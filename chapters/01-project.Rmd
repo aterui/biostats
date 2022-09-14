@@ -28,7 +28,7 @@ A new window pops up and prompts you to name a directory with a location in your
 The internal structure of an `R Project` is extremely important to navigate yourself (others once it's published). `R Project` will be composed of multiple types of files, typically `.R`, `.csv`, `.rds`, `.Rmd` among others. Unless those files are arranged in an organized manner, it is VERY LIKELY to make severe errors in coding. So I take this seriously. Table \@ref(tab:str) is my suggested subdirectory structure.
 
 | Name           | Content                                                                                                                                                                       |
-|-------------|-----------------------------------------------------------|
+|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `README.md`    | Markdown file explaining contents in the `R Project`. Can be derived from `README.Rmd`.                                                                                       |
 | `/code`        | Sub-directory for R scripts (`.R`).                                                                                                                                           |
 | `/data_raw`    | Sub-directory for raw data before data manipulation (`.csv` or other formats). Files in this sub-directory MUST NOT be modified unless there are changes to raw data entries. |

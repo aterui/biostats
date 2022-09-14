@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 DATA STRUCTURE | BIOSTATS</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 DATA STRUCTURE | BIOSTATS" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 DATA STRUCTURE | BIOSTATS" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Akira Terui" />
+
+
+<meta name="date" content="2022-09-13" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="project-management.html"/>
+<link rel="next" href="visualization.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">BIOSTATS</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="project-management.html"><a href="project-management.html"><i class="fa fa-check"></i><b>2</b> Project Management</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="project-management.html"><a href="project-management.html#r-project"><i class="fa fa-check"></i><b>2.1</b> R Project</a></li>
+<li class="chapter" data-level="2.2" data-path="project-management.html"><a href="project-management.html#internal-structure"><i class="fa fa-check"></i><b>2.2</b> Internal Structure</a></li>
+<li class="chapter" data-level="2.3" data-path="project-management.html"><a href="project-management.html#file-name"><i class="fa fa-check"></i><b>2.3</b> File Name</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-structure.html"><a href="data-structure.html"><i class="fa fa-check"></i><b>3</b> DATA STRUCTURE</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-structure.html"><a href="data-structure.html#overview"><i class="fa fa-check"></i><b>3.1</b> Overview</a></li>
+<li class="chapter" data-level="3.2" data-path="data-structure.html"><a href="data-structure.html#vector"><i class="fa fa-check"></i><b>3.2</b> Vector</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="data-structure.html"><a href="data-structure.html#create-vector"><i class="fa fa-check"></i><b>3.2.1</b> Create Vector</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-structure.html"><a href="data-structure.html#check-features"><i class="fa fa-check"></i><b>3.2.2</b> Check Features</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-structure.html"><a href="data-structure.html#access"><i class="fa fa-check"></i><b>3.2.3</b> Access</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="data-structure.html"><a href="data-structure.html#matrix"><i class="fa fa-check"></i><b>3.3</b> Matrix</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="data-structure.html"><a href="data-structure.html#create-matrix"><i class="fa fa-check"></i><b>3.3.1</b> Create Matrix</a></li>
+<li class="chapter" data-level="3.3.2" data-path="data-structure.html"><a href="data-structure.html#check-features-1"><i class="fa fa-check"></i><b>3.3.2</b> Check Features</a></li>
+<li class="chapter" data-level="3.3.3" data-path="data-structure.html"><a href="data-structure.html#access-1"><i class="fa fa-check"></i><b>3.3.3</b> Access</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="data-structure.html"><a href="data-structure.html#data-frame"><i class="fa fa-check"></i><b>3.4</b> Data Frame</a></li>
+<li class="chapter" data-level="3.5" data-path="data-structure.html"><a href="data-structure.html#exercise"><i class="fa fa-check"></i><b>3.5</b> Exercise</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="data-structure.html"><a href="data-structure.html#vector-1"><i class="fa fa-check"></i><b>3.5.1</b> Vector</a></li>
+<li class="chapter" data-level="3.5.2" data-path="data-structure.html"><a href="data-structure.html#matrix-1"><i class="fa fa-check"></i><b>3.5.2</b> Matrix</a></li>
+<li class="chapter" data-level="3.5.3" data-path="data-structure.html"><a href="data-structure.html#data-frame-1"><i class="fa fa-check"></i><b>3.5.3</b> Data Frame</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>4</b> VISUALIZATION</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="visualization.html"><a href="visualization.html#overview-1"><i class="fa fa-check"></i><b>4.1</b> Overview</a></li>
+<li class="chapter" data-level="4.2" data-path="visualization.html"><a href="visualization.html#plot"><i class="fa fa-check"></i><b>4.2</b> <code>plot()</code></a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="visualization.html"><a href="visualization.html#symbol"><i class="fa fa-check"></i><b>4.2.1</b> Symbol</a></li>
+<li class="chapter" data-level="4.2.2" data-path="visualization.html"><a href="visualization.html#symbol-size"><i class="fa fa-check"></i><b>4.2.2</b> Symbol size</a></li>
+<li class="chapter" data-level="4.2.3" data-path="visualization.html"><a href="visualization.html#symbol-color-border"><i class="fa fa-check"></i><b>4.2.3</b> Symbol color (border)</a></li>
+<li class="chapter" data-level="4.2.4" data-path="visualization.html"><a href="visualization.html#symbol-color-fill"><i class="fa fa-check"></i><b>4.2.4</b> Symbol color (fill)</a></li>
+<li class="chapter" data-level="4.2.5" data-path="visualization.html"><a href="visualization.html#label"><i class="fa fa-check"></i><b>4.2.5</b> Label</a></li>
+<li class="chapter" data-level="4.2.6" data-path="visualization.html"><a href="visualization.html#axis"><i class="fa fa-check"></i><b>4.2.6</b> Axis</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="visualization.html"><a href="visualization.html#boxplot"><i class="fa fa-check"></i><b>4.3</b> <code>boxplot()</code></a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="visualization.html"><a href="visualization.html#box-color"><i class="fa fa-check"></i><b>4.3.1</b> Box color</a></li>
+<li class="chapter" data-level="4.3.2" data-path="visualization.html"><a href="visualization.html#border-color"><i class="fa fa-check"></i><b>4.3.2</b> Border color</a></li>
+<li class="chapter" data-level="4.3.3" data-path="visualization.html"><a href="visualization.html#box-width"><i class="fa fa-check"></i><b>4.3.3</b> Box width</a></li>
+<li class="chapter" data-level="4.3.4" data-path="visualization.html"><a href="visualization.html#axis-1"><i class="fa fa-check"></i><b>4.3.4</b> Axis</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="visualization.html"><a href="visualization.html#exercise-1"><i class="fa fa-check"></i><b>4.4</b> Exercise</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="visualization.html"><a href="visualization.html#plot-function"><i class="fa fa-check"></i><b>4.4.1</b> <code>plot()</code> function</a></li>
+<li class="chapter" data-level="4.4.2" data-path="visualization.html"><a href="visualization.html#boxplot-function"><i class="fa fa-check"></i><b>4.4.2</b> <code>boxplot()</code> function</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">BIOSTATS</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-structure" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> DATA STRUCTURE<a href="data-structure.html#data-structure" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="overview" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Overview<a href="data-structure.html#overview" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>R has 6 basic <strong>data types</strong>.</p>
+<ul>
+<li>character: <code>"aquatic"</code>, <code>"ecology"</code> (no order)</li>
+<li>factor: similar to character, but has <em>levels</em> (alphabetically ordered by default)</li>
+<li>numeric: <code>20.0</code> , <code>15.5</code></li>
+<li>integer: <code>3</code>, <code>7</code></li>
+<li>logical: <code>TRUE</code> , <code>FALSE</code></li>
+<li>complex: <code>1+2i</code> (complex numbers with real and imaginary parts)</li>
+</ul>
+<p>These elements form one of the following <strong>data structures</strong>.</p>
+<ul>
+<li><strong>vector</strong>: a series of elements. A single data type is allowed in a single vector</li>
+<li><strong>matrix</strong>: elements organized into rows and columns. A single data type is allowed in a single matrix</li>
+<li><strong>data frame</strong>: looks similar to a matrix, but allows different data types in different columns</li>
+</ul>
+</div>
+<div id="vector" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Vector<a href="data-structure.html#vector" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="create-vector" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Create Vector<a href="data-structure.html#create-vector" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Below are examples of atomic character vectors, numeric vectors, integer vectors, etc. There are many ways to create vector data. The following examples use <code>c()</code>, <code>:</code>, <code>seq()</code>, <code>rep()</code>:</p>
+<pre><code>## [1] 1 3 4 8</code></pre>
+<pre><code>## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot;</code></pre>
+<pre><code>## [1]  TRUE FALSE FALSE</code></pre>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
+<pre><code>## [1] 2 2 2 2 2</code></pre>
+<pre><code>## [1] &quot;a&quot; &quot;a&quot; &quot;a&quot; &quot;a&quot; &quot;a&quot;</code></pre>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
+<pre><code>##  [1] 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8
+## [20] 2.9 3.0 3.1 3.2 3.3 3.4 3.5 3.6 3.7 3.8 3.9 4.0 4.1 4.2 4.3 4.4 4.5 4.6 4.7
+## [39] 4.8 4.9 5.0</code></pre>
+</div>
+<div id="check-features" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Check Features<a href="data-structure.html#check-features" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>R provides many functions to examine features of vectors and other objects, for example:</p>
+<ul>
+<li><code>class()</code> - what kind of object (data structure) is it (high-level)?</li>
+<li><code>typeof()</code> - what is the object’s data type (low-level)?</li>
+<li><code>attributes()</code> - does it have any metadata?</li>
+<li><code>length()</code> - how long is it? What about two dimensional objects?</li>
+<li><code>sum()</code> - what is the summed number of the data?</li>
+<li><code>mean()</code> - what is the average number of the data?</li>
+</ul>
+<p><strong>Numeric Vector</strong></p>
+<pre><code>## [1] 1.2 3.1 4.0 8.2</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre><code>## [1] &quot;double&quot;</code></pre>
+<pre><code>## [1] 4</code></pre>
+<pre><code>## [1] 16.5</code></pre>
+<pre><code>## [1] 4.125</code></pre>
+<p><strong>Character Vector</strong></p>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<pre><code>## [1] 3</code></pre>
+</div>
+<div id="access" class="section level3 hasAnchor" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Access<a href="data-structure.html#access" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Element ID</strong><br />
+Use brackets <code>[]</code> when accessing specific elements in an object. For example, if you want to access element #2 in the vector <code>x</code>, you may specify as <code>x[2]</code>:</p>
+<pre><code>## [1] 2</code></pre>
+<pre><code>## [1] 2 2</code></pre>
+<pre><code>## [1] 2 3 2</code></pre>
+<p><strong>Equation</strong><br />
+R provides many ways to access elements that suffice specific conditions. You can use mathematical symbols to specify what you need, for example:</p>
+<ul>
+<li><code>==</code> equal</li>
+<li><code>&gt;</code> larger than</li>
+<li><code>&gt;=</code> equal &amp; larger than</li>
+<li><code>&lt;</code> smaller than</li>
+<li><code>&lt;=</code> equal &amp; smaller than</li>
+<li><code>which()</code> a function that returns element # that suffices the specified condition</li>
+</ul>
+<p>The following examples return a logical vector indicating whether each element in x suffices the specified condition:</p>
+<pre><code>## [1]  TRUE  TRUE FALSE  TRUE FALSE</code></pre>
+<pre><code>## [1] FALSE FALSE  TRUE FALSE  TRUE</code></pre>
+<p>You can access elements that suffice the specified condition using brackets, for example:</p>
+<pre><code>## [1] 2 2 2</code></pre>
+<pre><code>## [1] 3 5</code></pre>
+<p>Using <code>which()</code>, you can see which elements (i.e., #) matches what you need:</p>
+<pre><code>## [1] 1 2 4</code></pre>
+<pre><code>## [1] 3 5</code></pre>
+</div>
+</div>
+<div id="matrix" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Matrix<a href="data-structure.html#matrix" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="create-matrix" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Create Matrix<a href="data-structure.html#create-matrix" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Matrix is a set of elements (<em>single data type</em>) that are organized into rows and columns:</p>
+<pre><code>##      [,1] [,2]
+## [1,]    1    4
+## [2,]    2    5
+## [3,]    3    6</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    2    3
+## [2,]    4    5    6</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    4    7
+## [2,]    2    5    8
+## [3,]    3    6    9</code></pre>
+</div>
+<div id="check-features-1" class="section level3 hasAnchor" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> Check Features<a href="data-structure.html#check-features-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>R provides many functions to examine features of matrix data, for example:</p>
+<ul>
+<li><code>class()</code> what kind of object (data type) is it (high-level)?</li>
+<li><code>typeof()</code> what is the object’s data type (low-level)?</li>
+<li><code>attributes()</code> does it have any metadata?</li>
+<li><code>dim()</code> how long are rows and columns?</li>
+<li><code>rowSums()</code> what is the summed number of the data for each row?</li>
+<li><code>colSums()</code> what is the summed number of the data for each column?</li>
+</ul>
+<p><strong>Integer Matrix</strong><br />
+</p>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    4    7
+## [2,]    2    5    8
+## [3,]    3    6    9</code></pre>
+<pre><code>## [1] &quot;matrix&quot; &quot;array&quot;</code></pre>
+<pre><code>## [1] &quot;integer&quot;</code></pre>
+<pre><code>## [1] 3 3</code></pre>
+<p><strong>Character Matrix</strong><br />
+</p>
+<pre><code>##      [,1] [,2]
+## [1,] &quot;a&quot;  &quot;d&quot; 
+## [2,] &quot;b&quot;  &quot;e&quot; 
+## [3,] &quot;c&quot;  &quot;f&quot;</code></pre>
+<pre><code>## [1] &quot;matrix&quot; &quot;array&quot;</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<pre><code>## [1] 3 2</code></pre>
+</div>
+<div id="access-1" class="section level3 hasAnchor" number="3.3.3">
+<h3><span class="header-section-number">3.3.3</span> Access<a href="data-structure.html#access-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When accessing matrix elements, you need to pick row(s) and/or column(s), for example:</p>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    4    7
+## [2,]    2    5    8
+## [3,]    3    6    9</code></pre>
+<pre><code>## [1] 8</code></pre>
+<pre><code>## [1] 2 5 8</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    2    5    8
+## [2,]    3    6    9</code></pre>
+<pre><code>##      [,1] [,2]
+## [1,]    4    7
+## [2,]    5    8
+## [3,]    6    9</code></pre>
+<p>You can assess each element with mathematical expressions just like vectors:</p>
+<pre><code>##       [,1]  [,2]  [,3]
+## [1,] FALSE FALSE FALSE
+## [2,]  TRUE FALSE FALSE
+## [3,] FALSE FALSE FALSE</code></pre>
+<pre><code>##       [,1] [,2] [,3]
+## [1,] FALSE TRUE TRUE
+## [2,] FALSE TRUE TRUE
+## [3,]  TRUE TRUE TRUE</code></pre>
+<p>However, care must be taken when accessing elements, as it will be automatically converted to vector data:</p>
+<pre><code>## [1] 2</code></pre>
+<pre><code>## [1] 3 4 5 6 7 8 9</code></pre>
+<p><code>which()</code> needs an additional argument to return both row and column #:</p>
+<pre><code>##      row col
+## [1,]   2   1</code></pre>
+<pre><code>##      row col
+## [1,]   3   1
+## [2,]   1   2
+## [3,]   2   2
+## [4,]   3   2
+## [5,]   1   3
+## [6,]   2   3
+## [7,]   3   3</code></pre>
+</div>
+</div>
+<div id="data-frame" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Data Frame<a href="data-structure.html#data-frame" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Data frame is a set of elements that are organized into rows and columns, but differ from matrix in several ways.</p>
+<ul>
+<li>it allows <em>multiple data types</em> in different columns</li>
+<li>each column has its <em>name</em></li>
+<li>you can access columns by name (using <code>$</code>)</li>
+</ul>
+<p><strong>Data frame is the most common data structure when manipulating ecological data</strong>. A data set loaded from a spread sheet (we will address this later) will be automatically recognized as a data frame. Here is an example:</p>
+<p><strong>Create a data frame</strong><br />
+In the following example, variables <code>x</code> and <code>y</code> are organized into a single data frame <code>dat</code>. Variable are renamed when creating a data frame composed of <code>x</code> and <code>y</code>.</p>
+<pre><code>##    LakeType  TSS
+## 1  Pristine  1.2
+## 2  Pristine  2.2
+## 3 Disturbed 10.9
+## 4 Disturbed 50.0
+## 5  Pristine  3.0</code></pre>
+<p><strong>Call column names</strong><br />
+</p>
+<pre><code>## [1] &quot;LakeType&quot; &quot;TSS&quot;</code></pre>
+<p><strong>Access by columns</strong><br />
+</p>
+<pre><code>## [1] &quot;Pristine&quot;  &quot;Pristine&quot;  &quot;Disturbed&quot; &quot;Disturbed&quot; &quot;Pristine&quot;</code></pre>
+<pre><code>## [1]  1.2  2.2 10.9 50.0  3.0</code></pre>
+<p>You can access elements like a matrix as well:</p>
+<pre><code>## [1] &quot;Pristine&quot;  &quot;Pristine&quot;  &quot;Disturbed&quot; &quot;Disturbed&quot; &quot;Pristine&quot;</code></pre>
+<pre><code>##   LakeType TSS
+## 1 Pristine 1.2</code></pre>
+<pre><code>##    LakeType  TSS
+## 2  Pristine  2.2
+## 4 Disturbed 50.0</code></pre>
+</div>
+<div id="exercise" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> Exercise<a href="data-structure.html#exercise" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Download a <a href = "file/report01_temp.R" download>template</a> (R script file).</p>
+<div id="vector-1" class="section level3 hasAnchor" number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> Vector<a href="data-structure.html#vector-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: lower-alpha">
+<li>Create three numeric vectors with length 3, 6 and 20, respectively. Each vector must be created using different functions in R.</li>
+<li>Create three character vectors with length 3, 6 and 20, respectively. Each vector must be created using different functions in R.</li>
+<li>Copy the following script to your R script and perform the following analysis:</li>
+</ol>
+<ul>
+<li>Identify element IDs of <code>x</code> that are greater than <code>2.0</code></li>
+<li>Identify element values of <code>x</code> that are greater than <code>2.0</code></li>
+</ul>
+</div>
+<div id="matrix-1" class="section level3 hasAnchor" number="3.5.2">
+<h3><span class="header-section-number">3.5.2</span> Matrix<a href="data-structure.html#matrix-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: lower-alpha">
+<li>Create a numeric matrix with 4 rows and 4 columns. Each column must contain identical elements.</li>
+<li>Create a numeric matrix with 4 rows and 4 columns. Each row must contain identical elements.</li>
+<li>Create a character matrix with 4 rows and 4 columns. Each column must contain identical elements.</li>
+<li>Create a character matrix with 4 rows and 4 columns. Each row must contain identical elements.</li>
+<li>Copy the following script to your R script and perform the following analysis:</li>
+</ol>
+<ul>
+<li>Identify element IDs of <code>x</code> that are greater than <code>2.0</code> (<strong>specify row and column IDs</strong>)</li>
+<li>Identify element values of <code>x</code> that are greater than <code>2.0</code> and calculate the mean.</li>
+</ul>
+</div>
+<div id="data-frame-1" class="section level3 hasAnchor" number="3.5.3">
+<h3><span class="header-section-number">3.5.3</span> Data Frame<a href="data-structure.html#data-frame-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: lower-alpha">
+<li>Create a data frame of 3 variables with 10 elements (name variables as <code>x</code>, <code>y</code> and <code>z</code>. <code>x</code> must be <code>character</code> while <code>y</code> and <code>z</code> must be <code>numeric</code>.</li>
+<li>Check the data structure (higher-level) of <code>x</code>, <code>y</code> and <code>z</code></li>
+<li>Copy the following script to your R script and perform the following analysis:</li>
+</ol>
+<ul>
+<li>Calculate the means of <code>temperature</code> and <code>abundance</code> for states <code>VA</code> and <code>NC</code> separately - use <code>tapply()</code> function</li>
+</ul>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="project-management.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="visualization.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/02-data_structure.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

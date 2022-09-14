@@ -1,0 +1,53 @@
+# Project Management
+
+## R Project
+
+For this entire book, I will use `R Project` as a fundamental unit of work-space, in which all the relevant materials (e.g., R scripts `.R` and data files) are assembled together. There are many ways to organize your project, but I usually make a single `R Project` for a collection of scripts and data that will lead to a single publication (see example [here](https://github.com/aterui/public-proj_stream-diversity)). To setup an `R Project` you will need *R Studio* in addition to base *R*. While *R* is a stand-alone software, I strongly recommend to use it with *R Studio*. *R Studio* has many functions that help your data analysis. *R* and *R Studio* can be installed from the following websites:
+
+-   [R](https://www.r-project.org/) (you can choose any CRAN mirror to download)
+-   [R Studio](https://rStudio.com/products/rStudio/download/)
+
+Once you open *R Studio*, you will see the following interface (Figure \@ref(fig:ui)). There are three major panels in its first appearance -- **Console**, **Environment**, and **Files**. **Console** is the place where you write your codes and execute calculation/data manipulation/analysis. **Environment** lists items you saved as an object. **Files** list any files in a designated location in your computer.
+
+```{r ui, fig.cap = "R Studio interface."}
+knitr::include_graphics("image/r_image01.png")
+```
+
+Although you can work on your data as it appears, **it is actually a BAD idea**. As you work on your project, numerous materials will be generated. How do you manage files? If you randomly locate those materials within your computer, you will lose necessary items sooner or later. For this reason, I assemble all the relevant materials in a single `R Project`. You can create a new `R Project` with the following procedure.
+
+a.  Go to `File > New Project` on the top menu
+b.  Select `New Directory`
+c.  Select `New Project`
+
+A new window pops up and prompts you to name a directory with a location in your computer. Click `Browse` to select a location for the directory.
+
+**IMPORTANT:** When you locate your project directories in your computer, I would strongly recommend to create a designated space. For example, in my computer, I have a folder named /`r_project` in which all the `R Project` directories are located.
+
+## Internal Structure
+
+The internal structure of an `R Project` is extremely important to navigate yourself (others once it's published). `R Project` will be composed of multiple types of files, typically `.R`, `.csv`, `.rds`, `.Rmd` among others. Unless those files are arranged in an organized manner, it is VERY LIKELY to make severe errors in coding. So take this seriously. Table \@ref(tab:str) is my suggested subdirectory structure.
+
+| Name           | Content                                                                                                                                                                       |
+|-----------------|-------------------------------------------------------|
+| `readme.md`    | Markdown file explaining contents in the `R Project`. A derived file from `README.Rmd`.                                                                                       |
+| `/code`        | Sub-directory for R scripts (`.R`).                                                                                                                                           |
+| `/data_raw`    | Sub-directory for raw data before data manipulation (`.csv` or other formats). Files in this sub-directory MUST NOT be modified unless there are changes to raw data entries. |
+| `/data_format` | Sub-directory for formatted data (`.csv`, `.rds`, or other formats).                                                                                                          |
+| `/output`      | Sub-directory for result outputs (`.csv`, `.rds`, or other formats). This may include statistical estimates from linear regression models etc.                                |
+| `/rmd`         | (Optional) Sub-directory for Rmarkdown files (`.Rmd`). Rmarkdown allows seamless integration of R scripts and text.                                                           |
+
+: (#tab:str) Suggested internal structure of `R Project`
+
+## File Name
+
+As you proceed, the number of files will increase, perhaps exponentially. It is therefore critical to have **consistent naming rules** for your files. Here are some recommendations:
+
+-   **NO SPACE.** Instead, use underscore.
+    -   Do: `script_week1.R`
+    -   Don't: `script week1.R`
+-   **NO UPPERCASE.** Use lowercase only for file names.
+    -   Do: `script_week1.R`
+    -   Don't: `Script_week1.R`
+-   **BE CONSISTENT.** Apply consistent naming rules within a project.
+    -   Do: R scripts for figures always start with a common prefix, e.g., `figure_XXX.R` `figure_YYY.R`(`XXX` and `YYY` specifies further details).
+    -   Don't: R scripts for figures start with random text, e.g., `XXX_fig.R` , `Figure_Y2.R` , `plotB.R`.

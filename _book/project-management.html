@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Project Management | BIOSTATS</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.28 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Project Management | BIOSTATS" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Project Management | BIOSTATS" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Akira Terui" />
+
+
+<meta name="date" content="2022-09-13" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="data-structure.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">BIOSTATS</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="project-management.html"><a href="project-management.html"><i class="fa fa-check"></i><b>2</b> Project Management</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="project-management.html"><a href="project-management.html#r-project"><i class="fa fa-check"></i><b>2.1</b> R Project</a></li>
+<li class="chapter" data-level="2.2" data-path="project-management.html"><a href="project-management.html#internal-structure"><i class="fa fa-check"></i><b>2.2</b> Internal Structure</a></li>
+<li class="chapter" data-level="2.3" data-path="project-management.html"><a href="project-management.html#file-name"><i class="fa fa-check"></i><b>2.3</b> File Name</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-structure.html"><a href="data-structure.html"><i class="fa fa-check"></i><b>3</b> DATA STRUCTURE</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-structure.html"><a href="data-structure.html#overview"><i class="fa fa-check"></i><b>3.1</b> Overview</a></li>
+<li class="chapter" data-level="3.2" data-path="data-structure.html"><a href="data-structure.html#vector"><i class="fa fa-check"></i><b>3.2</b> Vector</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="data-structure.html"><a href="data-structure.html#create-vector"><i class="fa fa-check"></i><b>3.2.1</b> Create Vector</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-structure.html"><a href="data-structure.html#check-features"><i class="fa fa-check"></i><b>3.2.2</b> Check Features</a></li>
+<li class="chapter" data-level="3.2.3" data-path="data-structure.html"><a href="data-structure.html#access"><i class="fa fa-check"></i><b>3.2.3</b> Access</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="data-structure.html"><a href="data-structure.html#matrix"><i class="fa fa-check"></i><b>3.3</b> Matrix</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="data-structure.html"><a href="data-structure.html#create-matrix"><i class="fa fa-check"></i><b>3.3.1</b> Create Matrix</a></li>
+<li class="chapter" data-level="3.3.2" data-path="data-structure.html"><a href="data-structure.html#check-features-1"><i class="fa fa-check"></i><b>3.3.2</b> Check Features</a></li>
+<li class="chapter" data-level="3.3.3" data-path="data-structure.html"><a href="data-structure.html#access-1"><i class="fa fa-check"></i><b>3.3.3</b> Access</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="data-structure.html"><a href="data-structure.html#data-frame"><i class="fa fa-check"></i><b>3.4</b> Data Frame</a></li>
+<li class="chapter" data-level="3.5" data-path="data-structure.html"><a href="data-structure.html#exercise"><i class="fa fa-check"></i><b>3.5</b> Exercise</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="data-structure.html"><a href="data-structure.html#vector-1"><i class="fa fa-check"></i><b>3.5.1</b> Vector</a></li>
+<li class="chapter" data-level="3.5.2" data-path="data-structure.html"><a href="data-structure.html#matrix-1"><i class="fa fa-check"></i><b>3.5.2</b> Matrix</a></li>
+<li class="chapter" data-level="3.5.3" data-path="data-structure.html"><a href="data-structure.html#data-frame-1"><i class="fa fa-check"></i><b>3.5.3</b> Data Frame</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>4</b> VISUALIZATION</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="visualization.html"><a href="visualization.html#overview-1"><i class="fa fa-check"></i><b>4.1</b> Overview</a></li>
+<li class="chapter" data-level="4.2" data-path="visualization.html"><a href="visualization.html#plot"><i class="fa fa-check"></i><b>4.2</b> <code>plot()</code></a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="visualization.html"><a href="visualization.html#symbol"><i class="fa fa-check"></i><b>4.2.1</b> Symbol</a></li>
+<li class="chapter" data-level="4.2.2" data-path="visualization.html"><a href="visualization.html#symbol-size"><i class="fa fa-check"></i><b>4.2.2</b> Symbol size</a></li>
+<li class="chapter" data-level="4.2.3" data-path="visualization.html"><a href="visualization.html#symbol-color-border"><i class="fa fa-check"></i><b>4.2.3</b> Symbol color (border)</a></li>
+<li class="chapter" data-level="4.2.4" data-path="visualization.html"><a href="visualization.html#symbol-color-fill"><i class="fa fa-check"></i><b>4.2.4</b> Symbol color (fill)</a></li>
+<li class="chapter" data-level="4.2.5" data-path="visualization.html"><a href="visualization.html#label"><i class="fa fa-check"></i><b>4.2.5</b> Label</a></li>
+<li class="chapter" data-level="4.2.6" data-path="visualization.html"><a href="visualization.html#axis"><i class="fa fa-check"></i><b>4.2.6</b> Axis</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="visualization.html"><a href="visualization.html#boxplot"><i class="fa fa-check"></i><b>4.3</b> <code>boxplot()</code></a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="visualization.html"><a href="visualization.html#box-color"><i class="fa fa-check"></i><b>4.3.1</b> Box color</a></li>
+<li class="chapter" data-level="4.3.2" data-path="visualization.html"><a href="visualization.html#border-color"><i class="fa fa-check"></i><b>4.3.2</b> Border color</a></li>
+<li class="chapter" data-level="4.3.3" data-path="visualization.html"><a href="visualization.html#box-width"><i class="fa fa-check"></i><b>4.3.3</b> Box width</a></li>
+<li class="chapter" data-level="4.3.4" data-path="visualization.html"><a href="visualization.html#axis-1"><i class="fa fa-check"></i><b>4.3.4</b> Axis</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="visualization.html"><a href="visualization.html#exercise-1"><i class="fa fa-check"></i><b>4.4</b> Exercise</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="visualization.html"><a href="visualization.html#plot-function"><i class="fa fa-check"></i><b>4.4.1</b> <code>plot()</code> function</a></li>
+<li class="chapter" data-level="4.4.2" data-path="visualization.html"><a href="visualization.html#boxplot-function"><i class="fa fa-check"></i><b>4.4.2</b> <code>boxplot()</code> function</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">BIOSTATS</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="project-management" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Project Management<a href="project-management.html#project-management" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="r-project" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> R Project<a href="project-management.html#r-project" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>For this entire book, I will use <code>R Project</code> as a fundamental unit of work-space, in which all the relevant materials (e.g., R scripts <code>.R</code> and data files) are assembled together. There are many ways to organize your project, but I usually make a single <code>R Project</code> for a collection of scripts and data that will lead to a single publication (see example <a href="https://github.com/aterui/public-proj_stream-diversity">here</a>). To setup an <code>R Project</code> you will need <em>R Studio</em> in addition to base <em>R</em>. While <em>R</em> is a stand-alone software, I strongly recommend to use it with <em>R Studio</em>. <em>R Studio</em> has many functions that help your data analysis. <em>R</em> and <em>R Studio</em> can be installed from the following websites:</p>
+<ul>
+<li><a href="https://www.r-project.org/">R</a> (you can choose any CRAN mirror to download)</li>
+<li><a href="https://rStudio.com/products/rStudio/download/">R Studio</a></li>
+</ul>
+<p>Once you open <em>R Studio</em>, you will see the following interface (Figure <a href="project-management.html#fig:ui">2.1</a>). There are three major panels in its first appearance – <strong>Console</strong>, <strong>Environment</strong>, and <strong>Files</strong>. <strong>Console</strong> is the place where you write your codes and execute calculation/data manipulation/analysis. <strong>Environment</strong> lists items you saved as an object. <strong>Files</strong> list any files in a designated location in your computer.</p>
+<div class="figure"><span style="display:block;" id="fig:ui"></span>
+<img src="image/r_image01.png" alt="R Studio interface." width="1000" />
+<p class="caption">
+Figure 2.1: R Studio interface.
+</p>
+</div>
+<p>Although you can work on your data as it appears, <strong>it is actually a BAD idea</strong>. As you work on your project, numerous materials will be generated. How do you manage files? If you randomly locate those materials within your computer, you will lose necessary items sooner or later. For this reason, I assemble all the relevant materials in a single <code>R Project</code>. You can create a new <code>R Project</code> with the following procedure.</p>
+<ol style="list-style-type: lower-alpha">
+<li>Go to <code>File &gt; New Project</code> on the top menu</li>
+<li>Select <code>New Directory</code></li>
+<li>Select <code>New Project</code></li>
+</ol>
+<p>A new window pops up and prompts you to name a directory with a location in your computer. Click <code>Browse</code> to select a location for the directory.</p>
+<p><strong>IMPORTANT:</strong> When you locate your project directories in your computer, I would strongly recommend to create a designated space. For example, in my computer, I have a folder named /<code>r_project</code> in which all the <code>R Project</code> directories are located.</p>
+</div>
+<div id="internal-structure" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Internal Structure<a href="project-management.html#internal-structure" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The internal structure of an <code>R Project</code> is extremely important to navigate yourself (others once it’s published). <code>R Project</code> will be composed of multiple types of files, typically <code>.R</code>, <code>.csv</code>, <code>.rds</code>, <code>.Rmd</code> among others. Unless those files are arranged in an organized manner, it is VERY LIKELY to make severe errors in coding. So take this seriously. Table <a href="project-management.html#tab:str">2.1</a> is my suggested subdirectory structure.</p>
+<table>
+<caption><span id="tab:str">Table 2.1: </span> Suggested internal structure of <code>R Project</code></caption>
+<colgroup>
+<col width="23%" />
+<col width="76%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>readme.md</code></td>
+<td>Markdown file explaining contents in the <code>R Project</code>. A derived file from <code>README.Rmd</code>.</td>
+</tr>
+<tr class="even">
+<td><code>/code</code></td>
+<td>Sub-directory for R scripts (<code>.R</code>).</td>
+</tr>
+<tr class="odd">
+<td><code>/data_raw</code></td>
+<td>Sub-directory for raw data before data manipulation (<code>.csv</code> or other formats). Files in this sub-directory MUST NOT be modified unless there are changes to raw data entries.</td>
+</tr>
+<tr class="even">
+<td><code>/data_format</code></td>
+<td>Sub-directory for formatted data (<code>.csv</code>, <code>.rds</code>, or other formats).</td>
+</tr>
+<tr class="odd">
+<td><code>/output</code></td>
+<td>Sub-directory for result outputs (<code>.csv</code>, <code>.rds</code>, or other formats). This may include statistical estimates from linear regression models etc.</td>
+</tr>
+<tr class="even">
+<td><code>/rmd</code></td>
+<td>(Optional) Sub-directory for Rmarkdown files (<code>.Rmd</code>). Rmarkdown allows seamless integration of R scripts and text.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="file-name" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> File Name<a href="project-management.html#file-name" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>As you proceed, the number of files will increase, perhaps exponentially. It is therefore critical to have <strong>consistent naming rules</strong> for your files. Here are some recommendations:</p>
+<ul>
+<li><strong>NO SPACE.</strong> Instead, use underscore or hyphen.
+<ul>
+<li>Do: <code>script_week1.R</code> <code>script-week1.R</code></li>
+<li>Don’t: <code>script week1.R</code></li>
+</ul></li>
+<li><strong>NO UPPERCASE.</strong> Use lowercase only for file names.
+<ul>
+<li>Do: <code>script_week1.R</code></li>
+<li>Don’t: <code>Script_week1.R</code></li>
+</ul></li>
+<li><strong>BE CONSISTENT.</strong> Apply consistent naming rules within a project.
+<ul>
+<li>Do: R scripts for figures always start with a common prefix, e.g., <code>figure_XXX.R</code> <code>figure_YYY.R</code>(<code>XXX</code> and <code>YYY</code> specifies further details).</li>
+<li>Don’t: R scripts for figures start with random text, e.g., <code>XXX_fig.R</code> , <code>Figure_Y2.R</code> , <code>plotB.R</code>.</li>
+</ul></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-structure.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/01-intro.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

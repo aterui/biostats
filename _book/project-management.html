@@ -29,7 +29,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Akira Terui" />
 
 
-<meta name="date" content="2022-09-13" />
+<meta name="date" content="2022-09-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -83,7 +83,6 @@ set in the _output.yml file.</p>" />
 <ul>
 <li class="chapter" data-level="2.1" data-path="project-management.html"><a href="project-management.html#r-project"><i class="fa fa-check"></i><b>2.1</b> R Project</a></li>
 <li class="chapter" data-level="2.2" data-path="project-management.html"><a href="project-management.html#internal-structure"><i class="fa fa-check"></i><b>2.2</b> Internal Structure</a></li>
-<li class="chapter" data-level="2.3" data-path="project-management.html"><a href="project-management.html#file-name"><i class="fa fa-check"></i><b>2.3</b> File Name</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-structure.html"><a href="data-structure.html"><i class="fa fa-check"></i><b>3</b> DATA STRUCTURE</a>
 <ul>
@@ -180,12 +179,12 @@ Figure 2.1: R Studio interface.
 </div>
 <div id="internal-structure" class="section level2 hasAnchor" number="2.2">
 <h2><span class="header-section-number">2.2</span> Internal Structure<a href="project-management.html#internal-structure" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The internal structure of an <code>R Project</code> is extremely important to navigate yourself (others once it’s published). <code>R Project</code> will be composed of multiple types of files, typically <code>.R</code>, <code>.csv</code>, <code>.rds</code>, <code>.Rmd</code> among others. Unless those files are arranged in an organized manner, it is VERY LIKELY to make severe errors in coding. So take this seriously. Table <a href="project-management.html#tab:str">2.1</a> is my suggested subdirectory structure.</p>
+<p>The internal structure of an <code>R Project</code> is extremely important to navigate yourself (others once it’s published). <code>R Project</code> will be composed of multiple types of files, typically <code>.R</code>, <code>.csv</code>, <code>.rds</code>, <code>.Rmd</code> among others. Unless those files are arranged in an organized manner, it is VERY LIKELY to make severe errors in coding. So I take this seriously. Table <a href="project-management.html#tab:str">2.1</a> is my suggested subdirectory structure.</p>
 <table>
 <caption><span id="tab:str">Table 2.1: </span> Suggested internal structure of <code>R Project</code></caption>
 <colgroup>
-<col width="23%" />
-<col width="76%" />
+<col width="18%" />
+<col width="81%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -195,8 +194,8 @@ Figure 2.1: R Studio interface.
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>readme.md</code></td>
-<td>Markdown file explaining contents in the <code>R Project</code>. A derived file from <code>README.Rmd</code>.</td>
+<td><code>README.md</code></td>
+<td>Markdown file explaining contents in the <code>R Project</code>. Can be derived from <code>README.Rmd</code>.</td>
 </tr>
 <tr class="even">
 <td><code>/code</code></td>
@@ -220,14 +219,11 @@ Figure 2.1: R Studio interface.
 </tr>
 </tbody>
 </table>
-</div>
-<div id="file-name" class="section level2 hasAnchor" number="2.3">
-<h2><span class="header-section-number">2.3</span> File Name<a href="project-management.html#file-name" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>As you proceed, the number of files will increase, perhaps exponentially. It is therefore critical to have <strong>consistent naming rules</strong> for your files. Here are some recommendations:</p>
+<p>It is also critical to have <strong>consistent naming rules</strong> for your files. As you make progress on your project, the number of files in each sub-directory will increase, perhaps exponentially. You will find it difficult navigating yourself unless you have clear naming rules for files (and even worse for others). Here are some recommendations:</p>
 <ul>
-<li><strong>NO SPACE.</strong> Instead, use underscore or hyphen.
+<li><strong>NO SPACE.</strong> Instead, use underscore.
 <ul>
-<li>Do: <code>script_week1.R</code> <code>script-week1.R</code></li>
+<li>Do: <code>script_week1.R</code></li>
 <li>Don’t: <code>script week1.R</code></li>
 </ul></li>
 <li><strong>NO UPPERCASE.</strong> Use lowercase only for file names.

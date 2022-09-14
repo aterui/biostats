@@ -4,7 +4,6 @@ introduction
 project-management
 r-project
 internal-structure
-file-name
 data-structure
 overview
 vector

@@ -77,7 +77,7 @@
 
 \title{BIOSTATS}
 \author{Akira Terui}
-\date{2022-09-13}
+\date{2022-09-14}
 
 \begin{document}
 \maketitle
@@ -133,11 +133,11 @@ A new window pops up and prompts you to name a directory with a location in your
 \hypertarget{internal-structure}{%
 \section{Internal Structure}\label{internal-structure}}
 
-The internal structure of an \texttt{R\ Project} is extremely important to navigate yourself (others once it's published). \texttt{R\ Project} will be composed of multiple types of files, typically \texttt{.R}, \texttt{.csv}, \texttt{.rds}, \texttt{.Rmd} among others. Unless those files are arranged in an organized manner, it is VERY LIKELY to make severe errors in coding. So take this seriously. Table \ref{tab:str} is my suggested subdirectory structure.
+The internal structure of an \texttt{R\ Project} is extremely important to navigate yourself (others once it's published). \texttt{R\ Project} will be composed of multiple types of files, typically \texttt{.R}, \texttt{.csv}, \texttt{.rds}, \texttt{.Rmd} among others. Unless those files are arranged in an organized manner, it is VERY LIKELY to make severe errors in coding. So I take this seriously. Table \ref{tab:str} is my suggested subdirectory structure.
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2361}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7639}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.1806}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.8194}}@{}}
 \caption{\label{tab:str} Suggested internal structure of \texttt{R\ Project}}\tabularnewline
 \toprule()
 \begin{minipage}[b]{\linewidth}\raggedright
@@ -155,7 +155,7 @@ Content
 \end{minipage} \\
 \midrule()
 \endhead
-\texttt{readme.md} & Markdown file explaining contents in the \texttt{R\ Project}. A derived file from \texttt{README.Rmd}. \\
+\texttt{README.md} & Markdown file explaining contents in the \texttt{R\ Project}. Can be derived from \texttt{README.Rmd}. \\
 \texttt{/code} & Sub-directory for R scripts (\texttt{.R}). \\
 \texttt{/data\_raw} & Sub-directory for raw data before data manipulation (\texttt{.csv} or other formats). Files in this sub-directory MUST NOT be modified unless there are changes to raw data entries. \\
 \texttt{/data\_format} & Sub-directory for formatted data (\texttt{.csv}, \texttt{.rds}, or other formats). \\
@@ -164,20 +164,17 @@ Content
 \bottomrule()
 \end{longtable}
 
-\hypertarget{file-name}{%
-\section{File Name}\label{file-name}}
-
-As you proceed, the number of files will increase, perhaps exponentially. It is therefore critical to have \textbf{consistent naming rules} for your files. Here are some recommendations:
+It is also critical to have \textbf{consistent naming rules} for your files. As you make progress on your project, the number of files in each sub-directory will increase, perhaps exponentially. You will find it difficult navigating yourself unless you have clear naming rules for files (and even worse for others). Here are some recommendations:
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{NO SPACE.} Instead, use underscore or hyphen.
+  \textbf{NO SPACE.} Instead, use underscore.
 
   \begin{itemize}
   \tightlist
   \item
-    Do: \texttt{script\_week1.R} \texttt{script-week1.R}
+    Do: \texttt{script\_week1.R}
   \item
     Don't: \texttt{script\ week1.R}
   \end{itemize}

@@ -10,7 +10,7 @@ For this entire book, I will use `R Project` as a fundamental unit of work-space
 Once you open *R Studio*, you will see the following interface (Figure \@ref(fig:ui)). There are three major panels in its first appearance -- `Console`, `Environment`, and `Files`. `Console` is the place where you write your codes and execute calculation/data manipulation/analysis. `Environment` lists items you saved as an object. `Files` list any files in a designated location in your computer.
 
 ```{r ui, fig.cap = "R Studio interface."}
-knitr::include_graphics("image/r_image01.png")
+knitr::include_graphics(here::here("image/r_image01.png"))
 ```
 
 Although you can work on your data as it appears, **it is actually a BAD idea**. As you work on your project, numerous materials will be generated. How do you manage files? If you randomly locate those materials within your computer, you will lose necessary items sooner or later. For this reason, I assemble all the relevant materials in a single `R Project`. You can create a new `R Project` with the following procedure.
@@ -28,7 +28,7 @@ A new window pops up and prompts you to name a directory with a location in your
 The internal structure of an `R Project` is extremely important to navigate yourself (others once it's published). `R Project` will be composed of multiple types of files, typically `.R`, `.csv`, `.rds`, `.Rmd` among others. Unless those files are arranged in an organized manner, it is VERY LIKELY to make severe errors in coding. So I take this seriously. Table \@ref(tab:str) is my suggested subdirectory structure.
 
 | Name           | Content                                                                                                                                                                       |
-|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-------------------|-----------------------------------------------------|
 | `README.md`    | Markdown file explaining contents in the `R Project`. Can be derived from `README.Rmd`.                                                                                       |
 | `/code`        | Sub-directory for R scripts (`.R`).                                                                                                                                           |
 | `/data_raw`    | Sub-directory for raw data before data manipulation (`.csv` or other formats). Files in this sub-directory MUST NOT be modified unless there are changes to raw data entries. |
@@ -38,9 +38,11 @@ The internal structure of an `R Project` is extremely important to navigate your
 
 : (#tab:str) Suggested internal structure of `R Project`
 
+## File Name
+
 It is also critical to have **consistent naming rules** for your files. As you make progress on your project, the number of files in each sub-directory will increase, perhaps exponentially. You will find it difficult navigating yourself unless you have clear naming rules for files (and even worse for others). Here are some recommendations:
 
--   **NO SPACE.** Instead, use underscore.
+-   **NO SPACE.** Use underscore.
     -   Do: `script_week1.R`
     -   Don't: `script week1.R`
 -   **NO UPPERCASE.** Use lowercase for file names.
@@ -49,3 +51,9 @@ It is also critical to have **consistent naming rules** for your files. As you m
 -   **BE CONSISTENT.** Apply consistent naming rules within a project.
     -   Do: R scripts for figures always start with a common prefix, e.g., `figure_XXX.R` `figure_YYY.R`(`XXX` and `YYY` specifies further details).
     -   Don't: R scripts for figures start with random text, e.g., `XXX_fig.R` , `Figure_Y2.R` , `plotB.R`.
+
+## Robust coding
+
+While this is not mandatory, I strongly recommend to use *R Studio* with *Git* & *GitHub* (see Chapter \@ref(appendix) Appendix for guidance). Coding is innately error-prone[^01-project-1]; every programmers, even bright ones, make mistakes - no exception. However, the critical difference between beginner and advanced programmers is whether they develop robust coding rules with a self-error-detection system. *Git* is the key to this. I will touch on this occasionally throughout this book.
+
+[^01-project-1]: well WAY BETTER than manual data manipulation!

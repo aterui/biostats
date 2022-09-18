@@ -117,7 +117,7 @@
 
 \title{BIOSTATS}
 \author{Akira Terui}
-\date{Last updated on 2022-09-16}
+\date{Last updated on 2022-09-18}
 
 \begin{document}
 \maketitle
@@ -138,17 +138,17 @@ This textbook aims to introduce fundamental statistical techniques and their app
 \hypertarget{r-project}{%
 \section{R Project}\label{r-project}}
 
-For this entire book, I will use \texttt{R\ Project} as a fundamental unit of work-space, in which all the relevant materials (e.g., R scripts \texttt{.R} and data files) are assembled together. There are many ways to organize your project, but I usually make a single \texttt{R\ Project} for a collection of scripts and data that will lead to a single publication (see example \href{https://github.com/aterui/public-proj_stream-diversity}{here}). To setup an \texttt{R\ Project} you will need \emph{R Studio} in addition to base \emph{R}. While \emph{R} is a stand-alone software, I strongly recommend to use it with \emph{R Studio}. \emph{R Studio} has many functions that help your data analysis. \emph{R} and \emph{R Studio} can be installed from the following websites:
+For this entire book, I will use \texttt{R\ Project} as a fundamental unit of work-space, in which all the relevant materials (e.g., R scripts \texttt{.R} and data files) are assembled together. There are many ways to organize your project, but I usually make a single \texttt{R\ Project} for a collection of scripts and data that will lead to a single publication (see example \href{https://github.com/aterui/public-proj_stream-diversity}{here}). To setup an \texttt{R\ Project} you will need \emph{RStudio} in addition to base \emph{R}. While \emph{R} is a stand-alone software, I strongly recommend to use it with \emph{RStudio}. \emph{RStudio} has many functions that help your data analysis. \emph{R} and \emph{RStudio} can be installed from the following websites:
 
 \begin{itemize}
 \tightlist
 \item
   \href{https://www.r-project.org/}{R} (you can choose any CRAN mirror to download)
 \item
-  \href{https://rStudio.com/products/rStudio/download/}{R Studio}
+  RStudio
 \end{itemize}
 
-Once you open \emph{R Studio}, you will see the following interface (Figure \ref{fig:ui}). There are three major panels in its first appearance -- \texttt{Console}, \texttt{Environment}, and \texttt{Files}. \texttt{Console} is the place where you write your codes and execute calculation/data manipulation/analysis. \texttt{Environment} lists items you saved as an object. \texttt{Files} list any files in a designated location in your computer.
+Once you open \emph{RStudio}, you will see the following interface (Figure \ref{fig:ui}). There are three major panels in its first appearance -- \texttt{Console}, \texttt{Environment}, and \texttt{Files}. \texttt{Console} is the place where you write your codes and execute calculation/data manipulation/analysis. \texttt{Environment} lists items you saved as an object. \texttt{Files} list any files in a designated location in your computer.
 
 \begin{figure}
 
@@ -156,62 +156,46 @@ Once you open \emph{R Studio}, you will see the following interface (Figure \ref
 
 }
 
-\caption{R Studio interface.}\label{fig:ui}
+\caption{RStudio interface.}\label{fig:ui}
 \end{figure}
 
-Although you can work on your data as it appears, \textbf{it is actually a BAD idea}. As you work on your project, numerous materials will be generated. How do you manage files? If you randomly locate those materials within your computer, you will lose necessary items sooner or later. For this reason, I assemble all the relevant materials in a single \texttt{R\ Project}. You can create a new \texttt{R\ Project} with the following procedure.
+Let's type something in console to see what happens. Copy and paste the following script to \texttt{Console}. You should see \texttt{x} in the environment.
 
-\begin{enumerate}
-\def\labelenumi{\alph{enumi}.}
-\tightlist
-\item
-  Go to \texttt{File\ \textgreater{}\ New\ Project} on the top menu
-\item
-  Select \texttt{New\ Directory}
-\item
-  Select \texttt{New\ Project}
-\end{enumerate}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
-A new window pops up and prompts you to name a directory with a location in your computer. Click \texttt{Browse} to select a location for the directory.
+\texttt{x} is an \textbf{object} where information is saved - in this case, we stored a sequence of \texttt{1} and \texttt{2} in object \texttt{x}. Once you store the information into \texttt{x}, you can call it just typing \texttt{x}.
 
-\textbf{IMPORTANT:} When you locate your project directories in your computer, I would strongly recommend to create a designated space. For example, in my computer, I have a folder named /\texttt{r\_project} in which all the \texttt{R\ Project} directories are located.
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
 
-\hypertarget{internal-structure}{%
-\section{Internal Structure}\label{internal-structure}}
+\begin{verbatim}
+## [1] 1 2
+\end{verbatim}
 
-The internal structure of an \texttt{R\ Project} is extremely important to navigate yourself (others once it's published). \texttt{R\ Project} will be composed of multiple types of files, typically \texttt{.R}, \texttt{.csv}, \texttt{.rds}, \texttt{.Rmd} among others. Unless those files are arranged in an organized manner, it is VERY LIKELY to make severe errors in coding. So I take this seriously. Table \ref{tab:str} is my suggested subdirectory structure.
+Sweet! You can work on your data like this, however, \textbf{it is actually a BAD idea}. As you work on your project, numerous materials will be generated (e.g., I would write \textgreater{} 2000 lines of codes for one project). How do you manage your codes?
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2639}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7361}}@{}}
-\caption{\label{tab:str} Suggested internal structure of \texttt{R\ Project}}\tabularnewline
-\toprule()
-\begin{minipage}[b]{\linewidth}\raggedright
-Name
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Content
-\end{minipage} \\
-\midrule()
-\endfirsthead
-\toprule()
-\begin{minipage}[b]{\linewidth}\raggedright
-Name
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Content
-\end{minipage} \\
-\midrule()
-\endhead
-\texttt{README.md} & Markdown file explaining contents in the \texttt{R\ Project}. Can be derived from \texttt{README.Rmd}. \\
-\texttt{/code} & Sub-directory for R scripts (\texttt{.R}). \\
-\texttt{/data\_raw} & Sub-directory for raw data before data manipulation (\texttt{.csv} or other formats). Files in this sub-directory MUST NOT be modified unless there are changes to raw data entries. \\
-\texttt{/data\_format} & Sub-directory for formatted data (\texttt{.csv}, \texttt{.rds}, or other formats). \\
-\texttt{/output} & Sub-directory for result outputs (\texttt{.csv}, \texttt{.rds}, or other formats). This may include statistical estimates from linear regression models etc. \\
-\texttt{/rmd} & (Optional) Sub-directory for Rmarkdown files (\texttt{.Rmd}). Rmarkdown allows seamless integration of R scripts and text. \\
-\bottomrule()
-\end{longtable}
+\hypertarget{script-editor}{%
+\subsection{Script Editor}\label{script-editor}}
+
+It is highly recommended to mange your script in \texttt{Editor} instead. \texttt{Editor} is where you draft and tweak your codes before executing them in \texttt{Console}. To create space for \texttt{Editor}, hit \texttt{Ctr\ +\ Shift\ +\ N}. A new panel pops up on the top left. Let's type the following script in \texttt{Editor}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Then, hit \texttt{Ctr\ +\ S} to save the \texttt{Editor} file. \emph{RStudio} will prompt you to enter the file name of the \texttt{Editor}\footnote{In \emph{R}, an editor file has an extension of \texttt{.R}.}.
 
 \hypertarget{file-name}{%
-\section{File Name}\label{file-name}}
+\subsection{File Name}\label{file-name}}
 
 It is also critical to have \textbf{consistent naming rules} for your files. As you make progress on your project, the number of files in each sub-directory will increase, perhaps exponentially. You will find it difficult navigating yourself unless you have clear naming rules for files (and even worse for others). Here are some recommendations:
 
@@ -249,13 +233,62 @@ It is also critical to have \textbf{consistent naming rules} for your files. As 
   \end{itemize}
 \end{itemize}
 
+\hypertarget{structure-your-project}{%
+\subsection{Structure Your Project}\label{structure-your-project}}
+
+If you do not save or randomly locate your codes within your computer, you will lose necessary items sooner or later. For this reason, I assemble all the relevant materials in a single \texttt{R\ Project}. You can create a new \texttt{R\ Project} with the following procedure.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Go to \texttt{File\ \textgreater{}\ New\ Project} on the top menu
+\item
+  Select \texttt{New\ Directory}
+\item
+  Select \texttt{New\ Project}
+\end{enumerate}
+
+A new window pops up and prompts you to name a directory with a location in your computer. Click \texttt{Browse} to select a location for the directory\footnote{When you locate your project directories in your computer, I would strongly recommend to create a designated space. For example, in my computer, I have a folder named /\texttt{r\_project} in which all \texttt{R\ Project} directories are located.}.
+
+The internal structure of an \texttt{R\ Project} is extremely important to navigate yourself (others once it's published). \texttt{R\ Project} will be composed of multiple types of files, typically \texttt{.R}, \texttt{.csv}, \texttt{.rds}, \texttt{.Rmd} among others. Unless those files are arranged in an organized manner, it is VERY LIKELY to make severe errors in coding. So I take this seriously. Table \ref{tab:str} is my suggested subdirectory structure.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.1806}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.8194}}@{}}
+\caption{\label{tab:str} Suggested internal structure of \texttt{R\ Project}}\tabularnewline
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+Name
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Content
+\end{minipage} \\
+\midrule()
+\endfirsthead
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+Name
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Content
+\end{minipage} \\
+\midrule()
+\endhead
+\texttt{README.md} & Markdown file explaining contents in the \texttt{R\ Project}. Can be derived from \texttt{README.Rmd}. \\
+\texttt{/code} & Sub-directory for R scripts (\texttt{.R}). \\
+\texttt{/data\_raw} & Sub-directory for raw data before data manipulation (\texttt{.csv} or other formats). Files in this sub-directory MUST NOT be modified unless there are changes to raw data entries. \\
+\texttt{/data\_format} & Sub-directory for formatted data (\texttt{.csv}, \texttt{.rds}, or other formats). \\
+\texttt{/output} & Sub-directory for result outputs (\texttt{.csv}, \texttt{.rds}, or other formats). This may include statistical estimates from linear regression models etc. \\
+\texttt{/rmd} & (Optional) Sub-directory for Rmarkdown files (\texttt{.Rmd}). Rmarkdown allows seamless integration of R scripts and text. \\
+\bottomrule()
+\end{longtable}
+
 \hypertarget{robust-coding}{%
 \section{Robust coding}\label{robust-coding}}
 
-While this is not mandatory, I strongly recommend to use \emph{R Studio} with \emph{Git} \& \emph{GitHub} (see Chapter \ref{appendix} Appendix for guidance). Coding is innately error-prone\footnote{well WAY BETTER than manual data manipulation!}; every programmers, even bright ones, make mistakes - no exception. However, the critical difference between beginner and advanced programmers is whether they develop robust coding rules with a self-error-detection system. \emph{Git} is the key to this. I will touch on this occasionally throughout this book.
+While this is not mandatory, I strongly recommend to use \emph{RStudio} with \emph{Git} \& \emph{GitHub} (see Chapter \ref{appendix} Appendix for guidance). Coding is innately error-prone\footnote{well WAY BETTER than manual data manipulation!}; every programmers, even bright ones, make mistakes - no exception. However, the critical difference between beginner and advanced programmers is whether they develop robust coding rules with a self-error-detection system. \emph{Git} is the key to this. I will touch on this occasionally throughout this book.
 
-\hypertarget{appendix}{%
-\chapter{Appendix}\label{appendix}}
+\hypertarget{appendix-git-github}{%
+\chapter{\texorpdfstring{Appendix: \emph{Git} \& \emph{GitHub}}{Appendix: Git \& GitHub}}\label{appendix-git-github}}
 
 \hypertarget{git-github}{%
 \section{\texorpdfstring{\emph{Git} \& \emph{GitHub}}{Git \& GitHub}}\label{git-github}}
@@ -404,5 +437,811 @@ After making this change, go to \emph{GitHub Desktop} again. \emph{GitHub Deskto
 
 \caption{Git detects edits to your codes}\label{fig:gitdesktop5}
 \end{figure}
+
+\hypertarget{appendix-data-structure}{%
+\chapter{Appendix: Data Structure}\label{appendix-data-structure}}
+
+\hypertarget{overview}{%
+\section{Overview}\label{overview}}
+
+R has 6 basic \textbf{data types}.
+
+\begin{itemize}
+\tightlist
+\item
+  character: \texttt{"aquatic"}, \texttt{"ecology"} (no order)
+\item
+  factor: similar to character, but has \emph{levels} (alphabetically ordered by default)
+\item
+  numeric: \texttt{20.0} , \texttt{15.5}
+\item
+  integer: \texttt{3}, \texttt{7}
+\item
+  logical: \texttt{TRUE} , \texttt{FALSE}
+\item
+  complex: \texttt{1+2i} (complex numbers with real and imaginary parts)
+\end{itemize}
+
+These elements form one of the following \textbf{data structures}.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{vector}: a series of elements. A single data type is allowed in a single vector
+\item
+  \textbf{matrix}: elements organized into rows and columns. A single data type is allowed in a single matrix
+\item
+  \textbf{data frame}: looks similar to a matrix, but allows different data types in different columns
+\end{itemize}
+
+\hypertarget{vector}{%
+\section{Vector}\label{vector}}
+
+\hypertarget{create-vector}{%
+\subsection{Create Vector}\label{create-vector}}
+
+Below are examples of atomic character vectors, numeric vectors, integer vectors, etc. There are many ways to create vector data. The following examples use \texttt{c()}, \texttt{:}, \texttt{seq()}, \texttt{rep()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#ex.1a manually create a vector using c()}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{8}\NormalTok{)}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1 3 4 8
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#ex.1b character}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\StringTok{"b"}\NormalTok{, }\StringTok{"c"}\NormalTok{)}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "a" "b" "c"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#ex.1c logical}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  TRUE FALSE FALSE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#ex.2 sequence of numbers}
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{5}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1 2 3 4 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#ex.3a replicate same numbers or characters}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{) }\CommentTok{\# replicate 2 five times}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2 2 2 2 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#ex.3b replicate same numbers or characters}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\DecValTok{5}\NormalTok{) }\CommentTok{\# replicate "a" five times}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "a" "a" "a" "a" "a"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#ex.4a use seq() function}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{, }\AttributeTok{by =} \DecValTok{1}\NormalTok{)}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1 2 3 4 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#ex.4b use seq() function}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{, }\AttributeTok{by =} \FloatTok{0.1}\NormalTok{)}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8
+## [20] 2.9 3.0 3.1 3.2 3.3 3.4 3.5 3.6 3.7 3.8 3.9 4.0 4.1 4.2 4.3 4.4 4.5 4.6 4.7
+## [39] 4.8 4.9 5.0
+\end{verbatim}
+
+\hypertarget{check-features}{%
+\subsection{Check Features}\label{check-features}}
+
+R provides many functions to examine features of vectors and other objects, for example:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{class()} - return high-level data structure of the object
+\item
+  \texttt{typeof()} - return low-level data structure of the object
+\item
+  \texttt{attributes()} - metadata of the object
+\item
+  \texttt{length()} - number of elements in the object
+\item
+  \texttt{sum()} - sum of object's elements
+\item
+  \texttt{mean()} - mean of object's elements
+\end{itemize}
+
+\textbf{Numeric Vector}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FloatTok{1.2}\NormalTok{, }\FloatTok{3.1}\NormalTok{, }\FloatTok{4.0}\NormalTok{, }\FloatTok{8.2}\NormalTok{)}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.2 3.1 4.0 8.2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "numeric"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{typeof}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "double"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{length}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sum}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 16.5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4.125
+\end{verbatim}
+
+\textbf{Character Vector}
+
+\begin{verbatim}
+## [1] "character"
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 3
+\end{verbatim}
+
+\hypertarget{access}{%
+\subsection{Access}\label{access}}
+
+\textbf{Element ID}\\
+Use brackets \texttt{{[}{]}} when accessing specific elements in an object. For example, if you want to access element \#2 in the vector \texttt{x}, you may specify as \texttt{x{[}2{]}}:
+
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 2 2
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 2 3 2
+\end{verbatim}
+
+\textbf{Equation}\\
+R provides many ways to access elements that suffice specific conditions. You can use mathematical symbols to specify what you need, for example:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{==} equal
+\item
+  \texttt{\textgreater{}} larger than
+\item
+  \texttt{\textgreater{}=} equal \& larger than
+\item
+  \texttt{\textless{}} smaller than
+\item
+  \texttt{\textless{}=} equal \& smaller than
+\item
+  \texttt{which()} a function that returns element \# that suffices the specified condition
+\end{itemize}
+
+The following examples return a logical vector indicating whether each element in x suffices the specified condition:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# creating a vector}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{5}\NormalTok{)}
+
+\CommentTok{\# ex.1a equal}
+\NormalTok{x }\SpecialCharTok{==} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  TRUE  TRUE FALSE  TRUE FALSE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# ex.1b larger than}
+\NormalTok{x }\SpecialCharTok{\textgreater{}} \DecValTok{2} 
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] FALSE FALSE  TRUE FALSE  TRUE
+\end{verbatim}
+
+You can access elements that suffice the specified condition using brackets, for example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# ex.2a equal}
+\NormalTok{x[x }\SpecialCharTok{==} \DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2 2 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# ex.2b larger than}
+\NormalTok{x[x }\SpecialCharTok{\textgreater{}} \DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3 5
+\end{verbatim}
+
+Using \texttt{which()}, you can see which elements (i.e., \#) matches what you need:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# ex.3a equal}
+\FunctionTok{which}\NormalTok{(x }\SpecialCharTok{==} \DecValTok{2}\NormalTok{) }\CommentTok{\# returns which elements are equal to 2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1 2 4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# ex.3b larger than}
+\FunctionTok{which}\NormalTok{(x }\SpecialCharTok{\textgreater{}} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3 5
+\end{verbatim}
+
+\hypertarget{matrix}{%
+\section{Matrix}\label{matrix}}
+
+\hypertarget{create-matrix}{%
+\subsection{Create Matrix}\label{create-matrix}}
+
+Matrix is a set of elements (\emph{single data type}) that are organized into rows and columns:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#ex.1 cbind: combine objects by column}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{), }\FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{))}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]    1    4
+## [2,]    2    5
+## [3,]    3    6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#ex.2 rbind: combine objects by row}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{), }\FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{))}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]    1    2    3
+## [2,]    4    5    6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#ex.3 matrix: specify elements and the number of rows (nrow) and columns (ncol)}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{9}\NormalTok{, }\AttributeTok{nrow =} \DecValTok{3}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{3}\NormalTok{)}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]    1    4    7
+## [2,]    2    5    8
+## [3,]    3    6    9
+\end{verbatim}
+
+\hypertarget{check-features-1}{%
+\subsection{Check Features}\label{check-features-1}}
+
+R provides many functions to examine features of matrix data, for example:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{dim()} number of rows and columns
+\item
+  \texttt{rowSums()} row sums
+\item
+  \texttt{colSums()} column sums
+\end{itemize}
+
+\textbf{Integer Matrix}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{9}\NormalTok{, }\AttributeTok{nrow =} \DecValTok{3}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{3}\NormalTok{)}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]    1    4    7
+## [2,]    2    5    8
+## [3,]    3    6    9
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "matrix" "array"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{typeof}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "integer"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dim}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3 3
+\end{verbatim}
+
+\textbf{Character Matrix}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"a"}\NormalTok{,}\StringTok{"b"}\NormalTok{, }\StringTok{"c"}\NormalTok{, }\StringTok{"d"}\NormalTok{, }\StringTok{"e"}\NormalTok{, }\StringTok{"f"}\NormalTok{), }\AttributeTok{nrow =} \DecValTok{3}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{2}\NormalTok{)}
+\NormalTok{y}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2]
+## [1,] "a"  "d" 
+## [2,] "b"  "e" 
+## [3,] "c"  "f"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "matrix" "array"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{typeof}\NormalTok{(y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "character"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dim}\NormalTok{(y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3 2
+\end{verbatim}
+
+\hypertarget{access-1}{%
+\subsection{Access}\label{access-1}}
+
+When accessing matrix elements, you need to pick row(s) and/or column(s), for example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{9}\NormalTok{, }\AttributeTok{nrow =} \DecValTok{3}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{3}\NormalTok{)}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]    1    4    7
+## [2,]    2    5    8
+## [3,]    3    6    9
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{] }\CommentTok{\# access an element in row \#2 and colum \#3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 8
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[}\DecValTok{2}\NormalTok{,] }\CommentTok{\# access elements in row \#2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2 5 8
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{),] }\CommentTok{\# access elements in rows \#2 and 3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]    2    5    8
+## [2,]    3    6    9
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[,}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{)] }\CommentTok{\# access elements in columns \#2 and 3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]    4    7
+## [2,]    5    8
+## [3,]    6    9
+\end{verbatim}
+
+You can assess each element with mathematical expressions just like vectors:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\SpecialCharTok{==} \DecValTok{2} \CommentTok{\# equal}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       [,1]  [,2]  [,3]
+## [1,] FALSE FALSE FALSE
+## [2,]  TRUE FALSE FALSE
+## [3,] FALSE FALSE FALSE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\SpecialCharTok{\textgreater{}} \DecValTok{2} \CommentTok{\# larger than}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       [,1] [,2] [,3]
+## [1,] FALSE TRUE TRUE
+## [2,] FALSE TRUE TRUE
+## [3,]  TRUE TRUE TRUE
+\end{verbatim}
+
+However, care must be taken when accessing elements, as it will be automatically converted to vector data:
+
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 3 4 5 6 7 8 9
+\end{verbatim}
+
+\texttt{which()} needs an additional argument to return both row and column \#:
+
+\begin{verbatim}
+##      row col
+## [1,]   2   1
+\end{verbatim}
+
+\begin{verbatim}
+##      row col
+## [1,]   3   1
+## [2,]   1   2
+## [3,]   2   2
+## [4,]   3   2
+## [5,]   1   3
+## [6,]   2   3
+## [7,]   3   3
+\end{verbatim}
+
+\hypertarget{data-frame}{%
+\section{Data Frame}\label{data-frame}}
+
+Data frame is a set of elements that are organized into rows and columns, but differ from matrix in several ways.
+
+\begin{itemize}
+\tightlist
+\item
+  it allows \emph{multiple data types} in different columns
+\item
+  each column has its \emph{name}
+\item
+  you can access columns by name (using \texttt{\$})
+\end{itemize}
+
+\textbf{Data frame is the most common data structure when manipulating ecological data}. A data set loaded from a spread sheet (we will address this later) will be automatically recognized as a data frame. Here is an example:
+
+\textbf{Create a data frame}\\
+In the following example, variables \texttt{x} and \texttt{y} are organized into a single data frame \texttt{dat}. Variable are renamed when creating a data frame composed of \texttt{x} and \texttt{y}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create data frame}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Pristine"}\NormalTok{, }\StringTok{"Pristine"}\NormalTok{, }\StringTok{"Disturbed"}\NormalTok{, }\StringTok{"Disturbed"}\NormalTok{, }\StringTok{"Pristine"}\NormalTok{) }\CommentTok{\# Lake type}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FloatTok{1.2}\NormalTok{, }\FloatTok{2.2}\NormalTok{, }\FloatTok{10.9}\NormalTok{, }\FloatTok{50.0}\NormalTok{, }\FloatTok{3.0}\NormalTok{) }\CommentTok{\# TSS: total suspended solids (mg/L)}
+\NormalTok{dat }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{LakeType =}\NormalTok{ x, }\AttributeTok{TSS =}\NormalTok{ y) }\CommentTok{\# x is named as "LakeType" while y is named as "TSS"}
+\NormalTok{dat}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    LakeType  TSS
+## 1  Pristine  1.2
+## 2  Pristine  2.2
+## 3 Disturbed 10.9
+## 4 Disturbed 50.0
+## 5  Pristine  3.0
+\end{verbatim}
+
+\textbf{Call column names}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{colnames}\NormalTok{(dat) }\CommentTok{\# call column names}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "LakeType" "TSS"
+\end{verbatim}
+
+\textbf{Access by columns}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat}\SpecialCharTok{$}\NormalTok{LakeType }\CommentTok{\# access LakeType}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Pristine"  "Pristine"  "Disturbed" "Disturbed" "Pristine"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat}\SpecialCharTok{$}\NormalTok{TSS }\CommentTok{\# access TSS}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  1.2  2.2 10.9 50.0  3.0
+\end{verbatim}
+
+You can access elements like a matrix as well:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat[,}\DecValTok{1}\NormalTok{] }\CommentTok{\# access column \#1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Pristine"  "Pristine"  "Disturbed" "Disturbed" "Pristine"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat[}\DecValTok{1}\NormalTok{,] }\CommentTok{\# access row \#1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   LakeType TSS
+## 1 Pristine 1.2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat[}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{),] }\CommentTok{\# access row \#2 and 4}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    LakeType  TSS
+## 2  Pristine  2.2
+## 4 Disturbed 50.0
+\end{verbatim}
+
+\hypertarget{exercise}{%
+\section{Exercise}\label{exercise}}
+
+\hypertarget{vector-1}{%
+\subsection{Vector}\label{vector-1}}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Create three numeric vectors with length 3, 6 and 20, respectively. Each vector must be created using different functions in R.
+\item
+  Create three character vectors with length 3, 6 and 20, respectively. Each vector must be created using different functions in R.
+\item
+  Copy the following script to your R script and perform the following analysis:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Identify element IDs of \texttt{x} that are greater than \texttt{2.0}
+\item
+  Identify element values of \texttt{x} that are greater than \texttt{2.0}
+\end{itemize}
+
+\hypertarget{matrix-1}{%
+\subsection{Matrix}\label{matrix-1}}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Create a numeric matrix with 4 rows and 4 columns. Each column must contain identical elements.
+\item
+  Create a numeric matrix with 4 rows and 4 columns. Each row must contain identical elements.
+\item
+  Create a character matrix with 4 rows and 4 columns. Each column must contain identical elements.
+\item
+  Create a character matrix with 4 rows and 4 columns. Each row must contain identical elements.
+\item
+  Copy the following script to your R script and perform the following analysis:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Identify element IDs of \texttt{x} that are greater than \texttt{2.0} (\textbf{specify row and column IDs})
+\item
+  Identify element values of \texttt{x} that are greater than \texttt{2.0} and calculate the mean.
+\end{itemize}
+
+\hypertarget{data-frame-1}{%
+\subsection{Data Frame}\label{data-frame-1}}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Create a data frame of 3 variables with 10 elements (name variables as \texttt{x}, \texttt{y} and \texttt{z}. \texttt{x} must be \texttt{character} while \texttt{y} and \texttt{z} must be \texttt{numeric}.
+\item
+  Check the data structure (higher-level) of \texttt{x}, \texttt{y} and \texttt{z}
+\item
+  Copy the following script to your R script and perform the following analysis:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Calculate the means of \texttt{temperature} and \texttt{abundance} for states \texttt{VA} and \texttt{NC} separately.
+\end{itemize}
 
 \end{document}

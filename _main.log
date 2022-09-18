@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (MiKTeX 20.10) (preloaded format=xelatex 2020.10.14)  16 SEP 2022 00:09
+This is XeTeX, Version 3.14159265-2.6-0.999992 (MiKTeX 20.10) (preloaded format=xelatex 2020.10.14)  18 SEP 2022 16:05
 entering extended mode
 **./_main.tex
 (_main.tex
@@ -826,83 +826,115 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 Chapter 1.
 File: image/r_image01.png Graphic file (type bmp)
 <image/r_image01.png>
-[7] [8] [9] [10
+[7] [8]
+Overfull \hbox (2.85919pt too wide) in paragraph at lines 279--279
+[]|\TU/lmtt/m/n/10 /data_format|  
+ []
 
-]
+[9]
+
+LaTeX Warning: Reference `appendix' on page 10 undefined on input line 288.
+
+[10]
 Chapter 2.
 File: image/git_image01.png Graphic file (type bmp)
 <image/git_image01.png>
 
-Overfull \hbox (101.03973pt too wide) in paragraph at lines 278--279
+Overfull \hbox (101.03973pt too wide) in paragraph at lines 311--312
  [][] 
  []
 
-[11] [12]
+[11
+
+] [12]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 301.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 334.
 
 LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/sl' tried instead on input line 301.
+(Font)              Font shape `TU/lmtt/b/sl' tried instead on input line 334.
 
 File: image/git_image02.png Graphic file (type bmp)
 <image/git_image02.png>
 
-Overfull \hbox (632.78961pt too wide) in paragraph at lines 316--317
+Overfull \hbox (632.78961pt too wide) in paragraph at lines 349--350
  [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 24.06664pt on input line 321.
+LaTeX Warning: Float too large for page by 24.06664pt on input line 354.
 
 File: image/git_image03.png Graphic file (type bmp)
 <image/git_image03.png>
 
-Overfull \hbox (618.10051pt too wide) in paragraph at lines 327--328
+Overfull \hbox (618.10051pt too wide) in paragraph at lines 360--361
  [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 16.11653pt on input line 332.
+LaTeX Warning: Float too large for page by 16.11653pt on input line 365.
 
 File: image/git_image04.png Graphic file (type bmp)
 <image/git_image04.png>
 
-Overfull \hbox (618.10051pt too wide) in paragraph at lines 341--342
+Overfull \hbox (618.10051pt too wide) in paragraph at lines 374--375
  [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 26.16653pt on input line 346.
+LaTeX Warning: Float too large for page by 26.16653pt on input line 379.
 
 [13] [14] [15] [16]
 File: image/git_image05.png Graphic file (type bmp)
 <image/git_image05.png>
 
-Overfull \hbox (618.10051pt too wide) in paragraph at lines 357--358
+Overfull \hbox (618.10051pt too wide) in paragraph at lines 390--391
  [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 16.11653pt on input line 362.
+LaTeX Warning: Float too large for page by 16.11653pt on input line 395.
 
 File: image/git_image06.png Graphic file (type bmp)
 <image/git_image06.png>
 
-Overfull \hbox (632.78961pt too wide) in paragraph at lines 401--402
+Overfull \hbox (632.78961pt too wide) in paragraph at lines 434--435
  [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 24.06664pt on input line 406.
+LaTeX Warning: Float too large for page by 24.06664pt on input line 439.
 
-[17] [18] [19] (_main.aux) ) 
+[17] [18] [19] [20
+
+]
+Chapter 3.
+[21]
+Overfull \hbox (90.75pt too wide) in paragraph at lines 581--581
+[]\TU/lmtt/m/n/10 ##  [1] 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0 2.1 2.2 2
+.3 2.4 2.5 2.6 2.7 2.8[] 
+ []
+
+
+Overfull \hbox (90.75pt too wide) in paragraph at lines 581--581
+[]\TU/lmtt/m/n/10 ## [20] 2.9 3.0 3.1 3.2 3.3 3.4 3.5 3.6 3.7 3.8 3.9 4.0 4.1 4
+.2 4.3 4.4 4.5 4.6 4.7[] 
+ []
+
+
+Underfull \vbox (badness 1975) has occurred while \output is active []
+
+[22] [23] [24] [25] [26] [27] [28] [29] [30] (_main.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
 Here is how much of TeX's memory you used:
- 18766 strings out of 412249
- 322089 string characters out of 2855664
- 804813 words of memory out of 3000000
- 37965 multiletter control sequences out of 15000+200000
- 541603 words of font info for 90 fonts, out of 3000000 for 9000
+ 18802 strings out of 412249
+ 322678 string characters out of 2855664
+ 807558 words of memory out of 3000000
+ 37994 multiletter control sequences out of 15000+200000
+ 541635 words of font info for 94 fonts, out of 3000000 for 9000
  1348 hyphenation exceptions out of 8191
- 84i,8n,118p,1090b,456s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 84i,8n,118p,1090b,478s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on _main.pdf (19 pages).
+Output written on _main.pdf (30 pages).

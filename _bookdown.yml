@@ -4,4 +4,5 @@ language:
     chapter_name: "Chapter "
 rmd_files: ["index.Rmd",
             "chapters/01-project.Rmd",
-            "chapters/04-appendix.Rmd"]
+            "chapters/04-git.Rmd",
+            "chapters/05-data_str.Rmd"]

@@ -1,5 +1,7 @@
 fig:ui
 tab:str
+fig:fish-plot
+fig:fish-plot-2
 fig:gitcheck
 fig:gitdesktop1
 fig:gitdesktop2
@@ -12,6 +14,9 @@ script-editor
 file-name
 structure-your-project
 robust-coding
+why-statistics
+the-rationale
+example
 appendix-git-github
 git-github
 commit-push

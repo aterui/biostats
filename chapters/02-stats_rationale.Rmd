@@ -1,0 +1,93 @@
+```{r setup-02, include=FALSE}
+
+pacman::p_load(tidyverse,
+               foreach)
+```
+
+# Why statistics?
+
+## The rationale
+
+*Why do I need statistics in ecology in the first place?* - this is the first question I got when I stepped into the field of ecology. I thought this would be an easy question that someone could give me the answer right away, but actually it is a deep one. The short answer is "*we need statistics because we only have **partial** information about what we want to know.*" The long answer? See below.
+
+## Example
+
+```{r fish-data}
+lake_size <- 15
+set.seed(10)
+
+## data set
+df_plot <- tibble(x0 = runif(10, 0, lake_size - 1),
+                  x1 = x0 + 1,
+                  y0 = runif(10, 0, lake_size - 1),
+                  y1 = y0 + 1)
+
+df_fish <- tibble(x = runif(500, 0, lake_size),
+                  y = runif(500, 0, lake_size))
+
+
+df_fish_sub <- foreach(i = seq_len(nrow(df_plot)),
+                       .combine = bind_rows) %do% {
+  df_fish %>% 
+    filter(x > df_plot$x0[i],
+           x < df_plot$x1[i],
+           y > df_plot$y0[i],
+           y < df_plot$y1[i]) %>% 
+    mutate(plot = i,
+           count = nrow(.))
+}
+```
+
+Let say we are interested in fish density in a lake (total area $15 \times 15 = 225~\text{m}^2$). We try to quantify it by catching fish in a certain area (1 m^2^ for example). Since there should be some variation in fish density among sampled points, we decided to repeat this `r nrow(df_plot)` times to take an average. Figure \@ref(fig:fish-plot) shows a graphical representation of this example.
+
+```{r fish-plot, fig.cap="Lake fish density example. Points are fish, and white boxes are sampling sites with 1 sq-m"}
+
+g_lake <- ggplot(data = df_fish_sub,
+                 aes(x = x,
+                     y = y)) +
+  geom_rect(aes(xmin = 0,
+                xmax = lake_size,
+                ymin = 0,
+                ymax = lake_size),
+            fill = "steelblue") +
+  geom_point(size = 0.5) +
+  geom_rect(data = df_plot,
+            aes(x = x0,
+                y = y0,
+                xmin = x0,
+                xmax = x1,
+                ymin = y0,
+                ymax = y1),
+            color = "white",
+            fill = NA) +
+  scale_x_continuous(limits = c(0, lake_size)) +
+  scale_y_continuous(limits = c(0, lake_size)) +
+  theme_minimal()
+
+g_lake
+```
+
+Through this sampling, we got the following dataset:
+
+```{r, echo = FALSE}
+
+df_count <- df_fish_sub %>% 
+  right_join(tibble(plot = 1:nrow(df_plot)),
+             by = "plot") %>% 
+  mutate(count = replace_na(count, 0)) %>% 
+  distinct(plot, count) %>% 
+  arrange(plot)
+
+df_count
+```
+
+Based on this dataset, we may conclude the average fish density in this lake is `r round(mean(df_count$count), 2)`. However, how confident are you on this conclusion? The lake area is $15 \times 15 = 225~\text{m}^2$ but we sampled only $1~\text{m}^2 \times 10 = 10~\text{m}^2$! Indeed, we missed a lot of fish in the lake (Figure \@ref(fig:fish-plot-2)).
+
+```{r fish-plot-2, fig.cap="True fish distribution in the lake"}
+g_lake + 
+  geom_point(data = df_fish,
+             size = 0.5,
+             color = grey(0, 0.2))
+```
+
+In ecological research (and almost all research field), we are rarely able to obtain the perfect dataset, i.e., no uncertainty in the data.

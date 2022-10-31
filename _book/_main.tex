@@ -117,7 +117,7 @@
 
 \title{BIOSTATS}
 \author{Akira Terui}
-\date{Last updated on 2022-09-18}
+\date{Last updated on 2022-10-31}
 
 \begin{document}
 \maketitle
@@ -254,8 +254,8 @@ A new window pops up and prompts you to name a directory with a location in your
 The internal structure of an \texttt{R\ Project} is extremely important to navigate yourself (others once it's published). \texttt{R\ Project} will be composed of multiple types of files, typically \texttt{.R}, \texttt{.csv}, \texttt{.rds}, \texttt{.Rmd} among others. Unless those files are arranged in an organized manner, it is VERY LIKELY to make severe errors in coding. So I take this seriously. Table \ref{tab:str} is my suggested subdirectory structure.
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.1806}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.8194}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.0838}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.9162}}@{}}
 \caption{\label{tab:str} Suggested internal structure of \texttt{R\ Project}}\tabularnewline
 \toprule()
 \begin{minipage}[b]{\linewidth}\raggedright
@@ -286,6 +286,59 @@ Content
 \section{Robust coding}\label{robust-coding}}
 
 While this is not mandatory, I strongly recommend to use \emph{RStudio} with \emph{Git} \& \emph{GitHub} (see Chapter \ref{appendix} Appendix for guidance). Coding is innately error-prone\footnote{well WAY BETTER than manual data manipulation!}; every programmers, even bright ones, make mistakes - no exception. However, the critical difference between beginner and advanced programmers is whether they develop robust coding rules with a self-error-detection system. \emph{Git} is the key to this. I will touch on this occasionally throughout this book.
+
+\hypertarget{why-statistics}{%
+\chapter{Why statistics?}\label{why-statistics}}
+
+\hypertarget{the-rationale}{%
+\section{The rationale}\label{the-rationale}}
+
+\emph{Why do I need statistics in ecology in the first place?} - this is the first question I got when I stepped into the field of ecology. I thought this would be an easy question that someone could give me the answer right away, but actually it is a deep one. The short answer is ``\emph{we need statistics because we only have \textbf{partial} information about what we want to know.}'' The long answer? See below.
+
+\hypertarget{example}{%
+\section{Example}\label{example}}
+
+Let say we are interested in fish density in a lake (total area \(15 \times 15 = 225~\text{m}^2\)). We try to quantify it by catching fish in a certain area (1 m\textsuperscript{2} for example). Since there should be some variation in fish density among sampled points, we decided to repeat this 5 times to take an average. Figure \ref{fig:fish-plot} shows a graphical representation of this example.
+
+\begin{figure}
+
+{\centering \includegraphics{_main_files/figure-latex/fish-plot-1} 
+
+}
+
+\caption{Lake fish density example. Points are fish, and white boxes are sampling sites with 1 sq-m}\label{fig:fish-plot}
+\end{figure}
+
+Through this sampling, we got the following dataset:
+
+\begin{verbatim}
+## # A tibble: 10 x 2
+##     plot count
+##    <int> <int>
+##  1     1     1
+##  2     2     1
+##  3     3     1
+##  4     4     2
+##  5     5     7
+##  6     6     2
+##  7     7     5
+##  8     8     1
+##  9     9     3
+## 10    10     3
+\end{verbatim}
+
+Based on this dataset, we may conclude the average fish density in this lake is 2.6. However, how confident are you on this conclusion? The lake area is \(15 \times 15 = 225~\text{m}^2\) but we sampled only \(1~\text{m}^2 \times 10 = 10~\text{m}^2\)! Indeed, we missed a lot of fish in the lake (Figure \ref{fig:fish-plot-2}).
+
+\begin{figure}
+
+{\centering \includegraphics{_main_files/figure-latex/fish-plot-2-1} 
+
+}
+
+\caption{True fish distribution in the lake}\label{fig:fish-plot-2}
+\end{figure}
+
+In ecological research (and almost all research field), we rarely able to obtain
 
 \hypertarget{appendix-git-github}{%
 \chapter{\texorpdfstring{Appendix: \emph{Git} \& \emph{GitHub}}{Appendix: Git \& GitHub}}\label{appendix-git-github}}

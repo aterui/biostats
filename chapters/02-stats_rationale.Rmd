@@ -6,11 +6,11 @@ pacman::p_load(tidyverse,
 
 # Why statistics?
 
-## The rationale
+## Rationale
 
 *Why do I need statistics in ecology in the first place?* - this is the first question I got when I stepped into the field of ecology. I thought this would be an easy question that someone could give me the answer right away, but actually it is a deep one. The short answer is "*we need statistics because we only have **partial** information about what we want to know.*" The long answer? See below.
 
-## Example
+## Example -- fish density in a lake
 
 ```{r fish-data}
 lake_size <- 15
@@ -77,7 +77,9 @@ df_count <- df_fish_sub %>%
   mutate(count = replace_na(count, 0)) %>% 
   distinct(plot, count) %>% 
   arrange(plot)
+```
 
+```{r, echo = TRUE}
 df_count
 ```
 
@@ -90,4 +92,46 @@ g_lake +
              color = grey(0, 0.2))
 ```
 
-In ecological research (and almost all research field), we are rarely able to obtain the perfect dataset, i.e., no uncertainty in the data.
+In ecological research (and almost all research field), we are rarely able to obtain the perfect dataset with no uncertainty -- the data are partial information of what we want to know (true fish density in the entire lake = `r round(nrow(df_fish)/(15^2), 2)`). This is the reason why we refer to a data point as a **sample**, and the average fish density in white boxes (`r round(mean(df_count$count), 2)`) is the **estimate** of the true fish density because it is the inference from the incomplete information. Since the average fish density is the estimate, it does not perfectly match the true density -- how do we account for this uncertainty?
+
+## Mean & Variance
+
+In the above section, I talked only about the **mean** (total fish counts / number of plots = mean density per plot area [m^2^]). Let me re-write this in a little more mathematical form -- I write a single data point (fish count in a single white box) as $y_i$ with $i$ representing an ID of a plot (therefore, $y_1 = 1,~y_2 = 1,~y_3 = 1,~y_4 = 2, ...y_{10}=3$), and refer to the number of plots as $N$. The mean fish counts $\mu$ is:
+
+$$
+\mu = \frac{\sum_{i=1}^N y_i}{N}
+$$
+
+However, the data contain another important aspect of information: variability in fish counts among samples. This variability -- called **variance** -- expresses the degree of uncertainty in your data. The variance $\sigma^2$ can be calculated using the deviation of each data point $x_i$ from the mean $\mu$:
+
+$$
+\sigma^2 = \frac{\sum_{i=1}^N (y_i - \mu)^2}{N - 1}
+$$
+
+In this equation, $(y_i - \mu)^2$ is the deviation from the mean, but it is squared to make the deviation positive regardless the value of $y_i$. Since all the deviations are positive, the summation should represent the overall deviation from the mean. We divide it by $N-1$ to express it as the "average" of deviations[^02-stats_rationale-1]. Thus, cheafly speaking, variance can be interpreted as the average squared-deviation of each data point.
+
+[^02-stats_rationale-1]: The reason for dividing by $N-1$, not by $N$, is a statistically deep topic; in essence, this is required to obtain an unbiased estimate of variance.
+
+Let's estimate mean and variance in R. Create `tibble()` containing the data presented above, and perform the following analysis. Although R has built-in functions for mean (`mean()`) and variance (`var()`), I show here how to express the equations above in R codes:
+
+```{r, echo = TRUE}
+
+# define variables
+y <- df_count$count # fish counts
+n <- nrow(df_count) # number of plots
+
+print(y)
+print(n)
+
+# mean
+mu <- sum(y) / n
+print(mu)
+
+# variance
+sigma2 <- sum((y - mu)^2) / (n - 1)
+print(sigma2)
+```
+
+Make sure these values are identical to what you would obtain from `mean()` and `var()` functions in R.
+
+## Probability distribution

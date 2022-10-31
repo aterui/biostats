@@ -290,15 +290,15 @@ While this is not mandatory, I strongly recommend to use \emph{RStudio} with \em
 \hypertarget{why-statistics}{%
 \chapter{Why statistics?}\label{why-statistics}}
 
-\hypertarget{the-rationale}{%
-\section{The rationale}\label{the-rationale}}
+\hypertarget{rationale}{%
+\section{Rationale}\label{rationale}}
 
 \emph{Why do I need statistics in ecology in the first place?} - this is the first question I got when I stepped into the field of ecology. I thought this would be an easy question that someone could give me the answer right away, but actually it is a deep one. The short answer is ``\emph{we need statistics because we only have \textbf{partial} information about what we want to know.}'' The long answer? See below.
 
-\hypertarget{example}{%
-\section{Example}\label{example}}
+\hypertarget{example-fish-density-in-a-lake}{%
+\section{Example -- fish density in a lake}\label{example-fish-density-in-a-lake}}
 
-Let say we are interested in fish density in a lake (total area \(15 \times 15 = 225~\text{m}^2\)). We try to quantify it by catching fish in a certain area (1 m\textsuperscript{2} for example). Since there should be some variation in fish density among sampled points, we decided to repeat this 5 times to take an average. Figure \ref{fig:fish-plot} shows a graphical representation of this example.
+Let say we are interested in fish density in a lake (total area \(15 \times 15 = 225~\text{m}^2\)). We try to quantify it by catching fish in a certain area (1 m\textsuperscript{2} for example). Since there should be some variation in fish density among sampled points, we decided to repeat this 10 times to take an average. Figure \ref{fig:fish-plot} shows a graphical representation of this example.
 
 \begin{figure}
 
@@ -338,7 +338,21 @@ Based on this dataset, we may conclude the average fish density in this lake is 
 \caption{True fish distribution in the lake}\label{fig:fish-plot-2}
 \end{figure}
 
-In ecological research (and almost all research field), we rarely able to obtain
+In ecological research (and almost all research field), we are rarely able to obtain the perfect dataset with no uncertainty -- the data are partial information of what we want to know (true fish density in the entire lake = 2.22). This is the reason why we refer to a data point as a \textbf{sample}, and the average fish density in white boxes (2.6) is the \textbf{estimate} of the true fish density because it is the inference from the incomplete information. Since the average fish density is the estimate, it does not perfectly match the true density -- how do we account for this uncertainty?
+
+\hypertarget{mean-variance}{%
+\section{Mean \& Variance}\label{mean-variance}}
+
+In the above section, I talked only about the \textbf{mean} (total fish counts / number of plots = mean density per plot area {[}m\textsuperscript{2}{]}). Let me re-write this in a little more mathematical form -- I write a single data point (fish count in a single white box) as \(y_i\) with \(i\) representing an ID of a plot (therefore, \(y_1 = 1,~y_2 = 1,~y_3 = 1,~y_4 = 2, ...y_{10}=3\)), and refer to the number of plots as \(N\). The mean fish counts is:
+
+\[
+\frac{\sum_{i=1}^N y_i}{N}
+\]
+
+However, the data contain another important aspect of information: variability in fish counts among samples. This variability -- called \textbf{variance} -- expresses the degree of uncertainty in your data. This uncertainty is can be calculated from the deviation of each data point \(x_i\) from the mean \(\mu\):
+
+\hypertarget{probability-distribution}{%
+\section{Probability distribution}\label{probability-distribution}}
 
 \hypertarget{appendix-git-github}{%
 \chapter{\texorpdfstring{Appendix: \emph{Git} \& \emph{GitHub}}{Appendix: Git \& GitHub}}\label{appendix-git-github}}

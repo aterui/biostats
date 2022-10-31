@@ -15,8 +15,10 @@ file-name
 structure-your-project
 robust-coding
 why-statistics
-the-rationale
-example
+rationale
+example-fish-density-in-a-lake
+mean-variance
+probability-distribution
 appendix-git-github
 git-github
 commit-push

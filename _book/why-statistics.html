@@ -229,7 +229,7 @@ Figure 2.1: Lake fish density example. Points are fish, and white boxes are samp
 </p>
 </div>
 <p>Through this sampling, we got the following dataset:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="why-statistics.html#cb1-1" aria-hidden="true" tabindex="-1"></a>df_count</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="why-statistics.html#cb5-1" aria-hidden="true" tabindex="-1"></a>df_count</span></code></pre></div>
 <pre><code>## # A tibble: 10 × 2
 ##     plot count
 ##    &lt;int&gt; &lt;int&gt;
@@ -262,23 +262,23 @@ Figure 2.2: True fish distribution in the lake
 <p><span class="math display">\[
 \sigma^2 = \frac{\sum_{i=1}^N (y_i - \mu)^2}{N - 1}
 \]</span></p>
-<p>In this equation, <span class="math inline">\((y_i - \mu)^2\)</span> is the deviation from the mean, but it is squared to make the deviation positive regardless the value of <span class="math inline">\(y_i\)</span>. Since all the deviations are positive, the summation should represent the overall deviation from the mean. We divide it by <span class="math inline">\(N-1\)</span> to express it as the “average” of deviations<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. Thus, cheafly speaking, variance can be interpreted as the average squared-deviation of each data point.</p>
+<p>In this equation, <span class="math inline">\((y_i - \mu)^2\)</span> is the deviation from the mean, but it is squared to make the deviation positive regardless the value of <span class="math inline">\(y_i\)</span>. Since all the deviations are positive, the summation should represent the overall deviation from the mean. We divide it by <span class="math inline">\(N-1\)</span> to express it as the “average” of deviations<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>. Thus, cheafly speaking, variance can be interpreted as the average squared-deviation of each data point.</p>
 <p>Let’s estimate mean and variance in R. Create <code>tibble()</code> containing the data presented above, and perform the following analysis. Although R has built-in functions for mean (<code>mean()</code>) and variance (<code>var()</code>), I show here how to express the equations above in R codes:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="why-statistics.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define variables</span></span>
-<span id="cb3-2"><a href="why-statistics.html#cb3-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> df_count<span class="sc">$</span>count <span class="co"># fish counts</span></span>
-<span id="cb3-3"><a href="why-statistics.html#cb3-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(df_count) <span class="co"># number of plots</span></span>
-<span id="cb3-4"><a href="why-statistics.html#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="why-statistics.html#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(y)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="why-statistics.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define variables</span></span>
+<span id="cb7-2"><a href="why-statistics.html#cb7-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> df_count<span class="sc">$</span>count <span class="co"># fish counts</span></span>
+<span id="cb7-3"><a href="why-statistics.html#cb7-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(df_count) <span class="co"># number of plots</span></span>
+<span id="cb7-4"><a href="why-statistics.html#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="why-statistics.html#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(y)</span></code></pre></div>
 <pre><code>##  [1] 1 1 1 2 7 2 5 1 3 3</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="why-statistics.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(n)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="why-statistics.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(n)</span></code></pre></div>
 <pre><code>## [1] 10</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="why-statistics.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mean</span></span>
-<span id="cb7-2"><a href="why-statistics.html#cb7-2" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">sum</span>(y) <span class="sc">/</span> n</span>
-<span id="cb7-3"><a href="why-statistics.html#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mu)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="why-statistics.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mean</span></span>
+<span id="cb11-2"><a href="why-statistics.html#cb11-2" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">sum</span>(y) <span class="sc">/</span> n</span>
+<span id="cb11-3"><a href="why-statistics.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mu)</span></code></pre></div>
 <pre><code>## [1] 2.6</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="why-statistics.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># variance</span></span>
-<span id="cb9-2"><a href="why-statistics.html#cb9-2" aria-hidden="true" tabindex="-1"></a>sigma2 <span class="ot">&lt;-</span> <span class="fu">sum</span>((y <span class="sc">-</span> mu)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> (n <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb9-3"><a href="why-statistics.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sigma2)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="why-statistics.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># variance</span></span>
+<span id="cb13-2"><a href="why-statistics.html#cb13-2" aria-hidden="true" tabindex="-1"></a>sigma2 <span class="ot">&lt;-</span> <span class="fu">sum</span>((y <span class="sc">-</span> mu)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> (n <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb13-3"><a href="why-statistics.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sigma2)</span></code></pre></div>
 <pre><code>## [1] 4.044444</code></pre>
 <p>Make sure these values are identical to what you would obtain from <code>mean()</code> and <code>var()</code> functions in R.</p>
 </div>
@@ -289,8 +289,8 @@ Figure 2.2: True fish distribution in the lake
 </div>
 <div class="footnotes">
 <hr />
-<ol start="1">
-<li id="fn1"><p>The reason for dividing by <span class="math inline">\(N-1\)</span>, not by <span class="math inline">\(N\)</span>, is a statistically deep topic; in essence, this is required to obtain an unbiased estimate of variance.<a href="why-statistics.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<ol start="4">
+<li id="fn4"><p>The reason for dividing by <span class="math inline">\(N-1\)</span>, not by <span class="math inline">\(N\)</span>, is a statistically deep topic; in essence, this is required to obtain an unbiased estimate of variance.<a href="why-statistics.html#fnref4" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

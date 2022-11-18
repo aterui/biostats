@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (MiKTeX 20.10) (preloaded format=xelatex 2020.10.14)  31 OCT 2022 11:30
+This is XeTeX, Version 3.14159265-2.6-0.999992 (MiKTeX 20.10) (preloaded format=xelatex 2020.10.14)  14 NOV 2022 16:44
 entering extended mode
 **./_main.tex
 (_main.tex
@@ -859,87 +859,87 @@ File: _main_files/figure-latex/fish-plot-1.pdf Graphic file (type pdf)
 ] [12]
 File: _main_files/figure-latex/fish-plot-2-1.pdf Graphic file (type pdf)
 <use _main_files/figure-latex/fish-plot-2-1.pdf>
-[13] [14]
+[13] [14] [15] [16
+
+]
 Chapter 3.
 File: image/git_image01.png Graphic file (type bmp)
 <image/git_image01.png>
 
-Overfull \hbox (101.03973pt too wide) in paragraph at lines 378--379
+Overfull \hbox (101.03973pt too wide) in paragraph at lines 442--443
  [][] 
  []
 
-[15
-
-] [16]
+[17] [18]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 401.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 465.
 
 LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/sl' tried instead on input line 401.
+(Font)              Font shape `TU/lmtt/b/sl' tried instead on input line 465.
 
 File: image/git_image02.png Graphic file (type bmp)
 <image/git_image02.png>
 
-Overfull \hbox (632.78961pt too wide) in paragraph at lines 416--417
+Overfull \hbox (632.78961pt too wide) in paragraph at lines 480--481
  [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 24.06664pt on input line 421.
+LaTeX Warning: Float too large for page by 24.06664pt on input line 485.
 
 File: image/git_image03.png Graphic file (type bmp)
 <image/git_image03.png>
 
-Overfull \hbox (618.10051pt too wide) in paragraph at lines 427--428
+Overfull \hbox (618.10051pt too wide) in paragraph at lines 491--492
  [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 16.11653pt on input line 432.
+LaTeX Warning: Float too large for page by 16.11653pt on input line 496.
 
 File: image/git_image04.png Graphic file (type bmp)
 <image/git_image04.png>
 
-Overfull \hbox (618.10051pt too wide) in paragraph at lines 441--442
+Overfull \hbox (618.10051pt too wide) in paragraph at lines 505--506
  [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 26.16653pt on input line 446.
+LaTeX Warning: Float too large for page by 26.16653pt on input line 510.
 
-[17] [18] [19] [20]
+[19] [20] [21] [22]
 File: image/git_image05.png Graphic file (type bmp)
 <image/git_image05.png>
 
-Overfull \hbox (618.10051pt too wide) in paragraph at lines 457--458
+Overfull \hbox (618.10051pt too wide) in paragraph at lines 521--522
  [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 16.11653pt on input line 462.
+LaTeX Warning: Float too large for page by 16.11653pt on input line 526.
 
 File: image/git_image06.png Graphic file (type bmp)
 <image/git_image06.png>
 
-Overfull \hbox (632.78961pt too wide) in paragraph at lines 501--502
+Overfull \hbox (632.78961pt too wide) in paragraph at lines 565--566
  [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 24.06664pt on input line 506.
+LaTeX Warning: Float too large for page by 24.06664pt on input line 570.
 
-[21] [22] [23] [24
+[23] [24] [25] [26
 
 ]
 Chapter 4.
-[25]
-Overfull \hbox (90.75pt too wide) in paragraph at lines 648--648
+[27]
+Overfull \hbox (90.75pt too wide) in paragraph at lines 712--712
 []\TU/lmtt/m/n/10 ##  [1] 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0 2.1 2.2 2
 .3 2.4 2.5 2.6 2.7 2.8[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 648--648
+Overfull \hbox (90.75pt too wide) in paragraph at lines 712--712
 []\TU/lmtt/m/n/10 ## [20] 2.9 3.0 3.1 3.2 3.3 3.4 3.5 3.6 3.7 3.8 3.9 4.0 4.1 4
 .2 4.3 4.4 4.5 4.6 4.7[] 
  []
@@ -947,7 +947,7 @@ Overfull \hbox (90.75pt too wide) in paragraph at lines 648--648
 
 Underfull \vbox (badness 1975) has occurred while \output is active []
 
-[26] [27] [28] [29] [30] [31] [32] [33] [34] (_main.aux)
+[28] [29] [30] [31] [32] [33] [34] [35] [36] (_main.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -961,4 +961,4 @@ Here is how much of TeX's memory you used:
  1348 hyphenation exceptions out of 8191
  84i,8n,118p,1090b,484s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on _main.pdf (34 pages).
+Output written on _main.pdf (36 pages).

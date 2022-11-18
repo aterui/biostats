@@ -239,14 +239,14 @@ Figure 3.1: After installing Git, you should see <code>Create a git repository</
 <div id="register-your-git-repo" class="section level3 hasAnchor" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Register Your Git repo<a href="appendix-git-github.html#register-your-git-repo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Open the <code>R Project</code> you’ve just created as a git repository. Let’s make a sample <code>.R</code> file (<code>Ctr + Shift + N</code>) and save it (name as <code>sample.R</code>). For example:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="appendix-git-github.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="do">## produce 100 random numbers that follows a normal distribution</span></span>
-<span id="cb6-2"><a href="appendix-git-github.html#cb6-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb6-3"><a href="appendix-git-github.html#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="appendix-git-github.html#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate mean</span></span>
-<span id="cb6-5"><a href="appendix-git-github.html#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span>
-<span id="cb6-6"><a href="appendix-git-github.html#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="appendix-git-github.html#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate SD</span></span>
-<span id="cb6-8"><a href="appendix-git-github.html#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="appendix-git-github.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="do">## produce 100 random numbers that follows a normal distribution</span></span>
+<span id="cb15-2"><a href="appendix-git-github.html#cb15-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb15-3"><a href="appendix-git-github.html#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="appendix-git-github.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate mean</span></span>
+<span id="cb15-5"><a href="appendix-git-github.html#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span>
+<span id="cb15-6"><a href="appendix-git-github.html#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="appendix-git-github.html#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate SD</span></span>
+<span id="cb15-8"><a href="appendix-git-github.html#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(x)</span></code></pre></div>
 <p>Open GitHub Desktop App. You will see the following GUI (Figure <a href="appendix-git-github.html#fig:gitdesktop1">3.2</a>):</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:gitdesktop1"></span>
 <img src="image/git_image02.png" alt="GUI for GitHub Desktop" width="2200" />
@@ -286,23 +286,23 @@ Figure 3.5: To Push your code, hit the highlighted menu button
 <div id="edit" class="section level3 hasAnchor" number="3.2.4">
 <h3><span class="header-section-number">3.2.4</span> Edit<a href="appendix-git-github.html#edit" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We went through how we get things uploaded onto <em>GitHub</em>, but what happens if we make changes to existing files? To see this, let’s make a minor change to your R script. We have created a file <code>sample.R</code>:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="appendix-git-github.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="do">## produce 100 random numbers that follows a normal distribution</span></span>
-<span id="cb7-2"><a href="appendix-git-github.html#cb7-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb7-3"><a href="appendix-git-github.html#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="appendix-git-github.html#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate mean</span></span>
-<span id="cb7-5"><a href="appendix-git-github.html#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span>
-<span id="cb7-6"><a href="appendix-git-github.html#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="appendix-git-github.html#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate SD</span></span>
-<span id="cb7-8"><a href="appendix-git-github.html#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="appendix-git-github.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="do">## produce 100 random numbers that follows a normal distribution</span></span>
+<span id="cb16-2"><a href="appendix-git-github.html#cb16-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb16-3"><a href="appendix-git-github.html#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="appendix-git-github.html#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate mean</span></span>
+<span id="cb16-5"><a href="appendix-git-github.html#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span>
+<span id="cb16-6"><a href="appendix-git-github.html#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="appendix-git-github.html#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate SD</span></span>
+<span id="cb16-8"><a href="appendix-git-github.html#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(x)</span></code></pre></div>
 <p>Edit this as follows:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="appendix-git-github.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="do">## produce 100 random numbers that follows a normal distribution</span></span>
-<span id="cb8-2"><a href="appendix-git-github.html#cb8-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb8-3"><a href="appendix-git-github.html#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="appendix-git-github.html#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate mean</span></span>
-<span id="cb8-5"><a href="appendix-git-github.html#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(x)</span>
-<span id="cb8-6"><a href="appendix-git-github.html#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="appendix-git-github.html#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate SD</span></span>
-<span id="cb8-8"><a href="appendix-git-github.html#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="appendix-git-github.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="do">## produce 100 random numbers that follows a normal distribution</span></span>
+<span id="cb17-2"><a href="appendix-git-github.html#cb17-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb17-3"><a href="appendix-git-github.html#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="appendix-git-github.html#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate mean</span></span>
+<span id="cb17-5"><a href="appendix-git-github.html#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(x)</span>
+<span id="cb17-6"><a href="appendix-git-github.html#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="appendix-git-github.html#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate SD</span></span>
+<span id="cb17-8"><a href="appendix-git-github.html#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(x)</span></code></pre></div>
 <p>After making this change, go to <em>GitHub Desktop</em> again. <em>GitHub Desktop</em> automatically detects the difference between the new and old files and shows which part of the script has been edited! This helps coding quite a bit:</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:gitdesktop5"></span>
 <img src="image/git_image06.png" alt="Git detects edits to your codes" width="2200" />

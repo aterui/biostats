@@ -117,7 +117,7 @@
 
 \title{BIOSTATS}
 \author{Akira Terui}
-\date{Last updated on 2022-10-31}
+\date{Last updated on 2022-11-14}
 
 \begin{document}
 \maketitle
@@ -311,6 +311,12 @@ Let say we are interested in fish density in a lake (total area \(15 \times 15 =
 
 Through this sampling, we got the following dataset:
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_count}
+\end{Highlighting}
+\end{Shaded}
+
 \begin{verbatim}
 ## # A tibble: 10 x 2
 ##     plot count
@@ -343,13 +349,71 @@ In ecological research (and almost all research field), we are rarely able to ob
 \hypertarget{mean-variance}{%
 \section{Mean \& Variance}\label{mean-variance}}
 
-In the above section, I talked only about the \textbf{mean} (total fish counts / number of plots = mean density per plot area {[}m\textsuperscript{2}{]}). Let me re-write this in a little more mathematical form -- I write a single data point (fish count in a single white box) as \(y_i\) with \(i\) representing an ID of a plot (therefore, \(y_1 = 1,~y_2 = 1,~y_3 = 1,~y_4 = 2, ...y_{10}=3\)), and refer to the number of plots as \(N\). The mean fish counts is:
+In the above section, I talked only about the \textbf{mean} (total fish counts / number of plots = mean density per plot area {[}m\textsuperscript{2}{]}). Let me re-write this in a little more mathematical form -- I write a single data point (fish count in a single white box) as \(y_i\) with \(i\) representing an ID of a plot (therefore, \(y_1 = 1,~y_2 = 1,~y_3 = 1,~y_4 = 2, ...y_{10}=3\)), and refer to the number of plots as \(N\). The mean fish counts \(\mu\) is:
 
 \[
-\frac{\sum_{i=1}^N y_i}{N}
+\mu = \frac{\sum_{i=1}^N y_i}{N}
 \]
 
-However, the data contain another important aspect of information: variability in fish counts among samples. This variability -- called \textbf{variance} -- expresses the degree of uncertainty in your data. This uncertainty is can be calculated from the deviation of each data point \(x_i\) from the mean \(\mu\):
+However, the data contain another important aspect of information: variability in fish counts among samples. This variability -- called \textbf{variance} -- expresses the degree of uncertainty in your data. The variance \(\sigma^2\) can be calculated using the deviation of each data point \(x_i\) from the mean \(\mu\):
+
+\[
+\sigma^2 = \frac{\sum_{i=1}^N (y_i - \mu)^2}{N - 1}
+\]
+
+In this equation, \((y_i - \mu)^2\) is the deviation from the mean, but it is squared to make the deviation positive regardless the value of \(y_i\). Since all the deviations are positive, the summation should represent the overall deviation from the mean. We divide it by \(N-1\) to express it as the ``average'' of deviations\footnote{The reason for dividing by \(N-1\), not by \(N\), is a statistically deep topic; in essence, this is required to obtain an unbiased estimate of variance.}. Thus, cheafly speaking, variance can be interpreted as the average squared-deviation of each data point.
+
+Let's estimate mean and variance in R. Create \texttt{tibble()} containing the data presented above, and perform the following analysis. Although R has built-in functions for mean (\texttt{mean()}) and variance (\texttt{var()}), I show here how to express the equations above in R codes:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# define variables}
+\NormalTok{y }\OtherTok{\textless{}{-}}\NormalTok{ df\_count}\SpecialCharTok{$}\NormalTok{count }\CommentTok{\# fish counts}
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(df\_count) }\CommentTok{\# number of plots}
+
+\FunctionTok{print}\NormalTok{(y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 1 1 1 2 7 2 5 1 3 3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(n)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 10
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# mean}
+\NormalTok{mu }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(y) }\SpecialCharTok{/}\NormalTok{ n}
+\FunctionTok{print}\NormalTok{(mu)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# variance}
+\NormalTok{sigma2 }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{((y }\SpecialCharTok{{-}}\NormalTok{ mu)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{) }\SpecialCharTok{/}\NormalTok{ (n }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(sigma2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4.044444
+\end{verbatim}
+
+Make sure these values are identical to what you would obtain from \texttt{mean()} and \texttt{var()} functions in R.
 
 \hypertarget{probability-distribution}{%
 \section{Probability distribution}\label{probability-distribution}}

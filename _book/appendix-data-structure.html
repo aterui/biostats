@@ -238,37 +238,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="create-vector" class="section level3 hasAnchor" number="4.2.1">
 <h3><span class="header-section-number">4.2.1</span> Create Vector<a href="appendix-data-structure.html#create-vector" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Below are examples of atomic character vectors, numeric vectors, integer vectors, etc. There are many ways to create vector data. The following examples use <code>c()</code>, <code>:</code>, <code>seq()</code>, <code>rep()</code>:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="appendix-data-structure.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.1a manually create a vector using c()</span></span>
-<span id="cb9-2"><a href="appendix-data-structure.html#cb9-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">8</span>)</span>
-<span id="cb9-3"><a href="appendix-data-structure.html#cb9-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="appendix-data-structure.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.1a manually create a vector using c()</span></span>
+<span id="cb18-2"><a href="appendix-data-structure.html#cb18-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">8</span>)</span>
+<span id="cb18-3"><a href="appendix-data-structure.html#cb18-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## [1] 1 3 4 8</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="appendix-data-structure.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.1b character</span></span>
-<span id="cb11-2"><a href="appendix-data-structure.html#cb11-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>)</span>
-<span id="cb11-3"><a href="appendix-data-structure.html#cb11-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="appendix-data-structure.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.1b character</span></span>
+<span id="cb20-2"><a href="appendix-data-structure.html#cb20-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>)</span>
+<span id="cb20-3"><a href="appendix-data-structure.html#cb20-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot;</code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="appendix-data-structure.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.1c logical</span></span>
-<span id="cb13-2"><a href="appendix-data-structure.html#cb13-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>)</span>
-<span id="cb13-3"><a href="appendix-data-structure.html#cb13-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="appendix-data-structure.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.1c logical</span></span>
+<span id="cb22-2"><a href="appendix-data-structure.html#cb22-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb22-3"><a href="appendix-data-structure.html#cb22-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## [1]  TRUE FALSE FALSE</code></pre>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="appendix-data-structure.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.2 sequence of numbers</span></span>
-<span id="cb15-2"><a href="appendix-data-structure.html#cb15-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
-<span id="cb15-3"><a href="appendix-data-structure.html#cb15-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="appendix-data-structure.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.2 sequence of numbers</span></span>
+<span id="cb24-2"><a href="appendix-data-structure.html#cb24-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb24-3"><a href="appendix-data-structure.html#cb24-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## [1] 1 2 3 4 5</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="appendix-data-structure.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.3a replicate same numbers or characters</span></span>
-<span id="cb17-2"><a href="appendix-data-structure.html#cb17-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">2</span>, <span class="dv">5</span>) <span class="co"># replicate 2 five times</span></span>
-<span id="cb17-3"><a href="appendix-data-structure.html#cb17-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="appendix-data-structure.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.3a replicate same numbers or characters</span></span>
+<span id="cb26-2"><a href="appendix-data-structure.html#cb26-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">2</span>, <span class="dv">5</span>) <span class="co"># replicate 2 five times</span></span>
+<span id="cb26-3"><a href="appendix-data-structure.html#cb26-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## [1] 2 2 2 2 2</code></pre>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="appendix-data-structure.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.3b replicate same numbers or characters</span></span>
-<span id="cb19-2"><a href="appendix-data-structure.html#cb19-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="st">&quot;a&quot;</span>, <span class="dv">5</span>) <span class="co"># replicate &quot;a&quot; five times</span></span>
-<span id="cb19-3"><a href="appendix-data-structure.html#cb19-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="appendix-data-structure.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.3b replicate same numbers or characters</span></span>
+<span id="cb28-2"><a href="appendix-data-structure.html#cb28-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="st">&quot;a&quot;</span>, <span class="dv">5</span>) <span class="co"># replicate &quot;a&quot; five times</span></span>
+<span id="cb28-3"><a href="appendix-data-structure.html#cb28-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## [1] &quot;a&quot; &quot;a&quot; &quot;a&quot; &quot;a&quot; &quot;a&quot;</code></pre>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="appendix-data-structure.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.4a use seq() function</span></span>
-<span id="cb21-2"><a href="appendix-data-structure.html#cb21-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
-<span id="cb21-3"><a href="appendix-data-structure.html#cb21-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="appendix-data-structure.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.4a use seq() function</span></span>
+<span id="cb30-2"><a href="appendix-data-structure.html#cb30-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
+<span id="cb30-3"><a href="appendix-data-structure.html#cb30-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## [1] 1 2 3 4 5</code></pre>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="appendix-data-structure.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.4b use seq() function</span></span>
-<span id="cb23-2"><a href="appendix-data-structure.html#cb23-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="fl">0.1</span>)</span>
-<span id="cb23-3"><a href="appendix-data-structure.html#cb23-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="appendix-data-structure.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.4b use seq() function</span></span>
+<span id="cb32-2"><a href="appendix-data-structure.html#cb32-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="fl">0.1</span>)</span>
+<span id="cb32-3"><a href="appendix-data-structure.html#cb32-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>##  [1] 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8
 ## [20] 2.9 3.0 3.1 3.2 3.3 3.4 3.5 3.6 3.7 3.8 3.9 4.0 4.1 4.2 4.3 4.4 4.5 4.6 4.7
 ## [39] 4.8 4.9 5.0</code></pre>
@@ -285,18 +285,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>mean()</code> - mean of object’s elements</li>
 </ul>
 <p><strong>Numeric Vector</strong></p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="appendix-data-structure.html#cb25-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.2</span>, <span class="fl">3.1</span>, <span class="fl">4.0</span>, <span class="fl">8.2</span>)</span>
-<span id="cb25-2"><a href="appendix-data-structure.html#cb25-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="appendix-data-structure.html#cb34-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.2</span>, <span class="fl">3.1</span>, <span class="fl">4.0</span>, <span class="fl">8.2</span>)</span>
+<span id="cb34-2"><a href="appendix-data-structure.html#cb34-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## [1] 1.2 3.1 4.0 8.2</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="appendix-data-structure.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="appendix-data-structure.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(x)</span></code></pre></div>
 <pre><code>## [1] &quot;numeric&quot;</code></pre>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="appendix-data-structure.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="appendix-data-structure.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(x)</span></code></pre></div>
 <pre><code>## [1] &quot;double&quot;</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="appendix-data-structure.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="appendix-data-structure.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(x)</span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="appendix-data-structure.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="appendix-data-structure.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(x)</span></code></pre></div>
 <pre><code>## [1] 16.5</code></pre>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="appendix-data-structure.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="appendix-data-structure.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span></code></pre></div>
 <pre><code>## [1] 4.125</code></pre>
 <p><strong>Character Vector</strong></p>
 <pre><code>## [1] &quot;character&quot;</code></pre>
@@ -320,28 +320,28 @@ R provides many ways to access elements that suffice specific conditions. You ca
 <li><code>which()</code> a function that returns element # that suffices the specified condition</li>
 </ul>
 <p>The following examples return a logical vector indicating whether each element in x suffices the specified condition:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="appendix-data-structure.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creating a vector</span></span>
-<span id="cb42-2"><a href="appendix-data-structure.html#cb42-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">5</span>)</span>
-<span id="cb42-3"><a href="appendix-data-structure.html#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-4"><a href="appendix-data-structure.html#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ex.1a equal</span></span>
-<span id="cb42-5"><a href="appendix-data-structure.html#cb42-5" aria-hidden="true" tabindex="-1"></a>x <span class="sc">==</span> <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="appendix-data-structure.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creating a vector</span></span>
+<span id="cb51-2"><a href="appendix-data-structure.html#cb51-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">5</span>)</span>
+<span id="cb51-3"><a href="appendix-data-structure.html#cb51-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-4"><a href="appendix-data-structure.html#cb51-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ex.1a equal</span></span>
+<span id="cb51-5"><a href="appendix-data-structure.html#cb51-5" aria-hidden="true" tabindex="-1"></a>x <span class="sc">==</span> <span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1]  TRUE  TRUE FALSE  TRUE FALSE</code></pre>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="appendix-data-structure.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ex.1b larger than</span></span>
-<span id="cb44-2"><a href="appendix-data-structure.html#cb44-2" aria-hidden="true" tabindex="-1"></a>x <span class="sc">&gt;</span> <span class="dv">2</span> </span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="appendix-data-structure.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ex.1b larger than</span></span>
+<span id="cb53-2"><a href="appendix-data-structure.html#cb53-2" aria-hidden="true" tabindex="-1"></a>x <span class="sc">&gt;</span> <span class="dv">2</span> </span></code></pre></div>
 <pre><code>## [1] FALSE FALSE  TRUE FALSE  TRUE</code></pre>
 <p>You can access elements that suffice the specified condition using brackets, for example:</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="appendix-data-structure.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ex.2a equal</span></span>
-<span id="cb46-2"><a href="appendix-data-structure.html#cb46-2" aria-hidden="true" tabindex="-1"></a>x[x <span class="sc">==</span> <span class="dv">2</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="appendix-data-structure.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ex.2a equal</span></span>
+<span id="cb55-2"><a href="appendix-data-structure.html#cb55-2" aria-hidden="true" tabindex="-1"></a>x[x <span class="sc">==</span> <span class="dv">2</span>]</span></code></pre></div>
 <pre><code>## [1] 2 2 2</code></pre>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="appendix-data-structure.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ex.2b larger than</span></span>
-<span id="cb48-2"><a href="appendix-data-structure.html#cb48-2" aria-hidden="true" tabindex="-1"></a>x[x <span class="sc">&gt;</span> <span class="dv">2</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="appendix-data-structure.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ex.2b larger than</span></span>
+<span id="cb57-2"><a href="appendix-data-structure.html#cb57-2" aria-hidden="true" tabindex="-1"></a>x[x <span class="sc">&gt;</span> <span class="dv">2</span>]</span></code></pre></div>
 <pre><code>## [1] 3 5</code></pre>
 <p>Using <code>which()</code>, you can see which elements (i.e., #) matches what you need:</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="appendix-data-structure.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ex.3a equal</span></span>
-<span id="cb50-2"><a href="appendix-data-structure.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(x <span class="sc">==</span> <span class="dv">2</span>) <span class="co"># returns which elements are equal to 2</span></span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="appendix-data-structure.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ex.3a equal</span></span>
+<span id="cb59-2"><a href="appendix-data-structure.html#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(x <span class="sc">==</span> <span class="dv">2</span>) <span class="co"># returns which elements are equal to 2</span></span></code></pre></div>
 <pre><code>## [1] 1 2 4</code></pre>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="appendix-data-structure.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ex.3b larger than</span></span>
-<span id="cb52-2"><a href="appendix-data-structure.html#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(x <span class="sc">&gt;</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="appendix-data-structure.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ex.3b larger than</span></span>
+<span id="cb61-2"><a href="appendix-data-structure.html#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(x <span class="sc">&gt;</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 3 5</code></pre>
 </div>
 </div>
@@ -350,22 +350,22 @@ R provides many ways to access elements that suffice specific conditions. You ca
 <div id="create-matrix" class="section level3 hasAnchor" number="4.3.1">
 <h3><span class="header-section-number">4.3.1</span> Create Matrix<a href="appendix-data-structure.html#create-matrix" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Matrix is a set of elements (<em>single data type</em>) that are organized into rows and columns:</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="appendix-data-structure.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.1 cbind: combine objects by column</span></span>
-<span id="cb54-2"><a href="appendix-data-structure.html#cb54-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>))</span>
-<span id="cb54-3"><a href="appendix-data-structure.html#cb54-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="appendix-data-structure.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.1 cbind: combine objects by column</span></span>
+<span id="cb63-2"><a href="appendix-data-structure.html#cb63-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>))</span>
+<span id="cb63-3"><a href="appendix-data-structure.html#cb63-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    1    4
 ## [2,]    2    5
 ## [3,]    3    6</code></pre>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="appendix-data-structure.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.2 rbind: combine objects by row</span></span>
-<span id="cb56-2"><a href="appendix-data-structure.html#cb56-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>))</span>
-<span id="cb56-3"><a href="appendix-data-structure.html#cb56-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="appendix-data-structure.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.2 rbind: combine objects by row</span></span>
+<span id="cb65-2"><a href="appendix-data-structure.html#cb65-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>))</span>
+<span id="cb65-3"><a href="appendix-data-structure.html#cb65-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    1    2    3
 ## [2,]    4    5    6</code></pre>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="appendix-data-structure.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.3 matrix: specify elements and the number of rows (nrow) and columns (ncol)</span></span>
-<span id="cb58-2"><a href="appendix-data-structure.html#cb58-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
-<span id="cb58-3"><a href="appendix-data-structure.html#cb58-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="appendix-data-structure.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.3 matrix: specify elements and the number of rows (nrow) and columns (ncol)</span></span>
+<span id="cb67-2"><a href="appendix-data-structure.html#cb67-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb67-3"><a href="appendix-data-structure.html#cb67-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    1    4    7
 ## [2,]    2    5    8
@@ -380,61 +380,61 @@ R provides many ways to access elements that suffice specific conditions. You ca
 <li><code>colSums()</code> column sums</li>
 </ul>
 <p><strong>Integer Matrix</strong></p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="appendix-data-structure.html#cb60-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
-<span id="cb60-2"><a href="appendix-data-structure.html#cb60-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="appendix-data-structure.html#cb69-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb69-2"><a href="appendix-data-structure.html#cb69-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    1    4    7
 ## [2,]    2    5    8
 ## [3,]    3    6    9</code></pre>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="appendix-data-structure.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="appendix-data-structure.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(x)</span></code></pre></div>
 <pre><code>## [1] &quot;matrix&quot; &quot;array&quot;</code></pre>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="appendix-data-structure.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="appendix-data-structure.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(x)</span></code></pre></div>
 <pre><code>## [1] &quot;integer&quot;</code></pre>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="appendix-data-structure.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="appendix-data-structure.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(x)</span></code></pre></div>
 <pre><code>## [1] 3 3</code></pre>
 <p><strong>Character Matrix</strong></p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="appendix-data-structure.html#cb68-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>, <span class="st">&quot;f&quot;</span>), <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">2</span>)</span>
-<span id="cb68-2"><a href="appendix-data-structure.html#cb68-2" aria-hidden="true" tabindex="-1"></a>y</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="appendix-data-structure.html#cb77-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>, <span class="st">&quot;f&quot;</span>), <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb77-2"><a href="appendix-data-structure.html#cb77-2" aria-hidden="true" tabindex="-1"></a>y</span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,] &quot;a&quot;  &quot;d&quot; 
 ## [2,] &quot;b&quot;  &quot;e&quot; 
 ## [3,] &quot;c&quot;  &quot;f&quot;</code></pre>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="appendix-data-structure.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(y)</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="appendix-data-structure.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(y)</span></code></pre></div>
 <pre><code>## [1] &quot;matrix&quot; &quot;array&quot;</code></pre>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="appendix-data-structure.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(y)</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="appendix-data-structure.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(y)</span></code></pre></div>
 <pre><code>## [1] &quot;character&quot;</code></pre>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="appendix-data-structure.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(y)</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="appendix-data-structure.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(y)</span></code></pre></div>
 <pre><code>## [1] 3 2</code></pre>
 </div>
 <div id="access-1" class="section level3 hasAnchor" number="4.3.3">
 <h3><span class="header-section-number">4.3.3</span> Access<a href="appendix-data-structure.html#access-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>When accessing matrix elements, you need to pick row(s) and/or column(s), for example:</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="appendix-data-structure.html#cb76-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
-<span id="cb76-2"><a href="appendix-data-structure.html#cb76-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="appendix-data-structure.html#cb85-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb85-2"><a href="appendix-data-structure.html#cb85-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    1    4    7
 ## [2,]    2    5    8
 ## [3,]    3    6    9</code></pre>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="appendix-data-structure.html#cb78-1" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">2</span>,<span class="dv">3</span>] <span class="co"># access an element in row #2 and colum #3</span></span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="appendix-data-structure.html#cb87-1" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">2</span>,<span class="dv">3</span>] <span class="co"># access an element in row #2 and colum #3</span></span></code></pre></div>
 <pre><code>## [1] 8</code></pre>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="appendix-data-structure.html#cb80-1" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">2</span>,] <span class="co"># access elements in row #2</span></span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="appendix-data-structure.html#cb89-1" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">2</span>,] <span class="co"># access elements in row #2</span></span></code></pre></div>
 <pre><code>## [1] 2 5 8</code></pre>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="appendix-data-structure.html#cb82-1" aria-hidden="true" tabindex="-1"></a>x[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>),] <span class="co"># access elements in rows #2 and 3</span></span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="appendix-data-structure.html#cb91-1" aria-hidden="true" tabindex="-1"></a>x[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>),] <span class="co"># access elements in rows #2 and 3</span></span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    2    5    8
 ## [2,]    3    6    9</code></pre>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="appendix-data-structure.html#cb84-1" aria-hidden="true" tabindex="-1"></a>x[,<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>)] <span class="co"># access elements in columns #2 and 3</span></span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="appendix-data-structure.html#cb93-1" aria-hidden="true" tabindex="-1"></a>x[,<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>)] <span class="co"># access elements in columns #2 and 3</span></span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    4    7
 ## [2,]    5    8
 ## [3,]    6    9</code></pre>
 <p>You can assess each element with mathematical expressions just like vectors:</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="appendix-data-structure.html#cb86-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">==</span> <span class="dv">2</span> <span class="co"># equal</span></span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="appendix-data-structure.html#cb95-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">==</span> <span class="dv">2</span> <span class="co"># equal</span></span></code></pre></div>
 <pre><code>##       [,1]  [,2]  [,3]
 ## [1,] FALSE FALSE FALSE
 ## [2,]  TRUE FALSE FALSE
 ## [3,] FALSE FALSE FALSE</code></pre>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="appendix-data-structure.html#cb88-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">&gt;</span> <span class="dv">2</span> <span class="co"># larger than</span></span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="appendix-data-structure.html#cb97-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">&gt;</span> <span class="dv">2</span> <span class="co"># larger than</span></span></code></pre></div>
 <pre><code>##       [,1] [,2] [,3]
 ## [1,] FALSE TRUE TRUE
 ## [2,] FALSE TRUE TRUE
@@ -466,11 +466,11 @@ R provides many ways to access elements that suffice specific conditions. You ca
 <p><strong>Data frame is the most common data structure when manipulating ecological data</strong>. A data set loaded from a spread sheet (we will address this later) will be automatically recognized as a data frame. Here is an example:</p>
 <p><strong>Create a data frame</strong><br />
 In the following example, variables <code>x</code> and <code>y</code> are organized into a single data frame <code>dat</code>. Variable are renamed when creating a data frame composed of <code>x</code> and <code>y</code>.</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="appendix-data-structure.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data frame</span></span>
-<span id="cb94-2"><a href="appendix-data-structure.html#cb94-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Pristine&quot;</span>, <span class="st">&quot;Pristine&quot;</span>, <span class="st">&quot;Disturbed&quot;</span>, <span class="st">&quot;Disturbed&quot;</span>, <span class="st">&quot;Pristine&quot;</span>) <span class="co"># Lake type</span></span>
-<span id="cb94-3"><a href="appendix-data-structure.html#cb94-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.2</span>, <span class="fl">2.2</span>, <span class="fl">10.9</span>, <span class="fl">50.0</span>, <span class="fl">3.0</span>) <span class="co"># TSS: total suspended solids (mg/L)</span></span>
-<span id="cb94-4"><a href="appendix-data-structure.html#cb94-4" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">LakeType =</span> x, <span class="at">TSS =</span> y) <span class="co"># x is named as &quot;LakeType&quot; while y is named as &quot;TSS&quot;</span></span>
-<span id="cb94-5"><a href="appendix-data-structure.html#cb94-5" aria-hidden="true" tabindex="-1"></a>dat</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="appendix-data-structure.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data frame</span></span>
+<span id="cb103-2"><a href="appendix-data-structure.html#cb103-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Pristine&quot;</span>, <span class="st">&quot;Pristine&quot;</span>, <span class="st">&quot;Disturbed&quot;</span>, <span class="st">&quot;Disturbed&quot;</span>, <span class="st">&quot;Pristine&quot;</span>) <span class="co"># Lake type</span></span>
+<span id="cb103-3"><a href="appendix-data-structure.html#cb103-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.2</span>, <span class="fl">2.2</span>, <span class="fl">10.9</span>, <span class="fl">50.0</span>, <span class="fl">3.0</span>) <span class="co"># TSS: total suspended solids (mg/L)</span></span>
+<span id="cb103-4"><a href="appendix-data-structure.html#cb103-4" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">LakeType =</span> x, <span class="at">TSS =</span> y) <span class="co"># x is named as &quot;LakeType&quot; while y is named as &quot;TSS&quot;</span></span>
+<span id="cb103-5"><a href="appendix-data-structure.html#cb103-5" aria-hidden="true" tabindex="-1"></a>dat</span></code></pre></div>
 <pre><code>##    LakeType  TSS
 ## 1  Pristine  1.2
 ## 2  Pristine  2.2
@@ -478,20 +478,20 @@ In the following example, variables <code>x</code> and <code>y</code> are organi
 ## 4 Disturbed 50.0
 ## 5  Pristine  3.0</code></pre>
 <p><strong>Call column names</strong></p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="appendix-data-structure.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(dat) <span class="co"># call column names</span></span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="appendix-data-structure.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(dat) <span class="co"># call column names</span></span></code></pre></div>
 <pre><code>## [1] &quot;LakeType&quot; &quot;TSS&quot;</code></pre>
 <p><strong>Access by columns</strong></p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="appendix-data-structure.html#cb98-1" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>LakeType <span class="co"># access LakeType</span></span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="appendix-data-structure.html#cb107-1" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>LakeType <span class="co"># access LakeType</span></span></code></pre></div>
 <pre><code>## [1] &quot;Pristine&quot;  &quot;Pristine&quot;  &quot;Disturbed&quot; &quot;Disturbed&quot; &quot;Pristine&quot;</code></pre>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="appendix-data-structure.html#cb100-1" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>TSS <span class="co"># access TSS</span></span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="appendix-data-structure.html#cb109-1" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>TSS <span class="co"># access TSS</span></span></code></pre></div>
 <pre><code>## [1]  1.2  2.2 10.9 50.0  3.0</code></pre>
 <p>You can access elements like a matrix as well:</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="appendix-data-structure.html#cb102-1" aria-hidden="true" tabindex="-1"></a>dat[,<span class="dv">1</span>] <span class="co"># access column #1</span></span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="appendix-data-structure.html#cb111-1" aria-hidden="true" tabindex="-1"></a>dat[,<span class="dv">1</span>] <span class="co"># access column #1</span></span></code></pre></div>
 <pre><code>## [1] &quot;Pristine&quot;  &quot;Pristine&quot;  &quot;Disturbed&quot; &quot;Disturbed&quot; &quot;Pristine&quot;</code></pre>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="appendix-data-structure.html#cb104-1" aria-hidden="true" tabindex="-1"></a>dat[<span class="dv">1</span>,] <span class="co"># access row #1</span></span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="appendix-data-structure.html#cb113-1" aria-hidden="true" tabindex="-1"></a>dat[<span class="dv">1</span>,] <span class="co"># access row #1</span></span></code></pre></div>
 <pre><code>##   LakeType TSS
 ## 1 Pristine 1.2</code></pre>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="appendix-data-structure.html#cb106-1" aria-hidden="true" tabindex="-1"></a>dat[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>),] <span class="co"># access row #2 and 4</span></span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="appendix-data-structure.html#cb115-1" aria-hidden="true" tabindex="-1"></a>dat[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>),] <span class="co"># access row #2 and 4</span></span></code></pre></div>
 <pre><code>##    LakeType  TSS
 ## 2  Pristine  2.2
 ## 4 Disturbed 50.0</code></pre>
@@ -538,6 +538,7 @@ In the following example, variables <code>x</code> and <code>y</code> are organi
 </div>
 </div>
 </div>
+
 
 
 

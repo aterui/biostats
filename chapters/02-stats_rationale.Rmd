@@ -92,7 +92,7 @@ g_lake +
              color = grey(0, 0.2))
 ```
 
-In ecological research (and almost all research field), we are rarely able to obtain the perfect dataset with no uncertainty -- the data are partial information of what we want to know (true fish density in the entire lake = `r round(nrow(df_fish)/(15^2), 2)`). This is the reason why we refer to a data point as a **sample**, and the average fish density in white boxes (`r round(mean(df_count$count), 2)`) is the **estimate** of the true fish density because it is the inference from the incomplete information. Since the average fish density is the estimate, it does not perfectly match the true density -- how do we account for this uncertainty?
+In ecological research (and almost all research field), we are rarely able to obtain the perfect dataset with no uncertainty -- the data are partial information of what we want to know (true fish density in the entire lake = `r round(nrow(df_fish)/(15^2), 2)`). This is the reason why we refer to a data point as a **sample**, and the average fish density in a plot (`r round(mean(df_count$count), 2)`) is the **estimate** of the true fish density -- it is the inference from the incomplete information. Since the average fish density is the estimate, it does not perfectly match the true density -- how do we account for this uncertainty?
 
 ## Mean & Variance
 
@@ -135,3 +135,30 @@ print(sigma2)
 Make sure these values are identical to what you would obtain from `mean()` and `var()` functions in R.
 
 ## Probability distribution
+
+Mean and variance are unknown numbers, i.e., **parameters**. Parameters are the focus of statistical inference. In the above example, I made an implicit assumption of a normal distribution, one kind of probability distributions. The equations presented above actually holds true only if we assume a normal distribution -- let me explain what this means below.
+
+Let's think more about a **mean** -- more precisely speaking, an expected value of a random variable. A mean is the value around which data points are concentrated. This means, the probability of observing data points close to this value is very high. This is the reason why we use a mean as a "representative" summary statistic, although many of us may use it without recognizing it. Then, what **variance** does for us? As you move away from the mean, the probability of observing that value will decrease. Variance tells you how *sharply* the probability decreases as a value deviates from the mean. Thus, these two parameters shape the distribution of probability across a range of possible values -- **the probability distribution**.
+
+```{r}
+
+x <- seq(-5, 10, length = 100)
+
+df0 <- expand.grid(x = x,
+                   mu = mean(df_count$count),
+                   var = var(df_count$count)) %>% 
+  tibble() %>% 
+  mutate(y = dnorm(x, mu, sqrt(var)),
+         color = paste0("mean = ", round(mu, 2), "; variance = ", round(var)))
+
+df0 %>% 
+  ggplot(aes(x = x,
+             y = y,
+             color = color)) +
+  geom_line() +
+  labs(y = "Probability density",
+       x = "Fish count",
+       color = "Parameter") +
+  theme_bw() +
+  theme(panel.grid = element_blank())
+```

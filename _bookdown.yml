@@ -3,7 +3,8 @@ language:
   ui:
     chapter_name: "Chapter "
 rmd_files: ["index.Rmd",
-            "chapters/01-project.Rmd",
-            "chapters/02-stats_rationale.Rmd",
-            "chapters/a-git.Rmd",
-            "chapters/b-data_str.Rmd"]
+            "chapters/01-stats-rationale.Rmd",
+            "chapters/02-linear-model.Rmd",
+            "chapters/a-project.Rmd",
+            "chapters/b-git.Rmd",
+            "chapters/c-data-str.Rmd"]

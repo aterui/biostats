@@ -4,13 +4,13 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Why statistics? | BIOSTATS</title>
+  <title>Chapter 1 Why statistics? | BIOSTATS</title>
   <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
 set in the _output.yml file.</p>" />
   <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Why statistics? | BIOSTATS" />
+  <meta property="og:title" content="Chapter 1 Why statistics? | BIOSTATS" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
@@ -19,7 +19,7 @@ set in the _output.yml file.</p>" />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Why statistics? | BIOSTATS" />
+  <meta name="twitter:title" content="Chapter 1 Why statistics? | BIOSTATS" />
   
   <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
@@ -35,8 +35,8 @@ set in the _output.yml file.</p>" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="project-management.html"/>
-<link rel="next" href="appendix-git-github.html"/>
+<link rel="prev" href="index.html"/>
+<link rel="next" href="linear-model.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -97,7 +97,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -110,7 +110,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -142,55 +142,71 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
-<li class="chapter" data-level="1" data-path="project-management.html"><a href="project-management.html"><i class="fa fa-check"></i><b>1</b> Project Management</a>
+<li class="chapter" data-level="1" data-path="why-statistics.html"><a href="why-statistics.html"><i class="fa fa-check"></i><b>1</b> Why statistics?</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="project-management.html"><a href="project-management.html#r-project"><i class="fa fa-check"></i><b>1.1</b> R Project</a>
+<li class="chapter" data-level="1.1" data-path="why-statistics.html"><a href="why-statistics.html#rationale"><i class="fa fa-check"></i><b>1.1</b> Rationale</a></li>
+<li class="chapter" data-level="1.2" data-path="why-statistics.html"><a href="why-statistics.html#example-fish-density-in-a-lake"><i class="fa fa-check"></i><b>1.2</b> Example – fish density in a lake</a></li>
+<li class="chapter" data-level="1.3" data-path="why-statistics.html"><a href="why-statistics.html#mean-variance"><i class="fa fa-check"></i><b>1.3</b> Mean &amp; Variance</a></li>
+<li class="chapter" data-level="1.4" data-path="why-statistics.html"><a href="why-statistics.html#probability-distribution"><i class="fa fa-check"></i><b>1.4</b> Probability distribution</a>
 <ul>
-<li class="chapter" data-level="1.1.1" data-path="project-management.html"><a href="project-management.html#script-editor"><i class="fa fa-check"></i><b>1.1.1</b> Script Editor</a></li>
-<li class="chapter" data-level="1.1.2" data-path="project-management.html"><a href="project-management.html#file-name"><i class="fa fa-check"></i><b>1.1.2</b> File Name</a></li>
-<li class="chapter" data-level="1.1.3" data-path="project-management.html"><a href="project-management.html#structure-your-project"><i class="fa fa-check"></i><b>1.1.3</b> Structure Your Project</a></li>
-</ul></li>
-<li class="chapter" data-level="1.2" data-path="project-management.html"><a href="project-management.html#robust-coding"><i class="fa fa-check"></i><b>1.2</b> Robust coding</a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="why-statistics.html"><a href="why-statistics.html"><i class="fa fa-check"></i><b>2</b> Why statistics?</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="why-statistics.html"><a href="why-statistics.html#rationale"><i class="fa fa-check"></i><b>2.1</b> Rationale</a></li>
-<li class="chapter" data-level="2.2" data-path="why-statistics.html"><a href="why-statistics.html#example-fish-density-in-a-lake"><i class="fa fa-check"></i><b>2.2</b> Example – fish density in a lake</a></li>
-<li class="chapter" data-level="2.3" data-path="why-statistics.html"><a href="why-statistics.html#mean-variance"><i class="fa fa-check"></i><b>2.3</b> Mean &amp; Variance</a></li>
-<li class="chapter" data-level="2.4" data-path="why-statistics.html"><a href="why-statistics.html#probability-distribution"><i class="fa fa-check"></i><b>2.4</b> Probability distribution</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="appendix-git-github.html"><a href="appendix-git-github.html"><i class="fa fa-check"></i><b>3</b> Appendix: <em>Git</em> &amp; <em>GitHub</em></a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="appendix-git-github.html"><a href="appendix-git-github.html#git-github"><i class="fa fa-check"></i><b>3.1</b> <em>Git</em> &amp; <em>GitHub</em></a></li>
-<li class="chapter" data-level="3.2" data-path="appendix-git-github.html"><a href="appendix-git-github.html#commit-push"><i class="fa fa-check"></i><b>3.2</b> Commit &amp; Push</a>
-<ul>
-<li class="chapter" data-level="3.2.1" data-path="appendix-git-github.html"><a href="appendix-git-github.html#register-your-git-repo"><i class="fa fa-check"></i><b>3.2.1</b> Register Your Git repo</a></li>
-<li class="chapter" data-level="3.2.2" data-path="appendix-git-github.html"><a href="appendix-git-github.html#commit"><i class="fa fa-check"></i><b>3.2.2</b> Commit</a></li>
-<li class="chapter" data-level="3.2.3" data-path="appendix-git-github.html"><a href="appendix-git-github.html#push"><i class="fa fa-check"></i><b>3.2.3</b> Push</a></li>
-<li class="chapter" data-level="3.2.4" data-path="appendix-git-github.html"><a href="appendix-git-github.html#edit"><i class="fa fa-check"></i><b>3.2.4</b> Edit</a></li>
+<li class="chapter" data-level="1.4.1" data-path="why-statistics.html"><a href="why-statistics.html#choose-right-one"><i class="fa fa-check"></i><b>1.4.1</b> Choose right one</a></li>
+<li class="chapter" data-level="1.4.2" data-path="why-statistics.html"><a href="why-statistics.html#how-to-choose-appropriate-one"><i class="fa fa-check"></i><b>1.4.2</b> How to choose appropriate one?</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html"><i class="fa fa-check"></i><b>4</b> Appendix: Data Structure</a>
+<li class="chapter" data-level="2" data-path="linear-model.html"><a href="linear-model.html"><i class="fa fa-check"></i><b>2</b> Linear model</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#overview"><i class="fa fa-check"></i><b>4.1</b> Overview</a></li>
-<li class="chapter" data-level="4.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#vector"><i class="fa fa-check"></i><b>4.2</b> Vector</a>
+<li class="chapter" data-level="2.1" data-path="linear-model.html"><a href="linear-model.html#mean-estimate"><i class="fa fa-check"></i><b>2.1</b> Mean estimate</a>
 <ul>
-<li class="chapter" data-level="4.2.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#create-vector"><i class="fa fa-check"></i><b>4.2.1</b> Create Vector</a></li>
-<li class="chapter" data-level="4.2.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#check-features"><i class="fa fa-check"></i><b>4.2.2</b> Check Features</a></li>
-<li class="chapter" data-level="4.2.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#access"><i class="fa fa-check"></i><b>4.2.3</b> Access</a></li>
+<li class="chapter" data-level="2.1.1" data-path="linear-model.html"><a href="linear-model.html#normal-distribution"><i class="fa fa-check"></i><b>2.1.1</b> Normal distribution</a></li>
+<li class="chapter" data-level="2.1.2" data-path="linear-model.html"><a href="linear-model.html#poisson-distribution"><i class="fa fa-check"></i><b>2.1.2</b> Poisson distribution</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#matrix"><i class="fa fa-check"></i><b>4.3</b> Matrix</a>
+<li class="chapter" data-level="2.2" data-path="linear-model.html"><a href="linear-model.html#effect-estimate"><i class="fa fa-check"></i><b>2.2</b> Effect estimate</a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#create-matrix"><i class="fa fa-check"></i><b>4.3.1</b> Create Matrix</a></li>
-<li class="chapter" data-level="4.3.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#check-features-1"><i class="fa fa-check"></i><b>4.3.2</b> Check Features</a></li>
-<li class="chapter" data-level="4.3.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#access-1"><i class="fa fa-check"></i><b>4.3.3</b> Access</a></li>
+<li class="chapter" data-level="2.2.1" data-path="linear-model.html"><a href="linear-model.html#section"><i class="fa fa-check"></i><b>2.2.1</b> </a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#data-frame"><i class="fa fa-check"></i><b>4.4</b> Data Frame</a></li>
-<li class="chapter" data-level="4.5" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#exercise"><i class="fa fa-check"></i><b>4.5</b> Exercise</a>
+</ul></li>
+<li class="chapter" data-level="3" data-path="appendix-project-management.html"><a href="appendix-project-management.html"><i class="fa fa-check"></i><b>3</b> Appendix: Project Management</a>
 <ul>
-<li class="chapter" data-level="4.5.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#vector-1"><i class="fa fa-check"></i><b>4.5.1</b> Vector</a></li>
-<li class="chapter" data-level="4.5.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#matrix-1"><i class="fa fa-check"></i><b>4.5.2</b> Matrix</a></li>
-<li class="chapter" data-level="4.5.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#data-frame-1"><i class="fa fa-check"></i><b>4.5.3</b> Data Frame</a></li>
+<li class="chapter" data-level="3.1" data-path="appendix-project-management.html"><a href="appendix-project-management.html#r-project"><i class="fa fa-check"></i><b>3.1</b> R Project</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="appendix-project-management.html"><a href="appendix-project-management.html#script-editor"><i class="fa fa-check"></i><b>3.1.1</b> Script Editor</a></li>
+<li class="chapter" data-level="3.1.2" data-path="appendix-project-management.html"><a href="appendix-project-management.html#file-name"><i class="fa fa-check"></i><b>3.1.2</b> File Name</a></li>
+<li class="chapter" data-level="3.1.3" data-path="appendix-project-management.html"><a href="appendix-project-management.html#structure-your-project"><i class="fa fa-check"></i><b>3.1.3</b> Structure Your Project</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="appendix-project-management.html"><a href="appendix-project-management.html#robust-coding"><i class="fa fa-check"></i><b>3.2</b> Robust coding</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="appendix-git-github.html"><a href="appendix-git-github.html"><i class="fa fa-check"></i><b>4</b> Appendix: <em>Git</em> &amp; <em>GitHub</em></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="appendix-git-github.html"><a href="appendix-git-github.html#git-github"><i class="fa fa-check"></i><b>4.1</b> <em>Git</em> &amp; <em>GitHub</em></a></li>
+<li class="chapter" data-level="4.2" data-path="appendix-git-github.html"><a href="appendix-git-github.html#commit-push"><i class="fa fa-check"></i><b>4.2</b> Commit &amp; Push</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="appendix-git-github.html"><a href="appendix-git-github.html#register-your-git-repo"><i class="fa fa-check"></i><b>4.2.1</b> Register Your Git repo</a></li>
+<li class="chapter" data-level="4.2.2" data-path="appendix-git-github.html"><a href="appendix-git-github.html#commit"><i class="fa fa-check"></i><b>4.2.2</b> Commit</a></li>
+<li class="chapter" data-level="4.2.3" data-path="appendix-git-github.html"><a href="appendix-git-github.html#push"><i class="fa fa-check"></i><b>4.2.3</b> Push</a></li>
+<li class="chapter" data-level="4.2.4" data-path="appendix-git-github.html"><a href="appendix-git-github.html#edit"><i class="fa fa-check"></i><b>4.2.4</b> Edit</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html"><i class="fa fa-check"></i><b>5</b> Appendix: Data Structure</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#overview"><i class="fa fa-check"></i><b>5.1</b> Overview</a></li>
+<li class="chapter" data-level="5.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#vector"><i class="fa fa-check"></i><b>5.2</b> Vector</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#create-vector"><i class="fa fa-check"></i><b>5.2.1</b> Create Vector</a></li>
+<li class="chapter" data-level="5.2.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#check-features"><i class="fa fa-check"></i><b>5.2.2</b> Check Features</a></li>
+<li class="chapter" data-level="5.2.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#access"><i class="fa fa-check"></i><b>5.2.3</b> Access</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#matrix"><i class="fa fa-check"></i><b>5.3</b> Matrix</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#create-matrix"><i class="fa fa-check"></i><b>5.3.1</b> Create Matrix</a></li>
+<li class="chapter" data-level="5.3.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#check-features-1"><i class="fa fa-check"></i><b>5.3.2</b> Check Features</a></li>
+<li class="chapter" data-level="5.3.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#access-1"><i class="fa fa-check"></i><b>5.3.3</b> Access</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#data-frame"><i class="fa fa-check"></i><b>5.4</b> Data Frame</a></li>
+<li class="chapter" data-level="5.5" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#exercise"><i class="fa fa-check"></i><b>5.5</b> Exercise</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#vector-1"><i class="fa fa-check"></i><b>5.5.1</b> Vector</a></li>
+<li class="chapter" data-level="5.5.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#matrix-1"><i class="fa fa-check"></i><b>5.5.2</b> Matrix</a></li>
+<li class="chapter" data-level="5.5.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#data-frame-1"><i class="fa fa-check"></i><b>5.5.3</b> Data Frame</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -213,48 +229,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="why-statistics" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Why statistics?<a href="why-statistics.html#why-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="rationale" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> Rationale<a href="why-statistics.html#rationale" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><em>Why do I need statistics in ecology in the first place?</em> - this is the first question I got when I stepped into the field of ecology. I thought this would be an easy question that someone could give me the answer right away, but actually it is a deep one. The short answer is “<em>we need statistics because we only have <strong>partial</strong> information about what we want to know.</em>” The long answer? See below.</p>
+<div id="why-statistics" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Why statistics?<a href="why-statistics.html#why-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="rationale" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Rationale<a href="why-statistics.html#rationale" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><em>Why do I need statistics in the first place?</em> - This is the first question I got when I stepped into the field of ecology. I thought this would be an easy question that someone could give me the answer to right away, but actually, it is a deep one. The short answer is “<em>we need statistics because we only have <strong>partial</strong> information about what we want to know.</em>” The long answer? See below.</p>
 </div>
-<div id="example-fish-density-in-a-lake" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> Example – fish density in a lake<a href="why-statistics.html#example-fish-density-in-a-lake" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Let say we are interested in fish density in a lake (total area <span class="math inline">\(15 \times 15 = 225~\text{m}^2\)</span>). We try to quantify it by catching fish in a certain area (1 m<sup>2</sup> for example). Since there should be some variation in fish density among sampled points, we decided to repeat this 10 times to take an average. Figure <a href="why-statistics.html#fig:fish-plot">2.1</a> shows a graphical representation of this example.</p>
+<div id="example-fish-density-in-a-lake" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Example – fish density in a lake<a href="why-statistics.html#example-fish-density-in-a-lake" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let’s say we are interested in fish density in a lake (total area <span class="math inline">\(15 \times 15 = 225~\text{m}^2\)</span>). We try to quantify it by catching fish in a certain area (1 m<sup>2</sup> for example). Since there should be some variation in fish density among sampled points, we decided to repeat this 10 times to take an average. Figure <a href="why-statistics.html#fig:fish-plot">1.1</a> shows a graphical representation of this example.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fish-plot"></span>
 <img src="_main_files/figure-html/fish-plot-1.png" alt="Lake fish density example. Points are fish, and white boxes are sampling sites with 1 sq-m" width="672" />
 <p class="caption">
-Figure 2.1: Lake fish density example. Points are fish, and white boxes are sampling sites with 1 sq-m
+Figure 1.1: Lake fish density example. Points are fish, and white boxes are sampling sites with 1 sq-m
 </p>
 </div>
 <p>Through this sampling, we got the following dataset:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="why-statistics.html#cb5-1" aria-hidden="true" tabindex="-1"></a>df_count</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="why-statistics.html#cb1-1" aria-hidden="true" tabindex="-1"></a>df_count</span></code></pre></div>
 <pre><code>## # A tibble: 10 × 2
 ##     plot count
 ##    &lt;int&gt; &lt;int&gt;
-##  1     1     1
+##  1     1     2
 ##  2     2     1
-##  3     3     1
+##  3     3     2
 ##  4     4     2
-##  5     5     7
-##  6     6     2
-##  7     7     5
+##  5     5     0
+##  6     6     3
+##  7     7     3
 ##  8     8     1
-##  9     9     3
-## 10    10     3</code></pre>
-<p>Based on this dataset, we may conclude the average fish density in this lake is 2.6. However, how confident are you on this conclusion? The lake area is <span class="math inline">\(15 \times 15 = 225~\text{m}^2\)</span> but we sampled only <span class="math inline">\(1~\text{m}^2 \times 10 = 10~\text{m}^2\)</span>! Indeed, we missed a lot of fish in the lake (Figure <a href="why-statistics.html#fig:fish-plot-2">2.2</a>).</p>
+##  9     9     5
+## 10    10     0</code></pre>
+<blockquote>
+<p><strong>Exercise:</strong> create a <code>tibble</code> object containing above data</p>
+</blockquote>
+<p>Based on this dataset, we may conclude the average fish density in this lake is 1.9. However, how confident are you in this conclusion? The lake area is <span class="math inline">\(15 \times 15 = 225~\text{m}^2\)</span> but we sampled only <span class="math inline">\(1~\text{m}^2 \times 10 = 10~\text{m}^2\)</span>! Indeed, we missed a lot of fish in the lake (Figure <a href="why-statistics.html#fig:fish-plot-2">1.2</a>).</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fish-plot-2"></span>
 <img src="_main_files/figure-html/fish-plot-2-1.png" alt="True fish distribution in the lake" width="672" />
 <p class="caption">
-Figure 2.2: True fish distribution in the lake
+Figure 1.2: True fish distribution in the lake
 </p>
 </div>
-<p>In ecological research (and almost all research field), we are rarely able to obtain the perfect dataset with no uncertainty – the data are partial information of what we want to know (true fish density in the entire lake = 2.22). This is the reason why we refer to a data point as a <strong>sample</strong>, and the average fish density in white boxes (2.6) is the <strong>estimate</strong> of the true fish density because it is the inference from the incomplete information. Since the average fish density is the estimate, it does not perfectly match the true density – how do we account for this uncertainty?</p>
+<p>In ecological research (and almost all research fields), we are rarely able to obtain the perfect dataset with no uncertainty – the data are partial information of what we want to know (true fish density in the entire lake = 2.22). This is the reason why we refer to a data point as a <strong>sample</strong>, and the average fish density in a plot (1.9) is the <strong>estimate</strong> of the true fish density – it is the inference from the incomplete information. Since the average fish density is the estimate, it does not perfectly match the true density – how do we account for this uncertainty?</p>
 </div>
-<div id="mean-variance" class="section level2 hasAnchor" number="2.3">
-<h2><span class="header-section-number">2.3</span> Mean &amp; Variance<a href="why-statistics.html#mean-variance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In the above section, I talked only about the <strong>mean</strong> (total fish counts / number of plots = mean density per plot area [m<sup>2</sup>]). Let me re-write this in a little more mathematical form – I write a single data point (fish count in a single white box) as <span class="math inline">\(y_i\)</span> with <span class="math inline">\(i\)</span> representing an ID of a plot (therefore, <span class="math inline">\(y_1 = 1,~y_2 = 1,~y_3 = 1,~y_4 = 2, ...y_{10}=3\)</span>), and refer to the number of plots as <span class="math inline">\(N\)</span>. The mean fish counts <span class="math inline">\(\mu\)</span> is:</p>
+<div id="mean-variance" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Mean &amp; Variance<a href="why-statistics.html#mean-variance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In the above section, I talked only about the <strong>mean</strong> (total fish counts/number of plots = mean density per plot area [m<sup>2</sup>]). Let me re-write this in a little more mathematical form – I write a single data point (fish count in a single white box) as <span class="math inline">\(y_i\)</span> with <span class="math inline">\(i\)</span> representing an ID of a plot (therefore, <span class="math inline">\(y_1 = 1,~y_2 = 1,~y_3 = 1,~y_4 = 2, ...y_{10}=3\)</span>), and refer to the number of plots as <span class="math inline">\(N\)</span>. The mean fish counts <span class="math inline">\(\mu\)</span> is:</p>
 <p><span class="math display">\[
 \mu = \frac{\sum_{i=1}^N y_i}{N}
 \]</span></p>
@@ -262,35 +281,153 @@ Figure 2.2: True fish distribution in the lake
 <p><span class="math display">\[
 \sigma^2 = \frac{\sum_{i=1}^N (y_i - \mu)^2}{N - 1}
 \]</span></p>
-<p>In this equation, <span class="math inline">\((y_i - \mu)^2\)</span> is the deviation from the mean, but it is squared to make the deviation positive regardless the value of <span class="math inline">\(y_i\)</span>. Since all the deviations are positive, the summation should represent the overall deviation from the mean. We divide it by <span class="math inline">\(N-1\)</span> to express it as the “average” of deviations<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>. Thus, cheafly speaking, variance can be interpreted as the average squared-deviation of each data point.</p>
+<p>In this equation, <span class="math inline">\((y_i - \mu)^2\)</span> is the deviation from the mean, but it is squared to make the deviation positive regardless of the value of <span class="math inline">\(y_i\)</span>. Since all the deviations are positive, the summation should represent the overall deviation from the mean. We divide it by <span class="math inline">\(N-1\)</span> to express it as the “average” of deviations<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. Thus, chiefly speaking, variance can be interpreted as the average squared deviation of each data point.</p>
 <p>Let’s estimate mean and variance in R. Create <code>tibble()</code> containing the data presented above, and perform the following analysis. Although R has built-in functions for mean (<code>mean()</code>) and variance (<code>var()</code>), I show here how to express the equations above in R codes:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="why-statistics.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define variables</span></span>
-<span id="cb7-2"><a href="why-statistics.html#cb7-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> df_count<span class="sc">$</span>count <span class="co"># fish counts</span></span>
-<span id="cb7-3"><a href="why-statistics.html#cb7-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(df_count) <span class="co"># number of plots</span></span>
-<span id="cb7-4"><a href="why-statistics.html#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="why-statistics.html#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(y)</span></code></pre></div>
-<pre><code>##  [1] 1 1 1 2 7 2 5 1 3 3</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="why-statistics.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(n)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="why-statistics.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define variables</span></span>
+<span id="cb3-2"><a href="why-statistics.html#cb3-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> df_count<span class="sc">$</span>count <span class="co"># fish counts</span></span>
+<span id="cb3-3"><a href="why-statistics.html#cb3-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(df_count) <span class="co"># number of plots</span></span>
+<span id="cb3-4"><a href="why-statistics.html#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="why-statistics.html#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(y)</span></code></pre></div>
+<pre><code>##  [1] 2 1 2 2 0 3 3 1 5 0</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="why-statistics.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(n)</span></code></pre></div>
 <pre><code>## [1] 10</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="why-statistics.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mean</span></span>
-<span id="cb11-2"><a href="why-statistics.html#cb11-2" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">sum</span>(y) <span class="sc">/</span> n</span>
-<span id="cb11-3"><a href="why-statistics.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mu)</span></code></pre></div>
-<pre><code>## [1] 2.6</code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="why-statistics.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># variance</span></span>
-<span id="cb13-2"><a href="why-statistics.html#cb13-2" aria-hidden="true" tabindex="-1"></a>sigma2 <span class="ot">&lt;-</span> <span class="fu">sum</span>((y <span class="sc">-</span> mu)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> (n <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb13-3"><a href="why-statistics.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sigma2)</span></code></pre></div>
-<pre><code>## [1] 4.044444</code></pre>
-<p>Make sure these values are identical to what you would obtain from <code>mean()</code> and <code>var()</code> functions in R.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="why-statistics.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mean</span></span>
+<span id="cb7-2"><a href="why-statistics.html#cb7-2" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">sum</span>(y) <span class="sc">/</span> n</span>
+<span id="cb7-3"><a href="why-statistics.html#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mu)</span></code></pre></div>
+<pre><code>## [1] 1.9</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="why-statistics.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># variance</span></span>
+<span id="cb9-2"><a href="why-statistics.html#cb9-2" aria-hidden="true" tabindex="-1"></a>sigma2 <span class="ot">&lt;-</span> <span class="fu">sum</span>((y <span class="sc">-</span> mu)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> (n <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb9-3"><a href="why-statistics.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sigma2)</span></code></pre></div>
+<pre><code>## [1] 2.322222</code></pre>
+<blockquote>
+<p><strong>Exercise:</strong> Make sure these values are identical to what you would obtain from <code>mean()</code> and <code>var()</code> functions in R</p>
+</blockquote>
 </div>
-<div id="probability-distribution" class="section level2 hasAnchor" number="2.4">
-<h2><span class="header-section-number">2.4</span> Probability distribution<a href="why-statistics.html#probability-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="probability-distribution" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> Probability distribution<a href="why-statistics.html#probability-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="choose-right-one" class="section level3 hasAnchor" number="1.4.1">
+<h3><span class="header-section-number">1.4.1</span> Choose right one<a href="why-statistics.html#choose-right-one" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Mean and variance are unknown constants<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> – these are what we refer to as <strong>parameters</strong>. Parameters are the focus of statistical inference because it allows the speculations for the <em>overall</em> structure of the population under investigation.</p>
+<p>To clarify this argument, let’s think more about a <strong>mean</strong> – more precisely speaking, an expected value of a <em>random</em> variable. A mean is a value around which data points are concentrated. This suggests that <strong>the probability of observing data points close to this value is very high</strong>. This is the reason why we use a mean as a “representative” summary statistic (e.g., mean height, mean weight, etc…), although many of us may use it without recognizing it. Then, what <strong>variance</strong> does for us? As you move away from the mean, the probability of observing that value will decrease. Variance tells you how <em>sharply</em> the probability decreases as a value deviates from the mean (smaller variance means sharper decline). Thus, these two parameters shape the distribution of probability across a range of possible values – this is what we refer to as <strong>a probability distribution</strong>. Figure <a href="why-statistics.html#fig:prob-dist">1.3</a> is the probability distribution drawn based on the parameters we estimated in the fish data. The distribution has the peak at the mean value (1.9) with curvy declines towards both tails. The y-axis is labeled as “probability density” to allow for the continuous expression of probability for continuous values on the x-axis<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:prob-dist"></span>
+<img src="_main_files/figure-html/prob-dist-1.png" alt="Example of probability distribution" width="672" />
+<p class="caption">
+Figure 1.3: Example of probability distribution
+</p>
+</div>
+<p>However, some of you might notice weird things in Figure <a href="why-statistics.html#fig:prob-dist">1.3</a>. First, the positive probability density extends below the “zero” fish count, which should not happen in nature (we cannot observe negative counts). Second, the fish count is treated as if it is a continuous variable, even though fish counts are always discrete values (there is no way to count 1.1 individuals for an individual survey plot, for example). When comparing this probability distribution with the fish count histogram, they do not look similar at all (Figure <a href="why-statistics.html#fig:freq-data">1.4</a>))…even though they should look very similar if the probability distribution represents the data properly.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:freq-data"></span>
+<img src="_main_files/figure-html/freq-data-1.png" alt="Frequency distribution of fish count data" width="672" />
+<p class="caption">
+Figure 1.4: Frequency distribution of fish count data
+</p>
+</div>
+<blockquote>
+<p><strong>Exercise:</strong> Produce a histogram of fish count</p>
+</blockquote>
+<p>Why does this happen? – this is because this particular kind of probability distribution is inappropriate to express count data. The above example is drawn from a <strong>Normal distribution</strong>, whose outcome (values drawn from this distribution) ranges from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(\infty\)</span>. To properly represent our fish count data, we must choose a probability distribution that can express discrete values of <span class="math inline">\(\ge 0\)</span> (<span class="math inline">\(0, 1, 2, 3,...\)</span>). One possible choice for the fish count data is a <strong>Poisson distribution</strong>, whose outcome is confined to zero and positive discrete values. Unlike a Normal distribution, a Poisson distribution assumes <span class="math inline">\(\mu = \sigma^2\)</span>; thus, knowing either <span class="math inline">\(\mu\)</span> or <span class="math inline">\(\sigma^2\)</span> is sufficient to draw a distribution (we use <span class="math inline">\(\mu\)</span> because it’s easier) if the Poisson distribution is appropriate to represent the data. When a Poisson distribution is used, the probability distribution differs from that of a Normal distribution. Note that the y-axis is “probability” because the Poisson distribution allows only discrete values.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:poisson"></span>
+<img src="_main_files/figure-html/poisson-1.png" alt="Poisson distribution with the mean fish count" width="672" />
+<p class="caption">
+Figure 1.5: Poisson distribution with the mean fish count
+</p>
+</div>
+<p>To overlay this “probability” distribution on the “frequency” distribution for comparison, we need to calculate a product of the number of samples (in this case, the number of plots = 10) and the probability of fish count <span class="math inline">\(Y\)</span> taking value <span class="math inline">\(k\)</span>, <span class="math inline">\(\text{Pr}(Y=k)\)</span> – this multiplication results in the “expected” frequency of a value in the data. Figure <a href="why-statistics.html#fig:overlay-poisson">1.6</a> shows the comparison – this seems better than the Normal distribution. Yet, there are some deviations from the expectation (e.g., the frequency of fish count <span class="math inline">\(Y=1\)</span>).</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:overlay-poisson"></span>
+<img src="_main_files/figure-html/overlay-poisson-1.png" alt="Comparison of observed and expected frequencies of fish count" width="672" />
+<p class="caption">
+Figure 1.6: Comparison of observed and expected frequencies of fish count
+</p>
+</div>
+<p>The deviation is due largely to the small sample size – we have only 10 plots. In theory, we can obtain more accurate parameter estimates as the sample size increases. To see this effect, let’s increase the sample size to 100 plots – Figure <a href="why-statistics.html#fig:full-count">1.7</a> shows the updated histogram and the expected distribution with the new mean estimate (<span class="math inline">\(\mu =\)</span> 2.19). This greatly improved the matching between the expected and observed distributions.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:full-count"></span>
+<img src="_main_files/figure-html/full-count-1.png" alt="Histogram obtained from 100 plots" width="672" />
+<p class="caption">
+Figure 1.7: Histogram obtained from 100 plots
+</p>
+</div>
+</div>
+<div id="how-to-choose-appropriate-one" class="section level3 hasAnchor" number="1.4.2">
+<h3><span class="header-section-number">1.4.2</span> How to choose appropriate one?<a href="why-statistics.html#how-to-choose-appropriate-one" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We chose a Poisson distribution to express fish counts based on the characteristics of the variable. I used a comparison of a Normal and a Poisson distribution, but there are many more choices when expressing random variables. In ecology, several probability distributions are more frequently used than others, and the following dendrogram describes how we choose an acceptable distribution among them. Answer the questions and find your node.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:dendrogram"></span>
+<img src="_main_files/figure-html/dendrogram-1.png" alt="Brief guide for how to choose an appropriate probability distribution." width="672" />
+<p class="caption">
+Figure 1.8: Brief guide for how to choose an appropriate probability distribution.
+</p>
+</div>
+<p>Once you find your node<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>:</p>
+<table>
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+<col width="13%" />
+<col width="58%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Node</th>
+<th>Possible distribution</th>
+<th>Possible values</th>
+<th>Example in ecological data</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Beta-binomial</td>
+<td><span class="math inline">\(0\)</span> to <span class="math inline">\(N\)</span></td>
+<td>Number of fertilized eggs out of <span class="math inline">\(N\)</span> eggs examined. Useful when <span class="math inline">\(N\)</span> is large (tend to be over-dispersed with binomial distribution)</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Binomial</td>
+<td><span class="math inline">\(0\)</span> to <span class="math inline">\(N\)</span></td>
+<td>Number of fertilized eggs out of <span class="math inline">\(N\)</span> eggs examined.</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Negative-binomial</td>
+<td><span class="math inline">\(\ge 0\)</span></td>
+<td>Number of individuals captured. Useful when variance is very large relative to mean (over-dispersed with a Poisson distribution).</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Poisson</td>
+<td><span class="math inline">\(\ge 0\)</span></td>
+<td>Species richness.</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Beta</td>
+<td><span class="math inline">\(0\)</span> to <span class="math inline">\(1\)</span></td>
+<td>Survival probability.</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>Log-Normal</td>
+<td><span class="math inline">\(&gt;0\)</span></td>
+<td>Biomass.</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>Normal</td>
+<td><span class="math inline">\(-\infty\)</span> to <span class="math inline">\(\infty\)</span></td>
+<td>Temperature.</td>
+</tr>
+</tbody>
+</table>
 
+</div>
 </div>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="4">
-<li id="fn4"><p>The reason for dividing by <span class="math inline">\(N-1\)</span>, not by <span class="math inline">\(N\)</span>, is a statistically deep topic; in essence, this is required to obtain an unbiased estimate of variance.<a href="why-statistics.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<ol start="1">
+<li id="fn1"><p>The reason for dividing by <span class="math inline">\(N-1\)</span>, not by <span class="math inline">\(N\)</span>, is a statistically deep topic; in essence, this is required to obtain an unbiased estimate of variance.<a href="why-statistics.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>At least for frequentist analysis.<a href="why-statistics.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>You can define a probability for a range (e.g., <span class="math inline">\(1 &lt; x &lt; 2\)</span>); otherwise, it must be probability “density” because you cannot define a probability for <span class="math inline">\(x = 1.1\)</span> due to the continuous nature of the variable <span class="math inline">\(x\)</span> (we don’t know whether <span class="math inline">\(x=1.1\)</span> to be <span class="math inline">\(x = 1.101~\text{or}~1.102~\text{or}....\)</span>)<a href="why-statistics.html#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>Although this covers common distributions in ecology, following this dendrogram does not guarantee that your choice is appropriate.<a href="why-statistics.html#fnref4" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>
@@ -298,8 +435,8 @@ Figure 2.2: True fish distribution in the lake
           </div>
         </div>
       </div>
-<a href="project-management.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="appendix-git-github.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="linear-model.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -330,7 +467,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/chapters/02-stats_rationale.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/chapters/01-stats-rationale.Rmd",
 "text": "Edit"
 },
 "history": {

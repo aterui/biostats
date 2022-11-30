@@ -117,7 +117,7 @@
 
 \title{BIOSTATS}
 \author{Akira Terui}
-\date{Last updated on 2022-11-14}
+\date{Last updated on 2022-11-30}
 
 \begin{document}
 \maketitle
@@ -132,8 +132,414 @@
 
 This textbook aims to introduce fundamental statistical techniques and their applications to biological data. A unique aspect of this book is the ``flipped-order'' introduction. Many statistics courses start with theory; yet, I found it difficult for those unfamiliar with statistics. I will start with a real example of the method, followed by the explanation for an underlying theory/concept. The author is an ecologist, so some methods in this book might not be popular in other fields.
 
-\hypertarget{project-management}{%
-\chapter{Project Management}\label{project-management}}
+\hypertarget{why-statistics}{%
+\chapter{Why statistics?}\label{why-statistics}}
+
+\hypertarget{rationale}{%
+\section{Rationale}\label{rationale}}
+
+\emph{Why do I need statistics in the first place?} - This is the first question I got when I stepped into the field of ecology. I thought this would be an easy question that someone could give me the answer to right away, but actually, it is a deep one. The short answer is ``\emph{we need statistics because we only have \textbf{partial} information about what we want to know.}'' The long answer? See below.
+
+\hypertarget{example-fish-density-in-a-lake}{%
+\section{Example -- fish density in a lake}\label{example-fish-density-in-a-lake}}
+
+Let's say we are interested in fish density in a lake (total area \(15 \times 15 = 225~\text{m}^2\)). We try to quantify it by catching fish in a certain area (1 m\textsuperscript{2} for example). Since there should be some variation in fish density among sampled points, we decided to repeat this 10 times to take an average. Figure \ref{fig:fish-plot} shows a graphical representation of this example.
+
+\begin{figure}
+
+{\centering \includegraphics{_main_files/figure-latex/fish-plot-1} 
+
+}
+
+\caption{Lake fish density example. Points are fish, and white boxes are sampling sites with 1 sq-m}\label{fig:fish-plot}
+\end{figure}
+
+Through this sampling, we got the following dataset:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_count}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 10 x 2
+##     plot count
+##    <int> <int>
+##  1     1     2
+##  2     2     1
+##  3     3     2
+##  4     4     2
+##  5     5     0
+##  6     6     3
+##  7     7     3
+##  8     8     1
+##  9     9     5
+## 10    10     0
+\end{verbatim}
+
+\begin{quote}
+\textbf{Exercise:} create a \texttt{tibble} object containing above data
+\end{quote}
+
+Based on this dataset, we may conclude the average fish density in this lake is 1.9. However, how confident are you in this conclusion? The lake area is \(15 \times 15 = 225~\text{m}^2\) but we sampled only \(1~\text{m}^2 \times 10 = 10~\text{m}^2\)! Indeed, we missed a lot of fish in the lake (Figure \ref{fig:fish-plot-2}).
+
+\begin{figure}
+
+{\centering \includegraphics{_main_files/figure-latex/fish-plot-2-1} 
+
+}
+
+\caption{True fish distribution in the lake}\label{fig:fish-plot-2}
+\end{figure}
+
+In ecological research (and almost all research fields), we are rarely able to obtain the perfect dataset with no uncertainty -- the data are partial information of what we want to know (true fish density in the entire lake = 2.22). This is the reason why we refer to a data point as a \textbf{sample}, and the average fish density in a plot (1.9) is the \textbf{estimate} of the true fish density -- it is the inference from the incomplete information. Since the average fish density is the estimate, it does not perfectly match the true density -- how do we account for this uncertainty?
+
+\hypertarget{mean-variance}{%
+\section{Mean \& Variance}\label{mean-variance}}
+
+In the above section, I talked only about the \textbf{mean} (total fish counts/number of plots = mean density per plot area {[}m\textsuperscript{2}{]}). Let me re-write this in a little more mathematical form -- I write a single data point (fish count in a single white box) as \(y_i\) with \(i\) representing an ID of a plot (therefore, \(y_1 = 1,~y_2 = 1,~y_3 = 1,~y_4 = 2, ...y_{10}=3\)), and refer to the number of plots as \(N\). The mean fish counts \(\mu\) is:
+
+\[
+\mu = \frac{\sum_{i=1}^N y_i}{N}
+\]
+
+However, the data contain another important aspect of information: variability in fish counts among samples. This variability -- called \textbf{variance} -- expresses the degree of uncertainty in your data. The variance \(\sigma^2\) can be calculated using the deviation of each data point \(x_i\) from the mean \(\mu\):
+
+\[
+\sigma^2 = \frac{\sum_{i=1}^N (y_i - \mu)^2}{N - 1}
+\]
+
+In this equation, \((y_i - \mu)^2\) is the deviation from the mean, but it is squared to make the deviation positive regardless of the value of \(y_i\). Since all the deviations are positive, the summation should represent the overall deviation from the mean. We divide it by \(N-1\) to express it as the ``average'' of deviations\footnote{The reason for dividing by \(N-1\), not by \(N\), is a statistically deep topic; in essence, this is required to obtain an unbiased estimate of variance.}. Thus, chiefly speaking, variance can be interpreted as the average squared deviation of each data point.
+
+Let's estimate mean and variance in R. Create \texttt{tibble()} containing the data presented above, and perform the following analysis. Although R has built-in functions for mean (\texttt{mean()}) and variance (\texttt{var()}), I show here how to express the equations above in R codes:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# define variables}
+\NormalTok{y }\OtherTok{\textless{}{-}}\NormalTok{ df\_count}\SpecialCharTok{$}\NormalTok{count }\CommentTok{\# fish counts}
+\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(df\_count) }\CommentTok{\# number of plots}
+
+\FunctionTok{print}\NormalTok{(y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 2 1 2 2 0 3 3 1 5 0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(n)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 10
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# mean}
+\NormalTok{mu }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(y) }\SpecialCharTok{/}\NormalTok{ n}
+\FunctionTok{print}\NormalTok{(mu)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.9
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# variance}
+\NormalTok{sigma2 }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{((y }\SpecialCharTok{{-}}\NormalTok{ mu)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{) }\SpecialCharTok{/}\NormalTok{ (n }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(sigma2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.322222
+\end{verbatim}
+
+\begin{quote}
+\textbf{Exercise:} Make sure these values are identical to what you would obtain from \texttt{mean()} and \texttt{var()} functions in R
+\end{quote}
+
+\hypertarget{probability-distribution}{%
+\section{Probability distribution}\label{probability-distribution}}
+
+\hypertarget{choose-right-one}{%
+\subsection{Choose right one}\label{choose-right-one}}
+
+Mean and variance are unknown constants\footnote{At least for frequentist analysis.} -- these are what we refer to as \textbf{parameters}. Parameters are the focus of statistical inference because it allows the speculations for the \emph{overall} structure of the population under investigation.
+
+To clarify this argument, let's think more about a \textbf{mean} -- more precisely speaking, an expected value of a \emph{random} variable. A mean is a value around which data points are concentrated. This suggests that \textbf{the probability of observing data points close to this value is very high}. This is the reason why we use a mean as a ``representative'' summary statistic (e.g., mean height, mean weight, etc\ldots), although many of us may use it without recognizing it. Then, what \textbf{variance} does for us? As you move away from the mean, the probability of observing that value will decrease. Variance tells you how \emph{sharply} the probability decreases as a value deviates from the mean (smaller variance means sharper decline). Thus, these two parameters shape the distribution of probability across a range of possible values -- this is what we refer to as \textbf{a probability distribution}. Figure \ref{fig:prob-dist} is the probability distribution drawn based on the parameters we estimated in the fish data. The distribution has the peak at the mean value (1.9) with curvy declines towards both tails. The y-axis is labeled as ``probability density'' to allow for the continuous expression of probability for continuous values on the x-axis\footnote{You can define a probability for a range (e.g., \(1 < x < 2\)); otherwise, it must be probability ``density'' because you cannot define a probability for \(x = 1.1\) due to the continuous nature of the variable \(x\) (we don't know whether \(x=1.1\) to be \(x = 1.101~\text{or}~1.102~\text{or}....\))}.
+
+\begin{figure}
+
+{\centering \includegraphics{_main_files/figure-latex/prob-dist-1} 
+
+}
+
+\caption{Example of probability distribution}\label{fig:prob-dist}
+\end{figure}
+
+However, some of you might notice weird things in Figure \ref{fig:prob-dist}. First, the positive probability density extends below the ``zero'' fish count, which should not happen in nature (we cannot observe negative counts). Second, the fish count is treated as if it is a continuous variable, even though fish counts are always discrete values (there is no way to count 1.1 individuals for an individual survey plot, for example). When comparing this probability distribution with the fish count histogram, they do not look similar at all (Figure \ref{fig:freq-data}))\ldots even though they should look very similar if the probability distribution represents the data properly.
+
+\begin{figure}
+
+{\centering \includegraphics{_main_files/figure-latex/freq-data-1} 
+
+}
+
+\caption{Frequency distribution of fish count data}\label{fig:freq-data}
+\end{figure}
+
+\begin{quote}
+\textbf{Exercise:} Produce a histogram of fish count
+\end{quote}
+
+Why does this happen? -- this is because this particular kind of probability distribution is inappropriate to express count data. The above example is drawn from a \textbf{Normal distribution}, whose outcome (values drawn from this distribution) ranges from \(-\infty\) to \(\infty\). To properly represent our fish count data, we must choose a probability distribution that can express discrete values of \(\ge 0\) (\(0, 1, 2, 3,...\)). One possible choice for the fish count data is a \textbf{Poisson distribution}, whose outcome is confined to zero and positive discrete values. Unlike a Normal distribution, a Poisson distribution assumes \(\mu = \sigma^2\); thus, knowing either \(\mu\) or \(\sigma^2\) is sufficient to draw a distribution (we use \(\mu\) because it's easier) if the Poisson distribution is appropriate to represent the data. When a Poisson distribution is used, the probability distribution differs from that of a Normal distribution. Note that the y-axis is ``probability'' because the Poisson distribution allows only discrete values.
+
+\begin{figure}
+
+{\centering \includegraphics{_main_files/figure-latex/poisson-1} 
+
+}
+
+\caption{Poisson distribution with the mean fish count}\label{fig:poisson}
+\end{figure}
+
+To overlay this ``probability'' distribution on the ``frequency'' distribution for comparison, we need to calculate a product of the number of samples (in this case, the number of plots = 10) and the probability of fish count \(Y\) taking value \(k\), \(\text{Pr}(Y=k)\) -- this multiplication results in the ``expected'' frequency of a value in the data. Figure \ref{fig:overlay-poisson} shows the comparison -- this seems better than the Normal distribution. Yet, there are some deviations from the expectation (e.g., the frequency of fish count \(Y=1\)).
+
+\begin{figure}
+
+{\centering \includegraphics{_main_files/figure-latex/overlay-poisson-1} 
+
+}
+
+\caption{Comparison of observed and expected frequencies of fish count}\label{fig:overlay-poisson}
+\end{figure}
+
+The deviation is due largely to the small sample size -- we have only 10 plots. In theory, we can obtain more accurate parameter estimates as the sample size increases. To see this effect, let's increase the sample size to 100 plots -- Figure \ref{fig:full-count} shows the updated histogram and the expected distribution with the new mean estimate (\(\mu =\) 2.19). This greatly improved the matching between the expected and observed distributions.
+
+\begin{figure}
+
+{\centering \includegraphics{_main_files/figure-latex/full-count-1} 
+
+}
+
+\caption{Histogram obtained from 100 plots}\label{fig:full-count}
+\end{figure}
+
+\hypertarget{how-to-choose-appropriate-one}{%
+\subsection{How to choose appropriate one?}\label{how-to-choose-appropriate-one}}
+
+We chose a Poisson distribution to express fish counts based on the characteristics of the variable. I used a comparison of a Normal and a Poisson distribution, but there are many more choices when expressing random variables. In ecology, several probability distributions are more frequently used than others, and the following dendrogram describes how we choose an acceptable distribution among them. Answer the questions and find your node.
+
+\begin{figure}
+
+{\centering \includegraphics{_main_files/figure-latex/dendrogram-1} 
+
+}
+
+\caption{Brief guide for how to choose an appropriate probability distribution.}\label{fig:dendrogram}
+\end{figure}
+
+Once you find your node\footnote{Although this covers common distributions in ecology, following this dendrogram does not guarantee that your choice is appropriate.}:
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1389}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1389}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1389}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.5833}}@{}}
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+Node
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Possible distribution
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Possible values
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Example in ecological data
+\end{minipage} \\
+\midrule()
+\endhead
+1 & Beta-binomial & \(0\) to \(N\) & Number of fertilized eggs out of \(N\) eggs examined. Useful when \(N\) is large (tend to be over-dispersed with binomial distribution) \\
+2 & Binomial & \(0\) to \(N\) & Number of fertilized eggs out of \(N\) eggs examined. \\
+3 & Negative-binomial & \(\ge 0\) & Number of individuals captured. Useful when variance is very large relative to mean (over-dispersed with a Poisson distribution). \\
+4 & Poisson & \(\ge 0\) & Species richness. \\
+5 & Beta & \(0\) to \(1\) & Survival probability. \\
+5 & Log-Normal & \(>0\) & Biomass. \\
+6 & Normal & \(-\infty\) to \(\infty\) & Temperature. \\
+\bottomrule()
+\end{longtable}
+
+\hypertarget{linear-model}{%
+\chapter{Linear model}\label{linear-model}}
+
+Many of you might hate equation -- I hated too because no one told me how to read it. However, you will like it once you understand how to interpret; it is actually the clearest explanation. In this section, I will continue to use the example of fish counts in a lake to explain the use of linear models.
+
+\hypertarget{mean-estimate}{%
+\section{Mean estimate}\label{mean-estimate}}
+
+\hypertarget{normal-distribution}{%
+\subsection{Normal distribution}\label{normal-distribution}}
+
+In the example of fish counts, we estimated mean and variance to infer how fish counts distribute over a range of possible values (probability distribution). Implicitly, I assumed that the ``true'' mean -- i.e., the expected number of fish counts in a plot -- is uniform within the lake. Let's express this assumption as a ``model.'' Let \(y_i\) be fish count in plot \(i\):
+
+\[
+y_i = \mu + \varepsilon_i
+\]
+
+The above equation reads fish count \(y_i\) can be expressed as the sum of mean density \(\mu\) and residual \(\varepsilon_i\) (raw deviation from the mean; \(\varepsilon_i = y_i - \mu\)). Notice that the parameter \(\mu\) does not have subscript \(i\) (i.e., \(\mu\) is constant across plots) since we assume that the mean fish count is uniform across plots.
+
+We can build this model pretty easily in R using function \texttt{lm()} (Linear Model, LM) with caution that this function assumes a Normal distribution, which we identified as an inappropriate distribution for our fish data. However, let me use this function for the sake of simplicity. In the function \texttt{lm()}, we write a \textbf{response} variable (i.e., the variable we want to explain = fish count) on the left side of tilde \texttt{\textasciitilde{}}, and \textbf{explanatory} variables (or predictors) on the right. In our simplest model, we do not have explanatory variables, so put \texttt{1} on the right.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(count }\SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{, }\AttributeTok{data =}\NormalTok{ df\_count)}
+\FunctionTok{summary}\NormalTok{(fit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = count ~ 1, data = df_count)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+##  -1.90  -0.90   0.10   0.85   3.10 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)   
+## (Intercept)   1.9000     0.4819   3.943  0.00339 **
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.524 on 9 degrees of freedom
+\end{verbatim}
+
+This is perhaps the simplest model we can make -- the variation in fish count \(y_i\) can be expressed as the mean \(\mu\) plus random variation \(\varepsilon_i\). However, where is the mean in the output? In the model output, the estimated mean is shown in the column \texttt{Estimate} under the area \texttt{Coefficients:}. We can prove it by comparing the estimate and the mean calculated with function \texttt{mean()}.
+
+\begin{quote}
+\textbf{Exercise:} calculate mean fish count with \texttt{mean()}
+\end{quote}
+
+Now we see how this model works. however, where is \(\varepsilon_i\) then? You can get values of \(\varepsilon_i\) using function \texttt{resid()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{eps }\OtherTok{\textless{}{-}} \FunctionTok{resid}\NormalTok{(fit)}
+\FunctionTok{print}\NormalTok{(eps)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    1    2    3    4    5    6    7    8    9   10 
+##  0.1 -0.9  0.1  0.1 -1.9  1.1  1.1 -0.9  3.1 -1.9
+\end{verbatim}
+
+It is unclear how this is derived, so let's compare it with \(y_i - \mu\). Note that SD of the residual (\(\text{SD} = \sqrt{\text{Variance}}\)) is the degree of variation in the data, and the value \texttt{Residual\ standard\ error:} should match \texttt{eps}'s SD.
+
+\begin{quote}
+\textbf{Exercise:} calculate \(y_i - \mu\) and compare it with \texttt{eps}. Also, calculate the SD of \texttt{eps} and compare it with the reported value \texttt{Residual\ standard\ error:} in the \texttt{lm()} output.
+\end{quote}
+
+The model can be written in many ways. It varies by person, but I strongly encourage you to know the following expression of a statistical model:
+
+\[
+y_i \sim \text{Normal}(\mu, \sigma^2)
+\]
+
+The interpretation of this equation is that \(y_i\) follows a normal distribution with a mean \(\mu\) and variance \(\sigma^2\). When the left and right hands of the equation are related with tilde, it indicates the relationship is stochastic -- the outcome \(y_i\) always deviates from the expectation \(\mu\), unlike equal sign \(y_i = \mu\). This expression is identical to the following:
+
+\[
+y_i = \mu + \varepsilon_i\\
+\varepsilon_i \sim \text{Normal}(0, \sigma^2)
+\]
+
+This expression clarifies that the deviation \(\varepsilon_i\) is stochastic, but the expectation \(\mu\) is deterministic. This is the basic structure of statistical model -- \textbf{observation is a mixture of deterministic and stochastic components}.
+
+\hypertarget{poisson-distribution}{%
+\subsection{Poisson distribution}\label{poisson-distribution}}
+
+In the previous section, we have identified that fish count is better described by a Poisson distribution. How can fit a model with a Poisson distribution? R has functionality to perform this type of analysis, and Generalized Linear Model (GLM) (\texttt{glm()}) is the natural extension of \texttt{lm()} function for non-normal distributions. It's pretty easy to use:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit\_pois }\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(count }\SpecialCharTok{\textasciitilde{}} \DecValTok{1}\NormalTok{, }\AttributeTok{data =}\NormalTok{ df\_count, }\AttributeTok{family =} \StringTok{"poisson"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The only difference is that we used \texttt{glm()} and specified a Poisson distribution as \texttt{family\ =\ "poisson"}. Let's see what's in there.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(fit\_pois)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = count ~ 1, family = "poisson", data = df_count)
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -1.94936  -0.71853   0.07192   0.56940   1.86436  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(>|z|)   
+## (Intercept)   0.6419     0.2294   2.798  0.00515 **
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 13.205  on 9  degrees of freedom
+## Residual deviance: 13.205  on 9  degrees of freedom
+## AIC: 36.51
+## 
+## Number of Fisher Scoring iterations: 5
+\end{verbatim}
+
+Wait\ldots it says \texttt{Estimate} 0.64, which is quite different from what we see in our fish count data (mean = 1.9). What's going on? This is because there is internal variable transformation when using a Poisson distribution. Since a Poisson distribution deals with positive integer (including zero), its mean cannot be negative. To avoid this potential problem in some data sets, the function \texttt{glm()} estimates the mean after log-transformation, and then back-transform to an ordinary scale. The reported value is in a natural log-scale -- we can retrieve the mean estimate in an ordinary scale by transforming the estimate by exponent \texttt{exp()} .
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# get intercept value in a log{-}scale}
+\NormalTok{fit\_pois}\SpecialCharTok{$}\NormalTok{coefficients}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## (Intercept) 
+##   0.6418539
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# transform to an ordinary scale}
+\FunctionTok{exp}\NormalTok{(fit\_pois}\SpecialCharTok{$}\NormalTok{coefficients)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## (Intercept) 
+##         1.9
+\end{verbatim}
+
+\hypertarget{effect-estimate}{%
+\section{Effect estimate}\label{effect-estimate}}
+
+\hypertarget{section}{%
+\subsection{}\label{section}}
+
+\hypertarget{appendix-project-management}{%
+\chapter{Appendix: Project Management}\label{appendix-project-management}}
 
 \hypertarget{r-project}{%
 \section{R Project}\label{r-project}}
@@ -254,8 +660,8 @@ A new window pops up and prompts you to name a directory with a location in your
 The internal structure of an \texttt{R\ Project} is extremely important to navigate yourself (others once it's published). \texttt{R\ Project} will be composed of multiple types of files, typically \texttt{.R}, \texttt{.csv}, \texttt{.rds}, \texttt{.Rmd} among others. Unless those files are arranged in an organized manner, it is VERY LIKELY to make severe errors in coding. So I take this seriously. Table \ref{tab:str} is my suggested subdirectory structure.
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.0838}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.9162}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.0691}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.9309}}@{}}
 \caption{\label{tab:str} Suggested internal structure of \texttt{R\ Project}}\tabularnewline
 \toprule()
 \begin{minipage}[b]{\linewidth}\raggedright
@@ -276,7 +682,7 @@ Content
 \texttt{README.md} & Markdown file explaining contents in the \texttt{R\ Project}. Can be derived from \texttt{README.Rmd}. \\
 \texttt{/code} & Sub-directory for R scripts (\texttt{.R}). \\
 \texttt{/data\_raw} & Sub-directory for raw data before data manipulation (\texttt{.csv} or other formats). Files in this sub-directory MUST NOT be modified unless there are changes to raw data entries. \\
-\texttt{/data\_format} & Sub-directory for formatted data (\texttt{.csv}, \texttt{.rds}, or other formats). \\
+\texttt{/data\_fmt} & Sub-directory for formatted data (\texttt{.csv}, \texttt{.rds}, or other formats). \\
 \texttt{/output} & Sub-directory for result outputs (\texttt{.csv}, \texttt{.rds}, or other formats). This may include statistical estimates from linear regression models etc. \\
 \texttt{/rmd} & (Optional) Sub-directory for Rmarkdown files (\texttt{.Rmd}). Rmarkdown allows seamless integration of R scripts and text. \\
 \bottomrule()
@@ -286,137 +692,6 @@ Content
 \section{Robust coding}\label{robust-coding}}
 
 While this is not mandatory, I strongly recommend to use \emph{RStudio} with \emph{Git} \& \emph{GitHub} (see Chapter \ref{appendix} Appendix for guidance). Coding is innately error-prone\footnote{well WAY BETTER than manual data manipulation!}; every programmers, even bright ones, make mistakes - no exception. However, the critical difference between beginner and advanced programmers is whether they develop robust coding rules with a self-error-detection system. \emph{Git} is the key to this. I will touch on this occasionally throughout this book.
-
-\hypertarget{why-statistics}{%
-\chapter{Why statistics?}\label{why-statistics}}
-
-\hypertarget{rationale}{%
-\section{Rationale}\label{rationale}}
-
-\emph{Why do I need statistics in ecology in the first place?} - this is the first question I got when I stepped into the field of ecology. I thought this would be an easy question that someone could give me the answer right away, but actually it is a deep one. The short answer is ``\emph{we need statistics because we only have \textbf{partial} information about what we want to know.}'' The long answer? See below.
-
-\hypertarget{example-fish-density-in-a-lake}{%
-\section{Example -- fish density in a lake}\label{example-fish-density-in-a-lake}}
-
-Let say we are interested in fish density in a lake (total area \(15 \times 15 = 225~\text{m}^2\)). We try to quantify it by catching fish in a certain area (1 m\textsuperscript{2} for example). Since there should be some variation in fish density among sampled points, we decided to repeat this 10 times to take an average. Figure \ref{fig:fish-plot} shows a graphical representation of this example.
-
-\begin{figure}
-
-{\centering \includegraphics{_main_files/figure-latex/fish-plot-1} 
-
-}
-
-\caption{Lake fish density example. Points are fish, and white boxes are sampling sites with 1 sq-m}\label{fig:fish-plot}
-\end{figure}
-
-Through this sampling, we got the following dataset:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df\_count}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## # A tibble: 10 x 2
-##     plot count
-##    <int> <int>
-##  1     1     1
-##  2     2     1
-##  3     3     1
-##  4     4     2
-##  5     5     7
-##  6     6     2
-##  7     7     5
-##  8     8     1
-##  9     9     3
-## 10    10     3
-\end{verbatim}
-
-Based on this dataset, we may conclude the average fish density in this lake is 2.6. However, how confident are you on this conclusion? The lake area is \(15 \times 15 = 225~\text{m}^2\) but we sampled only \(1~\text{m}^2 \times 10 = 10~\text{m}^2\)! Indeed, we missed a lot of fish in the lake (Figure \ref{fig:fish-plot-2}).
-
-\begin{figure}
-
-{\centering \includegraphics{_main_files/figure-latex/fish-plot-2-1} 
-
-}
-
-\caption{True fish distribution in the lake}\label{fig:fish-plot-2}
-\end{figure}
-
-In ecological research (and almost all research field), we are rarely able to obtain the perfect dataset with no uncertainty -- the data are partial information of what we want to know (true fish density in the entire lake = 2.22). This is the reason why we refer to a data point as a \textbf{sample}, and the average fish density in white boxes (2.6) is the \textbf{estimate} of the true fish density because it is the inference from the incomplete information. Since the average fish density is the estimate, it does not perfectly match the true density -- how do we account for this uncertainty?
-
-\hypertarget{mean-variance}{%
-\section{Mean \& Variance}\label{mean-variance}}
-
-In the above section, I talked only about the \textbf{mean} (total fish counts / number of plots = mean density per plot area {[}m\textsuperscript{2}{]}). Let me re-write this in a little more mathematical form -- I write a single data point (fish count in a single white box) as \(y_i\) with \(i\) representing an ID of a plot (therefore, \(y_1 = 1,~y_2 = 1,~y_3 = 1,~y_4 = 2, ...y_{10}=3\)), and refer to the number of plots as \(N\). The mean fish counts \(\mu\) is:
-
-\[
-\mu = \frac{\sum_{i=1}^N y_i}{N}
-\]
-
-However, the data contain another important aspect of information: variability in fish counts among samples. This variability -- called \textbf{variance} -- expresses the degree of uncertainty in your data. The variance \(\sigma^2\) can be calculated using the deviation of each data point \(x_i\) from the mean \(\mu\):
-
-\[
-\sigma^2 = \frac{\sum_{i=1}^N (y_i - \mu)^2}{N - 1}
-\]
-
-In this equation, \((y_i - \mu)^2\) is the deviation from the mean, but it is squared to make the deviation positive regardless the value of \(y_i\). Since all the deviations are positive, the summation should represent the overall deviation from the mean. We divide it by \(N-1\) to express it as the ``average'' of deviations\footnote{The reason for dividing by \(N-1\), not by \(N\), is a statistically deep topic; in essence, this is required to obtain an unbiased estimate of variance.}. Thus, cheafly speaking, variance can be interpreted as the average squared-deviation of each data point.
-
-Let's estimate mean and variance in R. Create \texttt{tibble()} containing the data presented above, and perform the following analysis. Although R has built-in functions for mean (\texttt{mean()}) and variance (\texttt{var()}), I show here how to express the equations above in R codes:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# define variables}
-\NormalTok{y }\OtherTok{\textless{}{-}}\NormalTok{ df\_count}\SpecialCharTok{$}\NormalTok{count }\CommentTok{\# fish counts}
-\NormalTok{n }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(df\_count) }\CommentTok{\# number of plots}
-
-\FunctionTok{print}\NormalTok{(y)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##  [1] 1 1 1 2 7 2 5 1 3 3
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{print}\NormalTok{(n)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 10
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# mean}
-\NormalTok{mu }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(y) }\SpecialCharTok{/}\NormalTok{ n}
-\FunctionTok{print}\NormalTok{(mu)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 2.6
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# variance}
-\NormalTok{sigma2 }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{((y }\SpecialCharTok{{-}}\NormalTok{ mu)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{) }\SpecialCharTok{/}\NormalTok{ (n }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{)}
-\FunctionTok{print}\NormalTok{(sigma2)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 4.044444
-\end{verbatim}
-
-Make sure these values are identical to what you would obtain from \texttt{mean()} and \texttt{var()} functions in R.
-
-\hypertarget{probability-distribution}{%
-\section{Probability distribution}\label{probability-distribution}}
 
 \hypertarget{appendix-git-github}{%
 \chapter{\texorpdfstring{Appendix: \emph{Git} \& \emph{GitHub}}{Appendix: Git \& GitHub}}\label{appendix-git-github}}

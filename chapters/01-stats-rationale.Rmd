@@ -1,0 +1,303 @@
+# Why statistics?
+
+## Rationale
+
+*Why do I need statistics in the first place?* - This is the first question I got when I stepped into the field of ecology. I thought this would be an easy question that someone could give me the answer to right away, but actually, it is a deep one. The short answer is "*we need statistics because we only have **partial** information about what we want to know.*" The long answer? See below.
+
+## Example -- fish density in a lake
+
+```{r fish-data}
+
+## base numbers
+set.seed(10)
+
+lake_size <- 15
+n_plot <- 225
+
+plot10 <- foreach(i = seq(1, 15, by = 2), .combine = c) %do% {
+  one <- (i - 1) * 15 + 1
+  x <- seq(one, (one + 15), by = 2) %>% sample(size = 4)
+  
+  return(x)
+} %>% 
+  sample(size = 10)
+
+## data set
+df_plot <- expand.grid(x0 = seq(0, 14, length = 15),
+                       y0 = seq(0, 14, length = 15)) %>% 
+  as_tibble() %>% 
+  mutate(x1 = x0 + 1,
+         y1 = y0 + 1)
+
+df_fish <- tibble(x = runif(500, 0, lake_size),
+                  y = runif(500, 0, lake_size))
+
+
+df_fish_sub <- foreach(i = seq_len(nrow(df_plot)),
+                       .combine = bind_rows) %do% {
+  df_fish %>% 
+    filter(x > df_plot$x0[i],
+           x < df_plot$x1[i],
+           y > df_plot$y0[i],
+           y < df_plot$y1[i]) %>% 
+    mutate(plot = i,
+           count = nrow(.))
+} %>% 
+  right_join(tibble(plot = 1:n_plot),
+             by = "plot") %>% 
+  mutate(count = replace_na(count, replace = 0))
+```
+
+Let's say we are interested in fish density in a lake (total area $15 \times 15 = 225~\text{m}^2$). We try to quantify it by catching fish in a certain area (1 m^2^ for example). Since there should be some variation in fish density among sampled points, we decided to repeat this `r df_plot %>% slice(plot10) %>% nrow()` times to take an average. Figure \@ref(fig:fish-plot) shows a graphical representation of this example.
+
+```{r fish-plot, fig.cap="Lake fish density example. Points are fish, and white boxes are sampling sites with 1 sq-m"}
+
+g_lake <- df_fish_sub %>% 
+  filter(plot %in% plot10) %>% 
+  ggplot(aes(x = x,
+             y = y)) +
+  geom_rect(aes(xmin = 0,
+                xmax = lake_size,
+                ymin = 0,
+                ymax = lake_size),
+            fill = "steelblue") +
+  geom_rect(data = df_plot %>% slice(plot10),
+            aes(x = x0,
+                y = y0,
+                xmin = x0,
+                xmax = x1,
+                ymin = y0,
+                ymax = y1),
+            color = "white",
+            fill = NA,
+            size = 0.1) +
+  geom_point(size = 0.5,
+             color = "salmon") +
+  scale_x_continuous(limits = c(0, lake_size)) +
+  scale_y_continuous(limits = c(0, lake_size)) +
+  theme_minimal()
+
+g_lake
+```
+
+Through this sampling, we got the following dataset:
+
+```{r df_count, echo = FALSE}
+
+id <- 1:nrow(df_plot)
+plot100 <- c(plot10, sample(id[!(id %in% plot10)], size = 90))
+
+df_count_full <- df_fish_sub %>% 
+  distinct(plot, count) %>% 
+  arrange(plot) %>% 
+  slice(plot100)
+
+df_count <- df_count_full %>% 
+  filter(plot %in% plot10) %>% 
+  mutate(plot = row_number())
+```
+
+```{r df_count_print, echo = TRUE}
+df_count
+```
+
+> **Exercise:** create a `tibble` object containing above data
+
+Based on this dataset, we may conclude the average fish density in this lake is `r df_count %>% pull(count) %>% mean() %>% round(2)`. However, how confident are you in this conclusion? The lake area is $15 \times 15 = 225~\text{m}^2$ but we sampled only $1~\text{m}^2 \times 10 = 10~\text{m}^2$! Indeed, we missed a lot of fish in the lake (Figure \@ref(fig:fish-plot-2)).
+
+```{r fish-plot-2, fig.cap="True fish distribution in the lake"}
+g_lake + 
+  geom_point(data = df_fish,
+             size = 0.5,
+             color = grey(0, 0.2))
+```
+
+In ecological research (and almost all research fields), we are rarely able to obtain the perfect dataset with no uncertainty -- the data are partial information of what we want to know (true fish density in the entire lake = `r round(nrow(df_fish)/(15^2), 2)`). This is the reason why we refer to a data point as a **sample**, and the average fish density in a plot (`r df_count %>% pull(count) %>% mean() %>% round(2)`) is the **estimate** of the true fish density -- it is the inference from the incomplete information. Since the average fish density is the estimate, it does not perfectly match the true density -- how do we account for this uncertainty?
+
+## Mean & Variance
+
+In the above section, I talked only about the **mean** (total fish counts/number of plots = mean density per plot area [m^2^]). Let me re-write this in a little more mathematical form -- I write a single data point (fish count in a single white box) as $y_i$ with $i$ representing an ID of a plot (therefore, $y_1 = 1,~y_2 = 1,~y_3 = 1,~y_4 = 2, ...y_{10}=3$), and refer to the number of plots as $N$. The mean fish counts $\mu$ is:
+
+$$
+\mu = \frac{\sum_{i=1}^N y_i}{N}
+$$
+
+However, the data contain another important aspect of information: variability in fish counts among samples. This variability -- called **variance** -- expresses the degree of uncertainty in your data. The variance $\sigma^2$ can be calculated using the deviation of each data point $x_i$ from the mean $\mu$:
+
+$$
+\sigma^2 = \frac{\sum_{i=1}^N (y_i - \mu)^2}{N - 1}
+$$
+
+In this equation, $(y_i - \mu)^2$ is the deviation from the mean, but it is squared to make the deviation positive regardless of the value of $y_i$. Since all the deviations are positive, the summation should represent the overall deviation from the mean. We divide it by $N-1$ to express it as the "average" of deviations[^01-stats-rationale-1]. Thus, chiefly speaking, variance can be interpreted as the average squared deviation of each data point.
+
+[^01-stats-rationale-1]: The reason for dividing by $N-1$, not by $N$, is a statistically deep topic; in essence, this is required to obtain an unbiased estimate of variance.
+
+Let's estimate mean and variance in R. Create `tibble()` containing the data presented above, and perform the following analysis. Although R has built-in functions for mean (`mean()`) and variance (`var()`), I show here how to express the equations above in R codes:
+
+```{r mean-variance, echo = TRUE}
+
+# define variables
+y <- df_count$count # fish counts
+n <- nrow(df_count) # number of plots
+
+print(y)
+print(n)
+
+# mean
+mu <- sum(y) / n
+print(mu)
+
+# variance
+sigma2 <- sum((y - mu)^2) / (n - 1)
+print(sigma2)
+```
+
+> **Exercise:** Make sure these values are identical to what you would obtain from `mean()` and `var()` functions in R
+
+## Probability distribution
+
+### Choose right one
+
+Mean and variance are unknown constants[^01-stats-rationale-2] -- these are what we refer to as **parameters**. Parameters are the focus of statistical inference because it allows the speculations for the *overall* structure of the population under investigation.
+
+[^01-stats-rationale-2]: At least for frequentist analysis.
+
+To clarify this argument, let's think more about a **mean** -- more precisely speaking, an expected value of a *random* variable. A mean is a value around which data points are concentrated. This suggests that **the probability of observing data points close to this value is very high**. This is the reason why we use a mean as a "representative" summary statistic (e.g., mean height, mean weight, etc...), although many of us may use it without recognizing it. Then, what **variance** does for us? As you move away from the mean, the probability of observing that value will decrease. Variance tells you how *sharply* the probability decreases as a value deviates from the mean (smaller variance means sharper decline). Thus, these two parameters shape the distribution of probability across a range of possible values -- this is what we refer to as **a probability distribution**. Figure \@ref(fig:prob-dist) is the probability distribution drawn based on the parameters we estimated in the fish data. The distribution has the peak at the mean value (`r df_count %>% pull(count) %>% mean() %>% round(2)`) with curvy declines towards both tails. The y-axis is labeled as "probability density" to allow for the continuous expression of probability for continuous values on the x-axis[^01-stats-rationale-3].
+
+[^01-stats-rationale-3]: You can define a probability for a range (e.g., $1 < x < 2$); otherwise, it must be probability "density" because you cannot define a probability for $x = 1.1$ due to the continuous nature of the variable $x$ (we don't know whether $x=1.1$ to be $x = 1.101~\text{or}~1.102~\text{or}....$)
+
+```{r prob-dist, fig.cap="Example of probability distribution"}
+
+x <- seq(-5, 10, length = 100)
+
+df0 <- expand.grid(x = x,
+                   mu = mean(df_count$count),
+                   var = var(df_count$count)) %>% 
+  tibble() %>% 
+  mutate(y = dnorm(x, mu, sqrt(var)),
+         color = paste0("mean = ", round(mu, 2), "; variance = ", round(var)))
+
+df0 %>% 
+  ggplot(aes(x = x,
+             y = y,
+             color = color)) +
+  geom_line() +
+  geom_vline(xintercept = mu,
+             color = grey(0.6),
+             linetype = "dashed") +
+  labs(y = "Probability density",
+       x = "Fish count",
+       color = "Parameter") +
+  theme_bw() +
+  theme(panel.grid = element_blank(),
+        legend.position = "top")
+```
+
+However, some of you might notice weird things in Figure \@ref(fig:prob-dist). First, the positive probability density extends below the "zero" fish count, which should not happen in nature (we cannot observe negative counts). Second, the fish count is treated as if it is a continuous variable, even though fish counts are always discrete values (there is no way to count 1.1 individuals for an individual survey plot, for example). When comparing this probability distribution with the fish count histogram, they do not look similar at all (Figure \@ref(fig:freq-data)))...even though they should look very similar if the probability distribution represents the data properly.
+
+```{r freq-data, fig.cap="Frequency distribution of fish count data"}
+
+df_count %>% 
+  ggplot(aes(x = count)) +
+  geom_histogram(binwidth = 0.1,
+                 center = 0) +
+  theme_bw() +
+  scale_x_continuous(breaks = seq(0, 10, by = 1)) +
+  labs(y = "Frequency",
+       x = "Fish count")
+```
+
+> **Exercise:** Produce a histogram of fish count
+
+Why does this happen? -- this is because this particular kind of probability distribution is inappropriate to express count data. The above example is drawn from a **Normal distribution**, whose outcome (values drawn from this distribution) ranges from $-\infty$ to $\infty$. To properly represent our fish count data, we must choose a probability distribution that can express discrete values of $\ge 0$ ($0, 1, 2, 3,...$). One possible choice for the fish count data is a **Poisson distribution**, whose outcome is confined to zero and positive discrete values. Unlike a Normal distribution, a Poisson distribution assumes $\mu = \sigma^2$; thus, knowing either $\mu$ or $\sigma^2$ is sufficient to draw a distribution (we use $\mu$ because it's easier) if the Poisson distribution is appropriate to represent the data. When a Poisson distribution is used, the probability distribution differs from that of a Normal distribution. Note that the y-axis is "probability" because the Poisson distribution allows only discrete values.
+
+```{r poisson, fig.cap="Poisson distribution with the mean fish count"}
+
+df_poisson <- tibble(x = 0:10,
+                     prob = dpois(x, lambda = mean(df_count$count)),
+                     freq = prob * nrow(df_count))
+
+df_poisson %>% 
+  ggplot(aes(y = prob,
+             x = x)) +
+  geom_line(color = grey(0.8)) +
+  geom_point(color = grey(0.6),
+             size = 4) +
+  theme_bw() +
+  labs(y = "Probability",
+       x = "Fish count")
+```
+
+To overlay this "probability" distribution on the "frequency" distribution for comparison, we need to calculate a product of the number of samples (in this case, the number of plots = 10) and the probability of fish count $Y$ taking value $k$, $\text{Pr}(Y=k)$ -- this multiplication results in the "expected" frequency of a value in the data. Figure \@ref(fig:overlay-poisson) shows the comparison -- this seems better than the Normal distribution. Yet, there are some deviations from the expectation (e.g., the frequency of fish count $Y=1$).
+
+```{r overlay-poisson, fig.cap="Comparison of observed and expected frequencies of fish count"}
+
+df_count %>% 
+  ggplot(aes(x = count)) +
+  geom_histogram(binwidth = 0.1,
+                 center = 0) +
+  geom_line(data = df_poisson,
+             aes(x = x,
+                 y = freq),
+            color = grey(0.8)) +
+  geom_point(data = df_poisson,
+             aes(x = x,
+                 y = freq),
+             color = grey(0.6),
+             size = 4) +
+  scale_x_continuous(breaks = seq(0, 10, by = 1)) +
+  theme_bw() +
+  labs(y = "Frequency",
+       x = "Fish count")
+```
+
+The deviation is due largely to the small sample size -- we have only 10 plots. In theory, we can obtain more accurate parameter estimates as the sample size increases. To see this effect, let's increase the sample size to 100 plots -- Figure \@ref(fig:full-count) shows the updated histogram and the expected distribution with the new mean estimate ($\mu =$ `r mean(df_count_full$count) %>% round(2)`). This greatly improved the matching between the expected and observed distributions.
+
+```{r full-count, fig.cap="Histogram obtained from 100 plots"}
+
+df_poisson_full <- tibble(x = 0:10,
+                          prob_full = dpois(x,
+                                            lambda = mean(df_count_full$count)),
+                          freq_full = prob_full * nrow(df_count_full))
+
+df_count_full %>% 
+  ggplot(aes(x = count)) +
+  geom_histogram(binwidth = 0.1,
+                 center = 0) +
+  geom_line(data = df_poisson_full,
+            aes(x = x,
+                y = freq_full),
+            color = grey(0.8)) +
+  geom_point(data = df_poisson_full,
+             aes(x = x,
+                 y = freq_full),
+             color = grey(0.6),
+             size = 4) +
+  scale_x_continuous(breaks = seq(0, 10, by = 1)) +
+  theme_bw() +
+  labs(y = "Frequency",
+       x = "Fish count")
+```
+
+### How to choose appropriate one?
+
+We chose a Poisson distribution to express fish counts based on the characteristics of the variable. I used a comparison of a Normal and a Poisson distribution, but there are many more choices when expressing random variables. In ecology, several probability distributions are more frequently used than others, and the following dendrogram describes how we choose an acceptable distribution among them. Answer the questions and find your node.
+
+```{r dendrogram, fig.cap="Brief guide for how to choose an appropriate probability distribution."}
+
+g_dendro
+```
+
+Once you find your node[^01-stats-rationale-4]:
+
+[^01-stats-rationale-4]: Although this covers common distributions in ecology, following this dendrogram does not guarantee that your choice is appropriate.
+
+| Node | Possible distribution | Possible values       | Example in ecological data                                                                                                          |
+|----------|----------|----------|------------------------------------------|
+| 1    | Beta-binomial         | $0$ to $N$            | Number of fertilized eggs out of $N$ eggs examined. Useful when $N$ is large (tend to be over-dispersed with binomial distribution) |
+| 2    | Binomial              | $0$ to $N$            | Number of fertilized eggs out of $N$ eggs examined.                                                                                 |
+| 3    | Negative-binomial     | $\ge 0$               | Number of individuals captured. Useful when variance is very large relative to mean (over-dispersed with a Poisson distribution).   |
+| 4    | Poisson               | $\ge 0$               | Species richness.                                                                                                                   |
+| 5    | Beta                  | $0$ to $1$            | Survival probability.                                                                                                               |
+| 5    | Log-Normal            | $>0$                  | Biomass.                                                                                                                            |
+| 6    | Normal                | $-\infty$ to $\infty$ | Temperature.                                                                                                                        |

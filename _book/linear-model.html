@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Linear model | BIOSTATS</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Linear model | BIOSTATS" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Linear model | BIOSTATS" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Akira Terui" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="why-statistics.html"/>
+<link rel="next" href="appendix-project-management.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">BIOSTATS</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1" data-path="why-statistics.html"><a href="why-statistics.html"><i class="fa fa-check"></i><b>1</b> Why statistics?</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="why-statistics.html"><a href="why-statistics.html#rationale"><i class="fa fa-check"></i><b>1.1</b> Rationale</a></li>
+<li class="chapter" data-level="1.2" data-path="why-statistics.html"><a href="why-statistics.html#example-fish-density-in-a-lake"><i class="fa fa-check"></i><b>1.2</b> Example – fish density in a lake</a></li>
+<li class="chapter" data-level="1.3" data-path="why-statistics.html"><a href="why-statistics.html#mean-variance"><i class="fa fa-check"></i><b>1.3</b> Mean &amp; Variance</a></li>
+<li class="chapter" data-level="1.4" data-path="why-statistics.html"><a href="why-statistics.html#probability-distribution"><i class="fa fa-check"></i><b>1.4</b> Probability distribution</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="why-statistics.html"><a href="why-statistics.html#choose-right-one"><i class="fa fa-check"></i><b>1.4.1</b> Choose right one</a></li>
+<li class="chapter" data-level="1.4.2" data-path="why-statistics.html"><a href="why-statistics.html#how-to-choose-appropriate-one"><i class="fa fa-check"></i><b>1.4.2</b> How to choose appropriate one?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="linear-model.html"><a href="linear-model.html"><i class="fa fa-check"></i><b>2</b> Linear model</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="linear-model.html"><a href="linear-model.html#mean-estimate"><i class="fa fa-check"></i><b>2.1</b> Mean estimate</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="linear-model.html"><a href="linear-model.html#normal-distribution"><i class="fa fa-check"></i><b>2.1.1</b> Normal distribution</a></li>
+<li class="chapter" data-level="2.1.2" data-path="linear-model.html"><a href="linear-model.html#poisson-distribution"><i class="fa fa-check"></i><b>2.1.2</b> Poisson distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="linear-model.html"><a href="linear-model.html#effect-estimate"><i class="fa fa-check"></i><b>2.2</b> Effect estimate</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="linear-model.html"><a href="linear-model.html#section"><i class="fa fa-check"></i><b>2.2.1</b> </a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="appendix-project-management.html"><a href="appendix-project-management.html"><i class="fa fa-check"></i><b>3</b> Appendix: Project Management</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="appendix-project-management.html"><a href="appendix-project-management.html#r-project"><i class="fa fa-check"></i><b>3.1</b> R Project</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="appendix-project-management.html"><a href="appendix-project-management.html#script-editor"><i class="fa fa-check"></i><b>3.1.1</b> Script Editor</a></li>
+<li class="chapter" data-level="3.1.2" data-path="appendix-project-management.html"><a href="appendix-project-management.html#file-name"><i class="fa fa-check"></i><b>3.1.2</b> File Name</a></li>
+<li class="chapter" data-level="3.1.3" data-path="appendix-project-management.html"><a href="appendix-project-management.html#structure-your-project"><i class="fa fa-check"></i><b>3.1.3</b> Structure Your Project</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="appendix-project-management.html"><a href="appendix-project-management.html#robust-coding"><i class="fa fa-check"></i><b>3.2</b> Robust coding</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="appendix-git-github.html"><a href="appendix-git-github.html"><i class="fa fa-check"></i><b>4</b> Appendix: <em>Git</em> &amp; <em>GitHub</em></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="appendix-git-github.html"><a href="appendix-git-github.html#git-github"><i class="fa fa-check"></i><b>4.1</b> <em>Git</em> &amp; <em>GitHub</em></a></li>
+<li class="chapter" data-level="4.2" data-path="appendix-git-github.html"><a href="appendix-git-github.html#commit-push"><i class="fa fa-check"></i><b>4.2</b> Commit &amp; Push</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="appendix-git-github.html"><a href="appendix-git-github.html#register-your-git-repo"><i class="fa fa-check"></i><b>4.2.1</b> Register Your Git repo</a></li>
+<li class="chapter" data-level="4.2.2" data-path="appendix-git-github.html"><a href="appendix-git-github.html#commit"><i class="fa fa-check"></i><b>4.2.2</b> Commit</a></li>
+<li class="chapter" data-level="4.2.3" data-path="appendix-git-github.html"><a href="appendix-git-github.html#push"><i class="fa fa-check"></i><b>4.2.3</b> Push</a></li>
+<li class="chapter" data-level="4.2.4" data-path="appendix-git-github.html"><a href="appendix-git-github.html#edit"><i class="fa fa-check"></i><b>4.2.4</b> Edit</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html"><i class="fa fa-check"></i><b>5</b> Appendix: Data Structure</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#overview"><i class="fa fa-check"></i><b>5.1</b> Overview</a></li>
+<li class="chapter" data-level="5.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#vector"><i class="fa fa-check"></i><b>5.2</b> Vector</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#create-vector"><i class="fa fa-check"></i><b>5.2.1</b> Create Vector</a></li>
+<li class="chapter" data-level="5.2.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#check-features"><i class="fa fa-check"></i><b>5.2.2</b> Check Features</a></li>
+<li class="chapter" data-level="5.2.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#access"><i class="fa fa-check"></i><b>5.2.3</b> Access</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#matrix"><i class="fa fa-check"></i><b>5.3</b> Matrix</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#create-matrix"><i class="fa fa-check"></i><b>5.3.1</b> Create Matrix</a></li>
+<li class="chapter" data-level="5.3.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#check-features-1"><i class="fa fa-check"></i><b>5.3.2</b> Check Features</a></li>
+<li class="chapter" data-level="5.3.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#access-1"><i class="fa fa-check"></i><b>5.3.3</b> Access</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#data-frame"><i class="fa fa-check"></i><b>5.4</b> Data Frame</a></li>
+<li class="chapter" data-level="5.5" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#exercise"><i class="fa fa-check"></i><b>5.5</b> Exercise</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#vector-1"><i class="fa fa-check"></i><b>5.5.1</b> Vector</a></li>
+<li class="chapter" data-level="5.5.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#matrix-1"><i class="fa fa-check"></i><b>5.5.2</b> Matrix</a></li>
+<li class="chapter" data-level="5.5.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#data-frame-1"><i class="fa fa-check"></i><b>5.5.3</b> Data Frame</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">BIOSTATS</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="linear-model" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Linear model<a href="linear-model.html#linear-model" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Many of you might hate equation – I hated too because no one told me how to read it. However, you will like it once you understand how to interpret; it is actually the clearest explanation. In this section, I will continue to use the example of fish counts in a lake to explain the use of linear models.</p>
+<div id="mean-estimate" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Mean estimate<a href="linear-model.html#mean-estimate" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="normal-distribution" class="section level3 hasAnchor" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Normal distribution<a href="linear-model.html#normal-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In the example of fish counts, we estimated mean and variance to infer how fish counts distribute over a range of possible values (probability distribution). Implicitly, I assumed that the “true” mean – i.e., the expected number of fish counts in a plot – is uniform within the lake. Let’s express this assumption as a “model.” Let <span class="math inline">\(y_i\)</span> be fish count in plot <span class="math inline">\(i\)</span>:</p>
+<p><span class="math display">\[
+y_i = \mu + \varepsilon_i
+\]</span></p>
+<p>The above equation reads fish count <span class="math inline">\(y_i\)</span> can be expressed as the sum of mean density <span class="math inline">\(\mu\)</span> and residual <span class="math inline">\(\varepsilon_i\)</span> (raw deviation from the mean; <span class="math inline">\(\varepsilon_i = y_i - \mu\)</span>). Notice that the parameter <span class="math inline">\(\mu\)</span> does not have subscript <span class="math inline">\(i\)</span> (i.e., <span class="math inline">\(\mu\)</span> is constant across plots) since we assume that the mean fish count is uniform across plots.</p>
+<p>We can build this model pretty easily in R using function <code>lm()</code> (Linear Model, LM) with caution that this function assumes a Normal distribution, which we identified as an inappropriate distribution for our fish data. However, let me use this function for the sake of simplicity. In the function <code>lm()</code>, we write a <strong>response</strong> variable (i.e., the variable we want to explain = fish count) on the left side of tilde <code>~</code>, and <strong>explanatory</strong> variables (or predictors) on the right. In our simplest model, we do not have explanatory variables, so put <code>1</code> on the right.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="linear-model.html#cb11-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(count <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> df_count)</span>
+<span id="cb11-2"><a href="linear-model.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = count ~ 1, data = df_count)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+##  -1.90  -0.90   0.10   0.85   3.10 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept)   1.9000     0.4819   3.943  0.00339 **
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.524 on 9 degrees of freedom</code></pre>
+<p>This is perhaps the simplest model we can make – the variation in fish count <span class="math inline">\(y_i\)</span> can be expressed as the mean <span class="math inline">\(\mu\)</span> plus random variation <span class="math inline">\(\varepsilon_i\)</span>. However, where is the mean in the output? In the model output, the estimated mean is shown in the column <code>Estimate</code> under the area <code>Coefficients:</code>. We can prove it by comparing the estimate and the mean calculated with function <code>mean()</code>.</p>
+<blockquote>
+<p><strong>Exercise:</strong> calculate mean fish count with <code>mean()</code></p>
+</blockquote>
+<p>Now we see how this model works. however, where is <span class="math inline">\(\varepsilon_i\)</span> then? You can get values of <span class="math inline">\(\varepsilon_i\)</span> using function <code>resid()</code>.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="linear-model.html#cb13-1" aria-hidden="true" tabindex="-1"></a>eps <span class="ot">&lt;-</span> <span class="fu">resid</span>(fit)</span>
+<span id="cb13-2"><a href="linear-model.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(eps)</span></code></pre></div>
+<pre><code>##    1    2    3    4    5    6    7    8    9   10 
+##  0.1 -0.9  0.1  0.1 -1.9  1.1  1.1 -0.9  3.1 -1.9</code></pre>
+<p>It is unclear how this is derived, so let’s compare it with <span class="math inline">\(y_i - \mu\)</span>. Note that SD of the residual (<span class="math inline">\(\text{SD} = \sqrt{\text{Variance}}\)</span>) is the degree of variation in the data, and the value <code>Residual standard error:</code> should match <code>eps</code>’s SD.</p>
+<blockquote>
+<p><strong>Exercise:</strong> calculate <span class="math inline">\(y_i - \mu\)</span> and compare it with <code>eps</code>. Also, calculate the SD of <code>eps</code> and compare it with the reported value <code>Residual standard error:</code> in the <code>lm()</code> output.</p>
+</blockquote>
+<p>The model can be written in many ways. It varies by person, but I strongly encourage you to know the following expression of a statistical model:</p>
+<p><span class="math display">\[
+y_i \sim \text{Normal}(\mu, \sigma^2)
+\]</span></p>
+<p>The interpretation of this equation is that <span class="math inline">\(y_i\)</span> follows a normal distribution with a mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>. When the left and right hands of the equation are related with tilde, it indicates the relationship is stochastic – the outcome <span class="math inline">\(y_i\)</span> always deviates from the expectation <span class="math inline">\(\mu\)</span>, unlike equal sign <span class="math inline">\(y_i = \mu\)</span>. This expression is identical to the following:</p>
+<p><span class="math display">\[
+y_i = \mu + \varepsilon_i\\
+\varepsilon_i \sim \text{Normal}(0, \sigma^2)
+\]</span></p>
+<p>This expression clarifies that the deviation <span class="math inline">\(\varepsilon_i\)</span> is stochastic, but the expectation <span class="math inline">\(\mu\)</span> is deterministic. This is the basic structure of statistical model – <strong>observation is a mixture of deterministic and stochastic components</strong>.</p>
+</div>
+<div id="poisson-distribution" class="section level3 hasAnchor" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Poisson distribution<a href="linear-model.html#poisson-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In the previous section, we have identified that fish count is better described by a Poisson distribution. How can fit a model with a Poisson distribution? R has functionality to perform this type of analysis, and Generalized Linear Model (GLM) (<code>glm()</code>) is the natural extension of <code>lm()</code> function for non-normal distributions. It’s pretty easy to use:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="linear-model.html#cb15-1" aria-hidden="true" tabindex="-1"></a>fit_pois <span class="ot">&lt;-</span> <span class="fu">glm</span>(count <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> df_count, <span class="at">family =</span> <span class="st">&quot;poisson&quot;</span>)</span></code></pre></div>
+<p>The only difference is that we used <code>glm()</code> and specified a Poisson distribution as <code>family = "poisson"</code>. Let’s see what’s in there.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="linear-model.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_pois)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = count ~ 1, family = &quot;poisson&quot;, data = df_count)
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -1.94936  -0.71853   0.07192   0.56940   1.86436  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(&gt;|z|)   
+## (Intercept)   0.6419     0.2294   2.798  0.00515 **
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for poisson family taken to be 1)
+## 
+##     Null deviance: 13.205  on 9  degrees of freedom
+## Residual deviance: 13.205  on 9  degrees of freedom
+## AIC: 36.51
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+<p>Wait…it says <code>Estimate</code> 0.64, which is quite different from what we see in our fish count data (mean = 1.9). What’s going on? This is because there is internal variable transformation when using a Poisson distribution. Since a Poisson distribution deals with positive integer (including zero), its mean cannot be negative. To avoid this potential problem in some data sets, the function <code>glm()</code> estimates the mean after log-transformation, and then back-transform to an ordinary scale. The reported value is in a natural log-scale – we can retrieve the mean estimate in an ordinary scale by transforming the estimate by exponent <code>exp()</code> .</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="linear-model.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get intercept value in a log-scale</span></span>
+<span id="cb18-2"><a href="linear-model.html#cb18-2" aria-hidden="true" tabindex="-1"></a>fit_pois<span class="sc">$</span>coefficients</span></code></pre></div>
+<pre><code>## (Intercept) 
+##   0.6418539</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="linear-model.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># transform to an ordinary scale</span></span>
+<span id="cb20-2"><a href="linear-model.html#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(fit_pois<span class="sc">$</span>coefficients)</span></code></pre></div>
+<pre><code>## (Intercept) 
+##         1.9</code></pre>
+</div>
+</div>
+<div id="effect-estimate" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Effect estimate<a href="linear-model.html#effect-estimate" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="section" class="section level3" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> </h3>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="why-statistics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="appendix-project-management.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/chapters/02-linear-model.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

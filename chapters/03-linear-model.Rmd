@@ -1,7 +1,0 @@
-```{r setup-02, include=FALSE}
-
-pacman::p_load(tidyverse,
-               foreach)
-```
-
-# 

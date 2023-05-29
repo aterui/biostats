@@ -662,11 +662,8 @@ Using this data, perform the following exercise:
 
 \emph{``Why do I need statistics in the first place?''} This was the initial question that arose when I entered the field of ecology. Initially, I assumed it would be a straightforward query with an immediate response. However, I soon realized that it is a profound question with a complex answer. In short, ``we need statistics because we often possess only partial information about what we seek to understand.'' Now, let's explore the more elaborate explanation below.
 
-\hypertarget{the-unknown}{%
-\section{The Unknown}\label{the-unknown}}
-
-\hypertarget{garden-plant-height}{%
-\subsection{Garden Plant Height}\label{garden-plant-height}}
+\hypertarget{the-unknown-garden-plant-example}{%
+\section{The Unknown: Garden Plant Example}\label{the-unknown-garden-plant-example}}
 
 Consider a scenario where we are conducting a study on plant height in a garden. In this garden, there exists a thousand of individual plants, making it impractical for a single researcher to measure all of them. Instead, due to resource limitations, a sample of \(10\) plants was selected to \textbf{\emph{calculate}} the average height and the extent of variation among these plant individuals:
 
@@ -764,7 +761,7 @@ Create another \texttt{tibble()} :
 Wow, that's totally different.
 
 \hypertarget{linking-part-to-the-whole}{%
-\subsection{Linking Part to the Whole}\label{linking-part-to-the-whole}}
+\section{Linking Part to the Whole}\label{linking-part-to-the-whole}}
 
 The exercise highlights an important takeaway: what we can determine from the above data is the average and variance of the sample, \textbf{which may not perfectly represent the characteristics of the entire garden.}
 
@@ -805,7 +802,7 @@ Download the data \href{https://github.com/aterui/biostats/blob/master/data_raw/
 ## # i 990 more rows
 \end{verbatim}
 
-Using this ``virtual data'' (I created this through a random value generator), we first calculate the true mean and variance (we ``calculate'' it because it it the entire population; the whole is known) as follows:
+Using this synthetic dataset (I generated through a random value generator), we can calculate the true mean and variance (reference values). It is important to note that in this case, we use the term ``calculate'' for the mean and variance because they represent the parameters of the entire population, which are known to us in this scenario.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1067,7 +1064,7 @@ Recognizing the limitations and uncertainties associated with working with sampl
 \end{Highlighting}
 \end{Shaded}
 
-  Repeat step 1 with \texttt{df\_h10} instead of \texttt{df\_h} and compare the results.
+  Repeat step 1 with \texttt{df\_h10} instead of \texttt{df\_h0} and compare the results.
 \end{enumerate}
 
 \hypertarget{appendix-project-management}{%

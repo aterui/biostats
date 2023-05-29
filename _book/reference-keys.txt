@@ -13,8 +13,7 @@ laboratory
 comparing-central-tendency-measures
 comparing-variation-measures
 sampling-concept
-the-unknown
-garden-plant-height
+the-unknown-garden-plant-example
 linking-part-to-the-whole
 laboratory-1
 appendix-project-management

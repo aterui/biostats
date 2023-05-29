@@ -6,9 +6,7 @@ source(here::here("code/library.R"))
 
 *"Why do I need statistics in the first place?"* This was the initial question that arose when I entered the field of ecology. Initially, I assumed it would be a straightforward query with an immediate response. However, I soon realized that it is a profound question with a complex answer. In short, "we need statistics because we often possess only partial information about what we seek to understand." Now, let's explore the more elaborate explanation below.
 
-## The Unknown
-
-### Garden Plant Height
+## The Unknown: Garden Plant Example
 
 ```{r plant-height, include = F}
 
@@ -71,7 +69,7 @@ print(df_h2)
 
 Wow, that's totally different.
 
-### Linking Part to the Whole
+## Linking Part to the Whole
 
 The exercise highlights an important takeaway: what we can determine from the above data is the average and variance of the sample, **which may not perfectly represent the characteristics of the entire garden.**
 
@@ -267,4 +265,4 @@ Recognizing the limitations and uncertainties associated with working with sampl
       filter(height >= 10)
     ```
 
-    Repeat step 1 with `df_h10` instead of `df_h` and compare the results.
+    Repeat step 1 with `df_h10` instead of `df_h0` and compare the results.

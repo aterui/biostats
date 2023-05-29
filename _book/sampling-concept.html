@@ -162,12 +162,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="2" data-path="sampling-concept.html"><a href="sampling-concept.html"><i class="fa fa-check"></i><b>2</b> Sampling Concept</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="sampling-concept.html"><a href="sampling-concept.html#the-unknown"><i class="fa fa-check"></i><b>2.1</b> The Unknown</a>
-<ul>
-<li class="chapter" data-level="2.1.1" data-path="sampling-concept.html"><a href="sampling-concept.html#garden-plant-height"><i class="fa fa-check"></i><b>2.1.1</b> Garden Plant Height</a></li>
-<li class="chapter" data-level="2.1.2" data-path="sampling-concept.html"><a href="sampling-concept.html#linking-part-to-the-whole"><i class="fa fa-check"></i><b>2.1.2</b> Linking Part to the Whole</a></li>
-</ul></li>
-<li class="chapter" data-level="2.2" data-path="sampling-concept.html"><a href="sampling-concept.html#laboratory-1"><i class="fa fa-check"></i><b>2.2</b> Laboratory</a></li>
+<li class="chapter" data-level="2.1" data-path="sampling-concept.html"><a href="sampling-concept.html#the-unknown-garden-plant-example"><i class="fa fa-check"></i><b>2.1</b> The Unknown: Garden Plant Example</a></li>
+<li class="chapter" data-level="2.2" data-path="sampling-concept.html"><a href="sampling-concept.html#linking-part-to-the-whole"><i class="fa fa-check"></i><b>2.2</b> Linking Part to the Whole</a></li>
+<li class="chapter" data-level="2.3" data-path="sampling-concept.html"><a href="sampling-concept.html#laboratory-1"><i class="fa fa-check"></i><b>2.3</b> Laboratory</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="appendix-project-management.html"><a href="appendix-project-management.html"><i class="fa fa-check"></i><b>3</b> Appendix: Project Management</a>
 <ul>
@@ -202,10 +199,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="sampling-concept" class="section level1 hasAnchor" number="2">
 <h1><span class="header-section-number">Chapter 2</span> Sampling Concept<a href="sampling-concept.html#sampling-concept" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><em>“Why do I need statistics in the first place?”</em> This was the initial question that arose when I entered the field of ecology. Initially, I assumed it would be a straightforward query with an immediate response. However, I soon realized that it is a profound question with a complex answer. In short, “we need statistics because we often possess only partial information about what we seek to understand.” Now, let’s explore the more elaborate explanation below.</p>
-<div id="the-unknown" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> The Unknown<a href="sampling-concept.html#the-unknown" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="garden-plant-height" class="section level3 hasAnchor" number="2.1.1">
-<h3><span class="header-section-number">2.1.1</span> Garden Plant Height<a href="sampling-concept.html#garden-plant-height" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="the-unknown-garden-plant-example" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> The Unknown: Garden Plant Example<a href="sampling-concept.html#the-unknown-garden-plant-example" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Consider a scenario where we are conducting a study on plant height in a garden. In this garden, there exists a thousand of individual plants, making it impractical for a single researcher to measure all of them. Instead, due to resource limitations, a sample of <span class="math inline">\(10\)</span> plants was selected to <strong><em>calculate</em></strong> the average height and the extent of variation among these plant individuals:</p>
 <pre><code>## # A tibble: 10 × 3
 ##    plant_id height unit 
@@ -272,8 +267,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 10       20   23   cm         21.2       25.8</code></pre>
 <p>Wow, that’s totally different.</p>
 </div>
-<div id="linking-part-to-the-whole" class="section level3 hasAnchor" number="2.1.2">
-<h3><span class="header-section-number">2.1.2</span> Linking Part to the Whole<a href="sampling-concept.html#linking-part-to-the-whole" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="linking-part-to-the-whole" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Linking Part to the Whole<a href="sampling-concept.html#linking-part-to-the-whole" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The exercise highlights an important takeaway: what we can determine from the above data is the average and variance of the sample, <strong>which may not perfectly represent the characteristics of the entire garden.</strong></p>
 <p>In the field of biological research, it is often impractical or impossible to sample the entire population, so we must rely on estimating the unknowns (in this case, the <em>mean</em> and <em>variance</em>) from the available samples. This is where statistics comes into play, offering a tool to infer information about the entire population based on partial information obtained from the samples.</p>
 <p>The population mean and variance in the garden, which are the unknowns we are interested in, are referred to as “<strong>parameters.</strong>” These parameters <u><em>cannot be directly measured</em></u> but can be <u><em>estimated</em></u> from samples through statistical inference.</p>
@@ -299,7 +294,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  9     9        9   22.9 cm   
 ## 10    10       10   18.5 cm   
 ## # ℹ 990 more rows</code></pre>
-<p>Using this “virtual data” (I created this through a random value generator), we first calculate the true mean and variance (we “calculate” it because it it the entire population; the whole is known) as follows:</p>
+<p>Using this synthetic dataset (I generated through a random value generator), we can calculate the true mean and variance (reference values). It is important to note that in this case, we use the term “calculate” for the mean and variance because they represent the parameters of the entire population, which are known to us in this scenario.</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="sampling-concept.html#cb60-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">mean</span>(df_h0<span class="sc">$</span>height)</span>
 <span id="cb60-2"><a href="sampling-concept.html#cb60-2" aria-hidden="true" tabindex="-1"></a>sigma2 <span class="ot">&lt;-</span> <span class="fu">sum</span>((df_h0<span class="sc">$</span>height <span class="sc">-</span> mu)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">nrow</span>(df_h0)</span>
 <span id="cb60-3"><a href="sampling-concept.html#cb60-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -468,15 +463,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In summary, samples can only provide information about a part of the whole population. The complete picture of the entire population is often unknown, and we rely on estimating key parameters from the available samples. This concept applies to a wide range of parametric analyses in statistics, where we use sample data to make inferences about the population parameters.</p>
 <p>Recognizing the limitations and uncertainties associated with working with samples is essential for proper statistical analysis and interpretation of results in various fields of study.</p>
 </div>
-</div>
-<div id="laboratory-1" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> Laboratory<a href="sampling-concept.html#laboratory-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="laboratory-1" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Laboratory<a href="sampling-concept.html#laboratory-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ol style="list-style-type: decimal">
 <li><p>We used 10 plants to estimate sample means and variances. Obtain 100 sub-datasets with 50 and 100 measures each, and draw histograms of sample means and unbiased variances (use <code>var()</code>).</p></li>
 <li><p>Sample means and unbiased variances are unbiased if samples are randomly selected. What happens if samples are non-random? Suppose the investigator was unable to find plants less than 10 cm in height – the following code excludes those less than 10 cm in height:</p>
 <div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="sampling-concept.html#cb75-1" aria-hidden="true" tabindex="-1"></a>df_h10 <span class="ot">&lt;-</span> df_h0 <span class="sc">%&gt;%</span> </span>
 <span id="cb75-2"><a href="sampling-concept.html#cb75-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(height <span class="sc">&gt;=</span> <span class="dv">10</span>)</span></code></pre></div>
-<p>Repeat step 1 with <code>df_h10</code> instead of <code>df_h</code> and compare the results.</p></li>
+<p>Repeat step 1 with <code>df_h10</code> instead of <code>df_h0</code> and compare the results.</p></li>
 </ol>
 
 </div>

@@ -165,8 +165,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1" data-path="sampling-concept.html"><a href="sampling-concept.html#the-unknown"><i class="fa fa-check"></i><b>2.1</b> The Unknown</a>
 <ul>
 <li class="chapter" data-level="2.1.1" data-path="sampling-concept.html"><a href="sampling-concept.html#garden-plant-height"><i class="fa fa-check"></i><b>2.1.1</b> Garden Plant Height</a></li>
-<li class="chapter" data-level="2.1.2" data-path="sampling-concept.html"><a href="sampling-concept.html#linking-part-to-the-whole"><i class="fa fa-check"></i><b>2.1.2</b> Linking part to the whole</a></li>
+<li class="chapter" data-level="2.1.2" data-path="sampling-concept.html"><a href="sampling-concept.html#linking-part-to-the-whole"><i class="fa fa-check"></i><b>2.1.2</b> Linking Part to the Whole</a></li>
 </ul></li>
+<li class="chapter" data-level="2.2" data-path="sampling-concept.html"><a href="sampling-concept.html#laboratory-1"><i class="fa fa-check"></i><b>2.2</b> Laboratory</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="appendix-project-management.html"><a href="appendix-project-management.html"><i class="fa fa-check"></i><b>3</b> Appendix: Project Management</a>
 <ul>
@@ -272,13 +273,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Wow, that’s totally different.</p>
 </div>
 <div id="linking-part-to-the-whole" class="section level3 hasAnchor" number="2.1.2">
-<h3><span class="header-section-number">2.1.2</span> Linking part to the whole<a href="sampling-concept.html#linking-part-to-the-whole" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3><span class="header-section-number">2.1.2</span> Linking Part to the Whole<a href="sampling-concept.html#linking-part-to-the-whole" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The exercise highlights an important takeaway: what we can determine from the above data is the average and variance of the sample, <strong>which may not perfectly represent the characteristics of the entire garden.</strong></p>
 <p>In the field of biological research, it is often impractical or impossible to sample the entire population, so we must rely on estimating the unknowns (in this case, the <em>mean</em> and <em>variance</em>) from the available samples. This is where statistics comes into play, offering a tool to infer information about the entire population based on partial information obtained from the samples.</p>
 <p>The population mean and variance in the garden, which are the unknowns we are interested in, are referred to as “<strong>parameters.</strong>” These parameters <u><em>cannot be directly measured</em></u> but can be <u><em>estimated</em></u> from samples through statistical inference.</p>
 <p>Provided that certain assumptions are met, the <em>sample mean</em> is the unbiased point estimate of the <em>population</em> <em>mean</em>. The <strong>“<em>unbiased</em>”</strong> means that the sample means – if we repeat the sampling process – are centered around the population mean. In the meantime, the sample variance – if we use the formula in Chapter <a href="descriptive-statistics.html#descriptive-statistics">1</a> – is “<strong><em>biased</em></strong>.” It tends to be smaller than the population variance.</p>
 <p>Let’s explore this concept further through simple simulations. Suppose we have data on a thousand plant individuals, although this scenario may be unrealistic in practice. However, by conducting these simulations, we can examine how different sample means and variances can deviate from the true values.</p>
-<p>Download the data <a href="C:/Users/Akira/OneDrive%20-%20UNCG/Documents/github/biostats/data_raw/data_plant_height.csv">here</a> containing height measurements of thousand individuals, and place this file under <code>data_raw/</code> in your project directory. You can load this <code>csv</code> file in R as follows:</p>
+<p>Download the data <a href="https://github.com/aterui/biostats/blob/master/data_raw/data_plant_height.csv">here</a> containing height measurements of thousand individuals, and place this file under <code>data_raw/</code> in your project directory. You can load this <code>csv</code> file in R as follows:</p>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="sampling-concept.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load csv data on R</span></span>
 <span id="cb58-2"><a href="sampling-concept.html#cb58-2" aria-hidden="true" tabindex="-1"></a>df_h0 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data_raw/data_plant_height.csv&quot;</span>)</span>
 <span id="cb58-3"><a href="sampling-concept.html#cb58-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -407,12 +408,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb73-19"><a href="sampling-concept.html#cb73-19" aria-hidden="true" tabindex="-1"></a><span class="co"># possible only if &quot;patchwork&quot; is loaded</span></span>
 <span id="cb73-20"><a href="sampling-concept.html#cb73-20" aria-hidden="true" tabindex="-1"></a>g_mu <span class="sc">/</span> g_var</span></code></pre></div>
 <p><img src="_main_files/figure-html/mu-var-dist-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>While sample means are symmetrically distributed around the true mean, sample variances are skewed to the right – it tends to be smaller than the true variance.</p>
-<p>The variance estimate is biased because we inferred the parameter from small number of samples – fortunately, there is an unbiased estimator of variance as well. The unbiased estimator of variance is:</p>
+<p>While sample means are indeed symmetrically distributed around the true mean, sample variances tend to be biased and skewed to the right, often underestimating the true variance.</p>
+<p>The bias in estimating the variance arises due to inferring the parameter from a small number of samples. However, there is good news: an unbiased estimator of variance exists. The formula for the unbiased estimator of variance is as follows:</p>
 <p><span class="math display">\[
 \frac{\sum_i^N (x_i - \mu)^2}{N-1}
 \]</span></p>
-<p>Actually, this is the default formula in <code>var()</code> in R, a function used to estimate <em>unbiased</em> variance (and <em>unbiased</em> SD <code>sd()</code>). Comparison reveals how this works:</p>
+<p>The correction in the denominator (<span class="math inline">\(N\)</span> replaced with <span class="math inline">\(N-1\)</span>) compensates for the bias, providing an estimate of the true variance without systematic underestimation (although this seems a simple correction, a <a href="https://en.wikipedia.org/wiki/Bessel%27s_correction">deep math</a> underlies the derivation of <span class="math inline">\(N-1\)</span>). This is the default formula in <code>var()</code> in R, a function used to estimate <em>unbiased</em> variance (and <em>unbiased</em> SD <code>sd()</code>). Comparison reveals how this works:</p>
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="sampling-concept.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># for reproducibility</span></span>
 <span id="cb74-2"><a href="sampling-concept.html#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">3</span>)</span>
 <span id="cb74-3"><a href="sampling-concept.html#cb74-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -464,9 +465,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb74-49"><a href="sampling-concept.html#cb74-49" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb74-50"><a href="sampling-concept.html#cb74-50" aria-hidden="true" tabindex="-1"></a>g_mu <span class="sc">/</span> g_var <span class="sc">/</span> g_var_ub</span></code></pre></div>
 <p><img src="_main_files/figure-html/var-ub-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>In summary, samples can only provide information about a part of the whole population. The complete picture of the entire population is often unknown, and we rely on estimating key parameters from the available samples. This concept applies to a wide range of parametric analyses in statistics, where we use sample data to make inferences about the population parameters. Recognizing the limitations and uncertainties associated with working with samples is essential for proper statistical analysis and interpretation of results in various fields of study.</p>
-
+<p>In summary, samples can only provide information about a part of the whole population. The complete picture of the entire population is often unknown, and we rely on estimating key parameters from the available samples. This concept applies to a wide range of parametric analyses in statistics, where we use sample data to make inferences about the population parameters.</p>
+<p>Recognizing the limitations and uncertainties associated with working with samples is essential for proper statistical analysis and interpretation of results in various fields of study.</p>
 </div>
+</div>
+<div id="laboratory-1" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Laboratory<a href="sampling-concept.html#laboratory-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li><p>We used 10 plants to estimate sample means and variances. Obtain 100 sub-datasets with 50 and 100 measures each, and draw histograms of sample means and unbiased variances (use <code>var()</code>).</p></li>
+<li><p>Sample means and unbiased variances are unbiased if samples are randomly selected. What happens if samples are non-random? Suppose the investigator was unable to find plants less than 10 cm in height – the following code excludes those less than 10 cm in height:</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="sampling-concept.html#cb75-1" aria-hidden="true" tabindex="-1"></a>df_h10 <span class="ot">&lt;-</span> df_h0 <span class="sc">%&gt;%</span> </span>
+<span id="cb75-2"><a href="sampling-concept.html#cb75-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(height <span class="sc">&gt;=</span> <span class="dv">10</span>)</span></code></pre></div>
+<p>Repeat step 1 with <code>df_h10</code> instead of <code>df_h</code> and compare the results.</p></li>
+</ol>
+
 </div>
 </div>
             </section>

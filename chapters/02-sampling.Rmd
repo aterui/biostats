@@ -71,7 +71,7 @@ print(df_h2)
 
 Wow, that's totally different.
 
-### Linking part to the whole
+### Linking Part to the Whole
 
 The exercise highlights an important takeaway: what we can determine from the above data is the average and variance of the sample, **which may not perfectly represent the characteristics of the entire garden.**
 
@@ -83,7 +83,7 @@ Provided that certain assumptions are met, the *sample mean* is the unbiased poi
 
 Let's explore this concept further through simple simulations. Suppose we have data on a thousand plant individuals, although this scenario may be unrealistic in practice. However, by conducting these simulations, we can examine how different sample means and variances can deviate from the true values.
 
-Download the data [here](C:/Users/Akira/OneDrive%20-%20UNCG/Documents/github/biostats/data_raw/data_plant_height.csv) containing height measurements of thousand individuals, and place this file under `data_raw/` in your project directory. You can load this `csv` file in R as follows:
+Download the data [here](https://github.com/aterui/biostats/blob/master/data_raw/data_plant_height.csv) containing height measurements of thousand individuals, and place this file under `data_raw/` in your project directory. You can load this `csv` file in R as follows:
 
 ```{r, eval=F}
 # load csv data on R
@@ -100,7 +100,7 @@ df_h0 <- read_csv(here::here("data_raw/data_plant_height.csv"))
 print(df_h0)
 ```
 
-Using this "virtual data" (I created this through a random value generator), we first calculate the true mean and variance (we "calculate" it because it it the entire population; the whole is known) as follows:
+Using this synthetic dataset (I generated through a random value generator), we can calculate the true mean and variance (reference values). It is important to note that in this case, we use the term "calculate" for the mean and variance because they represent the parameters of the entire population, which are known to us in this scenario.
 
 ```{r true-par}
 
@@ -188,15 +188,15 @@ g_var <- df_sample %>%
 g_mu / g_var
 ```
 
-While sample means are symmetrically distributed around the true mean, sample variances are skewed to the right -- it tends to be smaller than the true variance.
+While sample means are indeed symmetrically distributed around the true mean, sample variances tend to be biased and skewed to the right, often underestimating the true variance.
 
-The variance estimate is biased because we inferred the parameter from small number of samples -- fortunately, there is an unbiased estimator of variance as well. The unbiased estimator of variance is:
+The bias in estimating the variance arises due to inferring the parameter from a small number of samples. However, there is good news: an unbiased estimator of variance exists. The formula for the unbiased estimator of variance is as follows:
 
 $$
 \frac{\sum_i^N (x_i - \mu)^2}{N-1}
 $$
 
-Actually, this is the default formula in `var()` in R, a function used to estimate *unbiased* variance (and *unbiased* SD `sd()`). Comparison reveals how this works:
+The correction in the denominator ($N$ replaced with $N-1$) compensates for the bias, providing an estimate of the true variance without systematic underestimation (although this seems a simple correction, a [deep math](https://en.wikipedia.org/wiki/Bessel%27s_correction) underlies the derivation of $N-1$). This is the default formula in `var()` in R, a function used to estimate *unbiased* variance (and *unbiased* SD `sd()`). Comparison reveals how this works:
 
 ```{r var-ub}
 
@@ -252,4 +252,19 @@ g_var_ub <- df_sample %>%
 g_mu / g_var / g_var_ub
 ```
 
-In summary, samples can only provide information about a part of the whole population. The complete picture of the entire population is often unknown, and we rely on estimating key parameters from the available samples. This concept applies to a wide range of parametric analyses in statistics, where we use sample data to make inferences about the population parameters. Recognizing the limitations and uncertainties associated with working with samples is essential for proper statistical analysis and interpretation of results in various fields of study.
+In summary, samples can only provide information about a part of the whole population. The complete picture of the entire population is often unknown, and we rely on estimating key parameters from the available samples. This concept applies to a wide range of parametric analyses in statistics, where we use sample data to make inferences about the population parameters.
+
+Recognizing the limitations and uncertainties associated with working with samples is essential for proper statistical analysis and interpretation of results in various fields of study.
+
+## Laboratory
+
+1.  We used 10 plants to estimate sample means and variances. Obtain 100 sub-datasets with 50 and 100 measures each, and draw histograms of sample means and unbiased variances (use `var()`).
+
+2.  Sample means and unbiased variances are unbiased if samples are randomly selected. What happens if samples are non-random? Suppose the investigator was unable to find plants less than 10 cm in height -- the following code excludes those less than 10 cm in height:
+
+    ```{r}
+    df_h10 <- df_h0 %>% 
+      filter(height >= 10)
+    ```
+
+    Repeat step 1 with `df_h10` instead of `df_h` and compare the results.

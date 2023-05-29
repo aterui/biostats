@@ -764,7 +764,7 @@ Create another \texttt{tibble()} :
 Wow, that's totally different.
 
 \hypertarget{linking-part-to-the-whole}{%
-\subsection{Linking part to the whole}\label{linking-part-to-the-whole}}
+\subsection{Linking Part to the Whole}\label{linking-part-to-the-whole}}
 
 The exercise highlights an important takeaway: what we can determine from the above data is the average and variance of the sample, \textbf{which may not perfectly represent the characteristics of the entire garden.}
 
@@ -776,7 +776,7 @@ Provided that certain assumptions are met, the \emph{sample mean} is the unbiase
 
 Let's explore this concept further through simple simulations. Suppose we have data on a thousand plant individuals, although this scenario may be unrealistic in practice. However, by conducting these simulations, we can examine how different sample means and variances can deviate from the true values.
 
-Download the data \href{C:/Users/Akira/OneDrive\%20-\%20UNCG/Documents/github/biostats/data_raw/data_plant_height.csv}{here} containing height measurements of thousand individuals, and place this file under \texttt{data\_raw/} in your project directory. You can load this \texttt{csv} file in R as follows:
+Download the data \href{https://github.com/aterui/biostats/blob/master/data_raw/data_plant_height.csv}{here} containing height measurements of thousand individuals, and place this file under \texttt{data\_raw/} in your project directory. You can load this \texttt{csv} file in R as follows:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -979,15 +979,15 @@ In each element of \texttt{mu\_i} and \texttt{var\_i}, we have saved estimated m
 
 \begin{center}\includegraphics{_main_files/figure-latex/mu-var-dist-1} \end{center}
 
-While sample means are symmetrically distributed around the true mean, sample variances are skewed to the right -- it tends to be smaller than the true variance.
+While sample means are indeed symmetrically distributed around the true mean, sample variances tend to be biased and skewed to the right, often underestimating the true variance.
 
-The variance estimate is biased because we inferred the parameter from small number of samples -- fortunately, there is an unbiased estimator of variance as well. The unbiased estimator of variance is:
+The bias in estimating the variance arises due to inferring the parameter from a small number of samples. However, there is good news: an unbiased estimator of variance exists. The formula for the unbiased estimator of variance is as follows:
 
 \[
 \frac{\sum_i^N (x_i - \mu)^2}{N-1}
 \]
 
-Actually, this is the default formula in \texttt{var()} in R, a function used to estimate \emph{unbiased} variance (and \emph{unbiased} SD \texttt{sd()}). Comparison reveals how this works:
+The correction in the denominator (\(N\) replaced with \(N-1\)) compensates for the bias, providing an estimate of the true variance without systematic underestimation (although this seems a simple correction, a \href{https://en.wikipedia.org/wiki/Bessel\%27s_correction}{deep math} underlies the derivation of \(N-1\)). This is the default formula in \texttt{var()} in R, a function used to estimate \emph{unbiased} variance (and \emph{unbiased} SD \texttt{sd()}). Comparison reveals how this works:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1046,7 +1046,29 @@ Actually, this is the default formula in \texttt{var()} in R, a function used to
 
 \begin{center}\includegraphics{_main_files/figure-latex/var-ub-1} \end{center}
 
-In summary, samples can only provide information about a part of the whole population. The complete picture of the entire population is often unknown, and we rely on estimating key parameters from the available samples. This concept applies to a wide range of parametric analyses in statistics, where we use sample data to make inferences about the population parameters. Recognizing the limitations and uncertainties associated with working with samples is essential for proper statistical analysis and interpretation of results in various fields of study.
+In summary, samples can only provide information about a part of the whole population. The complete picture of the entire population is often unknown, and we rely on estimating key parameters from the available samples. This concept applies to a wide range of parametric analyses in statistics, where we use sample data to make inferences about the population parameters.
+
+Recognizing the limitations and uncertainties associated with working with samples is essential for proper statistical analysis and interpretation of results in various fields of study.
+
+\hypertarget{laboratory-1}{%
+\section{Laboratory}\label{laboratory-1}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  We used 10 plants to estimate sample means and variances. Obtain 100 sub-datasets with 50 and 100 measures each, and draw histograms of sample means and unbiased variances (use \texttt{var()}).
+\item
+  Sample means and unbiased variances are unbiased if samples are randomly selected. What happens if samples are non-random? Suppose the investigator was unable to find plants less than 10 cm in height -- the following code excludes those less than 10 cm in height:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_h10 }\OtherTok{\textless{}{-}}\NormalTok{ df\_h0 }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{filter}\NormalTok{(height }\SpecialCharTok{\textgreater{}=} \DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+  Repeat step 1 with \texttt{df\_h10} instead of \texttt{df\_h} and compare the results.
+\end{enumerate}
 
 \hypertarget{appendix-project-management}{%
 \chapter{Appendix: Project Management}\label{appendix-project-management}}

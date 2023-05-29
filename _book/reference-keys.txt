@@ -16,6 +16,7 @@ sampling-concept
 the-unknown
 garden-plant-height
 linking-part-to-the-whole
+laboratory-1
 appendix-project-management
 r-project
 script-editor

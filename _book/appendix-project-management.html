@@ -165,8 +165,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1" data-path="sampling-concept.html"><a href="sampling-concept.html#the-unknown"><i class="fa fa-check"></i><b>2.1</b> The Unknown</a>
 <ul>
 <li class="chapter" data-level="2.1.1" data-path="sampling-concept.html"><a href="sampling-concept.html#garden-plant-height"><i class="fa fa-check"></i><b>2.1.1</b> Garden Plant Height</a></li>
-<li class="chapter" data-level="2.1.2" data-path="sampling-concept.html"><a href="sampling-concept.html#linking-part-to-the-whole"><i class="fa fa-check"></i><b>2.1.2</b> Linking part to the whole</a></li>
+<li class="chapter" data-level="2.1.2" data-path="sampling-concept.html"><a href="sampling-concept.html#linking-part-to-the-whole"><i class="fa fa-check"></i><b>2.1.2</b> Linking Part to the Whole</a></li>
 </ul></li>
+<li class="chapter" data-level="2.2" data-path="sampling-concept.html"><a href="sampling-concept.html#laboratory-1"><i class="fa fa-check"></i><b>2.2</b> Laboratory</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="appendix-project-management.html"><a href="appendix-project-management.html"><i class="fa fa-check"></i><b>3</b> Appendix: Project Management</a>
 <ul>
@@ -208,7 +209,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>RStudio</li>
 </ul>
 <p>Once you launch <em>RStudio</em>, you will be greeted by the interface shown in Figure <a href="appendix-project-management.html#fig:ui">3.1</a>. The interface consists of three primary panels upon first opening it: the <code>Console</code>, <code>Environment</code>, and <code>Files</code>. The <code>Console</code> is where you write your code and execute calculations, data manipulation, and analysis. The <code>Environment</code> panel lists the objects you have saved, and the <code>Files</code> panel displays any files in a designated location on your computer.</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="appendix-project-management.html#cb75-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;image/r_image01.png&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="appendix-project-management.html#cb76-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;image/r_image01.png&quot;</span>))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:ui"></span>
 <img src="image/r_image01.png" alt="RStudio interface." width="341" />
 <p class="caption">
@@ -216,15 +217,15 @@ Figure 3.1: RStudio interface.
 </p>
 </div>
 <p>After pasting the script into the console, you should see the variable <code>x</code> appear in the environment panel.</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="appendix-project-management.html#cb76-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="appendix-project-management.html#cb77-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)</span></code></pre></div>
 <p><code>x</code> is an <strong>object</strong> where information is stored. In this case, we have stored a sequence of <code>1</code> and <code>2</code> in the object <code>x</code>. Once you have stored information in <code>x</code>, you can access it by simply typing <code>x</code>.</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="appendix-project-management.html#cb77-1" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="appendix-project-management.html#cb78-1" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## [1] 1 2</code></pre>
 <p>Great! You can indeed work on your data in this manner, but it is important to note that <strong>it is generally considered a poor practice</strong>. As you progress through your project, you will generate a significant amount of materials, such as writing over 2000 lines of code for a single project. Therefore, it becomes crucial to implement effective code management strategies. How do you currently manage your code?</p>
 <div id="script-editor" class="section level3 hasAnchor" number="3.1.1">
 <h3><span class="header-section-number">3.1.1</span> Script Editor<a href="appendix-project-management.html#script-editor" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>It is highly recommended to manage your scripts in the <code>Editor</code> instead. The <code>Editor</code> is where you draft and fine-tune your code before executing it in the <code>Console</code>. To create space for the <code>Editor</code>, press <code>Ctrl + Shift + N</code>. A new panel will appear in the top left corner. Let’s type the following script in the <code>Editor</code>. Please note that the key combination <code>Ctrl + Shift + N</code> assumes a Windows or Linux operating system. If you’re using a Mac, you can use <code>Command + Shift + N</code> instead.</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="appendix-project-management.html#cb79-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="appendix-project-management.html#cb80-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>)</span></code></pre></div>
 <p>Then, hit <code>Ctr + S</code> to save the <code>Editor</code> file. <em>RStudio</em> will prompt you to enter the file name of the <code>Editor</code><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
 </div>
 <div id="file-name" class="section level3 hasAnchor" number="3.1.2">

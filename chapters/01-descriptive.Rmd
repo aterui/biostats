@@ -1,0 +1,271 @@
+# Descriptive Statistics
+
+Descriptive statistics are a set of summary measures that provide a concise overview of a dataset. They help us understand the characteristics and properties of the data without delving into complex statistical analyses. Some commonly used descriptive statistics include the mean, standard deviation, and median.
+
+To illustrate the concept, let's consider fish length measurement $x$. Each fish is identified by a subscript, and their lengths are denoted as follows:
+
+$$
+x_1 = 15.9\\
+x_2 = 15.1\\
+x_3 = 21.9\\
+x_4 = 13.3\\
+x_5 = 24.4\\
+$$Often times, we use subscript $i$ (or any character you like) instead of actual number to indicate a given data point. For example, we write fish length $x_i$ for individual $i$. Alternatively, instead of writing each individual data point, we can represent them as a vector using boldface, denoted as $\pmb{x}$. In this case, the vector $\pmb{x}$ can be expressed as:
+
+$$
+\pmb{x} = \{15.9, 15.1, 21.9, 13.3, 24.4\}
+$$
+
+Now let's see how we represent summary statistics of vector $\pmb{x}$.
+
+## Central Tendency
+
+### Measures of Central Tendency
+
+Central tendency measures (Table \@ref(tab:central)) provide insights into the typical or central value of a dataset. There are three commonly used measures:
+
+-   **Arithmetic Mean**. This is the most commonly used measure of central tendency. It represents the *additive* average of the data. To calculate the arithmetic mean, you sum up all the values and divide the total by the number of data points. It can be heavily influenced by extreme values, known as outliers.
+
+-   **Geometric Mean**. The geometric mean is a *multiplicative* average. It is always smaller than the arithmetic mean and less sensitive to unusually large values. However, it is not applicable when the data contain negative values.
+
+-   **Median**. The median is the value that separates the higher half from the lower half of the dataset. It represents the 50th percentile data point. The median is less affected by outliers compared to the arithmetic mean. To calculate the median, you arrange the data in ascending order and select the middle value if the dataset has an odd number of values. If the dataset has an even number of values, you take the average of the two middle values.
+
+| Measure                   | Equation                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+|------------------------------------------------------------|------------------------------------------------------------|
+| Arithmetic mean $\mu$     | $$                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                                                                                                                                                               \frac{\sum_i^N x_i}{N}                                                                                                                                 
+                                                                                                                                                                                                                                                                                                                                                                                                                               $$                                                                                                                                                     |
+| Geometric mean $\mu_{ge}$ | $$                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                                                                                                                                                               (\prod_i^N x_i)^{\frac{1}{N}}                                                                                                                          
+                                                                                                                                                                                                                                                                                                                                                                                                                               $$                                                                                                                                                     |
+| Median $\mu_{med}$        | $$                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                                                                                                                                                               \begin{aligned}                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                                                                               &x_{(\frac{N + 1}{2}^\text{th})} &&\text{if N is odd number}\\                                                                                         
+                                                                                                                                                                                                                                                                                                                                                                                                                               &\frac{1}{2}[x_{(\frac{N}{2}^\text{th})} + x_{(\frac{N}{2} + 1^\text{th})}] &&\text{if N is even number}                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                               \end{aligned}$$                                                                                                                                        |
+
+: (#tab:central) Common measures of central tendency. $N$ refers to the number of data points.
+
+### R Exercise
+
+To learn more about these measures, let's create vectors $\pmb{x} = \{15.9, 15.1, 21.9, 13.3, 24.4\}$ and $\pmb{y} = \{15.9, 15.1, 21.9, 53.3, 24.4\}$ -- $\pmb{y}$ is identical to $\pmb{x}$ but contains one outlier value. How does this make difference? To construct vectors in R, we use `c()`, a function that stands for "construct." Below is the script:
+
+```{r construct}
+
+# construct vectors x and y
+x <- c(15.9, 15.1, 21.9, 13.3, 24.4)
+y <- c(15.9, 15.1, 21.9, 53.3, 24.4)
+```
+
+Confirm you constructed them correctly:
+
+```{r construct-confirm}
+x
+y
+```
+
+Cool! Now we can calculate summary statistics of `x` and `y`.
+
+**Arithmetic mean**
+
+While R has a function for arithmetic `mean()`, let's try to calculate the value from scratch:
+
+```{r arithmetic-mean}
+
+# for vector x
+n_x <- length(x) # the number of elements in x = the number of data points
+sum_x <- sum(x) # summation for x
+mu_x <- sum_x / n_x # arithmetic mean
+print(mu_x) # print calculated value
+
+# for vector y; we can calculate directly too
+mu_y <- sum(y) / length(y)
+print(mu_y) # print calculated value
+```
+
+Compare with outputs from `mean()` :
+
+```{r mean-buildin}
+
+print(mean(x))
+print(mean(y))
+```
+
+**Geometric Mean**
+
+Unfortunately, there is no build-in function for geometric mean $\mu_{ge}$ in R (as far as I know; there are packages though). But, we can calculate the value from scratch again:
+
+```{r geometric-mean}
+
+# for vector x
+prod_x <- prod(x) # product of vector x; x1 * x2 * x3...
+n_x <- length(x)
+mug_x <- prod_x^(1 / n_x) # ^ means power
+print(mug_x)
+
+# for vector y
+mug_y <- prod(y)^(1 / length(y))
+print(mug_y)
+```
+
+**Median**
+
+Lastly, let's do the same for median:
+
+```{r median}
+
+# for vector x
+x <- sort(x) # sort x from small to large
+index <- (length(x) + 1) / 2 # (N + 1)/2 th index as length(x) is an odd number
+med_x <- x[index]
+print(med_x)
+
+# for vector y
+y <- sort(y) # sort y from small to large
+med_y <- y[(length(y) + 1) / 2]
+print(med_y)
+```
+
+Compare with outputs from `median()`
+
+```{r median-builtin}
+print(median(x))
+print(median(y))
+```
+
+## Variation
+
+### Measures of Variation
+
+Variation measures (Table \@ref(tab:variation)) provide information about the spread of data points.
+
+-   **Variance.** Variance is a statistical measure that quantifies the spread or dispersion of a dataset. It provides a numerical value that indicates how far individual data points in a dataset deviate from the mean or average value. In other words, variance measures the average squared difference between each data point and the mean. **Standard deviation (SD) is the square root of variance**.
+
+-   **Inter-Quantile Range.** The interquartile range (IQR) is a statistical measure that provides information about the spread or dispersion of a dataset, specifically focusing on the middle 50% of the data. It is a robust measure of variability that is less affected by outliers compared to variance.
+
+-   **Median Absolute Deviation.** Median Absolute Deviation (MAD) is similar to variance, but provides a robust estimation of variability that is less affected by outliers compared to variance. MAD is defined as the median of the absolute deviations from the data's median.
+
+-   **Coefficient of Variation.** The coefficient of variation (CV) is a statistical measure that expresses the relative variability of a dataset in relation to its mean. It is particularly useful when comparing the variability of different datasets that have different scales or units of measurement.
+
+-   **MAD/Median.** MAD/Median is a statistical measure used to assess the relative variability of a dataset without assuming any specific distribution or parametric model. CV is sensitive to outliers because of its reliance on the arithmetic mean. However, MAD/Median is robust to this issue.
+
+| Measure                                                                                        | Equation                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|
+| Variance $\sigma^2$ (standard deviation $\sigma$)                                              | $$                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            \frac{\sum_i^N (x_i - \mu)^2}{N}                                 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            $$                                                               |
+| Inter-Quantile Range IQR ($x_l$ and $x_h$ are $l^{th}$ and $h^{th}$ percentiles, respectively) | $$                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |x_{l} - x_{h}|                                                  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            $$                                                               |
+| Median Absolute Deviation (MAD)                                                                | $$                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            \text{Median}(|x_i-\mu_{med}|)                                   
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            $$                                                               |
+| Coefficient of Variation (CV)                                                                  | $$                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            \frac{\sigma}{\mu}                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            $$                                                               |
+| MAD/Median                                                                                     | $$                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            \frac{\text{MAD}}{\mu_{med}}                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            $$                                                               |
+
+: (#tab:variation) Common measures of variation. $N$ refers to the number of data points.
+
+### R Exercise
+
+**Variance, SD, and CV**
+
+Let's try variance, SD, and CV:
+
+```{r variance}
+# for x
+sqd_x <- (x - mean(x))^2 # sqared deviance
+sum_sqd_x <- sum(sqd_x)
+
+var_x <- sum_sqd_x / length(x)
+sd_x <- sqrt(var_x) # sqrt(): square root
+cv_x <- sd_x / mean(x)
+
+print(var_x)
+print(sd_x)
+print(cv_x)
+
+# for y
+var_y <- sum((y - mean(y))^2) / length(y)
+sd_y <- sqrt(var_y)
+cv_y <- sd_y / mean(y)
+
+print(var_y)
+print(sd_y)
+print(cv_y)
+```
+
+**IQR, MAD, and MAD/Median**
+
+Let's try IQR, MAD, and MAD/Median. IQR can be defined for given percentiles. Here, let me use 25 and 75 percentiles as $x_l$ and $x_h$.
+
+```{r iqr}
+
+# for x
+## IQR
+x_l <- quantile(x, 0.25) # quantile(): return quantile values, 25 percentile
+x_h <- quantile(x, 0.75) # quantile(): return quantile values, 75 percentile
+iqr_x <- abs(x_l - x_h) # abs(): absolute value
+
+## MAD
+ad_x <- abs(x - mean(x))
+mad_x <- median(ad_x)
+
+## MAD/median
+mad_m_x <- mad_x / median(x)
+
+print(iqr_x)
+print(mad_x)
+print(mad_m_x)
+
+# for y
+## IQR
+y_q <- quantile(y, c(0.25, 0.75)) # return as a vector
+iqr_y <- abs(y_q[1] - y_q[2]) # y_q[1] = 25 percentile; y_q[2] = 75 percentile
+
+## MAD
+mad_y <- median(abs(y - mean(y)))
+
+## MAD/median
+mad_m_y <- mad_y / median(y)
+
+print(iqr_y)
+print(mad_y)
+print(mad_m_y)
+```
+
+## Laboratory
+
+### Comparing Central Tendency Measures
+
+What are the differences of the three measures of central tendency? To investigate this further, let's perform the following exercise.
+
+1.  Create a new vector `z` with length $1000$ as `exp(rnorm(n = 1000, mean = 0, sd = 0.1))`, and calculate the arithmetic mean, geometric mean, and median.
+
+2.  Draw a histogram of `z` using functions `tibble()`, `ggplot()`, and `geom_histogram()`.
+
+3.  Draw vertical lines of arithmetic mean, geometric mean, and median on the histogram with different colors using a function `geom_vline()` .
+
+4.  Compare the values of the central tendency measures.
+
+5.  Create a new vector `z_rev` as `-z + max(z) + 0.1`, and repeat step 1 -- 4.
+
+### Comparing Variation Measures
+
+Why do we have absolute (variance, SD, MAD, IQR) and relative measures (CV, MAD/Median) of variation? To understand this, suppose we have 100 measurements of fish weight in unit "gram." (`w` in the following script)
+
+```{r gram}
+w <- rnorm(100, mean = 10, sd = 1)
+head(w) # show first 10 elements in w
+```
+
+Using this data, perform the following exercise:
+
+1.  Convert the unit of `w` to "milligram" and create a new vector `m`.
+
+2.  Calculate SD and MAD for `w` and `m`.
+
+3.  Calculate CV and MAD/Median for `w` and `m`.

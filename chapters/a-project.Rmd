@@ -2,35 +2,35 @@
 
 ## R Project
 
-For this entire book, I will use `R Project` as a fundamental unit of work-space, in which all the relevant materials (e.g., R scripts `.R` and data files) are assembled together. There are many ways to organize your project, but I usually make a single `R Project` for a collection of scripts and data that will lead to a single publication (see example [here](https://github.com/aterui/public-proj_stream-diversity)). To setup an `R Project` you will need *RStudio* in addition to base *R*. While *R* is a stand-alone software, I strongly recommend to use it with *RStudio*. *RStudio* has many functions that help your data analysis. *R* and *RStudio* can be installed from the following websites:
+For the entirety of this book, I will utilize the 'R Project' as the fundamental unit of workspace, where all relevant materials such as R scripts (`.R`) and data files are gathered together. There are multiple ways to organize your project, but my preferred approach is to create a single 'R Project' for a collection of scripts and data that will contribute to a single publication (see example [here](https://github.com/aterui/public-proj_stream-diversity)). To set up an 'R Project,' you will need to have both *RStudio* and the base *R* software installed. Although *R* can be used as a standalone software, I highly recommend using it in conjunction with *RStudio* due to the latter's many features that facilitate data analysis. You can download *R* and *RStudio* from the following websites:
 
--   [R](https://www.r-project.org/) (you can choose any CRAN mirror to download)
+-   [R](https://www.r-project.org/) (you can select any CRAN mirror for downloading)
 -   RStudio
 
-Once you open *RStudio*, you will see the following interface (Figure \@ref(fig:ui)). There are three major panels in its first appearance -- `Console`, `Environment`, and `Files`. `Console` is the place where you write your codes and execute calculation/data manipulation/analysis. `Environment` lists items you saved as an object. `Files` list any files in a designated location in your computer.
+Once you launch *RStudio*, you will be greeted by the interface shown in Figure \@ref(fig:ui). The interface consists of three primary panels upon first opening it: the `Console`, `Environment`, and `Files`. The `Console` is where you write your code and execute calculations, data manipulation, and analysis. The `Environment` panel lists the objects you have saved, and the `Files` panel displays any files in a designated location on your computer.
 
 ```{r ui, fig.cap = "RStudio interface."}
 knitr::include_graphics(here::here("image/r_image01.png"))
 ```
 
-Let's type something in console to see what happens. Copy and paste the following script to `Console`. You should see `x` in the environment.
+After pasting the script into the console, you should see the variable `x` appear in the environment panel.
 
 ```{r, echo = TRUE}
 
 x <- c(1, 2)
 ```
 
-`x` is an **object** where information is saved - in this case, we stored a sequence of `1` and `2` in object `x`. Once you store the information into `x`, you can call it just typing `x`.
+`x` is an **object** where information is stored. In this case, we have stored a sequence of `1` and `2` in the object `x`. Once you have stored information in `x`, you can access it by simply typing `x`.
 
 ```{r, echo = TRUE}
 x
 ```
 
-Sweet! You can work on your data like this, however, **it is actually a BAD idea**. As you work on your project, numerous materials will be generated (e.g., I would write \> 2000 lines of codes for one project). How do you manage your codes?
+Great! You can indeed work on your data in this manner, but it is important to note that **it is generally considered a poor practice**. As you progress through your project, you will generate a significant amount of materials, such as writing over 2000 lines of code for a single project. Therefore, it becomes crucial to implement effective code management strategies. How do you currently manage your code?
 
 ### Script Editor
 
-It is highly recommended to mange your script in `Editor` instead. `Editor` is where you draft and tweak your codes before executing them in `Console`. To create space for `Editor`, hit `Ctr + Shift + N`. A new panel pops up on the top left. Let's type the following script in `Editor`.
+It is highly recommended to manage your scripts in the `Editor` instead. The `Editor` is where you draft and fine-tune your code before executing it in the `Console`. To create space for the `Editor`, press `Ctrl + Shift + N`. A new panel will appear in the top left corner. Let's type the following script in the `Editor`. Please note that the key combination `Ctrl + Shift + N` assumes a Windows or Linux operating system. If you're using a Mac, you can use `Command + Shift + N` instead.
 
 ```{r, echo = TRUE}
 y <- c(3, 4)
@@ -42,7 +42,7 @@ Then, hit `Ctr + S` to save the `Editor` file. *RStudio* will prompt you to ente
 
 ### File Name
 
-It is also critical to have **consistent naming rules** for your files. As you make progress on your project, the number of files in each sub-directory will increase, perhaps exponentially. You will find it difficult navigating yourself unless you have clear naming rules for files (and even worse for others). Here are some recommendations:
+It is also crucial to establish consistent naming **rules** for your files. As your project progresses, the number of files within each sub-directory may increase significantly. Without clear and consistent naming rules for your files, navigating through the project can become challenging, not only for yourself but also for others involved. To alleviate this issue, consider implementing the following recommendations for file naming:
 
 -   **NO SPACE.** Use underscore.
     -   Do: `script_week1.R`
@@ -56,17 +56,15 @@ It is also critical to have **consistent naming rules** for your files. As you m
 
 ### Structure Your Project
 
-If you do not save or randomly locate your codes within your computer, you will lose necessary items sooner or later. For this reason, I assemble all the relevant materials in a single `R Project`. You can create a new `R Project` with the following procedure.
+If you fail to save or haphazardly store your code files on your computer, the risk of losing essential items becomes inevitable sooner or later. To mitigate this risk, I highly recommend gathering all the relevant materials within a single `R Project`. To create a new `R Project`, follow the procedure outlined below:
 
 a.  Go to `File > New Project` on the top menu
 b.  Select `New Directory`
 c.  Select `New Project`
 
-A new window pops up and prompts you to name a directory with a location in your computer. Click `Browse` to select a location for the directory[^a-project-2].
+A new window will appear, prompting you to name a directory and select a location on your computer. To choose a location for the directory, click on the 'Browse' button. When organizing your project directories on your computer, I highly recommend creating a dedicated space. For instance, on my computer, I have a folder named `/github` where I store all my `R Project` directories.
 
-[^a-project-2]: When you locate your project directories in your computer, I would strongly recommend to create a designated space. For example, in my computer, I have a folder named /`r_project` in which all `R Project` directories are located.
-
-The internal structure of an `R Project` is extremely important to navigate yourself (others once it's published). `R Project` will be composed of multiple types of files, typically `.R`, `.csv`, `.rds`, `.Rmd` among others. Unless those files are arranged in an organized manner, it is VERY LIKELY to make severe errors in coding. So I take this seriously. Table \@ref(tab:str) is my suggested subdirectory structure.
+The internal structure of an `R Project` is crucial for effective navigation and ensures clarity for both yourself and others when it is published. An `R Project` typically consists of various file types, such as `.R`, `.csv`, `.rds`, `.Rmd`, and others. Without an organized arrangement of these files, there is a high probability of encountering significant coding errors. Therefore, I place great importance on maintaining a well-structured project. In Table \@ref(tab:str), I present my recommended subdirectory structure.
 
 | Name        | Content                                                                                                                                                                       |
 |-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -81,6 +79,4 @@ The internal structure of an `R Project` is extremely important to navigate your
 
 ## Robust coding
 
-While this is not mandatory, I strongly recommend to use *RStudio* with *Git* & *GitHub* (see Chapter \@ref(appendix) Appendix for guidance). Coding is innately error-prone[^a-project-3]; every programmers, even bright ones, make mistakes - no exception. However, the critical difference between beginner and advanced programmers is whether they develop robust coding rules with a self-error-detection system. *Git* is the key to this. I will touch on this occasionally throughout this book.
-
-[^a-project-3]: well WAY BETTER than manual data manipulation!
+While it is not mandatory, I highly recommend using *RStudio* in conjunction with *Git* and *GitHub*. Coding is inherently prone to errors, and even the most skilled programmers make mistakes---without exception. However, the crucial difference between beginner and advanced programmers lies in their ability to develop robust coding practices accompanied by a self-error-detection system. *Git* plays a vital role in this process. Throughout this book, I will occasionally delve into the importance of *Git* and its usage.

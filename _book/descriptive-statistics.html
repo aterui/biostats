@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 1 Descriptive Statistics | BIOSTATS</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 1 Descriptive Statistics | BIOSTATS" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 1 Descriptive Statistics | BIOSTATS" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Akira Terui" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="sampling-concept.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">BIOSTATS</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html"><i class="fa fa-check"></i><b>1</b> Descriptive Statistics</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#central-tendency"><i class="fa fa-check"></i><b>1.1</b> Central Tendency</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#measures-of-central-tendency"><i class="fa fa-check"></i><b>1.1.1</b> Measures of Central Tendency</a></li>
+<li class="chapter" data-level="1.1.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#r-exercise"><i class="fa fa-check"></i><b>1.1.2</b> R Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#variation"><i class="fa fa-check"></i><b>1.2</b> Variation</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#measures-of-variation"><i class="fa fa-check"></i><b>1.2.1</b> Measures of Variation</a></li>
+<li class="chapter" data-level="1.2.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#r-exercise-1"><i class="fa fa-check"></i><b>1.2.2</b> R Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#laboratory"><i class="fa fa-check"></i><b>1.3</b> Laboratory</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#comparing-central-tendency-measures"><i class="fa fa-check"></i><b>1.3.1</b> Comparing Central Tendency Measures</a></li>
+<li class="chapter" data-level="1.3.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#comparing-variation-measures"><i class="fa fa-check"></i><b>1.3.2</b> Comparing Variation Measures</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="sampling-concept.html"><a href="sampling-concept.html"><i class="fa fa-check"></i><b>2</b> Sampling Concept</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="sampling-concept.html"><a href="sampling-concept.html#the-unknown"><i class="fa fa-check"></i><b>2.1</b> The Unknown</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="sampling-concept.html"><a href="sampling-concept.html#garden-plant-height"><i class="fa fa-check"></i><b>2.1.1</b> Garden Plant Height</a></li>
+<li class="chapter" data-level="2.1.2" data-path="sampling-concept.html"><a href="sampling-concept.html#linking-part-to-the-whole"><i class="fa fa-check"></i><b>2.1.2</b> Linking part to the whole</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="appendix-project-management.html"><a href="appendix-project-management.html"><i class="fa fa-check"></i><b>3</b> Appendix: Project Management</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="appendix-project-management.html"><a href="appendix-project-management.html#r-project"><i class="fa fa-check"></i><b>3.1</b> R Project</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="appendix-project-management.html"><a href="appendix-project-management.html#script-editor"><i class="fa fa-check"></i><b>3.1.1</b> Script Editor</a></li>
+<li class="chapter" data-level="3.1.2" data-path="appendix-project-management.html"><a href="appendix-project-management.html#file-name"><i class="fa fa-check"></i><b>3.1.2</b> File Name</a></li>
+<li class="chapter" data-level="3.1.3" data-path="appendix-project-management.html"><a href="appendix-project-management.html#structure-your-project"><i class="fa fa-check"></i><b>3.1.3</b> Structure Your Project</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="appendix-project-management.html"><a href="appendix-project-management.html#robust-coding"><i class="fa fa-check"></i><b>3.2</b> Robust coding</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">BIOSTATS</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="descriptive-statistics" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Descriptive Statistics<a href="descriptive-statistics.html#descriptive-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Descriptive statistics are a set of summary measures that provide a concise overview of a dataset. They help us understand the characteristics and properties of the data without delving into complex statistical analyses. Some commonly used descriptive statistics include the mean, standard deviation, and median.</p>
+<p>To illustrate the concept, let’s consider fish length measurement <span class="math inline">\(x\)</span>. Each fish is identified by a subscript, and their lengths are denoted as follows:</p>
+<p><span class="math display">\[
+x_1 = 15.9\\
+x_2 = 15.1\\
+x_3 = 21.9\\
+x_4 = 13.3\\
+x_5 = 24.4\\
+\]</span>Often times, we use subscript <span class="math inline">\(i\)</span> (or any character you like) instead of actual number to indicate a given data point. For example, we write fish length <span class="math inline">\(x_i\)</span> for individual <span class="math inline">\(i\)</span>. Alternatively, instead of writing each individual data point, we can represent them as a vector using boldface, denoted as <span class="math inline">\(\pmb{x}\)</span>. In this case, the vector <span class="math inline">\(\pmb{x}\)</span> can be expressed as:</p>
+<p><span class="math display">\[
+\pmb{x} = \{15.9, 15.1, 21.9, 13.3, 24.4\}
+\]</span></p>
+<p>Now let’s see how we represent summary statistics of vector <span class="math inline">\(\pmb{x}\)</span>.</p>
+<div id="central-tendency" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Central Tendency<a href="descriptive-statistics.html#central-tendency" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="measures-of-central-tendency" class="section level3 hasAnchor" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> Measures of Central Tendency<a href="descriptive-statistics.html#measures-of-central-tendency" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Central tendency measures (Table <a href="descriptive-statistics.html#tab:central">1.1</a>) provide insights into the typical or central value of a dataset. There are three commonly used measures:</p>
+<ul>
+<li><p><strong>Arithmetic Mean</strong>. This is the most commonly used measure of central tendency. It represents the <em>additive</em> average of the data. To calculate the arithmetic mean, you sum up all the values and divide the total by the number of data points. It can be heavily influenced by extreme values, known as outliers.</p></li>
+<li><p><strong>Geometric Mean</strong>. The geometric mean is a <em>multiplicative</em> average. It is always smaller than the arithmetic mean and less sensitive to unusually large values. However, it is not applicable when the data contain negative values.</p></li>
+<li><p><strong>Median</strong>. The median is the value that separates the higher half from the lower half of the dataset. It represents the 50th percentile data point. The median is less affected by outliers compared to the arithmetic mean. To calculate the median, you arrange the data in ascending order and select the middle value if the dataset has an odd number of values. If the dataset has an even number of values, you take the average of the two middle values.</p></li>
+</ul>
+<table>
+<caption><span id="tab:central">Table 1.1: </span> Common measures of central tendency. <span class="math inline">\(N\)</span> refers to the number of data points.</caption>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Measure</th>
+<th>Equation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Arithmetic mean <span class="math inline">\(\mu\)</span></td>
+<td><span class="math display">\[                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                                                                                                                                                               \frac{\sum_i^N x_i}{N}                                                                                                                                 
+                                                                                                                                                                                                                                                                                                                                                                                                                               \]</span></td>
+</tr>
+<tr class="even">
+<td>Geometric mean <span class="math inline">\(\mu_{ge}\)</span></td>
+<td><span class="math display">\[                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                                                                                                                                                               (\prod_i^N x_i)^{\frac{1}{N}}                                                                                                                          
+                                                                                                                                                                                                                                                                                                                                                                                                                               \]</span></td>
+</tr>
+<tr class="odd">
+<td>Median <span class="math inline">\(\mu_{med}\)</span></td>
+<td><span class="math display">\[                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                                                                                                                                                               \begin{aligned}                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                                                                               &amp;x_{(\frac{N + 1}{2}^\text{th})} &amp;&amp;\text{if N is odd number}\\                                                                                         
+                                                                                                                                                                                                                                                                                                                                                                                                                               &amp;\frac{1}{2}[x_{(\frac{N}{2}^\text{th})} + x_{(\frac{N}{2} + 1^\text{th})}] &amp;&amp;\text{if N is even number}                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                               \end{aligned}\]</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="r-exercise" class="section level3 hasAnchor" number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> R Exercise<a href="descriptive-statistics.html#r-exercise" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To learn more about these measures, let’s create vectors <span class="math inline">\(\pmb{x} = \{15.9, 15.1, 21.9, 13.3, 24.4\}\)</span> and <span class="math inline">\(\pmb{y} = \{15.9, 15.1, 21.9, 53.3, 24.4\}\)</span> – <span class="math inline">\(\pmb{y}\)</span> is identical to <span class="math inline">\(\pmb{x}\)</span> but contains one outlier value. How does this make difference? To construct vectors in R, we use <code>c()</code>, a function that stands for “construct.” Below is the script:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="descriptive-statistics.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># construct vectors x and y</span></span>
+<span id="cb1-2"><a href="descriptive-statistics.html#cb1-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">15.9</span>, <span class="fl">15.1</span>, <span class="fl">21.9</span>, <span class="fl">13.3</span>, <span class="fl">24.4</span>)</span>
+<span id="cb1-3"><a href="descriptive-statistics.html#cb1-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">15.9</span>, <span class="fl">15.1</span>, <span class="fl">21.9</span>, <span class="fl">53.3</span>, <span class="fl">24.4</span>)</span></code></pre></div>
+<p>Confirm you constructed them correctly:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="descriptive-statistics.html#cb2-1" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>## [1] 15.9 15.1 21.9 13.3 24.4</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="descriptive-statistics.html#cb4-1" aria-hidden="true" tabindex="-1"></a>y</span></code></pre></div>
+<pre><code>## [1] 15.9 15.1 21.9 53.3 24.4</code></pre>
+<p>Cool! Now we can calculate summary statistics of <code>x</code> and <code>y</code>.</p>
+<p><strong>Arithmetic mean</strong></p>
+<p>While R has a function for arithmetic <code>mean()</code>, let’s try to calculate the value from scratch:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="descriptive-statistics.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># for vector x</span></span>
+<span id="cb6-2"><a href="descriptive-statistics.html#cb6-2" aria-hidden="true" tabindex="-1"></a>n_x <span class="ot">&lt;-</span> <span class="fu">length</span>(x) <span class="co"># the number of elements in x = the number of data points</span></span>
+<span id="cb6-3"><a href="descriptive-statistics.html#cb6-3" aria-hidden="true" tabindex="-1"></a>sum_x <span class="ot">&lt;-</span> <span class="fu">sum</span>(x) <span class="co"># summation for x</span></span>
+<span id="cb6-4"><a href="descriptive-statistics.html#cb6-4" aria-hidden="true" tabindex="-1"></a>mu_x <span class="ot">&lt;-</span> sum_x <span class="sc">/</span> n_x <span class="co"># arithmetic mean</span></span>
+<span id="cb6-5"><a href="descriptive-statistics.html#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mu_x) <span class="co"># print calculated value</span></span></code></pre></div>
+<pre><code>## [1] 18.12</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="descriptive-statistics.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># for vector y; we can calculate directly too</span></span>
+<span id="cb8-2"><a href="descriptive-statistics.html#cb8-2" aria-hidden="true" tabindex="-1"></a>mu_y <span class="ot">&lt;-</span> <span class="fu">sum</span>(y) <span class="sc">/</span> <span class="fu">length</span>(y)</span>
+<span id="cb8-3"><a href="descriptive-statistics.html#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mu_y) <span class="co"># print calculated value</span></span></code></pre></div>
+<pre><code>## [1] 26.12</code></pre>
+<p>Compare with outputs from <code>mean()</code> :</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="descriptive-statistics.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">mean</span>(x))</span></code></pre></div>
+<pre><code>## [1] 18.12</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="descriptive-statistics.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">mean</span>(y))</span></code></pre></div>
+<pre><code>## [1] 26.12</code></pre>
+<p><strong>Geometric Mean</strong></p>
+<p>Unfortunately, there is no build-in function for geometric mean <span class="math inline">\(\mu_{ge}\)</span> in R (as far as I know; there are packages though). But, we can calculate the value from scratch again:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="descriptive-statistics.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># for vector x</span></span>
+<span id="cb14-2"><a href="descriptive-statistics.html#cb14-2" aria-hidden="true" tabindex="-1"></a>prod_x <span class="ot">&lt;-</span> <span class="fu">prod</span>(x) <span class="co"># product of vector x; x1 * x2 * x3...</span></span>
+<span id="cb14-3"><a href="descriptive-statistics.html#cb14-3" aria-hidden="true" tabindex="-1"></a>n_x <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
+<span id="cb14-4"><a href="descriptive-statistics.html#cb14-4" aria-hidden="true" tabindex="-1"></a>mug_x <span class="ot">&lt;-</span> prod_x<span class="sc">^</span>(<span class="dv">1</span> <span class="sc">/</span> n_x) <span class="co"># ^ means power</span></span>
+<span id="cb14-5"><a href="descriptive-statistics.html#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mug_x)</span></code></pre></div>
+<pre><code>## [1] 17.63648</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="descriptive-statistics.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># for vector y</span></span>
+<span id="cb16-2"><a href="descriptive-statistics.html#cb16-2" aria-hidden="true" tabindex="-1"></a>mug_y <span class="ot">&lt;-</span> <span class="fu">prod</span>(y)<span class="sc">^</span>(<span class="dv">1</span> <span class="sc">/</span> <span class="fu">length</span>(y))</span>
+<span id="cb16-3"><a href="descriptive-statistics.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mug_y)</span></code></pre></div>
+<pre><code>## [1] 23.28022</code></pre>
+<p><strong>Median</strong></p>
+<p>Lastly, let’s do the same for median:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="descriptive-statistics.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># for vector x</span></span>
+<span id="cb18-2"><a href="descriptive-statistics.html#cb18-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">sort</span>(x) <span class="co"># sort x from small to large</span></span>
+<span id="cb18-3"><a href="descriptive-statistics.html#cb18-3" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> (<span class="fu">length</span>(x) <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">/</span> <span class="dv">2</span> <span class="co"># (N + 1)/2 th index as length(x) is an odd number</span></span>
+<span id="cb18-4"><a href="descriptive-statistics.html#cb18-4" aria-hidden="true" tabindex="-1"></a>med_x <span class="ot">&lt;-</span> x[index]</span>
+<span id="cb18-5"><a href="descriptive-statistics.html#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(med_x)</span></code></pre></div>
+<pre><code>## [1] 15.9</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="descriptive-statistics.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># for vector y</span></span>
+<span id="cb20-2"><a href="descriptive-statistics.html#cb20-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">sort</span>(y) <span class="co"># sort y from small to large</span></span>
+<span id="cb20-3"><a href="descriptive-statistics.html#cb20-3" aria-hidden="true" tabindex="-1"></a>med_y <span class="ot">&lt;-</span> y[(<span class="fu">length</span>(y) <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">/</span> <span class="dv">2</span>]</span>
+<span id="cb20-4"><a href="descriptive-statistics.html#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(med_y)</span></code></pre></div>
+<pre><code>## [1] 21.9</code></pre>
+<p>Compare with outputs from <code>median()</code></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="descriptive-statistics.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">median</span>(x))</span></code></pre></div>
+<pre><code>## [1] 15.9</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="descriptive-statistics.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">median</span>(y))</span></code></pre></div>
+<pre><code>## [1] 21.9</code></pre>
+</div>
+</div>
+<div id="variation" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Variation<a href="descriptive-statistics.html#variation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="measures-of-variation" class="section level3 hasAnchor" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Measures of Variation<a href="descriptive-statistics.html#measures-of-variation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Variation measures (Table <a href="descriptive-statistics.html#tab:variation">1.2</a>) provide information about the spread of data points.</p>
+<ul>
+<li><p><strong>Variance.</strong> Variance is a statistical measure that quantifies the spread or dispersion of a dataset. It provides a numerical value that indicates how far individual data points in a dataset deviate from the mean or average value. In other words, variance measures the average squared difference between each data point and the mean. <strong>Standard deviation (SD) is the square root of variance</strong>.</p></li>
+<li><p><strong>Inter-Quantile Range.</strong> The interquartile range (IQR) is a statistical measure that provides information about the spread or dispersion of a dataset, specifically focusing on the middle 50% of the data. It is a robust measure of variability that is less affected by outliers compared to variance.</p></li>
+<li><p><strong>Median Absolute Deviation.</strong> Median Absolute Deviation (MAD) is similar to variance, but provides a robust estimation of variability that is less affected by outliers compared to variance. MAD is defined as the median of the absolute deviations from the data’s median.</p></li>
+<li><p><strong>Coefficient of Variation.</strong> The coefficient of variation (CV) is a statistical measure that expresses the relative variability of a dataset in relation to its mean. It is particularly useful when comparing the variability of different datasets that have different scales or units of measurement.</p></li>
+<li><p><strong>MAD/Median.</strong> MAD/Median is a statistical measure used to assess the relative variability of a dataset without assuming any specific distribution or parametric model. CV is sensitive to outliers because of its reliance on the arithmetic mean. However, MAD/Median is robust to this issue.</p></li>
+</ul>
+<table>
+<caption><span id="tab:variation">Table 1.2: </span> Common measures of variation. <span class="math inline">\(N\)</span> refers to the number of data points.</caption>
+<colgroup>
+<col width="72%" />
+<col width="27%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Measure</th>
+<th>Equation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Variance <span class="math inline">\(\sigma^2\)</span> (standard deviation <span class="math inline">\(\sigma\)</span>)</td>
+<td><span class="math display">\[                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            \frac{\sum_i^N (x_i - \mu)^2}{N}                                 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            \]</span></td>
+</tr>
+<tr class="even">
+<td>Inter-Quantile Range IQR (<span class="math inline">\(x_l\)</span> and <span class="math inline">\(x_h\)</span> are <span class="math inline">\(l^{th}\)</span> and <span class="math inline">\(h^{th}\)</span> percentiles, respectively)</td>
+<td><span class="math display">\[                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |x_{l} - x_{h}|                                                  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            \]</span></td>
+</tr>
+<tr class="odd">
+<td>Median Absolute Deviation (MAD)</td>
+<td><span class="math display">\[                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            \text{Median}(|x_i-\mu_{med}|)                                   
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            \]</span></td>
+</tr>
+<tr class="even">
+<td>Coefficient of Variation (CV)</td>
+<td><span class="math display">\[                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            \frac{\sigma}{\mu}                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            \]</span></td>
+</tr>
+<tr class="odd">
+<td>MAD/Median</td>
+<td><span class="math display">\[                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            \frac{\text{MAD}}{\mu_{med}}                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            \]</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="r-exercise-1" class="section level3 hasAnchor" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> R Exercise<a href="descriptive-statistics.html#r-exercise-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Variance, SD, and CV</strong></p>
+<p>Let’s try variance, SD, and CV:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="descriptive-statistics.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># for x</span></span>
+<span id="cb26-2"><a href="descriptive-statistics.html#cb26-2" aria-hidden="true" tabindex="-1"></a>sqd_x <span class="ot">&lt;-</span> (x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span> <span class="co"># sqared deviance</span></span>
+<span id="cb26-3"><a href="descriptive-statistics.html#cb26-3" aria-hidden="true" tabindex="-1"></a>sum_sqd_x <span class="ot">&lt;-</span> <span class="fu">sum</span>(sqd_x)</span>
+<span id="cb26-4"><a href="descriptive-statistics.html#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="descriptive-statistics.html#cb26-5" aria-hidden="true" tabindex="-1"></a>var_x <span class="ot">&lt;-</span> sum_sqd_x <span class="sc">/</span> <span class="fu">length</span>(x)</span>
+<span id="cb26-6"><a href="descriptive-statistics.html#cb26-6" aria-hidden="true" tabindex="-1"></a>sd_x <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(var_x) <span class="co"># sqrt(): square root</span></span>
+<span id="cb26-7"><a href="descriptive-statistics.html#cb26-7" aria-hidden="true" tabindex="-1"></a>cv_x <span class="ot">&lt;-</span> sd_x <span class="sc">/</span> <span class="fu">mean</span>(x)</span>
+<span id="cb26-8"><a href="descriptive-statistics.html#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="descriptive-statistics.html#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var_x)</span></code></pre></div>
+<pre><code>## [1] 18.2016</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="descriptive-statistics.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sd_x)</span></code></pre></div>
+<pre><code>## [1] 4.266333</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="descriptive-statistics.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cv_x)</span></code></pre></div>
+<pre><code>## [1] 0.2354489</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="descriptive-statistics.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># for y</span></span>
+<span id="cb32-2"><a href="descriptive-statistics.html#cb32-2" aria-hidden="true" tabindex="-1"></a>var_y <span class="ot">&lt;-</span> <span class="fu">sum</span>((y <span class="sc">-</span> <span class="fu">mean</span>(y))<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">length</span>(y)</span>
+<span id="cb32-3"><a href="descriptive-statistics.html#cb32-3" aria-hidden="true" tabindex="-1"></a>sd_y <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(var_y)</span>
+<span id="cb32-4"><a href="descriptive-statistics.html#cb32-4" aria-hidden="true" tabindex="-1"></a>cv_y <span class="ot">&lt;-</span> sd_y <span class="sc">/</span> <span class="fu">mean</span>(y)</span>
+<span id="cb32-5"><a href="descriptive-statistics.html#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-6"><a href="descriptive-statistics.html#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var_y)</span></code></pre></div>
+<pre><code>## [1] 197.0816</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="descriptive-statistics.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sd_y)</span></code></pre></div>
+<pre><code>## [1] 14.03858</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="descriptive-statistics.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(cv_y)</span></code></pre></div>
+<pre><code>## [1] 0.5374646</code></pre>
+<p><strong>IQR, MAD, and MAD/Median</strong></p>
+<p>Let’s try IQR, MAD, and MAD/Median. IQR can be defined for given percentiles. Here, let me use 25 and 75 percentiles as <span class="math inline">\(x_l\)</span> and <span class="math inline">\(x_h\)</span>.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="descriptive-statistics.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># for x</span></span>
+<span id="cb38-2"><a href="descriptive-statistics.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="do">## IQR</span></span>
+<span id="cb38-3"><a href="descriptive-statistics.html#cb38-3" aria-hidden="true" tabindex="-1"></a>x_l <span class="ot">&lt;-</span> <span class="fu">quantile</span>(x, <span class="fl">0.25</span>) <span class="co"># quantile(): return quantile values, 25 percentile</span></span>
+<span id="cb38-4"><a href="descriptive-statistics.html#cb38-4" aria-hidden="true" tabindex="-1"></a>x_h <span class="ot">&lt;-</span> <span class="fu">quantile</span>(x, <span class="fl">0.75</span>) <span class="co"># quantile(): return quantile values, 75 percentile</span></span>
+<span id="cb38-5"><a href="descriptive-statistics.html#cb38-5" aria-hidden="true" tabindex="-1"></a>iqr_x <span class="ot">&lt;-</span> <span class="fu">abs</span>(x_l <span class="sc">-</span> x_h) <span class="co"># abs(): absolute value</span></span>
+<span id="cb38-6"><a href="descriptive-statistics.html#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-7"><a href="descriptive-statistics.html#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="do">## MAD</span></span>
+<span id="cb38-8"><a href="descriptive-statistics.html#cb38-8" aria-hidden="true" tabindex="-1"></a>ad_x <span class="ot">&lt;-</span> <span class="fu">abs</span>(x <span class="sc">-</span> <span class="fu">mean</span>(x))</span>
+<span id="cb38-9"><a href="descriptive-statistics.html#cb38-9" aria-hidden="true" tabindex="-1"></a>mad_x <span class="ot">&lt;-</span> <span class="fu">median</span>(ad_x)</span>
+<span id="cb38-10"><a href="descriptive-statistics.html#cb38-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-11"><a href="descriptive-statistics.html#cb38-11" aria-hidden="true" tabindex="-1"></a><span class="do">## MAD/median</span></span>
+<span id="cb38-12"><a href="descriptive-statistics.html#cb38-12" aria-hidden="true" tabindex="-1"></a>mad_m_x <span class="ot">&lt;-</span> mad_x <span class="sc">/</span> <span class="fu">median</span>(x)</span>
+<span id="cb38-13"><a href="descriptive-statistics.html#cb38-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-14"><a href="descriptive-statistics.html#cb38-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(iqr_x)</span></code></pre></div>
+<pre><code>## 25% 
+## 6.8</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="descriptive-statistics.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mad_x)</span></code></pre></div>
+<pre><code>## [1] 3.78</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="descriptive-statistics.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mad_m_x)</span></code></pre></div>
+<pre><code>## [1] 0.2377358</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="descriptive-statistics.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># for y</span></span>
+<span id="cb44-2"><a href="descriptive-statistics.html#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="do">## IQR</span></span>
+<span id="cb44-3"><a href="descriptive-statistics.html#cb44-3" aria-hidden="true" tabindex="-1"></a>y_q <span class="ot">&lt;-</span> <span class="fu">quantile</span>(y, <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.75</span>)) <span class="co"># return as a vector</span></span>
+<span id="cb44-4"><a href="descriptive-statistics.html#cb44-4" aria-hidden="true" tabindex="-1"></a>iqr_y <span class="ot">&lt;-</span> <span class="fu">abs</span>(y_q[<span class="dv">1</span>] <span class="sc">-</span> y_q[<span class="dv">2</span>]) <span class="co"># y_q[1] = 25 percentile; y_q[2] = 75 percentile</span></span>
+<span id="cb44-5"><a href="descriptive-statistics.html#cb44-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-6"><a href="descriptive-statistics.html#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="do">## MAD</span></span>
+<span id="cb44-7"><a href="descriptive-statistics.html#cb44-7" aria-hidden="true" tabindex="-1"></a>mad_y <span class="ot">&lt;-</span> <span class="fu">median</span>(<span class="fu">abs</span>(y <span class="sc">-</span> <span class="fu">mean</span>(y)))</span>
+<span id="cb44-8"><a href="descriptive-statistics.html#cb44-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-9"><a href="descriptive-statistics.html#cb44-9" aria-hidden="true" tabindex="-1"></a><span class="do">## MAD/median</span></span>
+<span id="cb44-10"><a href="descriptive-statistics.html#cb44-10" aria-hidden="true" tabindex="-1"></a>mad_m_y <span class="ot">&lt;-</span> mad_y <span class="sc">/</span> <span class="fu">median</span>(y)</span>
+<span id="cb44-11"><a href="descriptive-statistics.html#cb44-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-12"><a href="descriptive-statistics.html#cb44-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(iqr_y)</span></code></pre></div>
+<pre><code>## 25% 
+## 8.5</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="descriptive-statistics.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mad_y)</span></code></pre></div>
+<pre><code>## [1] 10.22</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="descriptive-statistics.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mad_m_y)</span></code></pre></div>
+<pre><code>## [1] 0.4666667</code></pre>
+</div>
+</div>
+<div id="laboratory" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Laboratory<a href="descriptive-statistics.html#laboratory" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="comparing-central-tendency-measures" class="section level3 hasAnchor" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> Comparing Central Tendency Measures<a href="descriptive-statistics.html#comparing-central-tendency-measures" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>What are the differences of the three measures of central tendency? To investigate this further, let’s perform the following exercise.</p>
+<ol style="list-style-type: decimal">
+<li><p>Create a new vector <code>z</code> with length <span class="math inline">\(1000\)</span> as <code>exp(rnorm(n = 1000, mean = 0, sd = 0.1))</code>, and calculate the arithmetic mean, geometric mean, and median.</p></li>
+<li><p>Draw a histogram of <code>z</code> using functions <code>tibble()</code>, <code>ggplot()</code>, and <code>geom_histogram()</code>.</p></li>
+<li><p>Draw vertical lines of arithmetic mean, geometric mean, and median on the histogram with different colors using a function <code>geom_vline()</code> .</p></li>
+<li><p>Compare the values of the central tendency measures.</p></li>
+<li><p>Create a new vector <code>z_rev</code> as <code>-z + max(z) + 0.1</code>, and repeat step 1 – 4.</p></li>
+</ol>
+</div>
+<div id="comparing-variation-measures" class="section level3 hasAnchor" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> Comparing Variation Measures<a href="descriptive-statistics.html#comparing-variation-measures" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Why do we have absolute (variance, SD, MAD, IQR) and relative measures (CV, MAD/Median) of variation? To understand this, suppose we have 100 measurements of fish weight in unit “gram.” (<code>w</code> in the following script)</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="descriptive-statistics.html#cb50-1" aria-hidden="true" tabindex="-1"></a>w <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb50-2"><a href="descriptive-statistics.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(w) <span class="co"># show first 10 elements in w</span></span></code></pre></div>
+<pre><code>## [1]  7.693534 12.056249  9.954456 10.489594 12.082495 12.152664</code></pre>
+<p>Using this data, perform the following exercise:</p>
+<ol style="list-style-type: decimal">
+<li><p>Convert the unit of <code>w</code> to “milligram” and create a new vector <code>m</code>.</p></li>
+<li><p>Calculate SD and MAD for <code>w</code> and <code>m</code>.</p></li>
+<li><p>Calculate CV and MAD/Median for <code>w</code> and <code>m</code>.</p></li>
+</ol>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sampling-concept.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/chapters/01-descriptive.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

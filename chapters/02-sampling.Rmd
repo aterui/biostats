@@ -1,26 +1,18 @@
 ```{r, include=FALSE}
 source(here::here("code/library.R"))
+df_h0 <- read_csv(here::here("data_raw/data_plant_height.csv"))
 ```
 
-# Sampling Concept
+# Sampling
 
 *"Why do I need statistics in the first place?"* This was the initial question that arose when I entered the field of ecology. Initially, I assumed it would be a straightforward query with an immediate response. However, I soon realized that it is a profound question with a complex answer. In short, "we need statistics because we often possess only partial information about what we seek to understand." Now, let's explore the more elaborate explanation below.
 
 ## The Unknown: Garden Plant Example
 
-```{r plant-height, include = F}
-
-set.seed(1)
-df_height <- tibble(height = rnorm(1000, 20, 5) %>% round(1),
-                    unit = "cm") %>% 
-  mutate(plant_id = row_number()) %>% 
-  relocate(plant_id)
-```
-
 Consider a scenario where we are conducting a study on plant height in a garden. In this garden, there exists a thousand of individual plants, making it impractical for a single researcher to measure all of them. Instead, due to resource limitations, a sample of $10$ plants was selected to ***calculate*** the average height and the extent of variation among these plant individuals:
 
 ```{r dfh1, echo = FALSE}
-print(df_height %>% slice(1:10))
+print(df_h0 %>% slice(1:10))
 ```
 
 Cool. Let's use this data set to learn about the pitfall behind this. Create a vector of plant height `h` and put it in a `tibble()` to analyze it:
@@ -40,7 +32,7 @@ This format (`tibble()`) is better than a raw vector of height because it allows
 
 # nrow() returns the number of rows
 # while piping, "." refers to the dataframe inherited 
-# i.e., nrow(.) counts the number of rows in df_height
+# i.e., nrow(.) counts the number of rows in df_h1
 df_h1 <- df_h1 %>% 
   mutate(mu_height = mean(height),
          var_height = sum((height - mu_height)^2) / nrow(.))
@@ -49,7 +41,7 @@ df_h1 <- df_h1 %>%
 Awesome, we were able to get the average height and the variance! -- **however, how confident are you?** We obtained plant height only from 10...out of 1000. Are they different if we measure another set of 10 plant individuals? Let's see:
 
 ```{r dfh2, echo = FALSE}
-print(df_height %>% slice(11:20))
+print(df_h0 %>% slice(11:20))
 ```
 
 Create another `tibble()` :
@@ -75,7 +67,7 @@ The exercise highlights an important takeaway: what we can determine from the ab
 
 In the field of biological research, it is often impractical or impossible to sample the entire population, so we must rely on estimating the unknowns (in this case, the *mean* and *variance*) from the available samples. This is where statistics comes into play, offering a tool to infer information about the entire population based on partial information obtained from the samples.
 
-The population mean and variance in the garden, which are the unknowns we are interested in, are referred to as "**parameters.**" These parameters [*cannot be directly measured*]{.underline} but can be [*estimated*]{.underline} from samples through statistical inference.
+The unknowns we are interested in, which the population mean and variance in this example, are referred to as "**parameters.**" These parameters [*cannot be directly measured*]{.underline} but can be [*estimated*]{.underline} from samples through statistical inference.
 
 Provided that certain assumptions are met, the *sample mean* is the unbiased point estimate of the *population* *mean*. The **"*unbiased*"** means that the sample means -- if we repeat the sampling process -- are centered around the population mean. In the meantime, the sample variance -- if we use the formula in Chapter \@ref(descriptive-statistics) -- is "***biased***." It tends to be smaller than the population variance.
 

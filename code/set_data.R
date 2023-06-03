@@ -4,6 +4,19 @@
 source(here::here("code/library.R"))
 
 
+# lake body size data -----------------------------------------------------
+
+set.seed(1)
+x <- rnorm(50, 13, sd = 3.5)
+y <- rnorm(50, 15, sd = 3.5)
+
+df_fish_length <- tibble(lake = rep(c("a", "b"), each = 50),
+                         length = round(c(x, y), 1),
+                         unit = "cm")
+
+write_csv(df_fish_length,
+          "data_raw/data_fish_length.csv")
+
 # lake sample data --------------------------------------------------------
 
 set.seed(10)
@@ -44,5 +57,5 @@ df_fish_sub <- foreach(i = seq_len(nrow(df_plot)),
              by = "plot") %>% 
   mutate(count = replace_na(count, replace = 0))
 
-saveRDS(df_fish, "data/data_lake_fish.rds")
-saveRDS(df_fish_sub, "data/data_lake_fish_sub.rds")
+saveRDS(df_fish, "data_raw/data_lake_fish.rds")
+saveRDS(df_fish_sub, "data_raw/data_lake_fish_sub.rds")

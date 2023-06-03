@@ -1,0 +1,124 @@
+```{r, include=FALSE}
+source(here::here("code/library.R"))
+df_h0 <- read_csv(here::here("data_raw/data_plant_height.csv"))
+```
+
+# Probabilistic View
+
+While Chapter \@ref(sampling) highlighted the concept of sampling, it introduced another important aspect of statistics -- i.e., randomness. While mean provides a central tendency of the data, it does not represent all the data points. Inevitable deviations exist. How do we express such "randomness"? The concept of probability distributions helps fully grasp the stochastic nature of observation data.
+
+## Probability Distribution of Plant Height
+
+### Probability Density Function
+
+Let me use the plant height example in Chapter \@ref(sampling):
+
+```{r, eval=F}
+# load csv data on R
+df_h0 <- read_csv("data_raw/data_plant_height.csv")
+```
+
+While our focus was on examining mean and variance in Chapter \@ref(sampling), let's expand the focus to grasp the overall distribution of the height:
+
+```{r histogram-height, fig.cap="Distribution of plant height"}
+
+df_h0 %>% 
+  ggplot(aes(x = height)) + 
+  geom_histogram(binwidth = 1) + # specify binwidth
+  geom_vline(aes(xintercept = mean(height))) # draw vertical line at the mean
+```
+
+This distribution consists of a thousand of height measures. However, there are some rules. Data are centered around the mean and symmetrically distributed. This fact suggests that this distribution could be approximated by a simple formula that requires only a few *characteristic numbers*.
+
+In statistics, the symmetric bell-shaped form is often approximated by a Normal distribution, and we denote "*variable* $x$ *is assumed to follow a Normal distribution.*" We use the following mathematical expression:
+
+$$
+x \sim Normal(\mu, \sigma^2)
+$$
+
+Unlike "equation," we do not use "$=$" sign because variable $x$ is not identical to the Normal distribution. Instead, it describes a "stochastic" relationship that denotes the probability of $x$ taking a certain range of values.
+
+A Normal distribution has two parameters -- mean and variance. Once these parameters are determined, the formula defining the Normal distribution will provide probability density for a range values. This formula, appearing below as $f(x)$, is referred to as a **probability density function (PDF)**.
+
+$$
+f(x) = \frac{1}{\sqrt{2 \pi} \sigma} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
+$$
+
+### PDF to frequency distribution
+
+In R, function `dnorm()` calculates probability density for a given value. The first argument `x` is a vector of values that you'd like to calculate its probability density. In the second `mean` and third arguments `sd`, you will provide the mean and SD of the distribution. For $x$ (plant height), let's use $\text{min}(x)$ to $\text{max}(x)$ to cover the full range of observed height:
+
+```{r dnorm}
+
+# vector of x values
+# seq() generate min to max values with specified numbers of elements or interval
+# the following produce 100 elements
+x <- seq(min(df_h0$height), max(df_h0$height), length = 100)
+
+# calculate probability density
+mu <- mean(df_h0$height)
+sigma <- sd(df_h0$height)
+pd <- dnorm(x, mean = mu, sd = sigma)
+
+# figure
+tibble(y = pd, x = x) %>% # data frame
+  ggplot(aes(x = x, y = y)) +
+  geom_line() + # draw lines
+  labs(y = "Probability density") # re-label
+```
+
+That looks pretty similar to what we observed, but the scale of y-axis is quite different. Since this figure shows a "probability density," we need to calculate the area under the curve to make it probability. R provides `pnorm()` function for this purpose. It calculates the probability less than the value provided in the first argument `q`:
+
+```{r pnorm}
+# probability of x < 10
+p10 <- pnorm(10, mean = mu, sd = sigma)
+print(p10)
+
+# probability of x < 20
+p20 <- pnorm(20, mean = mu, sd = sigma)
+print(p20)
+
+# probability of 10 < x < 20
+p20_10 <- p20 - p10
+print(p20_10)
+```
+
+To make estimates comparable to the frequency data, calculate the probability for each 1 cm bin. Expected frequency can be calculated as a product of probability and sample size (1000):
+
+```{r bin-prob}
+x_min <- floor(min(df_h0$height)) # floor takes the integer part of the value
+x_max <- ceiling(max(df_h0$height)) # ceiling takes the next closest integer
+bin <- seq(x_min, x_max, by = 1) # each bin has 1cm
+
+p <- NULL # empty object for probability
+for (i in 1:(length(bin) - 1)) {
+  p[i] <- pnorm(bin[i+1], mean = mu, sd = sigma) - pnorm(bin[i], mean = mu, sd = sigma)
+}
+
+## data frame for probability
+## bin: last element [-length(bin)] was removed to match length
+## expected frequency in each bin is "prob times sample size"
+df_prob <- tibble(p, bin = bin[-length(bin)]) %>% 
+  mutate(freq = p * nrow(df_h0))
+```
+
+Let me overlay:
+
+```{r histogram-overlaid}
+
+df_h0 %>% 
+  ggplot(aes(x = height)) + 
+  geom_histogram(binwidth = 1) +
+  geom_point(data = df_prob,
+             aes(y = freq,
+                 x = bin),
+             color = "salmon") +
+  geom_line(data = df_prob,
+            aes(y = freq,
+                x = bin),
+            color = "salmon")
+```
+
+While the original data set had 1000 data points, the probability distribution could reproduce the overall shape with just two parameters (mean and variance)! This is a good news -- once we know the key parameters, we can infer the overall pattern of the data.
+
+## Probability Distribution of Plant Individuals

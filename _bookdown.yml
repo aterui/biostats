@@ -5,4 +5,6 @@ language:
 rmd_files: ["index.Rmd",
             "chapters/01-descriptive.Rmd",
             "chapters/02-sampling.Rmd",
+            "chapters/03-probability.Rmd",
+            "chapters/04-two-group.Rmd",
             "chapters/a-project.Rmd"]

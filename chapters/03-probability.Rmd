@@ -1,13 +1,14 @@
 ```{r, include=FALSE}
 source(here::here("code/library.R"))
 df_h0 <- read_csv(here::here("data_raw/data_plant_height.csv"))
+df_count <- read_csv(here::here("data_raw/data_garden_count.csv"))
 ```
 
 # Probabilistic View
 
-While Chapter \@ref(sampling) highlighted the concept of sampling, it introduced another important aspect of statistics -- i.e., randomness. While mean provides a central tendency of the data, it does not represent all the data points. Inevitable deviations exist. How do we express such "randomness"? The concept of probability distributions helps fully grasp the stochastic nature of observation data.
+Chapter \@ref(sampling) emphasized the concept of sampling and introduced the crucial aspect of statistics: randomness. Although the mean represents the central tendency of the data, it does not encompass all the data points. Inevitable deviations occur, and we need a way to express this "randomness." The concept of probability distributions aids in fully understanding the stochastic nature of observed data.
 
-## Probability Distribution of Plant Height
+## Probability Distribution of a Continuous Variable
 
 ### Probability Density Function
 
@@ -18,7 +19,7 @@ Let me use the plant height example in Chapter \@ref(sampling):
 df_h0 <- read_csv("data_raw/data_plant_height.csv")
 ```
 
-While our focus was on examining mean and variance in Chapter \@ref(sampling), let's expand the focus to grasp the overall distribution of the height:
+While Chapter \@ref(sampling) primarily focused on exploring mean and variance, let's broaden our perspective to gain a comprehensive understanding of the entire distribution of height.
 
 ```{r histogram-height, fig.cap="Distribution of plant height"}
 
@@ -28,17 +29,17 @@ df_h0 %>%
   geom_vline(aes(xintercept = mean(height))) # draw vertical line at the mean
 ```
 
-This distribution consists of a thousand of height measures. However, there are some rules. Data are centered around the mean and symmetrically distributed. This fact suggests that this distribution could be approximated by a simple formula that requires only a few *characteristic numbers*.
+This distribution comprises a thousand height measurements. However, there are certain patterns to consider. The data is centered around the mean and exhibits a symmetrical distribution. This characteristic implies that the distribution can be approximated by a simple formula that relies on only a few *key parameters*.
 
-In statistics, the symmetric bell-shaped form is often approximated by a Normal distribution, and we denote "*variable* $x$ *is assumed to follow a Normal distribution.*" We use the following mathematical expression:
+In statistics, the symmetrical bell-shaped form is commonly approximated by a Normal distribution, often denoted as "*variable* $x$ *is assumed to follow a Normal distribution.*" We express this using the following mathematical expression:
 
 $$
 x \sim Normal(\mu, \sigma^2)
 $$
 
-Unlike "equation," we do not use "$=$" sign because variable $x$ is not identical to the Normal distribution. Instead, it describes a "stochastic" relationship that denotes the probability of $x$ taking a certain range of values.
+Unlike an "equation," we do not use the "$=$" sign because variable $x$ is not equivalent to the Normal distribution. Rather, it represents a "stochastic" relationship that signifies the probability of $x$ taking on a specific range of values.
 
-A Normal distribution has two parameters -- mean and variance. Once these parameters are determined, the formula defining the Normal distribution will provide probability density for a range values. This formula, appearing below as $f(x)$, is referred to as a **probability density function (PDF)**.
+A Normal distribution is characterized by two parameters: the mean and the variance. Once these parameters are determined, the formula that defines the Normal distribution will yield the probability density for a given range of values. This formula $f(x)$ is known as the **probability density function (PDF)** and is displayed below:
 
 $$
 f(x) = \frac{1}{\sqrt{2 \pi} \sigma} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
@@ -46,9 +47,11 @@ $$
 
 ### PDF to frequency distribution
 
-In R, function `dnorm()` calculates probability density for a given value. The first argument `x` is a vector of values that you'd like to calculate its probability density. In the second `mean` and third arguments `sd`, you will provide the mean and SD of the distribution. For $x$ (plant height), let's use $\text{min}(x)$ to $\text{max}(x)$ to cover the full range of observed height:
+In R, the function `dnorm()` can be used to calculate the probability density for a given value. The first argument, `x`, should be a vector of values for which you want to calculate the probability density. The second argument, `mean`, and the third argument, `sd`, correspond to the mean and standard deviation of the distribution, respectively. Note that we must provide `mean` and `sd` to calculate the probability density.
 
-```{r dnorm}
+To encompass the entire range of observed heights, we can use $\text{min}(x)$ and $\text{max}(x)$ as the lower and upper limits, respectively.
+
+```{r dnorm, fig.cap="Probability density function of a Normal distribution"}
 
 # vector of x values
 # seq() generate min to max values with specified numbers of elements or interval
@@ -67,15 +70,15 @@ tibble(y = pd, x = x) %>% # data frame
   labs(y = "Probability density") # re-label
 ```
 
-That looks pretty similar to what we observed, but the scale of y-axis is quite different. Since this figure shows a "probability density," we need to calculate the area under the curve to make it probability. R provides `pnorm()` function for this purpose. It calculates the probability less than the value provided in the first argument `q`:
+The shape of the curve appears quite similar to what we observed; however, the scale of the y-axis is different. This is because the y-axis represents "probability density." To convert it into actual "probability," we need to calculate the area under the curve. In R, we can utilize the `pnorm()` function for this purpose. It calculates the probability of a variable being less than the specified value, which is provided in the first argument `q`.
 
 ```{r pnorm}
 # probability of x < 10
-p10 <- pnorm(10, mean = mu, sd = sigma)
+p10 <- pnorm(q = 10, mean = mu, sd = sigma)
 print(p10)
 
 # probability of x < 20
-p20 <- pnorm(20, mean = mu, sd = sigma)
+p20 <- pnorm(q = 20, mean = mu, sd = sigma)
 print(p20)
 
 # probability of 10 < x < 20
@@ -83,7 +86,7 @@ p20_10 <- p20 - p10
 print(p20_10)
 ```
 
-To make estimates comparable to the frequency data, calculate the probability for each 1 cm bin. Expected frequency can be calculated as a product of probability and sample size (1000):
+To make the estimates comparable to the frequency data, you can calculate the probability for each 1 cm bin. The expected frequency can be obtained by multiplying the probability by the sample size, which in this case is 1000. This allows you to estimate the number of observations you would expect in each 1 cm bin based on the calculated probabilities.
 
 ```{r bin-prob}
 x_min <- floor(min(df_h0$height)) # floor takes the integer part of the value
@@ -95,16 +98,16 @@ for (i in 1:(length(bin) - 1)) {
   p[i] <- pnorm(bin[i+1], mean = mu, sd = sigma) - pnorm(bin[i], mean = mu, sd = sigma)
 }
 
-## data frame for probability
-## bin: last element [-length(bin)] was removed to match length
-## expected frequency in each bin is "prob times sample size"
+# data frame for probability
+# bin: last element [-length(bin)] was removed to match length
+# expected frequency in each bin is "prob times sample size"
 df_prob <- tibble(p, bin = bin[-length(bin)]) %>% 
   mutate(freq = p * nrow(df_h0))
 ```
 
-Let me overlay:
+Overlay:
 
-```{r histogram-overlaid}
+```{r histogram-overlaid, fig.cap="Histogram overlaid with predicted frequency (red dots and line)"}
 
 df_h0 %>% 
   ggplot(aes(x = height)) + 
@@ -119,6 +122,141 @@ df_h0 %>%
             color = "salmon")
 ```
 
-While the original data set had 1000 data points, the probability distribution could reproduce the overall shape with just two parameters (mean and variance)! This is a good news -- once we know the key parameters, we can infer the overall pattern of the data.
+It is remarkable that the probability distribution, characterized by just two parameters (mean and variance), can effectively reproduce the overall shape observed in the original data set of 1000 data points. This is great news because it means that once we determine these key parameters, we can infer the general pattern of the data.
 
-## Probability Distribution of Plant Individuals
+## Probability Distribution of a Discrete Variable
+
+### Probability Mass Function
+
+Let's shift our perspective and examine the density of plants in the garden. For this analysis, we have counted the number of plant individuals within 30 plots, with each plot covering an area of one square meter (refer to Figure \@ref(fig:garden)).
+
+```{r garden, echo = F, fig.cap="Garden view with sampling plots. White squares represent plots. Red dots indicate plant individuals counted."}
+knitr::include_graphics(here::here("image/figure_garden.jpg"))
+```
+
+Download the data [here](https://github.com/aterui/biostats/blob/master/data_raw/data_garden_count.csv) and load it onto R:
+
+```{r, eval=F}
+df_count <- read_csv("data_raw/data_garden_count.csv")
+print(df_count)
+```
+
+```{r, echo=FALSE}
+print(df_count)
+```
+
+Make a histogram:
+
+```{r hist-density, fig.cap="Histogram of plant individuals per plot"}
+df_count %>% 
+  ggplot(aes(x = count)) +
+  geom_histogram(binwidth = 0.5, # define binwidth
+                 center = 0) # relative position of each bin
+```
+
+There are several significant differences compared to the plant height example when considering the density of plants in the garden:
+
+1.  The possible values are discrete (count data) since we are counting the number of plant individuals in each plot.
+
+2.  The possible values are always positive, as counts cannot be negative.
+
+3.  The distribution appears to be non-symmetric around the sample mean.
+
+Given these characteristics, a Normal distribution may not be an appropriate choice for representing such a variable. Instead, it would be more suitable to use a Poisson distribution to characterize the observed distribution of the discrete variable.
+
+$$
+x \sim Poisson(\lambda)
+$$
+
+In a Poisson distribution, the mean parameter ($\lambda$) serves as the sole parameter[^03-probability-1]. Probability distributions that describe discrete variables are expressed using a **probability mass function** (PMF):
+
+[^03-probability-1]: In a Poisson distribution, mean = variance
+
+$$
+g(x) = \frac{\lambda^x \exp(-\lambda)}{x!}
+$$
+
+Unlike a probability density function (PDF), a probability mass function (PMF) represents the probability of a discrete variable $x$ taking a specific value. For instance, the probability of $x=2$, denoted as $\Pr(x=2)$, can be calculated as follows:
+
+$$
+\Pr(x=2) = g(2) = \frac{\lambda^2 \exp(-\lambda)}{2!}
+$$
+
+In a generalized form, we write:
+
+$$
+\Pr(x=k) = g(k) = \frac{\lambda^k \exp(-\lambda)}{k!}
+$$
+
+### PMF to frequency distribution
+
+In R, you can use the `dpois()` function to visualize a Poisson distribution. This function allows you to plot the probability mass function (PMF) of the Poisson distribution and gain insights into the distribution of the discrete variable.
+
+```{r dpois, fig.cap="Example of a Poisson distribution"}
+
+# vector of x values
+# create a vector of 0 to 10 with an interval one
+# must be integer of > 0
+x <- seq(0, 10, by = 1)
+
+# calculate probability mass
+lambda_hat <- mean(df_count$count)
+pm <- dpois(x, lambda = lambda_hat)
+
+# figure
+tibble(y = pm, x = x) %>% # data frame
+  ggplot(aes(x = x, y = y)) +
+  geom_line(linetype = "dashed") + # draw dashed lines
+  geom_point() + # draw points
+  labs(y = "Probability",
+       x = "Count") # re-label
+
+```
+
+To convert the y-axis from probability to frequency, multiply the probabilities by the sample size (total number of observations) to obtain the expected frequency. As in the plant height example, you can plot the expected frequency on the histogram, providing a visual representation of the distribution of the discrete variable.
+
+```{r pois-hist, fig.cap="Observed histogram of the discrete variable overlaid with the Poisson expectation."}
+df_prob <- tibble(x = x, y = pm) %>% 
+  mutate(freq = y * nrow(df_count)) # prob x sample size
+
+df_count %>% 
+  ggplot(aes(x = count)) +
+  geom_histogram(binwidth = 0.5,
+                 center = 0) +
+  geom_line(data = df_prob,
+            aes(x = x,
+                y = freq),
+            linetype = "dashed") +
+  geom_point(data = df_prob,
+             aes(x = x,
+                y = freq))
+
+```
+
+Cool, the Poisson distribution does an excellent job of characterizing the distribution of plant counts.
+
+## Why Probability Distributions?
+
+As we have seen in the above examples, probability distributions provide a framework for describing the likelihood of different outcomes or events. By utilizing probability distributions, we can:
+
+1.  Make predictions and estimate probabilities of specific events or ranges of values.
+2.  Determine the most likely values or outcomes based on available information.
+3.  Quantify and analyze the uncertainty associated with random variables or processes.
+
+Probability distributions serve as fundamental tools in statistics, enabling us to model, analyze, and make informed decisions in the face of uncertainty.
+
+## Laboratory
+
+### Normal Distribution
+
+The function `rnorm()` produces a random variable that follows a Normal distribution with a specified mean and SD. Using this function,
+
+1.  Generate a variable with 50 observations.
+2.  Create a figure similar to Figure \@ref(fig:histogram-overlaid)
+
+### Poisson Distribution
+
+The function `rpois()` produces a random variable that follows a Poisson distribution with a specified mean. Using this function,
+
+1.  Generate a variable with 1000 observations.
+2.  Create a figure similar to Figure \@ref(fig:pois-hist)

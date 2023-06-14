@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Multiple-Group Comparison | BIOSTATS</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 Multiple-Group Comparison | BIOSTATS" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Multiple-Group Comparison | BIOSTATS" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Akira Terui" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="two-group-comparison.html"/>
+<link rel="next" href="appendix-project-management.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">BIOSTATS</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html"><i class="fa fa-check"></i><b>1</b> Descriptive Statistics</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#central-tendency"><i class="fa fa-check"></i><b>1.1</b> Central Tendency</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#measures-of-central-tendency"><i class="fa fa-check"></i><b>1.1.1</b> Measures of Central Tendency</a></li>
+<li class="chapter" data-level="1.1.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#r-exercise"><i class="fa fa-check"></i><b>1.1.2</b> R Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#variation"><i class="fa fa-check"></i><b>1.2</b> Variation</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#measures-of-variation"><i class="fa fa-check"></i><b>1.2.1</b> Measures of Variation</a></li>
+<li class="chapter" data-level="1.2.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#r-exercise-1"><i class="fa fa-check"></i><b>1.2.2</b> R Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#laboratory"><i class="fa fa-check"></i><b>1.3</b> Laboratory</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#comparing-central-tendency-measures"><i class="fa fa-check"></i><b>1.3.1</b> Comparing Central Tendency Measures</a></li>
+<li class="chapter" data-level="1.3.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#comparing-variation-measures"><i class="fa fa-check"></i><b>1.3.2</b> Comparing Variation Measures</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="sampling.html"><a href="sampling.html"><i class="fa fa-check"></i><b>2</b> Sampling</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="sampling.html"><a href="sampling.html#the-unknown-garden-plant-example"><i class="fa fa-check"></i><b>2.1</b> The Unknown: Garden Plant Example</a></li>
+<li class="chapter" data-level="2.2" data-path="sampling.html"><a href="sampling.html#linking-part-to-the-whole"><i class="fa fa-check"></i><b>2.2</b> Linking Part to the Whole</a></li>
+<li class="chapter" data-level="2.3" data-path="sampling.html"><a href="sampling.html#laboratory-1"><i class="fa fa-check"></i><b>2.3</b> Laboratory</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="probabilistic-view.html"><a href="probabilistic-view.html"><i class="fa fa-check"></i><b>3</b> Probabilistic View</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="probabilistic-view.html"><a href="probabilistic-view.html#probability-distribution-of-a-continuous-variable"><i class="fa fa-check"></i><b>3.1</b> Probability Distribution of a Continuous Variable</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="probabilistic-view.html"><a href="probabilistic-view.html#probability-density-function"><i class="fa fa-check"></i><b>3.1.1</b> Probability Density Function</a></li>
+<li class="chapter" data-level="3.1.2" data-path="probabilistic-view.html"><a href="probabilistic-view.html#pdf-to-frequency-distribution"><i class="fa fa-check"></i><b>3.1.2</b> PDF to frequency distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="probabilistic-view.html"><a href="probabilistic-view.html#probability-distribution-of-a-discrete-variable"><i class="fa fa-check"></i><b>3.2</b> Probability Distribution of a Discrete Variable</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="probabilistic-view.html"><a href="probabilistic-view.html#probability-mass-function"><i class="fa fa-check"></i><b>3.2.1</b> Probability Mass Function</a></li>
+<li class="chapter" data-level="3.2.2" data-path="probabilistic-view.html"><a href="probabilistic-view.html#pmf-to-frequency-distribution"><i class="fa fa-check"></i><b>3.2.2</b> PMF to frequency distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="probabilistic-view.html"><a href="probabilistic-view.html#why-probability-distributions"><i class="fa fa-check"></i><b>3.3</b> Why Probability Distributions?</a></li>
+<li class="chapter" data-level="3.4" data-path="probabilistic-view.html"><a href="probabilistic-view.html#laboratory-2"><i class="fa fa-check"></i><b>3.4</b> Laboratory</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="probabilistic-view.html"><a href="probabilistic-view.html#normal-distribution"><i class="fa fa-check"></i><b>3.4.1</b> Normal Distribution</a></li>
+<li class="chapter" data-level="3.4.2" data-path="probabilistic-view.html"><a href="probabilistic-view.html#poisson-distribution"><i class="fa fa-check"></i><b>3.4.2</b> Poisson Distribution</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="two-group-comparison.html"><a href="two-group-comparison.html"><i class="fa fa-check"></i><b>4</b> Two-Group Comparison</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="two-group-comparison.html"><a href="two-group-comparison.html#explore-data-structure"><i class="fa fa-check"></i><b>4.1</b> Explore Data Structure</a></li>
+<li class="chapter" data-level="4.2" data-path="two-group-comparison.html"><a href="two-group-comparison.html#test-statistic"><i class="fa fa-check"></i><b>4.2</b> Test Statistic</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="two-group-comparison.html"><a href="two-group-comparison.html#t-statistic"><i class="fa fa-check"></i><b>4.2.1</b> t-statistic</a></li>
+<li class="chapter" data-level="4.2.2" data-path="two-group-comparison.html"><a href="two-group-comparison.html#null-hypothesis"><i class="fa fa-check"></i><b>4.2.2</b> Null Hypothesis</a></li>
+<li class="chapter" data-level="4.2.3" data-path="two-group-comparison.html"><a href="two-group-comparison.html#interpretation"><i class="fa fa-check"></i><b>4.2.3</b> Interpretation</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="two-group-comparison.html"><a href="two-group-comparison.html#t-test-in-r"><i class="fa fa-check"></i><b>4.3</b> t-test in R</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="two-group-comparison.html"><a href="two-group-comparison.html#t-test-with-equal-variance"><i class="fa fa-check"></i><b>4.3.1</b> t-test with equal variance</a></li>
+<li class="chapter" data-level="4.3.2" data-path="two-group-comparison.html"><a href="two-group-comparison.html#t-test-with-unequal-variance"><i class="fa fa-check"></i><b>4.3.2</b> t-test with unequal variance</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="two-group-comparison.html"><a href="two-group-comparison.html#laboratory-3"><i class="fa fa-check"></i><b>4.4</b> Laboratory</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html"><i class="fa fa-check"></i><b>5</b> Multiple-Group Comparison</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#partition-the-variability"><i class="fa fa-check"></i><b>5.1</b> Partition the Variability</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#between-group-variability"><i class="fa fa-check"></i><b>5.1.1</b> Between-group variability</a></li>
+<li class="chapter" data-level="5.1.2" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#within-group-variability"><i class="fa fa-check"></i><b>5.1.2</b> Within-group variability</a></li>
+<li class="chapter" data-level="5.1.3" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#variability-to-variance"><i class="fa fa-check"></i><b>5.1.3</b> Variability to Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#test-statistic-1"><i class="fa fa-check"></i><b>5.2</b> Test Statistic</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#f-statistic"><i class="fa fa-check"></i><b>5.2.1</b> F-statistic</a></li>
+<li class="chapter" data-level="5.2.2" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#null-hypothesis-1"><i class="fa fa-check"></i><b>5.2.2</b> Null Hypothesis</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#anova-in-r"><i class="fa fa-check"></i><b>5.3</b> ANOVA in R</a></li>
+<li class="chapter" data-level="5.4" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#post-hoc-tests"><i class="fa fa-check"></i><b>5.4</b> Post-hoc Tests</a></li>
+<li class="chapter" data-level="5.5" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#laboratory-4"><i class="fa fa-check"></i><b>5.5</b> Laboratory</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="appendix-project-management.html"><a href="appendix-project-management.html"><i class="fa fa-check"></i><b>6</b> Appendix: Project Management</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="appendix-project-management.html"><a href="appendix-project-management.html#r-project"><i class="fa fa-check"></i><b>6.1</b> R Project</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="appendix-project-management.html"><a href="appendix-project-management.html#script-editor"><i class="fa fa-check"></i><b>6.1.1</b> Script Editor</a></li>
+<li class="chapter" data-level="6.1.2" data-path="appendix-project-management.html"><a href="appendix-project-management.html#file-name"><i class="fa fa-check"></i><b>6.1.2</b> File Name</a></li>
+<li class="chapter" data-level="6.1.3" data-path="appendix-project-management.html"><a href="appendix-project-management.html#structure-your-project"><i class="fa fa-check"></i><b>6.1.3</b> Structure Your Project</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="appendix-project-management.html"><a href="appendix-project-management.html#robust-coding"><i class="fa fa-check"></i><b>6.2</b> Robust coding</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">BIOSTATS</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="multiple-group-comparison" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Multiple-Group Comparison<a href="multiple-group-comparison.html#multiple-group-comparison" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>The t-test is used to compare two groups, but when there are more than two groups, ANOVA (Analysis of Variance) is employed. ANOVA allows for simultaneous comparison of means among multiple groups to determine if there are statistically significant differences. ANOVA uses the following steps:</p>
+<ol style="list-style-type: decimal">
+<li>Partition the total variability into <strong>between-group</strong> and <strong>within-group</strong> components.</li>
+<li>Define a <strong>test statistic</strong> as a ratio of between-group variability to within-group variability (F statistic).</li>
+<li>Define a probability distribution of F-statistic under the null hypothesis.</li>
+<li>Estimate the probability of yielding greater the observed test statistic.</li>
+</ol>
+<p>If appropriate, post-hoc tests can be conducted to identify specific differing groups.</p>
+<div id="partition-the-variability" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Partition the Variability<a href="multiple-group-comparison.html#partition-the-variability" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The first step is to determine what aspect to examine. In the case of a t-test, we focus on the difference in sample means between groups. One might initially consider conducting t-tests for all possible combinations. However, this approach leads to a problem known as the <a href="https://en.wikipedia.org/wiki/Multiple_comparisons_problem#:~:text=In%20statistics%2C%20the%20multiple%20comparisons,based%20on%20the%20observed%20values.">multiple comparisons problem</a>. Hence, this is not a viable option. Therefore, we need to explore the data from a different perspective.</p>
+<p>To facilitate learning, let’s once again utilize the lake fish data, but this time we have three lakes in our analysis:</p>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="multiple-group-comparison.html#cb120-1" aria-hidden="true" tabindex="-1"></a>df_anova <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data_raw/data_fish_length_anova.csv&quot;</span>)</span>
+<span id="cb120-2"><a href="multiple-group-comparison.html#cb120-2" aria-hidden="true" tabindex="-1"></a><span class="fu">distinct</span>(df_anova, lake)</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 1
+##   lake 
+##   &lt;chr&gt;
+## 1 a    
+## 2 b    
+## 3 c</code></pre>
+<p>Visualization can be helpful in understanding how the data is distributed. While mean <span class="math inline">\(\pm\)</span> SD is perfectly fine here, let me use a violin plot to show a different way of visualization.</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="multiple-group-comparison.html#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="co"># geom_violin() - function for violin plots</span></span>
+<span id="cb122-2"><a href="multiple-group-comparison.html#cb122-2" aria-hidden="true" tabindex="-1"></a><span class="co"># geom_jitter() - jittered points</span></span>
+<span id="cb122-3"><a href="multiple-group-comparison.html#cb122-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb122-4"><a href="multiple-group-comparison.html#cb122-4" aria-hidden="true" tabindex="-1"></a>df_anova <span class="sc">%&gt;%</span> </span>
+<span id="cb122-5"><a href="multiple-group-comparison.html#cb122-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> lake,</span>
+<span id="cb122-6"><a href="multiple-group-comparison.html#cb122-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> length)) <span class="sc">+</span></span>
+<span id="cb122-7"><a href="multiple-group-comparison.html#cb122-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="at">draw_quantiles =</span> <span class="fl">0.5</span>, <span class="co"># draw median horizontal line</span></span>
+<span id="cb122-8"><a href="multiple-group-comparison.html#cb122-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> <span class="co"># transparency</span></span>
+<span id="cb122-9"><a href="multiple-group-comparison.html#cb122-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="co"># transparency</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:violin"></span>
+<img src="_main_files/figure-html/violin-1.png" alt="Violin plot for fish length in three lakes." width="672" />
+<p class="caption">
+Figure 5.1: Violin plot for fish length in three lakes.
+</p>
+</div>
+<p>It appears that Lake <code>b</code> exhibits a larger average body size compared to the other lakes. One approach to quantifying this difference between groups is by examining the ratio of between-group variability to within-group variability. <strong>If we observe a greater between-group variability relative to within-group variability, it suggests that the differences among the groups are substantial.</strong> In other words, much of the observed variation is explained by the group structure (lake).</p>
+<p>Let me denote between-group and within-group variability as <span class="math inline">\(S_w\)</span> and <span class="math inline">\(S_a\)</span>, respectively, which are defined as follows:</p>
+<p><span class="math display">\[
+\begin{aligned}
+S_a &amp;= \sum_g \sum_i (\hat{\mu}_{g(i)} - \hat{\mu})^2\\
+S_w &amp;= \sum_g \sum_i (x_{i} - \hat{\mu}_{g(i)})^2
+\end{aligned}
+\]</span></p>
+<p>The double summation <span class="math inline">\(\sum_g \sum_i\)</span> might scare you, but no worries. We can decompose this equation into two steps.</p>
+<div id="between-group-variability" class="section level3 hasAnchor" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> Between-group variability<a href="multiple-group-comparison.html#between-group-variability" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let me first consider <span class="math inline">\(S_a = \sum_g \sum_i (\hat{\mu}_{g(i)} - \hat{\mu})^2\)</span>. In this equation, <span class="math inline">\(\hat{\mu}\)</span> is the overall mean of the fish length and <span class="math inline">\(\hat{\mu}_{g(i)}\)</span> is the group-mean in a given lake (<span class="math inline">\(g = \{a, b, c\}\)</span>). Let’s perform this estimation in R:</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="multiple-group-comparison.html#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="co"># estimate overall mean</span></span>
+<span id="cb123-2"><a href="multiple-group-comparison.html#cb123-2" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">mean</span>(df_anova<span class="sc">$</span>length)</span>
+<span id="cb123-3"><a href="multiple-group-comparison.html#cb123-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb123-4"><a href="multiple-group-comparison.html#cb123-4" aria-hidden="true" tabindex="-1"></a><span class="co"># estimate group means and sample size each</span></span>
+<span id="cb123-5"><a href="multiple-group-comparison.html#cb123-5" aria-hidden="true" tabindex="-1"></a>df_g <span class="ot">&lt;-</span> df_anova <span class="sc">%&gt;%</span> </span>
+<span id="cb123-6"><a href="multiple-group-comparison.html#cb123-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(lake) <span class="sc">%&gt;%</span> </span>
+<span id="cb123-7"><a href="multiple-group-comparison.html#cb123-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mu_g =</span> <span class="fu">mean</span>(length), <span class="co"># mean for each group</span></span>
+<span id="cb123-8"><a href="multiple-group-comparison.html#cb123-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">dev_g =</span> (mu_g <span class="sc">-</span> mu)<span class="sc">^</span><span class="dv">2</span>, <span class="co"># squared deviation for each group</span></span>
+<span id="cb123-9"><a href="multiple-group-comparison.html#cb123-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">n =</span> <span class="fu">n</span>()) <span class="co"># sample size for each group</span></span>
+<span id="cb123-10"><a href="multiple-group-comparison.html#cb123-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb123-11"><a href="multiple-group-comparison.html#cb123-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_g)</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 4
+##   lake   mu_g   dev_g     n
+##   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;
+## 1 a      13.4 1.12       50
+## 2 b      15.4 0.997      50
+## 3 c      14.5 0.00344    50</code></pre>
+<p>In the column <code>dev_g</code>, we estimated <span class="math inline">\((\hat{\mu}_{g(i)} - \hat{\mu})^2\)</span>. We must sum over <span class="math inline">\(i\)</span> (fish individual) to get the variability in each lake (<span class="math inline">\(\sum_i (\hat{\mu}_{g(i)} - \hat{\mu})^2\)</span>). Since <span class="math inline">\(\hat{\mu}_{g(i)}\)</span> is constant in each lake, we can simply multiply <code>dev_g</code> with sample size <code>n</code> in each lake:</p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="multiple-group-comparison.html#cb125-1" aria-hidden="true" tabindex="-1"></a>df_g <span class="ot">&lt;-</span> df_g <span class="sc">%&gt;%</span> </span>
+<span id="cb125-2"><a href="multiple-group-comparison.html#cb125-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ss =</span> dev_g <span class="sc">*</span> n)</span>
+<span id="cb125-3"><a href="multiple-group-comparison.html#cb125-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb125-4"><a href="multiple-group-comparison.html#cb125-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_g)</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 5
+##   lake   mu_g   dev_g     n     ss
+##   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt;
+## 1 a      13.4 1.12       50 55.9  
+## 2 b      15.4 0.997      50 49.9  
+## 3 c      14.5 0.00344    50  0.172</code></pre>
+<p>Sum over <span class="math inline">\(g\)</span> (lake) to get <span class="math inline">\(S_a\)</span>.</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="multiple-group-comparison.html#cb127-1" aria-hidden="true" tabindex="-1"></a>s_a <span class="ot">&lt;-</span> <span class="fu">sum</span>(df_g<span class="sc">$</span>ss)</span>
+<span id="cb127-2"><a href="multiple-group-comparison.html#cb127-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(s_a)</span></code></pre></div>
+<pre><code>## [1] 105.9365</code></pre>
+</div>
+<div id="within-group-variability" class="section level3 hasAnchor" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> Within-group variability<a href="multiple-group-comparison.html#within-group-variability" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We can follow the same steps to estimate the within-group variability <span class="math inline">\(S_w = \sum_g \sum_i (x_{i} - \hat{\mu}_{g(i)})^2\)</span>. Let’s estimate <span class="math inline">\((x_{i} - \hat{\mu}_{g(i)})^2\)</span> first:</p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="multiple-group-comparison.html#cb129-1" aria-hidden="true" tabindex="-1"></a>df_i <span class="ot">&lt;-</span> df_anova <span class="sc">%&gt;%</span> </span>
+<span id="cb129-2"><a href="multiple-group-comparison.html#cb129-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(lake) <span class="sc">%&gt;%</span> </span>
+<span id="cb129-3"><a href="multiple-group-comparison.html#cb129-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mu_g =</span> <span class="fu">mean</span>(length)) <span class="sc">%&gt;%</span> <span class="co"># use mutate() to retain individual rows</span></span>
+<span id="cb129-4"><a href="multiple-group-comparison.html#cb129-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb129-5"><a href="multiple-group-comparison.html#cb129-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dev_i =</span> (length <span class="sc">-</span> mu_g)<span class="sc">^</span><span class="dv">2</span>) <span class="co"># deviation from group mean for each fish</span></span></code></pre></div>
+<p>You can take a look at group-level data with the following code; the column <code>mu_g</code> contains group-specific means of fish length, and <code>dev_i</code> contains <span class="math inline">\((x_{g(i)} - \hat{\mu}_{g(i)})^2\)</span>:</p>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="multiple-group-comparison.html#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="co"># filter() &amp; slice(): show first 3 rows each group</span></span>
+<span id="cb130-2"><a href="multiple-group-comparison.html#cb130-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_i <span class="sc">%&gt;%</span> <span class="fu">filter</span>(lake <span class="sc">==</span> <span class="st">&quot;a&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>))</span>
+<span id="cb130-3"><a href="multiple-group-comparison.html#cb130-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb130-4"><a href="multiple-group-comparison.html#cb130-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_i <span class="sc">%&gt;%</span> <span class="fu">filter</span>(lake <span class="sc">==</span> <span class="st">&quot;b&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>))</span>
+<span id="cb130-5"><a href="multiple-group-comparison.html#cb130-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb130-6"><a href="multiple-group-comparison.html#cb130-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_i <span class="sc">%&gt;%</span> <span class="fu">filter</span>(lake <span class="sc">==</span> <span class="st">&quot;c&quot;</span>) <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>))</span></code></pre></div>
+<p>Sum over <span class="math inline">\(i\)</span> in each lake <span class="math inline">\(g\)</span> (<span class="math inline">\(\sum_i (x_{g(i)} - \hat{\mu}_{g(i)})^2\)</span>):</p>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="multiple-group-comparison.html#cb131-1" aria-hidden="true" tabindex="-1"></a>df_i_g <span class="ot">&lt;-</span> df_i <span class="sc">%&gt;%</span> </span>
+<span id="cb131-2"><a href="multiple-group-comparison.html#cb131-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(lake) <span class="sc">%&gt;%</span> </span>
+<span id="cb131-3"><a href="multiple-group-comparison.html#cb131-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">ss =</span> <span class="fu">sum</span>(dev_i))</span>
+<span id="cb131-4"><a href="multiple-group-comparison.html#cb131-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb131-5"><a href="multiple-group-comparison.html#cb131-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_i_g)</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 2
+##   lake     ss
+##   &lt;chr&gt; &lt;dbl&gt;
+## 1 a      417.
+## 2 b      565.
+## 3 c      486.</code></pre>
+<p>Then sum over <span class="math inline">\(g\)</span> to get <span class="math inline">\(S_w\)</span>:</p>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="multiple-group-comparison.html#cb133-1" aria-hidden="true" tabindex="-1"></a>s_w <span class="ot">&lt;-</span> <span class="fu">sum</span>(df_i_g<span class="sc">$</span>ss)</span>
+<span id="cb133-2"><a href="multiple-group-comparison.html#cb133-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(s_w)</span></code></pre></div>
+<pre><code>## [1] 1467.645</code></pre>
+</div>
+<div id="variability-to-variance" class="section level3 hasAnchor" number="5.1.3">
+<h3><span class="header-section-number">5.1.3</span> Variability to Variance<a href="multiple-group-comparison.html#variability-to-variance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>I referred to <span class="math inline">\(S_a\)</span> and <span class="math inline">\(S_w\)</span> as “variability,” which essentially represents the summation of squared deviations. To convert them into variances, we can divide them by appropriate numbers. In Chapter <a href="sampling.html#sampling">2</a>, I mentioned that the denominator for variance is the sample size minus one. The same principle applies here, but with caution.</p>
+<p>For the between-group variability, denoted as <span class="math inline">\(S_a\)</span>, the realized sample size is the number of groups, <span class="math inline">\(N_g\)</span>, which in this case is three (representing the number of lakes). Therefore, we divide by three minus one to obtain an unbiased estimate of the between-group variance, denoted as <span class="math inline">\(\hat{\sigma}_a^2&quot;\)</span>:</p>
+<p><span class="math display">\[
+\hat{\sigma}^2_a = \frac{S_a}{N_g-1}
+\]</span></p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="multiple-group-comparison.html#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="co"># n_distinct() count the number of unique elements</span></span>
+<span id="cb135-2"><a href="multiple-group-comparison.html#cb135-2" aria-hidden="true" tabindex="-1"></a>n_g <span class="ot">&lt;-</span> <span class="fu">n_distinct</span>(df_anova<span class="sc">$</span>lake)</span>
+<span id="cb135-3"><a href="multiple-group-comparison.html#cb135-3" aria-hidden="true" tabindex="-1"></a>s2_a <span class="ot">&lt;-</span> s_a <span class="sc">/</span> (n_g <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb135-4"><a href="multiple-group-comparison.html#cb135-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(s2_a)</span></code></pre></div>
+<pre><code>## [1] 52.96827</code></pre>
+<p>Meanwhile, we need to be careful when estimating the within-group variance. Since the within-group variance is measured at the individual level, the number of data used is equal to the number of fish individuals. Yet, we subtract the number of groups – while the rationale behind this is beyond the scope, we are essentially accounting for the fact that some of the degrees of freedom are “used up” in estimating the group means. As such, we estimate the within-group variance <span class="math inline">\(\hat{\sigma}^2_w\)</span> as follows:</p>
+<p><span class="math display">\[
+\hat{\sigma}^2_w = \frac{S_w}{N-N_g}
+\]</span></p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="multiple-group-comparison.html#cb137-1" aria-hidden="true" tabindex="-1"></a>s2_w <span class="ot">&lt;-</span> s_w <span class="sc">/</span> (<span class="fu">nrow</span>(df_anova) <span class="sc">-</span> n_g)</span>
+<span id="cb137-2"><a href="multiple-group-comparison.html#cb137-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(s2_w)</span></code></pre></div>
+<pre><code>## [1] 9.983982</code></pre>
+</div>
+</div>
+<div id="test-statistic-1" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Test Statistic<a href="multiple-group-comparison.html#test-statistic-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="f-statistic" class="section level3 hasAnchor" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> F-statistic<a href="multiple-group-comparison.html#f-statistic" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In ANOVA, we use F-statistic – the ratio of between-group variability to within-group variability. The above exercise was essentially performed to yield this test statistic:</p>
+<p><span class="math display">\[
+F = \frac{\text{between-group variance}}{\text{within-group variance}} = \frac{\hat{\sigma}^2_a}{\hat{\sigma}^2_w}
+\]</span></p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="multiple-group-comparison.html#cb139-1" aria-hidden="true" tabindex="-1"></a>f_value <span class="ot">&lt;-</span> s2_a <span class="sc">/</span> s2_w</span>
+<span id="cb139-2"><a href="multiple-group-comparison.html#cb139-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(f_value)</span></code></pre></div>
+<pre><code>## [1] 5.305325</code></pre>
+<p>The F-statistic in our data was calculated to be 5.31. This indicates that the between-group variance is approximately five times higher than the within-group variance. While this difference appears significant, it is important to determine whether it is statistically substantial. To make such a claim, we can use the Null Hypothesis as a reference.</p>
+</div>
+<div id="null-hypothesis-1" class="section level3 hasAnchor" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> Null Hypothesis<a href="multiple-group-comparison.html#null-hypothesis-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The F-statistic follows an F-distribution when there is no difference in means among the groups. Therefore, the null hypothesis we are considering in our example is that the means of all groups are equal, represented as <span class="math inline">\(\mu_a = \mu_b = \mu_c\)</span>. It’s worth noting that the alternative hypotheses can take different forms, such as <span class="math inline">\(\mu_a \ne \mu_b = \mu_c\)</span>, <span class="math inline">\(\mu_a = \mu_b \ne \mu_c\)</span>, or $_a _b _c`. ANOVA, however, is unable to distinguish between these alternative hypotheses.</p>
+<p>The degrees of freedom in an F-distribution are determined by two parameters: <span class="math inline">\(N_g - 1\)</span> and $N - N_g<code>. To visualize the distribution, you can utilize the</code>df()` function. Similar to the t-test, we can plot the F-distribution and draw a vertical line to represent the observed F-statistic. This approach allows us to assess the position of the observed F-statistic within the distribution and determine the associated p-value.</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="multiple-group-comparison.html#cb141-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="at">by =</span> <span class="fl">0.1</span>)</span>
+<span id="cb141-2"><a href="multiple-group-comparison.html#cb141-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">df</span>(<span class="at">x =</span> x, <span class="at">df1 =</span> n_g <span class="sc">-</span> <span class="dv">1</span>, <span class="at">df2 =</span> <span class="fu">nrow</span>(df_anova) <span class="sc">-</span> n_g)</span>
+<span id="cb141-3"><a href="multiple-group-comparison.html#cb141-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb141-4"><a href="multiple-group-comparison.html#cb141-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">x =</span> x, <span class="at">y =</span> y) <span class="sc">%&gt;%</span> </span>
+<span id="cb141-5"><a href="multiple-group-comparison.html#cb141-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x,</span>
+<span id="cb141-6"><a href="multiple-group-comparison.html#cb141-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> y)) <span class="sc">+</span> </span>
+<span id="cb141-7"><a href="multiple-group-comparison.html#cb141-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="co"># F distribution</span></span>
+<span id="cb141-8"><a href="multiple-group-comparison.html#cb141-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> f_value,</span>
+<span id="cb141-9"><a href="multiple-group-comparison.html#cb141-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">&quot;salmon&quot;</span>) <span class="co"># observed F-statistic</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:f-dist"></span>
+<img src="_main_files/figure-html/f-dist-1.png" alt="F-distribution. The vertical red line denotes the observed F-statistic." width="672" />
+<p class="caption">
+Figure 5.2: F-distribution. The vertical red line denotes the observed F-statistic.
+</p>
+</div>
+<p>Unlike t-statistics, F-statistics can take only positive values (because F-statistics are the ratio of positive values). The p-value here is <span class="math inline">\(\Pr(F &gt;F_0)\)</span>, where <span class="math inline">\(F_0\)</span> is the possible F-statistics under the null hypothesis. Let’s estimate this probability using <code>pf()</code>:</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="multiple-group-comparison.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pf() estimate the probability of less than q</span></span>
+<span id="cb142-2"><a href="multiple-group-comparison.html#cb142-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Pr(F &gt; F0) is 1 - Pr(F &lt; F0)</span></span>
+<span id="cb142-3"><a href="multiple-group-comparison.html#cb142-3" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pf</span>(<span class="at">q =</span> f_value, <span class="at">df1 =</span> n_g <span class="sc">-</span> <span class="dv">1</span>, <span class="at">df2 =</span> <span class="fu">nrow</span>(df_anova) <span class="sc">-</span> n_g)</span>
+<span id="cb142-4"><a href="multiple-group-comparison.html#cb142-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p_value)</span></code></pre></div>
+<pre><code>## [1] 0.00596054</code></pre>
+</div>
+</div>
+<div id="anova-in-r" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> ANOVA in R<a href="multiple-group-comparison.html#anova-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Like the t-test, R provides functions to perform ANOVA easily. In this case, we will utilize the <code>aov()</code> function. The first argument of this function is the “formula,” which is used to describe the structure of the model. In our scenario, we aim to explain the fish body length by grouping them according to lakes. In the formula expression, we represent this relationship as <code>length ~ lake</code>, using the tilde symbol (~) to indicate the stochastic nature of the relationship.</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="multiple-group-comparison.html#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="co"># first argument is formula</span></span>
+<span id="cb144-2"><a href="multiple-group-comparison.html#cb144-2" aria-hidden="true" tabindex="-1"></a><span class="co"># second argument is data frame for reference</span></span>
+<span id="cb144-3"><a href="multiple-group-comparison.html#cb144-3" aria-hidden="true" tabindex="-1"></a><span class="co"># do not forget specify data = XXX! aov() refer to columns in the data frame</span></span>
+<span id="cb144-4"><a href="multiple-group-comparison.html#cb144-4" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">aov</span>(<span class="at">formula =</span> length <span class="sc">~</span> lake,</span>
+<span id="cb144-5"><a href="multiple-group-comparison.html#cb144-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">data =</span> df_anova)</span>
+<span id="cb144-6"><a href="multiple-group-comparison.html#cb144-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb144-7"><a href="multiple-group-comparison.html#cb144-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(m)</span></code></pre></div>
+<pre><code>## Call:
+##    aov(formula = length ~ lake, data = df_anova)
+## 
+## Terms:
+##                      lake Residuals
+## Sum of Squares   105.9365 1467.6454
+## Deg. of Freedom         2       147
+## 
+## Residual standard error: 3.159744
+## Estimated effects may be unbalanced</code></pre>
+<p>The function returns <code>Sum of Squares</code> and <code>Deg. of Freedom</code> – these value matches what we have calculated. To get deeper insights, wrap the object with <code>summary()</code>:</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="multiple-group-comparison.html#cb146-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m)</span></code></pre></div>
+<pre><code>##              Df Sum Sq Mean Sq F value  Pr(&gt;F)   
+## lake          2  105.9   52.97   5.305 0.00596 **
+## Residuals   147 1467.6    9.98                   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>The F-statistic and p-value are identical to our manual estimate.</p>
+</div>
+<div id="post-hoc-tests" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> Post-hoc Tests<a href="multiple-group-comparison.html#post-hoc-tests" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>When conducting an ANOVA and finding a significant difference among group means, a post-hoc test is often performed to determine which specific groups differ significantly from each other. Post-hoc tests help to identify pairwise comparisons that contribute to the observed overall difference.</p>
+<p>There are several post-hoc tests available for ANOVA, including:</p>
+<ol style="list-style-type: decimal">
+<li><p>Tukey’s Honestly Significant Difference (HSD): This test compares all possible pairs of group means and provides adjusted p-values to control for the family-wise error rate. It is a commonly used and reliable post-hoc test.</p></li>
+<li><p>Bonferroni correction: This method adjusts the significance level for each individual comparison to control the overall Type I error rate. The adjusted p-value is obtained by dividing the desired significance level (e.g., 0.05) by the number of comparisons.</p></li>
+<li><p>Scheffe’s test: This test controls the family-wise error rate by considering all possible pairwise comparisons. It is more conservative than Tukey’s HSD, but it is suitable for cases where specific comparisons are of particular interest.</p></li>
+<li><p>Dunnett’s test: This test is useful when comparing multiple groups against a control group. It controls the overall error rate by conducting multiple t-tests between the control group and each of the other groups.</p></li>
+</ol>
+<p>The choice of post-hoc test depends on the specific research question, assumptions, and desired control of the Type I error rate. It is important to select an appropriate test and interpret the results accordingly to draw valid conclusions about group differences in an ANOVA analysis.</p>
+</div>
+<div id="laboratory-4" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> Laboratory<a href="multiple-group-comparison.html#laboratory-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="two-group-comparison.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="appendix-project-management.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/chapters/05-anova.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

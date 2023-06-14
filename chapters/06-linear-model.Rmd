@@ -1,0 +1,11 @@
+```{r, include=FALSE}
+source(here::here("code/library.R"))
+df_algae <- read_csv(here::here("data_raw/data_algae.csv"))
+```
+# Regression
+
+Our previous examples focused on cases that involved a distinct group structure. However, it is not always the case that such a structure exists. Instead, we might examine the relationship between continuous variables. In this chapter, I will introduce a technique called linear regression.
+
+## Drawing the "fittest" line
+
+For this exercise, we will use algae biomass data from streams. Download the data here 

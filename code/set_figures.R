@@ -8,16 +8,16 @@ source(here::here("code/library.R"))
 ## base numbers
 set.seed(10)
 
-lake_size <- 15
+garden_size <- 15
 n_plot <- 225
 
-plot10 <- foreach(i = seq(1, 15, by = 2), .combine = c) %do% {
+plot30 <- foreach(i = seq(1, 15, by = 2), .combine = c) %do% {
   one <- (i - 1) * 15 + 1
   x <- seq(one, (one + 15), by = 2) %>% sample(size = 4)
   
   return(x)
 } %>% 
-  sample(size = 10)
+  sample(size = 30)
 
 ## data set
 df_plot <- expand.grid(x0 = seq(0, 14, length = 15),
@@ -26,34 +26,18 @@ df_plot <- expand.grid(x0 = seq(0, 14, length = 15),
   mutate(x1 = x0 + 1,
          y1 = y0 + 1)
 
-df_fish <- tibble(x = runif(500, 0, lake_size),
-                  y = runif(500, 0, lake_size))
-
-
-df_fish_sub <- foreach(i = seq_len(nrow(df_plot)),
-                       .combine = bind_rows) %do% {
-                         df_fish %>% 
-                           filter(x > df_plot$x0[i],
-                                  x < df_plot$x1[i],
-                                  y > df_plot$y0[i],
-                                  y < df_plot$y1[i]) %>% 
-                           mutate(plot = i,
-                                  count = nrow(.))
-                       } %>% 
-  right_join(tibble(plot = 1:n_plot),
-             by = "plot") %>% 
-  mutate(count = replace_na(count, replace = 0))
-
 ## plot
-g_lake <- df_fish_sub %>% 
-  filter(plot %in% plot10) %>% 
+df_garden_sub <- readRDS(here::here("data_raw/data_garden_sub.rds"))
+
+g_garden <- df_garden_sub %>% 
+  filter(plot %in% plot30) %>% 
   ggplot(aes(x = x, y = y)) +
   geom_rect(aes(xmin = 0,
-                xmax = lake_size,
+                xmax = garden_size,
                 ymin = 0,
-                ymax = lake_size),
-            fill = "steelblue") +
-  geom_rect(data = df_plot %>% slice(plot10),
+                ymax = garden_size),
+            fill = "seagreen") +
+  geom_rect(data = df_plot %>% slice(plot30),
             aes(x = x0,
                 y = y0,
                 xmin = x0,
@@ -65,13 +49,13 @@ g_lake <- df_fish_sub %>%
             linewidth = 0.1) +
   geom_point(size = 0.5,
              color = "salmon") +
-  scale_x_continuous(limits = c(0, lake_size)) +
-  scale_y_continuous(limits = c(0, lake_size)) +
+  scale_x_continuous(limits = c(0, garden_size)) +
+  scale_y_continuous(limits = c(0, garden_size)) +
   theme_minimal()
 
-ggsave(g_lake,
-       filename = "image/figure_lake.pdf",
-       width = 5, height = 5)
+ggsave(g_garden,
+       filename = "image/figure_garden.jpg",
+       width = 4, height = 4)
 
 
 # dendrogram for probability distributions --------------------------------

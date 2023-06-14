@@ -1,0 +1,244 @@
+```{r, include=FALSE}
+source(here::here("code/library.R"))
+df_anova <- read_csv(here::here("data_raw/data_fish_length_anova.csv"))
+```
+
+# Multiple-Group Comparison
+
+The t-test is used to compare two groups, but when there are more than two groups, ANOVA (Analysis of Variance) is employed. ANOVA allows for simultaneous comparison of means among multiple groups to determine if there are statistically significant differences. ANOVA uses the following steps:
+
+1.  Partition the total variability into **between-group** and **within-group** components.
+2.  Define a **test statistic** as a ratio of between-group variability to within-group variability (F statistic).
+3.  Define a probability distribution of F-statistic under the null hypothesis.
+4.  Estimate the probability of yielding greater the observed test statistic.
+
+If appropriate, post-hoc tests can be conducted to identify specific differing groups.
+
+## Partition the Variability
+
+The first step is to determine what aspect to examine. In the case of a t-test, we focus on the difference in sample means between groups. One might initially consider conducting t-tests for all possible combinations. However, this approach leads to a problem known as the [multiple comparisons problem](https://en.wikipedia.org/wiki/Multiple_comparisons_problem#:~:text=In%20statistics%2C%20the%20multiple%20comparisons,based%20on%20the%20observed%20values.). Hence, this is not a viable option. Therefore, we need to explore the data from a different perspective.
+
+To facilitate learning, let's once again utilize the lake fish data, but this time we have three lakes in our analysis:
+
+```{r, eval = F}
+df_anova <- read_csv("data_raw/data_fish_length_anova.csv")
+distinct(df_anova, lake)
+```
+
+```{r, echo = F}
+distinct(df_anova, lake)
+```
+
+Visualization can be helpful in understanding how the data is distributed. While mean $\pm$ SD is perfectly fine here, let me use a violin plot to show a different way of visualization.
+
+```{r violin, fig.cap="Violin plot for fish length in three lakes."}
+# geom_violin() - function for violin plots
+# geom_jitter() - jittered points
+
+df_anova %>% 
+  ggplot(aes(x = lake,
+             y = length)) +
+  geom_violin(draw_quantiles = 0.5, # draw median horizontal line
+              alpha = 0.2) + # transparency
+  geom_jitter(alpha = 0.2) # transparency
+```
+
+It appears that Lake `b` exhibits a larger average body size compared to the other lakes. One approach to quantifying this difference between groups is by examining the ratio of between-group variability to within-group variability. **If we observe a greater between-group variability relative to within-group variability, it suggests that the differences among the groups are substantial.** In other words, much of the observed variation is explained by the group structure (lake).
+
+Let me denote between-group and within-group variability as $S_w$ and $S_a$, respectively, which are defined as follows:
+
+$$
+\begin{aligned}
+S_a &= \sum_g \sum_i (\hat{\mu}_{g(i)} - \hat{\mu})^2\\
+S_w &= \sum_g \sum_i (x_{i} - \hat{\mu}_{g(i)})^2
+\end{aligned}
+$$
+
+The double summation $\sum_g \sum_i$ might scare you, but no worries. We can decompose this equation into two steps.
+
+### Between-group variability
+
+Let me first consider $S_a = \sum_g \sum_i (\hat{\mu}_{g(i)} - \hat{\mu})^2$. In this equation, $\hat{\mu}$ is the overall mean of the fish length and $\hat{\mu}_{g(i)}$ is the group-mean in a given lake ($g = \{a, b, c\}$). Let's perform this estimation in R:
+
+```{r}
+# estimate overall mean
+mu <- mean(df_anova$length)
+
+# estimate group means and sample size each
+df_g <- df_anova %>% 
+  group_by(lake) %>% 
+  summarize(mu_g = mean(length), # mean for each group
+            dev_g = (mu_g - mu)^2, # squared deviation for each group
+            n = n()) # sample size for each group
+
+print(df_g)
+```
+
+In the column `dev_g`, we estimated $(\hat{\mu}_{g(i)} - \hat{\mu})^2$. We must sum over $i$ (fish individual) to get the variability in each lake ($\sum_i (\hat{\mu}_{g(i)} - \hat{\mu})^2$). Since $\hat{\mu}_{g(i)}$ is constant in each lake, we can simply multiply `dev_g` with sample size `n` in each lake:
+
+```{r}
+df_g <- df_g %>% 
+  mutate(ss = dev_g * n)
+
+print(df_g)
+```
+
+Sum over $g$ (lake) to get $S_a$.
+
+```{r}
+s_a <- sum(df_g$ss)
+print(s_a)
+```
+
+### Within-group variability
+
+We can follow the same steps to estimate the within-group variability $S_w = \sum_g \sum_i (x_{i} - \hat{\mu}_{g(i)})^2$. Let's estimate $(x_{i} - \hat{\mu}_{g(i)})^2$ first:
+
+```{r}
+df_i <- df_anova %>% 
+  group_by(lake) %>% 
+  mutate(mu_g = mean(length)) %>% # use mutate() to retain individual rows
+  ungroup() %>% 
+  mutate(dev_i = (length - mu_g)^2) # deviation from group mean for each fish
+```
+
+You can take a look at group-level data with the following code; the column `mu_g` contains group-specific means of fish length, and `dev_i` contains $(x_{g(i)} - \hat{\mu}_{g(i)})^2$:
+
+```{r, eval=FALSE}
+
+# filter() & slice(): show first 3 rows each group
+print(df_i %>% filter(lake == "a") %>% slice(1:3))
+
+print(df_i %>% filter(lake == "b") %>% slice(1:3))
+
+print(df_i %>% filter(lake == "c") %>% slice(1:3))
+```
+
+Sum over $i$ in each lake $g$ ($\sum_i (x_{g(i)} - \hat{\mu}_{g(i)})^2$):
+
+```{r}
+df_i_g <- df_i %>% 
+  group_by(lake) %>% 
+  summarize(ss = sum(dev_i))
+
+print(df_i_g)
+```
+
+Then sum over $g$ to get $S_w$:
+
+```{r}
+s_w <- sum(df_i_g$ss)
+print(s_w)
+```
+
+### Variability to Variance
+
+I referred to $S_a$ and $S_w$ as "variability," which essentially represents the summation of squared deviations. To convert them into variances, we can divide them by appropriate numbers. In Chapter \@ref(sampling), I mentioned that the denominator for variance is the sample size minus one. The same principle applies here, but with caution.
+
+For the between-group variability, denoted as $S_a$, the realized sample size is the number of groups, $N_g$, which in this case is three (representing the number of lakes). Therefore, we divide by three minus one to obtain an unbiased estimate of the between-group variance, denoted as $\hat{\sigma}_a^2"$:
+
+$$
+\hat{\sigma}^2_a = \frac{S_a}{N_g-1}
+$$
+
+```{r}
+# n_distinct() count the number of unique elements
+n_g <- n_distinct(df_anova$lake)
+s2_a <- s_a / (n_g - 1)
+print(s2_a)
+```
+
+Meanwhile, we need to be careful when estimating the within-group variance. Since the within-group variance is measured at the individual level, the number of data used is equal to the number of fish individuals. Yet, we subtract the number of groups -- while the rationale behind this is beyond the scope, we are essentially accounting for the fact that some of the degrees of freedom are "used up" in estimating the group means. As such, we estimate the within-group variance $\hat{\sigma}^2_w$ as follows:
+
+$$
+\hat{\sigma}^2_w = \frac{S_w}{N-N_g}
+$$
+
+```{r}
+s2_w <- s_w / (nrow(df_anova) - n_g)
+print(s2_w)
+```
+
+## Test Statistic
+
+### F-statistic
+
+In ANOVA, we use F-statistic -- the ratio of between-group variability to within-group variability. The above exercise was essentially performed to yield this test statistic:
+
+$$
+F = \frac{\text{between-group variance}}{\text{within-group variance}} = \frac{\hat{\sigma}^2_a}{\hat{\sigma}^2_w}
+$$
+
+```{r}
+f_value <- s2_a / s2_w
+print(f_value)
+```
+
+The F-statistic in our data was calculated to be `r round(f_value, 2)`. This indicates that the between-group variance is approximately five times higher than the within-group variance. While this difference appears significant, it is important to determine whether it is statistically substantial. To make such a claim, we can use the Null Hypothesis as a reference.
+
+### Null Hypothesis
+
+The F-statistic follows an F-distribution when there is no difference in means among the groups. Therefore, the null hypothesis we are considering in our example is that the means of all groups are equal, represented as $\mu_a = \mu_b = \mu_c$. It's worth noting that the alternative hypotheses can take different forms, such as $\mu_a \ne \mu_b = \mu_c$, $\mu_a = \mu_b \ne \mu_c$, or $\mu_a \ne \mu_b \ne \mu_c$. ANOVA, however, is unable to distinguish between these alternative hypotheses.
+
+The degrees of freedom in an F-distribution are determined by two parameters: $N_g - 1$ and $N - N_g$. To visualize the distribution, you can utilize the`df()` function. Similar to the t-test, we can plot the F-distribution and draw a vertical line to represent the observed F-statistic. This approach allows us to assess the position of the observed F-statistic within the distribution and determine the associated p-value.
+
+```{r f-dist, fig.cap="F-distribution. The vertical red line denotes the observed F-statistic."}
+x <- seq(0, 10, by = 0.1)
+y <- df(x = x, df1 = n_g - 1, df2 = nrow(df_anova) - n_g)
+
+tibble(x = x, y = y) %>% 
+  ggplot(aes(x = x,
+             y = y)) + 
+  geom_line() + # F distribution
+  geom_vline(xintercept = f_value,
+             color = "salmon") # observed F-statistic
+```
+
+Unlike t-statistics, F-statistics can take only positive values (because F-statistics are the ratio of positive values). The p-value here is $\Pr(F_0 > F)$, where $F_0$ is the possible F-statistics under the null hypothesis. Let's estimate this probability using `pf()`:
+
+```{r}
+# pf() estimate the probability of less than q
+# Pr(F0 > F) is 1 - Pr(F0 < F)
+p_value <- 1 - pf(q = f_value, df1 = n_g - 1, df2 = nrow(df_anova) - n_g)
+print(p_value)
+```
+
+## ANOVA in R
+
+Like the t-test, R provides functions to perform ANOVA easily. In this case, we will utilize the `aov()` function. The first argument of this function is the "formula," which is used to describe the structure of the model. In our scenario, we aim to explain the fish body length by grouping them according to lakes. In the formula expression, we represent this relationship as `length ~ lake`, using the tilde symbol (\~) to indicate the stochastic nature of the relationship.
+
+```{r}
+# first argument is formula
+# second argument is data frame for reference
+# do not forget specify data = XXX! aov() refer to columns in the data frame
+m <- aov(formula = length ~ lake,
+         data = df_anova)
+
+print(m)
+```
+
+The function returns `Sum of Squares` and `Deg. of Freedom` -- these value matches what we have calculated. To get deeper insights, wrap the object with `summary()`:
+
+```{r}
+summary(m)
+```
+
+The F-statistic and p-value are identical to our manual estimate.
+
+## Post-hoc Tests
+
+When conducting an ANOVA and finding a significant difference among group means, a post-hoc test is often performed to determine which specific groups differ significantly from each other. Post-hoc tests help to identify pairwise comparisons that contribute to the observed overall difference.
+
+There are several post-hoc tests available for ANOVA, including:
+
+1.  Tukey's Honestly Significant Difference (HSD): This test compares all possible pairs of group means and provides adjusted p-values to control for the family-wise error rate. It is a commonly used and reliable post-hoc test.
+
+2.  Bonferroni correction: This method adjusts the significance level for each individual comparison to control the overall Type I error rate. The adjusted p-value is obtained by dividing the desired significance level (e.g., 0.05) by the number of comparisons.
+
+3.  Scheffe's test: This test controls the family-wise error rate by considering all possible pairwise comparisons. It is more conservative than Tukey's HSD, but it is suitable for cases where specific comparisons are of particular interest.
+
+4.  Dunnett's test: This test is useful when comparing multiple groups against a control group. It controls the overall error rate by conducting multiple t-tests between the control group and each of the other groups.
+
+The choice of post-hoc test depends on the specific research question, assumptions, and desired control of the Type I error rate. It is important to select an appropriate test and interpret the results accordingly to draw valid conclusions about group differences in an ANOVA analysis.
+
+## Laboratory

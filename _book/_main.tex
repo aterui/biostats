@@ -119,7 +119,7 @@
 
 \title{BIOSTATS}
 \author{Akira Terui}
-\date{Last updated on 2023-06-02}
+\date{Last updated on 2023-06-14}
 
 \begin{document}
 \maketitle
@@ -173,8 +173,8 @@ Central tendency measures (Table \ref{tab:central}) provide insights into the ty
 \end{itemize}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.0346}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.9654}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2278}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7722}}@{}}
 \caption{\label{tab:central} Common measures of central tendency. \(N\) refers to the number of data points.}\tabularnewline
 \toprule()
 \begin{minipage}[b]{\linewidth}\raggedright
@@ -192,17 +192,17 @@ Equation
 \end{minipage} \\
 \midrule()
 \endhead
-Arithmetic mean \(\mu\) & \(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          \frac{\sum_i^N x_i}{N}                                                                                                                                               
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          \) \\
-Geometric mean \(\mu_{ge}\) & \(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          (\prod_i^N x_i)^{\frac{1}{N}}                                                                                                                                        
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          \) \\
-Median \(\mu_{med}\) & \(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          \begin{aligned}                                                                                                                                                      
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          &x_{(\frac{N + 1}{2}^\text{th})} &&\text{if N is odd number}\\                                                                                                       
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          &\frac{1}{2}[x_{(\frac{N}{2}^\text{th})} + x_{(\frac{N}{2} + 1^\text{th})}] &&\text{if N is even number}                                                             
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          \end{aligned}\) \\
+Arithmetic mean \(\mu\) & \(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     \frac{\sum_i^N x_i}{N}                                                                                                                                                             
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     \) \\
+Geometric mean \(\mu_{ge}\) & \(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     (\prod_i^N x_i)^{\frac{1}{N}}                                                                                                                                                      
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     \) \\
+Median \(\mu_{med}\) & \(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     \begin{aligned}                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     &x_{(\frac{N + 1}{2}^\text{th})} &&\text{if N is odd number}\\                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     &\frac{1}{2}[x_{(\frac{N}{2}^\text{th})} + x_{(\frac{N}{2} + 1^\text{th})}] &&\text{if N is even number}                                                                           
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     \end{aligned}\) \\
 \bottomrule()
 \end{longtable}
 
@@ -400,8 +400,8 @@ Variation measures (Table \ref{tab:variation}) provide information about the spr
 \end{itemize}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.0494}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.9506}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.3103}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.6897}}@{}}
 \caption{\label{tab:variation} Common measures of variation. \(N\) refers to the number of data points.}\tabularnewline
 \toprule()
 \begin{minipage}[b]{\linewidth}\raggedright
@@ -419,21 +419,21 @@ Equation
 \end{minipage} \\
 \midrule()
 \endhead
-Variance \(\sigma^2\) (standard deviation \(\sigma\)) & \(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          \frac{\sum_i^N (x_i - \mu)^2}{N}                                               
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          \) \\
-Inter-Quantile Range IQR (\(x_l\) and \(x_h\) are \(l^{th}\) and \(h^{th}\) percentiles, respectively) & \(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |x_{l} - x_{h}|                                                                
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          \) \\
-Median Absolute Deviation (MAD) & \(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          \text{Median}(|x_i-\mu_{med}|)                                                 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          \) \\
-Coefficient of Variation (CV) & \(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          \frac{\sigma}{\mu}                                                             
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          \) \\
-MAD/Median & \(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          \frac{\text{MAD}}{\mu_{med}}                                                   
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          \) \\
+Variance \(\sigma^2\) (standard deviation \(\sigma\)) & \(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        \frac{\sum_i^N (x_i - \mu)^2}{N}                                                             
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        \) \\
+Inter-Quantile Range IQR (\(x_l\) and \(x_h\) are \(l^{th}\) and \(h^{th}\) percentiles, respectively) & \(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |x_{l} - x_{h}|                                                                              
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        \) \\
+Median Absolute Deviation (MAD) & \(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        \text{Median}(|x_i-\mu_{med}|)                                                               
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        \) \\
+Coefficient of Variation (CV) & \(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        \frac{\sigma}{\mu}                                                                           
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        \) \\
+MAD/Median & \(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        \frac{\text{MAD}}{\mu_{med}}                                                                 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        \) \\
 \bottomrule()
 \end{longtable}
 
@@ -642,7 +642,7 @@ Why do we have absolute (variance, SD, MAD, IQR) and relative measures (CV, MAD/
 \end{Shaded}
 
 \begin{verbatim}
-## [1]  7.693534 12.056249  9.954456 10.489594 12.082495 12.152664
+## [1]  9.237455  9.171337 10.834474  9.032348  9.971185 10.232525
 \end{verbatim}
 
 Using this data, perform the following exercise:
@@ -657,8 +657,8 @@ Using this data, perform the following exercise:
   Calculate CV and MAD/Median for \texttt{w} and \texttt{m}.
 \end{enumerate}
 
-\hypertarget{sampling-concept}{%
-\chapter{Sampling Concept}\label{sampling-concept}}
+\hypertarget{sampling}{%
+\chapter{Sampling}\label{sampling}}
 
 \emph{``Why do I need statistics in the first place?''} This was the initial question that arose when I entered the field of ecology. Initially, I assumed it would be a straightforward query with an immediate response. However, I soon realized that it is a profound question with a complex answer. In short, ``we need statistics because we often possess only partial information about what we seek to understand.'' Now, let's explore the more elaborate explanation below.
 
@@ -668,19 +668,19 @@ Using this data, perform the following exercise:
 Consider a scenario where we are conducting a study on plant height in a garden. In this garden, there exists a thousand of individual plants, making it impractical for a single researcher to measure all of them. Instead, due to resource limitations, a sample of \(10\) plants was selected to \textbf{\emph{calculate}} the average height and the extent of variation among these plant individuals:
 
 \begin{verbatim}
-## # A tibble: 10 x 3
-##    plant_id height unit 
-##       <int>  <dbl> <chr>
-##  1        1   16.9 cm   
-##  2        2   20.9 cm   
-##  3        3   15.8 cm   
-##  4        4   28   cm   
-##  5        5   21.6 cm   
-##  6        6   15.9 cm   
-##  7        7   22.4 cm   
-##  8        8   23.7 cm   
-##  9        9   22.9 cm   
-## 10       10   18.5 cm
+## # A tibble: 10 x 4
+##     ...1 plant_id height unit 
+##    <dbl>    <dbl>  <dbl> <chr>
+##  1     1        1   16.9 cm   
+##  2     2        2   20.9 cm   
+##  3     3        3   15.8 cm   
+##  4     4        4   28   cm   
+##  5     5        5   21.6 cm   
+##  6     6        6   15.9 cm   
+##  7     7        7   22.4 cm   
+##  8     8        8   23.7 cm   
+##  9     9        9   22.9 cm   
+## 10    10       10   18.5 cm
 \end{verbatim}
 
 Cool. Let's use this data set to learn about the pitfall behind this. Create a vector of plant height \texttt{h} and put it in a \texttt{tibble()} to analyze it:
@@ -701,7 +701,7 @@ This format (\texttt{tibble()}) is better than a raw vector of height because it
 \begin{Highlighting}[]
 \CommentTok{\# nrow() returns the number of rows}
 \CommentTok{\# while piping, "." refers to the dataframe inherited }
-\CommentTok{\# i.e., nrow(.) counts the number of rows in df\_height}
+\CommentTok{\# i.e., nrow(.) counts the number of rows in df\_h1}
 \NormalTok{df\_h1 }\OtherTok{\textless{}{-}}\NormalTok{ df\_h1 }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{mu\_height =} \FunctionTok{mean}\NormalTok{(height),}
          \AttributeTok{var\_height =} \FunctionTok{sum}\NormalTok{((height }\SpecialCharTok{{-}}\NormalTok{ mu\_height)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{) }\SpecialCharTok{/} \FunctionTok{nrow}\NormalTok{(.))}
@@ -711,19 +711,19 @@ This format (\texttt{tibble()}) is better than a raw vector of height because it
 Awesome, we were able to get the average height and the variance! -- \textbf{however, how confident are you?} We obtained plant height only from 10\ldots out of 1000. Are they different if we measure another set of 10 plant individuals? Let's see:
 
 \begin{verbatim}
-## # A tibble: 10 x 3
-##    plant_id height unit 
-##       <int>  <dbl> <chr>
-##  1       11   27.6 cm   
-##  2       12   21.9 cm   
-##  3       13   16.9 cm   
-##  4       14    8.9 cm   
-##  5       15   25.6 cm   
-##  6       16   19.8 cm   
-##  7       17   19.9 cm   
-##  8       18   24.7 cm   
-##  9       19   24.1 cm   
-## 10       20   23   cm
+## # A tibble: 10 x 4
+##     ...1 plant_id height unit 
+##    <dbl>    <dbl>  <dbl> <chr>
+##  1    11       11   27.6 cm   
+##  2    12       12   21.9 cm   
+##  3    13       13   16.9 cm   
+##  4    14       14    8.9 cm   
+##  5    15       15   25.6 cm   
+##  6    16       16   19.8 cm   
+##  7    17       17   19.9 cm   
+##  8    18       18   24.7 cm   
+##  9    19       19   24.1 cm   
+## 10    20       20   23   cm
 \end{verbatim}
 
 Create another \texttt{tibble()} :
@@ -767,7 +767,7 @@ The exercise highlights an important takeaway: what we can determine from the ab
 
 In the field of biological research, it is often impractical or impossible to sample the entire population, so we must rely on estimating the unknowns (in this case, the \emph{mean} and \emph{variance}) from the available samples. This is where statistics comes into play, offering a tool to infer information about the entire population based on partial information obtained from the samples.
 
-The population mean and variance in the garden, which are the unknowns we are interested in, are referred to as ``\textbf{parameters.}'' These parameters \uline{\emph{cannot be directly measured}} but can be \uline{\emph{estimated}} from samples through statistical inference.
+The unknowns we are interested in, which the population mean and variance in this example, are referred to as ``\textbf{parameters.}'' These parameters \uline{\emph{cannot be directly measured}} but can be \uline{\emph{estimated}} from samples through statistical inference.
 
 Provided that certain assumptions are met, the \emph{sample mean} is the unbiased point estimate of the \emph{population} \emph{mean}. The \textbf{``\emph{unbiased}''} means that the sample means -- if we repeat the sampling process -- are centered around the population mean. In the meantime, the sample variance -- if we use the formula in Chapter \ref{descriptive-statistics} -- is ``\textbf{\emph{biased}}.'' It tends to be smaller than the population variance.
 
@@ -842,16 +842,16 @@ We can simulate the sampling of 10 plant individuals by randomly selecting 10 ro
 ## # A tibble: 10 x 4
 ##     ...1 plant_id height unit 
 ##    <dbl>    <dbl>  <dbl> <chr>
-##  1   815      815   18.8 cm   
-##  2   923      923   21.7 cm   
-##  3   495      495   39.1 cm   
-##  4    15       15   25.6 cm   
-##  5   291      291   18   cm   
-##  6   274      274   33.2 cm   
-##  7   350      350   29.4 cm   
-##  8   516      516   21.2 cm   
-##  9   789      789   23.4 cm   
-## 10   232      232    5.6 cm
+##  1   308      308   22.8 cm   
+##  2   461      461   17.7 cm   
+##  3   602      602   27.5 cm   
+##  4   181      181   13.8 cm   
+##  5   488      488   14.8 cm   
+##  6   565      565   17   cm   
+##  7   302      302   14.8 cm   
+##  8    96       96   22.8 cm   
+##  9   853      853   14.8 cm   
+## 10   987      987   15.9 cm
 \end{verbatim}
 
 Since \texttt{sample\_n()} selects rows randomly, you will (very likely) get different set of 10 individuals/rows every single time. Below is another set of 10 rows (notice that \texttt{df\_i} is overwritten with the new data set):
@@ -869,16 +869,16 @@ Since \texttt{sample\_n()} selects rows randomly, you will (very likely) get dif
 ## # A tibble: 10 x 4
 ##     ...1 plant_id height unit 
 ##    <dbl>    <dbl>  <dbl> <chr>
-##  1    87       87   25.3 cm   
-##  2    52       52   16.9 cm   
-##  3   657      657   20   cm   
-##  4   336      336   23.7 cm   
-##  5   806      806   19.1 cm   
-##  6   335      335   18.3 cm   
-##  7   819      819   11.7 cm   
-##  8   557      557    8.3 cm   
-##  9   838      838   21.5 cm   
-## 10   911      911   20.5 cm
+##  1   962      962   19.9 cm   
+##  2   618      618   11   cm   
+##  3   614      614   13   cm   
+##  4   735      735   22.1 cm   
+##  5   215      215   24.9 cm   
+##  6    32       32   19.5 cm   
+##  7   230      230   21.3 cm   
+##  8   367      367   23.4 cm   
+##  9   270      270   15.3 cm   
+## 10   524      524   21   cm
 \end{verbatim}
 
 Let's obtain 100 sets of 10 plant individuals (randomly selected) and \emph{estimate} the mean and variance in each. While we can perform random sampling one by one, this is cumbersome -- at least, I do not want to do it. Instead, we can leverage a technique of \texttt{for} loop:
@@ -1067,10 +1067,416 @@ Recognizing the limitations and uncertainties associated with working with sampl
   Repeat step 1 with \texttt{df\_h10} instead of \texttt{df\_h0} and compare the results.
 \end{enumerate}
 
+\hypertarget{probabilistic-view}{%
+\chapter{Probabilistic View}\label{probabilistic-view}}
+
+Chapter \ref{sampling} emphasized the concept of sampling and introduced the crucial aspect of statistics: randomness. Although the mean represents the central tendency of the data, it does not encompass all the data points. Inevitable deviations occur, and we need a way to express this ``randomness.'' The concept of probability distributions aids in fully understanding the stochastic nature of observed data.
+
+\hypertarget{probability-distribution-of-a-continuous-variable}{%
+\section{Probability Distribution of a Continuous Variable}\label{probability-distribution-of-a-continuous-variable}}
+
+\hypertarget{probability-density-function}{%
+\subsection{Probability Density Function}\label{probability-density-function}}
+
+Let me use the plant height example in Chapter \ref{sampling}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# load csv data on R}
+\NormalTok{df\_h0 }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"data\_raw/data\_plant\_height.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+While Chapter \ref{sampling} primarily focused on exploring mean and variance, let's broaden our perspective to gain a comprehensive understanding of the entire distribution of height.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_h0 }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ height)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+} \CommentTok{\# specify binwidth}
+  \FunctionTok{geom\_vline}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{xintercept =} \FunctionTok{mean}\NormalTok{(height))) }\CommentTok{\# draw vertical line at the mean}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{_main_files/figure-latex/histogram-height-1} 
+
+}
+
+\caption{Distribution of plant height}\label{fig:histogram-height}
+\end{figure}
+
+This distribution comprises a thousand height measurements. However, there are certain patterns to consider. The data is centered around the mean and exhibits a symmetrical distribution. This characteristic implies that the distribution can be approximated by a simple formula that relies on only a few \emph{key parameters}.
+
+In statistics, the symmetrical bell-shaped form is commonly approximated by a Normal distribution, often denoted as ``\emph{variable} \(x\) \emph{is assumed to follow a Normal distribution.}'' We express this using the following mathematical expression:
+
+\[
+x \sim Normal(\mu, \sigma^2)
+\]
+
+Unlike an ``equation,'' we do not use the ``\(=\)'' sign because variable \(x\) is not equivalent to the Normal distribution. Rather, it represents a ``stochastic'' relationship that signifies the probability of \(x\) taking on a specific range of values.
+
+A Normal distribution is characterized by two parameters: the mean and the variance. Once these parameters are determined, the formula that defines the Normal distribution will yield the probability density for a given range of values. This formula \(f(x)\) is known as the \textbf{probability density function (PDF)} and is displayed below:
+
+\[
+f(x) = \frac{1}{\sqrt{2 \pi} \sigma} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
+\]
+
+\hypertarget{pdf-to-frequency-distribution}{%
+\subsection{PDF to frequency distribution}\label{pdf-to-frequency-distribution}}
+
+In R, the function \texttt{dnorm()} can be used to calculate the probability density for a given value. The first argument, \texttt{x}, should be a vector of values for which you want to calculate the probability density. The second argument, \texttt{mean}, and the third argument, \texttt{sd}, correspond to the mean and standard deviation of the distribution, respectively. Note that we must provide \texttt{mean} and \texttt{sd} to calculate the probability density.
+
+To encompass the entire range of observed heights, we can use \(\text{min}(x)\) and \(\text{max}(x)\) as the lower and upper limits, respectively.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# vector of x values}
+\CommentTok{\# seq() generate min to max values with specified numbers of elements or interval}
+\CommentTok{\# the following produce 100 elements}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\FunctionTok{min}\NormalTok{(df\_h0}\SpecialCharTok{$}\NormalTok{height), }\FunctionTok{max}\NormalTok{(df\_h0}\SpecialCharTok{$}\NormalTok{height), }\AttributeTok{length =} \DecValTok{100}\NormalTok{)}
+
+\CommentTok{\# calculate probability density}
+\NormalTok{mu }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(df\_h0}\SpecialCharTok{$}\NormalTok{height)}
+\NormalTok{sigma }\OtherTok{\textless{}{-}} \FunctionTok{sd}\NormalTok{(df\_h0}\SpecialCharTok{$}\NormalTok{height)}
+\NormalTok{pd }\OtherTok{\textless{}{-}} \FunctionTok{dnorm}\NormalTok{(x, }\AttributeTok{mean =}\NormalTok{ mu, }\AttributeTok{sd =}\NormalTok{ sigma)}
+
+\CommentTok{\# figure}
+\FunctionTok{tibble}\NormalTok{(}\AttributeTok{y =}\NormalTok{ pd, }\AttributeTok{x =}\NormalTok{ x) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# data frame}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x, }\AttributeTok{y =}\NormalTok{ y)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+} \CommentTok{\# draw lines}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y =} \StringTok{"Probability density"}\NormalTok{) }\CommentTok{\# re{-}label}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{_main_files/figure-latex/dnorm-1} 
+
+}
+
+\caption{Probability density function of a Normal distribution}\label{fig:dnorm}
+\end{figure}
+
+The shape of the curve appears quite similar to what we observed; however, the scale of the y-axis is different. This is because the y-axis represents ``probability density.'' To convert it into actual ``probability,'' we need to calculate the area under the curve. In R, we can utilize the \texttt{pnorm()} function for this purpose. It calculates the probability of a variable being less than the specified value, which is provided in the first argument \texttt{q}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# probability of x \textless{} 10}
+\NormalTok{p10 }\OtherTok{\textless{}{-}} \FunctionTok{pnorm}\NormalTok{(}\AttributeTok{q =} \DecValTok{10}\NormalTok{, }\AttributeTok{mean =}\NormalTok{ mu, }\AttributeTok{sd =}\NormalTok{ sigma)}
+\FunctionTok{print}\NormalTok{(p10)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.02731905
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# probability of x \textless{} 20}
+\NormalTok{p20 }\OtherTok{\textless{}{-}} \FunctionTok{pnorm}\NormalTok{(}\AttributeTok{q =} \DecValTok{20}\NormalTok{, }\AttributeTok{mean =}\NormalTok{ mu, }\AttributeTok{sd =}\NormalTok{ sigma)}
+\FunctionTok{print}\NormalTok{(p20)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.504426
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# probability of 10 \textless{} x \textless{} 20}
+\NormalTok{p20\_10 }\OtherTok{\textless{}{-}}\NormalTok{ p20 }\SpecialCharTok{{-}}\NormalTok{ p10}
+\FunctionTok{print}\NormalTok{(p20\_10)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.4771069
+\end{verbatim}
+
+To make the estimates comparable to the frequency data, you can calculate the probability for each 1 cm bin. The expected frequency can be obtained by multiplying the probability by the sample size, which in this case is 1000. This allows you to estimate the number of observations you would expect in each 1 cm bin based on the calculated probabilities.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x\_min }\OtherTok{\textless{}{-}} \FunctionTok{floor}\NormalTok{(}\FunctionTok{min}\NormalTok{(df\_h0}\SpecialCharTok{$}\NormalTok{height)) }\CommentTok{\# floor takes the integer part of the value}
+\NormalTok{x\_max }\OtherTok{\textless{}{-}} \FunctionTok{ceiling}\NormalTok{(}\FunctionTok{max}\NormalTok{(df\_h0}\SpecialCharTok{$}\NormalTok{height)) }\CommentTok{\# ceiling takes the next closest integer}
+\NormalTok{bin }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(x\_min, x\_max, }\AttributeTok{by =} \DecValTok{1}\NormalTok{) }\CommentTok{\# each bin has 1cm}
+
+\NormalTok{p }\OtherTok{\textless{}{-}} \ConstantTok{NULL} \CommentTok{\# empty object for probability}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\NormalTok{(}\FunctionTok{length}\NormalTok{(bin) }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{)) \{}
+\NormalTok{  p[i] }\OtherTok{\textless{}{-}} \FunctionTok{pnorm}\NormalTok{(bin[i}\SpecialCharTok{+}\DecValTok{1}\NormalTok{], }\AttributeTok{mean =}\NormalTok{ mu, }\AttributeTok{sd =}\NormalTok{ sigma) }\SpecialCharTok{{-}} \FunctionTok{pnorm}\NormalTok{(bin[i], }\AttributeTok{mean =}\NormalTok{ mu, }\AttributeTok{sd =}\NormalTok{ sigma)}
+\NormalTok{\}}
+
+\CommentTok{\# data frame for probability}
+\CommentTok{\# bin: last element [{-}length(bin)] was removed to match length}
+\CommentTok{\# expected frequency in each bin is "prob times sample size"}
+\NormalTok{df\_prob }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(p, }\AttributeTok{bin =}\NormalTok{ bin[}\SpecialCharTok{{-}}\FunctionTok{length}\NormalTok{(bin)]) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{freq =}\NormalTok{ p }\SpecialCharTok{*} \FunctionTok{nrow}\NormalTok{(df\_h0))}
+\end{Highlighting}
+\end{Shaded}
+
+Overlay:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_h0 }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ height)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{data =}\NormalTok{ df\_prob,}
+             \FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ freq,}
+                 \AttributeTok{x =}\NormalTok{ bin),}
+             \AttributeTok{color =} \StringTok{"salmon"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{data =}\NormalTok{ df\_prob,}
+            \FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ freq,}
+                \AttributeTok{x =}\NormalTok{ bin),}
+            \AttributeTok{color =} \StringTok{"salmon"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{_main_files/figure-latex/histogram-overlaid-1} 
+
+}
+
+\caption{Histogram overlaid with predicted frequency (red dots and line)}\label{fig:histogram-overlaid}
+\end{figure}
+
+It is remarkable that the probability distribution, characterized by just two parameters (mean and variance), can effectively reproduce the overall shape observed in the original data set of 1000 data points. This is great news because it means that once we determine these key parameters, we can infer the general pattern of the data.
+
+\hypertarget{probability-distribution-of-a-discrete-variable}{%
+\section{Probability Distribution of a Discrete Variable}\label{probability-distribution-of-a-discrete-variable}}
+
+\hypertarget{probability-mass-function}{%
+\subsection{Probability Mass Function}\label{probability-mass-function}}
+
+Let's shift our perspective and examine the density of plants in the garden. For this analysis, we have counted the number of plant individuals within 30 plots, with each plot covering an area of one square meter (refer to Figure \ref{fig:garden}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=16.67in]{image/figure_garden} 
+
+}
+
+\caption{Garden view with sampling plots. White squares represent plots. Red dots indicate plant individuals counted.}\label{fig:garden}
+\end{figure}
+
+Download the data \href{https://github.com/aterui/biostats/blob/master/data_raw/data_garden_count.csv}{here} and load it onto R:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_count }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"data\_raw/data\_garden\_count.csv"}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(df\_count)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 30 x 2
+##     plot count
+##    <dbl> <dbl>
+##  1     1     3
+##  2     2     2
+##  3     3     3
+##  4     4     1
+##  5     5     2
+##  6     6     1
+##  7     7     3
+##  8     8     3
+##  9     9     3
+## 10    10     1
+## # i 20 more rows
+\end{verbatim}
+
+Make a histogram:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_count }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ count)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \FloatTok{0.5}\NormalTok{, }\CommentTok{\# define binwidth}
+                 \AttributeTok{center =} \DecValTok{0}\NormalTok{) }\CommentTok{\# relative position of each bin}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{_main_files/figure-latex/hist-density-1} 
+
+}
+
+\caption{Histogram of plant individuals per plot}\label{fig:hist-density}
+\end{figure}
+
+There are several significant differences compared to the plant height example when considering the density of plants in the garden:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  The possible values are discrete (count data) since we are counting the number of plant individuals in each plot.
+\item
+  The possible values are always positive, as counts cannot be negative.
+\item
+  The distribution appears to be non-symmetric around the sample mean.
+\end{enumerate}
+
+Given these characteristics, a Normal distribution may not be an appropriate choice for representing such a variable. Instead, it would be more suitable to use a Poisson distribution to characterize the observed distribution of the discrete variable.
+
+\[
+x \sim Poisson(\lambda)
+\]
+
+In a Poisson distribution, the mean parameter (\(\lambda\)) serves as the sole parameter\footnote{In a Poisson distribution, mean = variance}. Probability distributions that describe discrete variables are expressed using a \textbf{probability mass function} (PMF):
+
+\[
+g(x) = \frac{\lambda^x \exp(-\lambda)}{x!}
+\]
+
+Unlike a probability density function (PDF), a probability mass function (PMF) represents the probability of a discrete variable \(x\) taking a specific value. For instance, the probability of \(x=2\), denoted as \(\Pr(x=2)\), can be calculated as follows:
+
+\[
+\Pr(x=2) = g(2) = \frac{\lambda^2 \exp(-\lambda)}{2!}
+\]
+
+In a generalized form, we write:
+
+\[
+\Pr(x=k) = g(k) = \frac{\lambda^k \exp(-\lambda)}{k!}
+\]
+
+\hypertarget{pmf-to-frequency-distribution}{%
+\subsection{PMF to frequency distribution}\label{pmf-to-frequency-distribution}}
+
+In R, you can use the \texttt{dpois()} function to visualize a Poisson distribution. This function allows you to plot the probability mass function (PMF) of the Poisson distribution and gain insights into the distribution of the discrete variable.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# vector of x values}
+\CommentTok{\# create a vector of 0 to 10 with an interval one}
+\CommentTok{\# must be integer of \textgreater{} 0}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{, }\AttributeTok{by =} \DecValTok{1}\NormalTok{)}
+
+\CommentTok{\# calculate probability mass}
+\NormalTok{lambda\_hat }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(df\_count}\SpecialCharTok{$}\NormalTok{count)}
+\NormalTok{pm }\OtherTok{\textless{}{-}} \FunctionTok{dpois}\NormalTok{(x, }\AttributeTok{lambda =}\NormalTok{ lambda\_hat)}
+
+\CommentTok{\# figure}
+\FunctionTok{tibble}\NormalTok{(}\AttributeTok{y =}\NormalTok{ pm, }\AttributeTok{x =}\NormalTok{ x) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# data frame}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x, }\AttributeTok{y =}\NormalTok{ y)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{) }\SpecialCharTok{+} \CommentTok{\# draw dashed lines}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} \CommentTok{\# draw points}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y =} \StringTok{"Probability"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Count"}\NormalTok{) }\CommentTok{\# re{-}label}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{_main_files/figure-latex/dpois-1} 
+
+}
+
+\caption{Example of a Poisson distribution}\label{fig:dpois}
+\end{figure}
+
+To convert the y-axis from probability to frequency, multiply the probabilities by the sample size (total number of observations) to obtain the expected frequency. As in the plant height example, you can plot the expected frequency on the histogram, providing a visual representation of the distribution of the discrete variable.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_prob }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x, }\AttributeTok{y =}\NormalTok{ pm) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{freq =}\NormalTok{ y }\SpecialCharTok{*} \FunctionTok{nrow}\NormalTok{(df\_count)) }\CommentTok{\# prob x sample size}
+
+\NormalTok{df\_count }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ count)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{(}\AttributeTok{binwidth =} \FloatTok{0.5}\NormalTok{,}
+                 \AttributeTok{center =} \DecValTok{0}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{data =}\NormalTok{ df\_prob,}
+            \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x,}
+                \AttributeTok{y =}\NormalTok{ freq),}
+            \AttributeTok{linetype =} \StringTok{"dashed"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{data =}\NormalTok{ df\_prob,}
+             \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x,}
+                \AttributeTok{y =}\NormalTok{ freq))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{_main_files/figure-latex/pois-hist-1} 
+
+}
+
+\caption{Observed histogram of the discrete variable overlaid with the Poisson expectation.}\label{fig:pois-hist}
+\end{figure}
+
+Cool, the Poisson distribution does an excellent job of characterizing the distribution of plant counts.
+
+\hypertarget{why-probability-distributions}{%
+\section{Why Probability Distributions?}\label{why-probability-distributions}}
+
+As we have seen in the above examples, probability distributions provide a framework for describing the likelihood of different outcomes or events. By utilizing probability distributions, we can:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Make predictions and estimate probabilities of specific events or ranges of values.
+\item
+  Determine the most likely values or outcomes based on available information.
+\item
+  Quantify and analyze the uncertainty associated with random variables or processes.
+\end{enumerate}
+
+Probability distributions serve as fundamental tools in statistics, enabling us to model, analyze, and make informed decisions in the face of uncertainty.
+
+\hypertarget{laboratory-2}{%
+\section{Laboratory}\label{laboratory-2}}
+
+\hypertarget{normal-distribution}{%
+\subsection{Normal Distribution}\label{normal-distribution}}
+
+The function \texttt{rnorm()} produces a random variable that follows a Normal distribution with a specified mean and SD. Using this function,
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Generate a variable with 50 observations.
+\item
+  Create a figure similar to Figure \ref{fig:histogram-overlaid}
+\end{enumerate}
+
+\hypertarget{poisson-distribution}{%
+\subsection{Poisson Distribution}\label{poisson-distribution}}
+
+The function \texttt{rpois()} produces a random variable that follows a Poisson distribution with a specified mean. Using this function,
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Generate a variable with 1000 observations.
+\item
+  Create a figure similar to Figure \ref{fig:pois-hist}
+\end{enumerate}
+
 \hypertarget{two-group-comparison}{%
 \chapter{Two-Group Comparison}\label{two-group-comparison}}
 
-Data consists of ``samples'' extracted from the population of interest, but it's important to acknowledge that these samples are not flawless replicas of the entire population. Given this imperfect information, how can we effectively investigate and discern the distinction between two populations?
+Data consists of ``samples'' extracted from the population of interest, but it's important to acknowledge that these samples are not flawless replicas of the entire population. Given this imperfect information, how can we effectively investigate and discern the distinction between two populations? In this Chapter, I will introduce one of the most basic statistical tests -- ``t-test.'' The t-test takes the following steps:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Define a \textbf{test statistic} to signify the difference between groups (t-statistic).
+\item
+  Define a probability distribution of t-statistic under the \textbf{null hypothesis}, i.e., a scenario that we assume no difference between groups.
+\item
+  Estimate the probability of yielding greater or less than the observed test statistic.
+\end{enumerate}
 
 \hypertarget{explore-data-structure}{%
 \section{Explore Data Structure}\label{explore-data-structure}}
@@ -1175,11 +1581,11 @@ Visualization provides a powerful tool for summarizing data effectively. By plot
 
 Hmm, it is possible that there is a noticeable disparity in body size between Lake \texttt{a} and Lake \texttt{b}. However, how can we ascertain and provide evidence for this claim?
 
-\hypertarget{statistical-quantity}{%
-\section{Statistical Quantity}\label{statistical-quantity}}
+\hypertarget{test-statistic}{%
+\section{Test Statistic}\label{test-statistic}}
 
-\hypertarget{t-value}{%
-\subsection{t-value}\label{t-value}}
+\hypertarget{t-statistic}{%
+\subsection{t-statistic}\label{t-statistic}}
 
 Since our focus is on examining the difference in means, it is logical to estimate the disparity between the sample means in each lake. Let me denote the sample means as \(\hat{\mu}_a\) and \(\hat{\mu}_b\) for Lake \texttt{a} and Lake \texttt{b}, respectively. We can estimate the difference between the means using the following approach:
 
@@ -1235,12 +1641,12 @@ Since our focus is on examining the difference in means, it is logical to estima
 ## [1] -2.056
 \end{verbatim}
 
-The average fish body size in Lake \texttt{b} is approximately 2 cm larger than that in Lake \texttt{a}. However, it is crucial to recognize that we are still lacking vital information, specifically, the uncertainty associated with this difference. As discussed in Chapter \ref{sampling-concept}, we must acknowledge that sample means are not flawless representations of the entire population.
+The average fish body size in Lake \texttt{b} is approximately 2 cm larger than that in Lake \texttt{a}. However, it is crucial to recognize that we are still lacking vital information, specifically, the uncertainty associated with this difference. As discussed in Chapter \ref{sampling}, we must acknowledge that sample means are not flawless representations of the entire population.
 
-Fortunately, we can utilize sample variances to address such uncertainties. The \textbf{t-value} is a common indicator of the difference of means that takes into consideration the uncertainty associated with sample means.
+Fortunately, we can utilize sample variances to address such uncertainties. The \textbf{t-statistic} is a common indicator of the difference of means that takes into consideration the uncertainty associated with sample means.
 
 \[
-t = \frac{\mu_a - \mu_b}{\sqrt{\hat{\sigma}^2_p \left(\frac{1}{N_a} + \frac{1}{N_b}\right)}}
+t = \frac{\hat{\mu_a} - \hat{\mu_b}}{\sqrt{\hat{\sigma}^2_p \left(\frac{1}{N_a} + \frac{1}{N_b}\right)}}
 \]
 
 where \(N_a\) and \(N_b\) are sample sizes in Lake \texttt{a} and \texttt{b} (i.e., \(N_a = N_b = 50\) in this specific example), and \(\hat{\sigma}^2_p\) is the weighted mean of sample variances:
@@ -1292,18 +1698,18 @@ We can calculate this value in R manually:
 ## [1] -3.247322
 \end{verbatim}
 
-The difference in sample means were -2.06; therefore, t-value further emphasizes the distinction between the study lakes. This occurrence can be attributed to the t-value formula.
+The difference in sample means were -2.06; therefore, t-statistic further emphasizes the distinction between the study lakes. This occurrence can be attributed to the t-statistic formula.
 
-In the denominator, we observe the inclusion of \(\hat{\sigma}^2_p\) (estimated pooled variance), as well as the inverses of sample sizes \(N_a\) and \(N_b\). Consequently, as \(\hat{\sigma}^2_p\) decreases and/or the sample sizes increase, the t-value increases. This is a reasonable outcome since a decrease in variance and/or an increase in sample size enhance the certainty of the mean difference.
+In the denominator, we observe the inclusion of \(\hat{\sigma}^2_p\) (estimated pooled variance), as well as the inverses of sample sizes \(N_a\) and \(N_b\). Consequently, as \(\hat{\sigma}^2_p\) decreases and/or the sample sizes increase, the t-statistic increases. This is a reasonable outcome since a decrease in variance and/or an increase in sample size enhance the certainty of the mean difference.
 
 \hypertarget{null-hypothesis}{%
 \subsection{Null Hypothesis}\label{null-hypothesis}}
 
-The observed t-value serves a dual purpose in accounting for both the disparity of means and the accompanying uncertainty. However, the significance of this t-value remains unclear.
+The observed t-statistic serves a dual purpose in accounting for both the disparity of means and the accompanying uncertainty. However, the significance of this t-statistic remains unclear.
 
-To address this, the concept of the \textbf{Null Hypothesis} is utilized to substantiate the observed t-value. Essentially, it involves \emph{estimating the probability of observing the given t-value if there were no difference in mean body size between the lakes}.
+To address this, the concept of the \textbf{Null Hypothesis} is utilized to substantiate the observed t-statistic. The Null Hypothesis, no difference between groups or \(\mu_a = \mu_b\), allows us to draw the probability distribution of the test-statistic. Once we know the probability distribution, we can \textbf{\emph{estimate the probability of observing the given t-statistic by random chance}} if there were no difference in mean body size between the lakes.
 
-Let's begin by assuming that there is no difference in the mean body size of fish populations between the lakes, meaning the true difference in means is zero (\(\mu_a - \mu_b = 0\); without hats in this formula!). Under this assumption, we can define the probability distribution of t-values, which represents how t-values are distributed across a range of possible values.
+Let's begin by assuming that there is no difference in the mean body size of fish populations between the lakes, meaning the true difference in means is zero (\(\mu_a - \mu_b = 0\); without hats in this formula!). Under this assumption, we can define the probability distribution of t-statistics, which represents how t-statistics are distributed across a range of possible values.
 
 This probability distribution is known as the Student's t-distribution and is characterized by three parameters: the mean, the variance, and the degrees of freedom (d.f.). Considering that we are evaluating the difference in body size as the test statistic, the mean (of the difference) is assumed to be zero. The variance is estimated using \(\hat{\sigma}^2_p\), and the degrees of freedom are determined by \(N_a + N_b - 2\) (where d.f. can be considered as a measure related to the sample size\footnote{Discussing the concept of degrees of freedom in depth would require a more comprehensive explanation, so I will refer to it here as a quantity relevant to the sample size.}).
 
@@ -1314,7 +1720,7 @@ R has a function to draw the Student's t-distribution; let's try that out:
 \CommentTok{\# produce 500 values from {-}5 to 5 with equal interval}
 \NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{5}\NormalTok{, }\DecValTok{5}\NormalTok{, }\AttributeTok{length =} \DecValTok{500}\NormalTok{)}
 
-\CommentTok{\# probability density of t{-}values with df = sum(v\_n) {-} 2}
+\CommentTok{\# probability density of t{-}statistics with df = sum(v\_n) {-} 2}
 \NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{dt}\NormalTok{(x, }\AttributeTok{df =} \FunctionTok{sum}\NormalTok{(v\_n) }\SpecialCharTok{{-}} \DecValTok{2}\NormalTok{)}
 
 \CommentTok{\# draw figure}
@@ -1323,7 +1729,7 @@ R has a function to draw the Student's t-distribution; let's try that out:
              \AttributeTok{y =}\NormalTok{ y)) }\SpecialCharTok{+}
   \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+}
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{y =} \StringTok{"Probability density"}\NormalTok{,}
-       \AttributeTok{x =} \StringTok{"t{-}value"}\NormalTok{)}
+       \AttributeTok{x =} \StringTok{"t{-}statistic"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1333,10 +1739,10 @@ R has a function to draw the Student's t-distribution; let's try that out:
 
 }
 
-\caption{Distribution of t-values under null hypothesis. The probability density in a distribution determines the likelihood of observing a particular t-value. Higher probability density indicates a greater likelihood of the t-value occurring.}\label{fig:student-t}
+\caption{Distribution of t-statistics under null hypothesis. The probability density in a distribution determines the likelihood of observing a particular t-statistic. Higher probability density indicates a greater likelihood of the t-statistic occurring.}\label{fig:student-t}
 \end{figure}
 
-The probability density in a distribution (Figure \ref{fig:student-t}) determines the likelihood of observing a particular t-value. Higher probability density indicates a greater likelihood of the t-value occurring. Compare the observed t-value against this null distribution:
+The probability density in a distribution (Figure \ref{fig:student-t}) determines the likelihood of observing a particular t-statistic. Higher probability density indicates a greater likelihood of the t-statistic occurring. Compare the observed t-statistic against this null distribution:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1350,7 +1756,7 @@ The probability density in a distribution (Figure \ref{fig:student-t}) determine
   \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept =} \FunctionTok{abs}\NormalTok{(t\_value),}
              \AttributeTok{color =} \StringTok{"salmon"}\NormalTok{) }\SpecialCharTok{+} \CommentTok{\# t\_value is the observed t\_value}
   \FunctionTok{labs}\NormalTok{(}\AttributeTok{y =} \StringTok{"Probability density"}\NormalTok{,}
-       \AttributeTok{x =} \StringTok{"t{-}value"}\NormalTok{) }
+       \AttributeTok{x =} \StringTok{"t{-}statistic"}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
 
@@ -1360,10 +1766,10 @@ The probability density in a distribution (Figure \ref{fig:student-t}) determine
 
 }
 
-\caption{Observed t-value in comparison to the null distrubution}\label{fig:student-t-obs}
+\caption{Observed t-statistic in comparison to the null distrubution}\label{fig:student-t-obs}
 \end{figure}
 
-In a probability distribution, the area under the curve corresponds to the probability. Notably, \textbf{the area under the curve that falls below or above the observed t-value (indicated by vertical red lines) is very small (Figure} \ref{fig:student-t-obs}\textbf{)}, meaning that the observed difference in body size is very unlikely to occur under the null hypothesis (no difference in true means).
+In a probability distribution, the area under the curve corresponds to the probability. Notably, \textbf{the area under the curve that falls below or above the observed t-statistic (indicated by vertical red lines) is very small (Figure} \ref{fig:student-t-obs}\textbf{)}, meaning that the observed difference in body size is very unlikely to occur under the null hypothesis (no difference in true means).
 
 The function \texttt{pt()} allows us to calculate the area under the curve:
 
@@ -1377,7 +1783,7 @@ The function \texttt{pt()} allows us to calculate the area under the curve:
 \end{Highlighting}
 \end{Shaded}
 
-The \textbf{p-value,} i.e., \emph{the probability of observing t-values} less than ( \texttt{pr\_below}) or greater than (\texttt{pr\_above}) the observed t-value under the null hypothesis, can be estimated as the sum of \texttt{pr\_below} and \texttt{pr\_above}.
+The \textbf{p-value,} i.e., \emph{the probability of observing t-statistics} less than ( \texttt{pr\_below}) or greater than (\texttt{pr\_above}) the observed t-statistic under the null hypothesis, can be estimated as the sum of \texttt{pr\_below} and \texttt{pr\_above}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1394,13 +1800,13 @@ The \textbf{p-value,} i.e., \emph{the probability of observing t-values} less th
 \hypertarget{interpretation}{%
 \subsection{Interpretation}\label{interpretation}}
 
-The above exercise is called \textbf{t-test} -- perhaps, the most well-known hypothesis testing. To explain the interpretation of the results, let me use the following notations. \(t_{obs}\), the observed t-value; \(t_0\), possible t-values under the null hypothesis; \(Pr(\cdot)\), the probability of ``\(\cdot\)'' occurs -- for example, \(Pr(x > 2)\) means that the probability of \(x\) exceeding \(2\).
+The above exercise is called \textbf{t-test} -- perhaps, the most well-known hypothesis testing. To explain the interpretation of the results, let me use the following notations. \(t_{obs}\), the observed t-statistic; \(t_0\), possible t-statistics under the null hypothesis; \(\Pr(\cdot)\), the probability of ``\(\cdot\)'' occurs -- for example, \(\Pr(x > 2)\) means that the probability of \(x\) exceeding \(2\).
 
-We first calculated the observed t-value \(t_{obs}\) using the data of fish body size, which was -3.25. Then, we calculated p-value, i.e., \(Pr(t_0 < t_{obs}) + Pr(t_0 > t_{obs})\) under the null hypothesis of \(\mu_a = \mu_b\). We found p-value was very low, meaning that the observed t-value is very unlikely to occur if \(\mu_a = \mu_b\) is the truth. Therefore, it is logical to conclude \(\mu_a \ne \mu_b\).
+We first calculated the observed t-statistic \(t_{obs}\) using the data of fish body size, which was -3.25. Then, we calculated p-value, i.e., \(\Pr(t_0 < t_{obs}) + \Pr(t_0 > t_{obs})\) under the null hypothesis of \(\mu_a = \mu_b\). We found p-value was very low, meaning that the observed t-statistic is very unlikely to occur if \(\mu_a = \mu_b\) is the truth. Therefore, it is logical to conclude that the \textbf{Alternative Hypothesis} \(\mu_a \ne \mu_b\) is very likely.
 
-Although this is an example in t-test, the same logic is used in almost all statistical analysis -- define the null hypothesis, and estimate how likely the observed value is under the null hypothesis. It is tricky, but I find this genius: we can substantiate the observation(s) objectively that are otherwise a subjective claim!
+The same logic is used in many statistical analyses -- define the null hypothesis, and estimate the probability of observing a given value under the null hypothesis. It is tricky, but I find this genius: we can substantiate the observation(s) objectively that are otherwise a subjective claim!
 
-However, it is crucial to recognize that, \textbf{even if we found the observed t-value that results in very high p-value (i.e., very common under the null hypothesis), finding such a result does NOT support the null hypothesis -- we just cant reject it.}
+However, it is crucial to recognize that, \textbf{even if we found the observed t-statistic that results in very high p-value (i.e., very common under the null hypothesis), finding such a result does NOT support the null hypothesis -- we just can't reject it.}
 
 \hypertarget{t-test-in-r}{%
 \section{t-test in R}\label{t-test-in-r}}
@@ -1438,7 +1844,7 @@ In R, this t-test can be performed with \texttt{t.test()}. Let me examine if the
 ##    13.350    15.406
 \end{verbatim}
 
-The reported t-value \texttt{t\ =\ -3.2473}, the p-value \texttt{p-value\ =\ 0.001596}, and the degrees of freedom all agreed (\texttt{df\ =\ 98}) with what we have estimated manually. Importantly, this t-test assumes relative similarity of variance between groups.
+The reported t-statistic \texttt{t\ =\ -3.2473}, the p-value \texttt{p-value\ =\ 0.001596}, and the degrees of freedom all agreed (\texttt{df\ =\ 98}) with what we have estimated manually. Importantly, this t-test assumes relative similarity of variance between groups.
 
 \hypertarget{t-test-with-unequal-variance}{%
 \subsection{t-test with unequal variance}\label{t-test-with-unequal-variance}}
@@ -1465,15 +1871,411 @@ The relative similarity of variance between groups could be an unrealistic assum
 ##    13.350    15.406
 \end{verbatim}
 
-In Welch's t-test, t-values are defined differently to account for unequal variance between groups:
+In Welch's t-test, t-statistics are defined differently to account for unequal variance between groups\footnote{When \(\hat{\sigma}^2_a \approx \hat{\sigma}_b^2\), the t-statistic for Welch's t-test is reduced to the original t-statistic.}:
 
 \[
-t = \frac{\mu_a - \mu_b}{\sqrt{\left(\frac{\hat{\sigma}^2_a}{N_a} + \frac{\hat{\sigma}^2_b}{N_b}\right)}}
+t = \frac{\hat{\mu_a} - \hat{\mu_b}}{\sqrt{\left(\frac{\hat{\sigma}^2_a}{N_a} + \frac{\hat{\sigma}^2_b}{N_b}\right)}}
 \]
 
-This t-value is known to follow the Student's t-distribution with the degrees of freedom:
+This t-statistic is known to follow the Student's t-distribution with the degrees of freedom:
 
-Therefore, the reported values of t-value and d.f. are different from what we estimated.
+\[
+d.f. = \frac{\frac{\hat{\sigma}^2_a}{N_a} + \frac{\hat{\sigma}^2_b}{N_b}}{\frac{(\hat{\sigma}^2_a / N_a)^2}{N_a - 1} + \frac{(\hat{\sigma}^2_b/N_b)^2}{N_b-1}}
+\]
+
+Therefore, the reported values of t-statistic and d.f. are different from what we estimated. The Welch's t-test covers the cases for equal variances; therefore, by default, we use the Welch's test.
+
+\hypertarget{laboratory-3}{%
+\section{Laboratory}\label{laboratory-3}}
+
+\hypertarget{multiple-group-comparison}{%
+\chapter{Multiple-Group Comparison}\label{multiple-group-comparison}}
+
+The t-test is used to compare two groups, but when there are more than two groups, ANOVA (Analysis of Variance) is employed. ANOVA allows for simultaneous comparison of means among multiple groups to determine if there are statistically significant differences. ANOVA uses the following steps:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Partition the total variability into \textbf{between-group} and \textbf{within-group} components.
+\item
+  Define a \textbf{test statistic} as a ratio of between-group variability to within-group variability (F statistic).
+\item
+  Define a probability distribution of F-statistic under the null hypothesis.
+\item
+  Estimate the probability of yielding greater the observed test statistic.
+\end{enumerate}
+
+If appropriate, post-hoc tests can be conducted to identify specific differing groups.
+
+\hypertarget{partition-the-variability}{%
+\section{Partition the Variability}\label{partition-the-variability}}
+
+The first step is to determine what aspect to examine. In the case of a t-test, we focus on the difference in sample means between groups. One might initially consider conducting t-tests for all possible combinations. However, this approach leads to a problem known as the \href{https://en.wikipedia.org/wiki/Multiple_comparisons_problem\#:~:text=In\%20statistics\%2C\%20the\%20multiple\%20comparisons,based\%20on\%20the\%20observed\%20values.}{multiple comparisons problem}. Hence, this is not a viable option. Therefore, we need to explore the data from a different perspective.
+
+To facilitate learning, let's once again utilize the lake fish data, but this time we have three lakes in our analysis:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_anova }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"data\_raw/data\_fish\_length\_anova.csv"}\NormalTok{)}
+\FunctionTok{distinct}\NormalTok{(df\_anova, lake)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3 x 1
+##   lake 
+##   <chr>
+## 1 a    
+## 2 b    
+## 3 c
+\end{verbatim}
+
+Visualization can be helpful in understanding how the data is distributed. While mean \(\pm\) SD is perfectly fine here, let me use a violin plot to show a different way of visualization.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# geom\_violin() {-} function for violin plots}
+\CommentTok{\# geom\_jitter() {-} jittered points}
+
+\NormalTok{df\_anova }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ lake,}
+             \AttributeTok{y =}\NormalTok{ length)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_violin}\NormalTok{(}\AttributeTok{draw\_quantiles =} \FloatTok{0.5}\NormalTok{, }\CommentTok{\# draw median horizontal line}
+              \AttributeTok{alpha =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+} \CommentTok{\# transparency}
+  \FunctionTok{geom\_jitter}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.2}\NormalTok{) }\CommentTok{\# transparency}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{_main_files/figure-latex/violin-1} 
+
+}
+
+\caption{Violin plot for fish length in three lakes.}\label{fig:violin}
+\end{figure}
+
+It appears that Lake \texttt{b} exhibits a larger average body size compared to the other lakes. One approach to quantifying this difference between groups is by examining the ratio of between-group variability to within-group variability. \textbf{If we observe a greater between-group variability relative to within-group variability, it suggests that the differences among the groups are substantial.} In other words, much of the observed variation is explained by the group structure (lake).
+
+Let me denote between-group and within-group variability as \(S_w\) and \(S_a\), respectively, which are defined as follows:
+
+\[
+\begin{aligned}
+S_a &= \sum_g \sum_i (\hat{\mu}_{g(i)} - \hat{\mu})^2\\
+S_w &= \sum_g \sum_i (x_{i} - \hat{\mu}_{g(i)})^2
+\end{aligned}
+\]
+
+The double summation \(\sum_g \sum_i\) might scare you, but no worries. We can decompose this equation into two steps.
+
+\hypertarget{between-group-variability}{%
+\subsection{Between-group variability}\label{between-group-variability}}
+
+Let me first consider \(S_a = \sum_g \sum_i (\hat{\mu}_{g(i)} - \hat{\mu})^2\). In this equation, \(\hat{\mu}\) is the overall mean of the fish length and \(\hat{\mu}_{g(i)}\) is the group-mean in a given lake (\(g = \{a, b, c\}\)). Let's perform this estimation in R:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# estimate overall mean}
+\NormalTok{mu }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(df\_anova}\SpecialCharTok{$}\NormalTok{length)}
+
+\CommentTok{\# estimate group means and sample size each}
+\NormalTok{df\_g }\OtherTok{\textless{}{-}}\NormalTok{ df\_anova }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(lake) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{mu\_g =} \FunctionTok{mean}\NormalTok{(length), }\CommentTok{\# mean for each group}
+            \AttributeTok{dev\_g =}\NormalTok{ (mu\_g }\SpecialCharTok{{-}}\NormalTok{ mu)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{, }\CommentTok{\# squared deviation for each group}
+            \AttributeTok{n =} \FunctionTok{n}\NormalTok{()) }\CommentTok{\# sample size for each group}
+
+\FunctionTok{print}\NormalTok{(df\_g)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3 x 4
+##   lake   mu_g   dev_g     n
+##   <chr> <dbl>   <dbl> <int>
+## 1 a      13.4 1.12       50
+## 2 b      15.4 0.997      50
+## 3 c      14.5 0.00344    50
+\end{verbatim}
+
+In the column \texttt{dev\_g}, we estimated \((\hat{\mu}_{g(i)} - \hat{\mu})^2\). We must sum over \(i\) (fish individual) to get the variability in each lake (\(\sum_i (\hat{\mu}_{g(i)} - \hat{\mu})^2\)). Since \(\hat{\mu}_{g(i)}\) is constant in each lake, we can simply multiply \texttt{dev\_g} with sample size \texttt{n} in each lake:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_g }\OtherTok{\textless{}{-}}\NormalTok{ df\_g }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{ss =}\NormalTok{ dev\_g }\SpecialCharTok{*}\NormalTok{ n)}
+
+\FunctionTok{print}\NormalTok{(df\_g)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3 x 5
+##   lake   mu_g   dev_g     n     ss
+##   <chr> <dbl>   <dbl> <int>  <dbl>
+## 1 a      13.4 1.12       50 55.9  
+## 2 b      15.4 0.997      50 49.9  
+## 3 c      14.5 0.00344    50  0.172
+\end{verbatim}
+
+Sum over \(g\) (lake) to get \(S_a\).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{s\_a }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(df\_g}\SpecialCharTok{$}\NormalTok{ss)}
+\FunctionTok{print}\NormalTok{(s\_a)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 105.9365
+\end{verbatim}
+
+\hypertarget{within-group-variability}{%
+\subsection{Within-group variability}\label{within-group-variability}}
+
+We can follow the same steps to estimate the within-group variability \(S_w = \sum_g \sum_i (x_{i} - \hat{\mu}_{g(i)})^2\). Let's estimate \((x_{i} - \hat{\mu}_{g(i)})^2\) first:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_i }\OtherTok{\textless{}{-}}\NormalTok{ df\_anova }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(lake) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{mu\_g =} \FunctionTok{mean}\NormalTok{(length)) }\SpecialCharTok{\%\textgreater{}\%} \CommentTok{\# use mutate() to retain individual rows}
+  \FunctionTok{ungroup}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{dev\_i =}\NormalTok{ (length }\SpecialCharTok{{-}}\NormalTok{ mu\_g)}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{) }\CommentTok{\# deviation from group mean for each fish}
+\end{Highlighting}
+\end{Shaded}
+
+You can take a look at group-level data with the following code; the column \texttt{mu\_g} contains group-specific means of fish length, and \texttt{dev\_i} contains \((x_{g(i)} - \hat{\mu}_{g(i)})^2\):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# filter() \& slice(): show first 3 rows each group}
+\FunctionTok{print}\NormalTok{(df\_i }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(lake }\SpecialCharTok{==} \StringTok{"a"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{slice}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{))}
+
+\FunctionTok{print}\NormalTok{(df\_i }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(lake }\SpecialCharTok{==} \StringTok{"b"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{slice}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{))}
+
+\FunctionTok{print}\NormalTok{(df\_i }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(lake }\SpecialCharTok{==} \StringTok{"c"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{slice}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Sum over \(i\) in each lake \(g\) (\(\sum_i (x_{g(i)} - \hat{\mu}_{g(i)})^2\)):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_i\_g }\OtherTok{\textless{}{-}}\NormalTok{ df\_i }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{group\_by}\NormalTok{(lake) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{summarize}\NormalTok{(}\AttributeTok{ss =} \FunctionTok{sum}\NormalTok{(dev\_i))}
+
+\FunctionTok{print}\NormalTok{(df\_i\_g)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3 x 2
+##   lake     ss
+##   <chr> <dbl>
+## 1 a      417.
+## 2 b      565.
+## 3 c      486.
+\end{verbatim}
+
+Then sum over \(g\) to get \(S_w\):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{s\_w }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(df\_i\_g}\SpecialCharTok{$}\NormalTok{ss)}
+\FunctionTok{print}\NormalTok{(s\_w)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1467.645
+\end{verbatim}
+
+\hypertarget{variability-to-variance}{%
+\subsection{Variability to Variance}\label{variability-to-variance}}
+
+I referred to \(S_a\) and \(S_w\) as ``variability,'' which essentially represents the summation of squared deviations. To convert them into variances, we can divide them by appropriate numbers. In Chapter \ref{sampling}, I mentioned that the denominator for variance is the sample size minus one. The same principle applies here, but with caution.
+
+For the between-group variability, denoted as \(S_a\), the realized sample size is the number of groups, \(N_g\), which in this case is three (representing the number of lakes). Therefore, we divide by three minus one to obtain an unbiased estimate of the between-group variance, denoted as \(\hat{\sigma}_a^2"\):
+
+\[
+\hat{\sigma}^2_a = \frac{S_a}{N_g-1}
+\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# n\_distinct() count the number of unique elements}
+\NormalTok{n\_g }\OtherTok{\textless{}{-}} \FunctionTok{n\_distinct}\NormalTok{(df\_anova}\SpecialCharTok{$}\NormalTok{lake)}
+\NormalTok{s2\_a }\OtherTok{\textless{}{-}}\NormalTok{ s\_a }\SpecialCharTok{/}\NormalTok{ (n\_g }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(s2\_a)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 52.96827
+\end{verbatim}
+
+Meanwhile, we need to be careful when estimating the within-group variance. Since the within-group variance is measured at the individual level, the number of data used is equal to the number of fish individuals. Yet, we subtract the number of groups -- while the rationale behind this is beyond the scope, we are essentially accounting for the fact that some of the degrees of freedom are ``used up'' in estimating the group means. As such, we estimate the within-group variance \(\hat{\sigma}^2_w\) as follows:
+
+\[
+\hat{\sigma}^2_w = \frac{S_w}{N-N_g}
+\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{s2\_w }\OtherTok{\textless{}{-}}\NormalTok{ s\_w }\SpecialCharTok{/}\NormalTok{ (}\FunctionTok{nrow}\NormalTok{(df\_anova) }\SpecialCharTok{{-}}\NormalTok{ n\_g)}
+\FunctionTok{print}\NormalTok{(s2\_w)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 9.983982
+\end{verbatim}
+
+\hypertarget{test-statistic-1}{%
+\section{Test Statistic}\label{test-statistic-1}}
+
+\hypertarget{f-statistic}{%
+\subsection{F-statistic}\label{f-statistic}}
+
+In ANOVA, we use F-statistic -- the ratio of between-group variability to within-group variability. The above exercise was essentially performed to yield this test statistic:
+
+\[
+F = \frac{\text{between-group variance}}{\text{within-group variance}} = \frac{\hat{\sigma}^2_a}{\hat{\sigma}^2_w}
+\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{f\_value }\OtherTok{\textless{}{-}}\NormalTok{ s2\_a }\SpecialCharTok{/}\NormalTok{ s2\_w}
+\FunctionTok{print}\NormalTok{(f\_value)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5.305325
+\end{verbatim}
+
+The F-statistic in our data was calculated to be 5.31. This indicates that the between-group variance is approximately five times higher than the within-group variance. While this difference appears significant, it is important to determine whether it is statistically substantial. To make such a claim, we can use the Null Hypothesis as a reference.
+
+\hypertarget{null-hypothesis-1}{%
+\subsection{Null Hypothesis}\label{null-hypothesis-1}}
+
+The F-statistic follows an F-distribution when there is no difference in means among the groups. Therefore, the null hypothesis we are considering in our example is that the means of all groups are equal, represented as \(\mu_a = \mu_b = \mu_c\). It's worth noting that the alternative hypotheses can take different forms, such as \(\mu_a \ne \mu_b = \mu_c\), \(\mu_a = \mu_b \ne \mu_c\), or \$\mu\_a \ne \mu\_b \ne \mu\_c`. ANOVA, however, is unable to distinguish between these alternative hypotheses.
+
+The degrees of freedom in an F-distribution are determined by two parameters: \(N_g - 1\) and \$N - N\_g\texttt{.\ To\ visualize\ the\ distribution,\ you\ can\ utilize\ the}df()` function. Similar to the t-test, we can plot the F-distribution and draw a vertical line to represent the observed F-statistic. This approach allows us to assess the position of the observed F-statistic within the distribution and determine the associated p-value.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{, }\AttributeTok{by =} \FloatTok{0.1}\NormalTok{)}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{df}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x, }\AttributeTok{df1 =}\NormalTok{ n\_g }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{, }\AttributeTok{df2 =} \FunctionTok{nrow}\NormalTok{(df\_anova) }\SpecialCharTok{{-}}\NormalTok{ n\_g)}
+
+\FunctionTok{tibble}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x, }\AttributeTok{y =}\NormalTok{ y) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x,}
+             \AttributeTok{y =}\NormalTok{ y)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+} \CommentTok{\# F distribution}
+  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept =}\NormalTok{ f\_value,}
+             \AttributeTok{color =} \StringTok{"salmon"}\NormalTok{) }\CommentTok{\# observed F{-}statistic}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{_main_files/figure-latex/f-dist-1} 
+
+}
+
+\caption{F-distribution. The vertical red line denotes the observed F-statistic.}\label{fig:f-dist}
+\end{figure}
+
+Unlike t-statistics, F-statistics can take only positive values (because F-statistics are the ratio of positive values). The p-value here is \(\Pr(F >F_0)\), where \(F_0\) is the possible F-statistics under the null hypothesis. Let's estimate this probability using \texttt{pf()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# pf() estimate the probability of less than q}
+\CommentTok{\# Pr(F \textgreater{} F0) is 1 {-} Pr(F \textless{} F0)}
+\NormalTok{p\_value }\OtherTok{\textless{}{-}} \DecValTok{1} \SpecialCharTok{{-}} \FunctionTok{pf}\NormalTok{(}\AttributeTok{q =}\NormalTok{ f\_value, }\AttributeTok{df1 =}\NormalTok{ n\_g }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{, }\AttributeTok{df2 =} \FunctionTok{nrow}\NormalTok{(df\_anova) }\SpecialCharTok{{-}}\NormalTok{ n\_g)}
+\FunctionTok{print}\NormalTok{(p\_value)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.00596054
+\end{verbatim}
+
+\hypertarget{anova-in-r}{%
+\section{ANOVA in R}\label{anova-in-r}}
+
+Like the t-test, R provides functions to perform ANOVA easily. In this case, we will utilize the \texttt{aov()} function. The first argument of this function is the ``formula,'' which is used to describe the structure of the model. In our scenario, we aim to explain the fish body length by grouping them according to lakes. In the formula expression, we represent this relationship as \texttt{length\ \textasciitilde{}\ lake}, using the tilde symbol (\textasciitilde) to indicate the stochastic nature of the relationship.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# first argument is formula}
+\CommentTok{\# second argument is data frame for reference}
+\CommentTok{\# do not forget specify data = XXX! aov() refer to columns in the data frame}
+\NormalTok{m }\OtherTok{\textless{}{-}} \FunctionTok{aov}\NormalTok{(}\AttributeTok{formula =}\NormalTok{ length }\SpecialCharTok{\textasciitilde{}}\NormalTok{ lake,}
+         \AttributeTok{data =}\NormalTok{ df\_anova)}
+
+\FunctionTok{print}\NormalTok{(m)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Call:
+##    aov(formula = length ~ lake, data = df_anova)
+## 
+## Terms:
+##                      lake Residuals
+## Sum of Squares   105.9365 1467.6454
+## Deg. of Freedom         2       147
+## 
+## Residual standard error: 3.159744
+## Estimated effects may be unbalanced
+\end{verbatim}
+
+The function returns \texttt{Sum\ of\ Squares} and \texttt{Deg.\ of\ Freedom} -- these value matches what we have calculated. To get deeper insights, wrap the object with \texttt{summary()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(m)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##              Df Sum Sq Mean Sq F value  Pr(>F)   
+## lake          2  105.9   52.97   5.305 0.00596 **
+## Residuals   147 1467.6    9.98                   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+The F-statistic and p-value are identical to our manual estimate.
+
+\hypertarget{post-hoc-tests}{%
+\section{Post-hoc Tests}\label{post-hoc-tests}}
+
+When conducting an ANOVA and finding a significant difference among group means, a post-hoc test is often performed to determine which specific groups differ significantly from each other. Post-hoc tests help to identify pairwise comparisons that contribute to the observed overall difference.
+
+There are several post-hoc tests available for ANOVA, including:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Tukey's Honestly Significant Difference (HSD): This test compares all possible pairs of group means and provides adjusted p-values to control for the family-wise error rate. It is a commonly used and reliable post-hoc test.
+\item
+  Bonferroni correction: This method adjusts the significance level for each individual comparison to control the overall Type I error rate. The adjusted p-value is obtained by dividing the desired significance level (e.g., 0.05) by the number of comparisons.
+\item
+  Scheffe's test: This test controls the family-wise error rate by considering all possible pairwise comparisons. It is more conservative than Tukey's HSD, but it is suitable for cases where specific comparisons are of particular interest.
+\item
+  Dunnett's test: This test is useful when comparing multiple groups against a control group. It controls the overall error rate by conducting multiple t-tests between the control group and each of the other groups.
+\end{enumerate}
+
+The choice of post-hoc test depends on the specific research question, assumptions, and desired control of the Type I error rate. It is important to select an appropriate test and interpret the results accordingly to draw valid conclusions about group differences in an ANOVA analysis.
+
+\hypertarget{laboratory-4}{%
+\section{Laboratory}\label{laboratory-4}}
 
 \hypertarget{appendix-project-management}{%
 \chapter{Appendix: Project Management}\label{appendix-project-management}}

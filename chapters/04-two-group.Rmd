@@ -4,7 +4,11 @@ source(here::here("code/library.R"))
 
 # Two-Group Comparison
 
-Data consists of "samples" extracted from the population of interest, but it's important to acknowledge that these samples are not flawless replicas of the entire population. Given this imperfect information, how can we effectively investigate and discern the distinction between two populations?
+Data consists of "samples" extracted from the population of interest, but it's important to acknowledge that these samples are not flawless replicas of the entire population. Given this imperfect information, how can we effectively investigate and discern the distinction between two populations? In this Chapter, I will introduce one of the most basic statistical tests -- "t-test." The t-test takes the following steps:
+
+1.  Define a **test statistic** to signify the difference between groups (t-statistic).
+2.  Define a probability distribution of t-statistic under the **null hypothesis**, i.e., a scenario that we assume no difference between groups.
+3.  Estimate the probability of yielding greater or less than the observed test statistic.
 
 ## Explore Data Structure
 
@@ -66,9 +70,9 @@ df_fl %>%
 
 Hmm, it is possible that there is a noticeable disparity in body size between Lake `a` and Lake `b`. However, how can we ascertain and provide evidence for this claim?
 
-## Statistical Quantity
+## Test Statistic
 
-### t-value
+### t-statistic
 
 Since our focus is on examining the difference in means, it is logical to estimate the disparity between the sample means in each lake. Let me denote the sample means as $\hat{\mu}_a$ and $\hat{\mu}_b$ for Lake `a` and Lake `b`, respectively. We can estimate the difference between the means using the following approach:
 
@@ -91,9 +95,9 @@ print(v_mu[2])
 v_mu[1] - v_mu[2]
 ```
 
-The average fish body size in Lake `b` is approximately `r abs(round(v_mu[1] - v_mu[2]))` cm larger than that in Lake `a`. However, it is crucial to recognize that we are still lacking vital information, specifically, the uncertainty associated with this difference. As discussed in Chapter \@ref(sampling-concept), we must acknowledge that sample means are not flawless representations of the entire population.
+The average fish body size in Lake `b` is approximately `r abs(round(v_mu[1] - v_mu[2]))` cm larger than that in Lake `a`. However, it is crucial to recognize that we are still lacking vital information, specifically, the uncertainty associated with this difference. As discussed in Chapter \@ref(sampling), we must acknowledge that sample means are not flawless representations of the entire population.
 
-Fortunately, we can utilize sample variances to address such uncertainties. The **t-value** is a common indicator of the difference of means that takes into consideration the uncertainty associated with sample means.
+Fortunately, we can utilize sample variances to address such uncertainties. The **t-statistic** is a common indicator of the difference of means that takes into consideration the uncertainty associated with sample means.
 
 $$
 t = \frac{\hat{\mu_a} - \hat{\mu_b}}{\sqrt{\hat{\sigma}^2_p \left(\frac{1}{N_a} + \frac{1}{N_b}\right)}}
@@ -107,7 +111,7 @@ $$
 
 We can calculate this value in R manually:
 
-```{r t-value}
+```{r t-statistic}
 
 # group mean, variance, and sample size
 df_t <- df_fl %>% 
@@ -131,17 +135,17 @@ t_value <- (v_mu[1] - v_mu[2]) / sqrt(var_p * ((1 / v_n[1]) + (1 / v_n[2])))
 print(t_value)
 ```
 
-The difference in sample means were `r round(v_mu[1] - v_mu[2], 2)`; therefore, t-value further emphasizes the distinction between the study lakes. This occurrence can be attributed to the t-value formula.
+The difference in sample means were `r round(v_mu[1] - v_mu[2], 2)`; therefore, t-statistic further emphasizes the distinction between the study lakes. This occurrence can be attributed to the t-statistic formula.
 
-In the denominator, we observe the inclusion of $\hat{\sigma}^2_p$ (estimated pooled variance), as well as the inverses of sample sizes $N_a$ and $N_b$. Consequently, as $\hat{\sigma}^2_p$ decreases and/or the sample sizes increase, the t-value increases. This is a reasonable outcome since a decrease in variance and/or an increase in sample size enhance the certainty of the mean difference.
+In the denominator, we observe the inclusion of $\hat{\sigma}^2_p$ (estimated pooled variance), as well as the inverses of sample sizes $N_a$ and $N_b$. Consequently, as $\hat{\sigma}^2_p$ decreases and/or the sample sizes increase, the t-statistic increases. This is a reasonable outcome since a decrease in variance and/or an increase in sample size enhance the certainty of the mean difference.
 
 ### Null Hypothesis
 
-The observed t-value serves a dual purpose in accounting for both the disparity of means and the accompanying uncertainty. However, the significance of this t-value remains unclear.
+The observed t-statistic serves a dual purpose in accounting for both the disparity of means and the accompanying uncertainty. However, the significance of this t-statistic remains unclear.
 
-To address this, the concept of the **Null Hypothesis** is utilized to substantiate the observed t-value. Essentially, it involves *estimating the probability of observing the given t-value if there were no difference in mean body size between the lakes*.
+To address this, the concept of the **Null Hypothesis** is utilized to substantiate the observed t-statistic. The Null Hypothesis, no difference between groups or $\mu_a = \mu_b$, allows us to draw the probability distribution of the test-statistic. Once we know the probability distribution, we can ***estimate the probability of observing the given t-statistic by random chance*** if there were no difference in mean body size between the lakes.
 
-Let's begin by assuming that there is no difference in the mean body size of fish populations between the lakes, meaning the true difference in means is zero ($\mu_a - \mu_b = 0$; without hats in this formula!). Under this assumption, we can define the probability distribution of t-values, which represents how t-values are distributed across a range of possible values.
+Let's begin by assuming that there is no difference in the mean body size of fish populations between the lakes, meaning the true difference in means is zero ($\mu_a - \mu_b = 0$; without hats in this formula!). Under this assumption, we can define the probability distribution of t-statistics, which represents how t-statistics are distributed across a range of possible values.
 
 This probability distribution is known as the Student's t-distribution and is characterized by three parameters: the mean, the variance, and the degrees of freedom (d.f.). Considering that we are evaluating the difference in body size as the test statistic, the mean (of the difference) is assumed to be zero. The variance is estimated using $\hat{\sigma}^2_p$, and the degrees of freedom are determined by $N_a + N_b - 2$ (where d.f. can be considered as a measure related to the sample size[^04-two-group-1]).
 
@@ -149,12 +153,12 @@ This probability distribution is known as the Student's t-distribution and is ch
 
 R has a function to draw the Student's t-distribution; let's try that out:
 
-```{r student-t,  fig.cap="Distribution of t-values under null hypothesis. The probability density in a distribution determines the likelihood of observing a particular t-value. Higher probability density indicates a greater likelihood of the t-value occurring."}
+```{r student-t,  fig.cap="Distribution of t-statistics under null hypothesis. The probability density in a distribution determines the likelihood of observing a particular t-statistic. Higher probability density indicates a greater likelihood of the t-statistic occurring."}
 
 # produce 500 values from -5 to 5 with equal interval
 x <- seq(-5, 5, length = 500)
 
-# probability density of t-values with df = sum(v_n) - 2
+# probability density of t-statistics with df = sum(v_n) - 2
 y <- dt(x, df = sum(v_n) - 2)
 
 # draw figure
@@ -163,12 +167,12 @@ tibble(x, y) %>%
              y = y)) +
   geom_line() +
   labs(y = "Probability density",
-       x = "t-value")
+       x = "t-statistic")
 ```
 
-The probability density in a distribution (Figure \@ref(fig:student-t)) determines the likelihood of observing a particular t-value. Higher probability density indicates a greater likelihood of the t-value occurring. Compare the observed t-value against this null distribution:
+The probability density in a distribution (Figure \@ref(fig:student-t)) determines the likelihood of observing a particular t-statistic. Higher probability density indicates a greater likelihood of the t-statistic occurring. Compare the observed t-statistic against this null distribution:
 
-```{r student-t-obs, fig.cap="Observed t-value in comparison to the null distrubution"}
+```{r student-t-obs, fig.cap="Observed t-statistic in comparison to the null distrubution"}
 
 # draw entire range
 tibble(x, y) %>% 
@@ -180,10 +184,10 @@ tibble(x, y) %>%
   geom_vline(xintercept = abs(t_value),
              color = "salmon") + # t_value is the observed t_value
   labs(y = "Probability density",
-       x = "t-value") 
+       x = "t-statistic") 
 ```
 
-In a probability distribution, the area under the curve corresponds to the probability. Notably, **the area under the curve that falls below or above the observed t-value (indicated by vertical red lines) is very small (Figure** \@ref(fig:student-t-obs)**)**, meaning that the observed difference in body size is very unlikely to occur under the null hypothesis (no difference in true means).
+In a probability distribution, the area under the curve corresponds to the probability. Notably, **the area under the curve that falls below or above the observed t-statistic (indicated by vertical red lines) is very small (Figure** \@ref(fig:student-t-obs)**)**, meaning that the observed difference in body size is very unlikely to occur under the null hypothesis (no difference in true means).
 
 The function `pt()` allows us to calculate the area under the curve:
 
@@ -195,7 +199,7 @@ pr_below <- pt(q = t_value, df = sum(v_n) - 2)
 pr_above <- 1 - pt(q = abs(t_value), df = sum(v_n) - 2)
 ```
 
-The **p-value,** i.e., *the probability of observing t-values* less than ( `pr_below`) or greater than (`pr_above`) the observed t-value under the null hypothesis, can be estimated as the sum of `pr_below` and `pr_above`.
+The **p-value,** i.e., *the probability of observing t-statistics* less than ( `pr_below`) or greater than (`pr_above`) the observed t-statistic under the null hypothesis, can be estimated as the sum of `pr_below` and `pr_above`.
 
 ```{r p-value}
 # p_value
@@ -205,13 +209,13 @@ print(p_value)
 
 ### Interpretation
 
-The above exercise is called **t-test** -- perhaps, the most well-known hypothesis testing. To explain the interpretation of the results, let me use the following notations. $t_{obs}$, the observed t-value; $t_0$, possible t-values under the null hypothesis; $Pr(\cdot)$, the probability of "$\cdot$" occurs -- for example, $Pr(x > 2)$ means that the probability of $x$ exceeding $2$.
+The above exercise is called **t-test** -- perhaps, the most well-known hypothesis testing. To explain the interpretation of the results, let me use the following notations. $t_{obs}$, the observed t-statistic; $t_0$, possible t-statistics under the null hypothesis; $\Pr(\cdot)$, the probability of "$\cdot$" occurs -- for example, $\Pr(x > 2)$ means that the probability of $x$ exceeding $2$.
 
-We first calculated the observed t-value $t_{obs}$ using the data of fish body size, which was `r round(t_value, 2)`. Then, we calculated p-value, i.e., $Pr(t_0 < t_{obs}) + Pr(t_0 > t_{obs})$ under the null hypothesis of $\mu_a = \mu_b$. We found p-value was very low, meaning that the observed t-value is very unlikely to occur if $\mu_a = \mu_b$ is the truth. Therefore, it is logical to conclude $\mu_a \ne \mu_b$.
+We first calculated the observed t-statistic $t_{obs}$ using the data of fish body size, which was `r round(t_value, 2)`. Then, we calculated p-value, i.e., $\Pr(t_0 < t_{obs}) + \Pr(t_0 > t_{obs})$ under the null hypothesis of $\mu_a = \mu_b$. We found p-value was very low, meaning that the observed t-statistic is very unlikely to occur if $\mu_a = \mu_b$ is the truth. Therefore, it is logical to conclude that the **Alternative Hypothesis** $\mu_a \ne \mu_b$ is very likely.
 
-The same logic is used in almost all statistical analysis -- define the null hypothesis, and estimate the probability of observing a given value under the null hypothesis. It is tricky, but I find this genius: we can substantiate the observation(s) objectively that are otherwise a subjective claim!
+The same logic is used in many statistical analyses -- define the null hypothesis, and estimate the probability of observing a given value under the null hypothesis. It is tricky, but I find this genius: we can substantiate the observation(s) objectively that are otherwise a subjective claim!
 
-However, it is crucial to recognize that, **even if we found the observed t-value that results in very high p-value (i.e., very common under the null hypothesis), finding such a result does NOT support the null hypothesis -- we just cant reject it.**
+However, it is crucial to recognize that, **even if we found the observed t-statistic that results in very high p-value (i.e., very common under the null hypothesis), finding such a result does NOT support the null hypothesis -- we just can't reject it.**
 
 ## t-test in R
 
@@ -232,7 +236,7 @@ y <- df_fl %>%
 t.test(x, y, var.equal = TRUE)
 ```
 
-The reported t-value `t = -3.2473`, the p-value `p-value = 0.001596`, and the degrees of freedom all agreed (`df = 98`) with what we have estimated manually. Importantly, this t-test assumes relative similarity of variance between groups.
+The reported t-statistic `t = -3.2473`, the p-value `p-value = 0.001596`, and the degrees of freedom all agreed (`df = 98`) with what we have estimated manually. Importantly, this t-test assumes relative similarity of variance between groups.
 
 ### t-test with unequal variance
 
@@ -243,12 +247,20 @@ The relative similarity of variance between groups could be an unrealistic assum
 t.test(x, y, var.equal = FALSE)
 ```
 
-In Welch's t-test, t-values are defined differently to account for unequal variance between groups:
+In Welch's t-test, t-statistics are defined differently to account for unequal variance between groups[^04-two-group-2]:
+
+[^04-two-group-2]: When $\hat{\sigma}^2_a \approx \hat{\sigma}_b^2$, the t-statistic for Welch's t-test is reduced to the original t-statistic.
 
 $$
 t = \frac{\hat{\mu_a} - \hat{\mu_b}}{\sqrt{\left(\frac{\hat{\sigma}^2_a}{N_a} + \frac{\hat{\sigma}^2_b}{N_b}\right)}}
 $$
 
-This t-value is known to follow the Student's t-distribution with the degrees of freedom:
+This t-statistic is known to follow the Student's t-distribution with the degrees of freedom:
 
-Therefore, the reported values of t-value and d.f. are different from what we estimated.
+$$
+d.f. = \frac{\frac{\hat{\sigma}^2_a}{N_a} + \frac{\hat{\sigma}^2_b}{N_b}}{\frac{(\hat{\sigma}^2_a / N_a)^2}{N_a - 1} + \frac{(\hat{\sigma}^2_b/N_b)^2}{N_b-1}}
+$$
+
+Therefore, the reported values of t-statistic and d.f. are different from what we estimated. The Welch's t-test covers the cases for equal variances; therefore, by default, we use the Welch's test.
+
+## Laboratory

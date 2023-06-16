@@ -58,6 +58,47 @@ ggsave(g_garden,
        width = 4, height = 4)
 
 
+# intercept and slope -----------------------------------------------------
+
+x <- -5:5
+y <- 5 + x
+
+g_lm <- tibble(y = y, x = x) %>% 
+  ggplot(aes(x = x,
+             y = y)) +
+  geom_line() +
+  geom_vline(xintercept = 0,
+             linetype = "dotted") +
+  geom_segment(x = -0.75,
+               xend = -0.1,
+               y = 5,
+               yend = 5,
+               color = "steelblue") +
+  geom_text(label = expression(alpha),
+            x = -1,
+            y = 5) +
+  geom_segment(x = 2,
+               xend = 3,
+               y = 7,
+               yend = 7,
+               color = "steelblue") +
+  geom_segment(x = 3,
+               xend = 3,
+               y = 7,
+               yend = 8,
+               color = "steelblue") +
+  geom_text(label = expression(beta),
+            x = 3.25,
+            y = 7.5) +
+  geom_text(label = "1",
+            x = 2.5,
+            y = 6.5) +
+  theme_bw()
+
+ggsave(g_lm,
+       height = 4, width = 5,
+       filename = here::here("image/figure_lm.png"))
+
 # dendrogram for probability distributions --------------------------------
 
 ## base adjacency matrix

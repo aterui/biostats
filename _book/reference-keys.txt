@@ -12,6 +12,8 @@ fig:student-t
 fig:student-t-obs
 fig:violin
 fig:f-dist
+fig:scatter
+fig:intercept-slope
 fig:ui
 tab:str
 descriptive-statistics
@@ -60,6 +62,10 @@ null-hypothesis-1
 anova-in-r
 post-hoc-tests
 laboratory-4
+regression
+explore-data-structure-1
+drawing-the-fittest-line
+linear-formula
 appendix-project-management
 r-project
 script-editor

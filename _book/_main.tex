@@ -119,7 +119,7 @@
 
 \title{BIOSTATS}
 \author{Akira Terui}
-\date{Last updated on 2023-06-14}
+\date{Last updated on 2023-06-16}
 
 \begin{document}
 \maketitle
@@ -2163,9 +2163,9 @@ The F-statistic in our data was calculated to be 5.31. This indicates that the b
 \hypertarget{null-hypothesis-1}{%
 \subsection{Null Hypothesis}\label{null-hypothesis-1}}
 
-The F-statistic follows an F-distribution when there is no difference in means among the groups. Therefore, the null hypothesis we are considering in our example is that the means of all groups are equal, represented as \(\mu_a = \mu_b = \mu_c\). It's worth noting that the alternative hypotheses can take different forms, such as \(\mu_a \ne \mu_b = \mu_c\), \(\mu_a = \mu_b \ne \mu_c\), or \$\mu\_a \ne \mu\_b \ne \mu\_c`. ANOVA, however, is unable to distinguish between these alternative hypotheses.
+The F-statistic follows an F-distribution when there is no difference in means among the groups. Therefore, the null hypothesis we are considering in our example is that the means of all groups are equal, represented as \(\mu_a = \mu_b = \mu_c\). It's worth noting that the alternative hypotheses can take different forms, such as \(\mu_a \ne \mu_b = \mu_c\), \(\mu_a = \mu_b \ne \mu_c\), or \(\mu_a \ne \mu_b \ne \mu_c\). ANOVA, however, is unable to distinguish between these alternative hypotheses.
 
-The degrees of freedom in an F-distribution are determined by two parameters: \(N_g - 1\) and \$N - N\_g\texttt{.\ To\ visualize\ the\ distribution,\ you\ can\ utilize\ the}df()` function. Similar to the t-test, we can plot the F-distribution and draw a vertical line to represent the observed F-statistic. This approach allows us to assess the position of the observed F-statistic within the distribution and determine the associated p-value.
+The degrees of freedom in an F-distribution are determined by two parameters: \(N_g - 1\) and \(N - N_g\). To visualize the distribution, you can utilize the\texttt{df()} function. Similar to the t-test, we can plot the F-distribution and draw a vertical line to represent the observed F-statistic. This approach allows us to assess the position of the observed F-statistic within the distribution and determine the associated p-value.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2190,12 +2190,12 @@ The degrees of freedom in an F-distribution are determined by two parameters: \(
 \caption{F-distribution. The vertical red line denotes the observed F-statistic.}\label{fig:f-dist}
 \end{figure}
 
-Unlike t-statistics, F-statistics can take only positive values (because F-statistics are the ratio of positive values). The p-value here is \(\Pr(F >F_0)\), where \(F_0\) is the possible F-statistics under the null hypothesis. Let's estimate this probability using \texttt{pf()}:
+Unlike t-statistics, F-statistics can take only positive values (because F-statistics are the ratio of positive values). The p-value here is \(\Pr(F_0 > F)\), where \(F_0\) is the possible F-statistics under the null hypothesis. Let's estimate this probability using \texttt{pf()}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# pf() estimate the probability of less than q}
-\CommentTok{\# Pr(F \textgreater{} F0) is 1 {-} Pr(F \textless{} F0)}
+\CommentTok{\# Pr(F0 \textgreater{} F) is 1 {-} Pr(F0 \textless{} F)}
 \NormalTok{p\_value }\OtherTok{\textless{}{-}} \DecValTok{1} \SpecialCharTok{{-}} \FunctionTok{pf}\NormalTok{(}\AttributeTok{q =}\NormalTok{ f\_value, }\AttributeTok{df1 =}\NormalTok{ n\_g }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{, }\AttributeTok{df2 =} \FunctionTok{nrow}\NormalTok{(df\_anova) }\SpecialCharTok{{-}}\NormalTok{ n\_g)}
 \FunctionTok{print}\NormalTok{(p\_value)}
 \end{Highlighting}
@@ -2276,6 +2276,88 @@ The choice of post-hoc test depends on the specific research question, assumptio
 
 \hypertarget{laboratory-4}{%
 \section{Laboratory}\label{laboratory-4}}
+
+\hypertarget{regression}{%
+\chapter{Regression}\label{regression}}
+
+Our previous examples focused on cases that involved a distinct group structure. However, it is not always the case that such a structure exists. Instead, we might examine the relationship between continuous variables. In this chapter, I will introduce a technique called linear regression.
+
+\hypertarget{explore-data-structure-1}{%
+\section{Explore Data Structure}\label{explore-data-structure-1}}
+
+For this exercise, we will use algae biomass data from streams. Download the data \href{https://github.com/aterui/biostats/blob/master/data_raw/data_algae.csv}{here} and locate it in \texttt{data\_raw/}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\NormalTok{df\_algae }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"data\_raw/data\_algae.csv"}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(df\_algae)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 50 x 4
+##    biomass unit_biomass conductivity unit_cond
+##      <dbl> <chr>               <dbl> <chr>    
+##  1   19.8  mg_per_m2            30.2 ms       
+##  2   24.4  mg_per_m2            40.4 ms       
+##  3   27.4  mg_per_m2            59.4 ms       
+##  4   48.2  mg_per_m2            91.3 ms       
+##  5   19.2  mg_per_m2            24.2 ms       
+##  6   57.0  mg_per_m2            90.4 ms       
+##  7   51.9  mg_per_m2            94.7 ms       
+##  8   40.8  mg_per_m2            67.8 ms       
+##  9   37.1  mg_per_m2            64.8 ms       
+## 10    3.55 mg_per_m2            10.9 ms       
+## # i 40 more rows
+\end{verbatim}
+
+This dataset comprises data collected from 50 sampling sites. The variable \texttt{biomass} represents the standing biomass, indicating the dry mass of algae at the time of collection. On the other hand, \texttt{conductivity} serves as a proxy for water quality, with higher values usually indicating a higher nutrient content in the water. Let me now proceed to draw a scatter plot that will help visualize the relationship between these two variables.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_algae }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ conductivity,}
+             \AttributeTok{y =}\NormalTok{ biomass)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{_main_files/figure-latex/scatter-1} 
+
+}
+
+\caption{The relationship between algae biomass and conductivity.}\label{fig:scatter}
+\end{figure}
+
+It seems that there is a noticeable positive correlation where increased conductivity results in higher algal biomass. Nevertheless, how can we accurately represent this relationship with a line?
+
+\hypertarget{drawing-the-fittest-line}{%
+\section{Drawing the ``fittest'' line}\label{drawing-the-fittest-line}}
+
+\hypertarget{linear-formula}{%
+\subsection{Linear formula}\label{linear-formula}}
+
+The first step is to represent the relationship as a formula; let me ASSUME that the relationship can be described by the following linear formula:
+
+\[
+y_i = \alpha + \beta x_i
+\]
+
+In this formula, the algal biomass, denoted as \(y_i\), at site \(i\), is expressed as a function of conductivity, represented by \(x_i\). However, there are two additional constants, namely \(\alpha\) and \(\beta\). \(\alpha\) is commonly known as the `intercept,' while \(\beta\) is referred to as the `slope' or `coefficient.' The intercept represents the value of \(y\) when \(x\) is equal to zero, while the slope indicates the change in \(y\) associated with a unit increase in \(x\) (refer to Figure \ref{fig:intercept-slope}).
+
+\begin{figure}
+
+{\centering \includegraphics[width=20.83in]{image/figure_lm} 
+
+}
+
+\caption{Intercept and slope.}\label{fig:intercept-slope}
+\end{figure}
+
+However, this formula, or ``model,'' can never reproduce the observed algal biomass perfectly. We must consider the uncertainty associated with the observation process.
 
 \hypertarget{appendix-project-management}{%
 \chapter{Appendix: Project Management}\label{appendix-project-management}}

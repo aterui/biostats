@@ -1,0 +1,54 @@
+```{r, include=FALSE}
+source(here::here("code/library.R"))
+df_algae <- read_csv(here::here("data_raw/data_algae.csv"))
+```
+
+# Regression
+
+Our previous examples focused on cases that involved a distinct group structure. However, it is not always the case that such a structure exists. Instead, we might examine the relationship between continuous variables. In this chapter, I will introduce a technique called linear regression.
+
+## Explore Data Structure
+
+For this exercise, we will use algae biomass data from streams. Download the data [here](https://github.com/aterui/biostats/blob/master/data_raw/data_algae.csv) and locate it in `data_raw/`.
+
+```{r, eval=F}
+library(tidyverse)
+df_algae <- read_csv("data_raw/data_algae.csv")
+print(df_algae)
+```
+
+```{r, echo=F}
+print(df_algae)
+```
+
+This dataset comprises data collected from 50 sampling sites. The variable `biomass` represents the standing biomass, indicating the dry mass of algae at the time of collection. On the other hand, `conductivity` serves as a proxy for water quality, with higher values usually indicating a higher nutrient content in the water. Let me now proceed to draw a scatter plot that will help visualize the relationship between these two variables.
+
+```{r scatter, fig.cap="The relationship between algae biomass and conductivity."}
+
+df_algae %>% 
+  ggplot(aes(x = conductivity,
+             y = biomass)) +
+  geom_point()
+
+```
+
+It seems that there is a noticeable positive correlation where increased conductivity results in higher algal biomass. Nevertheless, how can we accurately represent this relationship with a line?
+
+## Drawing the "fittest" line
+
+### Linear formula
+
+The first step is to represent the relationship as a formula; let me ASSUME that the relationship can be described by the following linear formula:
+
+$$
+y_i = \alpha + \beta x_i
+$$
+
+In this formula, the algal biomass, denoted as $y_i$, at site $i$, is expressed as a function of conductivity, represented by $x_i$. However, there are two additional constants, namely $\alpha$ and $\beta$. $\alpha$ is commonly known as the 'intercept,' while $\beta$ is referred to as the 'slope' or 'coefficient.' The intercept represents the value of $y$ when $x$ is equal to zero, while the slope indicates the change in $y$ associated with a unit increase in $x$ (refer to Figure \@ref(fig:intercept-slope)).
+
+```{r intercept-slope, echo=F, fig.cap="Intercept and slope."}
+
+knitr::include_graphics(here::here("image/figure_lm.png"))
+```
+
+However, this formula, or "model," can never reproduce the observed algal biomass perfectly. We must consider the uncertainty associated with the observation process.

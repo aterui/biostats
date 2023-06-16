@@ -42,8 +42,10 @@ b <- rnorm(n = length(cond),
            mean = 5 + 0.5 * cond,
            sd = 5)
 
-df_algae <- tibble(biomass = b,
-                   conductivity = cond)
+df_algae <- tibble(biomass = round(b, 2),
+                   unit_biomass = "mg_per_m2",
+                   conductivity = round(cond, 2),
+                   unit_cond = "ms")
 
 write_csv(df_algae, "data_raw/data_algae.csv")
 

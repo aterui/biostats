@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (MiKTeX 20.10) (preloaded format=xelatex 2020.10.14)  14 JUN 2023 09:37
+This is XeTeX, Version 3.14159265-2.6-0.999992 (MiKTeX 20.10) (preloaded format=xelatex 2020.10.14)  16 JUN 2023 12:36
 entering extended mode
 **./_main.tex
 (_main.tex
@@ -825,13 +825,13 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 6.99925pt on input line 3.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 4.99947pt on input line 3.
-)
+[3])
 \tf@toc=\write4
 \openout4 = `_main.toc'.
 
-[3] [4
+[4] [5
 
-] [5] [6
+] [6
 
 ]
 Chapter 1.
@@ -1080,13 +1080,7 @@ File: _main_files/figure-latex/violin-1.pdf Graphic file (type pdf)
 Overfull \vbox (1.79283pt too high) detected at line 2073
  []
 
-[52] [53]
-Missing character: There is no 𝜇 in font [lmroman10-regular]:mapping=tex-text;!
-Missing character: There is no ≠ in font [lmroman10-regular]:mapping=tex-text;!
-Missing character: There is no 𝜇 in font [lmroman10-regular]:mapping=tex-text;!
-Missing character: There is no ≠ in font [lmroman10-regular]:mapping=tex-text;!
-Missing character: There is no 𝜇 in font [lmroman10-regular]:mapping=tex-text;!
-[54]
+[52] [53] [54]
 File: _main_files/figure-latex/f-dist-1.pdf Graphic file (type pdf)
 <use _main_files/figure-latex/f-dist-1.pdf>
 
@@ -1096,51 +1090,69 @@ Underfull \vbox (badness 7308) has occurred while \output is active []
 
 ]
 Chapter 6.
+[59]
+File: _main_files/figure-latex/scatter-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/scatter-1.pdf>
+
+Underfull \vbox (badness 1394) has occurred while \output is active []
+
+[60]
+File: image/figure_lm.png Graphic file (type bmp)
+<image/figure_lm.png>
+
+Overfull \hbox (16.03215pt too wide) in paragraph at lines 2353--2354
+ [][] 
+ []
+
+[61] [62
+
+]
+Chapter 7.
 File: image/r_image01.png Graphic file (type bmp)
 <image/r_image01.png>
-[59] [60] [61]
-Overfull \hbox (2.25735pt too wide) in paragraph at lines 2413--2414
+[63] [64] [65]
+Overfull \hbox (2.25735pt too wide) in paragraph at lines 2495--2496
 []\TU/lmr/m/n/10 Name  
  []
 
 
-Overfull \hbox (2.25735pt too wide) in paragraph at lines 2421--2422
+Overfull \hbox (2.25735pt too wide) in paragraph at lines 2503--2504
 []\TU/lmr/m/n/10 Name  
  []
 
 
-Overfull \hbox (24.23735pt too wide) in paragraph at lines 2427--2427
+Overfull \hbox (24.23735pt too wide) in paragraph at lines 2509--2509
 []|\TU/lmtt/m/n/10 README.md|  
  []
 
 
-Overfull \hbox (3.23735pt too wide) in paragraph at lines 2428--2428
+Overfull \hbox (3.23735pt too wide) in paragraph at lines 2510--2510
 []|\TU/lmtt/m/n/10 /code|  
  []
 
 
-Overfull \hbox (24.23735pt too wide) in paragraph at lines 2429--2429
+Overfull \hbox (24.23735pt too wide) in paragraph at lines 2511--2511
 []|\TU/lmtt/m/n/10 /data_raw|  
  []
 
 
-Overfull \hbox (24.23735pt too wide) in paragraph at lines 2430--2430
+Overfull \hbox (24.23735pt too wide) in paragraph at lines 2512--2512
 []|\TU/lmtt/m/n/10 /data_fmt|  
  []
 
 
-Overfull \hbox (13.73735pt too wide) in paragraph at lines 2431--2431
+Overfull \hbox (13.73735pt too wide) in paragraph at lines 2513--2513
 []|\TU/lmtt/m/n/10 /output|  
  []
 
-[62] (_main.aux) ) 
+[66] (_main.aux) ) 
 Here is how much of TeX's memory you used:
- 18968 strings out of 412249
- 326969 string characters out of 2855664
- 813028 words of memory out of 3000000
- 38145 multiletter control sequences out of 15000+200000
+ 18995 strings out of 412249
+ 327575 string characters out of 2855664
+ 813345 words of memory out of 3000000
+ 38170 multiletter control sequences out of 15000+200000
  541733 words of font info for 94 fonts, out of 3000000 for 9000
  1348 hyphenation exceptions out of 8191
  84i,16n,118p,2665b,482s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on _main.pdf (62 pages).
+Output written on _main.pdf (66 pages).

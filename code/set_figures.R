@@ -96,7 +96,7 @@ g_lm <- tibble(y = y, x = x) %>%
   theme_bw()
 
 ggsave(g_lm,
-       height = 4, width = 5,
+       height = 2.5, width = 3.5,
        filename = here::here("image/figure_lm.png"))
 
 # dendrogram for probability distributions --------------------------------

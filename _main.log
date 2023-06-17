@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (MiKTeX 20.10) (preloaded format=xelatex 2020.10.14)  16 JUN 2023 12:36
+This is XeTeX, Version 3.14159265-2.6-0.999992 (MiKTeX 20.10) (preloaded format=xelatex 2020.10.14)  17 JUN 2023 14:13
 entering extended mode
 **./_main.tex
 (_main.tex
@@ -1099,60 +1099,77 @@ Underfull \vbox (badness 1394) has occurred while \output is active []
 [60]
 File: image/figure_lm.png Graphic file (type bmp)
 <image/figure_lm.png>
-
-Overfull \hbox (16.03215pt too wide) in paragraph at lines 2353--2354
- [][] 
+[61] [62]
+File: _main_files/figure-latex/fittest-line-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/fittest-line-1.pdf>
+[63] [64]
+Overfull \vbox (1.91322pt too high) detected at line 2570
  []
 
-[61] [62
+[65]
+Overfull \hbox (12.0pt too wide) in paragraph at lines 2628--2628
+[]\TU/lmtt/m/n/10 ##          1          2          3          4          5    
+      6[] 
+ []
 
-]
+
+Overfull \hbox (12.0pt too wide) in paragraph at lines 2628--2628
+[]\TU/lmtt/m/n/10 ## -0.6838937 -1.2149034 -7.8576927 -3.0109473  1.7076481  6.
+1773586[] 
+ []
+
+[66] [67]
+File: _main_files/figure-latex/geom-errors-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/geom-errors-1.pdf>
+[68] [69] [70]
 Chapter 7.
 File: image/r_image01.png Graphic file (type bmp)
 <image/r_image01.png>
-[63] [64] [65]
-Overfull \hbox (2.25735pt too wide) in paragraph at lines 2495--2496
+[71
+
+] [72] [73]
+Overfull \hbox (2.25735pt too wide) in paragraph at lines 2911--2912
 []\TU/lmr/m/n/10 Name  
  []
 
 
-Overfull \hbox (2.25735pt too wide) in paragraph at lines 2503--2504
+Overfull \hbox (2.25735pt too wide) in paragraph at lines 2919--2920
 []\TU/lmr/m/n/10 Name  
  []
 
 
-Overfull \hbox (24.23735pt too wide) in paragraph at lines 2509--2509
+Overfull \hbox (24.23735pt too wide) in paragraph at lines 2925--2925
 []|\TU/lmtt/m/n/10 README.md|  
  []
 
 
-Overfull \hbox (3.23735pt too wide) in paragraph at lines 2510--2510
+Overfull \hbox (3.23735pt too wide) in paragraph at lines 2926--2926
 []|\TU/lmtt/m/n/10 /code|  
  []
 
 
-Overfull \hbox (24.23735pt too wide) in paragraph at lines 2511--2511
+Overfull \hbox (24.23735pt too wide) in paragraph at lines 2927--2927
 []|\TU/lmtt/m/n/10 /data_raw|  
  []
 
 
-Overfull \hbox (24.23735pt too wide) in paragraph at lines 2512--2512
+Overfull \hbox (24.23735pt too wide) in paragraph at lines 2928--2928
 []|\TU/lmtt/m/n/10 /data_fmt|  
  []
 
 
-Overfull \hbox (13.73735pt too wide) in paragraph at lines 2513--2513
+Overfull \hbox (13.73735pt too wide) in paragraph at lines 2929--2929
 []|\TU/lmtt/m/n/10 /output|  
  []
 
-[66] (_main.aux) ) 
+[74] (_main.aux) ) 
 Here is how much of TeX's memory you used:
- 18995 strings out of 412249
- 327575 string characters out of 2855664
- 813345 words of memory out of 3000000
- 38170 multiletter control sequences out of 15000+200000
+ 19021 strings out of 412249
+ 328385 string characters out of 2855664
+ 813885 words of memory out of 3000000
+ 38194 multiletter control sequences out of 15000+200000
  541733 words of font info for 94 fonts, out of 3000000 for 9000
  1348 hyphenation exceptions out of 8191
  84i,16n,118p,2665b,482s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on _main.pdf (66 pages).
+Output written on _main.pdf (74 pages).

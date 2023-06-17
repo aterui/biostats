@@ -14,6 +14,8 @@ fig:violin
 fig:f-dist
 fig:scatter
 fig:intercept-slope
+fig:fittest-line
+fig:geom-errors
 fig:ui
 tab:str
 descriptive-statistics
@@ -66,6 +68,14 @@ regression
 explore-data-structure-1
 drawing-the-fittest-line
 linear-formula
+minimizing-the-errors
+least-squares
+standard-errors-and-t-values
+unexplained-variation
+retrieve-errors
+visualize-errors
+coefficient-of-determination
+laboratory-5
 appendix-project-management
 r-project
 script-editor

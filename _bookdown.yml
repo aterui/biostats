@@ -9,4 +9,8 @@ rmd_files: ["index.Rmd",
             "chapters/04-two-group.Rmd",
             "chapters/05-anova.Rmd",
             "chapters/06-regression.Rmd",
-            "chapters/a-project.Rmd"]
+            "chapters/a-project.Rmd",
+            "chapters/b-git.Rmd",
+            "chapters/c-data-str.Rmd",
+            "chapters/d-tidyverse.Rmd",
+            "chapters/e-baseplot.Rmd"]

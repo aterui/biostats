@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 9 Appendix: Data Structure | BIOSTATS</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 9 Appendix: Data Structure | BIOSTATS" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 9 Appendix: Data Structure | BIOSTATS" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Akira Terui" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="appendix-git-github.html"/>
+<link rel="next" href="appendix-tidyverse.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">BIOSTATS</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html"><i class="fa fa-check"></i><b>1</b> Descriptive Statistics</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#central-tendency"><i class="fa fa-check"></i><b>1.1</b> Central Tendency</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#measures-of-central-tendency"><i class="fa fa-check"></i><b>1.1.1</b> Measures of Central Tendency</a></li>
+<li class="chapter" data-level="1.1.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#r-exercise"><i class="fa fa-check"></i><b>1.1.2</b> R Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#variation"><i class="fa fa-check"></i><b>1.2</b> Variation</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#measures-of-variation"><i class="fa fa-check"></i><b>1.2.1</b> Measures of Variation</a></li>
+<li class="chapter" data-level="1.2.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#r-exercise-1"><i class="fa fa-check"></i><b>1.2.2</b> R Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#laboratory"><i class="fa fa-check"></i><b>1.3</b> Laboratory</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#comparing-central-tendency-measures"><i class="fa fa-check"></i><b>1.3.1</b> Comparing Central Tendency Measures</a></li>
+<li class="chapter" data-level="1.3.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#comparing-variation-measures"><i class="fa fa-check"></i><b>1.3.2</b> Comparing Variation Measures</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="sampling.html"><a href="sampling.html"><i class="fa fa-check"></i><b>2</b> Sampling</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="sampling.html"><a href="sampling.html#the-unknown-garden-plant-example"><i class="fa fa-check"></i><b>2.1</b> The Unknown: Garden Plant Example</a></li>
+<li class="chapter" data-level="2.2" data-path="sampling.html"><a href="sampling.html#linking-part-to-the-whole"><i class="fa fa-check"></i><b>2.2</b> Linking Part to the Whole</a></li>
+<li class="chapter" data-level="2.3" data-path="sampling.html"><a href="sampling.html#laboratory-1"><i class="fa fa-check"></i><b>2.3</b> Laboratory</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="probabilistic-view.html"><a href="probabilistic-view.html"><i class="fa fa-check"></i><b>3</b> Probabilistic View</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="probabilistic-view.html"><a href="probabilistic-view.html#probability-distribution-of-a-continuous-variable"><i class="fa fa-check"></i><b>3.1</b> Probability Distribution of a Continuous Variable</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="probabilistic-view.html"><a href="probabilistic-view.html#probability-density-function"><i class="fa fa-check"></i><b>3.1.1</b> Probability Density Function</a></li>
+<li class="chapter" data-level="3.1.2" data-path="probabilistic-view.html"><a href="probabilistic-view.html#pdf-to-frequency-distribution"><i class="fa fa-check"></i><b>3.1.2</b> PDF to frequency distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="probabilistic-view.html"><a href="probabilistic-view.html#probability-distribution-of-a-discrete-variable"><i class="fa fa-check"></i><b>3.2</b> Probability Distribution of a Discrete Variable</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="probabilistic-view.html"><a href="probabilistic-view.html#probability-mass-function"><i class="fa fa-check"></i><b>3.2.1</b> Probability Mass Function</a></li>
+<li class="chapter" data-level="3.2.2" data-path="probabilistic-view.html"><a href="probabilistic-view.html#pmf-to-frequency-distribution"><i class="fa fa-check"></i><b>3.2.2</b> PMF to frequency distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="probabilistic-view.html"><a href="probabilistic-view.html#why-probability-distributions"><i class="fa fa-check"></i><b>3.3</b> Why Probability Distributions?</a></li>
+<li class="chapter" data-level="3.4" data-path="probabilistic-view.html"><a href="probabilistic-view.html#laboratory-2"><i class="fa fa-check"></i><b>3.4</b> Laboratory</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="probabilistic-view.html"><a href="probabilistic-view.html#normal-distribution"><i class="fa fa-check"></i><b>3.4.1</b> Normal Distribution</a></li>
+<li class="chapter" data-level="3.4.2" data-path="probabilistic-view.html"><a href="probabilistic-view.html#poisson-distribution"><i class="fa fa-check"></i><b>3.4.2</b> Poisson Distribution</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="two-group-comparison.html"><a href="two-group-comparison.html"><i class="fa fa-check"></i><b>4</b> Two-Group Comparison</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="two-group-comparison.html"><a href="two-group-comparison.html#explore-data-structure"><i class="fa fa-check"></i><b>4.1</b> Explore Data Structure</a></li>
+<li class="chapter" data-level="4.2" data-path="two-group-comparison.html"><a href="two-group-comparison.html#test-statistic"><i class="fa fa-check"></i><b>4.2</b> Test Statistic</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="two-group-comparison.html"><a href="two-group-comparison.html#t-statistic"><i class="fa fa-check"></i><b>4.2.1</b> t-statistic</a></li>
+<li class="chapter" data-level="4.2.2" data-path="two-group-comparison.html"><a href="two-group-comparison.html#null-hypothesis"><i class="fa fa-check"></i><b>4.2.2</b> Null Hypothesis</a></li>
+<li class="chapter" data-level="4.2.3" data-path="two-group-comparison.html"><a href="two-group-comparison.html#interpretation"><i class="fa fa-check"></i><b>4.2.3</b> Interpretation</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="two-group-comparison.html"><a href="two-group-comparison.html#t-test-in-r"><i class="fa fa-check"></i><b>4.3</b> t-test in R</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="two-group-comparison.html"><a href="two-group-comparison.html#t-test-with-equal-variance"><i class="fa fa-check"></i><b>4.3.1</b> t-test with equal variance</a></li>
+<li class="chapter" data-level="4.3.2" data-path="two-group-comparison.html"><a href="two-group-comparison.html#t-test-with-unequal-variance"><i class="fa fa-check"></i><b>4.3.2</b> t-test with unequal variance</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="two-group-comparison.html"><a href="two-group-comparison.html#laboratory-3"><i class="fa fa-check"></i><b>4.4</b> Laboratory</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html"><i class="fa fa-check"></i><b>5</b> Multiple-Group Comparison</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#partition-the-variability"><i class="fa fa-check"></i><b>5.1</b> Partition the Variability</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#between-group-variability"><i class="fa fa-check"></i><b>5.1.1</b> Between-group variability</a></li>
+<li class="chapter" data-level="5.1.2" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#within-group-variability"><i class="fa fa-check"></i><b>5.1.2</b> Within-group variability</a></li>
+<li class="chapter" data-level="5.1.3" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#variability-to-variance"><i class="fa fa-check"></i><b>5.1.3</b> Variability to Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#test-statistic-1"><i class="fa fa-check"></i><b>5.2</b> Test Statistic</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#f-statistic"><i class="fa fa-check"></i><b>5.2.1</b> F-statistic</a></li>
+<li class="chapter" data-level="5.2.2" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#null-hypothesis-1"><i class="fa fa-check"></i><b>5.2.2</b> Null Hypothesis</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#anova-in-r"><i class="fa fa-check"></i><b>5.3</b> ANOVA in R</a></li>
+<li class="chapter" data-level="5.4" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#post-hoc-tests"><i class="fa fa-check"></i><b>5.4</b> Post-hoc Tests</a></li>
+<li class="chapter" data-level="5.5" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#laboratory-4"><i class="fa fa-check"></i><b>5.5</b> Laboratory</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="regression.html"><a href="regression.html"><i class="fa fa-check"></i><b>6</b> Regression</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="regression.html"><a href="regression.html#explore-data-structure-1"><i class="fa fa-check"></i><b>6.1</b> Explore Data Structure</a></li>
+<li class="chapter" data-level="6.2" data-path="regression.html"><a href="regression.html#drawing-the-fittest-line"><i class="fa fa-check"></i><b>6.2</b> Drawing the “fittest” line</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="regression.html"><a href="regression.html#linear-formula"><i class="fa fa-check"></i><b>6.2.1</b> Linear formula</a></li>
+<li class="chapter" data-level="6.2.2" data-path="regression.html"><a href="regression.html#minimizing-the-errors"><i class="fa fa-check"></i><b>6.2.2</b> Minimizing the errors</a></li>
+<li class="chapter" data-level="6.2.3" data-path="regression.html"><a href="regression.html#least-squares"><i class="fa fa-check"></i><b>6.2.3</b> Least Squares</a></li>
+<li class="chapter" data-level="6.2.4" data-path="regression.html"><a href="regression.html#standard-errors-and-t-values"><i class="fa fa-check"></i><b>6.2.4</b> Standard Errors and t-values</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="regression.html"><a href="regression.html#unexplained-variation"><i class="fa fa-check"></i><b>6.3</b> Unexplained Variation</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="regression.html"><a href="regression.html#retrieve-errors"><i class="fa fa-check"></i><b>6.3.1</b> Retrieve Errors</a></li>
+<li class="chapter" data-level="6.3.2" data-path="regression.html"><a href="regression.html#visualize-errors"><i class="fa fa-check"></i><b>6.3.2</b> Visualize Errors</a></li>
+<li class="chapter" data-level="6.3.3" data-path="regression.html"><a href="regression.html#coefficient-of-determination"><i class="fa fa-check"></i><b>6.3.3</b> Coefficient of Determination</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="regression.html"><a href="regression.html#laboratory-5"><i class="fa fa-check"></i><b>6.4</b> Laboratory</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="appendix-project-management.html"><a href="appendix-project-management.html"><i class="fa fa-check"></i><b>7</b> Appendix: Project Management</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="appendix-project-management.html"><a href="appendix-project-management.html#r-project"><i class="fa fa-check"></i><b>7.1</b> R Project</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="appendix-project-management.html"><a href="appendix-project-management.html#script-editor"><i class="fa fa-check"></i><b>7.1.1</b> Script Editor</a></li>
+<li class="chapter" data-level="7.1.2" data-path="appendix-project-management.html"><a href="appendix-project-management.html#file-name"><i class="fa fa-check"></i><b>7.1.2</b> File Name</a></li>
+<li class="chapter" data-level="7.1.3" data-path="appendix-project-management.html"><a href="appendix-project-management.html#structure-your-project"><i class="fa fa-check"></i><b>7.1.3</b> Structure Your Project</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="appendix-project-management.html"><a href="appendix-project-management.html#robust-coding"><i class="fa fa-check"></i><b>7.2</b> Robust coding</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="appendix-git-github.html"><a href="appendix-git-github.html"><i class="fa fa-check"></i><b>8</b> Appendix: Git &amp; GitHub</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="appendix-git-github.html"><a href="appendix-git-github.html#git-github"><i class="fa fa-check"></i><b>8.1</b> Git &amp; GitHub</a></li>
+<li class="chapter" data-level="8.2" data-path="appendix-git-github.html"><a href="appendix-git-github.html#commit-push"><i class="fa fa-check"></i><b>8.2</b> Commit &amp; Push</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="appendix-git-github.html"><a href="appendix-git-github.html#register-your-git-repo"><i class="fa fa-check"></i><b>8.2.1</b> Register Your Git repo</a></li>
+<li class="chapter" data-level="8.2.2" data-path="appendix-git-github.html"><a href="appendix-git-github.html#commit"><i class="fa fa-check"></i><b>8.2.2</b> Commit</a></li>
+<li class="chapter" data-level="8.2.3" data-path="appendix-git-github.html"><a href="appendix-git-github.html#push"><i class="fa fa-check"></i><b>8.2.3</b> Push</a></li>
+<li class="chapter" data-level="8.2.4" data-path="appendix-git-github.html"><a href="appendix-git-github.html#edit"><i class="fa fa-check"></i><b>8.2.4</b> Edit</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html"><i class="fa fa-check"></i><b>9</b> Appendix: Data Structure</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#overview"><i class="fa fa-check"></i><b>9.1</b> Overview</a></li>
+<li class="chapter" data-level="9.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#vector"><i class="fa fa-check"></i><b>9.2</b> Vector</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#create-vector"><i class="fa fa-check"></i><b>9.2.1</b> Create Vector</a></li>
+<li class="chapter" data-level="9.2.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#check-features"><i class="fa fa-check"></i><b>9.2.2</b> Check Features</a></li>
+<li class="chapter" data-level="9.2.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#access"><i class="fa fa-check"></i><b>9.2.3</b> Access</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#matrix"><i class="fa fa-check"></i><b>9.3</b> Matrix</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#create-matrix"><i class="fa fa-check"></i><b>9.3.1</b> Create Matrix</a></li>
+<li class="chapter" data-level="9.3.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#check-features-1"><i class="fa fa-check"></i><b>9.3.2</b> Check Features</a></li>
+<li class="chapter" data-level="9.3.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#access-1"><i class="fa fa-check"></i><b>9.3.3</b> Access</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#data-frame"><i class="fa fa-check"></i><b>9.4</b> Data Frame</a></li>
+<li class="chapter" data-level="9.5" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#exercise"><i class="fa fa-check"></i><b>9.5</b> Exercise</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#vector-1"><i class="fa fa-check"></i><b>9.5.1</b> Vector</a></li>
+<li class="chapter" data-level="9.5.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#matrix-1"><i class="fa fa-check"></i><b>9.5.2</b> Matrix</a></li>
+<li class="chapter" data-level="9.5.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#data-frame-1"><i class="fa fa-check"></i><b>9.5.3</b> Data Frame</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html"><i class="fa fa-check"></i><b>10</b> Appendix: Tidyverse</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#overview-1"><i class="fa fa-check"></i><b>10.1</b> Overview</a></li>
+<li class="chapter" data-level="10.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#data-manipulation"><i class="fa fa-check"></i><b>10.2</b> Data Manipulation</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#data-format"><i class="fa fa-check"></i><b>10.2.1</b> Data Format</a></li>
+<li class="chapter" data-level="10.2.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#select-rows"><i class="fa fa-check"></i><b>10.2.2</b> Select Rows</a></li>
+<li class="chapter" data-level="10.2.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#select-columns"><i class="fa fa-check"></i><b>10.2.3</b> Select Columns</a></li>
+<li class="chapter" data-level="10.2.4" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#group-operation"><i class="fa fa-check"></i><b>10.2.4</b> Group Operation</a></li>
+<li class="chapter" data-level="10.2.5" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#reshape"><i class="fa fa-check"></i><b>10.2.5</b> Reshape</a></li>
+<li class="chapter" data-level="10.2.6" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#combination"><i class="fa fa-check"></i><b>10.2.6</b> Combination</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#visualization"><i class="fa fa-check"></i><b>10.3</b> Visualization</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#point"><i class="fa fa-check"></i><b>10.3.1</b> Point</a></li>
+<li class="chapter" data-level="10.3.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#histogram"><i class="fa fa-check"></i><b>10.3.2</b> Histogram</a></li>
+<li class="chapter" data-level="10.3.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#boxplot"><i class="fa fa-check"></i><b>10.3.3</b> Boxplot</a></li>
+<li class="chapter" data-level="10.3.4" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#violin-plot"><i class="fa fa-check"></i><b>10.3.4</b> Violin Plot</a></li>
+<li class="chapter" data-level="10.3.5" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#styling"><i class="fa fa-check"></i><b>10.3.5</b> Styling</a></li>
+<li class="chapter" data-level="10.3.6" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#more"><i class="fa fa-check"></i><b>10.3.6</b> More</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html"><i class="fa fa-check"></i><b>11</b> Appendix: Base Plot</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#overview-2"><i class="fa fa-check"></i><b>11.1</b> Overview</a></li>
+<li class="chapter" data-level="11.2" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#plot"><i class="fa fa-check"></i><b>11.2</b> Plot</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#symbol"><i class="fa fa-check"></i><b>11.2.1</b> Symbol</a></li>
+<li class="chapter" data-level="11.2.2" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#symbol-size"><i class="fa fa-check"></i><b>11.2.2</b> Symbol size</a></li>
+<li class="chapter" data-level="11.2.3" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#symbol-color-border"><i class="fa fa-check"></i><b>11.2.3</b> Symbol color (border)</a></li>
+<li class="chapter" data-level="11.2.4" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#symbol-color-fill"><i class="fa fa-check"></i><b>11.2.4</b> Symbol color (fill)</a></li>
+<li class="chapter" data-level="11.2.5" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#label"><i class="fa fa-check"></i><b>11.2.5</b> Label</a></li>
+<li class="chapter" data-level="11.2.6" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#axis"><i class="fa fa-check"></i><b>11.2.6</b> Axis</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#boxplot-1"><i class="fa fa-check"></i><b>11.3</b> Boxplot</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#box-color"><i class="fa fa-check"></i><b>11.3.1</b> Box color</a></li>
+<li class="chapter" data-level="11.3.2" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#border-color"><i class="fa fa-check"></i><b>11.3.2</b> Border color</a></li>
+<li class="chapter" data-level="11.3.3" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#box-width"><i class="fa fa-check"></i><b>11.3.3</b> Box width</a></li>
+<li class="chapter" data-level="11.3.4" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#axis-1"><i class="fa fa-check"></i><b>11.3.4</b> Axis</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">BIOSTATS</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="appendix-data-structure" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">Chapter 9</span> Appendix: Data Structure<a href="appendix-data-structure.html#appendix-data-structure" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="overview" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Overview<a href="appendix-data-structure.html#overview" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>R has 6 basic <strong>data types</strong>.</p>
+<ul>
+<li>character: <code>"aquatic"</code>, <code>"ecology"</code> (no order)</li>
+<li>factor: similar to character, but has <em>levels</em> (alphabetically ordered by default)</li>
+<li>numeric: <code>20.0</code> , <code>15.5</code></li>
+<li>integer: <code>3</code>, <code>7</code></li>
+<li>logical: <code>TRUE</code> , <code>FALSE</code></li>
+<li>complex: <code>1+2i</code> (complex numbers with real and imaginary parts)</li>
+</ul>
+<p>These elements form one of the following <strong>data structures</strong>.</p>
+<ul>
+<li><strong>vector</strong>: a series of elements. A single data type is allowed in a single vector</li>
+<li><strong>matrix</strong>: elements organized into rows and columns. A single data type is allowed in a single matrix</li>
+<li><strong>data frame</strong>: looks similar to a matrix, but allows different data types in different columns</li>
+</ul>
+</div>
+<div id="vector" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Vector<a href="appendix-data-structure.html#vector" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="create-vector" class="section level3 hasAnchor" number="9.2.1">
+<h3><span class="header-section-number">9.2.1</span> Create Vector<a href="appendix-data-structure.html#create-vector" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Below are examples of atomic character vectors, numeric vectors, integer vectors, etc. There are many ways to create vector data. The following examples use <code>c()</code>, <code>:</code>, <code>seq()</code>, <code>rep()</code>:</p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="appendix-data-structure.html#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.1a manually create a vector using c()</span></span>
+<span id="cb182-2"><a href="appendix-data-structure.html#cb182-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">8</span>)</span>
+<span id="cb182-3"><a href="appendix-data-structure.html#cb182-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>## [1] 1 3 4 8</code></pre>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="appendix-data-structure.html#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.1b character</span></span>
+<span id="cb184-2"><a href="appendix-data-structure.html#cb184-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>)</span>
+<span id="cb184-3"><a href="appendix-data-structure.html#cb184-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot;</code></pre>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="appendix-data-structure.html#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.1c logical</span></span>
+<span id="cb186-2"><a href="appendix-data-structure.html#cb186-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb186-3"><a href="appendix-data-structure.html#cb186-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>## [1]  TRUE FALSE FALSE</code></pre>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="appendix-data-structure.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.2 sequence of numbers</span></span>
+<span id="cb188-2"><a href="appendix-data-structure.html#cb188-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb188-3"><a href="appendix-data-structure.html#cb188-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="appendix-data-structure.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.3a replicate same numbers or characters</span></span>
+<span id="cb190-2"><a href="appendix-data-structure.html#cb190-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">2</span>, <span class="dv">5</span>) <span class="co"># replicate 2 five times</span></span>
+<span id="cb190-3"><a href="appendix-data-structure.html#cb190-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>## [1] 2 2 2 2 2</code></pre>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="appendix-data-structure.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.3b replicate same numbers or characters</span></span>
+<span id="cb192-2"><a href="appendix-data-structure.html#cb192-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="st">&quot;a&quot;</span>, <span class="dv">5</span>) <span class="co"># replicate &quot;a&quot; five times</span></span>
+<span id="cb192-3"><a href="appendix-data-structure.html#cb192-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>## [1] &quot;a&quot; &quot;a&quot; &quot;a&quot; &quot;a&quot; &quot;a&quot;</code></pre>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="appendix-data-structure.html#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.4a use seq() function</span></span>
+<span id="cb194-2"><a href="appendix-data-structure.html#cb194-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
+<span id="cb194-3"><a href="appendix-data-structure.html#cb194-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="appendix-data-structure.html#cb196-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.4b use seq() function</span></span>
+<span id="cb196-2"><a href="appendix-data-structure.html#cb196-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="at">by =</span> <span class="fl">0.1</span>)</span>
+<span id="cb196-3"><a href="appendix-data-structure.html#cb196-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>##  [1] 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8
+## [20] 2.9 3.0 3.1 3.2 3.3 3.4 3.5 3.6 3.7 3.8 3.9 4.0 4.1 4.2 4.3 4.4 4.5 4.6 4.7
+## [39] 4.8 4.9 5.0</code></pre>
+</div>
+<div id="check-features" class="section level3 hasAnchor" number="9.2.2">
+<h3><span class="header-section-number">9.2.2</span> Check Features<a href="appendix-data-structure.html#check-features" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>R provides many functions to examine features of vectors and other objects, for example:</p>
+<ul>
+<li><code>class()</code> - return high-level data structure of the object</li>
+<li><code>typeof()</code> - return low-level data structure of the object</li>
+<li><code>attributes()</code> - metadata of the object</li>
+<li><code>length()</code> - number of elements in the object</li>
+<li><code>sum()</code> - sum of object’s elements</li>
+<li><code>mean()</code> - mean of object’s elements</li>
+</ul>
+<p><strong>Numeric Vector</strong></p>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="appendix-data-structure.html#cb198-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.2</span>, <span class="fl">3.1</span>, <span class="fl">4.0</span>, <span class="fl">8.2</span>)</span>
+<span id="cb198-2"><a href="appendix-data-structure.html#cb198-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>## [1] 1.2 3.1 4.0 8.2</code></pre>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="appendix-data-structure.html#cb200-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(x)</span></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="appendix-data-structure.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(x)</span></code></pre></div>
+<pre><code>## [1] &quot;double&quot;</code></pre>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="appendix-data-structure.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(x)</span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="appendix-data-structure.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(x)</span></code></pre></div>
+<pre><code>## [1] 16.5</code></pre>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="appendix-data-structure.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span></code></pre></div>
+<pre><code>## [1] 4.125</code></pre>
+<p><strong>Character Vector</strong></p>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="appendix-data-structure.html#cb210-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>)</span>
+<span id="cb210-2"><a href="appendix-data-structure.html#cb210-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(y)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="appendix-data-structure.html#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(y)</span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+</div>
+<div id="access" class="section level3 hasAnchor" number="9.2.3">
+<h3><span class="header-section-number">9.2.3</span> Access<a href="appendix-data-structure.html#access" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Element ID</strong><br />
+Use brackets <code>[]</code> when accessing specific elements in an object. For example, if you want to access element #2 in the vector <code>x</code>, you may specify as <code>x[2]</code>:</p>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="appendix-data-structure.html#cb214-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">5</span>)</span>
+<span id="cb214-2"><a href="appendix-data-structure.html#cb214-2" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">2</span>] <span class="co"># access element #2</span></span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="appendix-data-structure.html#cb216-1" aria-hidden="true" tabindex="-1"></a>x[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>)] <span class="co"># access elements #2 and 4</span></span></code></pre></div>
+<pre><code>## [1] 2 2</code></pre>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="appendix-data-structure.html#cb218-1" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">2</span><span class="sc">:</span><span class="dv">4</span>] <span class="co"># access elements #2-4</span></span></code></pre></div>
+<pre><code>## [1] 2 3 2</code></pre>
+<p><strong>Equation</strong><br />
+R provides many ways to access elements that suffice specific conditions. You can use mathematical symbols to specify what you need, for example:</p>
+<ul>
+<li><code>==</code> equal</li>
+<li><code>&gt;</code> larger than</li>
+<li><code>&gt;=</code> equal &amp; larger than</li>
+<li><code>&lt;</code> smaller than</li>
+<li><code>&lt;=</code> equal &amp; smaller than</li>
+<li><code>which()</code> a function that returns element # that suffices the specified condition</li>
+</ul>
+<p>The following examples return a logical vector indicating whether each element in x suffices the specified condition:</p>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="appendix-data-structure.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creating a vector</span></span>
+<span id="cb220-2"><a href="appendix-data-structure.html#cb220-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">5</span>)</span>
+<span id="cb220-3"><a href="appendix-data-structure.html#cb220-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb220-4"><a href="appendix-data-structure.html#cb220-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ex.1a equal</span></span>
+<span id="cb220-5"><a href="appendix-data-structure.html#cb220-5" aria-hidden="true" tabindex="-1"></a>x <span class="sc">==</span> <span class="dv">2</span></span></code></pre></div>
+<pre><code>## [1]  TRUE  TRUE FALSE  TRUE FALSE</code></pre>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="appendix-data-structure.html#cb222-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ex.1b larger than</span></span>
+<span id="cb222-2"><a href="appendix-data-structure.html#cb222-2" aria-hidden="true" tabindex="-1"></a>x <span class="sc">&gt;</span> <span class="dv">2</span> </span></code></pre></div>
+<pre><code>## [1] FALSE FALSE  TRUE FALSE  TRUE</code></pre>
+<p>You can access elements that suffice the specified condition using brackets, for example:</p>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="appendix-data-structure.html#cb224-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ex.2a equal</span></span>
+<span id="cb224-2"><a href="appendix-data-structure.html#cb224-2" aria-hidden="true" tabindex="-1"></a>x[x <span class="sc">==</span> <span class="dv">2</span>]</span></code></pre></div>
+<pre><code>## [1] 2 2 2</code></pre>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="appendix-data-structure.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ex.2b larger than</span></span>
+<span id="cb226-2"><a href="appendix-data-structure.html#cb226-2" aria-hidden="true" tabindex="-1"></a>x[x <span class="sc">&gt;</span> <span class="dv">2</span>]</span></code></pre></div>
+<pre><code>## [1] 3 5</code></pre>
+<p>Using <code>which()</code>, you can see which elements (i.e., #) matches what you need:</p>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="appendix-data-structure.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ex.3a equal</span></span>
+<span id="cb228-2"><a href="appendix-data-structure.html#cb228-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(x <span class="sc">==</span> <span class="dv">2</span>) <span class="co"># returns which elements are equal to 2</span></span></code></pre></div>
+<pre><code>## [1] 1 2 4</code></pre>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="appendix-data-structure.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ex.3b larger than</span></span>
+<span id="cb230-2"><a href="appendix-data-structure.html#cb230-2" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(x <span class="sc">&gt;</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## [1] 3 5</code></pre>
+</div>
+</div>
+<div id="matrix" class="section level2 hasAnchor" number="9.3">
+<h2><span class="header-section-number">9.3</span> Matrix<a href="appendix-data-structure.html#matrix" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="create-matrix" class="section level3 hasAnchor" number="9.3.1">
+<h3><span class="header-section-number">9.3.1</span> Create Matrix<a href="appendix-data-structure.html#create-matrix" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Matrix is a set of elements (<em>single data type</em>) that are organized into rows and columns:</p>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="appendix-data-structure.html#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.1 cbind: combine objects by column</span></span>
+<span id="cb232-2"><a href="appendix-data-structure.html#cb232-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>))</span>
+<span id="cb232-3"><a href="appendix-data-structure.html#cb232-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    1    4
+## [2,]    2    5
+## [3,]    3    6</code></pre>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="appendix-data-structure.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.2 rbind: combine objects by row</span></span>
+<span id="cb234-2"><a href="appendix-data-structure.html#cb234-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>))</span>
+<span id="cb234-3"><a href="appendix-data-structure.html#cb234-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    2    3
+## [2,]    4    5    6</code></pre>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="appendix-data-structure.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ex.3 matrix: specify elements and the number of rows (nrow) and columns (ncol)</span></span>
+<span id="cb236-2"><a href="appendix-data-structure.html#cb236-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb236-3"><a href="appendix-data-structure.html#cb236-3" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    4    7
+## [2,]    2    5    8
+## [3,]    3    6    9</code></pre>
+</div>
+<div id="check-features-1" class="section level3 hasAnchor" number="9.3.2">
+<h3><span class="header-section-number">9.3.2</span> Check Features<a href="appendix-data-structure.html#check-features-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>R provides many functions to examine features of matrix data, for example:</p>
+<ul>
+<li><code>dim()</code> number of rows and columns</li>
+<li><code>rowSums()</code> row sums</li>
+<li><code>colSums()</code> column sums</li>
+</ul>
+<p><strong>Integer Matrix</strong></p>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="appendix-data-structure.html#cb238-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb238-2"><a href="appendix-data-structure.html#cb238-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    4    7
+## [2,]    2    5    8
+## [3,]    3    6    9</code></pre>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="appendix-data-structure.html#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(x)</span></code></pre></div>
+<pre><code>## [1] &quot;matrix&quot; &quot;array&quot;</code></pre>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="appendix-data-structure.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(x)</span></code></pre></div>
+<pre><code>## [1] &quot;integer&quot;</code></pre>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="appendix-data-structure.html#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(x)</span></code></pre></div>
+<pre><code>## [1] 3 3</code></pre>
+<p><strong>Character Matrix</strong></p>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="appendix-data-structure.html#cb246-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>, <span class="st">&quot;f&quot;</span>), <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb246-2"><a href="appendix-data-structure.html#cb246-2" aria-hidden="true" tabindex="-1"></a>y</span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,] &quot;a&quot;  &quot;d&quot; 
+## [2,] &quot;b&quot;  &quot;e&quot; 
+## [3,] &quot;c&quot;  &quot;f&quot;</code></pre>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="appendix-data-structure.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(y)</span></code></pre></div>
+<pre><code>## [1] &quot;matrix&quot; &quot;array&quot;</code></pre>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="appendix-data-structure.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(y)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="appendix-data-structure.html#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(y)</span></code></pre></div>
+<pre><code>## [1] 3 2</code></pre>
+</div>
+<div id="access-1" class="section level3 hasAnchor" number="9.3.3">
+<h3><span class="header-section-number">9.3.3</span> Access<a href="appendix-data-structure.html#access-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When accessing matrix elements, you need to pick row(s) and/or column(s), for example:</p>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="appendix-data-structure.html#cb254-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>, <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb254-2"><a href="appendix-data-structure.html#cb254-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    4    7
+## [2,]    2    5    8
+## [3,]    3    6    9</code></pre>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="appendix-data-structure.html#cb256-1" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">2</span>,<span class="dv">3</span>] <span class="co"># access an element in row #2 and colum #3</span></span></code></pre></div>
+<pre><code>## [1] 8</code></pre>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="appendix-data-structure.html#cb258-1" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">2</span>,] <span class="co"># access elements in row #2</span></span></code></pre></div>
+<pre><code>## [1] 2 5 8</code></pre>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="appendix-data-structure.html#cb260-1" aria-hidden="true" tabindex="-1"></a>x[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>),] <span class="co"># access elements in rows #2 and 3</span></span></code></pre></div>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    2    5    8
+## [2,]    3    6    9</code></pre>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="appendix-data-structure.html#cb262-1" aria-hidden="true" tabindex="-1"></a>x[,<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>)] <span class="co"># access elements in columns #2 and 3</span></span></code></pre></div>
+<pre><code>##      [,1] [,2]
+## [1,]    4    7
+## [2,]    5    8
+## [3,]    6    9</code></pre>
+<p>You can assess each element with mathematical expressions just like vectors:</p>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="appendix-data-structure.html#cb264-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">==</span> <span class="dv">2</span> <span class="co"># equal</span></span></code></pre></div>
+<pre><code>##       [,1]  [,2]  [,3]
+## [1,] FALSE FALSE FALSE
+## [2,]  TRUE FALSE FALSE
+## [3,] FALSE FALSE FALSE</code></pre>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="appendix-data-structure.html#cb266-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">&gt;</span> <span class="dv">2</span> <span class="co"># larger than</span></span></code></pre></div>
+<pre><code>##       [,1] [,2] [,3]
+## [1,] FALSE TRUE TRUE
+## [2,] FALSE TRUE TRUE
+## [3,]  TRUE TRUE TRUE</code></pre>
+<p>However, care must be taken when accessing elements, as it will be automatically converted to vector data:</p>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="appendix-data-structure.html#cb268-1" aria-hidden="true" tabindex="-1"></a>x[x <span class="sc">==</span> <span class="dv">2</span>] <span class="co"># equal</span></span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="appendix-data-structure.html#cb270-1" aria-hidden="true" tabindex="-1"></a>x[x <span class="sc">&gt;</span> <span class="dv">2</span>] <span class="co"># larger than</span></span></code></pre></div>
+<pre><code>## [1] 3 4 5 6 7 8 9</code></pre>
+<p><code>which()</code> needs an additional argument to return both row and column #:</p>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="appendix-data-structure.html#cb272-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(x <span class="sc">==</span> <span class="dv">2</span>, <span class="at">arr.ind =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>##      row col
+## [1,]   2   1</code></pre>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="appendix-data-structure.html#cb274-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(x <span class="sc">&gt;</span> <span class="dv">2</span>, <span class="at">arr.ind =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>##      row col
+## [1,]   3   1
+## [2,]   1   2
+## [3,]   2   2
+## [4,]   3   2
+## [5,]   1   3
+## [6,]   2   3
+## [7,]   3   3</code></pre>
+</div>
+</div>
+<div id="data-frame" class="section level2 hasAnchor" number="9.4">
+<h2><span class="header-section-number">9.4</span> Data Frame<a href="appendix-data-structure.html#data-frame" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A data frame is a collection of elements organized into rows and columns, but it differs from a matrix in several ways.</p>
+<ul>
+<li>It allows for the inclusion of <em>multiple data types</em> in different columns.</li>
+<li>Each column in a data frame has a <em>name</em> associated with it.</li>
+<li>You can access columns in a data frame by their respective names using the <code>$</code> operator.</li>
+</ul>
+<p>The data frame is the most commonly used data structure when manipulating ecological data. When loading a dataset from a spreadsheet (which we will discuss later), it is automatically recognized as a data frame. Let’s consider an example:</p>
+<p><strong>Creating a data frame</strong><br />
+In the following example, the variables <code>x</code> and <code>y</code> are organized into a single data frame named <code>df0</code>. The variables are renamed as part of the process of creating the data frame.</p>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="appendix-data-structure.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data frame</span></span>
+<span id="cb276-2"><a href="appendix-data-structure.html#cb276-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Pristine&quot;</span>, <span class="st">&quot;Pristine&quot;</span>, <span class="st">&quot;Disturbed&quot;</span>, <span class="st">&quot;Disturbed&quot;</span>, <span class="st">&quot;Pristine&quot;</span>) <span class="co"># Lake type</span></span>
+<span id="cb276-3"><a href="appendix-data-structure.html#cb276-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.2</span>, <span class="fl">2.2</span>, <span class="fl">10.9</span>, <span class="fl">50.0</span>, <span class="fl">3.0</span>) <span class="co"># TSS: total suspended solids (mg/L)</span></span>
+<span id="cb276-4"><a href="appendix-data-structure.html#cb276-4" aria-hidden="true" tabindex="-1"></a>df0 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">LakeType =</span> x, <span class="at">TSS =</span> y) <span class="co"># x is named as &quot;LakeType&quot; while y is named as &quot;TSS&quot;</span></span>
+<span id="cb276-5"><a href="appendix-data-structure.html#cb276-5" aria-hidden="true" tabindex="-1"></a>df0</span></code></pre></div>
+<pre><code>##    LakeType  TSS
+## 1  Pristine  1.2
+## 2  Pristine  2.2
+## 3 Disturbed 10.9
+## 4 Disturbed 50.0
+## 5  Pristine  3.0</code></pre>
+<p><strong>Call column names</strong></p>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="appendix-data-structure.html#cb278-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df0) <span class="co"># call column names</span></span></code></pre></div>
+<pre><code>## [1] &quot;LakeType&quot; &quot;TSS&quot;</code></pre>
+<p><strong>Access by columns</strong></p>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="appendix-data-structure.html#cb280-1" aria-hidden="true" tabindex="-1"></a>df0<span class="sc">$</span>LakeType <span class="co"># access LakeType</span></span></code></pre></div>
+<pre><code>## [1] &quot;Pristine&quot;  &quot;Pristine&quot;  &quot;Disturbed&quot; &quot;Disturbed&quot; &quot;Pristine&quot;</code></pre>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="appendix-data-structure.html#cb282-1" aria-hidden="true" tabindex="-1"></a>df0<span class="sc">$</span>TSS <span class="co"># access TSS</span></span></code></pre></div>
+<pre><code>## [1]  1.2  2.2 10.9 50.0  3.0</code></pre>
+<p>You can access elements like a matrix as well:</p>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="appendix-data-structure.html#cb284-1" aria-hidden="true" tabindex="-1"></a>df0[,<span class="dv">1</span>] <span class="co"># access column #1</span></span></code></pre></div>
+<pre><code>## [1] &quot;Pristine&quot;  &quot;Pristine&quot;  &quot;Disturbed&quot; &quot;Disturbed&quot; &quot;Pristine&quot;</code></pre>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="appendix-data-structure.html#cb286-1" aria-hidden="true" tabindex="-1"></a>df0[<span class="dv">1</span>,] <span class="co"># access row #1</span></span></code></pre></div>
+<pre><code>##   LakeType TSS
+## 1 Pristine 1.2</code></pre>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="appendix-data-structure.html#cb288-1" aria-hidden="true" tabindex="-1"></a>df0[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>),] <span class="co"># access row #2 and 4</span></span></code></pre></div>
+<pre><code>##    LakeType  TSS
+## 2  Pristine  2.2
+## 4 Disturbed 50.0</code></pre>
+</div>
+<div id="exercise" class="section level2 hasAnchor" number="9.5">
+<h2><span class="header-section-number">9.5</span> Exercise<a href="appendix-data-structure.html#exercise" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="vector-1" class="section level3 hasAnchor" number="9.5.1">
+<h3><span class="header-section-number">9.5.1</span> Vector<a href="appendix-data-structure.html#vector-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: lower-alpha">
+<li>Create three numeric vectors with length 3, 6 and 20, respectively. Each vector must be created using different functions in R.</li>
+<li>Create three character vectors with length 3, 6 and 20, respectively. Each vector must be created using different functions in R.</li>
+<li>Copy the following script to your R script and perform the following analysis:</li>
+</ol>
+<ul>
+<li>Identify element IDs of <code>x</code> that are greater than <code>2.0</code></li>
+<li>Identify element values of <code>x</code> that are greater than <code>2.0</code></li>
+</ul>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="appendix-data-structure.html#cb290-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb290-2"><a href="appendix-data-structure.html#cb290-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>)</span></code></pre></div>
+</div>
+<div id="matrix-1" class="section level3 hasAnchor" number="9.5.2">
+<h3><span class="header-section-number">9.5.2</span> Matrix<a href="appendix-data-structure.html#matrix-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: lower-alpha">
+<li>Create a numeric matrix with 4 rows and 4 columns. Each column must contain identical elements.</li>
+<li>Create a numeric matrix with 4 rows and 4 columns. Each row must contain identical elements.</li>
+<li>Create a character matrix with 4 rows and 4 columns. Each column must contain identical elements.</li>
+<li>Create a character matrix with 4 rows and 4 columns. Each row must contain identical elements.</li>
+<li>Copy the following script to your R script and perform the following analysis:</li>
+</ol>
+<ul>
+<li>Identify element IDs of <code>x</code> that are greater than <code>2.0</code> (<strong>specify row and column IDs</strong>)</li>
+<li>Identify element values of <code>x</code> that are greater than <code>2.0</code> and calculate the mean.</li>
+</ul>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="appendix-data-structure.html#cb291-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb291-2"><a href="appendix-data-structure.html#cb291-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">100</span>), <span class="at">nrow =</span> <span class="dv">10</span>, <span class="at">ncol =</span> <span class="dv">10</span>)</span></code></pre></div>
+</div>
+<div id="data-frame-1" class="section level3 hasAnchor" number="9.5.3">
+<h3><span class="header-section-number">9.5.3</span> Data Frame<a href="appendix-data-structure.html#data-frame-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: lower-alpha">
+<li>Create a data frame of 3 variables with 10 elements (name variables as <code>x</code>, <code>y</code> and <code>z</code>. <code>x</code> must be <code>character</code> while <code>y</code> and <code>z</code> must be <code>numeric</code>.</li>
+<li>Check the data structure (higher-level) of <code>x</code>, <code>y</code> and <code>z</code></li>
+<li>Copy the following script to your R script and perform the following analysis:</li>
+</ol>
+<ul>
+<li>Calculate the means of <code>temperature</code> and <code>abundance</code> for states <code>VA</code> and <code>NC</code> separately.</li>
+</ul>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="appendix-data-structure.html#cb292-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb292-2"><a href="appendix-data-structure.html#cb292-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">3</span>)</span>
+<span id="cb292-3"><a href="appendix-data-structure.html#cb292-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="dv">100</span>, <span class="at">lambda =</span> <span class="dv">10</span>)</span>
+<span id="cb292-4"><a href="appendix-data-structure.html#cb292-4" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;VA&quot;</span>, <span class="st">&quot;NC&quot;</span>), <span class="dv">50</span>)</span>
+<span id="cb292-5"><a href="appendix-data-structure.html#cb292-5" aria-hidden="true" tabindex="-1"></a>df0 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">temperature =</span> x, <span class="at">abundance =</span> y, <span class="at">state =</span> z)</span></code></pre></div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="appendix-git-github.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="appendix-tidyverse.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/chapters/c-data-str.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

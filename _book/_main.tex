@@ -132,7 +132,9 @@
 \chapter*{Introduction}\label{introduction}}
 \addcontentsline{toc}{chapter}{Introduction}
 
-This textbook aims to introduce fundamental statistical techniques and their applications to biological data. A unique aspect of this book is the ``flipped-order'' introduction. Many statistics courses start with theory; yet, I found it difficult for those unfamiliar with statistics. I will start with a real example of the method, followed by the explanation for an underlying theory/concept. The author is an ecologist, so some methods in this book might not be popular in other fields.
+This textbook is designed to provide a comprehensive introduction to fundamental statistical techniques and their practical applications in the context of biological data analysis. What sets this book apart is its ``flipped-order'' approach to teaching. Unlike traditional statistics courses that often begin with theoretical concepts, this book takes a different approach by initially presenting real-world data. By grounding the material in practical scenarios, it aims to make the learning process more accessible, particularly for those who are new to statistics.
+
+Through the ``flipped-order'' introduction, readers will be able to engage with concrete examples of statistical methods in use before delving into the underlying theories and concepts that support them. This pedagogical approach aims to provide a solid foundation for readers to comprehend and apply statistical techniques effectively in the biological sciences.
 
 \hypertarget{descriptive-statistics}{%
 \chapter{Descriptive Statistics}\label{descriptive-statistics}}
@@ -147,7 +149,7 @@ x_2 = 15.1\\
 x_3 = 21.9\\
 x_4 = 13.3\\
 x_5 = 24.4\\
-\]Often times, we use subscript \(i\) (or any character you like) instead of actual number to indicate a given data point. For example, we write fish length \(x_i\) for individual \(i\). Alternatively, instead of writing each individual data point, we can represent them as a vector using boldface, denoted as \(\pmb{x}\). In this case, the vector \(\pmb{x}\) can be expressed as:
+\] Often times, we use subscript \(i\) (or any character you like) instead of actual number to indicate a given data point. For example, we write fish length \(x_i\) for individual \(i\). Alternatively, instead of writing each individual data point, we can represent them as a vector using boldface, denoted as \(\pmb{x}\). In this case, the vector \(\pmb{x}\) can be expressed as:
 
 \[
 \pmb{x} = \{15.9, 15.1, 21.9, 13.3, 24.4\}
@@ -173,8 +175,8 @@ Central tendency measures (Table \ref{tab:central}) provide insights into the ty
 \end{itemize}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2278}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7722}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.3711}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.6289}}@{}}
 \caption{\label{tab:central} Common measures of central tendency. \(N\) refers to the number of data points.}\tabularnewline
 \toprule()
 \begin{minipage}[b]{\linewidth}\raggedright
@@ -192,17 +194,17 @@ Equation
 \end{minipage} \\
 \midrule()
 \endhead
-Arithmetic mean \(\mu\) & \(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     \frac{\sum_i^N x_i}{N}                                                                                                                                                             
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     \) \\
-Geometric mean \(\mu_{ge}\) & \(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     (\prod_i^N x_i)^{\frac{1}{N}}                                                                                                                                                      
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     \) \\
-Median \(\mu_{med}\) & \(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     \begin{aligned}                                                                                                                                                                    
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     &x_{(\frac{N + 1}{2}^\text{th})} &&\text{if N is odd number}\\                                                                                                                     
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     &\frac{1}{2}[x_{(\frac{N}{2}^\text{th})} + x_{(\frac{N}{2} + 1^\text{th})}] &&\text{if N is even number}                                                                           
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     \end{aligned}\) \\
+Arithmetic mean \(\mu\) & \(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         \frac{\sum_i^N x_i}{N}                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         \) \\
+Geometric mean \(\mu_{ge}\) & \(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         (\prod_i^N x_i)^{\frac{1}{N}}                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         \) \\
+Median \(\mu_{med}\) & \(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         \begin{aligned}                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         &x_{(\frac{N + 1}{2}^\text{th})} &&\text{if N is odd number}\\                                                                                                                             
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         &\frac{1}{2}[x_{(\frac{N}{2}^\text{th})} + x_{(\frac{N}{2} + 1^\text{th})}] &&\text{if N is even number}                                                                                   
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         \end{aligned}\) \\
 \bottomrule()
 \end{longtable}
 
@@ -400,8 +402,8 @@ Variation measures (Table \ref{tab:variation}) provide information about the spr
 \end{itemize}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.3103}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.6897}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.3900}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.6100}}@{}}
 \caption{\label{tab:variation} Common measures of variation. \(N\) refers to the number of data points.}\tabularnewline
 \toprule()
 \begin{minipage}[b]{\linewidth}\raggedright
@@ -419,21 +421,21 @@ Equation
 \end{minipage} \\
 \midrule()
 \endhead
-Variance \(\sigma^2\) (standard deviation \(\sigma\)) & \(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        \frac{\sum_i^N (x_i - \mu)^2}{N}                                                             
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        \) \\
-Inter-Quantile Range IQR (\(x_l\) and \(x_h\) are \(l^{th}\) and \(h^{th}\) percentiles, respectively) & \(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |x_{l} - x_{h}|                                                                              
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        \) \\
-Median Absolute Deviation (MAD) & \(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        \text{Median}(|x_i-\mu_{med}|)                                                               
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        \) \\
-Coefficient of Variation (CV) & \(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        \frac{\sigma}{\mu}                                                                           
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        \) \\
-MAD/Median & \(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        \frac{\text{MAD}}{\mu_{med}}                                                                 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        \) \\
+Variance \(\sigma^2\) (standard deviation \(\sigma\)) & \(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                \frac{\sum_i^N (x_i - \mu)^2}{N}                                                                     
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                \) \\
+Inter-Quantile Range IQR (\(x_l\) and \(x_h\) are \(l^{th}\) and \(h^{th}\) percentiles, respectively) & \(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |x_{l} - x_{h}|                                                                                      
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                \) \\
+Median Absolute Deviation (MAD) & \(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                \text{Median}(|x_i-\mu_{med}|)                                                                       
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                \) \\
+Coefficient of Variation (CV) & \(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                \frac{\sigma}{\mu}                                                                                   
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                \) \\
+MAD/Median & \(                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                \frac{\text{MAD}}{\mu_{med}}                                                                         
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                \) \\
 \bottomrule()
 \end{longtable}
 
@@ -2464,10 +2466,10 @@ X =
 \end{pmatrix}
 \]
 
-Using matrix notation, we can express the error vector \(\overrightarrow{\varepsilon}\) as:
+Using matrix notation, we can express the error vector \(\pmb{\varepsilon}\) as:
 
 \[
-\overrightarrow{\varepsilon} = Y - X\Theta
+\pmb{\varepsilon} = Y - X\Theta
 \]
 
 The column of \(1\)s is required to represent the intercept; \(X\Theta\) reads:
@@ -2495,7 +2497,7 @@ X\Theta =
 \end{pmatrix}
 \]
 
-Minimizing the squared magnitude of \(\overrightarrow{\varepsilon}\) (solve the partial derivative of \(||\overrightarrow{\varepsilon}||^2\) about \(\Theta\)) leads to the solution (for detailed derivation, refer to \href{https://en.wikipedia.org/wiki/Least_squares}{Wikipedia}):
+Minimizing the squared magnitude of \(\overrightarrow{\varepsilon}\) (solve the partial derivative of \(||\pmb{\varepsilon}||^2\) about \(\Theta\)) leads to the solution (for detailed derivation, refer to \href{https://en.wikipedia.org/wiki/Least_squares}{Wikipedia}):
 
 \[
 \hat{\Theta} = (X^TX)^{-1}X^{T}Y
@@ -2781,23 +2783,17 @@ Compare it with \texttt{lm()} output:
 \hypertarget{r-project}{%
 \section{R Project}\label{r-project}}
 
-For the entirety of this book, I will utilize the `R Project' as the fundamental unit of workspace, where all relevant materials such as R scripts (\texttt{.R}) and data files are gathered together. There are multiple ways to organize your project, but my preferred approach is to create a single `R Project' for a collection of scripts and data that will contribute to a single publication (see example \href{https://github.com/aterui/public-proj_stream-diversity}{here}). To set up an `R Project,' you will need to have both \emph{RStudio} and the base \emph{R} software installed. Although \emph{R} can be used as a standalone software, I highly recommend using it in conjunction with \emph{RStudio} due to the latter's many features that facilitate data analysis. You can download \emph{R} and \emph{RStudio} from the following websites:
+Throughout this book, I will use the `R Project' as the core workspace unit. It serves as a centralized location where all relevant materials, such as R scripts (\texttt{.R}) and data files, are consolidated. There are various ways to organize your project, but I prefer creating a single `R Project' for a set of scripts and data that contribute to a specific publication (see example \href{https://github.com/aterui/public-proj_stream-diversity}{here}). To set up an `R Project,' you'll need to have both \emph{RStudio} and the base \emph{R} software installed. While \emph{R} can be used independently, I highly recommend using it in conjunction with \emph{RStudio} due to the latter's numerous features that facilitate data analysis. You can download \emph{R} and \emph{RStudio} from the following websites:
 
 \begin{itemize}
 \tightlist
 \item
-  \href{https://www.r-project.org/}{R} (you can select any CRAN mirror for downloading)
+  \href{https://www.r-project.org/}{R} (you can choose any CRAN mirror for downloading)
 \item
   RStudio
 \end{itemize}
 
-Once you launch \emph{RStudio}, you will be greeted by the interface shown in Figure \ref{fig:ui}. The interface consists of three primary panels upon first opening it: the \texttt{Console}, \texttt{Environment}, and \texttt{Files}. The \texttt{Console} is where you write your code and execute calculations, data manipulation, and analysis. The \texttt{Environment} panel lists the objects you have saved, and the \texttt{Files} panel displays any files in a designated location on your computer.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(here}\SpecialCharTok{::}\FunctionTok{here}\NormalTok{(}\StringTok{"image/r\_image01.png"}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
+Upon launching \emph{RStudio}, you will encounter the interface depicted in Figure \ref{fig:ui}. Initially, the interface comprises three primary panels: the \texttt{Console}, \texttt{Environment}, and \texttt{Files}. The \texttt{Console} is where you write code and execute calculations, data manipulation, and analysis. The \texttt{Environment} panel lists the saved objects, while the \texttt{Files} panel displays files in a designated location on your computer.
 
 \begin{figure}
 
@@ -2808,7 +2804,7 @@ Once you launch \emph{RStudio}, you will be greeted by the interface shown in Fi
 \caption{RStudio interface.}\label{fig:ui}
 \end{figure}
 
-After pasting the script into the console, you should see the variable \texttt{x} appear in the environment panel.
+After pasting the script into the console, you will notice that the variable \texttt{x} appears in the environment panel.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2816,7 +2812,7 @@ After pasting the script into the console, you should see the variable \texttt{x
 \end{Highlighting}
 \end{Shaded}
 
-\texttt{x} is an \textbf{object} where information is stored. In this case, we have stored a sequence of \texttt{1} and \texttt{2} in the object \texttt{x}. Once you have stored information in \texttt{x}, you can access it by simply typing \texttt{x}.
+\texttt{x} is an object that stores information. In this particular case, we have stored a sequence of \texttt{1} and \texttt{2} in the object \texttt{x}. Once you have stored information in \texttt{x}, you can access it by simply typing \texttt{x}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2828,7 +2824,7 @@ After pasting the script into the console, you should see the variable \texttt{x
 ## [1] 1 2
 \end{verbatim}
 
-Great! You can indeed work on your data in this manner, but it is important to note that \textbf{it is generally considered a poor practice}. As you progress through your project, you will generate a significant amount of materials, such as writing over 2000 lines of code for a single project. Therefore, it becomes crucial to implement effective code management strategies. How do you currently manage your code?
+Excellent! While it is possible to work with your data using this approach, it is important to highlight that \textbf{it is generally regarded as a poor practice}. As your project evolves, you will accumulate a substantial amount of material, such as writing more than 2000 lines of code for a single project. Consequently, it becomes essential to implement effective code management strategies. How do you presently handle code management?
 
 \hypertarget{script-editor}{%
 \subsection{Script Editor}\label{script-editor}}
@@ -2903,8 +2899,8 @@ A new window will appear, prompting you to name a directory and select a locatio
 The internal structure of an \texttt{R\ Project} is crucial for effective navigation and ensures clarity for both yourself and others when it is published. An \texttt{R\ Project} typically consists of various file types, such as \texttt{.R}, \texttt{.csv}, \texttt{.rds}, \texttt{.Rmd}, and others. Without an organized arrangement of these files, there is a high probability of encountering significant coding errors. Therefore, I place great importance on maintaining a well-structured project. In Table \ref{tab:str}, I present my recommended subdirectory structure.
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.0691}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.9309}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.1690}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.8310}}@{}}
 \caption{\label{tab:str} Suggested internal structure of \texttt{R\ Project}}\tabularnewline
 \toprule()
 \begin{minipage}[b]{\linewidth}\raggedright
@@ -2935,5 +2931,1387 @@ Content
 \section{Robust coding}\label{robust-coding}}
 
 While it is not mandatory, I highly recommend using \emph{RStudio} in conjunction with \emph{Git} and \emph{GitHub}. Coding is inherently prone to errors, and even the most skilled programmers make mistakes---without exception. However, the crucial difference between beginner and advanced programmers lies in their ability to develop robust coding practices accompanied by a self-error-detection system. \emph{Git} plays a vital role in this process. Throughout this book, I will occasionally delve into the importance of \emph{Git} and its usage.
+
+\hypertarget{appendix-git-github}{%
+\chapter{Appendix: Git \& GitHub}\label{appendix-git-github}}
+
+\hypertarget{git-github}{%
+\section{Git \& GitHub}\label{git-github}}
+
+In this section, I will explain how to integrate Git and GitHub into R Studio. While R Studio is already an excellent tool, it becomes even more powerful when combined with Git and GitHub. Git is a free and open-source distributed version control system that tracks changes in your code as you work on your project, ensuring you are aware of any modifications made to your script (and other) files. Tracking changes is crucial to avoid unintended errors in your code and helps prevent the creation of redundant files. Although Git is primarily a local system, it has an online counterpart called GitHub.
+
+To set up this system, you'll need to follow a few steps. The first step is to install Git on your computer:
+
+\begin{itemize}
+\item
+  For \textbf{Windows}: Install Git from \href{https://gitforwindows.org/}{here}. During the installation process, you'll be prompted about ``Adjusting your PATH environment.'' Choose ``Git from the command line and also from 3rd-party software'' if it's not already selected.
+\item
+  For \textbf{Mac}: Follow the instructions provided \href{https://happygitwithr.com/install-git.html}{here}.
+\end{itemize}
+
+Once Git is installed, open R Studio and navigate to \texttt{Create\ Project} \textgreater{} \texttt{New\ Directory} \textgreater{} \texttt{New\ Project}. If you see the checkbox labeled ``Create a git repository,'' make sure to select it before creating your new project (refer to Figure \ref{fig:gitcheck}). This action will display the Git pane on the upper right panel of R Studio, indicating that Git integration is enabled.
+
+\begin{figure}
+
+{\centering \includegraphics[width=8.24in]{image/git_image01} 
+
+}
+
+\caption{After installing Git, you should see `Create a git repository`.}\label{fig:gitcheck}
+\end{figure}
+
+If you are unable to find the options mentioned above, follow these steps:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Click on \texttt{Tools} in the menu bar of R Studio.
+\item
+  Select \texttt{Terminal} and then choose \texttt{New\ Terminal}.
+\item
+  In the terminal window, type \texttt{where\ git} and press Enter. This command will display the location of the Git executable on your computer.
+\item
+  Next, go back to \texttt{Tools} in the menu bar and select \texttt{Global\ Options}.
+\item
+  In the options window, navigate to \texttt{Git/SVN}.
+\item
+  Look for the field labeled \emph{Git executable} and specify the location of the Git executable that you obtained from the terminal.
+\end{enumerate}
+
+After setting up Git, you can proceed to create an account on \href{https://github.com/}{GitHub}. It's a free platform, and when choosing a username, consider using lowercase letters and including your name to make it easier for others to find you.
+
+While R Studio seamlessly integrates with Git and GitHub, using a Git client can provide additional visual aids. There are various options for Git clients (see choices \href{https://happygitwithr.com/git-client.html}{here}), but for this exercise, we will use GitHub Desktop. Install GitHub Desktop on your computer from \href{https://desktop.github.com/}{here}.
+
+\hypertarget{commit-push}{%
+\section{Commit \& Push}\label{commit-push}}
+
+\hypertarget{register-your-git-repo}{%
+\subsection{Register Your Git repo}\label{register-your-git-repo}}
+
+To open the \texttt{R\ Project} you've just created as a git repository, follow these steps:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Open R Studio.
+\item
+  Click on \texttt{File} in the menu bar.
+\item
+  Select \texttt{Open\ Project}.
+\item
+  Browse to the directory where you created the \texttt{R\ Project} and select the corresponding \texttt{.Rproj} file.
+\item
+  R Studio will open the project, and you will see the project name in the top-right corner of the window.
+\end{enumerate}
+
+To create a sample \texttt{.R} file named \texttt{sample.R} within the project, you can use the shortcut \texttt{Ctrl\ +\ Shift\ +\ N} or follow these steps:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Click on \texttt{File} in the menu bar.
+\item
+  Select \texttt{New\ File}.
+\item
+  Choose \texttt{R\ Script}.
+\item
+  A new script editor will open, where you can write your R code.
+\item
+  Write your code in the editor and save it as \texttt{sample.R} by clicking on \texttt{File} and selecting \texttt{Save} or using the shortcut \texttt{Ctrl\ +\ S}.
+\end{enumerate}
+
+Remember to save the file after writing your code.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# produce 100 random numbers that follows a normal distribution}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{, }\AttributeTok{mean =} \DecValTok{0}\NormalTok{, }\AttributeTok{sd =} \DecValTok{1}\NormalTok{)}
+
+\DocumentationTok{\#\# estimate mean}
+\FunctionTok{mean}\NormalTok{(x)}
+
+\DocumentationTok{\#\# estimate SD}
+\FunctionTok{sd}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+To open the GitHub Desktop app, locate the application on your computer and launch it. Once opened, you will see a GUI similar to the one depicted in Figure \ref{fig:gitdesktop1}.
+
+\begin{figure}
+
+{\centering \includegraphics[width=61.11in]{image/git_image02} 
+
+}
+
+\caption{GUI for GitHub Desktop}\label{fig:gitdesktop1}
+\end{figure}
+
+Click on the ``Current Repository'' button located at the top left corner of the GitHub Desktop app interface. Then, select ``Add'' followed by ``Add existing repository'' from the dropdown menu, as shown in Figure \ref{fig:gitdesktop2}.
+
+\begin{figure}
+
+{\centering \includegraphics[width=61.11in]{image/git_image03} 
+
+}
+
+\caption{Add dropdown on the top left}\label{fig:gitdesktop2}
+\end{figure}
+
+\hypertarget{commit}{%
+\subsection{Commit}\label{commit}}
+
+GitHub Desktop will prompt you to enter a local path to your Git repository. Browse and select the directory where your \texttt{R\ Project} is located. Once you have selected the directory, the local Git repository will appear in the list of repositories on the left side bar of GitHub Desktop, as shown in Figure \ref{fig:gitdesktop2}.
+
+Now that your repository is added to GitHub Desktop, you are ready to start committing your files to Git. Committing is the process of recording the changes made to your files in Git. To proceed with committing, click on your Git repository in GitHub Desktop. You will see the following options and information displayed:
+
+\begin{itemize}
+\tightlist
+\item
+  The list of changed files: This section shows the files that have been modified since the last commit.
+\item
+  A summary of the changes: This section provides an overview of the changes made to the selected files.
+\item
+  Commit message: This is where you can enter a descriptive message explaining the changes made in the commit.
+\end{itemize}
+
+By providing a meaningful commit message, you can keep track of the changes made to your files and easily understand the purpose of each commit.
+
+\begin{figure}
+
+{\centering \includegraphics[width=61.11in]{image/git_image04} 
+
+}
+
+\caption{You will see `Create sample.R` or `summary (required)` on the bottom left}\label{fig:gitdesktop3}
+\end{figure}
+
+At this stage, your file (\texttt{.R} or any other file) is saved in your local directory but has not been recorded in Git as a change history. To commit the changes, follow these steps:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  First, select the file(s) you want to commit. You can do this by checking the checkboxes next to the files listed in the ``Changes'' section of the GitHub Desktop app.
+\item
+  Once you have selected the files, go to the bottom left of the GitHub Desktop app window. You will see a small box that says \texttt{summary\ (required)} or \texttt{Create\ sample.R}.
+\item
+  In this box, enter a descriptive title that explains what you did in this commit. It is important to provide a meaningful summary, as you cannot proceed with the commit unless you enter this information. For example, for this exercise, you can enter \texttt{Initial\ commit} as the commit title. For subsequent commits, it is recommended to provide more informative commit messages that accurately describe the changes made. You can refer to online resources for recommendations on how to write effective commit titles and descriptions.
+\item
+  After entering the commit title, click on the button that says \texttt{Commit\ to\ master}. This action will record the changes made to the selected files in Git.
+\end{enumerate}
+
+Now, the changes to the selected files have been successfully recorded in Git as a commit. It's important to commit regularly and provide meaningful commit messages so that you can track changes and understand the evolution of your project when needed.
+
+\hypertarget{push}{%
+\subsection{Push}\label{push}}
+
+It's important to note that your changes are currently recorded in your local computer's Git repository but have not been published to your online GitHub repository. To send the local changes to the online GitHub repository, you need to use the ``Push'' operation through GitHub Desktop.
+
+After you make a commit in GitHub Desktop, you will be prompted with a dialog box asking if you want to push the commit to an online repository, as shown in Figure \ref{fig:gitdesktop4}. If this is your first push, there won't be a corresponding repository on GitHub linked to your local repository. In this case, GitHub Desktop will ask if you want to publish it on GitHub. Please note that ``publishing'' here means making the repository available on GitHub, but it will remain private unless you explicitly choose to make it public.
+
+If you are comfortable with the changes you made and want to send them to the online repository, click the ``Push'' button in GitHub Desktop. This action will push your commits to the remote repository on GitHub, effectively synchronizing your local repository with the online repository.
+
+\begin{figure}
+
+{\centering \includegraphics[width=61.11in]{image/git_image05} 
+
+}
+
+\caption{To Push your code, hit the highlighted menu button}\label{fig:gitdesktop4}
+\end{figure}
+
+\hypertarget{edit}{%
+\subsection{Edit}\label{edit}}
+
+We have created a file named \texttt{sample.R} as per the previous instructions. Now, let's make a minor change to the content of the \texttt{sample.R} file. Open the \texttt{sample.R} file in your preferred text editor or in R Studio, and make a modification to the code. For example, you can update the code from:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# produce 100 random numbers that follows a normal distribution}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{, }\AttributeTok{mean =} \DecValTok{0}\NormalTok{, }\AttributeTok{sd =} \DecValTok{1}\NormalTok{)}
+
+\DocumentationTok{\#\# estimate mean}
+\FunctionTok{mean}\NormalTok{(x)}
+
+\DocumentationTok{\#\# estimate SD}
+\FunctionTok{sd}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+to:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# produce 100 random numbers that follows a normal distribution}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{, }\AttributeTok{mean =} \DecValTok{0}\NormalTok{, }\AttributeTok{sd =} \DecValTok{1}\NormalTok{)}
+
+\DocumentationTok{\#\# estimate mean}
+\FunctionTok{median}\NormalTok{(x)}
+
+\DocumentationTok{\#\# estimate SD}
+\FunctionTok{var}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+Save the changes to the \texttt{sample.R} file. Now, let's go back to GitHub Desktop and see how we can handle this change.
+
+After making the change to the \texttt{sample.R} file, open GitHub Desktop again. You will notice that GitHub Desktop automatically detects the difference between the new and old versions of the file. It highlights the specific parts of the script that have been edited, which can be extremely helpful when reviewing and comparing changes in your code.
+
+This feature provided by GitHub Desktop makes it easier to track modifications and understand the specific updates made to your files. It helps streamline the coding process by providing a clear visual representation of the differences between different versions of your code.
+
+\begin{figure}
+
+{\centering \includegraphics[width=61.11in]{image/git_image06} 
+
+}
+
+\caption{Git detects edits to your codes}\label{fig:gitdesktop5}
+\end{figure}
+
+\hypertarget{appendix-data-structure}{%
+\chapter{Appendix: Data Structure}\label{appendix-data-structure}}
+
+\hypertarget{overview}{%
+\section{Overview}\label{overview}}
+
+R has 6 basic \textbf{data types}.
+
+\begin{itemize}
+\tightlist
+\item
+  character: \texttt{"aquatic"}, \texttt{"ecology"} (no order)
+\item
+  factor: similar to character, but has \emph{levels} (alphabetically ordered by default)
+\item
+  numeric: \texttt{20.0} , \texttt{15.5}
+\item
+  integer: \texttt{3}, \texttt{7}
+\item
+  logical: \texttt{TRUE} , \texttt{FALSE}
+\item
+  complex: \texttt{1+2i} (complex numbers with real and imaginary parts)
+\end{itemize}
+
+These elements form one of the following \textbf{data structures}.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{vector}: a series of elements. A single data type is allowed in a single vector
+\item
+  \textbf{matrix}: elements organized into rows and columns. A single data type is allowed in a single matrix
+\item
+  \textbf{data frame}: looks similar to a matrix, but allows different data types in different columns
+\end{itemize}
+
+\hypertarget{vector}{%
+\section{Vector}\label{vector}}
+
+\hypertarget{create-vector}{%
+\subsection{Create Vector}\label{create-vector}}
+
+Below are examples of atomic character vectors, numeric vectors, integer vectors, etc. There are many ways to create vector data. The following examples use \texttt{c()}, \texttt{:}, \texttt{seq()}, \texttt{rep()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#ex.1a manually create a vector using c()}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{8}\NormalTok{)}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1 3 4 8
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#ex.1b character}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\StringTok{"b"}\NormalTok{, }\StringTok{"c"}\NormalTok{)}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "a" "b" "c"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#ex.1c logical}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\ConstantTok{TRUE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  TRUE FALSE FALSE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#ex.2 sequence of numbers}
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{:}\DecValTok{5}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1 2 3 4 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#ex.3a replicate same numbers or characters}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{) }\CommentTok{\# replicate 2 five times}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2 2 2 2 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#ex.3b replicate same numbers or characters}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\DecValTok{5}\NormalTok{) }\CommentTok{\# replicate "a" five times}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "a" "a" "a" "a" "a"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#ex.4a use seq() function}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{, }\AttributeTok{by =} \DecValTok{1}\NormalTok{)}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1 2 3 4 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#ex.4b use seq() function}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{, }\AttributeTok{by =} \FloatTok{0.1}\NormalTok{)}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8
+## [20] 2.9 3.0 3.1 3.2 3.3 3.4 3.5 3.6 3.7 3.8 3.9 4.0 4.1 4.2 4.3 4.4 4.5 4.6 4.7
+## [39] 4.8 4.9 5.0
+\end{verbatim}
+
+\hypertarget{check-features}{%
+\subsection{Check Features}\label{check-features}}
+
+R provides many functions to examine features of vectors and other objects, for example:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{class()} - return high-level data structure of the object
+\item
+  \texttt{typeof()} - return low-level data structure of the object
+\item
+  \texttt{attributes()} - metadata of the object
+\item
+  \texttt{length()} - number of elements in the object
+\item
+  \texttt{sum()} - sum of object's elements
+\item
+  \texttt{mean()} - mean of object's elements
+\end{itemize}
+
+\textbf{Numeric Vector}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FloatTok{1.2}\NormalTok{, }\FloatTok{3.1}\NormalTok{, }\FloatTok{4.0}\NormalTok{, }\FloatTok{8.2}\NormalTok{)}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.2 3.1 4.0 8.2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "numeric"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{typeof}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "double"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{length}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sum}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 16.5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4.125
+\end{verbatim}
+
+\textbf{Character Vector}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"a"}\NormalTok{, }\StringTok{"b"}\NormalTok{, }\StringTok{"c"}\NormalTok{)}
+\FunctionTok{class}\NormalTok{(y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "character"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{length}\NormalTok{(y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3
+\end{verbatim}
+
+\hypertarget{access}{%
+\subsection{Access}\label{access}}
+
+\textbf{Element ID}\\
+Use brackets \texttt{{[}{]}} when accessing specific elements in an object. For example, if you want to access element \#2 in the vector \texttt{x}, you may specify as \texttt{x{[}2{]}}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{5}\NormalTok{)}
+\NormalTok{x[}\DecValTok{2}\NormalTok{] }\CommentTok{\# access element \#2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{)] }\CommentTok{\# access elements \#2 and 4}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[}\DecValTok{2}\SpecialCharTok{:}\DecValTok{4}\NormalTok{] }\CommentTok{\# access elements \#2{-}4}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2 3 2
+\end{verbatim}
+
+\textbf{Equation}\\
+R provides many ways to access elements that suffice specific conditions. You can use mathematical symbols to specify what you need, for example:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{==} equal
+\item
+  \texttt{\textgreater{}} larger than
+\item
+  \texttt{\textgreater{}=} equal \& larger than
+\item
+  \texttt{\textless{}} smaller than
+\item
+  \texttt{\textless{}=} equal \& smaller than
+\item
+  \texttt{which()} a function that returns element \# that suffices the specified condition
+\end{itemize}
+
+The following examples return a logical vector indicating whether each element in x suffices the specified condition:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# creating a vector}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{5}\NormalTok{)}
+
+\CommentTok{\# ex.1a equal}
+\NormalTok{x }\SpecialCharTok{==} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  TRUE  TRUE FALSE  TRUE FALSE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# ex.1b larger than}
+\NormalTok{x }\SpecialCharTok{\textgreater{}} \DecValTok{2} 
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] FALSE FALSE  TRUE FALSE  TRUE
+\end{verbatim}
+
+You can access elements that suffice the specified condition using brackets, for example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# ex.2a equal}
+\NormalTok{x[x }\SpecialCharTok{==} \DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2 2 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# ex.2b larger than}
+\NormalTok{x[x }\SpecialCharTok{\textgreater{}} \DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3 5
+\end{verbatim}
+
+Using \texttt{which()}, you can see which elements (i.e., \#) matches what you need:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# ex.3a equal}
+\FunctionTok{which}\NormalTok{(x }\SpecialCharTok{==} \DecValTok{2}\NormalTok{) }\CommentTok{\# returns which elements are equal to 2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1 2 4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# ex.3b larger than}
+\FunctionTok{which}\NormalTok{(x }\SpecialCharTok{\textgreater{}} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3 5
+\end{verbatim}
+
+\hypertarget{matrix}{%
+\section{Matrix}\label{matrix}}
+
+\hypertarget{create-matrix}{%
+\subsection{Create Matrix}\label{create-matrix}}
+
+Matrix is a set of elements (\emph{single data type}) that are organized into rows and columns:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#ex.1 cbind: combine objects by column}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{cbind}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{), }\FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{))}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]    1    4
+## [2,]    2    5
+## [3,]    3    6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#ex.2 rbind: combine objects by row}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{), }\FunctionTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{))}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]    1    2    3
+## [2,]    4    5    6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#ex.3 matrix: specify elements and the number of rows (nrow) and columns (ncol)}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{9}\NormalTok{, }\AttributeTok{nrow =} \DecValTok{3}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{3}\NormalTok{)}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]    1    4    7
+## [2,]    2    5    8
+## [3,]    3    6    9
+\end{verbatim}
+
+\hypertarget{check-features-1}{%
+\subsection{Check Features}\label{check-features-1}}
+
+R provides many functions to examine features of matrix data, for example:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{dim()} number of rows and columns
+\item
+  \texttt{rowSums()} row sums
+\item
+  \texttt{colSums()} column sums
+\end{itemize}
+
+\textbf{Integer Matrix}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{9}\NormalTok{, }\AttributeTok{nrow =} \DecValTok{3}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{3}\NormalTok{)}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]    1    4    7
+## [2,]    2    5    8
+## [3,]    3    6    9
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "matrix" "array"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{typeof}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "integer"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dim}\NormalTok{(x)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3 3
+\end{verbatim}
+
+\textbf{Character Matrix}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"a"}\NormalTok{,}\StringTok{"b"}\NormalTok{, }\StringTok{"c"}\NormalTok{, }\StringTok{"d"}\NormalTok{, }\StringTok{"e"}\NormalTok{, }\StringTok{"f"}\NormalTok{), }\AttributeTok{nrow =} \DecValTok{3}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{2}\NormalTok{)}
+\NormalTok{y}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2]
+## [1,] "a"  "d" 
+## [2,] "b"  "e" 
+## [3,] "c"  "f"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "matrix" "array"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{typeof}\NormalTok{(y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "character"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dim}\NormalTok{(y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3 2
+\end{verbatim}
+
+\hypertarget{access-1}{%
+\subsection{Access}\label{access-1}}
+
+When accessing matrix elements, you need to pick row(s) and/or column(s), for example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{9}\NormalTok{, }\AttributeTok{nrow =} \DecValTok{3}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{3}\NormalTok{)}
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]    1    4    7
+## [2,]    2    5    8
+## [3,]    3    6    9
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{] }\CommentTok{\# access an element in row \#2 and colum \#3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 8
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[}\DecValTok{2}\NormalTok{,] }\CommentTok{\# access elements in row \#2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2 5 8
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{),] }\CommentTok{\# access elements in rows \#2 and 3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2] [,3]
+## [1,]    2    5    8
+## [2,]    3    6    9
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[,}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{)] }\CommentTok{\# access elements in columns \#2 and 3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      [,1] [,2]
+## [1,]    4    7
+## [2,]    5    8
+## [3,]    6    9
+\end{verbatim}
+
+You can assess each element with mathematical expressions just like vectors:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\SpecialCharTok{==} \DecValTok{2} \CommentTok{\# equal}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       [,1]  [,2]  [,3]
+## [1,] FALSE FALSE FALSE
+## [2,]  TRUE FALSE FALSE
+## [3,] FALSE FALSE FALSE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\SpecialCharTok{\textgreater{}} \DecValTok{2} \CommentTok{\# larger than}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       [,1] [,2] [,3]
+## [1,] FALSE TRUE TRUE
+## [2,] FALSE TRUE TRUE
+## [3,]  TRUE TRUE TRUE
+\end{verbatim}
+
+However, care must be taken when accessing elements, as it will be automatically converted to vector data:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[x }\SpecialCharTok{==} \DecValTok{2}\NormalTok{] }\CommentTok{\# equal}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x[x }\SpecialCharTok{\textgreater{}} \DecValTok{2}\NormalTok{] }\CommentTok{\# larger than}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3 4 5 6 7 8 9
+\end{verbatim}
+
+\texttt{which()} needs an additional argument to return both row and column \#:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{which}\NormalTok{(x }\SpecialCharTok{==} \DecValTok{2}\NormalTok{, }\AttributeTok{arr.ind =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      row col
+## [1,]   2   1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{which}\NormalTok{(x }\SpecialCharTok{\textgreater{}} \DecValTok{2}\NormalTok{, }\AttributeTok{arr.ind =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      row col
+## [1,]   3   1
+## [2,]   1   2
+## [3,]   2   2
+## [4,]   3   2
+## [5,]   1   3
+## [6,]   2   3
+## [7,]   3   3
+\end{verbatim}
+
+\hypertarget{data-frame}{%
+\section{Data Frame}\label{data-frame}}
+
+A data frame is a collection of elements organized into rows and columns, but it differs from a matrix in several ways.
+
+\begin{itemize}
+\tightlist
+\item
+  It allows for the inclusion of \emph{multiple data types} in different columns.
+\item
+  Each column in a data frame has a \emph{name} associated with it.
+\item
+  You can access columns in a data frame by their respective names using the \texttt{\$} operator.
+\end{itemize}
+
+The data frame is the most commonly used data structure when manipulating ecological data. When loading a dataset from a spreadsheet (which we will discuss later), it is automatically recognized as a data frame. Let's consider an example:
+
+\textbf{Creating a data frame}\\
+In the following example, the variables \texttt{x} and \texttt{y} are organized into a single data frame named \texttt{df0}. The variables are renamed as part of the process of creating the data frame.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create data frame}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Pristine"}\NormalTok{, }\StringTok{"Pristine"}\NormalTok{, }\StringTok{"Disturbed"}\NormalTok{, }\StringTok{"Disturbed"}\NormalTok{, }\StringTok{"Pristine"}\NormalTok{) }\CommentTok{\# Lake type}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FloatTok{1.2}\NormalTok{, }\FloatTok{2.2}\NormalTok{, }\FloatTok{10.9}\NormalTok{, }\FloatTok{50.0}\NormalTok{, }\FloatTok{3.0}\NormalTok{) }\CommentTok{\# TSS: total suspended solids (mg/L)}
+\NormalTok{df0 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{LakeType =}\NormalTok{ x, }\AttributeTok{TSS =}\NormalTok{ y) }\CommentTok{\# x is named as "LakeType" while y is named as "TSS"}
+\NormalTok{df0}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    LakeType  TSS
+## 1  Pristine  1.2
+## 2  Pristine  2.2
+## 3 Disturbed 10.9
+## 4 Disturbed 50.0
+## 5  Pristine  3.0
+\end{verbatim}
+
+\textbf{Call column names}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{colnames}\NormalTok{(df0) }\CommentTok{\# call column names}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "LakeType" "TSS"
+\end{verbatim}
+
+\textbf{Access by columns}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df0}\SpecialCharTok{$}\NormalTok{LakeType }\CommentTok{\# access LakeType}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Pristine"  "Pristine"  "Disturbed" "Disturbed" "Pristine"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df0}\SpecialCharTok{$}\NormalTok{TSS }\CommentTok{\# access TSS}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  1.2  2.2 10.9 50.0  3.0
+\end{verbatim}
+
+You can access elements like a matrix as well:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df0[,}\DecValTok{1}\NormalTok{] }\CommentTok{\# access column \#1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Pristine"  "Pristine"  "Disturbed" "Disturbed" "Pristine"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df0[}\DecValTok{1}\NormalTok{,] }\CommentTok{\# access row \#1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   LakeType TSS
+## 1 Pristine 1.2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df0[}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{),] }\CommentTok{\# access row \#2 and 4}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    LakeType  TSS
+## 2  Pristine  2.2
+## 4 Disturbed 50.0
+\end{verbatim}
+
+\hypertarget{exercise}{%
+\section{Exercise}\label{exercise}}
+
+\hypertarget{vector-1}{%
+\subsection{Vector}\label{vector-1}}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Create three numeric vectors with length 3, 6 and 20, respectively. Each vector must be created using different functions in R.
+\item
+  Create three character vectors with length 3, 6 and 20, respectively. Each vector must be created using different functions in R.
+\item
+  Copy the following script to your R script and perform the following analysis:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Identify element IDs of \texttt{x} that are greater than \texttt{2.0}
+\item
+  Identify element values of \texttt{x} that are greater than \texttt{2.0}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{matrix-1}{%
+\subsection{Matrix}\label{matrix-1}}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Create a numeric matrix with 4 rows and 4 columns. Each column must contain identical elements.
+\item
+  Create a numeric matrix with 4 rows and 4 columns. Each row must contain identical elements.
+\item
+  Create a character matrix with 4 rows and 4 columns. Each column must contain identical elements.
+\item
+  Create a character matrix with 4 rows and 4 columns. Each row must contain identical elements.
+\item
+  Copy the following script to your R script and perform the following analysis:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Identify element IDs of \texttt{x} that are greater than \texttt{2.0} (\textbf{specify row and column IDs})
+\item
+  Identify element values of \texttt{x} that are greater than \texttt{2.0} and calculate the mean.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{matrix}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{), }\AttributeTok{nrow =} \DecValTok{10}\NormalTok{, }\AttributeTok{ncol =} \DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{data-frame-1}{%
+\subsection{Data Frame}\label{data-frame-1}}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Create a data frame of 3 variables with 10 elements (name variables as \texttt{x}, \texttt{y} and \texttt{z}. \texttt{x} must be \texttt{character} while \texttt{y} and \texttt{z} must be \texttt{numeric}.
+\item
+  Check the data structure (higher-level) of \texttt{x}, \texttt{y} and \texttt{z}
+\item
+  Copy the following script to your R script and perform the following analysis:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Calculate the means of \texttt{temperature} and \texttt{abundance} for states \texttt{VA} and \texttt{NC} separately.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{, }\AttributeTok{mean =} \DecValTok{10}\NormalTok{, }\AttributeTok{sd =} \DecValTok{3}\NormalTok{)}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{rpois}\NormalTok{(}\DecValTok{100}\NormalTok{, }\AttributeTok{lambda =} \DecValTok{10}\NormalTok{)}
+\NormalTok{z }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"VA"}\NormalTok{, }\StringTok{"NC"}\NormalTok{), }\DecValTok{50}\NormalTok{)}
+\NormalTok{df0 }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{temperature =}\NormalTok{ x, }\AttributeTok{abundance =}\NormalTok{ y, }\AttributeTok{state =}\NormalTok{ z)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{appendix-tidyverse}{%
+\chapter{Appendix: Tidyverse}\label{appendix-tidyverse}}
+
+\hypertarget{overview-1}{%
+\section{Overview}\label{overview-1}}
+
+R packages are collections of code, data, and documentation that extend the functionality of the R programming language. They provide a convenient way for users to access and utilize specialized tools and functions for data analysis, visualization, statistical modeling, and more. Among them, \texttt{tidyverse} provides very useful functions for data manipulation and visualization.
+
+\texttt{tidyverse} is a collection of R packages designed to make data manipulation, exploration, and visualization more efficient and intuitive. Developed by Hadley Wickham and other contributors, the Tidyverse packages share a common philosophy and syntax, emphasizing a consistent and tidy data format. The core packages, such as \texttt{dplyr}, \texttt{tidyr}, and \texttt{ggplot2}, provide powerful tools for data wrangling, reshaping, and creating visualizations.
+
+\hypertarget{data-manipulation}{%
+\section{Data Manipulation}\label{data-manipulation}}
+
+\hypertarget{data-format}{%
+\subsection{Data Format}\label{data-format}}
+
+\hypertarget{select-rows}{%
+\subsection{Select Rows}\label{select-rows}}
+
+\hypertarget{select-columns}{%
+\subsection{Select Columns}\label{select-columns}}
+
+\hypertarget{group-operation}{%
+\subsection{Group Operation}\label{group-operation}}
+
+\hypertarget{reshape}{%
+\subsection{Reshape}\label{reshape}}
+
+\hypertarget{combination}{%
+\subsection{Combination}\label{combination}}
+
+\hypertarget{visualization}{%
+\section{Visualization}\label{visualization}}
+
+\hypertarget{point}{%
+\subsection{Point}\label{point}}
+
+\hypertarget{histogram}{%
+\subsection{Histogram}\label{histogram}}
+
+\hypertarget{boxplot}{%
+\subsection{Boxplot}\label{boxplot}}
+
+\hypertarget{violin-plot}{%
+\subsection{Violin Plot}\label{violin-plot}}
+
+\hypertarget{styling}{%
+\subsection{Styling}\label{styling}}
+
+\hypertarget{more}{%
+\subsection{More}\label{more}}
+
+\hypertarget{appendix-base-plot}{%
+\chapter{Appendix: Base Plot}\label{appendix-base-plot}}
+
+\hypertarget{overview-2}{%
+\section{Overview}\label{overview-2}}
+
+R offers a variety of functions that aid in visualizing data. The \texttt{graphics} package in R provides a set of functions for basic graphics (\href{https://www.rdocumentation.org/packages/graphics/versions/3.6.2}{list of functions}). To demonstrate the functionality of these \texttt{graphics} functions, I will utilize the built-in \texttt{iris} dataset in R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(iris)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa
+\end{verbatim}
+
+\hypertarget{plot}{%
+\section{Plot}\label{plot}}
+
+When creating a plot, you typically need to specify the \textbf{formula} to define the relationship between variables. For instance, if you wish to visualize the association between \texttt{x} and \texttt{y} (with \texttt{y} on the vertical axis and \texttt{x} on the horizontal axis), the formula would be \texttt{y\ \textasciitilde{}\ x} (where the left side of the formula represents the vertical axis). In the \texttt{iris} dataset, you have access to the following columns: \texttt{Sepal.Length}, \texttt{Sepal.Width}, \texttt{Petal.Length}, \texttt{Petal.Width}, and \texttt{Species}. In the subsequent example, we will plot the relationship between \texttt{Sepal.Length} and \texttt{Sepal.Width}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(Sepal.Length }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Sepal.Width, }\AttributeTok{data =}\NormalTok{ iris)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{_main_files/figure-latex/unnamed-chunk-70-1} \end{center}
+
+The \texttt{data\ =} argument informs the function about the dataset from which the variables (\texttt{Sepal.Length} and \texttt{Sepal.Width}) should be extracted.
+
+\hypertarget{symbol}{%
+\subsection{Symbol}\label{symbol}}
+
+\texttt{pch} argument. Choose from \texttt{1} to \texttt{25} (google \textbf{r plot pch} for details)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(Sepal.Length }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Sepal.Width, }\AttributeTok{data =}\NormalTok{ iris,}
+     \AttributeTok{pch =} \DecValTok{19}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{_main_files/figure-latex/unnamed-chunk-71-1} \end{center}
+
+\hypertarget{symbol-size}{%
+\subsection{Symbol size}\label{symbol-size}}
+
+\texttt{cex} argument. \texttt{cex\ =\ 1} is the default value. \texttt{cex\ =\ 2} is as twice large as default value.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(Sepal.Length }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Sepal.Width, }\AttributeTok{data =}\NormalTok{ iris,}
+     \AttributeTok{pch =} \DecValTok{19}\NormalTok{, }\AttributeTok{cex =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{_main_files/figure-latex/unnamed-chunk-72-1} \end{center}
+
+\hypertarget{symbol-color-border}{%
+\subsection{Symbol color (border)}\label{symbol-color-border}}
+
+\texttt{col} argument (quote \texttt{"color\ name"} when specifying). Google \textbf{r color name} for color options.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(Sepal.Length }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Sepal.Width, }\AttributeTok{data =}\NormalTok{ iris,}
+     \AttributeTok{pch =} \DecValTok{21}\NormalTok{, }\AttributeTok{cex =} \DecValTok{2}\NormalTok{, }\AttributeTok{col =} \StringTok{"gray"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{_main_files/figure-latex/unnamed-chunk-73-1} \end{center}
+
+\hypertarget{symbol-color-fill}{%
+\subsection{Symbol color (fill)}\label{symbol-color-fill}}
+
+\texttt{bg} argument (quote \texttt{"color\ name"} when specifying). Available for a subset of symbol options (some symbols have pre-defined filled color).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(Sepal.Length }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Sepal.Width, }\AttributeTok{data =}\NormalTok{ iris,}
+     \AttributeTok{pch =} \DecValTok{21}\NormalTok{, }\AttributeTok{cex =} \DecValTok{2}\NormalTok{, }\AttributeTok{bg =} \StringTok{"lightgray"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{_main_files/figure-latex/unnamed-chunk-74-1} \end{center}
+
+\hypertarget{label}{%
+\subsection{Label}\label{label}}
+
+\texttt{ylab} or \texttt{xlab} arguments. Provide \texttt{"quoted\ text"}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(Sepal.Length }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Sepal.Width, }\AttributeTok{data =}\NormalTok{ iris,}
+     \AttributeTok{pch =} \DecValTok{21}\NormalTok{, }\AttributeTok{cex =} \DecValTok{2}\NormalTok{, }\AttributeTok{bg =} \StringTok{"lightgray"}\NormalTok{,}
+     \AttributeTok{xlab =} \StringTok{"Sepal width (cm)"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Sepal length (cm)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{_main_files/figure-latex/unnamed-chunk-75-1} \end{center}
+
+\hypertarget{axis}{%
+\subsection{Axis}\label{axis}}
+
+Delete axes with \texttt{axes\ =\ F} and re-draw with \texttt{box()} and \texttt{axis()} functions.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(Sepal.Length }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Sepal.Width, }\AttributeTok{data =}\NormalTok{ iris,}
+     \AttributeTok{pch =} \DecValTok{21}\NormalTok{, }\AttributeTok{cex =} \DecValTok{2}\NormalTok{, }\AttributeTok{bg =} \StringTok{"lightgray"}\NormalTok{,}
+     \AttributeTok{xlab =} \StringTok{"Sepal width (cm)"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Sepal length (cm)"}\NormalTok{,}
+     \AttributeTok{axes =}\NormalTok{ F)}
+\FunctionTok{box}\NormalTok{(}\AttributeTok{bty =} \StringTok{"l"}\NormalTok{) }\CommentTok{\# L{-}shaped border lines}
+\FunctionTok{axis}\NormalTok{(}\DecValTok{1}\NormalTok{) }\CommentTok{\# 1: draw x{-}axis}
+\FunctionTok{axis}\NormalTok{(}\DecValTok{2}\NormalTok{, }\AttributeTok{las =} \DecValTok{2}\NormalTok{) }\CommentTok{\# 2: draw y{-}axis, las = 2: make axis lables horizontal}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{_main_files/figure-latex/unnamed-chunk-76-1} \end{center}
+
+\hypertarget{boxplot-1}{%
+\section{Boxplot}\label{boxplot-1}}
+
+\texttt{boxplot()} is used when the x-axis is factor-type data (by default, \texttt{plot()} will produce a boxplot when x-axis is a factor variable). In the \texttt{iris} dataset, the column \texttt{Species} is a factor variable. Compare \texttt{Sepal.Length} among species using \texttt{boxplot()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(Sepal.Length }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Species, }\AttributeTok{data =}\NormalTok{ iris)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{_main_files/figure-latex/unnamed-chunk-77-1} \end{center}
+
+You can customize as in \texttt{plot()}, but slighlty different.
+
+\hypertarget{box-color}{%
+\subsection{Box color}\label{box-color}}
+
+\texttt{col} argument.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(Sepal.Length }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Species, }\AttributeTok{data =}\NormalTok{ iris,}
+        \AttributeTok{col =} \StringTok{"lightgray"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{_main_files/figure-latex/unnamed-chunk-78-1} \end{center}
+
+\hypertarget{border-color}{%
+\subsection{Border color}\label{border-color}}
+
+\texttt{border} argument.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(Sepal.Length }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Species, }\AttributeTok{data =}\NormalTok{ iris,}
+        \AttributeTok{col =} \StringTok{"lightgray"}\NormalTok{, }\AttributeTok{border =} \StringTok{"grey48"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{_main_files/figure-latex/unnamed-chunk-79-1} \end{center}
+
+\hypertarget{box-width}{%
+\subsection{Box width}\label{box-width}}
+
+\texttt{boxwex} argument.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(Sepal.Length }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Species, }\AttributeTok{data =}\NormalTok{ iris,}
+        \AttributeTok{col =} \StringTok{"lightgray"}\NormalTok{, }\AttributeTok{border =} \StringTok{"grey48"}\NormalTok{,}
+        \AttributeTok{boxwex =} \FloatTok{0.4}\NormalTok{ )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{_main_files/figure-latex/unnamed-chunk-80-1} \end{center}
+
+\hypertarget{axis-1}{%
+\subsection{Axis}\label{axis-1}}
+
+Delete axes with \texttt{axes\ =\ F} and re-draw with \texttt{box()} and \texttt{axis()} functions.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(Sepal.Length }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Species, }\AttributeTok{data =}\NormalTok{ iris,}
+        \AttributeTok{col =} \StringTok{"lightgray"}\NormalTok{, }\AttributeTok{border =} \StringTok{"grey48"}\NormalTok{,}
+        \AttributeTok{boxwex =} \FloatTok{0.4}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Sepal length (cm)"}\NormalTok{,}
+        \AttributeTok{axes =}\NormalTok{ F)}
+\FunctionTok{box}\NormalTok{(}\AttributeTok{bty =} \StringTok{"l"}\NormalTok{)}
+\FunctionTok{axis}\NormalTok{(}\DecValTok{1}\NormalTok{, }\AttributeTok{at =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{), }\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Setosa"}\NormalTok{, }\StringTok{"Versicolor"}\NormalTok{, }\StringTok{"Virginica"}\NormalTok{) )}
+\FunctionTok{axis}\NormalTok{(}\DecValTok{2}\NormalTok{, }\AttributeTok{las =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{_main_files/figure-latex/unnamed-chunk-81-1} \end{center}
 
 \end{document}

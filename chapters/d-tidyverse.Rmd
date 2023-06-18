@@ -1,0 +1,23 @@
+# Appendix: Tidyverse
+
+## Overview
+
+R packages are collections of code, data, and documentation that extend the functionality of the R programming language. They provide a convenient way for users to access and utilize specialized tools and functions for data analysis, visualization, statistical modeling, and more. Among them, `tidyverse` provides very useful functions for data manipulation and visualization.
+
+`tidyverse` is a collection of R packages designed to make data manipulation, exploration, and visualization more efficient and intuitive. Developed by Hadley Wickham and other contributors, the Tidyverse packages share a common philosophy and syntax, emphasizing a consistent and tidy data format. The core packages, such as `dplyr`, `tidyr`, and `ggplot2`, provide powerful tools for data wrangling, reshaping, and creating visualizations.
+
+## Data Manipulation
+### Data Format
+### Select Rows
+### Select Columns
+### Group Operation
+### Reshape
+### Combination
+
+## Visualization
+### Point
+### Histogram
+### Boxplot
+### Violin Plot
+### Styling
+### More

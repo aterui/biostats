@@ -123,10 +123,10 @@ X =
 \end{pmatrix}
 $$
 
-Using matrix notation, we can express the error vector $\overrightarrow{\varepsilon}$ as:
+Using matrix notation, we can express the error vector $\pmb{\varepsilon}$ as:
 
 $$
-\overrightarrow{\varepsilon} = Y - X\Theta
+\pmb{\varepsilon} = Y - X\Theta
 $$
 
 The column of $1$s is required to represent the intercept; $X\Theta$ reads:
@@ -154,7 +154,7 @@ X\Theta =
 \end{pmatrix}
 $$
 
-Minimizing the squared magnitude of $\overrightarrow{\varepsilon}$ (solve the partial derivative of $||\overrightarrow{\varepsilon}||^2$ about $\Theta$) leads to the solution (for detailed derivation, refer to [Wikipedia](https://en.wikipedia.org/wiki/Least_squares)):
+Minimizing the squared magnitude of $\pmb{\varepsilon}$ (solve the partial derivative of $||\pmb{\varepsilon}||^2$ about $\Theta$) leads to the solution (for detailed derivation, refer to [Wikipedia](https://en.wikipedia.org/wiki/Least_squares)):
 
 $$
 \hat{\Theta} = (X^TX)^{-1}X^{T}Y

@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 8 Appendix: Git &amp; GitHub | BIOSTATS</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 8 Appendix: Git &amp; GitHub | BIOSTATS" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 8 Appendix: Git &amp; GitHub | BIOSTATS" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Akira Terui" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="appendix-project-management.html"/>
+<link rel="next" href="appendix-data-structure.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">BIOSTATS</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html"><i class="fa fa-check"></i><b>1</b> Descriptive Statistics</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#central-tendency"><i class="fa fa-check"></i><b>1.1</b> Central Tendency</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#measures-of-central-tendency"><i class="fa fa-check"></i><b>1.1.1</b> Measures of Central Tendency</a></li>
+<li class="chapter" data-level="1.1.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#r-exercise"><i class="fa fa-check"></i><b>1.1.2</b> R Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#variation"><i class="fa fa-check"></i><b>1.2</b> Variation</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#measures-of-variation"><i class="fa fa-check"></i><b>1.2.1</b> Measures of Variation</a></li>
+<li class="chapter" data-level="1.2.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#r-exercise-1"><i class="fa fa-check"></i><b>1.2.2</b> R Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#laboratory"><i class="fa fa-check"></i><b>1.3</b> Laboratory</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#comparing-central-tendency-measures"><i class="fa fa-check"></i><b>1.3.1</b> Comparing Central Tendency Measures</a></li>
+<li class="chapter" data-level="1.3.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#comparing-variation-measures"><i class="fa fa-check"></i><b>1.3.2</b> Comparing Variation Measures</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="sampling.html"><a href="sampling.html"><i class="fa fa-check"></i><b>2</b> Sampling</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="sampling.html"><a href="sampling.html#the-unknown-garden-plant-example"><i class="fa fa-check"></i><b>2.1</b> The Unknown: Garden Plant Example</a></li>
+<li class="chapter" data-level="2.2" data-path="sampling.html"><a href="sampling.html#linking-part-to-the-whole"><i class="fa fa-check"></i><b>2.2</b> Linking Part to the Whole</a></li>
+<li class="chapter" data-level="2.3" data-path="sampling.html"><a href="sampling.html#laboratory-1"><i class="fa fa-check"></i><b>2.3</b> Laboratory</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="probabilistic-view.html"><a href="probabilistic-view.html"><i class="fa fa-check"></i><b>3</b> Probabilistic View</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="probabilistic-view.html"><a href="probabilistic-view.html#probability-distribution-of-a-continuous-variable"><i class="fa fa-check"></i><b>3.1</b> Probability Distribution of a Continuous Variable</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="probabilistic-view.html"><a href="probabilistic-view.html#probability-density-function"><i class="fa fa-check"></i><b>3.1.1</b> Probability Density Function</a></li>
+<li class="chapter" data-level="3.1.2" data-path="probabilistic-view.html"><a href="probabilistic-view.html#pdf-to-frequency-distribution"><i class="fa fa-check"></i><b>3.1.2</b> PDF to frequency distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="probabilistic-view.html"><a href="probabilistic-view.html#probability-distribution-of-a-discrete-variable"><i class="fa fa-check"></i><b>3.2</b> Probability Distribution of a Discrete Variable</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="probabilistic-view.html"><a href="probabilistic-view.html#probability-mass-function"><i class="fa fa-check"></i><b>3.2.1</b> Probability Mass Function</a></li>
+<li class="chapter" data-level="3.2.2" data-path="probabilistic-view.html"><a href="probabilistic-view.html#pmf-to-frequency-distribution"><i class="fa fa-check"></i><b>3.2.2</b> PMF to frequency distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="probabilistic-view.html"><a href="probabilistic-view.html#why-probability-distributions"><i class="fa fa-check"></i><b>3.3</b> Why Probability Distributions?</a></li>
+<li class="chapter" data-level="3.4" data-path="probabilistic-view.html"><a href="probabilistic-view.html#laboratory-2"><i class="fa fa-check"></i><b>3.4</b> Laboratory</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="probabilistic-view.html"><a href="probabilistic-view.html#normal-distribution"><i class="fa fa-check"></i><b>3.4.1</b> Normal Distribution</a></li>
+<li class="chapter" data-level="3.4.2" data-path="probabilistic-view.html"><a href="probabilistic-view.html#poisson-distribution"><i class="fa fa-check"></i><b>3.4.2</b> Poisson Distribution</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="two-group-comparison.html"><a href="two-group-comparison.html"><i class="fa fa-check"></i><b>4</b> Two-Group Comparison</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="two-group-comparison.html"><a href="two-group-comparison.html#explore-data-structure"><i class="fa fa-check"></i><b>4.1</b> Explore Data Structure</a></li>
+<li class="chapter" data-level="4.2" data-path="two-group-comparison.html"><a href="two-group-comparison.html#test-statistic"><i class="fa fa-check"></i><b>4.2</b> Test Statistic</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="two-group-comparison.html"><a href="two-group-comparison.html#t-statistic"><i class="fa fa-check"></i><b>4.2.1</b> t-statistic</a></li>
+<li class="chapter" data-level="4.2.2" data-path="two-group-comparison.html"><a href="two-group-comparison.html#null-hypothesis"><i class="fa fa-check"></i><b>4.2.2</b> Null Hypothesis</a></li>
+<li class="chapter" data-level="4.2.3" data-path="two-group-comparison.html"><a href="two-group-comparison.html#interpretation"><i class="fa fa-check"></i><b>4.2.3</b> Interpretation</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="two-group-comparison.html"><a href="two-group-comparison.html#t-test-in-r"><i class="fa fa-check"></i><b>4.3</b> t-test in R</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="two-group-comparison.html"><a href="two-group-comparison.html#t-test-with-equal-variance"><i class="fa fa-check"></i><b>4.3.1</b> t-test with equal variance</a></li>
+<li class="chapter" data-level="4.3.2" data-path="two-group-comparison.html"><a href="two-group-comparison.html#t-test-with-unequal-variance"><i class="fa fa-check"></i><b>4.3.2</b> t-test with unequal variance</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="two-group-comparison.html"><a href="two-group-comparison.html#laboratory-3"><i class="fa fa-check"></i><b>4.4</b> Laboratory</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html"><i class="fa fa-check"></i><b>5</b> Multiple-Group Comparison</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#partition-the-variability"><i class="fa fa-check"></i><b>5.1</b> Partition the Variability</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#between-group-variability"><i class="fa fa-check"></i><b>5.1.1</b> Between-group variability</a></li>
+<li class="chapter" data-level="5.1.2" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#within-group-variability"><i class="fa fa-check"></i><b>5.1.2</b> Within-group variability</a></li>
+<li class="chapter" data-level="5.1.3" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#variability-to-variance"><i class="fa fa-check"></i><b>5.1.3</b> Variability to Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#test-statistic-1"><i class="fa fa-check"></i><b>5.2</b> Test Statistic</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#f-statistic"><i class="fa fa-check"></i><b>5.2.1</b> F-statistic</a></li>
+<li class="chapter" data-level="5.2.2" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#null-hypothesis-1"><i class="fa fa-check"></i><b>5.2.2</b> Null Hypothesis</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#anova-in-r"><i class="fa fa-check"></i><b>5.3</b> ANOVA in R</a></li>
+<li class="chapter" data-level="5.4" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#post-hoc-tests"><i class="fa fa-check"></i><b>5.4</b> Post-hoc Tests</a></li>
+<li class="chapter" data-level="5.5" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#laboratory-4"><i class="fa fa-check"></i><b>5.5</b> Laboratory</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="regression.html"><a href="regression.html"><i class="fa fa-check"></i><b>6</b> Regression</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="regression.html"><a href="regression.html#explore-data-structure-1"><i class="fa fa-check"></i><b>6.1</b> Explore Data Structure</a></li>
+<li class="chapter" data-level="6.2" data-path="regression.html"><a href="regression.html#drawing-the-fittest-line"><i class="fa fa-check"></i><b>6.2</b> Drawing the “fittest” line</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="regression.html"><a href="regression.html#linear-formula"><i class="fa fa-check"></i><b>6.2.1</b> Linear formula</a></li>
+<li class="chapter" data-level="6.2.2" data-path="regression.html"><a href="regression.html#minimizing-the-errors"><i class="fa fa-check"></i><b>6.2.2</b> Minimizing the errors</a></li>
+<li class="chapter" data-level="6.2.3" data-path="regression.html"><a href="regression.html#least-squares"><i class="fa fa-check"></i><b>6.2.3</b> Least Squares</a></li>
+<li class="chapter" data-level="6.2.4" data-path="regression.html"><a href="regression.html#standard-errors-and-t-values"><i class="fa fa-check"></i><b>6.2.4</b> Standard Errors and t-values</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="regression.html"><a href="regression.html#unexplained-variation"><i class="fa fa-check"></i><b>6.3</b> Unexplained Variation</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="regression.html"><a href="regression.html#retrieve-errors"><i class="fa fa-check"></i><b>6.3.1</b> Retrieve Errors</a></li>
+<li class="chapter" data-level="6.3.2" data-path="regression.html"><a href="regression.html#visualize-errors"><i class="fa fa-check"></i><b>6.3.2</b> Visualize Errors</a></li>
+<li class="chapter" data-level="6.3.3" data-path="regression.html"><a href="regression.html#coefficient-of-determination"><i class="fa fa-check"></i><b>6.3.3</b> Coefficient of Determination</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="regression.html"><a href="regression.html#laboratory-5"><i class="fa fa-check"></i><b>6.4</b> Laboratory</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="appendix-project-management.html"><a href="appendix-project-management.html"><i class="fa fa-check"></i><b>7</b> Appendix: Project Management</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="appendix-project-management.html"><a href="appendix-project-management.html#r-project"><i class="fa fa-check"></i><b>7.1</b> R Project</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="appendix-project-management.html"><a href="appendix-project-management.html#script-editor"><i class="fa fa-check"></i><b>7.1.1</b> Script Editor</a></li>
+<li class="chapter" data-level="7.1.2" data-path="appendix-project-management.html"><a href="appendix-project-management.html#file-name"><i class="fa fa-check"></i><b>7.1.2</b> File Name</a></li>
+<li class="chapter" data-level="7.1.3" data-path="appendix-project-management.html"><a href="appendix-project-management.html#structure-your-project"><i class="fa fa-check"></i><b>7.1.3</b> Structure Your Project</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="appendix-project-management.html"><a href="appendix-project-management.html#robust-coding"><i class="fa fa-check"></i><b>7.2</b> Robust coding</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="appendix-git-github.html"><a href="appendix-git-github.html"><i class="fa fa-check"></i><b>8</b> Appendix: Git &amp; GitHub</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="appendix-git-github.html"><a href="appendix-git-github.html#git-github"><i class="fa fa-check"></i><b>8.1</b> Git &amp; GitHub</a></li>
+<li class="chapter" data-level="8.2" data-path="appendix-git-github.html"><a href="appendix-git-github.html#commit-push"><i class="fa fa-check"></i><b>8.2</b> Commit &amp; Push</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="appendix-git-github.html"><a href="appendix-git-github.html#register-your-git-repo"><i class="fa fa-check"></i><b>8.2.1</b> Register Your Git repo</a></li>
+<li class="chapter" data-level="8.2.2" data-path="appendix-git-github.html"><a href="appendix-git-github.html#commit"><i class="fa fa-check"></i><b>8.2.2</b> Commit</a></li>
+<li class="chapter" data-level="8.2.3" data-path="appendix-git-github.html"><a href="appendix-git-github.html#push"><i class="fa fa-check"></i><b>8.2.3</b> Push</a></li>
+<li class="chapter" data-level="8.2.4" data-path="appendix-git-github.html"><a href="appendix-git-github.html#edit"><i class="fa fa-check"></i><b>8.2.4</b> Edit</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html"><i class="fa fa-check"></i><b>9</b> Appendix: Data Structure</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#overview"><i class="fa fa-check"></i><b>9.1</b> Overview</a></li>
+<li class="chapter" data-level="9.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#vector"><i class="fa fa-check"></i><b>9.2</b> Vector</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#create-vector"><i class="fa fa-check"></i><b>9.2.1</b> Create Vector</a></li>
+<li class="chapter" data-level="9.2.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#check-features"><i class="fa fa-check"></i><b>9.2.2</b> Check Features</a></li>
+<li class="chapter" data-level="9.2.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#access"><i class="fa fa-check"></i><b>9.2.3</b> Access</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#matrix"><i class="fa fa-check"></i><b>9.3</b> Matrix</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#create-matrix"><i class="fa fa-check"></i><b>9.3.1</b> Create Matrix</a></li>
+<li class="chapter" data-level="9.3.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#check-features-1"><i class="fa fa-check"></i><b>9.3.2</b> Check Features</a></li>
+<li class="chapter" data-level="9.3.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#access-1"><i class="fa fa-check"></i><b>9.3.3</b> Access</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#data-frame"><i class="fa fa-check"></i><b>9.4</b> Data Frame</a></li>
+<li class="chapter" data-level="9.5" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#exercise"><i class="fa fa-check"></i><b>9.5</b> Exercise</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#vector-1"><i class="fa fa-check"></i><b>9.5.1</b> Vector</a></li>
+<li class="chapter" data-level="9.5.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#matrix-1"><i class="fa fa-check"></i><b>9.5.2</b> Matrix</a></li>
+<li class="chapter" data-level="9.5.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#data-frame-1"><i class="fa fa-check"></i><b>9.5.3</b> Data Frame</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html"><i class="fa fa-check"></i><b>10</b> Appendix: Tidyverse</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#overview-1"><i class="fa fa-check"></i><b>10.1</b> Overview</a></li>
+<li class="chapter" data-level="10.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#data-manipulation"><i class="fa fa-check"></i><b>10.2</b> Data Manipulation</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#data-format"><i class="fa fa-check"></i><b>10.2.1</b> Data Format</a></li>
+<li class="chapter" data-level="10.2.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#select-rows"><i class="fa fa-check"></i><b>10.2.2</b> Select Rows</a></li>
+<li class="chapter" data-level="10.2.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#select-columns"><i class="fa fa-check"></i><b>10.2.3</b> Select Columns</a></li>
+<li class="chapter" data-level="10.2.4" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#group-operation"><i class="fa fa-check"></i><b>10.2.4</b> Group Operation</a></li>
+<li class="chapter" data-level="10.2.5" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#reshape"><i class="fa fa-check"></i><b>10.2.5</b> Reshape</a></li>
+<li class="chapter" data-level="10.2.6" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#combination"><i class="fa fa-check"></i><b>10.2.6</b> Combination</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#visualization"><i class="fa fa-check"></i><b>10.3</b> Visualization</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#point"><i class="fa fa-check"></i><b>10.3.1</b> Point</a></li>
+<li class="chapter" data-level="10.3.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#histogram"><i class="fa fa-check"></i><b>10.3.2</b> Histogram</a></li>
+<li class="chapter" data-level="10.3.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#boxplot"><i class="fa fa-check"></i><b>10.3.3</b> Boxplot</a></li>
+<li class="chapter" data-level="10.3.4" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#violin-plot"><i class="fa fa-check"></i><b>10.3.4</b> Violin Plot</a></li>
+<li class="chapter" data-level="10.3.5" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#styling"><i class="fa fa-check"></i><b>10.3.5</b> Styling</a></li>
+<li class="chapter" data-level="10.3.6" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#more"><i class="fa fa-check"></i><b>10.3.6</b> More</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html"><i class="fa fa-check"></i><b>11</b> Appendix: Base Plot</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#overview-2"><i class="fa fa-check"></i><b>11.1</b> Overview</a></li>
+<li class="chapter" data-level="11.2" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#plot"><i class="fa fa-check"></i><b>11.2</b> Plot</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#symbol"><i class="fa fa-check"></i><b>11.2.1</b> Symbol</a></li>
+<li class="chapter" data-level="11.2.2" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#symbol-size"><i class="fa fa-check"></i><b>11.2.2</b> Symbol size</a></li>
+<li class="chapter" data-level="11.2.3" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#symbol-color-border"><i class="fa fa-check"></i><b>11.2.3</b> Symbol color (border)</a></li>
+<li class="chapter" data-level="11.2.4" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#symbol-color-fill"><i class="fa fa-check"></i><b>11.2.4</b> Symbol color (fill)</a></li>
+<li class="chapter" data-level="11.2.5" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#label"><i class="fa fa-check"></i><b>11.2.5</b> Label</a></li>
+<li class="chapter" data-level="11.2.6" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#axis"><i class="fa fa-check"></i><b>11.2.6</b> Axis</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#boxplot-1"><i class="fa fa-check"></i><b>11.3</b> Boxplot</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#box-color"><i class="fa fa-check"></i><b>11.3.1</b> Box color</a></li>
+<li class="chapter" data-level="11.3.2" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#border-color"><i class="fa fa-check"></i><b>11.3.2</b> Border color</a></li>
+<li class="chapter" data-level="11.3.3" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#box-width"><i class="fa fa-check"></i><b>11.3.3</b> Box width</a></li>
+<li class="chapter" data-level="11.3.4" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#axis-1"><i class="fa fa-check"></i><b>11.3.4</b> Axis</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">BIOSTATS</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="appendix-git-github" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">Chapter 8</span> Appendix: Git &amp; GitHub<a href="appendix-git-github.html#appendix-git-github" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="git-github" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Git &amp; GitHub<a href="appendix-git-github.html#git-github" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this section, I will explain how to integrate Git and GitHub into R Studio. While R Studio is already an excellent tool, it becomes even more powerful when combined with Git and GitHub. Git is a free and open-source distributed version control system that tracks changes in your code as you work on your project, ensuring you are aware of any modifications made to your script (and other) files. Tracking changes is crucial to avoid unintended errors in your code and helps prevent the creation of redundant files. Although Git is primarily a local system, it has an online counterpart called GitHub.</p>
+<p>To set up this system, you’ll need to follow a few steps. The first step is to install Git on your computer:</p>
+<ul>
+<li><p>For <strong>Windows</strong>: Install Git from <a href="https://gitforwindows.org/">here</a>. During the installation process, you’ll be prompted about “Adjusting your PATH environment.” Choose “Git from the command line and also from 3rd-party software” if it’s not already selected.</p></li>
+<li><p>For <strong>Mac</strong>: Follow the instructions provided <a href="https://happygitwithr.com/install-git.html">here</a>.</p></li>
+</ul>
+<p>Once Git is installed, open R Studio and navigate to <code>Create Project</code> &gt; <code>New Directory</code> &gt; <code>New Project</code>. If you see the checkbox labeled “Create a git repository,” make sure to select it before creating your new project (refer to Figure <a href="appendix-git-github.html#fig:gitcheck">8.1</a>). This action will display the Git pane on the upper right panel of R Studio, indicating that Git integration is enabled.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:gitcheck"></span>
+<img src="image/git_image01.png" alt="After installing Git, you should see `Create a git repository`." width="296" />
+<p class="caption">
+Figure 8.1: After installing Git, you should see <code>Create a git repository</code>.
+</p>
+</div>
+<p>If you are unable to find the options mentioned above, follow these steps:</p>
+<ol style="list-style-type: decimal">
+<li>Click on <code>Tools</code> in the menu bar of R Studio.</li>
+<li>Select <code>Terminal</code> and then choose <code>New Terminal</code>.</li>
+<li>In the terminal window, type <code>where git</code> and press Enter. This command will display the location of the Git executable on your computer.</li>
+<li>Next, go back to <code>Tools</code> in the menu bar and select <code>Global Options</code>.</li>
+<li>In the options window, navigate to <code>Git/SVN</code>.</li>
+<li>Look for the field labeled <em>Git executable</em> and specify the location of the Git executable that you obtained from the terminal.</li>
+</ol>
+<p>After setting up Git, you can proceed to create an account on <a href="https://github.com/">GitHub</a>. It’s a free platform, and when choosing a username, consider using lowercase letters and including your name to make it easier for others to find you.</p>
+<p>While R Studio seamlessly integrates with Git and GitHub, using a Git client can provide additional visual aids. There are various options for Git clients (see choices <a href="https://happygitwithr.com/git-client.html">here</a>), but for this exercise, we will use GitHub Desktop. Install GitHub Desktop on your computer from <a href="https://desktop.github.com/">here</a>.</p>
+</div>
+<div id="commit-push" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Commit &amp; Push<a href="appendix-git-github.html#commit-push" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="register-your-git-repo" class="section level3 hasAnchor" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> Register Your Git repo<a href="appendix-git-github.html#register-your-git-repo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To open the <code>R Project</code> you’ve just created as a git repository, follow these steps:</p>
+<ol style="list-style-type: decimal">
+<li>Open R Studio.</li>
+<li>Click on <code>File</code> in the menu bar.</li>
+<li>Select <code>Open Project</code>.</li>
+<li>Browse to the directory where you created the <code>R Project</code> and select the corresponding <code>.Rproj</code> file.</li>
+<li>R Studio will open the project, and you will see the project name in the top-right corner of the window.</li>
+</ol>
+<p>To create a sample <code>.R</code> file named <code>sample.R</code> within the project, you can use the shortcut <code>Ctrl + Shift + N</code> or follow these steps:</p>
+<ol style="list-style-type: decimal">
+<li>Click on <code>File</code> in the menu bar.</li>
+<li>Select <code>New File</code>.</li>
+<li>Choose <code>R Script</code>.</li>
+<li>A new script editor will open, where you can write your R code.</li>
+<li>Write your code in the editor and save it as <code>sample.R</code> by clicking on <code>File</code> and selecting <code>Save</code> or using the shortcut <code>Ctrl + S</code>.</li>
+</ol>
+<p>Remember to save the file after writing your code.</p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="appendix-git-github.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="do">## produce 100 random numbers that follows a normal distribution</span></span>
+<span id="cb179-2"><a href="appendix-git-github.html#cb179-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb179-3"><a href="appendix-git-github.html#cb179-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb179-4"><a href="appendix-git-github.html#cb179-4" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate mean</span></span>
+<span id="cb179-5"><a href="appendix-git-github.html#cb179-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span>
+<span id="cb179-6"><a href="appendix-git-github.html#cb179-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb179-7"><a href="appendix-git-github.html#cb179-7" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate SD</span></span>
+<span id="cb179-8"><a href="appendix-git-github.html#cb179-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(x)</span></code></pre></div>
+<p>To open the GitHub Desktop app, locate the application on your computer and launch it. Once opened, you will see a GUI similar to the one depicted in Figure <a href="appendix-git-github.html#fig:gitdesktop1">8.2</a>.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:gitdesktop1"></span>
+<img src="image/git_image02.png" alt="GUI for GitHub Desktop" width="2200" />
+<p class="caption">
+Figure 8.2: GUI for GitHub Desktop
+</p>
+</div>
+<p>Click on the “Current Repository” button located at the top left corner of the GitHub Desktop app interface. Then, select “Add” followed by “Add existing repository” from the dropdown menu, as shown in Figure <a href="appendix-git-github.html#fig:gitdesktop2">8.3</a>.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:gitdesktop2"></span>
+<img src="image/git_image03.png" alt="Add dropdown on the top left" width="2200" />
+<p class="caption">
+Figure 8.3: Add dropdown on the top left
+</p>
+</div>
+</div>
+<div id="commit" class="section level3 hasAnchor" number="8.2.2">
+<h3><span class="header-section-number">8.2.2</span> Commit<a href="appendix-git-github.html#commit" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>GitHub Desktop will prompt you to enter a local path to your Git repository. Browse and select the directory where your <code>R Project</code> is located. Once you have selected the directory, the local Git repository will appear in the list of repositories on the left side bar of GitHub Desktop, as shown in Figure <a href="appendix-git-github.html#fig:gitdesktop2">8.3</a>.</p>
+<p>Now that your repository is added to GitHub Desktop, you are ready to start committing your files to Git. Committing is the process of recording the changes made to your files in Git. To proceed with committing, click on your Git repository in GitHub Desktop. You will see the following options and information displayed:</p>
+<ul>
+<li>The list of changed files: This section shows the files that have been modified since the last commit.</li>
+<li>A summary of the changes: This section provides an overview of the changes made to the selected files.</li>
+<li>Commit message: This is where you can enter a descriptive message explaining the changes made in the commit.</li>
+</ul>
+<p>By providing a meaningful commit message, you can keep track of the changes made to your files and easily understand the purpose of each commit.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:gitdesktop3"></span>
+<img src="image/git_image04.png" alt="You will see `Create sample.R` or `summary (required)` on the bottom left" width="2200" />
+<p class="caption">
+Figure 8.4: You will see <code>Create sample.R</code> or <code>summary (required)</code> on the bottom left
+</p>
+</div>
+<p>At this stage, your file (<code>.R</code> or any other file) is saved in your local directory but has not been recorded in Git as a change history. To commit the changes, follow these steps:</p>
+<ol style="list-style-type: decimal">
+<li><p>First, select the file(s) you want to commit. You can do this by checking the checkboxes next to the files listed in the “Changes” section of the GitHub Desktop app.</p></li>
+<li><p>Once you have selected the files, go to the bottom left of the GitHub Desktop app window. You will see a small box that says <code>summary (required)</code> or <code>Create sample.R</code>.</p></li>
+<li><p>In this box, enter a descriptive title that explains what you did in this commit. It is important to provide a meaningful summary, as you cannot proceed with the commit unless you enter this information. For example, for this exercise, you can enter <code>Initial commit</code> as the commit title. For subsequent commits, it is recommended to provide more informative commit messages that accurately describe the changes made. You can refer to online resources for recommendations on how to write effective commit titles and descriptions.</p></li>
+<li><p>After entering the commit title, click on the button that says <code>Commit to master</code>. This action will record the changes made to the selected files in Git.</p></li>
+</ol>
+<p>Now, the changes to the selected files have been successfully recorded in Git as a commit. It’s important to commit regularly and provide meaningful commit messages so that you can track changes and understand the evolution of your project when needed.</p>
+</div>
+<div id="push" class="section level3 hasAnchor" number="8.2.3">
+<h3><span class="header-section-number">8.2.3</span> Push<a href="appendix-git-github.html#push" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>It’s important to note that your changes are currently recorded in your local computer’s Git repository but have not been published to your online GitHub repository. To send the local changes to the online GitHub repository, you need to use the “Push” operation through GitHub Desktop.</p>
+<p>After you make a commit in GitHub Desktop, you will be prompted with a dialog box asking if you want to push the commit to an online repository, as shown in Figure <a href="appendix-git-github.html#fig:gitdesktop4">8.5</a>. If this is your first push, there won’t be a corresponding repository on GitHub linked to your local repository. In this case, GitHub Desktop will ask if you want to publish it on GitHub. Please note that “publishing” here means making the repository available on GitHub, but it will remain private unless you explicitly choose to make it public.</p>
+<p>If you are comfortable with the changes you made and want to send them to the online repository, click the “Push” button in GitHub Desktop. This action will push your commits to the remote repository on GitHub, effectively synchronizing your local repository with the online repository.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:gitdesktop4"></span>
+<img src="image/git_image05.png" alt="To Push your code, hit the highlighted menu button" width="2200" />
+<p class="caption">
+Figure 8.5: To Push your code, hit the highlighted menu button
+</p>
+</div>
+</div>
+<div id="edit" class="section level3 hasAnchor" number="8.2.4">
+<h3><span class="header-section-number">8.2.4</span> Edit<a href="appendix-git-github.html#edit" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We have created a file named <code>sample.R</code> as per the previous instructions. Now, let’s make a minor change to the content of the <code>sample.R</code> file. Open the <code>sample.R</code> file in your preferred text editor or in R Studio, and make a modification to the code. For example, you can update the code from:</p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="appendix-git-github.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="do">## produce 100 random numbers that follows a normal distribution</span></span>
+<span id="cb180-2"><a href="appendix-git-github.html#cb180-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb180-3"><a href="appendix-git-github.html#cb180-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb180-4"><a href="appendix-git-github.html#cb180-4" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate mean</span></span>
+<span id="cb180-5"><a href="appendix-git-github.html#cb180-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span>
+<span id="cb180-6"><a href="appendix-git-github.html#cb180-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb180-7"><a href="appendix-git-github.html#cb180-7" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate SD</span></span>
+<span id="cb180-8"><a href="appendix-git-github.html#cb180-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(x)</span></code></pre></div>
+<p>to:</p>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="appendix-git-github.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="do">## produce 100 random numbers that follows a normal distribution</span></span>
+<span id="cb181-2"><a href="appendix-git-github.html#cb181-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb181-3"><a href="appendix-git-github.html#cb181-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb181-4"><a href="appendix-git-github.html#cb181-4" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate mean</span></span>
+<span id="cb181-5"><a href="appendix-git-github.html#cb181-5" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(x)</span>
+<span id="cb181-6"><a href="appendix-git-github.html#cb181-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb181-7"><a href="appendix-git-github.html#cb181-7" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate SD</span></span>
+<span id="cb181-8"><a href="appendix-git-github.html#cb181-8" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(x)</span></code></pre></div>
+<p>Save the changes to the <code>sample.R</code> file. Now, let’s go back to GitHub Desktop and see how we can handle this change.</p>
+<p>After making the change to the <code>sample.R</code> file, open GitHub Desktop again. You will notice that GitHub Desktop automatically detects the difference between the new and old versions of the file. It highlights the specific parts of the script that have been edited, which can be extremely helpful when reviewing and comparing changes in your code.</p>
+<p>This feature provided by GitHub Desktop makes it easier to track modifications and understand the specific updates made to your files. It helps streamline the coding process by providing a clear visual representation of the differences between different versions of your code.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:gitdesktop5"></span>
+<img src="image/git_image06.png" alt="Git detects edits to your codes" width="2200" />
+<p class="caption">
+Figure 8.6: Git detects edits to your codes
+</p>
+</div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="appendix-project-management.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="appendix-data-structure.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/chapters/b-git.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

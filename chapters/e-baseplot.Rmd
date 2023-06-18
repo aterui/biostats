@@ -1,16 +1,16 @@
-# VISUALIZATION
+# Appendix: Base Plot
 
 ## Overview
 
-R has a number of functions that help visualize data. `graphics` provides R functions for base graphics ([list of functions](https://www.rdocumentation.org/packages/graphics/versions/3.6.2)). I will use `iris`, the built-in data set in R, to show how `graphics` functions work.
+R offers a variety of functions that aid in visualizing data. The `graphics` package in R provides a set of functions for basic graphics ([list of functions](https://www.rdocumentation.org/packages/graphics/versions/3.6.2)). To demonstrate the functionality of these `graphics` functions, I will utilize the built-in `iris` dataset in R.
 
 ```{r}
-iris
+head(iris)
 ```
 
-## `plot()`
+## Plot
 
-When plotting data, what's you need is to specify the **formula**. For example, if you want to visualize the relationship between `x` and `y` (`y` on the vertical axis and `x` on the horizontal axis), the formula would be `y ~ x` (the left side of the formula will be on the vertical axis). In the `iris` data set, the following columns are available: `Sepal.Length` `Sepal.Width` `Petal.Length` `Petal.Width` `Species`. In the following example, the relationship between `Sepal.Length` and `Sepal.Width` is plotted:
+When creating a plot, you typically need to specify the **formula** to define the relationship between variables. For instance, if you wish to visualize the association between `x` and `y` (with `y` on the vertical axis and `x` on the horizontal axis), the formula would be `y ~ x` (where the left side of the formula represents the vertical axis). In the `iris` dataset, you have access to the following columns: `Sepal.Length`, `Sepal.Width`, `Petal.Length`, `Petal.Width`, and `Species`. In the subsequent example, we will plot the relationship between `Sepal.Length` and `Sepal.Width`:
 
 ```{r}
 
@@ -18,7 +18,7 @@ plot(Sepal.Length ~ Sepal.Width, data = iris)
 
 ```
 
-The argument `data =` tells the function the data set from which the variables (`Sepal.Length` and `Sepal.Width`) are extracted. The above figure is the default setting, and you may customize it as necessary. Below is an example of how you may customize:
+The `data =` argument informs the function about the dataset from which the variables (`Sepal.Length` and `Sepal.Width`) should be extracted.
 
 ### Symbol
 
@@ -92,7 +92,7 @@ axis(2, las = 2) # 2: draw y-axis, las = 2: make axis lables horizontal
 
 ```
 
-## `boxplot()`
+## Boxplot
 
 `boxplot()` is used when the x-axis is factor-type data (by default, `plot()` will produce a boxplot when x-axis is a factor variable). In the `iris` dataset, the column `Species` is a factor variable. Compare `Sepal.Length` among species using `boxplot()`.
 
@@ -153,21 +153,3 @@ axis(1, at = c(1, 2, 3), labels = c("Setosa", "Versicolor", "Virginica") )
 axis(2, las = 2)
 
 ```
-
-## Exercise
-
-Download a <a href="file/report02_temp.R" download>template</a> (R script file).
-
-### `plot()` function
-
-a.  Plot the relationship between `Sepal.Width` and `Petal.Width`
-b.  Turn symbol color (border) into red.
-c.  Turn symbol color (fill) into red (set `pch = 21`).
-d.  Make symbol size larger.
-e.  Make L-shaped plot border (delete border lines on upper and right sides)
-
-### `boxplot()` function
-
-a.  Plot the relationship between `Petal.Width` and `Species`.
-b.  Turn box color (border) into `blue`.
-c.  Make box width narrower.

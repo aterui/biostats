@@ -253,45 +253,45 @@ which(x > 2, arr.ind = TRUE)
 
 ## Data Frame
 
-Data frame is a set of elements that are organized into rows and columns, but differ from matrix in several ways.
+A data frame is a collection of elements organized into rows and columns, but it differs from a matrix in several ways.
 
--   it allows *multiple data types* in different columns
--   each column has its *name*
--   you can access columns by name (using `$`)
+-   It allows for the inclusion of *multiple data types* in different columns.
+-   Each column in a data frame has a *name* associated with it.
+-   You can access columns in a data frame by their respective names using the `$` operator.
 
-**Data frame is the most common data structure when manipulating ecological data**. A data set loaded from a spread sheet (we will address this later) will be automatically recognized as a data frame. Here is an example:
+The data frame is the most commonly used data structure when manipulating ecological data. When loading a dataset from a spreadsheet (which we will discuss later), it is automatically recognized as a data frame. Let's consider an example:
 
-**Create a data frame**\
-In the following example, variables `x` and `y` are organized into a single data frame `dat`. Variable are renamed when creating a data frame composed of `x` and `y`.
+**Creating a data frame**\
+In the following example, the variables `x` and `y` are organized into a single data frame named `df0`. The variables are renamed as part of the process of creating the data frame.
 
 ```{r, echo=TRUE}
 # Create data frame
 x <- c("Pristine", "Pristine", "Disturbed", "Disturbed", "Pristine") # Lake type
 y <- c(1.2, 2.2, 10.9, 50.0, 3.0) # TSS: total suspended solids (mg/L)
-dat <- data.frame(LakeType = x, TSS = y) # x is named as "LakeType" while y is named as "TSS"
-dat
+df0 <- data.frame(LakeType = x, TSS = y) # x is named as "LakeType" while y is named as "TSS"
+df0
 ```
 
 **Call column names**
 
 ```{r, echo=TRUE}
-colnames(dat) # call column names
+colnames(df0) # call column names
 ```
 
 **Access by columns**
 
 ```{r, echo=TRUE}
-dat$LakeType # access LakeType
-dat$TSS # access TSS
+df0$LakeType # access LakeType
+df0$TSS # access TSS
 ```
 
 You can access elements like a matrix as well:
 
 ```{r, echo=TRUE}
 
-dat[,1] # access column #1
-dat[1,] # access row #1
-dat[c(2,4),] # access row #2 and 4
+df0[,1] # access column #1
+df0[1,] # access row #1
+df0[c(2,4),] # access row #2 and 4
 
 ```
 
@@ -307,10 +307,8 @@ c.  Copy the following script to your R script and perform the following analysi
 -   Identify element values of `x` that are greater than `2.0`
 
 ```{r, eval = FALSE}
-
 set.seed(1)
 x <- rnorm(100)
-
 ```
 
 ### Matrix
@@ -325,10 +323,8 @@ e.  Copy the following script to your R script and perform the following analysi
 -   Identify element values of `x` that are greater than `2.0` and calculate the mean.
 
 ```{r, eval = FALSE}
-
 set.seed(1)
 x <- matrix(rnorm(100), nrow = 10, ncol = 10)
-
 ```
 
 ### Data Frame
@@ -340,11 +336,9 @@ c.  Copy the following script to your R script and perform the following analysi
 -   Calculate the means of `temperature` and `abundance` for states `VA` and `NC` separately.
 
 ```{r, eval = FALSE}
-
 set.seed(1)
 x <- rnorm(100, mean = 10, sd = 3)
 y <- rpois(100, lambda = 10)
 z <- rep(c("VA", "NC"), 50)
-dat <- data.frame(temperature = x, abundance = y, state = z)
-
+df0 <- data.frame(temperature = x, abundance = y, state = z)
 ```

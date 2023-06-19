@@ -286,20 +286,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#data-manipulation"><i class="fa fa-check"></i><b>10.2</b> Data Manipulation</a>
 <ul>
 <li class="chapter" data-level="10.2.1" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#data-format"><i class="fa fa-check"></i><b>10.2.1</b> Data Format</a></li>
-<li class="chapter" data-level="10.2.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#select-rows"><i class="fa fa-check"></i><b>10.2.2</b> Select Rows</a></li>
-<li class="chapter" data-level="10.2.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#select-columns"><i class="fa fa-check"></i><b>10.2.3</b> Select Columns</a></li>
-<li class="chapter" data-level="10.2.4" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#group-operation"><i class="fa fa-check"></i><b>10.2.4</b> Group Operation</a></li>
+<li class="chapter" data-level="10.2.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#row-manipulation"><i class="fa fa-check"></i><b>10.2.2</b> Row Manipulation</a></li>
+<li class="chapter" data-level="10.2.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#column-manipulation"><i class="fa fa-check"></i><b>10.2.3</b> Column Manipulation</a></li>
+<li class="chapter" data-level="10.2.4" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#piping"><i class="fa fa-check"></i><b>10.2.4</b> Piping</a></li>
 <li class="chapter" data-level="10.2.5" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#reshape"><i class="fa fa-check"></i><b>10.2.5</b> Reshape</a></li>
-<li class="chapter" data-level="10.2.6" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#combination"><i class="fa fa-check"></i><b>10.2.6</b> Combination</a></li>
+<li class="chapter" data-level="10.2.6" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#group-operation"><i class="fa fa-check"></i><b>10.2.6</b> Group Operation</a></li>
+<li class="chapter" data-level="10.2.7" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#join"><i class="fa fa-check"></i><b>10.2.7</b> Join</a></li>
 </ul></li>
 <li class="chapter" data-level="10.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#visualization"><i class="fa fa-check"></i><b>10.3</b> Visualization</a>
 <ul>
 <li class="chapter" data-level="10.3.1" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#point"><i class="fa fa-check"></i><b>10.3.1</b> Point</a></li>
-<li class="chapter" data-level="10.3.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#histogram"><i class="fa fa-check"></i><b>10.3.2</b> Histogram</a></li>
-<li class="chapter" data-level="10.3.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#boxplot"><i class="fa fa-check"></i><b>10.3.3</b> Boxplot</a></li>
-<li class="chapter" data-level="10.3.4" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#violin-plot"><i class="fa fa-check"></i><b>10.3.4</b> Violin Plot</a></li>
-<li class="chapter" data-level="10.3.5" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#styling"><i class="fa fa-check"></i><b>10.3.5</b> Styling</a></li>
-<li class="chapter" data-level="10.3.6" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#more"><i class="fa fa-check"></i><b>10.3.6</b> More</a></li>
+<li class="chapter" data-level="10.3.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#line"><i class="fa fa-check"></i><b>10.3.2</b> Line</a></li>
+<li class="chapter" data-level="10.3.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#histogram"><i class="fa fa-check"></i><b>10.3.3</b> Histogram</a></li>
+<li class="chapter" data-level="10.3.4" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#boxplot"><i class="fa fa-check"></i><b>10.3.4</b> Boxplot</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html"><i class="fa fa-check"></i><b>11</b> Appendix: Base Plot</a>
@@ -392,14 +391,14 @@ Figure 8.1: After installing Git, you should see <code>Create a git repository</
 <li>Write your code in the editor and save it as <code>sample.R</code> by clicking on <code>File</code> and selecting <code>Save</code> or using the shortcut <code>Ctrl + S</code>.</li>
 </ol>
 <p>Remember to save the file after writing your code.</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="appendix-git-github.html#cb179-1" aria-hidden="true" tabindex="-1"></a><span class="do">## produce 100 random numbers that follows a normal distribution</span></span>
-<span id="cb179-2"><a href="appendix-git-github.html#cb179-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb179-3"><a href="appendix-git-github.html#cb179-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb179-4"><a href="appendix-git-github.html#cb179-4" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate mean</span></span>
-<span id="cb179-5"><a href="appendix-git-github.html#cb179-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span>
-<span id="cb179-6"><a href="appendix-git-github.html#cb179-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb179-7"><a href="appendix-git-github.html#cb179-7" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate SD</span></span>
-<span id="cb179-8"><a href="appendix-git-github.html#cb179-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="appendix-git-github.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="do">## produce 100 random numbers that follows a normal distribution</span></span>
+<span id="cb180-2"><a href="appendix-git-github.html#cb180-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb180-3"><a href="appendix-git-github.html#cb180-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb180-4"><a href="appendix-git-github.html#cb180-4" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate mean</span></span>
+<span id="cb180-5"><a href="appendix-git-github.html#cb180-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span>
+<span id="cb180-6"><a href="appendix-git-github.html#cb180-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb180-7"><a href="appendix-git-github.html#cb180-7" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate SD</span></span>
+<span id="cb180-8"><a href="appendix-git-github.html#cb180-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(x)</span></code></pre></div>
 <p>To open the GitHub Desktop app, locate the application on your computer and launch it. Once opened, you will see a GUI similar to the one depicted in Figure <a href="appendix-git-github.html#fig:gitdesktop1">8.2</a>.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:gitdesktop1"></span>
 <img src="image/git_image02.png" alt="GUI for GitHub Desktop" width="2200" />
@@ -455,23 +454,23 @@ Figure 8.5: To Push your code, hit the highlighted menu button
 <div id="edit" class="section level3 hasAnchor" number="8.2.4">
 <h3><span class="header-section-number">8.2.4</span> Edit<a href="appendix-git-github.html#edit" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We have created a file named <code>sample.R</code> as per the previous instructions. Now, let’s make a minor change to the content of the <code>sample.R</code> file. Open the <code>sample.R</code> file in your preferred text editor or in R Studio, and make a modification to the code. For example, you can update the code from:</p>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="appendix-git-github.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="do">## produce 100 random numbers that follows a normal distribution</span></span>
-<span id="cb180-2"><a href="appendix-git-github.html#cb180-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb180-3"><a href="appendix-git-github.html#cb180-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb180-4"><a href="appendix-git-github.html#cb180-4" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate mean</span></span>
-<span id="cb180-5"><a href="appendix-git-github.html#cb180-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span>
-<span id="cb180-6"><a href="appendix-git-github.html#cb180-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb180-7"><a href="appendix-git-github.html#cb180-7" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate SD</span></span>
-<span id="cb180-8"><a href="appendix-git-github.html#cb180-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(x)</span></code></pre></div>
-<p>to:</p>
 <div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="appendix-git-github.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="do">## produce 100 random numbers that follows a normal distribution</span></span>
 <span id="cb181-2"><a href="appendix-git-github.html#cb181-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
 <span id="cb181-3"><a href="appendix-git-github.html#cb181-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb181-4"><a href="appendix-git-github.html#cb181-4" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate mean</span></span>
-<span id="cb181-5"><a href="appendix-git-github.html#cb181-5" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(x)</span>
+<span id="cb181-5"><a href="appendix-git-github.html#cb181-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span>
 <span id="cb181-6"><a href="appendix-git-github.html#cb181-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb181-7"><a href="appendix-git-github.html#cb181-7" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate SD</span></span>
-<span id="cb181-8"><a href="appendix-git-github.html#cb181-8" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(x)</span></code></pre></div>
+<span id="cb181-8"><a href="appendix-git-github.html#cb181-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(x)</span></code></pre></div>
+<p>to:</p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="appendix-git-github.html#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="do">## produce 100 random numbers that follows a normal distribution</span></span>
+<span id="cb182-2"><a href="appendix-git-github.html#cb182-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb182-3"><a href="appendix-git-github.html#cb182-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb182-4"><a href="appendix-git-github.html#cb182-4" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate mean</span></span>
+<span id="cb182-5"><a href="appendix-git-github.html#cb182-5" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(x)</span>
+<span id="cb182-6"><a href="appendix-git-github.html#cb182-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb182-7"><a href="appendix-git-github.html#cb182-7" aria-hidden="true" tabindex="-1"></a><span class="do">## estimate SD</span></span>
+<span id="cb182-8"><a href="appendix-git-github.html#cb182-8" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(x)</span></code></pre></div>
 <p>Save the changes to the <code>sample.R</code> file. Now, let’s go back to GitHub Desktop and see how we can handle this change.</p>
 <p>After making the change to the <code>sample.R</code> file, open GitHub Desktop again. You will notice that GitHub Desktop automatically detects the difference between the new and old versions of the file. It highlights the specific parts of the script that have been edited, which can be extremely helpful when reviewing and comparing changes in your code.</p>
 <p>This feature provided by GitHub Desktop makes it easier to track modifications and understand the specific updates made to your files. It helps streamline the coding process by providing a clear visual representation of the differences between different versions of your code.</p>
@@ -522,7 +521,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/chapters/b-git.Rmd",
+"link": "https://github.com/aterui/biostats/chapters/b-git.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -533,7 +532,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf", "_main.epub"],
+"download": ["_main.epub"],
 "search": {
 "engine": "fuse",
 "options": null

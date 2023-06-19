@@ -286,20 +286,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#data-manipulation"><i class="fa fa-check"></i><b>10.2</b> Data Manipulation</a>
 <ul>
 <li class="chapter" data-level="10.2.1" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#data-format"><i class="fa fa-check"></i><b>10.2.1</b> Data Format</a></li>
-<li class="chapter" data-level="10.2.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#select-rows"><i class="fa fa-check"></i><b>10.2.2</b> Select Rows</a></li>
-<li class="chapter" data-level="10.2.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#select-columns"><i class="fa fa-check"></i><b>10.2.3</b> Select Columns</a></li>
-<li class="chapter" data-level="10.2.4" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#group-operation"><i class="fa fa-check"></i><b>10.2.4</b> Group Operation</a></li>
+<li class="chapter" data-level="10.2.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#row-manipulation"><i class="fa fa-check"></i><b>10.2.2</b> Row Manipulation</a></li>
+<li class="chapter" data-level="10.2.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#column-manipulation"><i class="fa fa-check"></i><b>10.2.3</b> Column Manipulation</a></li>
+<li class="chapter" data-level="10.2.4" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#piping"><i class="fa fa-check"></i><b>10.2.4</b> Piping</a></li>
 <li class="chapter" data-level="10.2.5" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#reshape"><i class="fa fa-check"></i><b>10.2.5</b> Reshape</a></li>
-<li class="chapter" data-level="10.2.6" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#combination"><i class="fa fa-check"></i><b>10.2.6</b> Combination</a></li>
+<li class="chapter" data-level="10.2.6" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#group-operation"><i class="fa fa-check"></i><b>10.2.6</b> Group Operation</a></li>
+<li class="chapter" data-level="10.2.7" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#join"><i class="fa fa-check"></i><b>10.2.7</b> Join</a></li>
 </ul></li>
 <li class="chapter" data-level="10.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#visualization"><i class="fa fa-check"></i><b>10.3</b> Visualization</a>
 <ul>
 <li class="chapter" data-level="10.3.1" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#point"><i class="fa fa-check"></i><b>10.3.1</b> Point</a></li>
-<li class="chapter" data-level="10.3.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#histogram"><i class="fa fa-check"></i><b>10.3.2</b> Histogram</a></li>
-<li class="chapter" data-level="10.3.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#boxplot"><i class="fa fa-check"></i><b>10.3.3</b> Boxplot</a></li>
-<li class="chapter" data-level="10.3.4" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#violin-plot"><i class="fa fa-check"></i><b>10.3.4</b> Violin Plot</a></li>
-<li class="chapter" data-level="10.3.5" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#styling"><i class="fa fa-check"></i><b>10.3.5</b> Styling</a></li>
-<li class="chapter" data-level="10.3.6" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#more"><i class="fa fa-check"></i><b>10.3.6</b> More</a></li>
+<li class="chapter" data-level="10.3.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#line"><i class="fa fa-check"></i><b>10.3.2</b> Line</a></li>
+<li class="chapter" data-level="10.3.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#histogram"><i class="fa fa-check"></i><b>10.3.3</b> Histogram</a></li>
+<li class="chapter" data-level="10.3.4" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#boxplot"><i class="fa fa-check"></i><b>10.3.4</b> Boxplot</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html"><i class="fa fa-check"></i><b>11</b> Appendix: Base Plot</a>
@@ -353,9 +352,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="explore-data-structure" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Explore Data Structure<a href="two-group-comparison.html#explore-data-structure" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Suppose that we study fish populations of the same species in two lakes (Lake <code>a</code> and <code>b</code>). These lakes are in stark contrast of productivity (Lake <code>b</code> looks more productive), and our interest is the difference in <em>mean</em> body size between the two lakes. We obtained <span class="math inline">\(50\)</span> data points of fish length from each lake (download <a href="https://github.com/aterui/biostats/blob/master/data_raw/data_fish_length.csv">here</a>). Save under <code>data_raw/</code> and use <code>read_csv()</code> to read data:</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="two-group-comparison.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># call add-in packages everytime you open new R session</span></span>
-<span id="cb92-2"><a href="two-group-comparison.html#cb92-2" aria-hidden="true" tabindex="-1"></a>df_fl <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data_raw/data_fish_length.csv&quot;</span>)</span>
-<span id="cb92-3"><a href="two-group-comparison.html#cb92-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_fl)</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="two-group-comparison.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># call add-in packages everytime you open new R session</span></span>
+<span id="cb93-2"><a href="two-group-comparison.html#cb93-2" aria-hidden="true" tabindex="-1"></a>df_fl <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data_raw/data_fish_length.csv&quot;</span>)</span>
+<span id="cb93-3"><a href="two-group-comparison.html#cb93-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_fl)</span></code></pre></div>
 <pre><code>## # A tibble: 100 × 3
 ##    lake  length unit 
 ##    &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;
@@ -371,44 +370,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 10 a       11.9 cm   
 ## # ℹ 90 more rows</code></pre>
 <p>In this data frame, fish length data from lake <code>a</code> and <code>b</code> are recorded. Confirm this with <code>unique()</code> or <code>distinct()</code> function:</p>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="two-group-comparison.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co"># unique returns unique values as a vector</span></span>
-<span id="cb94-2"><a href="two-group-comparison.html#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(df_fl<span class="sc">$</span>lake)</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="two-group-comparison.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="co"># unique returns unique values as a vector</span></span>
+<span id="cb95-2"><a href="two-group-comparison.html#cb95-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(df_fl<span class="sc">$</span>lake)</span></code></pre></div>
 <pre><code>## [1] &quot;a&quot; &quot;b&quot;</code></pre>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="two-group-comparison.html#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># distinct returns unique values as a tibble</span></span>
-<span id="cb96-2"><a href="two-group-comparison.html#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="fu">distinct</span>(df_fl, lake)</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="two-group-comparison.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="co"># distinct returns unique values as a tibble</span></span>
+<span id="cb97-2"><a href="two-group-comparison.html#cb97-2" aria-hidden="true" tabindex="-1"></a><span class="fu">distinct</span>(df_fl, lake)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 1
 ##   lake 
 ##   &lt;chr&gt;
 ## 1 a    
 ## 2 b</code></pre>
 <p>Visualization provides a powerful tool for summarizing data effectively. By plotting individual data points overlaid with mean values and error bars, we can observe the distribution and patterns within the data, allowing us to identify trends, variations, and potential outliers:</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="two-group-comparison.html#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co"># group mean and sd</span></span>
-<span id="cb98-2"><a href="two-group-comparison.html#cb98-2" aria-hidden="true" tabindex="-1"></a>df_fl_mu <span class="ot">&lt;-</span> df_fl <span class="sc">%&gt;%</span> </span>
-<span id="cb98-3"><a href="two-group-comparison.html#cb98-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(lake) <span class="sc">%&gt;%</span> <span class="co"># group operation</span></span>
-<span id="cb98-4"><a href="two-group-comparison.html#cb98-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mu_l =</span> <span class="fu">mean</span>(length), <span class="co"># summarize by mean()</span></span>
-<span id="cb98-5"><a href="two-group-comparison.html#cb98-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_l =</span> <span class="fu">sd</span>(length)) <span class="co"># summarize with sd()</span></span>
-<span id="cb98-6"><a href="two-group-comparison.html#cb98-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb98-7"><a href="two-group-comparison.html#cb98-7" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
-<span id="cb98-8"><a href="two-group-comparison.html#cb98-8" aria-hidden="true" tabindex="-1"></a><span class="co"># geom_jitter() plot data points with scatter</span></span>
-<span id="cb98-9"><a href="two-group-comparison.html#cb98-9" aria-hidden="true" tabindex="-1"></a><span class="co"># geom_segment() draw lines</span></span>
-<span id="cb98-10"><a href="two-group-comparison.html#cb98-10" aria-hidden="true" tabindex="-1"></a><span class="co"># geom_point() draw points</span></span>
-<span id="cb98-11"><a href="two-group-comparison.html#cb98-11" aria-hidden="true" tabindex="-1"></a>df_fl <span class="sc">%&gt;%</span> </span>
-<span id="cb98-12"><a href="two-group-comparison.html#cb98-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> lake,</span>
-<span id="cb98-13"><a href="two-group-comparison.html#cb98-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> length)) <span class="sc">+</span></span>
-<span id="cb98-14"><a href="two-group-comparison.html#cb98-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="co"># scatter width</span></span>
-<span id="cb98-15"><a href="two-group-comparison.html#cb98-15" aria-hidden="true" tabindex="-1"></a>              <span class="at">height =</span> <span class="dv">0</span>, <span class="co"># scatter height (no scatter with zero)</span></span>
-<span id="cb98-16"><a href="two-group-comparison.html#cb98-16" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.25</span>) <span class="sc">+</span> <span class="co"># transparency of data points</span></span>
-<span id="cb98-17"><a href="two-group-comparison.html#cb98-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data =</span> df_fl_mu, <span class="co"># switch data frame</span></span>
-<span id="cb98-18"><a href="two-group-comparison.html#cb98-18" aria-hidden="true" tabindex="-1"></a>               <span class="fu">aes</span>(<span class="at">x =</span> lake,</span>
-<span id="cb98-19"><a href="two-group-comparison.html#cb98-19" aria-hidden="true" tabindex="-1"></a>                   <span class="at">xend =</span> lake,</span>
-<span id="cb98-20"><a href="two-group-comparison.html#cb98-20" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> mu_l <span class="sc">-</span> sd_l,</span>
-<span id="cb98-21"><a href="two-group-comparison.html#cb98-21" aria-hidden="true" tabindex="-1"></a>                   <span class="at">yend =</span> mu_l <span class="sc">+</span> sd_l)) <span class="sc">+</span></span>
-<span id="cb98-22"><a href="two-group-comparison.html#cb98-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> df_fl_mu, <span class="co"># switch data frame</span></span>
-<span id="cb98-23"><a href="two-group-comparison.html#cb98-23" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> lake,</span>
-<span id="cb98-24"><a href="two-group-comparison.html#cb98-24" aria-hidden="true" tabindex="-1"></a>                 <span class="at">y =</span> mu_l),</span>
-<span id="cb98-25"><a href="two-group-comparison.html#cb98-25" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb98-26"><a href="two-group-comparison.html#cb98-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Lake&quot;</span>, <span class="co"># x label</span></span>
-<span id="cb98-27"><a href="two-group-comparison.html#cb98-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Fish body length&quot;</span>) <span class="co"># y label</span></span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="two-group-comparison.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="co"># group mean and sd</span></span>
+<span id="cb99-2"><a href="two-group-comparison.html#cb99-2" aria-hidden="true" tabindex="-1"></a>df_fl_mu <span class="ot">&lt;-</span> df_fl <span class="sc">%&gt;%</span> </span>
+<span id="cb99-3"><a href="two-group-comparison.html#cb99-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(lake) <span class="sc">%&gt;%</span> <span class="co"># group operation</span></span>
+<span id="cb99-4"><a href="two-group-comparison.html#cb99-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mu_l =</span> <span class="fu">mean</span>(length), <span class="co"># summarize by mean()</span></span>
+<span id="cb99-5"><a href="two-group-comparison.html#cb99-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_l =</span> <span class="fu">sd</span>(length)) <span class="co"># summarize with sd()</span></span>
+<span id="cb99-6"><a href="two-group-comparison.html#cb99-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb99-7"><a href="two-group-comparison.html#cb99-7" aria-hidden="true" tabindex="-1"></a><span class="co"># plot</span></span>
+<span id="cb99-8"><a href="two-group-comparison.html#cb99-8" aria-hidden="true" tabindex="-1"></a><span class="co"># geom_jitter() plot data points with scatter</span></span>
+<span id="cb99-9"><a href="two-group-comparison.html#cb99-9" aria-hidden="true" tabindex="-1"></a><span class="co"># geom_segment() draw lines</span></span>
+<span id="cb99-10"><a href="two-group-comparison.html#cb99-10" aria-hidden="true" tabindex="-1"></a><span class="co"># geom_point() draw points</span></span>
+<span id="cb99-11"><a href="two-group-comparison.html#cb99-11" aria-hidden="true" tabindex="-1"></a>df_fl <span class="sc">%&gt;%</span> </span>
+<span id="cb99-12"><a href="two-group-comparison.html#cb99-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> lake,</span>
+<span id="cb99-13"><a href="two-group-comparison.html#cb99-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> length)) <span class="sc">+</span></span>
+<span id="cb99-14"><a href="two-group-comparison.html#cb99-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="co"># scatter width</span></span>
+<span id="cb99-15"><a href="two-group-comparison.html#cb99-15" aria-hidden="true" tabindex="-1"></a>              <span class="at">height =</span> <span class="dv">0</span>, <span class="co"># scatter height (no scatter with zero)</span></span>
+<span id="cb99-16"><a href="two-group-comparison.html#cb99-16" aria-hidden="true" tabindex="-1"></a>              <span class="at">alpha =</span> <span class="fl">0.25</span>) <span class="sc">+</span> <span class="co"># transparency of data points</span></span>
+<span id="cb99-17"><a href="two-group-comparison.html#cb99-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="at">data =</span> df_fl_mu, <span class="co"># switch data frame</span></span>
+<span id="cb99-18"><a href="two-group-comparison.html#cb99-18" aria-hidden="true" tabindex="-1"></a>               <span class="fu">aes</span>(<span class="at">x =</span> lake,</span>
+<span id="cb99-19"><a href="two-group-comparison.html#cb99-19" aria-hidden="true" tabindex="-1"></a>                   <span class="at">xend =</span> lake,</span>
+<span id="cb99-20"><a href="two-group-comparison.html#cb99-20" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> mu_l <span class="sc">-</span> sd_l,</span>
+<span id="cb99-21"><a href="two-group-comparison.html#cb99-21" aria-hidden="true" tabindex="-1"></a>                   <span class="at">yend =</span> mu_l <span class="sc">+</span> sd_l)) <span class="sc">+</span></span>
+<span id="cb99-22"><a href="two-group-comparison.html#cb99-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> df_fl_mu, <span class="co"># switch data frame</span></span>
+<span id="cb99-23"><a href="two-group-comparison.html#cb99-23" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> lake,</span>
+<span id="cb99-24"><a href="two-group-comparison.html#cb99-24" aria-hidden="true" tabindex="-1"></a>                 <span class="at">y =</span> mu_l),</span>
+<span id="cb99-25"><a href="two-group-comparison.html#cb99-25" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb99-26"><a href="two-group-comparison.html#cb99-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Lake&quot;</span>, <span class="co"># x label</span></span>
+<span id="cb99-27"><a href="two-group-comparison.html#cb99-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">&quot;Fish body length&quot;</span>) <span class="co"># y label</span></span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:mean-plot"></span>
 <img src="_main_files/figure-html/mean-plot-1.png" alt="Example of mean and SD plot" width="672" />
 <p class="caption">
@@ -422,25 +421,25 @@ Figure 4.1: Example of mean and SD plot
 <div id="t-statistic" class="section level3 hasAnchor" number="4.2.1">
 <h3><span class="header-section-number">4.2.1</span> t-statistic<a href="two-group-comparison.html#t-statistic" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Since our focus is on examining the difference in means, it is logical to estimate the disparity between the sample means in each lake. Let me denote the sample means as <span class="math inline">\(\hat{\mu}_a\)</span> and <span class="math inline">\(\hat{\mu}_b\)</span> for Lake <code>a</code> and Lake <code>b</code>, respectively. We can estimate the difference between the means using the following approach:</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="two-group-comparison.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="co"># take another look at df_fl_mu</span></span>
-<span id="cb99-2"><a href="two-group-comparison.html#cb99-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_fl_mu)</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="two-group-comparison.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="co"># take another look at df_fl_mu</span></span>
+<span id="cb100-2"><a href="two-group-comparison.html#cb100-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_fl_mu)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 3
 ##   lake   mu_l  sd_l
 ##   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1 a      13.4  2.92
 ## 2 b      15.4  3.39</code></pre>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="two-group-comparison.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pull mu_l from tibble as vector</span></span>
-<span id="cb101-2"><a href="two-group-comparison.html#cb101-2" aria-hidden="true" tabindex="-1"></a>v_mu <span class="ot">&lt;-</span> df_fl_mu <span class="sc">%&gt;%</span> </span>
-<span id="cb101-3"><a href="two-group-comparison.html#cb101-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(mu_l)</span>
-<span id="cb101-4"><a href="two-group-comparison.html#cb101-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb101-5"><a href="two-group-comparison.html#cb101-5" aria-hidden="true" tabindex="-1"></a><span class="co"># lake a</span></span>
-<span id="cb101-6"><a href="two-group-comparison.html#cb101-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(v_mu[<span class="dv">1</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="two-group-comparison.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pull mu_l from tibble as vector</span></span>
+<span id="cb102-2"><a href="two-group-comparison.html#cb102-2" aria-hidden="true" tabindex="-1"></a>v_mu <span class="ot">&lt;-</span> df_fl_mu <span class="sc">%&gt;%</span> </span>
+<span id="cb102-3"><a href="two-group-comparison.html#cb102-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(mu_l)</span>
+<span id="cb102-4"><a href="two-group-comparison.html#cb102-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb102-5"><a href="two-group-comparison.html#cb102-5" aria-hidden="true" tabindex="-1"></a><span class="co"># lake a</span></span>
+<span id="cb102-6"><a href="two-group-comparison.html#cb102-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(v_mu[<span class="dv">1</span>])</span></code></pre></div>
 <pre><code>## [1] 13.35</code></pre>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="two-group-comparison.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="co"># lake b</span></span>
-<span id="cb103-2"><a href="two-group-comparison.html#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(v_mu[<span class="dv">2</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="two-group-comparison.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co"># lake b</span></span>
+<span id="cb104-2"><a href="two-group-comparison.html#cb104-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(v_mu[<span class="dv">2</span>])</span></code></pre></div>
 <pre><code>## [1] 15.406</code></pre>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="two-group-comparison.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="co"># difference</span></span>
-<span id="cb105-2"><a href="two-group-comparison.html#cb105-2" aria-hidden="true" tabindex="-1"></a>v_mu[<span class="dv">1</span>] <span class="sc">-</span> v_mu[<span class="dv">2</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="two-group-comparison.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="co"># difference</span></span>
+<span id="cb106-2"><a href="two-group-comparison.html#cb106-2" aria-hidden="true" tabindex="-1"></a>v_mu[<span class="dv">1</span>] <span class="sc">-</span> v_mu[<span class="dv">2</span>]</span></code></pre></div>
 <pre><code>## [1] -2.056</code></pre>
 <p>The average fish body size in Lake <code>b</code> is approximately 2 cm larger than that in Lake <code>a</code>. However, it is crucial to recognize that we are still lacking vital information, specifically, the uncertainty associated with this difference. As discussed in Chapter <a href="sampling.html#sampling">2</a>, we must acknowledge that sample means are not flawless representations of the entire population.</p>
 <p>Fortunately, we can utilize sample variances to address such uncertainties. The <strong>t-statistic</strong> is a common indicator of the difference of means that takes into consideration the uncertainty associated with sample means.</p>
@@ -452,30 +451,30 @@ t = \frac{\hat{\mu_a} - \hat{\mu_b}}{\sqrt{\hat{\sigma}^2_p \left(\frac{1}{N_a} 
 \hat{\sigma}^2_p = \frac{N_a-1}{N_a + N_b - 2}\hat{\sigma}^2_a + \frac{N_b-1}{N_a + N_b - 2}\hat{\sigma}^2_b
 \]</span></p>
 <p>We can calculate this value in R manually:</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="two-group-comparison.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="co"># group mean, variance, and sample size</span></span>
-<span id="cb107-2"><a href="two-group-comparison.html#cb107-2" aria-hidden="true" tabindex="-1"></a>df_t <span class="ot">&lt;-</span> df_fl <span class="sc">%&gt;%</span> </span>
-<span id="cb107-3"><a href="two-group-comparison.html#cb107-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(lake) <span class="sc">%&gt;%</span> <span class="co"># group operation</span></span>
-<span id="cb107-4"><a href="two-group-comparison.html#cb107-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mu_l =</span> <span class="fu">mean</span>(length), <span class="co"># summarize by mean()</span></span>
-<span id="cb107-5"><a href="two-group-comparison.html#cb107-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">var_l =</span> <span class="fu">var</span>(length), <span class="co"># summarize with sd()</span></span>
-<span id="cb107-6"><a href="two-group-comparison.html#cb107-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">n =</span> <span class="fu">n</span>()) <span class="co"># count number of rows per group</span></span>
-<span id="cb107-7"><a href="two-group-comparison.html#cb107-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb107-8"><a href="two-group-comparison.html#cb107-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_t)</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="two-group-comparison.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="co"># group mean, variance, and sample size</span></span>
+<span id="cb108-2"><a href="two-group-comparison.html#cb108-2" aria-hidden="true" tabindex="-1"></a>df_t <span class="ot">&lt;-</span> df_fl <span class="sc">%&gt;%</span> </span>
+<span id="cb108-3"><a href="two-group-comparison.html#cb108-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(lake) <span class="sc">%&gt;%</span> <span class="co"># group operation</span></span>
+<span id="cb108-4"><a href="two-group-comparison.html#cb108-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mu_l =</span> <span class="fu">mean</span>(length), <span class="co"># summarize by mean()</span></span>
+<span id="cb108-5"><a href="two-group-comparison.html#cb108-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">var_l =</span> <span class="fu">var</span>(length), <span class="co"># summarize with sd()</span></span>
+<span id="cb108-6"><a href="two-group-comparison.html#cb108-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">n =</span> <span class="fu">n</span>()) <span class="co"># count number of rows per group</span></span>
+<span id="cb108-7"><a href="two-group-comparison.html#cb108-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb108-8"><a href="two-group-comparison.html#cb108-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_t)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 4
 ##   lake   mu_l var_l     n
 ##   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
 ## 1 a      13.4  8.52    50
 ## 2 b      15.4 11.5     50</code></pre>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="two-group-comparison.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pull values as a vector</span></span>
-<span id="cb109-2"><a href="two-group-comparison.html#cb109-2" aria-hidden="true" tabindex="-1"></a>v_mu <span class="ot">&lt;-</span> <span class="fu">pull</span>(df_t, mu_l)</span>
-<span id="cb109-3"><a href="two-group-comparison.html#cb109-3" aria-hidden="true" tabindex="-1"></a>v_var <span class="ot">&lt;-</span> <span class="fu">pull</span>(df_t, var_l)</span>
-<span id="cb109-4"><a href="two-group-comparison.html#cb109-4" aria-hidden="true" tabindex="-1"></a>v_n <span class="ot">&lt;-</span> <span class="fu">pull</span>(df_t, n)</span>
-<span id="cb109-5"><a href="two-group-comparison.html#cb109-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb109-6"><a href="two-group-comparison.html#cb109-6" aria-hidden="true" tabindex="-1"></a>var_p <span class="ot">&lt;-</span> ((v_n[<span class="dv">1</span>] <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">/</span>(<span class="fu">sum</span>(v_n) <span class="sc">-</span> <span class="dv">2</span>)) <span class="sc">*</span> v_var[<span class="dv">1</span>] <span class="sc">+</span></span>
-<span id="cb109-7"><a href="two-group-comparison.html#cb109-7" aria-hidden="true" tabindex="-1"></a>  ((v_n[<span class="dv">2</span>] <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">/</span>(<span class="fu">sum</span>(v_n) <span class="sc">-</span> <span class="dv">2</span>)) <span class="sc">*</span> v_var[<span class="dv">2</span>]</span>
-<span id="cb109-8"><a href="two-group-comparison.html#cb109-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb109-9"><a href="two-group-comparison.html#cb109-9" aria-hidden="true" tabindex="-1"></a>t_value <span class="ot">&lt;-</span> (v_mu[<span class="dv">1</span>] <span class="sc">-</span> v_mu[<span class="dv">2</span>]) <span class="sc">/</span> <span class="fu">sqrt</span>(var_p <span class="sc">*</span> ((<span class="dv">1</span> <span class="sc">/</span> v_n[<span class="dv">1</span>]) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">/</span> v_n[<span class="dv">2</span>])))</span>
-<span id="cb109-10"><a href="two-group-comparison.html#cb109-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb109-11"><a href="two-group-comparison.html#cb109-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(t_value)</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="two-group-comparison.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pull values as a vector</span></span>
+<span id="cb110-2"><a href="two-group-comparison.html#cb110-2" aria-hidden="true" tabindex="-1"></a>v_mu <span class="ot">&lt;-</span> <span class="fu">pull</span>(df_t, mu_l)</span>
+<span id="cb110-3"><a href="two-group-comparison.html#cb110-3" aria-hidden="true" tabindex="-1"></a>v_var <span class="ot">&lt;-</span> <span class="fu">pull</span>(df_t, var_l)</span>
+<span id="cb110-4"><a href="two-group-comparison.html#cb110-4" aria-hidden="true" tabindex="-1"></a>v_n <span class="ot">&lt;-</span> <span class="fu">pull</span>(df_t, n)</span>
+<span id="cb110-5"><a href="two-group-comparison.html#cb110-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-6"><a href="two-group-comparison.html#cb110-6" aria-hidden="true" tabindex="-1"></a>var_p <span class="ot">&lt;-</span> ((v_n[<span class="dv">1</span>] <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">/</span>(<span class="fu">sum</span>(v_n) <span class="sc">-</span> <span class="dv">2</span>)) <span class="sc">*</span> v_var[<span class="dv">1</span>] <span class="sc">+</span></span>
+<span id="cb110-7"><a href="two-group-comparison.html#cb110-7" aria-hidden="true" tabindex="-1"></a>  ((v_n[<span class="dv">2</span>] <span class="sc">-</span> <span class="dv">1</span>)<span class="sc">/</span>(<span class="fu">sum</span>(v_n) <span class="sc">-</span> <span class="dv">2</span>)) <span class="sc">*</span> v_var[<span class="dv">2</span>]</span>
+<span id="cb110-8"><a href="two-group-comparison.html#cb110-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-9"><a href="two-group-comparison.html#cb110-9" aria-hidden="true" tabindex="-1"></a>t_value <span class="ot">&lt;-</span> (v_mu[<span class="dv">1</span>] <span class="sc">-</span> v_mu[<span class="dv">2</span>]) <span class="sc">/</span> <span class="fu">sqrt</span>(var_p <span class="sc">*</span> ((<span class="dv">1</span> <span class="sc">/</span> v_n[<span class="dv">1</span>]) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">/</span> v_n[<span class="dv">2</span>])))</span>
+<span id="cb110-10"><a href="two-group-comparison.html#cb110-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-11"><a href="two-group-comparison.html#cb110-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(t_value)</span></code></pre></div>
 <pre><code>## [1] -3.247322</code></pre>
 <p>The difference in sample means were -2.06; therefore, t-statistic further emphasizes the distinction between the study lakes. This occurrence can be attributed to the t-statistic formula.</p>
 <p>In the denominator, we observe the inclusion of <span class="math inline">\(\hat{\sigma}^2_p\)</span> (estimated pooled variance), as well as the inverses of sample sizes <span class="math inline">\(N_a\)</span> and <span class="math inline">\(N_b\)</span>. Consequently, as <span class="math inline">\(\hat{\sigma}^2_p\)</span> decreases and/or the sample sizes increase, the t-statistic increases. This is a reasonable outcome since a decrease in variance and/or an increase in sample size enhance the certainty of the mean difference.</p>
@@ -487,19 +486,19 @@ t = \frac{\hat{\mu_a} - \hat{\mu_b}}{\sqrt{\hat{\sigma}^2_p \left(\frac{1}{N_a} 
 <p>Let’s begin by assuming that there is no difference in the mean body size of fish populations between the lakes, meaning the true difference in means is zero (<span class="math inline">\(\mu_a - \mu_b = 0\)</span>; without hats in this formula!). Under this assumption, we can define the probability distribution of t-statistics, which represents how t-statistics are distributed across a range of possible values.</p>
 <p>This probability distribution is known as the Student’s t-distribution and is characterized by three parameters: the mean, the variance, and the degrees of freedom (d.f.). Considering that we are evaluating the difference in body size as the test statistic, the mean (of the difference) is assumed to be zero. The variance is estimated using <span class="math inline">\(\hat{\sigma}^2_p\)</span>, and the degrees of freedom are determined by <span class="math inline">\(N_a + N_b - 2\)</span> (where d.f. can be considered as a measure related to the sample size<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>).</p>
 <p>R has a function to draw the Student’s t-distribution; let’s try that out:</p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="two-group-comparison.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="co"># produce 500 values from -5 to 5 with equal interval</span></span>
-<span id="cb111-2"><a href="two-group-comparison.html#cb111-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">length =</span> <span class="dv">500</span>)</span>
-<span id="cb111-3"><a href="two-group-comparison.html#cb111-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb111-4"><a href="two-group-comparison.html#cb111-4" aria-hidden="true" tabindex="-1"></a><span class="co"># probability density of t-statistics with df = sum(v_n) - 2</span></span>
-<span id="cb111-5"><a href="two-group-comparison.html#cb111-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">dt</span>(x, <span class="at">df =</span> <span class="fu">sum</span>(v_n) <span class="sc">-</span> <span class="dv">2</span>)</span>
-<span id="cb111-6"><a href="two-group-comparison.html#cb111-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb111-7"><a href="two-group-comparison.html#cb111-7" aria-hidden="true" tabindex="-1"></a><span class="co"># draw figure</span></span>
-<span id="cb111-8"><a href="two-group-comparison.html#cb111-8" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(x, y) <span class="sc">%&gt;%</span> </span>
-<span id="cb111-9"><a href="two-group-comparison.html#cb111-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x,</span>
-<span id="cb111-10"><a href="two-group-comparison.html#cb111-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> y)) <span class="sc">+</span></span>
-<span id="cb111-11"><a href="two-group-comparison.html#cb111-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb111-12"><a href="two-group-comparison.html#cb111-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Probability density&quot;</span>,</span>
-<span id="cb111-13"><a href="two-group-comparison.html#cb111-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;t-statistic&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="two-group-comparison.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="co"># produce 500 values from -5 to 5 with equal interval</span></span>
+<span id="cb112-2"><a href="two-group-comparison.html#cb112-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">length =</span> <span class="dv">500</span>)</span>
+<span id="cb112-3"><a href="two-group-comparison.html#cb112-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb112-4"><a href="two-group-comparison.html#cb112-4" aria-hidden="true" tabindex="-1"></a><span class="co"># probability density of t-statistics with df = sum(v_n) - 2</span></span>
+<span id="cb112-5"><a href="two-group-comparison.html#cb112-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">dt</span>(x, <span class="at">df =</span> <span class="fu">sum</span>(v_n) <span class="sc">-</span> <span class="dv">2</span>)</span>
+<span id="cb112-6"><a href="two-group-comparison.html#cb112-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb112-7"><a href="two-group-comparison.html#cb112-7" aria-hidden="true" tabindex="-1"></a><span class="co"># draw figure</span></span>
+<span id="cb112-8"><a href="two-group-comparison.html#cb112-8" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(x, y) <span class="sc">%&gt;%</span> </span>
+<span id="cb112-9"><a href="two-group-comparison.html#cb112-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x,</span>
+<span id="cb112-10"><a href="two-group-comparison.html#cb112-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb112-11"><a href="two-group-comparison.html#cb112-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb112-12"><a href="two-group-comparison.html#cb112-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Probability density&quot;</span>,</span>
+<span id="cb112-13"><a href="two-group-comparison.html#cb112-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;t-statistic&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:student-t"></span>
 <img src="_main_files/figure-html/student-t-1.png" alt="Distribution of t-statistics under null hypothesis. The probability density in a distribution determines the likelihood of observing a particular t-statistic. Higher probability density indicates a greater likelihood of the t-statistic occurring." width="672" />
 <p class="caption">
@@ -507,17 +506,17 @@ Figure 4.2: Distribution of t-statistics under null hypothesis. The probability 
 </p>
 </div>
 <p>The probability density in a distribution (Figure <a href="two-group-comparison.html#fig:student-t">4.2</a>) determines the likelihood of observing a particular t-statistic. Higher probability density indicates a greater likelihood of the t-statistic occurring. Compare the observed t-statistic against this null distribution:</p>
-<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="two-group-comparison.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="co"># draw entire range</span></span>
-<span id="cb112-2"><a href="two-group-comparison.html#cb112-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(x, y) <span class="sc">%&gt;%</span> </span>
-<span id="cb112-3"><a href="two-group-comparison.html#cb112-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x,</span>
-<span id="cb112-4"><a href="two-group-comparison.html#cb112-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> y)) <span class="sc">+</span></span>
-<span id="cb112-5"><a href="two-group-comparison.html#cb112-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb112-6"><a href="two-group-comparison.html#cb112-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> t_value,</span>
-<span id="cb112-7"><a href="two-group-comparison.html#cb112-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">&quot;salmon&quot;</span>) <span class="sc">+</span> <span class="co"># t_value is the observed t_value</span></span>
-<span id="cb112-8"><a href="two-group-comparison.html#cb112-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">abs</span>(t_value),</span>
-<span id="cb112-9"><a href="two-group-comparison.html#cb112-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">&quot;salmon&quot;</span>) <span class="sc">+</span> <span class="co"># t_value is the observed t_value</span></span>
-<span id="cb112-10"><a href="two-group-comparison.html#cb112-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Probability density&quot;</span>,</span>
-<span id="cb112-11"><a href="two-group-comparison.html#cb112-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;t-statistic&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="two-group-comparison.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="co"># draw entire range</span></span>
+<span id="cb113-2"><a href="two-group-comparison.html#cb113-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(x, y) <span class="sc">%&gt;%</span> </span>
+<span id="cb113-3"><a href="two-group-comparison.html#cb113-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x,</span>
+<span id="cb113-4"><a href="two-group-comparison.html#cb113-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb113-5"><a href="two-group-comparison.html#cb113-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb113-6"><a href="two-group-comparison.html#cb113-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> t_value,</span>
+<span id="cb113-7"><a href="two-group-comparison.html#cb113-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">&quot;salmon&quot;</span>) <span class="sc">+</span> <span class="co"># t_value is the observed t_value</span></span>
+<span id="cb113-8"><a href="two-group-comparison.html#cb113-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">abs</span>(t_value),</span>
+<span id="cb113-9"><a href="two-group-comparison.html#cb113-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">&quot;salmon&quot;</span>) <span class="sc">+</span> <span class="co"># t_value is the observed t_value</span></span>
+<span id="cb113-10"><a href="two-group-comparison.html#cb113-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Probability density&quot;</span>,</span>
+<span id="cb113-11"><a href="two-group-comparison.html#cb113-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;t-statistic&quot;</span>) </span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:student-t-obs"></span>
 <img src="_main_files/figure-html/student-t-obs-1.png" alt="Observed t-statistic in comparison to the null distrubution" width="672" />
 <p class="caption">
@@ -526,15 +525,15 @@ Figure 4.3: Observed t-statistic in comparison to the null distrubution
 </div>
 <p>In a probability distribution, the area under the curve corresponds to the probability. Notably, <strong>the area under the curve that falls below or above the observed t-statistic (indicated by vertical red lines) is very small (Figure</strong> <a href="two-group-comparison.html#fig:student-t-obs">4.3</a><strong>)</strong>, meaning that the observed difference in body size is very unlikely to occur under the null hypothesis (no difference in true means).</p>
 <p>The function <code>pt()</code> allows us to calculate the area under the curve:</p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="two-group-comparison.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate area under the curve from -infinity to t_value</span></span>
-<span id="cb113-2"><a href="two-group-comparison.html#cb113-2" aria-hidden="true" tabindex="-1"></a>pr_below <span class="ot">&lt;-</span> <span class="fu">pt</span>(<span class="at">q =</span> t_value, <span class="at">df =</span> <span class="fu">sum</span>(v_n) <span class="sc">-</span> <span class="dv">2</span>)</span>
-<span id="cb113-3"><a href="two-group-comparison.html#cb113-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb113-4"><a href="two-group-comparison.html#cb113-4" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate area under the curve from abs(t_value) to infinity</span></span>
-<span id="cb113-5"><a href="two-group-comparison.html#cb113-5" aria-hidden="true" tabindex="-1"></a>pr_above <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(<span class="at">q =</span> <span class="fu">abs</span>(t_value), <span class="at">df =</span> <span class="fu">sum</span>(v_n) <span class="sc">-</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="two-group-comparison.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate area under the curve from -infinity to t_value</span></span>
+<span id="cb114-2"><a href="two-group-comparison.html#cb114-2" aria-hidden="true" tabindex="-1"></a>pr_below <span class="ot">&lt;-</span> <span class="fu">pt</span>(<span class="at">q =</span> t_value, <span class="at">df =</span> <span class="fu">sum</span>(v_n) <span class="sc">-</span> <span class="dv">2</span>)</span>
+<span id="cb114-3"><a href="two-group-comparison.html#cb114-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb114-4"><a href="two-group-comparison.html#cb114-4" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate area under the curve from abs(t_value) to infinity</span></span>
+<span id="cb114-5"><a href="two-group-comparison.html#cb114-5" aria-hidden="true" tabindex="-1"></a>pr_above <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(<span class="at">q =</span> <span class="fu">abs</span>(t_value), <span class="at">df =</span> <span class="fu">sum</span>(v_n) <span class="sc">-</span> <span class="dv">2</span>)</span></code></pre></div>
 <p>The <strong>p-value,</strong> i.e., <em>the probability of observing t-statistics</em> less than ( <code>pr_below</code>) or greater than (<code>pr_above</code>) the observed t-statistic under the null hypothesis, can be estimated as the sum of <code>pr_below</code> and <code>pr_above</code>.</p>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="two-group-comparison.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="co"># p_value</span></span>
-<span id="cb114-2"><a href="two-group-comparison.html#cb114-2" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> pr_below <span class="sc">+</span> pr_above</span>
-<span id="cb114-3"><a href="two-group-comparison.html#cb114-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p_value)</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="two-group-comparison.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="co"># p_value</span></span>
+<span id="cb115-2"><a href="two-group-comparison.html#cb115-2" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> pr_below <span class="sc">+</span> pr_above</span>
+<span id="cb115-3"><a href="two-group-comparison.html#cb115-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p_value)</span></code></pre></div>
 <pre><code>## [1] 0.001595529</code></pre>
 </div>
 <div id="interpretation" class="section level3 hasAnchor" number="4.2.3">
@@ -550,15 +549,15 @@ Figure 4.3: Observed t-statistic in comparison to the null distrubution
 <div id="t-test-with-equal-variance" class="section level3 hasAnchor" number="4.3.1">
 <h3><span class="header-section-number">4.3.1</span> t-test with equal variance<a href="two-group-comparison.html#t-test-with-equal-variance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In R, this t-test can be performed with <code>t.test()</code>. Let me examine if the function gives us identical results:</p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="two-group-comparison.html#cb116-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> df_fl <span class="sc">%&gt;%</span></span>
-<span id="cb116-2"><a href="two-group-comparison.html#cb116-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(lake <span class="sc">==</span> <span class="st">&quot;a&quot;</span>) <span class="sc">%&gt;%</span>  <span class="co"># subset lake a</span></span>
-<span id="cb116-3"><a href="two-group-comparison.html#cb116-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(length)</span>
-<span id="cb116-4"><a href="two-group-comparison.html#cb116-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb116-5"><a href="two-group-comparison.html#cb116-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> df_fl <span class="sc">%&gt;%</span></span>
-<span id="cb116-6"><a href="two-group-comparison.html#cb116-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(lake <span class="sc">==</span> <span class="st">&quot;b&quot;</span>) <span class="sc">%&gt;%</span> <span class="co"># subset lake b</span></span>
-<span id="cb116-7"><a href="two-group-comparison.html#cb116-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(length)</span>
-<span id="cb116-8"><a href="two-group-comparison.html#cb116-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb116-9"><a href="two-group-comparison.html#cb116-9" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(x, y, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="two-group-comparison.html#cb117-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> df_fl <span class="sc">%&gt;%</span></span>
+<span id="cb117-2"><a href="two-group-comparison.html#cb117-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(lake <span class="sc">==</span> <span class="st">&quot;a&quot;</span>) <span class="sc">%&gt;%</span>  <span class="co"># subset lake a</span></span>
+<span id="cb117-3"><a href="two-group-comparison.html#cb117-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(length)</span>
+<span id="cb117-4"><a href="two-group-comparison.html#cb117-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-5"><a href="two-group-comparison.html#cb117-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> df_fl <span class="sc">%&gt;%</span></span>
+<span id="cb117-6"><a href="two-group-comparison.html#cb117-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(lake <span class="sc">==</span> <span class="st">&quot;b&quot;</span>) <span class="sc">%&gt;%</span> <span class="co"># subset lake b</span></span>
+<span id="cb117-7"><a href="two-group-comparison.html#cb117-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(length)</span>
+<span id="cb117-8"><a href="two-group-comparison.html#cb117-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb117-9"><a href="two-group-comparison.html#cb117-9" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(x, y, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Two Sample t-test
 ## 
@@ -575,7 +574,7 @@ Figure 4.3: Observed t-statistic in comparison to the null distrubution
 <div id="t-test-with-unequal-variance" class="section level3 hasAnchor" number="4.3.2">
 <h3><span class="header-section-number">4.3.2</span> t-test with unequal variance<a href="two-group-comparison.html#t-test-with-unequal-variance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The relative similarity of variance between groups could be an unrealistic assumption. Luckily, there is a variant of t-test “Welch’s t-test,” in which we assume unequal variance between groups. The implementation is easy – set <code>var.equal = FALSE</code> in <code>t.test()</code>:</p>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="two-group-comparison.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(x, y, <span class="at">var.equal =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="two-group-comparison.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(x, y, <span class="at">var.equal =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
@@ -647,7 +646,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/chapters/04-two-group.Rmd",
+"link": "https://github.com/aterui/biostats/chapters/04-two-group.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -658,7 +657,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf", "_main.epub"],
+"download": ["_main.epub"],
 "search": {
 "engine": "fuse",
 "options": null

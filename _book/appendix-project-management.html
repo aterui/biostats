@@ -286,20 +286,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#data-manipulation"><i class="fa fa-check"></i><b>10.2</b> Data Manipulation</a>
 <ul>
 <li class="chapter" data-level="10.2.1" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#data-format"><i class="fa fa-check"></i><b>10.2.1</b> Data Format</a></li>
-<li class="chapter" data-level="10.2.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#select-rows"><i class="fa fa-check"></i><b>10.2.2</b> Select Rows</a></li>
-<li class="chapter" data-level="10.2.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#select-columns"><i class="fa fa-check"></i><b>10.2.3</b> Select Columns</a></li>
-<li class="chapter" data-level="10.2.4" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#group-operation"><i class="fa fa-check"></i><b>10.2.4</b> Group Operation</a></li>
+<li class="chapter" data-level="10.2.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#row-manipulation"><i class="fa fa-check"></i><b>10.2.2</b> Row Manipulation</a></li>
+<li class="chapter" data-level="10.2.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#column-manipulation"><i class="fa fa-check"></i><b>10.2.3</b> Column Manipulation</a></li>
+<li class="chapter" data-level="10.2.4" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#piping"><i class="fa fa-check"></i><b>10.2.4</b> Piping</a></li>
 <li class="chapter" data-level="10.2.5" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#reshape"><i class="fa fa-check"></i><b>10.2.5</b> Reshape</a></li>
-<li class="chapter" data-level="10.2.6" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#combination"><i class="fa fa-check"></i><b>10.2.6</b> Combination</a></li>
+<li class="chapter" data-level="10.2.6" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#group-operation"><i class="fa fa-check"></i><b>10.2.6</b> Group Operation</a></li>
+<li class="chapter" data-level="10.2.7" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#join"><i class="fa fa-check"></i><b>10.2.7</b> Join</a></li>
 </ul></li>
 <li class="chapter" data-level="10.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#visualization"><i class="fa fa-check"></i><b>10.3</b> Visualization</a>
 <ul>
 <li class="chapter" data-level="10.3.1" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#point"><i class="fa fa-check"></i><b>10.3.1</b> Point</a></li>
-<li class="chapter" data-level="10.3.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#histogram"><i class="fa fa-check"></i><b>10.3.2</b> Histogram</a></li>
-<li class="chapter" data-level="10.3.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#boxplot"><i class="fa fa-check"></i><b>10.3.3</b> Boxplot</a></li>
-<li class="chapter" data-level="10.3.4" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#violin-plot"><i class="fa fa-check"></i><b>10.3.4</b> Violin Plot</a></li>
-<li class="chapter" data-level="10.3.5" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#styling"><i class="fa fa-check"></i><b>10.3.5</b> Styling</a></li>
-<li class="chapter" data-level="10.3.6" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#more"><i class="fa fa-check"></i><b>10.3.6</b> More</a></li>
+<li class="chapter" data-level="10.3.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#line"><i class="fa fa-check"></i><b>10.3.2</b> Line</a></li>
+<li class="chapter" data-level="10.3.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#histogram"><i class="fa fa-check"></i><b>10.3.3</b> Histogram</a></li>
+<li class="chapter" data-level="10.3.4" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#boxplot"><i class="fa fa-check"></i><b>10.3.4</b> Boxplot</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html"><i class="fa fa-check"></i><b>11</b> Appendix: Base Plot</a>
@@ -359,15 +358,15 @@ Figure 7.1: RStudio interface.
 </p>
 </div>
 <p>After pasting the script into the console, you will notice that the variable <code>x</code> appears in the environment panel.</p>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="appendix-project-management.html#cb175-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="appendix-project-management.html#cb176-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)</span></code></pre></div>
 <p><code>x</code> is an object that stores information. In this particular case, we have stored a sequence of <code>1</code> and <code>2</code> in the object <code>x</code>. Once you have stored information in <code>x</code>, you can access it by simply typing <code>x</code>.</p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="appendix-project-management.html#cb176-1" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="appendix-project-management.html#cb177-1" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <pre><code>## [1] 1 2</code></pre>
 <p>Excellent! While it is possible to work with your data using this approach, it is important to highlight that <strong>it is generally regarded as a poor practice</strong>. As your project evolves, you will accumulate a substantial amount of material, such as writing more than 2000 lines of code for a single project. Consequently, it becomes essential to implement effective code management strategies. How do you presently handle code management?</p>
 <div id="script-editor" class="section level3 hasAnchor" number="7.1.1">
 <h3><span class="header-section-number">7.1.1</span> Script Editor<a href="appendix-project-management.html#script-editor" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>It is highly recommended to manage your scripts in the <code>Editor</code> instead. The <code>Editor</code> is where you draft and fine-tune your code before executing it in the <code>Console</code>. To create space for the <code>Editor</code>, press <code>Ctrl + Shift + N</code>. A new panel will appear in the top left corner. Let’s type the following script in the <code>Editor</code>. Please note that the key combination <code>Ctrl + Shift + N</code> assumes a Windows or Linux operating system. If you’re using a Mac, you can use <code>Command + Shift + N</code> instead.</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="appendix-project-management.html#cb178-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="appendix-project-management.html#cb179-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>)</span></code></pre></div>
 <p>Then, hit <code>Ctr + S</code> to save the <code>Editor</code> file. <em>RStudio</em> will prompt you to enter the file name of the <code>Editor</code><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>.</p>
 </div>
 <div id="file-name" class="section level3 hasAnchor" number="7.1.2">
@@ -491,7 +490,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/chapters/a-project.Rmd",
+"link": "https://github.com/aterui/biostats/chapters/a-project.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -502,7 +501,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf", "_main.epub"],
+"download": ["_main.epub"],
 "search": {
 "engine": "fuse",
 "options": null

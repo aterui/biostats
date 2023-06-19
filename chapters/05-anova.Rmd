@@ -45,11 +45,11 @@ df_anova %>%
 
 It appears that Lake `b` exhibits a larger average body size compared to the other lakes. One approach to quantifying this difference between groups is by examining the ratio of between-group variability to within-group variability. **If we observe a greater between-group variability relative to within-group variability, it suggests that the differences among the groups are substantial.** In other words, much of the observed variation is explained by the group structure (lake).
 
-Let me denote between-group and within-group variability as $S_w$ and $S_a$, respectively, which are defined as follows:
+Let me denote between-group and within-group variability as $S_b$ and $S_w$, respectively, which are defined as follows:
 
 $$
 \begin{aligned}
-S_a &= \sum_g \sum_i (\hat{\mu}_{g(i)} - \hat{\mu})^2\\
+S_b &= \sum_g \sum_i (\hat{\mu}_{g(i)} - \hat{\mu})^2\\
 S_w &= \sum_g \sum_i (x_{i} - \hat{\mu}_{g(i)})^2
 \end{aligned}
 $$
@@ -58,7 +58,7 @@ The double summation $\sum_g \sum_i$ might scare you, but no worries. We can dec
 
 ### Between-group variability
 
-Let me first consider $S_a = \sum_g \sum_i (\hat{\mu}_{g(i)} - \hat{\mu})^2$. In this equation, $\hat{\mu}$ is the overall mean of the fish length and $\hat{\mu}_{g(i)}$ is the group-mean in a given lake ($g = \{a, b, c\}$). Let's perform this estimation in R:
+Let me first consider $S_b = \sum_g \sum_i (\hat{\mu}_{g(i)} - \hat{\mu})^2$. In this equation, $\hat{\mu}$ is the overall mean of the fish length and $\hat{\mu}_{g(i)}$ is the group-mean in a given lake ($g = \{a, b, c\}$). Let's perform this estimation in R:
 
 ```{r}
 # estimate overall mean
@@ -83,11 +83,11 @@ df_g <- df_g %>%
 print(df_g)
 ```
 
-Sum over $g$ (lake) to get $S_a$.
+Sum over $g$ (lake) to get $S_b$.
 
 ```{r}
-s_a <- sum(df_g$ss)
-print(s_a)
+s_b <- sum(df_g$ss)
+print(s_b)
 ```
 
 ### Within-group variability
@@ -133,19 +133,19 @@ print(s_w)
 
 ### Variability to Variance
 
-I referred to $S_a$ and $S_w$ as "variability," which essentially represents the summation of squared deviations. To convert them into variances, we can divide them by appropriate numbers. In Chapter \@ref(sampling), I mentioned that the denominator for variance is the sample size minus one. The same principle applies here, but with caution.
+I referred to $S_b$ and $S_w$ as "variability," which essentially represents the summation of squared deviations. To convert them into variances, we can divide them by appropriate numbers. In Chapter \@ref(sampling), I mentioned that the denominator for variance is the sample size minus one. The same principle applies here, but with caution.
 
-For the between-group variability, denoted as $S_a$, the realized sample size is the number of groups, $N_g$, which in this case is three (representing the number of lakes). Therefore, we divide by three minus one to obtain an unbiased estimate of the between-group variance, denoted as $\hat{\sigma}_a^2"$:
+For the between-group variability, denoted as $S_b$, the realized sample size is the number of groups, $N_g$, which in this case is three (representing the number of lakes). Therefore, we divide by three minus one to obtain an unbiased estimate of the between-group variance, denoted as $\hat{\sigma}_b^2"$:
 
 $$
-\hat{\sigma}^2_a = \frac{S_a}{N_g-1}
+\hat{\sigma}^2_b = \frac{S_b}{N_g-1}
 $$
 
 ```{r}
 # n_distinct() count the number of unique elements
 n_g <- n_distinct(df_anova$lake)
-s2_a <- s_a / (n_g - 1)
-print(s2_a)
+s2_b <- s_b / (n_g - 1)
+print(s2_b)
 ```
 
 Meanwhile, we need to be careful when estimating the within-group variance. Since the within-group variance is measured at the individual level, the number of data used is equal to the number of fish individuals. Yet, we subtract the number of groups -- while the rationale behind this is beyond the scope, we are essentially accounting for the fact that some of the degrees of freedom are "used up" in estimating the group means. As such, we estimate the within-group variance $\hat{\sigma}^2_w$ as follows:
@@ -166,11 +166,11 @@ print(s2_w)
 In ANOVA, we use F-statistic -- the ratio of between-group variability to within-group variability. The above exercise was essentially performed to yield this test statistic:
 
 $$
-F = \frac{\text{between-group variance}}{\text{within-group variance}} = \frac{\hat{\sigma}^2_a}{\hat{\sigma}^2_w}
+F = \frac{\text{between-group variance}}{\text{within-group variance}} = \frac{\hat{\sigma}^2_b}{\hat{\sigma}^2_w}
 $$
 
 ```{r}
-f_value <- s2_a / s2_w
+f_value <- s2_b / s2_w
 print(f_value)
 ```
 

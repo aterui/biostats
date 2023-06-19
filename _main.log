@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (MiKTeX 20.10) (preloaded format=xelatex 2020.10.14)  17 JUN 2023 23:13
+This is XeTeX, Version 3.14159265-2.6-0.999992 (MiKTeX 20.10) (preloaded format=xelatex 2020.10.14)  18 JUN 2023 23:52
 entering extended mode
 **./_main.tex
 (_main.tex
@@ -990,9 +990,6 @@ File: _main_files/figure-latex/mu-var-dist-1.pdf Graphic file (type pdf)
 [21] [22]
 File: _main_files/figure-latex/var-ub-1.pdf Graphic file (type pdf)
 <use _main_files/figure-latex/var-ub-1.pdf>
-
-Underfull \vbox (badness 4940) has occurred while \output is active []
-
 [23] [24]
 Chapter 3.
 File: _main_files/figure-latex/histogram-height-1.pdf Graphic file (type pdf)
@@ -1006,7 +1003,7 @@ Underfull \vbox (badness 1859) has occurred while \output is active []
 File: _main_files/figure-latex/dnorm-1.pdf Graphic file (type pdf)
 <use _main_files/figure-latex/dnorm-1.pdf>
 [27]
-Overfull \vbox (1.53284pt too high) detected at line 1221
+Overfull \vbox (1.53284pt too high) detected at line 1241
  []
 
 [28]
@@ -1020,12 +1017,12 @@ Underfull \vbox (badness 7667) has occurred while \output is active []
 File: image/figure_garden.jpg Graphic file (type bmp)
 <image/figure_garden.jpg>
 
-Overfull \hbox (205.02545pt too wide) in paragraph at lines 1262--1263
+Overfull \hbox (205.02545pt too wide) in paragraph at lines 1282--1283
  [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 35.96544pt on input line 1267.
+LaTeX Warning: Float too large for page by 35.96544pt on input line 1287.
 
 File: _main_files/figure-latex/hist-density-1.pdf Graphic file (type pdf)
 <use _main_files/figure-latex/hist-density-1.pdf>
@@ -1039,13 +1036,13 @@ File: _main_files/figure-latex/pois-hist-1.pdf Graphic file (type pdf)
 ]
 Chapter 4.
 
-Underfull \hbox (badness 2050) in paragraph at lines 1476--1478
+Underfull \hbox (badness 2050) in paragraph at lines 1496--1498
 []\TU/lmr/m/n/10 Define a \TU/lmr/bx/n/10 test statistic \TU/lmr/m/n/10 to sign
 ify the difference between groups
  []
 
 [37]
-Overfull \vbox (0.61995pt too high) detected at line 1573
+Overfull \vbox (0.61995pt too high) detected at line 1593
  []
 
 [38]
@@ -1058,13 +1055,13 @@ File: _main_files/figure-latex/student-t-1.pdf Graphic file (type pdf)
 File: _main_files/figure-latex/student-t-obs-1.pdf Graphic file (type pdf)
 <use _main_files/figure-latex/student-t-obs-1.pdf>
 [44] [45]
-Overfull \hbox (17.25pt too wide) in paragraph at lines 1847--1847
+Overfull \hbox (17.25pt too wide) in paragraph at lines 1867--1867
 []\TU/lmtt/m/n/10 ## alternative hypothesis: true difference in means is not eq
 ual to 0[] 
  []
 
 
-Overfull \hbox (17.25pt too wide) in paragraph at lines 1874--1874
+Overfull \hbox (17.25pt too wide) in paragraph at lines 1894--1894
 []\TU/lmtt/m/n/10 ## alternative hypothesis: true difference in means is not eq
 ual to 0[] 
  []
@@ -1077,7 +1074,7 @@ Chapter 5.
 File: _main_files/figure-latex/violin-1.pdf Graphic file (type pdf)
 <use _main_files/figure-latex/violin-1.pdf>
 [50] [51]
-Overfull \vbox (1.79283pt too high) detected at line 2075
+Overfull \vbox (1.79283pt too high) detected at line 2095
  []
 
 [52] [53] [54]
@@ -1103,17 +1100,17 @@ File: image/figure_lm.png Graphic file (type bmp)
 File: _main_files/figure-latex/fittest-line-1.pdf Graphic file (type pdf)
 <use _main_files/figure-latex/fittest-line-1.pdf>
 [63] [64]
-Overfull \vbox (1.91322pt too high) detected at line 2572
+Overfull \vbox (1.91322pt too high) detected at line 2592
  []
 
 [65]
-Overfull \hbox (12.0pt too wide) in paragraph at lines 2630--2630
+Overfull \hbox (12.0pt too wide) in paragraph at lines 2650--2650
 []\TU/lmtt/m/n/10 ##          1          2          3          4          5    
       6[] 
  []
 
 
-Overfull \hbox (12.0pt too wide) in paragraph at lines 2630--2630
+Overfull \hbox (12.0pt too wide) in paragraph at lines 2650--2650
 []\TU/lmtt/m/n/10 ## -0.6838937 -1.2149034 -7.8576927 -3.0109473  1.7076481  6.
 1773586[] 
  []
@@ -1132,7 +1129,7 @@ Chapter 8.
 File: image/git_image01.png Graphic file (type bmp)
 <image/git_image01.png>
 
-Overfull \hbox (101.03973pt too wide) in paragraph at lines 2956--2957
+Overfull \hbox (101.03973pt too wide) in paragraph at lines 2976--2977
  [][] 
  []
 
@@ -1142,67 +1139,67 @@ Overfull \hbox (101.03973pt too wide) in paragraph at lines 2956--2957
 File: image/git_image02.png Graphic file (type bmp)
 <image/git_image02.png>
 
-Overfull \hbox (632.78961pt too wide) in paragraph at lines 3045--3046
+Overfull \hbox (632.78961pt too wide) in paragraph at lines 3065--3066
  [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 24.06664pt on input line 3050.
+LaTeX Warning: Float too large for page by 24.06664pt on input line 3070.
 
 File: image/git_image03.png Graphic file (type bmp)
 <image/git_image03.png>
 
-Overfull \hbox (618.10051pt too wide) in paragraph at lines 3056--3057
+Overfull \hbox (618.10051pt too wide) in paragraph at lines 3076--3077
  [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 16.11653pt on input line 3061.
+LaTeX Warning: Float too large for page by 16.11653pt on input line 3081.
 
 File: image/git_image04.png Graphic file (type bmp)
 <image/git_image04.png>
 
-Overfull \hbox (618.10051pt too wide) in paragraph at lines 3084--3085
+Overfull \hbox (618.10051pt too wide) in paragraph at lines 3104--3105
  [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 26.16653pt on input line 3089.
+LaTeX Warning: Float too large for page by 26.16653pt on input line 3109.
 
 [78] [79] [80] [81]
 File: image/git_image05.png Graphic file (type bmp)
 <image/git_image05.png>
 
-Overfull \hbox (618.10051pt too wide) in paragraph at lines 3118--3119
+Overfull \hbox (618.10051pt too wide) in paragraph at lines 3138--3139
  [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 16.11653pt on input line 3123.
+LaTeX Warning: Float too large for page by 16.11653pt on input line 3143.
 
 [82] [83]
 File: image/git_image06.png Graphic file (type bmp)
 <image/git_image06.png>
 
-Overfull \hbox (632.78961pt too wide) in paragraph at lines 3166--3167
+Overfull \hbox (632.78961pt too wide) in paragraph at lines 3186--3187
  [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 24.06664pt on input line 3171.
+LaTeX Warning: Float too large for page by 24.06664pt on input line 3191.
 
 [84] [85] [86
 
 ]
 Chapter 9.
 [87]
-Overfull \hbox (90.75pt too wide) in paragraph at lines 3313--3313
+Overfull \hbox (90.75pt too wide) in paragraph at lines 3333--3333
 []\TU/lmtt/m/n/10 ##  [1] 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2.0 2.1 2.2 2
 .3 2.4 2.5 2.6 2.7 2.8[] 
  []
 
 
-Overfull \hbox (90.75pt too wide) in paragraph at lines 3313--3313
+Overfull \hbox (90.75pt too wide) in paragraph at lines 3333--3333
 []\TU/lmtt/m/n/10 ## [20] 2.9 3.0 3.1 3.2 3.3 3.4 3.5 3.6 3.7 3.8 3.9 4.0 4.1 4
 .2 4.3 4.4 4.5 4.6 4.7[] 
  []
@@ -1212,91 +1209,292 @@ Underfull \vbox (badness 1975) has occurred while \output is active []
 
 [88] [89] [90] [91] [92] [93] [94] [95] [96]
 Chapter 10.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
 [97
 
 ] [98]
-Chapter 11.
-File: _main_files/figure-latex/unnamed-chunk-70-1.pdf Graphic file (type pdf)
-<use _main_files/figure-latex/unnamed-chunk-70-1.pdf>
-[99
+Overfull \hbox (17.25pt too wide) in paragraph at lines 4223--4223
+[]\TU/lmtt/m/n/10 ##    Sepal.Length Sepal.Width Petal.Length Petal.Width Speci
+es     x[] 
+ []
 
-]
-File: _main_files/figure-latex/unnamed-chunk-71-1.pdf Graphic file (type pdf)
-<use _main_files/figure-latex/unnamed-chunk-71-1.pdf>
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 4223--4223
+[]\TU/lmtt/m/n/10 ##           <dbl>       <dbl>        <dbl>       <dbl> <fct>
+   <int>[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 4223--4223
+[]\TU/lmtt/m/n/10 ##  1          5.1         3.5          1.4         0.2 setos
+a      1[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 4223--4223
+[]\TU/lmtt/m/n/10 ##  2          4.9         3            1.4         0.2 setos
+a      2[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 4223--4223
+[]\TU/lmtt/m/n/10 ##  3          4.7         3.2          1.3         0.2 setos
+a      3[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 4223--4223
+[]\TU/lmtt/m/n/10 ##  4          4.6         3.1          1.5         0.2 setos
+a      4[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 4223--4223
+[]\TU/lmtt/m/n/10 ##  5          5           3.6          1.4         0.2 setos
+a      5[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 4223--4223
+[]\TU/lmtt/m/n/10 ##  6          5.4         3.9          1.7         0.4 setos
+a      6[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 4223--4223
+[]\TU/lmtt/m/n/10 ##  7          4.6         3.4          1.4         0.3 setos
+a      7[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 4223--4223
+[]\TU/lmtt/m/n/10 ##  8          5           3.4          1.5         0.2 setos
+a      8[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 4223--4223
+[]\TU/lmtt/m/n/10 ##  9          4.4         2.9          1.4         0.2 setos
+a      9[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 4223--4223
+[]\TU/lmtt/m/n/10 ## 10          4.9         3.1          1.5         0.1 setos
+a     10[] 
+ []
+
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[100]
-File: _main_files/figure-latex/unnamed-chunk-72-1.pdf Graphic file (type pdf)
-<use _main_files/figure-latex/unnamed-chunk-72-1.pdf>
-
+[99]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[101]
-File: _main_files/figure-latex/unnamed-chunk-73-1.pdf Graphic file (type pdf)
-<use _main_files/figure-latex/unnamed-chunk-73-1.pdf>
+[100] [101]
+Overfull \hbox (17.25pt too wide) in paragraph at lines 4419--4419
+[]\TU/lmtt/m/n/10 ##    Sepal.Length Sepal.Width Petal.Length Petal.Width Speci
+es mu_sl[] 
+ []
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 4419--4419
+[]\TU/lmtt/m/n/10 ##           <dbl>       <dbl>        <dbl>       <dbl> <fct>
+   <dbl>[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 4419--4419
+[]\TU/lmtt/m/n/10 ##  1          5.1         3.5          1.4         0.2 setos
+a   5.01[] 
+ []
 
 [102]
-File: _main_files/figure-latex/unnamed-chunk-74-1.pdf Graphic file (type pdf)
-<use _main_files/figure-latex/unnamed-chunk-74-1.pdf>
+Overfull \hbox (17.25pt too wide) in paragraph at lines 4419--4419
+[]\TU/lmtt/m/n/10 ##  2          4.9         3            1.4         0.2 setos
+a   5.01[] 
+ []
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 4419--4419
+[]\TU/lmtt/m/n/10 ##  3          4.7         3.2          1.3         0.2 setos
+a   5.01[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 4419--4419
+[]\TU/lmtt/m/n/10 ##  4          4.6         3.1          1.5         0.2 setos
+a   5.01[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 4419--4419
+[]\TU/lmtt/m/n/10 ##  5          5           3.6          1.4         0.2 setos
+a   5.01[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 4419--4419
+[]\TU/lmtt/m/n/10 ##  6          5.4         3.9          1.7         0.4 setos
+a   5.01[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 4419--4419
+[]\TU/lmtt/m/n/10 ##  7          4.6         3.4          1.4         0.3 setos
+a   5.01[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 4419--4419
+[]\TU/lmtt/m/n/10 ##  8          5           3.4          1.5         0.2 setos
+a   5.01[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 4419--4419
+[]\TU/lmtt/m/n/10 ##  9          4.4         2.9          1.4         0.2 setos
+a   5.01[] 
+ []
+
+
+Overfull \hbox (17.25pt too wide) in paragraph at lines 4419--4419
+[]\TU/lmtt/m/n/10 ## 10          4.9         3.1          1.5         0.1 setos
+a   5.01[] 
+ []
 
 [103]
-File: _main_files/figure-latex/unnamed-chunk-75-1.pdf Graphic file (type pdf)
-<use _main_files/figure-latex/unnamed-chunk-75-1.pdf>
+Overfull \vbox (1.34995pt too high) detected at line 4532
+ []
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[104]
-File: _main_files/figure-latex/unnamed-chunk-76-1.pdf Graphic file (type pdf)
-<use _main_files/figure-latex/unnamed-chunk-76-1.pdf>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[105]
-File: _main_files/figure-latex/unnamed-chunk-77-1.pdf Graphic file (type pdf)
-<use _main_files/figure-latex/unnamed-chunk-77-1.pdf>
+[104] [105]
+File: _main_files/figure-latex/unnamed-chunk-83-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/unnamed-chunk-83-1.pdf>
+File: _main_files/figure-latex/unnamed-chunk-83-2.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/unnamed-chunk-83-2.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [106]
-File: _main_files/figure-latex/unnamed-chunk-78-1.pdf Graphic file (type pdf)
-<use _main_files/figure-latex/unnamed-chunk-78-1.pdf>
+File: _main_files/figure-latex/unnamed-chunk-84-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/unnamed-chunk-84-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [107]
-File: _main_files/figure-latex/unnamed-chunk-79-1.pdf Graphic file (type pdf)
-<use _main_files/figure-latex/unnamed-chunk-79-1.pdf>
+File: _main_files/figure-latex/unnamed-chunk-85-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/unnamed-chunk-85-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [108]
-File: _main_files/figure-latex/unnamed-chunk-80-1.pdf Graphic file (type pdf)
-<use _main_files/figure-latex/unnamed-chunk-80-1.pdf>
+File: _main_files/figure-latex/unnamed-chunk-85-2.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/unnamed-chunk-85-2.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [109]
-File: _main_files/figure-latex/unnamed-chunk-81-1.pdf Graphic file (type pdf)
-<use _main_files/figure-latex/unnamed-chunk-81-1.pdf>
+File: _main_files/figure-latex/unnamed-chunk-85-3.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/unnamed-chunk-85-3.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[110] [111] (_main.aux) ) 
+[110]
+File: _main_files/figure-latex/unnamed-chunk-86-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/unnamed-chunk-86-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[111]
+File: _main_files/figure-latex/unnamed-chunk-86-2.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/unnamed-chunk-86-2.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[112]
+File: _main_files/figure-latex/unnamed-chunk-86-3.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/unnamed-chunk-86-3.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[113] [114]
+Chapter 11.
+[115
+
+]
+File: _main_files/figure-latex/unnamed-chunk-88-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/unnamed-chunk-88-1.pdf>
+File: _main_files/figure-latex/unnamed-chunk-89-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/unnamed-chunk-89-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[116]
+File: _main_files/figure-latex/unnamed-chunk-90-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/unnamed-chunk-90-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[117]
+File: _main_files/figure-latex/unnamed-chunk-91-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/unnamed-chunk-91-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[118]
+File: _main_files/figure-latex/unnamed-chunk-92-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/unnamed-chunk-92-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[119]
+File: _main_files/figure-latex/unnamed-chunk-93-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/unnamed-chunk-93-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[120]
+File: _main_files/figure-latex/unnamed-chunk-94-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/unnamed-chunk-94-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[121]
+File: _main_files/figure-latex/unnamed-chunk-95-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/unnamed-chunk-95-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[122]
+File: _main_files/figure-latex/unnamed-chunk-96-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/unnamed-chunk-96-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[123]
+File: _main_files/figure-latex/unnamed-chunk-97-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/unnamed-chunk-97-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[124]
+File: _main_files/figure-latex/unnamed-chunk-98-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/unnamed-chunk-98-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[125]
+File: _main_files/figure-latex/unnamed-chunk-99-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/unnamed-chunk-99-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[126] [127] (_main.aux) ) 
 Here is how much of TeX's memory you used:
- 19246 strings out of 412249
- 334556 string characters out of 2855664
- 819535 words of memory out of 3000000
- 38401 multiletter control sequences out of 15000+200000
+ 19310 strings out of 412249
+ 337526 string characters out of 2855664
+ 819823 words of memory out of 3000000
+ 38456 multiletter control sequences out of 15000+200000
  541733 words of font info for 94 fonts, out of 3000000 for 9000
  1348 hyphenation exceptions out of 8191
- 84i,16n,118p,3065b,482s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 84i,16n,118p,3165b,482s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on _main.pdf (111 pages).
+Output written on _main.pdf (127 pages).

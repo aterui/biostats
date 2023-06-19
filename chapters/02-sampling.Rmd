@@ -155,7 +155,7 @@ print(var_i)
 
 In each element of `mu_i` and `var_i`, we have saved estimated mean ($\hat{\mu}$; reads mu hat) and variance ($\hat{\sigma^2}$) of 10 plant height measures for dataset `i`. By drawing a histogram of these values, we can examine the distributions of mean and variance estimates. I use R package `patchwork` to make a better figure:
 
-```{r mu-var-dist}
+```{r mu-var-dist, fig.cap="Sample mean and biased variance."}
 #install.packages("patchwork") # install only once
 library(patchwork)
 
@@ -188,7 +188,7 @@ $$
 
 The correction in the denominator ($N$ replaced with $N-1$) compensates for the bias, providing an estimate of the true variance without systematic underestimation (although this seems a simple correction, a [deep math](https://en.wikipedia.org/wiki/Bessel%27s_correction) underlies the derivation of $N-1$). This is the default formula in `var()` in R, a function used to estimate *unbiased* variance (and *unbiased* SD `sd()`). Comparison reveals how this works:
 
-```{r var-ub}
+```{r}
 
 # for reproducibility
 set.seed(3)
@@ -210,7 +210,11 @@ for (i in 1:100) {
   
   var_ub_i[i] <- var(df_i$height)
 }
+```
 
+Add the histogram of unbiased variance:
+
+```{r var-ub, fig.cap="Comparison of biased and unbiased variances."}
 # draw histograms ----
 df_sample <- tibble(mu_hat = mu_i,
                     var_hat = var_i,
@@ -228,21 +232,21 @@ g_var <- df_sample %>%
   ggplot(aes(x = var_hat)) +
   geom_histogram() +
   geom_vline(xintercept = sigma2) +
-  scale_x_continuous(limits= c(min(var_i, var_ub_i),
-                               max(var_i, var_ub_i)))
+  scale_x_continuous(limits= c(min(c(var_i, var_ub_i)),
+                               max(c(var_i, var_ub_i))))
 
 # histogram for unbiased variance
 g_var_ub <- df_sample %>% 
   ggplot(aes(x = var_ub_hat)) +
   geom_histogram() +
   geom_vline(xintercept = sigma2) +
-  scale_x_continuous(limits= c(min(var_i, var_ub_i),
-                               max(var_i, var_ub_i)))
+  scale_x_continuous(limits= c(min(c(var_i, var_ub_i)),
+                               max(c(var_i, var_ub_i))))
 
 g_mu / g_var / g_var_ub
 ```
 
-In summary, samples can only provide information about a part of the whole population. The complete picture of the entire population is often unknown, and we rely on estimating key parameters from the available samples. This concept applies to a wide range of parametric analyses in statistics, where we use sample data to make inferences about the population parameters.
+In summary, samples can only provide information about a part of the whole population. The complete picture of the entire population is often unknown, and **we rely on estimating key parameters from the available samples.** This concept applies to a wide range of parametric analyses in statistics, where we use sample data to make inferences about the population parameters.
 
 Recognizing the limitations and uncertainties associated with working with samples is essential for proper statistical analysis and interpretation of results in various fields of study.
 

@@ -286,20 +286,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#data-manipulation"><i class="fa fa-check"></i><b>10.2</b> Data Manipulation</a>
 <ul>
 <li class="chapter" data-level="10.2.1" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#data-format"><i class="fa fa-check"></i><b>10.2.1</b> Data Format</a></li>
-<li class="chapter" data-level="10.2.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#select-rows"><i class="fa fa-check"></i><b>10.2.2</b> Select Rows</a></li>
-<li class="chapter" data-level="10.2.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#select-columns"><i class="fa fa-check"></i><b>10.2.3</b> Select Columns</a></li>
-<li class="chapter" data-level="10.2.4" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#group-operation"><i class="fa fa-check"></i><b>10.2.4</b> Group Operation</a></li>
+<li class="chapter" data-level="10.2.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#row-manipulation"><i class="fa fa-check"></i><b>10.2.2</b> Row Manipulation</a></li>
+<li class="chapter" data-level="10.2.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#column-manipulation"><i class="fa fa-check"></i><b>10.2.3</b> Column Manipulation</a></li>
+<li class="chapter" data-level="10.2.4" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#piping"><i class="fa fa-check"></i><b>10.2.4</b> Piping</a></li>
 <li class="chapter" data-level="10.2.5" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#reshape"><i class="fa fa-check"></i><b>10.2.5</b> Reshape</a></li>
-<li class="chapter" data-level="10.2.6" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#combination"><i class="fa fa-check"></i><b>10.2.6</b> Combination</a></li>
+<li class="chapter" data-level="10.2.6" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#group-operation"><i class="fa fa-check"></i><b>10.2.6</b> Group Operation</a></li>
+<li class="chapter" data-level="10.2.7" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#join"><i class="fa fa-check"></i><b>10.2.7</b> Join</a></li>
 </ul></li>
 <li class="chapter" data-level="10.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#visualization"><i class="fa fa-check"></i><b>10.3</b> Visualization</a>
 <ul>
 <li class="chapter" data-level="10.3.1" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#point"><i class="fa fa-check"></i><b>10.3.1</b> Point</a></li>
-<li class="chapter" data-level="10.3.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#histogram"><i class="fa fa-check"></i><b>10.3.2</b> Histogram</a></li>
-<li class="chapter" data-level="10.3.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#boxplot"><i class="fa fa-check"></i><b>10.3.3</b> Boxplot</a></li>
-<li class="chapter" data-level="10.3.4" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#violin-plot"><i class="fa fa-check"></i><b>10.3.4</b> Violin Plot</a></li>
-<li class="chapter" data-level="10.3.5" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#styling"><i class="fa fa-check"></i><b>10.3.5</b> Styling</a></li>
-<li class="chapter" data-level="10.3.6" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#more"><i class="fa fa-check"></i><b>10.3.6</b> More</a></li>
+<li class="chapter" data-level="10.3.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#line"><i class="fa fa-check"></i><b>10.3.2</b> Line</a></li>
+<li class="chapter" data-level="10.3.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#histogram"><i class="fa fa-check"></i><b>10.3.3</b> Histogram</a></li>
+<li class="chapter" data-level="10.3.4" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#boxplot"><i class="fa fa-check"></i><b>10.3.4</b> Boxplot</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html"><i class="fa fa-check"></i><b>11</b> Appendix: Base Plot</a>
@@ -350,13 +349,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="probability-density-function" class="section level3 hasAnchor" number="3.1.1">
 <h3><span class="header-section-number">3.1.1</span> Probability Density Function<a href="probabilistic-view.html#probability-density-function" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let me use the plant height example in Chapter <a href="sampling.html#sampling">2</a>:</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="probabilistic-view.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load csv data on R</span></span>
-<span id="cb76-2"><a href="probabilistic-view.html#cb76-2" aria-hidden="true" tabindex="-1"></a>df_h0 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data_raw/data_plant_height.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="probabilistic-view.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load csv data on R</span></span>
+<span id="cb77-2"><a href="probabilistic-view.html#cb77-2" aria-hidden="true" tabindex="-1"></a>df_h0 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data_raw/data_plant_height.csv&quot;</span>)</span></code></pre></div>
 <p>While Chapter <a href="sampling.html#sampling">2</a> primarily focused on exploring mean and variance, let’s broaden our perspective to gain a comprehensive understanding of the entire distribution of height.</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="probabilistic-view.html#cb77-1" aria-hidden="true" tabindex="-1"></a>df_h0 <span class="sc">%&gt;%</span> </span>
-<span id="cb77-2"><a href="probabilistic-view.html#cb77-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> height)) <span class="sc">+</span> </span>
-<span id="cb77-3"><a href="probabilistic-view.html#cb77-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="co"># specify binwidth</span></span>
-<span id="cb77-4"><a href="probabilistic-view.html#cb77-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(height))) <span class="co"># draw vertical line at the mean</span></span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="probabilistic-view.html#cb78-1" aria-hidden="true" tabindex="-1"></a>df_h0 <span class="sc">%&gt;%</span> </span>
+<span id="cb78-2"><a href="probabilistic-view.html#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> height)) <span class="sc">+</span> </span>
+<span id="cb78-3"><a href="probabilistic-view.html#cb78-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="co"># specify binwidth</span></span>
+<span id="cb78-4"><a href="probabilistic-view.html#cb78-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(height))) <span class="co"># draw vertical line at the mean</span></span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:histogram-height"></span>
 <img src="_main_files/figure-html/histogram-height-1.png" alt="Distribution of plant height" width="672" />
 <p class="caption">
@@ -378,21 +377,21 @@ f(x) = \frac{1}{\sqrt{2 \pi} \sigma} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\righ
 <h3><span class="header-section-number">3.1.2</span> PDF to frequency distribution<a href="probabilistic-view.html#pdf-to-frequency-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In R, the function <code>dnorm()</code> can be used to calculate the probability density for a given value. The first argument, <code>x</code>, should be a vector of values for which you want to calculate the probability density. The second argument, <code>mean</code>, and the third argument, <code>sd</code>, correspond to the mean and standard deviation of the distribution, respectively. Note that we must provide <code>mean</code> and <code>sd</code> to calculate the probability density.</p>
 <p>To encompass the entire range of observed heights, we can use <span class="math inline">\(\text{min}(x)\)</span> and <span class="math inline">\(\text{max}(x)\)</span> as the lower and upper limits, respectively.</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="probabilistic-view.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># vector of x values</span></span>
-<span id="cb78-2"><a href="probabilistic-view.html#cb78-2" aria-hidden="true" tabindex="-1"></a><span class="co"># seq() generate min to max values with specified numbers of elements or interval</span></span>
-<span id="cb78-3"><a href="probabilistic-view.html#cb78-3" aria-hidden="true" tabindex="-1"></a><span class="co"># the following produce 100 elements</span></span>
-<span id="cb78-4"><a href="probabilistic-view.html#cb78-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(df_h0<span class="sc">$</span>height), <span class="fu">max</span>(df_h0<span class="sc">$</span>height), <span class="at">length =</span> <span class="dv">100</span>)</span>
-<span id="cb78-5"><a href="probabilistic-view.html#cb78-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-6"><a href="probabilistic-view.html#cb78-6" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate probability density</span></span>
-<span id="cb78-7"><a href="probabilistic-view.html#cb78-7" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">mean</span>(df_h0<span class="sc">$</span>height)</span>
-<span id="cb78-8"><a href="probabilistic-view.html#cb78-8" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="fu">sd</span>(df_h0<span class="sc">$</span>height)</span>
-<span id="cb78-9"><a href="probabilistic-view.html#cb78-9" aria-hidden="true" tabindex="-1"></a>pd <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(x, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma)</span>
-<span id="cb78-10"><a href="probabilistic-view.html#cb78-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb78-11"><a href="probabilistic-view.html#cb78-11" aria-hidden="true" tabindex="-1"></a><span class="co"># figure</span></span>
-<span id="cb78-12"><a href="probabilistic-view.html#cb78-12" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">y =</span> pd, <span class="at">x =</span> x) <span class="sc">%&gt;%</span> <span class="co"># data frame</span></span>
-<span id="cb78-13"><a href="probabilistic-view.html#cb78-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
-<span id="cb78-14"><a href="probabilistic-view.html#cb78-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="co"># draw lines</span></span>
-<span id="cb78-15"><a href="probabilistic-view.html#cb78-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Probability density&quot;</span>) <span class="co"># re-label</span></span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="probabilistic-view.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># vector of x values</span></span>
+<span id="cb79-2"><a href="probabilistic-view.html#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="co"># seq() generate min to max values with specified numbers of elements or interval</span></span>
+<span id="cb79-3"><a href="probabilistic-view.html#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="co"># the following produce 100 elements</span></span>
+<span id="cb79-4"><a href="probabilistic-view.html#cb79-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(df_h0<span class="sc">$</span>height), <span class="fu">max</span>(df_h0<span class="sc">$</span>height), <span class="at">length =</span> <span class="dv">100</span>)</span>
+<span id="cb79-5"><a href="probabilistic-view.html#cb79-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-6"><a href="probabilistic-view.html#cb79-6" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate probability density</span></span>
+<span id="cb79-7"><a href="probabilistic-view.html#cb79-7" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">mean</span>(df_h0<span class="sc">$</span>height)</span>
+<span id="cb79-8"><a href="probabilistic-view.html#cb79-8" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="fu">sd</span>(df_h0<span class="sc">$</span>height)</span>
+<span id="cb79-9"><a href="probabilistic-view.html#cb79-9" aria-hidden="true" tabindex="-1"></a>pd <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(x, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma)</span>
+<span id="cb79-10"><a href="probabilistic-view.html#cb79-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-11"><a href="probabilistic-view.html#cb79-11" aria-hidden="true" tabindex="-1"></a><span class="co"># figure</span></span>
+<span id="cb79-12"><a href="probabilistic-view.html#cb79-12" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">y =</span> pd, <span class="at">x =</span> x) <span class="sc">%&gt;%</span> <span class="co"># data frame</span></span>
+<span id="cb79-13"><a href="probabilistic-view.html#cb79-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb79-14"><a href="probabilistic-view.html#cb79-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="co"># draw lines</span></span>
+<span id="cb79-15"><a href="probabilistic-view.html#cb79-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Probability density&quot;</span>) <span class="co"># re-label</span></span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:dnorm"></span>
 <img src="_main_files/figure-html/dnorm-1.png" alt="Probability density function of a Normal distribution" width="672" />
 <p class="caption">
@@ -400,45 +399,45 @@ Figure 3.2: Probability density function of a Normal distribution
 </p>
 </div>
 <p>The shape of the curve appears quite similar to what we observed; however, the scale of the y-axis is different. This is because the y-axis represents “probability density.” To convert it into actual “probability,” we need to calculate the area under the curve. In R, we can utilize the <code>pnorm()</code> function for this purpose. It calculates the probability of a variable being less than the specified value, which is provided in the first argument <code>q</code>.</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="probabilistic-view.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># probability of x &lt; 10</span></span>
-<span id="cb79-2"><a href="probabilistic-view.html#cb79-2" aria-hidden="true" tabindex="-1"></a>p10 <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(<span class="at">q =</span> <span class="dv">10</span>, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma)</span>
-<span id="cb79-3"><a href="probabilistic-view.html#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p10)</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="probabilistic-view.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># probability of x &lt; 10</span></span>
+<span id="cb80-2"><a href="probabilistic-view.html#cb80-2" aria-hidden="true" tabindex="-1"></a>p10 <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(<span class="at">q =</span> <span class="dv">10</span>, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma)</span>
+<span id="cb80-3"><a href="probabilistic-view.html#cb80-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p10)</span></code></pre></div>
 <pre><code>## [1] 0.02731905</code></pre>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="probabilistic-view.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="co"># probability of x &lt; 20</span></span>
-<span id="cb81-2"><a href="probabilistic-view.html#cb81-2" aria-hidden="true" tabindex="-1"></a>p20 <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(<span class="at">q =</span> <span class="dv">20</span>, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma)</span>
-<span id="cb81-3"><a href="probabilistic-view.html#cb81-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p20)</span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="probabilistic-view.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># probability of x &lt; 20</span></span>
+<span id="cb82-2"><a href="probabilistic-view.html#cb82-2" aria-hidden="true" tabindex="-1"></a>p20 <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(<span class="at">q =</span> <span class="dv">20</span>, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma)</span>
+<span id="cb82-3"><a href="probabilistic-view.html#cb82-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p20)</span></code></pre></div>
 <pre><code>## [1] 0.504426</code></pre>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="probabilistic-view.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="co"># probability of 10 &lt; x &lt; 20</span></span>
-<span id="cb83-2"><a href="probabilistic-view.html#cb83-2" aria-hidden="true" tabindex="-1"></a>p20_10 <span class="ot">&lt;-</span> p20 <span class="sc">-</span> p10</span>
-<span id="cb83-3"><a href="probabilistic-view.html#cb83-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p20_10)</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="probabilistic-view.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="co"># probability of 10 &lt; x &lt; 20</span></span>
+<span id="cb84-2"><a href="probabilistic-view.html#cb84-2" aria-hidden="true" tabindex="-1"></a>p20_10 <span class="ot">&lt;-</span> p20 <span class="sc">-</span> p10</span>
+<span id="cb84-3"><a href="probabilistic-view.html#cb84-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p20_10)</span></code></pre></div>
 <pre><code>## [1] 0.4771069</code></pre>
 <p>To make the estimates comparable to the frequency data, you can calculate the probability for each 1 cm bin. The expected frequency can be obtained by multiplying the probability by the sample size, which in this case is 1000. This allows you to estimate the number of observations you would expect in each 1 cm bin based on the calculated probabilities.</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="probabilistic-view.html#cb85-1" aria-hidden="true" tabindex="-1"></a>x_min <span class="ot">&lt;-</span> <span class="fu">floor</span>(<span class="fu">min</span>(df_h0<span class="sc">$</span>height)) <span class="co"># floor takes the integer part of the value</span></span>
-<span id="cb85-2"><a href="probabilistic-view.html#cb85-2" aria-hidden="true" tabindex="-1"></a>x_max <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(<span class="fu">max</span>(df_h0<span class="sc">$</span>height)) <span class="co"># ceiling takes the next closest integer</span></span>
-<span id="cb85-3"><a href="probabilistic-view.html#cb85-3" aria-hidden="true" tabindex="-1"></a>bin <span class="ot">&lt;-</span> <span class="fu">seq</span>(x_min, x_max, <span class="at">by =</span> <span class="dv">1</span>) <span class="co"># each bin has 1cm</span></span>
-<span id="cb85-4"><a href="probabilistic-view.html#cb85-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb85-5"><a href="probabilistic-view.html#cb85-5" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># empty object for probability</span></span>
-<span id="cb85-6"><a href="probabilistic-view.html#cb85-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(<span class="fu">length</span>(bin) <span class="sc">-</span> <span class="dv">1</span>)) {</span>
-<span id="cb85-7"><a href="probabilistic-view.html#cb85-7" aria-hidden="true" tabindex="-1"></a>  p[i] <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(bin[i<span class="sc">+</span><span class="dv">1</span>], <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma) <span class="sc">-</span> <span class="fu">pnorm</span>(bin[i], <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma)</span>
-<span id="cb85-8"><a href="probabilistic-view.html#cb85-8" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb85-9"><a href="probabilistic-view.html#cb85-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb85-10"><a href="probabilistic-view.html#cb85-10" aria-hidden="true" tabindex="-1"></a><span class="co"># data frame for probability</span></span>
-<span id="cb85-11"><a href="probabilistic-view.html#cb85-11" aria-hidden="true" tabindex="-1"></a><span class="co"># bin: last element [-length(bin)] was removed to match length</span></span>
-<span id="cb85-12"><a href="probabilistic-view.html#cb85-12" aria-hidden="true" tabindex="-1"></a><span class="co"># expected frequency in each bin is &quot;prob times sample size&quot;</span></span>
-<span id="cb85-13"><a href="probabilistic-view.html#cb85-13" aria-hidden="true" tabindex="-1"></a>df_prob <span class="ot">&lt;-</span> <span class="fu">tibble</span>(p, <span class="at">bin =</span> bin[<span class="sc">-</span><span class="fu">length</span>(bin)]) <span class="sc">%&gt;%</span> </span>
-<span id="cb85-14"><a href="probabilistic-view.html#cb85-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">freq =</span> p <span class="sc">*</span> <span class="fu">nrow</span>(df_h0))</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="probabilistic-view.html#cb86-1" aria-hidden="true" tabindex="-1"></a>x_min <span class="ot">&lt;-</span> <span class="fu">floor</span>(<span class="fu">min</span>(df_h0<span class="sc">$</span>height)) <span class="co"># floor takes the integer part of the value</span></span>
+<span id="cb86-2"><a href="probabilistic-view.html#cb86-2" aria-hidden="true" tabindex="-1"></a>x_max <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(<span class="fu">max</span>(df_h0<span class="sc">$</span>height)) <span class="co"># ceiling takes the next closest integer</span></span>
+<span id="cb86-3"><a href="probabilistic-view.html#cb86-3" aria-hidden="true" tabindex="-1"></a>bin <span class="ot">&lt;-</span> <span class="fu">seq</span>(x_min, x_max, <span class="at">by =</span> <span class="dv">1</span>) <span class="co"># each bin has 1cm</span></span>
+<span id="cb86-4"><a href="probabilistic-view.html#cb86-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-5"><a href="probabilistic-view.html#cb86-5" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># empty object for probability</span></span>
+<span id="cb86-6"><a href="probabilistic-view.html#cb86-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(<span class="fu">length</span>(bin) <span class="sc">-</span> <span class="dv">1</span>)) {</span>
+<span id="cb86-7"><a href="probabilistic-view.html#cb86-7" aria-hidden="true" tabindex="-1"></a>  p[i] <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(bin[i<span class="sc">+</span><span class="dv">1</span>], <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma) <span class="sc">-</span> <span class="fu">pnorm</span>(bin[i], <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma)</span>
+<span id="cb86-8"><a href="probabilistic-view.html#cb86-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb86-9"><a href="probabilistic-view.html#cb86-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-10"><a href="probabilistic-view.html#cb86-10" aria-hidden="true" tabindex="-1"></a><span class="co"># data frame for probability</span></span>
+<span id="cb86-11"><a href="probabilistic-view.html#cb86-11" aria-hidden="true" tabindex="-1"></a><span class="co"># bin: last element [-length(bin)] was removed to match length</span></span>
+<span id="cb86-12"><a href="probabilistic-view.html#cb86-12" aria-hidden="true" tabindex="-1"></a><span class="co"># expected frequency in each bin is &quot;prob times sample size&quot;</span></span>
+<span id="cb86-13"><a href="probabilistic-view.html#cb86-13" aria-hidden="true" tabindex="-1"></a>df_prob <span class="ot">&lt;-</span> <span class="fu">tibble</span>(p, <span class="at">bin =</span> bin[<span class="sc">-</span><span class="fu">length</span>(bin)]) <span class="sc">%&gt;%</span> </span>
+<span id="cb86-14"><a href="probabilistic-view.html#cb86-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">freq =</span> p <span class="sc">*</span> <span class="fu">nrow</span>(df_h0))</span></code></pre></div>
 <p>Overlay:</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="probabilistic-view.html#cb86-1" aria-hidden="true" tabindex="-1"></a>df_h0 <span class="sc">%&gt;%</span> </span>
-<span id="cb86-2"><a href="probabilistic-view.html#cb86-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> height)) <span class="sc">+</span> </span>
-<span id="cb86-3"><a href="probabilistic-view.html#cb86-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb86-4"><a href="probabilistic-view.html#cb86-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> df_prob,</span>
-<span id="cb86-5"><a href="probabilistic-view.html#cb86-5" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">y =</span> freq,</span>
-<span id="cb86-6"><a href="probabilistic-view.html#cb86-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">x =</span> bin),</span>
-<span id="cb86-7"><a href="probabilistic-view.html#cb86-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">&quot;salmon&quot;</span>) <span class="sc">+</span></span>
-<span id="cb86-8"><a href="probabilistic-view.html#cb86-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> df_prob,</span>
-<span id="cb86-9"><a href="probabilistic-view.html#cb86-9" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">y =</span> freq,</span>
-<span id="cb86-10"><a href="probabilistic-view.html#cb86-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">x =</span> bin),</span>
-<span id="cb86-11"><a href="probabilistic-view.html#cb86-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">&quot;salmon&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="probabilistic-view.html#cb87-1" aria-hidden="true" tabindex="-1"></a>df_h0 <span class="sc">%&gt;%</span> </span>
+<span id="cb87-2"><a href="probabilistic-view.html#cb87-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> height)) <span class="sc">+</span> </span>
+<span id="cb87-3"><a href="probabilistic-view.html#cb87-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb87-4"><a href="probabilistic-view.html#cb87-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> df_prob,</span>
+<span id="cb87-5"><a href="probabilistic-view.html#cb87-5" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">y =</span> freq,</span>
+<span id="cb87-6"><a href="probabilistic-view.html#cb87-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">x =</span> bin),</span>
+<span id="cb87-7"><a href="probabilistic-view.html#cb87-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">&quot;salmon&quot;</span>) <span class="sc">+</span></span>
+<span id="cb87-8"><a href="probabilistic-view.html#cb87-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> df_prob,</span>
+<span id="cb87-9"><a href="probabilistic-view.html#cb87-9" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">y =</span> freq,</span>
+<span id="cb87-10"><a href="probabilistic-view.html#cb87-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">x =</span> bin),</span>
+<span id="cb87-11"><a href="probabilistic-view.html#cb87-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">&quot;salmon&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:histogram-overlaid"></span>
 <img src="_main_files/figure-html/histogram-overlaid-1.png" alt="Histogram overlaid with predicted frequency (red dots and line)" width="672" />
 <p class="caption">
@@ -460,8 +459,8 @@ Figure 3.4: Garden view with sampling plots. White squares represent plots. Red 
 </p>
 </div>
 <p>Download the data <a href="https://github.com/aterui/biostats/blob/master/data_raw/data_garden_count.csv">here</a> and load it onto R:</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="probabilistic-view.html#cb87-1" aria-hidden="true" tabindex="-1"></a>df_count <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data_raw/data_garden_count.csv&quot;</span>)</span>
-<span id="cb87-2"><a href="probabilistic-view.html#cb87-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_count)</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="probabilistic-view.html#cb88-1" aria-hidden="true" tabindex="-1"></a>df_count <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data_raw/data_garden_count.csv&quot;</span>)</span>
+<span id="cb88-2"><a href="probabilistic-view.html#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_count)</span></code></pre></div>
 <pre><code>## # A tibble: 30 × 2
 ##     plot count
 ##    &lt;dbl&gt; &lt;dbl&gt;
@@ -477,10 +476,10 @@ Figure 3.4: Garden view with sampling plots. White squares represent plots. Red 
 ## 10    10     1
 ## # ℹ 20 more rows</code></pre>
 <p>Make a histogram:</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="probabilistic-view.html#cb89-1" aria-hidden="true" tabindex="-1"></a>df_count <span class="sc">%&gt;%</span> </span>
-<span id="cb89-2"><a href="probabilistic-view.html#cb89-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> count)) <span class="sc">+</span></span>
-<span id="cb89-3"><a href="probabilistic-view.html#cb89-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>, <span class="co"># define binwidth</span></span>
-<span id="cb89-4"><a href="probabilistic-view.html#cb89-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">center =</span> <span class="dv">0</span>) <span class="co"># relative position of each bin</span></span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="probabilistic-view.html#cb90-1" aria-hidden="true" tabindex="-1"></a>df_count <span class="sc">%&gt;%</span> </span>
+<span id="cb90-2"><a href="probabilistic-view.html#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> count)) <span class="sc">+</span></span>
+<span id="cb90-3"><a href="probabilistic-view.html#cb90-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>, <span class="co"># define binwidth</span></span>
+<span id="cb90-4"><a href="probabilistic-view.html#cb90-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">center =</span> <span class="dv">0</span>) <span class="co"># relative position of each bin</span></span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:hist-density"></span>
 <img src="_main_files/figure-html/hist-density-1.png" alt="Histogram of plant individuals per plot" width="672" />
 <p class="caption">
@@ -513,22 +512,22 @@ g(x) = \frac{\lambda^x \exp(-\lambda)}{x!}
 <div id="pmf-to-frequency-distribution" class="section level3 hasAnchor" number="3.2.2">
 <h3><span class="header-section-number">3.2.2</span> PMF to frequency distribution<a href="probabilistic-view.html#pmf-to-frequency-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In R, you can use the <code>dpois()</code> function to visualize a Poisson distribution. This function allows you to plot the probability mass function (PMF) of the Poisson distribution and gain insights into the distribution of the discrete variable.</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="probabilistic-view.html#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="co"># vector of x values</span></span>
-<span id="cb90-2"><a href="probabilistic-view.html#cb90-2" aria-hidden="true" tabindex="-1"></a><span class="co"># create a vector of 0 to 10 with an interval one</span></span>
-<span id="cb90-3"><a href="probabilistic-view.html#cb90-3" aria-hidden="true" tabindex="-1"></a><span class="co"># must be integer of &gt; 0</span></span>
-<span id="cb90-4"><a href="probabilistic-view.html#cb90-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
-<span id="cb90-5"><a href="probabilistic-view.html#cb90-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb90-6"><a href="probabilistic-view.html#cb90-6" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate probability mass</span></span>
-<span id="cb90-7"><a href="probabilistic-view.html#cb90-7" aria-hidden="true" tabindex="-1"></a>lambda_hat <span class="ot">&lt;-</span> <span class="fu">mean</span>(df_count<span class="sc">$</span>count)</span>
-<span id="cb90-8"><a href="probabilistic-view.html#cb90-8" aria-hidden="true" tabindex="-1"></a>pm <span class="ot">&lt;-</span> <span class="fu">dpois</span>(x, <span class="at">lambda =</span> lambda_hat)</span>
-<span id="cb90-9"><a href="probabilistic-view.html#cb90-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb90-10"><a href="probabilistic-view.html#cb90-10" aria-hidden="true" tabindex="-1"></a><span class="co"># figure</span></span>
-<span id="cb90-11"><a href="probabilistic-view.html#cb90-11" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">y =</span> pm, <span class="at">x =</span> x) <span class="sc">%&gt;%</span> <span class="co"># data frame</span></span>
-<span id="cb90-12"><a href="probabilistic-view.html#cb90-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
-<span id="cb90-13"><a href="probabilistic-view.html#cb90-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span> <span class="co"># draw dashed lines</span></span>
-<span id="cb90-14"><a href="probabilistic-view.html#cb90-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co"># draw points</span></span>
-<span id="cb90-15"><a href="probabilistic-view.html#cb90-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Probability&quot;</span>,</span>
-<span id="cb90-16"><a href="probabilistic-view.html#cb90-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Count&quot;</span>) <span class="co"># re-label</span></span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="probabilistic-view.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># vector of x values</span></span>
+<span id="cb91-2"><a href="probabilistic-view.html#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="co"># create a vector of 0 to 10 with an interval one</span></span>
+<span id="cb91-3"><a href="probabilistic-view.html#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="co"># must be integer of &gt; 0</span></span>
+<span id="cb91-4"><a href="probabilistic-view.html#cb91-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
+<span id="cb91-5"><a href="probabilistic-view.html#cb91-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-6"><a href="probabilistic-view.html#cb91-6" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate probability mass</span></span>
+<span id="cb91-7"><a href="probabilistic-view.html#cb91-7" aria-hidden="true" tabindex="-1"></a>lambda_hat <span class="ot">&lt;-</span> <span class="fu">mean</span>(df_count<span class="sc">$</span>count)</span>
+<span id="cb91-8"><a href="probabilistic-view.html#cb91-8" aria-hidden="true" tabindex="-1"></a>pm <span class="ot">&lt;-</span> <span class="fu">dpois</span>(x, <span class="at">lambda =</span> lambda_hat)</span>
+<span id="cb91-9"><a href="probabilistic-view.html#cb91-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-10"><a href="probabilistic-view.html#cb91-10" aria-hidden="true" tabindex="-1"></a><span class="co"># figure</span></span>
+<span id="cb91-11"><a href="probabilistic-view.html#cb91-11" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">y =</span> pm, <span class="at">x =</span> x) <span class="sc">%&gt;%</span> <span class="co"># data frame</span></span>
+<span id="cb91-12"><a href="probabilistic-view.html#cb91-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb91-13"><a href="probabilistic-view.html#cb91-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span> <span class="co"># draw dashed lines</span></span>
+<span id="cb91-14"><a href="probabilistic-view.html#cb91-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co"># draw points</span></span>
+<span id="cb91-15"><a href="probabilistic-view.html#cb91-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Probability&quot;</span>,</span>
+<span id="cb91-16"><a href="probabilistic-view.html#cb91-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Count&quot;</span>) <span class="co"># re-label</span></span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:dpois"></span>
 <img src="_main_files/figure-html/dpois-1.png" alt="Example of a Poisson distribution" width="672" />
 <p class="caption">
@@ -536,20 +535,20 @@ Figure 3.6: Example of a Poisson distribution
 </p>
 </div>
 <p>To convert the y-axis from probability to frequency, multiply the probabilities by the sample size (total number of observations) to obtain the expected frequency. As in the plant height example, you can plot the expected frequency on the histogram, providing a visual representation of the distribution of the discrete variable.</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="probabilistic-view.html#cb91-1" aria-hidden="true" tabindex="-1"></a>df_prob <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> x, <span class="at">y =</span> pm) <span class="sc">%&gt;%</span> </span>
-<span id="cb91-2"><a href="probabilistic-view.html#cb91-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">freq =</span> y <span class="sc">*</span> <span class="fu">nrow</span>(df_count)) <span class="co"># prob x sample size</span></span>
-<span id="cb91-3"><a href="probabilistic-view.html#cb91-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb91-4"><a href="probabilistic-view.html#cb91-4" aria-hidden="true" tabindex="-1"></a>df_count <span class="sc">%&gt;%</span> </span>
-<span id="cb91-5"><a href="probabilistic-view.html#cb91-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> count)) <span class="sc">+</span></span>
-<span id="cb91-6"><a href="probabilistic-view.html#cb91-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>,</span>
-<span id="cb91-7"><a href="probabilistic-view.html#cb91-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">center =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb91-8"><a href="probabilistic-view.html#cb91-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> df_prob,</span>
-<span id="cb91-9"><a href="probabilistic-view.html#cb91-9" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x =</span> x,</span>
-<span id="cb91-10"><a href="probabilistic-view.html#cb91-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> freq),</span>
-<span id="cb91-11"><a href="probabilistic-view.html#cb91-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
-<span id="cb91-12"><a href="probabilistic-view.html#cb91-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> df_prob,</span>
-<span id="cb91-13"><a href="probabilistic-view.html#cb91-13" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> x,</span>
-<span id="cb91-14"><a href="probabilistic-view.html#cb91-14" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> freq))</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="probabilistic-view.html#cb92-1" aria-hidden="true" tabindex="-1"></a>df_prob <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> x, <span class="at">y =</span> pm) <span class="sc">%&gt;%</span> </span>
+<span id="cb92-2"><a href="probabilistic-view.html#cb92-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">freq =</span> y <span class="sc">*</span> <span class="fu">nrow</span>(df_count)) <span class="co"># prob x sample size</span></span>
+<span id="cb92-3"><a href="probabilistic-view.html#cb92-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-4"><a href="probabilistic-view.html#cb92-4" aria-hidden="true" tabindex="-1"></a>df_count <span class="sc">%&gt;%</span> </span>
+<span id="cb92-5"><a href="probabilistic-view.html#cb92-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> count)) <span class="sc">+</span></span>
+<span id="cb92-6"><a href="probabilistic-view.html#cb92-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>,</span>
+<span id="cb92-7"><a href="probabilistic-view.html#cb92-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">center =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb92-8"><a href="probabilistic-view.html#cb92-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> df_prob,</span>
+<span id="cb92-9"><a href="probabilistic-view.html#cb92-9" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x =</span> x,</span>
+<span id="cb92-10"><a href="probabilistic-view.html#cb92-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> freq),</span>
+<span id="cb92-11"><a href="probabilistic-view.html#cb92-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
+<span id="cb92-12"><a href="probabilistic-view.html#cb92-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> df_prob,</span>
+<span id="cb92-13"><a href="probabilistic-view.html#cb92-13" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> x,</span>
+<span id="cb92-14"><a href="probabilistic-view.html#cb92-14" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> freq))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:pois-hist"></span>
 <img src="_main_files/figure-html/pois-hist-1.png" alt="Observed histogram of the discrete variable overlaid with the Poisson expectation." width="672" />
 <p class="caption">
@@ -633,7 +632,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/chapters/03-probability.Rmd",
+"link": "https://github.com/aterui/biostats/chapters/03-probability.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -644,7 +643,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf", "_main.epub"],
+"download": ["_main.epub"],
 "search": {
 "engine": "fuse",
 "options": null

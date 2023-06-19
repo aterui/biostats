@@ -286,20 +286,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#data-manipulation"><i class="fa fa-check"></i><b>10.2</b> Data Manipulation</a>
 <ul>
 <li class="chapter" data-level="10.2.1" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#data-format"><i class="fa fa-check"></i><b>10.2.1</b> Data Format</a></li>
-<li class="chapter" data-level="10.2.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#select-rows"><i class="fa fa-check"></i><b>10.2.2</b> Select Rows</a></li>
-<li class="chapter" data-level="10.2.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#select-columns"><i class="fa fa-check"></i><b>10.2.3</b> Select Columns</a></li>
-<li class="chapter" data-level="10.2.4" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#group-operation"><i class="fa fa-check"></i><b>10.2.4</b> Group Operation</a></li>
+<li class="chapter" data-level="10.2.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#row-manipulation"><i class="fa fa-check"></i><b>10.2.2</b> Row Manipulation</a></li>
+<li class="chapter" data-level="10.2.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#column-manipulation"><i class="fa fa-check"></i><b>10.2.3</b> Column Manipulation</a></li>
+<li class="chapter" data-level="10.2.4" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#piping"><i class="fa fa-check"></i><b>10.2.4</b> Piping</a></li>
 <li class="chapter" data-level="10.2.5" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#reshape"><i class="fa fa-check"></i><b>10.2.5</b> Reshape</a></li>
-<li class="chapter" data-level="10.2.6" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#combination"><i class="fa fa-check"></i><b>10.2.6</b> Combination</a></li>
+<li class="chapter" data-level="10.2.6" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#group-operation"><i class="fa fa-check"></i><b>10.2.6</b> Group Operation</a></li>
+<li class="chapter" data-level="10.2.7" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#join"><i class="fa fa-check"></i><b>10.2.7</b> Join</a></li>
 </ul></li>
 <li class="chapter" data-level="10.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#visualization"><i class="fa fa-check"></i><b>10.3</b> Visualization</a>
 <ul>
 <li class="chapter" data-level="10.3.1" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#point"><i class="fa fa-check"></i><b>10.3.1</b> Point</a></li>
-<li class="chapter" data-level="10.3.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#histogram"><i class="fa fa-check"></i><b>10.3.2</b> Histogram</a></li>
-<li class="chapter" data-level="10.3.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#boxplot"><i class="fa fa-check"></i><b>10.3.3</b> Boxplot</a></li>
-<li class="chapter" data-level="10.3.4" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#violin-plot"><i class="fa fa-check"></i><b>10.3.4</b> Violin Plot</a></li>
-<li class="chapter" data-level="10.3.5" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#styling"><i class="fa fa-check"></i><b>10.3.5</b> Styling</a></li>
-<li class="chapter" data-level="10.3.6" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#more"><i class="fa fa-check"></i><b>10.3.6</b> More</a></li>
+<li class="chapter" data-level="10.3.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#line"><i class="fa fa-check"></i><b>10.3.2</b> Line</a></li>
+<li class="chapter" data-level="10.3.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#histogram"><i class="fa fa-check"></i><b>10.3.3</b> Histogram</a></li>
+<li class="chapter" data-level="10.3.4" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#boxplot"><i class="fa fa-check"></i><b>10.3.4</b> Boxplot</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html"><i class="fa fa-check"></i><b>11</b> Appendix: Base Plot</a>
@@ -548,7 +547,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb73-18"><a href="sampling.html#cb73-18" aria-hidden="true" tabindex="-1"></a><span class="co"># layout vertically</span></span>
 <span id="cb73-19"><a href="sampling.html#cb73-19" aria-hidden="true" tabindex="-1"></a><span class="co"># possible only if &quot;patchwork&quot; is loaded</span></span>
 <span id="cb73-20"><a href="sampling.html#cb73-20" aria-hidden="true" tabindex="-1"></a>g_mu <span class="sc">/</span> g_var</span></code></pre></div>
-<p><img src="_main_files/figure-html/mu-var-dist-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:mu-var-dist"></span>
+<img src="_main_files/figure-html/mu-var-dist-1.png" alt="Sample mean and biased variance." width="672" />
+<p class="caption">
+Figure 2.1: Sample mean and biased variance.
+</p>
+</div>
 <p>While sample means are indeed symmetrically distributed around the true mean, sample variances tend to be biased and skewed to the right, often underestimating the true variance.</p>
 <p>The bias in estimating the variance arises due to inferring the parameter from a small number of samples. However, there is good news: an unbiased estimator of variance exists. The formula for the unbiased estimator of variance is as follows:</p>
 <p><span class="math display">\[
@@ -574,39 +578,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb74-17"><a href="sampling.html#cb74-17" aria-hidden="true" tabindex="-1"></a>  var_i[i] <span class="ot">&lt;-</span> <span class="fu">sum</span>((df_i<span class="sc">$</span>height <span class="sc">-</span> <span class="fu">mean</span>(df_i<span class="sc">$</span>height))<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">nrow</span>(df_i) </span>
 <span id="cb74-18"><a href="sampling.html#cb74-18" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb74-19"><a href="sampling.html#cb74-19" aria-hidden="true" tabindex="-1"></a>  var_ub_i[i] <span class="ot">&lt;-</span> <span class="fu">var</span>(df_i<span class="sc">$</span>height)</span>
-<span id="cb74-20"><a href="sampling.html#cb74-20" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb74-21"><a href="sampling.html#cb74-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-22"><a href="sampling.html#cb74-22" aria-hidden="true" tabindex="-1"></a><span class="co"># draw histograms ----</span></span>
-<span id="cb74-23"><a href="sampling.html#cb74-23" aria-hidden="true" tabindex="-1"></a>df_sample <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">mu_hat =</span> mu_i,</span>
-<span id="cb74-24"><a href="sampling.html#cb74-24" aria-hidden="true" tabindex="-1"></a>                    <span class="at">var_hat =</span> var_i,</span>
-<span id="cb74-25"><a href="sampling.html#cb74-25" aria-hidden="true" tabindex="-1"></a>                    <span class="at">var_ub_hat =</span> var_ub_i)</span>
-<span id="cb74-26"><a href="sampling.html#cb74-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-27"><a href="sampling.html#cb74-27" aria-hidden="true" tabindex="-1"></a><span class="co"># histogram for mu</span></span>
-<span id="cb74-28"><a href="sampling.html#cb74-28" aria-hidden="true" tabindex="-1"></a>g_mu <span class="ot">&lt;-</span> df_sample <span class="sc">%&gt;%</span> </span>
-<span id="cb74-29"><a href="sampling.html#cb74-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> mu_hat)) <span class="sc">+</span></span>
-<span id="cb74-30"><a href="sampling.html#cb74-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
-<span id="cb74-31"><a href="sampling.html#cb74-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mu)</span>
-<span id="cb74-32"><a href="sampling.html#cb74-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-33"><a href="sampling.html#cb74-33" aria-hidden="true" tabindex="-1"></a><span class="co"># histogram for variance</span></span>
-<span id="cb74-34"><a href="sampling.html#cb74-34" aria-hidden="true" tabindex="-1"></a><span class="co"># scale_x_continuous() adjusts scale in x-axis</span></span>
-<span id="cb74-35"><a href="sampling.html#cb74-35" aria-hidden="true" tabindex="-1"></a>g_var <span class="ot">&lt;-</span> df_sample <span class="sc">%&gt;%</span> </span>
-<span id="cb74-36"><a href="sampling.html#cb74-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> var_hat)) <span class="sc">+</span></span>
-<span id="cb74-37"><a href="sampling.html#cb74-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
-<span id="cb74-38"><a href="sampling.html#cb74-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> sigma2) <span class="sc">+</span></span>
-<span id="cb74-39"><a href="sampling.html#cb74-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits=</span> <span class="fu">c</span>(<span class="fu">min</span>(var_i, var_ub_i),</span>
-<span id="cb74-40"><a href="sampling.html#cb74-40" aria-hidden="true" tabindex="-1"></a>                               <span class="fu">max</span>(var_i, var_ub_i)))</span>
-<span id="cb74-41"><a href="sampling.html#cb74-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-42"><a href="sampling.html#cb74-42" aria-hidden="true" tabindex="-1"></a><span class="co"># histogram for unbiased variance</span></span>
-<span id="cb74-43"><a href="sampling.html#cb74-43" aria-hidden="true" tabindex="-1"></a>g_var_ub <span class="ot">&lt;-</span> df_sample <span class="sc">%&gt;%</span> </span>
-<span id="cb74-44"><a href="sampling.html#cb74-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> var_ub_hat)) <span class="sc">+</span></span>
-<span id="cb74-45"><a href="sampling.html#cb74-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
-<span id="cb74-46"><a href="sampling.html#cb74-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> sigma2) <span class="sc">+</span></span>
-<span id="cb74-47"><a href="sampling.html#cb74-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits=</span> <span class="fu">c</span>(<span class="fu">min</span>(var_i, var_ub_i),</span>
-<span id="cb74-48"><a href="sampling.html#cb74-48" aria-hidden="true" tabindex="-1"></a>                               <span class="fu">max</span>(var_i, var_ub_i)))</span>
-<span id="cb74-49"><a href="sampling.html#cb74-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb74-50"><a href="sampling.html#cb74-50" aria-hidden="true" tabindex="-1"></a>g_mu <span class="sc">/</span> g_var <span class="sc">/</span> g_var_ub</span></code></pre></div>
-<p><img src="_main_files/figure-html/var-ub-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>In summary, samples can only provide information about a part of the whole population. The complete picture of the entire population is often unknown, and we rely on estimating key parameters from the available samples. This concept applies to a wide range of parametric analyses in statistics, where we use sample data to make inferences about the population parameters.</p>
+<span id="cb74-20"><a href="sampling.html#cb74-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Add the histogram of unbiased variance:</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="sampling.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># draw histograms ----</span></span>
+<span id="cb75-2"><a href="sampling.html#cb75-2" aria-hidden="true" tabindex="-1"></a>df_sample <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">mu_hat =</span> mu_i,</span>
+<span id="cb75-3"><a href="sampling.html#cb75-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">var_hat =</span> var_i,</span>
+<span id="cb75-4"><a href="sampling.html#cb75-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">var_ub_hat =</span> var_ub_i)</span>
+<span id="cb75-5"><a href="sampling.html#cb75-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-6"><a href="sampling.html#cb75-6" aria-hidden="true" tabindex="-1"></a><span class="co"># histogram for mu</span></span>
+<span id="cb75-7"><a href="sampling.html#cb75-7" aria-hidden="true" tabindex="-1"></a>g_mu <span class="ot">&lt;-</span> df_sample <span class="sc">%&gt;%</span> </span>
+<span id="cb75-8"><a href="sampling.html#cb75-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> mu_hat)) <span class="sc">+</span></span>
+<span id="cb75-9"><a href="sampling.html#cb75-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb75-10"><a href="sampling.html#cb75-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mu)</span>
+<span id="cb75-11"><a href="sampling.html#cb75-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-12"><a href="sampling.html#cb75-12" aria-hidden="true" tabindex="-1"></a><span class="co"># histogram for variance</span></span>
+<span id="cb75-13"><a href="sampling.html#cb75-13" aria-hidden="true" tabindex="-1"></a><span class="co"># scale_x_continuous() adjusts scale in x-axis</span></span>
+<span id="cb75-14"><a href="sampling.html#cb75-14" aria-hidden="true" tabindex="-1"></a>g_var <span class="ot">&lt;-</span> df_sample <span class="sc">%&gt;%</span> </span>
+<span id="cb75-15"><a href="sampling.html#cb75-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> var_hat)) <span class="sc">+</span></span>
+<span id="cb75-16"><a href="sampling.html#cb75-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb75-17"><a href="sampling.html#cb75-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> sigma2) <span class="sc">+</span></span>
+<span id="cb75-18"><a href="sampling.html#cb75-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits=</span> <span class="fu">c</span>(<span class="fu">min</span>(<span class="fu">c</span>(var_i, var_ub_i)),</span>
+<span id="cb75-19"><a href="sampling.html#cb75-19" aria-hidden="true" tabindex="-1"></a>                               <span class="fu">max</span>(<span class="fu">c</span>(var_i, var_ub_i))))</span>
+<span id="cb75-20"><a href="sampling.html#cb75-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-21"><a href="sampling.html#cb75-21" aria-hidden="true" tabindex="-1"></a><span class="co"># histogram for unbiased variance</span></span>
+<span id="cb75-22"><a href="sampling.html#cb75-22" aria-hidden="true" tabindex="-1"></a>g_var_ub <span class="ot">&lt;-</span> df_sample <span class="sc">%&gt;%</span> </span>
+<span id="cb75-23"><a href="sampling.html#cb75-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> var_ub_hat)) <span class="sc">+</span></span>
+<span id="cb75-24"><a href="sampling.html#cb75-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb75-25"><a href="sampling.html#cb75-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> sigma2) <span class="sc">+</span></span>
+<span id="cb75-26"><a href="sampling.html#cb75-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits=</span> <span class="fu">c</span>(<span class="fu">min</span>(<span class="fu">c</span>(var_i, var_ub_i)),</span>
+<span id="cb75-27"><a href="sampling.html#cb75-27" aria-hidden="true" tabindex="-1"></a>                               <span class="fu">max</span>(<span class="fu">c</span>(var_i, var_ub_i))))</span>
+<span id="cb75-28"><a href="sampling.html#cb75-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-29"><a href="sampling.html#cb75-29" aria-hidden="true" tabindex="-1"></a>g_mu <span class="sc">/</span> g_var <span class="sc">/</span> g_var_ub</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:var-ub"></span>
+<img src="_main_files/figure-html/var-ub-1.png" alt="Comparison of biased and unbiased variances." width="672" />
+<p class="caption">
+Figure 2.2: Comparison of biased and unbiased variances.
+</p>
+</div>
+<p>In summary, samples can only provide information about a part of the whole population. The complete picture of the entire population is often unknown, and <strong>we rely on estimating key parameters from the available samples.</strong> This concept applies to a wide range of parametric analyses in statistics, where we use sample data to make inferences about the population parameters.</p>
 <p>Recognizing the limitations and uncertainties associated with working with samples is essential for proper statistical analysis and interpretation of results in various fields of study.</p>
 </div>
 <div id="laboratory-1" class="section level2 hasAnchor" number="2.3">
@@ -614,8 +623,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: decimal">
 <li><p>We used 10 plants to estimate sample means and variances. Obtain 100 sub-datasets with 50 and 100 measures each, and draw histograms of sample means and unbiased variances (use <code>var()</code>).</p></li>
 <li><p>Sample means and unbiased variances are unbiased if samples are randomly selected. What happens if samples are non-random? Suppose the investigator was unable to find plants less than 10 cm in height – the following code excludes those less than 10 cm in height:</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="sampling.html#cb75-1" aria-hidden="true" tabindex="-1"></a>df_h10 <span class="ot">&lt;-</span> df_h0 <span class="sc">%&gt;%</span> </span>
-<span id="cb75-2"><a href="sampling.html#cb75-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(height <span class="sc">&gt;=</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="sampling.html#cb76-1" aria-hidden="true" tabindex="-1"></a>df_h10 <span class="ot">&lt;-</span> df_h0 <span class="sc">%&gt;%</span> </span>
+<span id="cb76-2"><a href="sampling.html#cb76-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(height <span class="sc">&gt;=</span> <span class="dv">10</span>)</span></code></pre></div>
 <p>Repeat step 1 with <code>df_h10</code> instead of <code>df_h0</code> and compare the results.</p></li>
 </ol>
 
@@ -658,7 +667,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/chapters/02-sampling.Rmd",
+"link": "https://github.com/aterui/biostats/chapters/02-sampling.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -669,7 +678,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf", "_main.epub"],
+"download": ["_main.epub"],
 "search": {
 "engine": "fuse",
 "options": null

@@ -190,10 +190,10 @@ coef(m)
 
 Ensuring the reliability of the estimated point estimates for $\alpha$ and $\beta$ is crucial. In the `summary(m)` output, two statistical quantities, namely the `Std. Error` and `t-value`, play a significant role in assessing the uncertainty associated with these estimates.
 
-The standard error (`Std. Error`) represents the estimated standard deviation of the parameter estimates ($\hat{\theta}$ is either $\hat{\alpha}$ or $\hat{\beta}$). A smaller value of the standard error indicates a higher degree of statistical reliability in the estimate. On the other hand, the `t-value` is a concept we have covered in Chapter \@ref(two-group-comparison). This value is defined as:
+The standard error (`Std. Error`; "SE") represents the estimated standard deviation of the parameter estimates ($\hat{\theta}$ is either $\hat{\alpha}$ or $\hat{\beta}$). A smaller value of the standard error indicates a higher degree of statistical reliability in the estimate. On the other hand, the `t-value` is a concept we have covered in Chapter \@ref(two-group-comparison). This value is defined as:
 
 $$
-t = \frac{\hat{\theta} - \theta_0}{SE(\hat{\theta})}
+t = \frac{\hat{\theta} - \theta_0}{\text{SE}(\hat{\theta})}
 $$
 
 The t-statistic is akin to the t-test; however, in the context of regression analysis, we do not have another group to compare with (i.e., $\theta_0$). Typically, in regression analysis, we use zero as the reference ($\theta_0 = 0$). Therefore, higher t-values in `lm()` indicate a greater deviation from zero. Consequently, the **Null Hypothesis in regression analysis is** $\beta = 0$. This hypothesis is sensible in our specific example since we are interested in quantifying the effect of conductivity. If $\beta = 0$, it implies that conductivity has no effect on algal biomass. Since $\theta_0 = 0$, the following code reproduces the reported t-values:

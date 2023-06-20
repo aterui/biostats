@@ -84,6 +84,12 @@ retrieve-errors
 visualize-errors
 coefficient-of-determination
 laboratory-5
+general-linear-model
+the-frame
+two-group-case
+multiple-group-case
+the-common-structure
+laboratory-6
 appendix-project-management
 r-project
 script-editor

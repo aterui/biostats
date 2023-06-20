@@ -1,0 +1,210 @@
+```{r, include=FALSE}
+source(here::here("code/library.R"))
+df_fl <- readr::read_csv(here::here("data_raw/data_fish_length.csv"))
+df_anova <- read_csv(here::here("data_raw/data_fish_length_anova.csv"))
+```
+
+# General Linear Model
+
+We have extensively covered three important statistical analyses: the t-test, ANOVA, and regression analysis. While these methods may seem distinct, they all fall under the umbrella of the General Linear Model framework.
+
+The General Linear Model encompasses models that depict the connection between a response variable and one or more explanatory variables. It assumes that the error term follows a normal distribution. In this chapter, I will elucidate this framework and illustrate its relationship to the t-test, ANOVA, and regression analysis.
+
+## The Frame
+
+The apparent distinctiveness between the t-test, ANOVA, and regression analysis arises because they are applied to different types of data:
+
+-   t-test: comparing differences between two groups.
+-   ANOVA: examining differences among more than two groups.
+-   Regression: exploring the relationship between a response variable and one or more explanatory variables.
+
+Despite these differences, these analyses can be unified under a single formula. As discussed in the regression formula in Chapter \@ref(regression), we have:
+
+$$
+\begin{aligned}
+y_i &= \alpha + \beta_1 x_{1,i} + \varepsilon_i\\
+\varepsilon_i &\sim \text{Normal}(0, \sigma^2)
+\end{aligned}
+$$
+
+where $y_i$ represents the response variable (such as fish body length or plant height), $x_{1,i}$ denotes the continuous explanatory variable, $\alpha$ represents the intercept, and $\beta_1$ corresponds to the slope. The equivalent model can be expressed differently as follows:
+
+$$
+\begin{aligned}
+y_i &\sim \text{Normal}(\mu_i, \sigma^2)\\
+\mu_i &= \alpha + \beta_1 x_{1,i}
+\end{aligned}
+$$
+
+This connection provides insight into the relationship between the t-test, ANOVA, and regression analysis. The fundamental purpose of regression analysis is to model how the mean $\mu_i$ changes with increasing or decreasing values of $x_{1,i}$. Thus, the primary distinction between the t-test, ANOVA, and regression lies in the nature of the explanatory variable, which can be either continuous or categorical (group).
+
+### Two-Group Case
+
+To establish a connection among these approaches, one can employ "dummy indicator" variables to represent group variables. In the case of the t-test, where a categorical variable consists of two groups, typically denoted as `a` and `b` (although they can be represented by numbers as well), one can convert these categories into numerical values. For instance, assigning `a` to 0 and `b` to 1 enables the following conversion:
+
+$$
+\pmb{x'}_2 =
+ \begin{pmatrix}
+   a\\
+   a\\
+   b\\
+   \vdots\\
+   b\end{pmatrix}
+\rightarrow
+\pmb{x}_2 =
+\begin{pmatrix}
+0\\
+0\\
+1\\
+\vdots\\
+1
+\end{pmatrix}
+$$
+
+The model can be written as:
+
+$$
+\begin{aligned}
+y_i &\sim \text{Normal}(\mu_i, \sigma^2)\\
+\mu_i &= \alpha + \beta_2 x_{2,i}
+\end{aligned}
+$$
+
+When incorporating this variable into the model, some interesting outcomes arise. Since $x_{2,i} = 0$ when an observation belongs to group `a`, the mean of group `a` ($\mu_i = \mu_a$) is determined as $\mu_a = \alpha + \beta \times 0 = \alpha$. Consequently, the intercept represents the mean value of the first group. On the other hand, if an observation is from group `b`, the mean of group `b` ($\mu_i = \mu_b$) is given by $\mu_b = \alpha + \beta \times 1 = \alpha + \beta$. It's important to recall that $\mu_a = \alpha$. By substituting $\alpha$ with $\mu_a$, the equation $\beta = \mu_b - \mu_a$ is obtained, indicating that the slope represents the difference between the means of the two groups -- the key statistic in the t-test.
+
+Let me confirm this using the dataset in Chapter \@ref(two-group-comparison) (fish body length in two lakes):
+
+```{r, eval=F}
+library(tidyverse)
+df_fl <- read_csv("data_raw/data_fish_length.csv")
+print(df_fl)
+```
+
+```{r, echo=F}
+print(df_fl)
+```
+
+In the `lm()` function, when you provide a "categorical" variable in character or factor form, it is automatically converted to a binary (0/1) variable internally. This means that you can include this variable in the formula as if you were conducting a standard regression analysis. The `lm()` function takes care of this conversion process, allowing you to seamlessly incorporate categorical variables into the `lm()` function.
+
+```{r}
+# group means
+v_mu <- df_fl %>% 
+  group_by(lake) %>% 
+  summarize(mu = mean(length)) %>% 
+  pull(mu)
+
+# mu_a: should be identical to intercept
+v_mu[1]
+
+# mu_b - mu_a: should be identical to slope
+v_mu[2] - v_mu[1]
+
+# in lm(), letters are automatically converted to 0/1 binary variable.
+# alphabetically ordered (in this case, a = 0, b = 1)
+m <- lm(length ~ lake,
+        data = df_fl)
+
+summary(m)
+```
+
+The estimated coefficient of Lake `b` (`lakeb`) is identical to the difference between group means. We can compare other statistics (`t value` and `Pr(>|t|`) with the output from `t.test()` as well:
+
+```{r}
+lake_a <- df_fl %>% 
+  filter(lake == "a") %>% 
+  pull(length)
+
+lake_b <- df_fl %>% 
+  filter(lake == "b") %>% 
+  pull(length)
+
+t.test(x = lake_b, y = lake_a)
+```
+
+The t-statistic and p-value match the `lm()` output.
+
+### Multiple-Group Case
+
+The same argument applies to ANOVA. In ANOVA, we deal with more than two groups in the explanatory variable. To handle this, we can convert the group variable into multiple dummy variables. For instance, if we have a variable $\pmb{x'}_2 = \{a, b, c\}$, we can convert it to $x_2 = \{0, 1, 0\}$ (where $b \rightarrow 1$ and the others are $0$) and $\pmb{x}_3 = \{0, 0, 1\}$ (where $c \rightarrow 1$ and the others are $0$). Thus, the model formula would be:
+
+$$
+\begin{aligned}
+y_i &\sim \text{Normal}(\mu_i, \sigma^2)\\
+\mu_i &= \alpha + \beta_{2} x_{2,i}  + \beta_{3} x_{3,i}
+\end{aligned}
+$$
+
+If you substitute these dummy variables, then:
+
+$$
+\begin{aligned}
+\mu_a &= \alpha + \beta_2 \times 0 + \beta_3 \times 0 = \alpha &&\text{both}~x_{2,i}~\text{and}~x_{3,i}~\text{are zero}\\
+\mu_b &= \alpha + \beta_2 \times 1 + \beta_3 \times 0 = \alpha + \beta_2 &&x_{2,i} = 1~\text{but}~x_{3,i}=0\\
+\mu_c &= \alpha + \beta_2 \times 0 + \beta_3 \times 1 = \alpha + \beta_3 &&x_{2,i} = 0~\text{but}~x_{3,i}=1\\
+\end{aligned}
+$$
+
+Therefore, the group `a` serves as the reference, and the $\beta$s represent the deviations from the reference group. Now, let me attempt the ANOVA dataset provided in Chapter \@ref(multiple-group-comparison):
+
+```{r, eval=F}
+df_anova <- read_csv("data_raw/data_fish_length_anova.csv")
+print(df_anova)
+```
+
+```{r, echo=F}
+print(df_anova)
+```
+
+Again, the `lm()` function converts the categorical variable to the dummy variables internally. Compare the mean and differences with the estimated parameters:
+
+```{r}
+# group means
+v_mu <- df_fl %>% 
+  group_by(lake) %>% 
+  summarize(mu = mean(length)) %>% 
+  pull(mu)
+
+print(c(v_mu[1], # mu_a: should be identical to intercept
+        v_mu[2] - v_mu[1], # mu_b - mu_a: should be identical to the slope for lakeb
+        v_mu[3] - v_mu[1])) # mu_c - mu_a: should be identical to the slope for lakec
+
+# lm() output
+m <- lm(length ~ lake,
+        data = df_anova)
+
+summary(m)
+```
+
+Also, there is a report for F-statistic (`5.305`) and p-value (`0.005961`). Compare them with the `aov()` output:
+
+```{r}
+m_aov <- aov(length ~ lake,
+             data = df_anova)
+
+summary(m_aov)
+```
+
+The results are identical.
+
+### The Common Structure
+
+The above examples show that the t-test, ANOVA, and regression has the same model structure:
+
+$$
+y_i = \text{(deterministic component)} + \text{(stochastic component)}
+$$
+In the framework of the General Linear Model, the deterministic component is expressed as $\alpha + \sum_k \beta_k x_{k,i}$ and the stochastic component (random error) is expressed as a Normal distribution. This structure makes several assumptions. Here are the main assumptions:
+
+1. Linearity: The relationship between the explanatory variables and the response variable is linear. This means that the effect of each explanatory variable on the response variable is additive and constant.
+
+2. Independence: The observations are independent of each other. This assumption implies that the values of the response variable for one observation do not influence the values for other observations.
+
+3. Homoscedasticity: The variance of the response variable is constant across all levels of the explanatory variables. In other words, the spread or dispersion of the response variable should be the same for all values of the explanatory variables.
+
+4. Normality: The response variable follows a normal distribution at each level of the explanatory variables. This assumption is important because many statistical tests and estimators used in the GLM are based on the assumption of normality.
+
+5. No multicollinearity: The explanatory variables are not highly correlated with each other. Multicollinearity can lead to problems in estimating the coefficients accurately and can make interpretation difficult.
+
+Violations of these assumptions can affect the validity and reliability of the results obtained from the General Linear Model.
+
+## Laboratory

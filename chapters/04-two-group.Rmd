@@ -1,5 +1,6 @@
 ```{r, include=FALSE}
 source(here::here("code/library.R"))
+df_fl <- readr::read_csv(here::here("data_raw/data_fish_length.csv"))
 ```
 
 # Two-Group Comparison
@@ -21,7 +22,6 @@ print(df_fl)
 ```
 
 ```{r, echo=F}
-df_fl <- readr::read_csv(here::here("data_raw/data_fish_length.csv"))
 print(df_fl)
 ```
 

@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Sampling | BIOSTATS</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Sampling | BIOSTATS" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Sampling | BIOSTATS" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Akira Terui" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="descriptive-statistics.html"/>
+<link rel="next" href="probabilistic-view.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">BIOSTATS</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html"><i class="fa fa-check"></i><b>1</b> Descriptive Statistics</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#central-tendency"><i class="fa fa-check"></i><b>1.1</b> Central Tendency</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#measures-of-central-tendency"><i class="fa fa-check"></i><b>1.1.1</b> Measures of Central Tendency</a></li>
+<li class="chapter" data-level="1.1.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#r-exercise"><i class="fa fa-check"></i><b>1.1.2</b> R Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#variation"><i class="fa fa-check"></i><b>1.2</b> Variation</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#measures-of-variation"><i class="fa fa-check"></i><b>1.2.1</b> Measures of Variation</a></li>
+<li class="chapter" data-level="1.2.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#r-exercise-1"><i class="fa fa-check"></i><b>1.2.2</b> R Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#laboratory"><i class="fa fa-check"></i><b>1.3</b> Laboratory</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#comparing-central-tendency-measures"><i class="fa fa-check"></i><b>1.3.1</b> Comparing Central Tendency Measures</a></li>
+<li class="chapter" data-level="1.3.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#comparing-variation-measures"><i class="fa fa-check"></i><b>1.3.2</b> Comparing Variation Measures</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="sampling.html"><a href="sampling.html"><i class="fa fa-check"></i><b>2</b> Sampling</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="sampling.html"><a href="sampling.html#the-unknown-garden-plant-example"><i class="fa fa-check"></i><b>2.1</b> The Unknown: Garden Plant Example</a></li>
+<li class="chapter" data-level="2.2" data-path="sampling.html"><a href="sampling.html#linking-part-to-the-whole"><i class="fa fa-check"></i><b>2.2</b> Linking Part to the Whole</a></li>
+<li class="chapter" data-level="2.3" data-path="sampling.html"><a href="sampling.html#laboratory-1"><i class="fa fa-check"></i><b>2.3</b> Laboratory</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="probabilistic-view.html"><a href="probabilistic-view.html"><i class="fa fa-check"></i><b>3</b> Probabilistic View</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="probabilistic-view.html"><a href="probabilistic-view.html#probability-distribution-of-a-continuous-variable"><i class="fa fa-check"></i><b>3.1</b> Probability Distribution of a Continuous Variable</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="probabilistic-view.html"><a href="probabilistic-view.html#probability-density-function"><i class="fa fa-check"></i><b>3.1.1</b> Probability Density Function</a></li>
+<li class="chapter" data-level="3.1.2" data-path="probabilistic-view.html"><a href="probabilistic-view.html#pdf-to-frequency-distribution"><i class="fa fa-check"></i><b>3.1.2</b> PDF to frequency distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="probabilistic-view.html"><a href="probabilistic-view.html#probability-distribution-of-a-discrete-variable"><i class="fa fa-check"></i><b>3.2</b> Probability Distribution of a Discrete Variable</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="probabilistic-view.html"><a href="probabilistic-view.html#probability-mass-function"><i class="fa fa-check"></i><b>3.2.1</b> Probability Mass Function</a></li>
+<li class="chapter" data-level="3.2.2" data-path="probabilistic-view.html"><a href="probabilistic-view.html#pmf-to-frequency-distribution"><i class="fa fa-check"></i><b>3.2.2</b> PMF to frequency distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="probabilistic-view.html"><a href="probabilistic-view.html#why-probability-distributions"><i class="fa fa-check"></i><b>3.3</b> Why Probability Distributions?</a></li>
+<li class="chapter" data-level="3.4" data-path="probabilistic-view.html"><a href="probabilistic-view.html#laboratory-2"><i class="fa fa-check"></i><b>3.4</b> Laboratory</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="probabilistic-view.html"><a href="probabilistic-view.html#normal-distribution"><i class="fa fa-check"></i><b>3.4.1</b> Normal Distribution</a></li>
+<li class="chapter" data-level="3.4.2" data-path="probabilistic-view.html"><a href="probabilistic-view.html#poisson-distribution"><i class="fa fa-check"></i><b>3.4.2</b> Poisson Distribution</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="two-group-comparison.html"><a href="two-group-comparison.html"><i class="fa fa-check"></i><b>4</b> Two-Group Comparison</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="two-group-comparison.html"><a href="two-group-comparison.html#explore-data-structure"><i class="fa fa-check"></i><b>4.1</b> Explore Data Structure</a></li>
+<li class="chapter" data-level="4.2" data-path="two-group-comparison.html"><a href="two-group-comparison.html#test-statistic"><i class="fa fa-check"></i><b>4.2</b> Test Statistic</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="two-group-comparison.html"><a href="two-group-comparison.html#t-statistic"><i class="fa fa-check"></i><b>4.2.1</b> t-statistic</a></li>
+<li class="chapter" data-level="4.2.2" data-path="two-group-comparison.html"><a href="two-group-comparison.html#null-hypothesis"><i class="fa fa-check"></i><b>4.2.2</b> Null Hypothesis</a></li>
+<li class="chapter" data-level="4.2.3" data-path="two-group-comparison.html"><a href="two-group-comparison.html#interpretation"><i class="fa fa-check"></i><b>4.2.3</b> Interpretation</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="two-group-comparison.html"><a href="two-group-comparison.html#t-test-in-r"><i class="fa fa-check"></i><b>4.3</b> t-test in R</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="two-group-comparison.html"><a href="two-group-comparison.html#t-test-with-equal-variance"><i class="fa fa-check"></i><b>4.3.1</b> t-test with equal variance</a></li>
+<li class="chapter" data-level="4.3.2" data-path="two-group-comparison.html"><a href="two-group-comparison.html#t-test-with-unequal-variance"><i class="fa fa-check"></i><b>4.3.2</b> t-test with unequal variance</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="two-group-comparison.html"><a href="two-group-comparison.html#laboratory-3"><i class="fa fa-check"></i><b>4.4</b> Laboratory</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html"><i class="fa fa-check"></i><b>5</b> Multiple-Group Comparison</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#partition-the-variability"><i class="fa fa-check"></i><b>5.1</b> Partition the Variability</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#between-group-variability"><i class="fa fa-check"></i><b>5.1.1</b> Between-group variability</a></li>
+<li class="chapter" data-level="5.1.2" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#within-group-variability"><i class="fa fa-check"></i><b>5.1.2</b> Within-group variability</a></li>
+<li class="chapter" data-level="5.1.3" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#variability-to-variance"><i class="fa fa-check"></i><b>5.1.3</b> Variability to Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#test-statistic-1"><i class="fa fa-check"></i><b>5.2</b> Test Statistic</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#f-statistic"><i class="fa fa-check"></i><b>5.2.1</b> F-statistic</a></li>
+<li class="chapter" data-level="5.2.2" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#null-hypothesis-1"><i class="fa fa-check"></i><b>5.2.2</b> Null Hypothesis</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#anova-in-r"><i class="fa fa-check"></i><b>5.3</b> ANOVA in R</a></li>
+<li class="chapter" data-level="5.4" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#post-hoc-tests"><i class="fa fa-check"></i><b>5.4</b> Post-hoc Tests</a></li>
+<li class="chapter" data-level="5.5" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#laboratory-4"><i class="fa fa-check"></i><b>5.5</b> Laboratory</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="regression.html"><a href="regression.html"><i class="fa fa-check"></i><b>6</b> Regression</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="regression.html"><a href="regression.html#explore-data-structure-1"><i class="fa fa-check"></i><b>6.1</b> Explore Data Structure</a></li>
+<li class="chapter" data-level="6.2" data-path="regression.html"><a href="regression.html#drawing-the-fittest-line"><i class="fa fa-check"></i><b>6.2</b> Drawing the “fittest” line</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="regression.html"><a href="regression.html#linear-formula"><i class="fa fa-check"></i><b>6.2.1</b> Linear formula</a></li>
+<li class="chapter" data-level="6.2.2" data-path="regression.html"><a href="regression.html#minimizing-the-errors"><i class="fa fa-check"></i><b>6.2.2</b> Minimizing the errors</a></li>
+<li class="chapter" data-level="6.2.3" data-path="regression.html"><a href="regression.html#least-squares"><i class="fa fa-check"></i><b>6.2.3</b> Least Squares</a></li>
+<li class="chapter" data-level="6.2.4" data-path="regression.html"><a href="regression.html#standard-errors-and-t-values"><i class="fa fa-check"></i><b>6.2.4</b> Standard Errors and t-values</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="regression.html"><a href="regression.html#unexplained-variation"><i class="fa fa-check"></i><b>6.3</b> Unexplained Variation</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="regression.html"><a href="regression.html#retrieve-errors"><i class="fa fa-check"></i><b>6.3.1</b> Retrieve Errors</a></li>
+<li class="chapter" data-level="6.3.2" data-path="regression.html"><a href="regression.html#visualize-errors"><i class="fa fa-check"></i><b>6.3.2</b> Visualize Errors</a></li>
+<li class="chapter" data-level="6.3.3" data-path="regression.html"><a href="regression.html#coefficient-of-determination"><i class="fa fa-check"></i><b>6.3.3</b> Coefficient of Determination</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="regression.html"><a href="regression.html#laboratory-5"><i class="fa fa-check"></i><b>6.4</b> Laboratory</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="linear-model.html"><a href="linear-model.html"><i class="fa fa-check"></i><b>7</b> Linear Model</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="linear-model.html"><a href="linear-model.html#the-frame"><i class="fa fa-check"></i><b>7.1</b> The Frame</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="linear-model.html"><a href="linear-model.html#two-group-case"><i class="fa fa-check"></i><b>7.1.1</b> Two-Group Case</a></li>
+<li class="chapter" data-level="7.1.2" data-path="linear-model.html"><a href="linear-model.html#multiple-group-case"><i class="fa fa-check"></i><b>7.1.2</b> Multiple-Group Case</a></li>
+<li class="chapter" data-level="7.1.3" data-path="linear-model.html"><a href="linear-model.html#the-common-structure"><i class="fa fa-check"></i><b>7.1.3</b> The Common Structure</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="linear-model.html"><a href="linear-model.html#combine-multiple-types-of-variables"><i class="fa fa-check"></i><b>7.2</b> Combine Multiple Types of Variables</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="linear-model.html"><a href="linear-model.html#iris-example"><i class="fa fa-check"></i><b>7.2.1</b> <code>iris</code> Example</a></li>
+<li class="chapter" data-level="7.2.2" data-path="linear-model.html"><a href="linear-model.html#variable-types"><i class="fa fa-check"></i><b>7.2.2</b> Variable Types</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="linear-model.html"><a href="linear-model.html#laboratory-6"><i class="fa fa-check"></i><b>7.3</b> Laboratory</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html"><i class="fa fa-check"></i><b>8</b> Generalized Linear Model</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html#count-data"><i class="fa fa-check"></i><b>8.1</b> Count Data</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html#plant-density"><i class="fa fa-check"></i><b>8.1.1</b> Plant Density</a></li>
+<li class="chapter" data-level="8.1.2" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html#poisson-model"><i class="fa fa-check"></i><b>8.1.2</b> Poisson Model</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html#proportional-data"><i class="fa fa-check"></i><b>8.2</b> Proportional Data</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html#mussel-egg-fertilization"><i class="fa fa-check"></i><b>8.2.1</b> Mussel Egg Fertilization</a></li>
+<li class="chapter" data-level="8.2.2" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html#binomial-model"><i class="fa fa-check"></i><b>8.2.2</b> Binomial Model</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html#the-glm-framework"><i class="fa fa-check"></i><b>8.3</b> The GLM Framework</a></li>
+<li class="chapter" data-level="8.4" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html#laboratory-7"><i class="fa fa-check"></i><b>8.4</b> Laboratory</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="appendix-project-management.html"><a href="appendix-project-management.html"><i class="fa fa-check"></i><b>9</b> Appendix: Project Management</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="appendix-project-management.html"><a href="appendix-project-management.html#r-project"><i class="fa fa-check"></i><b>9.1</b> R Project</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="appendix-project-management.html"><a href="appendix-project-management.html#script-editor"><i class="fa fa-check"></i><b>9.1.1</b> Script Editor</a></li>
+<li class="chapter" data-level="9.1.2" data-path="appendix-project-management.html"><a href="appendix-project-management.html#file-name"><i class="fa fa-check"></i><b>9.1.2</b> File Name</a></li>
+<li class="chapter" data-level="9.1.3" data-path="appendix-project-management.html"><a href="appendix-project-management.html#structure-your-project"><i class="fa fa-check"></i><b>9.1.3</b> Structure Your Project</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="appendix-project-management.html"><a href="appendix-project-management.html#robust-coding"><i class="fa fa-check"></i><b>9.2</b> Robust coding</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="appendix-git-github.html"><a href="appendix-git-github.html"><i class="fa fa-check"></i><b>10</b> Appendix: Git &amp; GitHub</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="appendix-git-github.html"><a href="appendix-git-github.html#git-github"><i class="fa fa-check"></i><b>10.1</b> Git &amp; GitHub</a></li>
+<li class="chapter" data-level="10.2" data-path="appendix-git-github.html"><a href="appendix-git-github.html#commit-push"><i class="fa fa-check"></i><b>10.2</b> Commit &amp; Push</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="appendix-git-github.html"><a href="appendix-git-github.html#register-your-git-repo"><i class="fa fa-check"></i><b>10.2.1</b> Register Your Git repo</a></li>
+<li class="chapter" data-level="10.2.2" data-path="appendix-git-github.html"><a href="appendix-git-github.html#commit"><i class="fa fa-check"></i><b>10.2.2</b> Commit</a></li>
+<li class="chapter" data-level="10.2.3" data-path="appendix-git-github.html"><a href="appendix-git-github.html#push"><i class="fa fa-check"></i><b>10.2.3</b> Push</a></li>
+<li class="chapter" data-level="10.2.4" data-path="appendix-git-github.html"><a href="appendix-git-github.html#edit"><i class="fa fa-check"></i><b>10.2.4</b> Edit</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html"><i class="fa fa-check"></i><b>11</b> Appendix: Data Structure</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#overview"><i class="fa fa-check"></i><b>11.1</b> Overview</a></li>
+<li class="chapter" data-level="11.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#vector"><i class="fa fa-check"></i><b>11.2</b> Vector</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#create-vector"><i class="fa fa-check"></i><b>11.2.1</b> Create Vector</a></li>
+<li class="chapter" data-level="11.2.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#check-features"><i class="fa fa-check"></i><b>11.2.2</b> Check Features</a></li>
+<li class="chapter" data-level="11.2.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#access"><i class="fa fa-check"></i><b>11.2.3</b> Access</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#matrix"><i class="fa fa-check"></i><b>11.3</b> Matrix</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#create-matrix"><i class="fa fa-check"></i><b>11.3.1</b> Create Matrix</a></li>
+<li class="chapter" data-level="11.3.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#check-features-1"><i class="fa fa-check"></i><b>11.3.2</b> Check Features</a></li>
+<li class="chapter" data-level="11.3.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#access-1"><i class="fa fa-check"></i><b>11.3.3</b> Access</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#data-frame"><i class="fa fa-check"></i><b>11.4</b> Data Frame</a></li>
+<li class="chapter" data-level="11.5" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#exercise"><i class="fa fa-check"></i><b>11.5</b> Exercise</a>
+<ul>
+<li class="chapter" data-level="11.5.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#vector-1"><i class="fa fa-check"></i><b>11.5.1</b> Vector</a></li>
+<li class="chapter" data-level="11.5.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#matrix-1"><i class="fa fa-check"></i><b>11.5.2</b> Matrix</a></li>
+<li class="chapter" data-level="11.5.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#data-frame-1"><i class="fa fa-check"></i><b>11.5.3</b> Data Frame</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html"><i class="fa fa-check"></i><b>12</b> Appendix: Tidyverse</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#overview-1"><i class="fa fa-check"></i><b>12.1</b> Overview</a></li>
+<li class="chapter" data-level="12.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#data-manipulation"><i class="fa fa-check"></i><b>12.2</b> Data Manipulation</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#data-format"><i class="fa fa-check"></i><b>12.2.1</b> Data Format</a></li>
+<li class="chapter" data-level="12.2.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#row-manipulation"><i class="fa fa-check"></i><b>12.2.2</b> Row Manipulation</a></li>
+<li class="chapter" data-level="12.2.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#column-manipulation"><i class="fa fa-check"></i><b>12.2.3</b> Column Manipulation</a></li>
+<li class="chapter" data-level="12.2.4" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#piping"><i class="fa fa-check"></i><b>12.2.4</b> Piping</a></li>
+<li class="chapter" data-level="12.2.5" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#reshape"><i class="fa fa-check"></i><b>12.2.5</b> Reshape</a></li>
+<li class="chapter" data-level="12.2.6" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#group-operation"><i class="fa fa-check"></i><b>12.2.6</b> Group Operation</a></li>
+<li class="chapter" data-level="12.2.7" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#join"><i class="fa fa-check"></i><b>12.2.7</b> Join</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#visualization"><i class="fa fa-check"></i><b>12.3</b> Visualization</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#point"><i class="fa fa-check"></i><b>12.3.1</b> Point</a></li>
+<li class="chapter" data-level="12.3.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#line"><i class="fa fa-check"></i><b>12.3.2</b> Line</a></li>
+<li class="chapter" data-level="12.3.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#histogram"><i class="fa fa-check"></i><b>12.3.3</b> Histogram</a></li>
+<li class="chapter" data-level="12.3.4" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#boxplot"><i class="fa fa-check"></i><b>12.3.4</b> Boxplot</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html"><i class="fa fa-check"></i><b>13</b> Appendix: Base Plot</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#overview-2"><i class="fa fa-check"></i><b>13.1</b> Overview</a></li>
+<li class="chapter" data-level="13.2" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#plot"><i class="fa fa-check"></i><b>13.2</b> Plot</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#symbol"><i class="fa fa-check"></i><b>13.2.1</b> Symbol</a></li>
+<li class="chapter" data-level="13.2.2" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#symbol-size"><i class="fa fa-check"></i><b>13.2.2</b> Symbol size</a></li>
+<li class="chapter" data-level="13.2.3" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#symbol-color-border"><i class="fa fa-check"></i><b>13.2.3</b> Symbol color (border)</a></li>
+<li class="chapter" data-level="13.2.4" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#symbol-color-fill"><i class="fa fa-check"></i><b>13.2.4</b> Symbol color (fill)</a></li>
+<li class="chapter" data-level="13.2.5" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#label"><i class="fa fa-check"></i><b>13.2.5</b> Label</a></li>
+<li class="chapter" data-level="13.2.6" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#axis"><i class="fa fa-check"></i><b>13.2.6</b> Axis</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#boxplot-1"><i class="fa fa-check"></i><b>13.3</b> Boxplot</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#box-color"><i class="fa fa-check"></i><b>13.3.1</b> Box color</a></li>
+<li class="chapter" data-level="13.3.2" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#border-color"><i class="fa fa-check"></i><b>13.3.2</b> Border color</a></li>
+<li class="chapter" data-level="13.3.3" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#box-width"><i class="fa fa-check"></i><b>13.3.3</b> Box width</a></li>
+<li class="chapter" data-level="13.3.4" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#axis-1"><i class="fa fa-check"></i><b>13.3.4</b> Axis</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">BIOSTATS</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="sampling" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Sampling<a href="sampling.html#sampling" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><em>“Why do I need statistics in the first place?”</em> This was the initial question that arose when I entered the field of ecology. Initially, I assumed it would be a straightforward query with an immediate response. However, I soon realized that it is a profound question with a complex answer. In short, “we need statistics because we often possess only partial information about what we seek to understand.” Now, let’s explore the more elaborate explanation below.</p>
+<div id="the-unknown-garden-plant-example" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> The Unknown: Garden Plant Example<a href="sampling.html#the-unknown-garden-plant-example" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Consider a scenario where we are conducting a study on plant height in a garden. In this garden, there exists a thousand of individual plants, making it impractical for a single researcher to measure all of them. Instead, due to resource limitations, a sample of <span class="math inline">\(10\)</span> plants was selected to <strong><em>calculate</em></strong> the average height and the extent of variation among these plant individuals:</p>
+<pre><code>## # A tibble: 10 × 4
+##     ...1 plant_id height unit 
+##    &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+##  1     1        1   16.9 cm   
+##  2     2        2   20.9 cm   
+##  3     3        3   15.8 cm   
+##  4     4        4   28   cm   
+##  5     5        5   21.6 cm   
+##  6     6        6   15.9 cm   
+##  7     7        7   22.4 cm   
+##  8     8        8   23.7 cm   
+##  9     9        9   22.9 cm   
+## 10    10       10   18.5 cm</code></pre>
+<p>Cool. Let’s use this data set to learn about the pitfall behind this. Create a vector of plant height <code>h</code> and put it in a <code>tibble()</code> to analyze it:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="sampling.html#cb53-1" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">16.9</span>, <span class="fl">20.9</span>, <span class="fl">15.8</span>, <span class="dv">28</span>, <span class="fl">21.6</span>, <span class="fl">15.9</span>, <span class="fl">22.4</span>, <span class="fl">23.7</span>, <span class="fl">22.9</span>, <span class="fl">18.5</span>)</span>
+<span id="cb53-2"><a href="sampling.html#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-3"><a href="sampling.html#cb53-3" aria-hidden="true" tabindex="-1"></a>df_h1 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">plant_id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="co"># a vector from 1 to 10 by 1</span></span>
+<span id="cb53-4"><a href="sampling.html#cb53-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">height =</span> h, <span class="co"># height</span></span>
+<span id="cb53-5"><a href="sampling.html#cb53-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">unit =</span> <span class="st">&quot;cm&quot;</span>) <span class="co"># unit</span></span></code></pre></div>
+<p>This format (<code>tibble()</code>) is better than a raw vector of height because it allows more flexible analysis. Let’s add columns of <code>mu_height</code> and <code>var_height</code> using <code>mutate()</code>, a function that adds new column(s) to an existing <code>tibble()</code> (or <code>data.frame()</code>):</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="sampling.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># nrow() returns the number of rows</span></span>
+<span id="cb54-2"><a href="sampling.html#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="co"># while piping, &quot;.&quot; refers to the dataframe inherited </span></span>
+<span id="cb54-3"><a href="sampling.html#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="co"># i.e., nrow(.) counts the number of rows in df_h1</span></span>
+<span id="cb54-4"><a href="sampling.html#cb54-4" aria-hidden="true" tabindex="-1"></a>df_h1 <span class="ot">&lt;-</span> df_h1 <span class="sc">%&gt;%</span> </span>
+<span id="cb54-5"><a href="sampling.html#cb54-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mu_height =</span> <span class="fu">mean</span>(height),</span>
+<span id="cb54-6"><a href="sampling.html#cb54-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">var_height =</span> <span class="fu">sum</span>((height <span class="sc">-</span> mu_height)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">nrow</span>(.))</span></code></pre></div>
+<p>Awesome, we were able to get the average height and the variance! – <strong>however, how confident are you?</strong> We obtained plant height only from 10…out of 1000. Are they different if we measure another set of 10 plant individuals? Let’s see:</p>
+<pre><code>## # A tibble: 10 × 4
+##     ...1 plant_id height unit 
+##    &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+##  1    11       11   27.6 cm   
+##  2    12       12   21.9 cm   
+##  3    13       13   16.9 cm   
+##  4    14       14    8.9 cm   
+##  5    15       15   25.6 cm   
+##  6    16       16   19.8 cm   
+##  7    17       17   19.9 cm   
+##  8    18       18   24.7 cm   
+##  9    19       19   24.1 cm   
+## 10    20       20   23   cm</code></pre>
+<p>Create another <code>tibble()</code> :</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="sampling.html#cb56-1" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">27.6</span>, <span class="fl">21.9</span>, <span class="fl">16.9</span>, <span class="fl">8.9</span>, <span class="fl">25.6</span>, <span class="fl">19.8</span>, <span class="fl">19.9</span>, <span class="fl">24.7</span>, <span class="fl">24.1</span>, <span class="dv">23</span>)</span>
+<span id="cb56-2"><a href="sampling.html#cb56-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-3"><a href="sampling.html#cb56-3" aria-hidden="true" tabindex="-1"></a>df_h2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">plant_id =</span> <span class="dv">11</span><span class="sc">:</span><span class="dv">20</span>, <span class="co"># a vector from 11 to 20 by 1</span></span>
+<span id="cb56-4"><a href="sampling.html#cb56-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">height =</span> h,</span>
+<span id="cb56-5"><a href="sampling.html#cb56-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">unit =</span> <span class="st">&quot;cm&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb56-6"><a href="sampling.html#cb56-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mu_height =</span> <span class="fu">mean</span>(height),</span>
+<span id="cb56-7"><a href="sampling.html#cb56-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">var_height =</span> <span class="fu">sum</span>((height <span class="sc">-</span> mu_height)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">nrow</span>(.))</span>
+<span id="cb56-8"><a href="sampling.html#cb56-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-9"><a href="sampling.html#cb56-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_h2)</span></code></pre></div>
+<pre><code>## # A tibble: 10 × 5
+##    plant_id height unit  mu_height var_height
+##       &lt;int&gt;  &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+##  1       11   27.6 cm         21.2       25.8
+##  2       12   21.9 cm         21.2       25.8
+##  3       13   16.9 cm         21.2       25.8
+##  4       14    8.9 cm         21.2       25.8
+##  5       15   25.6 cm         21.2       25.8
+##  6       16   19.8 cm         21.2       25.8
+##  7       17   19.9 cm         21.2       25.8
+##  8       18   24.7 cm         21.2       25.8
+##  9       19   24.1 cm         21.2       25.8
+## 10       20   23   cm         21.2       25.8</code></pre>
+<p>Wow, that’s totally different.</p>
+</div>
+<div id="linking-part-to-the-whole" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Linking Part to the Whole<a href="sampling.html#linking-part-to-the-whole" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The exercise highlights an important takeaway: what we can determine from the above data is the average and variance of the sample, <strong>which may not perfectly represent the characteristics of the entire garden.</strong></p>
+<p>In the field of biological research, it is often impractical or impossible to sample the entire population, so we must rely on estimating the unknowns (in this case, the <em>mean</em> and <em>variance</em>) from the available samples. This is where statistics comes into play, offering a tool to infer information about the entire population based on partial information obtained from the samples.</p>
+<p>The unknowns we are interested in, which the population mean and variance in this example, are referred to as “<strong>parameters.</strong>” These parameters <u><em>cannot be directly measured</em></u> but can be <u><em>estimated</em></u> from samples through statistical inference.</p>
+<p>Provided that certain assumptions are met, the <em>sample mean</em> is the unbiased point estimate of the <em>population</em> <em>mean</em>. The <strong>“<em>unbiased</em>”</strong> means that the sample means – if we repeat the sampling process – are centered around the population mean. In the meantime, the sample variance – if we use the formula in Chapter <a href="descriptive-statistics.html#descriptive-statistics">1</a> – is “<strong><em>biased</em></strong>.” It tends to be smaller than the population variance.</p>
+<p>Let’s explore this concept further through simple simulations. Suppose we have data on a thousand plant individuals, although this scenario may be unrealistic in practice. However, by conducting these simulations, we can examine how different sample means and variances can deviate from the true values.</p>
+<p>Download the data <a href="https://github.com/aterui/biostats/blob/master/data_raw/data_plant_height.csv">here</a> containing height measurements of thousand individuals, and place this file under <code>data_raw/</code> in your project directory. You can load this <code>csv</code> file in R as follows:</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="sampling.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load csv data on R</span></span>
+<span id="cb58-2"><a href="sampling.html#cb58-2" aria-hidden="true" tabindex="-1"></a>df_h0 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data_raw/data_plant_height.csv&quot;</span>)</span>
+<span id="cb58-3"><a href="sampling.html#cb58-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-4"><a href="sampling.html#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="co"># show the first 10 rows</span></span>
+<span id="cb58-5"><a href="sampling.html#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_h0)</span></code></pre></div>
+<pre><code>## # A tibble: 1,000 × 4
+##     ...1 plant_id height unit 
+##    &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+##  1     1        1   16.9 cm   
+##  2     2        2   20.9 cm   
+##  3     3        3   15.8 cm   
+##  4     4        4   28   cm   
+##  5     5        5   21.6 cm   
+##  6     6        6   15.9 cm   
+##  7     7        7   22.4 cm   
+##  8     8        8   23.7 cm   
+##  9     9        9   22.9 cm   
+## 10    10       10   18.5 cm   
+## # ℹ 990 more rows</code></pre>
+<p>Using this synthetic dataset (I generated through a random value generator), we can calculate the true mean and variance (reference values). It is important to note that in this case, we use the term “calculate” for the mean and variance because they represent the parameters of the entire population, which are known to us in this scenario.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="sampling.html#cb60-1" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">mean</span>(df_h0<span class="sc">$</span>height)</span>
+<span id="cb60-2"><a href="sampling.html#cb60-2" aria-hidden="true" tabindex="-1"></a>sigma2 <span class="ot">&lt;-</span> <span class="fu">sum</span>((df_h0<span class="sc">$</span>height <span class="sc">-</span> mu)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">nrow</span>(df_h0)</span>
+<span id="cb60-3"><a href="sampling.html#cb60-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-4"><a href="sampling.html#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mu)</span></code></pre></div>
+<pre><code>## [1] 19.9426</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="sampling.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sigma2)</span></code></pre></div>
+<pre><code>## [1] 26.74083</code></pre>
+<p>We can simulate the sampling of 10 plant individuals by randomly selecting 10 rows from <code>df_h0</code>:</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="sampling.html#cb64-1" aria-hidden="true" tabindex="-1"></a>df_i <span class="ot">&lt;-</span> df_h0 <span class="sc">%&gt;%</span> </span>
+<span id="cb64-2"><a href="sampling.html#cb64-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">10</span>) <span class="co"># size specifies the number of rows to be selected randomly</span></span>
+<span id="cb64-3"><a href="sampling.html#cb64-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-4"><a href="sampling.html#cb64-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_i)</span></code></pre></div>
+<pre><code>## # A tibble: 10 × 4
+##     ...1 plant_id height unit 
+##    &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+##  1   308      308   22.8 cm   
+##  2   461      461   17.7 cm   
+##  3   602      602   27.5 cm   
+##  4   181      181   13.8 cm   
+##  5   488      488   14.8 cm   
+##  6   565      565   17   cm   
+##  7   302      302   14.8 cm   
+##  8    96       96   22.8 cm   
+##  9   853      853   14.8 cm   
+## 10   987      987   15.9 cm</code></pre>
+<p>Since <code>sample_n()</code> selects rows randomly, you will (very likely) get different set of 10 individuals/rows every single time. Below is another set of 10 rows (notice that <code>df_i</code> is overwritten with the new data set):</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="sampling.html#cb66-1" aria-hidden="true" tabindex="-1"></a>df_i <span class="ot">&lt;-</span> df_h0 <span class="sc">%&gt;%</span> </span>
+<span id="cb66-2"><a href="sampling.html#cb66-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">10</span>)</span>
+<span id="cb66-3"><a href="sampling.html#cb66-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-4"><a href="sampling.html#cb66-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_i)</span></code></pre></div>
+<pre><code>## # A tibble: 10 × 4
+##     ...1 plant_id height unit 
+##    &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+##  1   962      962   19.9 cm   
+##  2   618      618   11   cm   
+##  3   614      614   13   cm   
+##  4   735      735   22.1 cm   
+##  5   215      215   24.9 cm   
+##  6    32       32   19.5 cm   
+##  7   230      230   21.3 cm   
+##  8   367      367   23.4 cm   
+##  9   270      270   15.3 cm   
+## 10   524      524   21   cm</code></pre>
+<p>Let’s obtain 100 sets of 10 plant individuals (randomly selected) and <em>estimate</em> the mean and variance in each. While we can perform random sampling one by one, this is cumbersome – at least, I do not want to do it. Instead, we can leverage a technique of <code>for</code> loop:</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="sampling.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># for reproducibility</span></span>
+<span id="cb68-2"><a href="sampling.html#cb68-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">3</span>)</span>
+<span id="cb68-3"><a href="sampling.html#cb68-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-4"><a href="sampling.html#cb68-4" aria-hidden="true" tabindex="-1"></a>mu_i <span class="ot">&lt;-</span> var_i <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># create empty objects</span></span>
+<span id="cb68-5"><a href="sampling.html#cb68-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-6"><a href="sampling.html#cb68-6" aria-hidden="true" tabindex="-1"></a><span class="co"># repeat the work in {} from i = 1 to i = 100</span></span>
+<span id="cb68-7"><a href="sampling.html#cb68-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
+<span id="cb68-8"><a href="sampling.html#cb68-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb68-9"><a href="sampling.html#cb68-9" aria-hidden="true" tabindex="-1"></a>  df_i <span class="ot">&lt;-</span> df_h0 <span class="sc">%&gt;%</span> </span>
+<span id="cb68-10"><a href="sampling.html#cb68-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">10</span>) <span class="co"># random samples of 10 individuals</span></span>
+<span id="cb68-11"><a href="sampling.html#cb68-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb68-12"><a href="sampling.html#cb68-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># save mean for sample set i</span></span>
+<span id="cb68-13"><a href="sampling.html#cb68-13" aria-hidden="true" tabindex="-1"></a>  mu_i[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(df_i<span class="sc">$</span>height)</span>
+<span id="cb68-14"><a href="sampling.html#cb68-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb68-15"><a href="sampling.html#cb68-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># save variance for sample set i</span></span>
+<span id="cb68-16"><a href="sampling.html#cb68-16" aria-hidden="true" tabindex="-1"></a>  var_i[i] <span class="ot">&lt;-</span> <span class="fu">sum</span>((df_i<span class="sc">$</span>height <span class="sc">-</span> <span class="fu">mean</span>(df_i<span class="sc">$</span>height))<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">nrow</span>(df_i) </span>
+<span id="cb68-17"><a href="sampling.html#cb68-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb68-18"><a href="sampling.html#cb68-18" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Take a look at <code>mu_i</code> and <code>var_i</code> :</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="sampling.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mu_i)</span></code></pre></div>
+<pre><code>##   [1] 19.97 17.86 22.55 22.03 17.00 23.28 21.33 21.23 18.55 19.29 22.14 19.84
+##  [13] 22.43 22.13 21.13 19.40 19.39 20.43 19.12 20.66 21.01 19.48 21.73 19.63
+##  [25] 21.03 20.60 21.11 20.42 18.76 23.70 20.31 22.22 21.34 20.70 20.96 20.03
+##  [37] 21.77 19.19 19.87 21.38 19.64 23.31 19.89 19.21 19.68 19.54 17.54 19.05
+##  [49] 18.91 20.57 18.33 18.07 19.48 17.70 20.24 17.74 20.45 16.48 18.93 17.60
+##  [61] 17.23 20.75 18.06 20.06 20.80 21.72 19.02 25.08 18.90 20.69 23.28 20.87
+##  [73] 18.65 19.74 21.47 17.95 16.98 18.30 19.77 17.25 19.60 21.27 19.28 20.42
+##  [85] 19.60 18.41 20.15 21.24 19.70 21.56 20.75 19.54 17.54 18.52 19.85 18.40
+##  [97] 20.39 17.07 17.84 20.66</code></pre>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="sampling.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(var_i)</span></code></pre></div>
+<pre><code>##   [1] 14.1961 21.6884 28.2685 21.6341  6.5700 24.5996 23.6941 24.8681 21.6485
+##  [10] 36.3689 17.8844 31.5784 21.0521 34.2341 20.6281 10.4420 20.0469 31.2781
+##  [19] 32.0316 23.0964  9.8789 31.8916 28.3061 19.6861  8.2641 23.3640 26.8769
+##  [28] 48.9416 27.7644 42.4220 38.4989 12.7076 15.9004  8.6740 11.7284 26.2061
+##  [37] 21.7461 25.9269 28.0421  6.2616 16.5584 27.7489 17.3609 23.1349 38.6936
+##  [46] 25.0984 13.5864 25.2625  7.7149 17.5341 11.4681 38.1561 12.6376 42.5480
+##  [55] 31.9224 13.9824 14.9725 25.8296 33.6781  8.2440 31.4741 29.7805 26.7324
+##  [64] 47.3704 26.8660 24.0536 29.5076 23.7376 14.8000 51.8449 13.3536 18.5581
+##  [73] 18.9185 12.4544 36.2201 16.3225 17.9236 42.8760 18.5421 22.0205 34.1680
+##  [82] 28.8841 26.6976 22.7356 35.2900 19.2229 34.3905 17.3784 23.1880 42.4264
+##  [91] 18.5365 18.5424 21.5204 13.1276 17.7185 21.2940 27.1649 35.3141 43.5624
+## [100] 55.1484</code></pre>
+<p>In each element of <code>mu_i</code> and <code>var_i</code>, we have saved estimated mean (<span class="math inline">\(\hat{\mu}\)</span>; reads mu hat) and variance (<span class="math inline">\(\hat{\sigma^2}\)</span>) of 10 plant height measures for dataset <code>i</code>. By drawing a histogram of these values, we can examine the distributions of mean and variance estimates. I use R package <code>patchwork</code> to make a better figure:</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="sampling.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;patchwork&quot;) # install only once</span></span>
+<span id="cb73-2"><a href="sampling.html#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb73-3"><a href="sampling.html#cb73-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-4"><a href="sampling.html#cb73-4" aria-hidden="true" tabindex="-1"></a>df_sample <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">mu_hat =</span> mu_i, <span class="at">var_hat =</span> var_i)</span>
+<span id="cb73-5"><a href="sampling.html#cb73-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-6"><a href="sampling.html#cb73-6" aria-hidden="true" tabindex="-1"></a><span class="co"># histogram for mean</span></span>
+<span id="cb73-7"><a href="sampling.html#cb73-7" aria-hidden="true" tabindex="-1"></a>g_mu <span class="ot">&lt;-</span> df_sample <span class="sc">%&gt;%</span> </span>
+<span id="cb73-8"><a href="sampling.html#cb73-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> mu_hat)) <span class="sc">+</span></span>
+<span id="cb73-9"><a href="sampling.html#cb73-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb73-10"><a href="sampling.html#cb73-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mu)</span>
+<span id="cb73-11"><a href="sampling.html#cb73-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-12"><a href="sampling.html#cb73-12" aria-hidden="true" tabindex="-1"></a><span class="co"># histogram for variance</span></span>
+<span id="cb73-13"><a href="sampling.html#cb73-13" aria-hidden="true" tabindex="-1"></a>g_var <span class="ot">&lt;-</span> df_sample <span class="sc">%&gt;%</span> </span>
+<span id="cb73-14"><a href="sampling.html#cb73-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> var_hat)) <span class="sc">+</span></span>
+<span id="cb73-15"><a href="sampling.html#cb73-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb73-16"><a href="sampling.html#cb73-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> sigma2)</span>
+<span id="cb73-17"><a href="sampling.html#cb73-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-18"><a href="sampling.html#cb73-18" aria-hidden="true" tabindex="-1"></a><span class="co"># layout vertically</span></span>
+<span id="cb73-19"><a href="sampling.html#cb73-19" aria-hidden="true" tabindex="-1"></a><span class="co"># possible only if &quot;patchwork&quot; is loaded</span></span>
+<span id="cb73-20"><a href="sampling.html#cb73-20" aria-hidden="true" tabindex="-1"></a>g_mu <span class="sc">/</span> g_var</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:mu-var-dist"></span>
+<img src="_main_files/figure-html/mu-var-dist-1.png" alt="Sample mean and biased variance." width="672" />
+<p class="caption">
+Figure 2.1: Sample mean and biased variance.
+</p>
+</div>
+<p>While sample means are indeed symmetrically distributed around the true mean, sample variances tend to be biased and skewed to the right, often underestimating the true variance.</p>
+<p>The bias in estimating the variance arises due to inferring the parameter from a small number of samples. However, there is good news: an unbiased estimator of variance exists. The formula for the unbiased estimator of variance is as follows:</p>
+<p><span class="math display">\[
+\frac{\sum_i^N (x_i - \mu)^2}{N-1}
+\]</span></p>
+<p>The correction in the denominator (<span class="math inline">\(N\)</span> replaced with <span class="math inline">\(N-1\)</span>) compensates for the bias, providing an estimate of the true variance without systematic underestimation (although this seems a simple correction, a <a href="https://en.wikipedia.org/wiki/Bessel%27s_correction">deep math</a> underlies the derivation of <span class="math inline">\(N-1\)</span>). This is the default formula in <code>var()</code> in R, a function used to estimate <em>unbiased</em> variance (and <em>unbiased</em> SD <code>sd()</code>). Comparison reveals how this works:</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="sampling.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co"># for reproducibility</span></span>
+<span id="cb74-2"><a href="sampling.html#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">3</span>)</span>
+<span id="cb74-3"><a href="sampling.html#cb74-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-4"><a href="sampling.html#cb74-4" aria-hidden="true" tabindex="-1"></a><span class="co"># redo simulations ----</span></span>
+<span id="cb74-5"><a href="sampling.html#cb74-5" aria-hidden="true" tabindex="-1"></a>mu_i <span class="ot">&lt;-</span> var_i <span class="ot">&lt;-</span> var_ub_i <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># create empty objects</span></span>
+<span id="cb74-6"><a href="sampling.html#cb74-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-7"><a href="sampling.html#cb74-7" aria-hidden="true" tabindex="-1"></a><span class="co"># repeat the work in {} from i = 1 to i = 100</span></span>
+<span id="cb74-8"><a href="sampling.html#cb74-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>) {</span>
+<span id="cb74-9"><a href="sampling.html#cb74-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb74-10"><a href="sampling.html#cb74-10" aria-hidden="true" tabindex="-1"></a>  df_i <span class="ot">&lt;-</span> df_h0 <span class="sc">%&gt;%</span> </span>
+<span id="cb74-11"><a href="sampling.html#cb74-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">10</span>) <span class="co"># random samples of 10 individuals</span></span>
+<span id="cb74-12"><a href="sampling.html#cb74-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb74-13"><a href="sampling.html#cb74-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># save mean for sample set i</span></span>
+<span id="cb74-14"><a href="sampling.html#cb74-14" aria-hidden="true" tabindex="-1"></a>  mu_i[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(df_i<span class="sc">$</span>height)</span>
+<span id="cb74-15"><a href="sampling.html#cb74-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb74-16"><a href="sampling.html#cb74-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># save variance for sample set i</span></span>
+<span id="cb74-17"><a href="sampling.html#cb74-17" aria-hidden="true" tabindex="-1"></a>  var_i[i] <span class="ot">&lt;-</span> <span class="fu">sum</span>((df_i<span class="sc">$</span>height <span class="sc">-</span> <span class="fu">mean</span>(df_i<span class="sc">$</span>height))<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">nrow</span>(df_i) </span>
+<span id="cb74-18"><a href="sampling.html#cb74-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb74-19"><a href="sampling.html#cb74-19" aria-hidden="true" tabindex="-1"></a>  var_ub_i[i] <span class="ot">&lt;-</span> <span class="fu">var</span>(df_i<span class="sc">$</span>height)</span>
+<span id="cb74-20"><a href="sampling.html#cb74-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Add the histogram of unbiased variance:</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="sampling.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co"># draw histograms ----</span></span>
+<span id="cb75-2"><a href="sampling.html#cb75-2" aria-hidden="true" tabindex="-1"></a>df_sample <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">mu_hat =</span> mu_i,</span>
+<span id="cb75-3"><a href="sampling.html#cb75-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">var_hat =</span> var_i,</span>
+<span id="cb75-4"><a href="sampling.html#cb75-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">var_ub_hat =</span> var_ub_i)</span>
+<span id="cb75-5"><a href="sampling.html#cb75-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-6"><a href="sampling.html#cb75-6" aria-hidden="true" tabindex="-1"></a><span class="co"># histogram for mu</span></span>
+<span id="cb75-7"><a href="sampling.html#cb75-7" aria-hidden="true" tabindex="-1"></a>g_mu <span class="ot">&lt;-</span> df_sample <span class="sc">%&gt;%</span> </span>
+<span id="cb75-8"><a href="sampling.html#cb75-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> mu_hat)) <span class="sc">+</span></span>
+<span id="cb75-9"><a href="sampling.html#cb75-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb75-10"><a href="sampling.html#cb75-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> mu)</span>
+<span id="cb75-11"><a href="sampling.html#cb75-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-12"><a href="sampling.html#cb75-12" aria-hidden="true" tabindex="-1"></a><span class="co"># histogram for variance</span></span>
+<span id="cb75-13"><a href="sampling.html#cb75-13" aria-hidden="true" tabindex="-1"></a><span class="co"># scale_x_continuous() adjusts scale in x-axis</span></span>
+<span id="cb75-14"><a href="sampling.html#cb75-14" aria-hidden="true" tabindex="-1"></a>g_var <span class="ot">&lt;-</span> df_sample <span class="sc">%&gt;%</span> </span>
+<span id="cb75-15"><a href="sampling.html#cb75-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> var_hat)) <span class="sc">+</span></span>
+<span id="cb75-16"><a href="sampling.html#cb75-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb75-17"><a href="sampling.html#cb75-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> sigma2) <span class="sc">+</span></span>
+<span id="cb75-18"><a href="sampling.html#cb75-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits=</span> <span class="fu">c</span>(<span class="fu">min</span>(<span class="fu">c</span>(var_i, var_ub_i)),</span>
+<span id="cb75-19"><a href="sampling.html#cb75-19" aria-hidden="true" tabindex="-1"></a>                               <span class="fu">max</span>(<span class="fu">c</span>(var_i, var_ub_i))))</span>
+<span id="cb75-20"><a href="sampling.html#cb75-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-21"><a href="sampling.html#cb75-21" aria-hidden="true" tabindex="-1"></a><span class="co"># histogram for unbiased variance</span></span>
+<span id="cb75-22"><a href="sampling.html#cb75-22" aria-hidden="true" tabindex="-1"></a>g_var_ub <span class="ot">&lt;-</span> df_sample <span class="sc">%&gt;%</span> </span>
+<span id="cb75-23"><a href="sampling.html#cb75-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> var_ub_hat)) <span class="sc">+</span></span>
+<span id="cb75-24"><a href="sampling.html#cb75-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
+<span id="cb75-25"><a href="sampling.html#cb75-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> sigma2) <span class="sc">+</span></span>
+<span id="cb75-26"><a href="sampling.html#cb75-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits=</span> <span class="fu">c</span>(<span class="fu">min</span>(<span class="fu">c</span>(var_i, var_ub_i)),</span>
+<span id="cb75-27"><a href="sampling.html#cb75-27" aria-hidden="true" tabindex="-1"></a>                               <span class="fu">max</span>(<span class="fu">c</span>(var_i, var_ub_i))))</span>
+<span id="cb75-28"><a href="sampling.html#cb75-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb75-29"><a href="sampling.html#cb75-29" aria-hidden="true" tabindex="-1"></a>g_mu <span class="sc">/</span> g_var <span class="sc">/</span> g_var_ub</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:var-ub"></span>
+<img src="_main_files/figure-html/var-ub-1.png" alt="Comparison of biased and unbiased variances." width="672" />
+<p class="caption">
+Figure 2.2: Comparison of biased and unbiased variances.
+</p>
+</div>
+<p>In summary, samples can only provide information about a part of the whole population. The complete picture of the entire population is often unknown, and <strong>we rely on estimating key parameters from the available samples.</strong> This concept applies to a wide range of parametric analyses in statistics, where we use sample data to make inferences about the population parameters.</p>
+<p>Recognizing the limitations and uncertainties associated with working with samples is essential for proper statistical analysis and interpretation of results in various fields of study.</p>
+</div>
+<div id="laboratory-1" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Laboratory<a href="sampling.html#laboratory-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li><p>We used 10 plants to estimate sample means and variances. Obtain 100 sub-datasets with 50 and 100 measures each, and draw histograms of sample means and unbiased variances (use <code>var()</code>).</p></li>
+<li><p>Sample means and unbiased variances are unbiased if samples are randomly selected. What happens if samples are non-random? Suppose the investigator was unable to find plants less than 10 cm in height – the following code excludes those less than 10 cm in height:</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="sampling.html#cb76-1" aria-hidden="true" tabindex="-1"></a>df_h10 <span class="ot">&lt;-</span> df_h0 <span class="sc">%&gt;%</span> </span>
+<span id="cb76-2"><a href="sampling.html#cb76-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(height <span class="sc">&gt;=</span> <span class="dv">10</span>)</span></code></pre></div>
+<p>Repeat step 1 with <code>df_h10</code> instead of <code>df_h0</code> and compare the results.</p></li>
+</ol>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="descriptive-statistics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="probabilistic-view.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/aterui/biostats/chapters/02-sampling.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -4,11 +4,13 @@ df_fl <- readr::read_csv(here::here("data_raw/data_fish_length.csv"))
 df_anova <- read_csv(here::here("data_raw/data_fish_length_anova.csv"))
 ```
 
-# General Linear Model
+# Linear Model
 
-We have extensively covered three important statistical analyses: the t-test, ANOVA, and regression analysis. While these methods may seem distinct, they all fall under the umbrella of the General Linear Model framework.
+We have extensively covered three important statistical analyses: the t-test, ANOVA, and regression analysis. While these methods may seem distinct, they all fall under the umbrella of the Linear Model framework[^07-lm-1].
 
-The General Linear Model encompasses models that depict the connection between a response variable and one or more explanatory variables. It assumes that the error term follows a normal distribution. In this chapter, I will elucidate this framework and illustrate its relationship to the t-test, ANOVA, and regression analysis.
+[^07-lm-1]: Some textbooks refer to this framework as "General Linear Model." However, to distinguish from Generalized Linear Model, I call this "Linear Model."
+
+The Linear Model encompasses models that depict the connection between a response variable and one or more explanatory variables. It assumes that the error term follows a normal distribution. In this chapter, I will elucidate this framework and illustrate its relationship to the t-test, ANOVA, and regression analysis.
 
 ## The Frame
 
@@ -36,7 +38,7 @@ y_i &\sim \text{Normal}(\mu_i, \sigma^2)\\
 \end{aligned}
 $$
 
-This connection provides insight into the relationship between the t-test, ANOVA, and regression analysis. The fundamental purpose of regression analysis is to model how the mean $\mu_i$ changes with increasing or decreasing values of $x_{1,i}$. Thus, the primary distinction between the t-test, ANOVA, and regression lies in the nature of the explanatory variable, which can be either continuous or categorical (group).
+This structure provides insight into the relationship between the t-test, ANOVA, and regression analysis. The fundamental purpose of regression analysis is to model how the mean $\mu_i$ changes with increasing or decreasing values of $x_{1,i}$. Thus, the t-test, ANOVA, and regression all analyze the mean -- the expected value of a Normal distribution. The primary distinction between the t-test, ANOVA, and regression lies in the nature of the explanatory variable, which can be either continuous or categorical (group).
 
 ### Two-Group Case
 
@@ -192,19 +194,81 @@ The above examples show that the t-test, ANOVA, and regression has the same mode
 
 $$
 y_i = \text{(deterministic component)} + \text{(stochastic component)}
-$$
-In the framework of the General Linear Model, the deterministic component is expressed as $\alpha + \sum_k \beta_k x_{k,i}$ and the stochastic component (random error) is expressed as a Normal distribution. This structure makes several assumptions. Here are the main assumptions:
+$$ In the framework of the Linear Model, the deterministic component is expressed as $\alpha + \sum_k \beta_k x_{k,i}$ and the stochastic component (random error) is expressed as a Normal distribution. This structure makes several assumptions. Here are the main assumptions:
 
-1. Linearity: The relationship between the explanatory variables and the response variable is linear. This means that the effect of each explanatory variable on the response variable is additive and constant.
+1.  Linearity: The relationship between the explanatory variables and the response variable is linear. This means that the effect of each explanatory variable on the response variable is additive and constant.
 
-2. Independence: The observations are independent of each other. This assumption implies that the values of the response variable for one observation do not influence the values for other observations.
+2.  Independence: The observations are independent of each other. This assumption implies that the values of the response variable for one observation do not influence the values for other observations.
 
-3. Homoscedasticity: The variance of the response variable is constant across all levels of the explanatory variables. In other words, the spread or dispersion of the response variable should be the same for all values of the explanatory variables.
+3.  Homoscedasticity: The variance of the response variable is constant across all levels of the explanatory variables. In other words, the spread or dispersion of the response variable should be the same for all values of the explanatory variables.
 
-4. Normality: The response variable follows a normal distribution at each level of the explanatory variables. This assumption is important because many statistical tests and estimators used in the GLM are based on the assumption of normality.
+4.  Normality: The error term follows a normal distribution at each level of the explanatory variables. This assumption is important because many statistical tests and estimators used in the linear model are based on the assumption of normality.
 
-5. No multicollinearity: The explanatory variables are not highly correlated with each other. Multicollinearity can lead to problems in estimating the coefficients accurately and can make interpretation difficult.
+5.  No multicollinearity: The explanatory variables are not highly correlated with each other. Multicollinearity can lead to problems in estimating the coefficients accurately and can make interpretation difficult.
 
-Violations of these assumptions can affect the validity and reliability of the results obtained from the General Linear Model.
+Violations of these assumptions can affect the validity and reliability of the results obtained from the Linear Model.
+
+## Combine Multiple Types of Variables
+
+### `iris` Example
+
+The previous section clarified that the t-test, ANOVA, and regression have a common model structure; therefore, categorical and continuous variables can be included in the same model. Here, let me use the `iris` data (available in R by default) to show an example. This data set comprises continuous (`r colnames(iris)[colnames(iris)!="Species"]`) and categorical variables (Species):
+
+```{r}
+# convert the data format to tibble
+iris <- as_tibble(iris)
+print(iris)
+
+distinct(iris, Species)
+```
+
+Here, let me model `Petal.Length` as a function of `Petal.Width` and `Species`:
+
+```{r}
+# develop iris model
+m_iris <- lm(Petal.Length ~ Petal.Width + Species,
+             data = iris)
+
+summary(m_iris)
+```
+
+Please note that the model output does not include `setosa` because it was used as the reference group (`(Intercept)`).
+
+If you want to obtain predicted values, you can use the `predict()` function. To make predictions, you need to provide a new data frame containing the values of explanatory variables for the prediction.
+
+```{r}
+# create a data frame for prediction
+# variable names must be identical to the original dataframe for analysis
+n_rep <- 100
+df_pred <- tibble(Petal.Width = rep(seq(min(iris$Petal.Width),
+                                        max(iris$Petal.Width),
+                                        length = n_rep),
+                                    n_distinct(iris$Species)),
+                  Species = rep(unique(iris$Species),
+                                each = n_rep))
+
+# make prediction based on supplied values of explanatory variables
+y_pred <- predict(m_iris,
+                  newdata = df_pred)
+
+df_pred <- df_pred %>% 
+  mutate(y_pred = y_pred)
+
+print(df_pred)
+```
+
+By plotting the predicted values against the observed data points, we can visually evaluate the accuracy of the model and assess its goodness of fit.
+
+```{r iris-plot, fig.cap="Example of model fitting to iris data. Points are observations, and lines are model predictions."}
+iris %>% 
+  ggplot(aes(x = Petal.Width,
+             y = Petal.Length,
+             color = Species)) +
+  geom_point(alpha = 0.5) +
+  geom_line(data = df_pred,
+            aes(y = y_pred)) # redefine y values for lines; x and color are inherited from ggplot()
+```
+
+### Variable Types
 
 ## Laboratory

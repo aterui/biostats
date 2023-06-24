@@ -10,8 +10,11 @@ rmd_files: ["index.Rmd",
             "chapters/05-anova.Rmd",
             "chapters/06-regression.Rmd",
             "chapters/07-lm.Rmd",
+            "chapters/08-glm.Rmd",
             "chapters/a-project.Rmd",
             "chapters/b-git.Rmd",
             "chapters/c-data-str.Rmd",
             "chapters/d-tidyverse.Rmd",
             "chapters/e-baseplot.Rmd"]
+output_dir: "docs"
+            

@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Probabilistic View | BIOSTATS</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Probabilistic View | BIOSTATS" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Probabilistic View | BIOSTATS" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Akira Terui" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="sampling.html"/>
+<link rel="next" href="two-group-comparison.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">BIOSTATS</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html"><i class="fa fa-check"></i><b>1</b> Descriptive Statistics</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#central-tendency"><i class="fa fa-check"></i><b>1.1</b> Central Tendency</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#measures-of-central-tendency"><i class="fa fa-check"></i><b>1.1.1</b> Measures of Central Tendency</a></li>
+<li class="chapter" data-level="1.1.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#r-exercise"><i class="fa fa-check"></i><b>1.1.2</b> R Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#variation"><i class="fa fa-check"></i><b>1.2</b> Variation</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#measures-of-variation"><i class="fa fa-check"></i><b>1.2.1</b> Measures of Variation</a></li>
+<li class="chapter" data-level="1.2.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#r-exercise-1"><i class="fa fa-check"></i><b>1.2.2</b> R Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#laboratory"><i class="fa fa-check"></i><b>1.3</b> Laboratory</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#comparing-central-tendency-measures"><i class="fa fa-check"></i><b>1.3.1</b> Comparing Central Tendency Measures</a></li>
+<li class="chapter" data-level="1.3.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#comparing-variation-measures"><i class="fa fa-check"></i><b>1.3.2</b> Comparing Variation Measures</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="sampling.html"><a href="sampling.html"><i class="fa fa-check"></i><b>2</b> Sampling</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="sampling.html"><a href="sampling.html#the-unknown-garden-plant-example"><i class="fa fa-check"></i><b>2.1</b> The Unknown: Garden Plant Example</a></li>
+<li class="chapter" data-level="2.2" data-path="sampling.html"><a href="sampling.html#linking-part-to-the-whole"><i class="fa fa-check"></i><b>2.2</b> Linking Part to the Whole</a></li>
+<li class="chapter" data-level="2.3" data-path="sampling.html"><a href="sampling.html#laboratory-1"><i class="fa fa-check"></i><b>2.3</b> Laboratory</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="probabilistic-view.html"><a href="probabilistic-view.html"><i class="fa fa-check"></i><b>3</b> Probabilistic View</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="probabilistic-view.html"><a href="probabilistic-view.html#probability-distribution-of-a-continuous-variable"><i class="fa fa-check"></i><b>3.1</b> Probability Distribution of a Continuous Variable</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="probabilistic-view.html"><a href="probabilistic-view.html#probability-density-function"><i class="fa fa-check"></i><b>3.1.1</b> Probability Density Function</a></li>
+<li class="chapter" data-level="3.1.2" data-path="probabilistic-view.html"><a href="probabilistic-view.html#pdf-to-frequency-distribution"><i class="fa fa-check"></i><b>3.1.2</b> PDF to frequency distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="probabilistic-view.html"><a href="probabilistic-view.html#probability-distribution-of-a-discrete-variable"><i class="fa fa-check"></i><b>3.2</b> Probability Distribution of a Discrete Variable</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="probabilistic-view.html"><a href="probabilistic-view.html#probability-mass-function"><i class="fa fa-check"></i><b>3.2.1</b> Probability Mass Function</a></li>
+<li class="chapter" data-level="3.2.2" data-path="probabilistic-view.html"><a href="probabilistic-view.html#pmf-to-frequency-distribution"><i class="fa fa-check"></i><b>3.2.2</b> PMF to frequency distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="probabilistic-view.html"><a href="probabilistic-view.html#why-probability-distributions"><i class="fa fa-check"></i><b>3.3</b> Why Probability Distributions?</a></li>
+<li class="chapter" data-level="3.4" data-path="probabilistic-view.html"><a href="probabilistic-view.html#laboratory-2"><i class="fa fa-check"></i><b>3.4</b> Laboratory</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="probabilistic-view.html"><a href="probabilistic-view.html#normal-distribution"><i class="fa fa-check"></i><b>3.4.1</b> Normal Distribution</a></li>
+<li class="chapter" data-level="3.4.2" data-path="probabilistic-view.html"><a href="probabilistic-view.html#poisson-distribution"><i class="fa fa-check"></i><b>3.4.2</b> Poisson Distribution</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="two-group-comparison.html"><a href="two-group-comparison.html"><i class="fa fa-check"></i><b>4</b> Two-Group Comparison</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="two-group-comparison.html"><a href="two-group-comparison.html#explore-data-structure"><i class="fa fa-check"></i><b>4.1</b> Explore Data Structure</a></li>
+<li class="chapter" data-level="4.2" data-path="two-group-comparison.html"><a href="two-group-comparison.html#test-statistic"><i class="fa fa-check"></i><b>4.2</b> Test Statistic</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="two-group-comparison.html"><a href="two-group-comparison.html#t-statistic"><i class="fa fa-check"></i><b>4.2.1</b> t-statistic</a></li>
+<li class="chapter" data-level="4.2.2" data-path="two-group-comparison.html"><a href="two-group-comparison.html#null-hypothesis"><i class="fa fa-check"></i><b>4.2.2</b> Null Hypothesis</a></li>
+<li class="chapter" data-level="4.2.3" data-path="two-group-comparison.html"><a href="two-group-comparison.html#interpretation"><i class="fa fa-check"></i><b>4.2.3</b> Interpretation</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="two-group-comparison.html"><a href="two-group-comparison.html#t-test-in-r"><i class="fa fa-check"></i><b>4.3</b> t-test in R</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="two-group-comparison.html"><a href="two-group-comparison.html#t-test-with-equal-variance"><i class="fa fa-check"></i><b>4.3.1</b> t-test with equal variance</a></li>
+<li class="chapter" data-level="4.3.2" data-path="two-group-comparison.html"><a href="two-group-comparison.html#t-test-with-unequal-variance"><i class="fa fa-check"></i><b>4.3.2</b> t-test with unequal variance</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="two-group-comparison.html"><a href="two-group-comparison.html#laboratory-3"><i class="fa fa-check"></i><b>4.4</b> Laboratory</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html"><i class="fa fa-check"></i><b>5</b> Multiple-Group Comparison</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#partition-the-variability"><i class="fa fa-check"></i><b>5.1</b> Partition the Variability</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#between-group-variability"><i class="fa fa-check"></i><b>5.1.1</b> Between-group variability</a></li>
+<li class="chapter" data-level="5.1.2" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#within-group-variability"><i class="fa fa-check"></i><b>5.1.2</b> Within-group variability</a></li>
+<li class="chapter" data-level="5.1.3" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#variability-to-variance"><i class="fa fa-check"></i><b>5.1.3</b> Variability to Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#test-statistic-1"><i class="fa fa-check"></i><b>5.2</b> Test Statistic</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#f-statistic"><i class="fa fa-check"></i><b>5.2.1</b> F-statistic</a></li>
+<li class="chapter" data-level="5.2.2" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#null-hypothesis-1"><i class="fa fa-check"></i><b>5.2.2</b> Null Hypothesis</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#anova-in-r"><i class="fa fa-check"></i><b>5.3</b> ANOVA in R</a></li>
+<li class="chapter" data-level="5.4" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#post-hoc-tests"><i class="fa fa-check"></i><b>5.4</b> Post-hoc Tests</a></li>
+<li class="chapter" data-level="5.5" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#laboratory-4"><i class="fa fa-check"></i><b>5.5</b> Laboratory</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="regression.html"><a href="regression.html"><i class="fa fa-check"></i><b>6</b> Regression</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="regression.html"><a href="regression.html#explore-data-structure-1"><i class="fa fa-check"></i><b>6.1</b> Explore Data Structure</a></li>
+<li class="chapter" data-level="6.2" data-path="regression.html"><a href="regression.html#drawing-the-fittest-line"><i class="fa fa-check"></i><b>6.2</b> Drawing the “fittest” line</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="regression.html"><a href="regression.html#linear-formula"><i class="fa fa-check"></i><b>6.2.1</b> Linear formula</a></li>
+<li class="chapter" data-level="6.2.2" data-path="regression.html"><a href="regression.html#minimizing-the-errors"><i class="fa fa-check"></i><b>6.2.2</b> Minimizing the errors</a></li>
+<li class="chapter" data-level="6.2.3" data-path="regression.html"><a href="regression.html#least-squares"><i class="fa fa-check"></i><b>6.2.3</b> Least Squares</a></li>
+<li class="chapter" data-level="6.2.4" data-path="regression.html"><a href="regression.html#standard-errors-and-t-values"><i class="fa fa-check"></i><b>6.2.4</b> Standard Errors and t-values</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="regression.html"><a href="regression.html#unexplained-variation"><i class="fa fa-check"></i><b>6.3</b> Unexplained Variation</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="regression.html"><a href="regression.html#retrieve-errors"><i class="fa fa-check"></i><b>6.3.1</b> Retrieve Errors</a></li>
+<li class="chapter" data-level="6.3.2" data-path="regression.html"><a href="regression.html#visualize-errors"><i class="fa fa-check"></i><b>6.3.2</b> Visualize Errors</a></li>
+<li class="chapter" data-level="6.3.3" data-path="regression.html"><a href="regression.html#coefficient-of-determination"><i class="fa fa-check"></i><b>6.3.3</b> Coefficient of Determination</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="regression.html"><a href="regression.html#laboratory-5"><i class="fa fa-check"></i><b>6.4</b> Laboratory</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="linear-model.html"><a href="linear-model.html"><i class="fa fa-check"></i><b>7</b> Linear Model</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="linear-model.html"><a href="linear-model.html#the-frame"><i class="fa fa-check"></i><b>7.1</b> The Frame</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="linear-model.html"><a href="linear-model.html#two-group-case"><i class="fa fa-check"></i><b>7.1.1</b> Two-Group Case</a></li>
+<li class="chapter" data-level="7.1.2" data-path="linear-model.html"><a href="linear-model.html#multiple-group-case"><i class="fa fa-check"></i><b>7.1.2</b> Multiple-Group Case</a></li>
+<li class="chapter" data-level="7.1.3" data-path="linear-model.html"><a href="linear-model.html#the-common-structure"><i class="fa fa-check"></i><b>7.1.3</b> The Common Structure</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="linear-model.html"><a href="linear-model.html#combine-multiple-types-of-variables"><i class="fa fa-check"></i><b>7.2</b> Combine Multiple Types of Variables</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="linear-model.html"><a href="linear-model.html#iris-example"><i class="fa fa-check"></i><b>7.2.1</b> <code>iris</code> Example</a></li>
+<li class="chapter" data-level="7.2.2" data-path="linear-model.html"><a href="linear-model.html#variable-types"><i class="fa fa-check"></i><b>7.2.2</b> Variable Types</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="linear-model.html"><a href="linear-model.html#laboratory-6"><i class="fa fa-check"></i><b>7.3</b> Laboratory</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html"><i class="fa fa-check"></i><b>8</b> Generalized Linear Model</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html#count-data"><i class="fa fa-check"></i><b>8.1</b> Count Data</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html#plant-density"><i class="fa fa-check"></i><b>8.1.1</b> Plant Density</a></li>
+<li class="chapter" data-level="8.1.2" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html#poisson-model"><i class="fa fa-check"></i><b>8.1.2</b> Poisson Model</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html#proportional-data"><i class="fa fa-check"></i><b>8.2</b> Proportional Data</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html#mussel-egg-fertilization"><i class="fa fa-check"></i><b>8.2.1</b> Mussel Egg Fertilization</a></li>
+<li class="chapter" data-level="8.2.2" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html#binomial-model"><i class="fa fa-check"></i><b>8.2.2</b> Binomial Model</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html#the-glm-framework"><i class="fa fa-check"></i><b>8.3</b> The GLM Framework</a></li>
+<li class="chapter" data-level="8.4" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html#laboratory-7"><i class="fa fa-check"></i><b>8.4</b> Laboratory</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="appendix-project-management.html"><a href="appendix-project-management.html"><i class="fa fa-check"></i><b>9</b> Appendix: Project Management</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="appendix-project-management.html"><a href="appendix-project-management.html#r-project"><i class="fa fa-check"></i><b>9.1</b> R Project</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="appendix-project-management.html"><a href="appendix-project-management.html#script-editor"><i class="fa fa-check"></i><b>9.1.1</b> Script Editor</a></li>
+<li class="chapter" data-level="9.1.2" data-path="appendix-project-management.html"><a href="appendix-project-management.html#file-name"><i class="fa fa-check"></i><b>9.1.2</b> File Name</a></li>
+<li class="chapter" data-level="9.1.3" data-path="appendix-project-management.html"><a href="appendix-project-management.html#structure-your-project"><i class="fa fa-check"></i><b>9.1.3</b> Structure Your Project</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="appendix-project-management.html"><a href="appendix-project-management.html#robust-coding"><i class="fa fa-check"></i><b>9.2</b> Robust coding</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="appendix-git-github.html"><a href="appendix-git-github.html"><i class="fa fa-check"></i><b>10</b> Appendix: Git &amp; GitHub</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="appendix-git-github.html"><a href="appendix-git-github.html#git-github"><i class="fa fa-check"></i><b>10.1</b> Git &amp; GitHub</a></li>
+<li class="chapter" data-level="10.2" data-path="appendix-git-github.html"><a href="appendix-git-github.html#commit-push"><i class="fa fa-check"></i><b>10.2</b> Commit &amp; Push</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="appendix-git-github.html"><a href="appendix-git-github.html#register-your-git-repo"><i class="fa fa-check"></i><b>10.2.1</b> Register Your Git repo</a></li>
+<li class="chapter" data-level="10.2.2" data-path="appendix-git-github.html"><a href="appendix-git-github.html#commit"><i class="fa fa-check"></i><b>10.2.2</b> Commit</a></li>
+<li class="chapter" data-level="10.2.3" data-path="appendix-git-github.html"><a href="appendix-git-github.html#push"><i class="fa fa-check"></i><b>10.2.3</b> Push</a></li>
+<li class="chapter" data-level="10.2.4" data-path="appendix-git-github.html"><a href="appendix-git-github.html#edit"><i class="fa fa-check"></i><b>10.2.4</b> Edit</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html"><i class="fa fa-check"></i><b>11</b> Appendix: Data Structure</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#overview"><i class="fa fa-check"></i><b>11.1</b> Overview</a></li>
+<li class="chapter" data-level="11.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#vector"><i class="fa fa-check"></i><b>11.2</b> Vector</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#create-vector"><i class="fa fa-check"></i><b>11.2.1</b> Create Vector</a></li>
+<li class="chapter" data-level="11.2.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#check-features"><i class="fa fa-check"></i><b>11.2.2</b> Check Features</a></li>
+<li class="chapter" data-level="11.2.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#access"><i class="fa fa-check"></i><b>11.2.3</b> Access</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#matrix"><i class="fa fa-check"></i><b>11.3</b> Matrix</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#create-matrix"><i class="fa fa-check"></i><b>11.3.1</b> Create Matrix</a></li>
+<li class="chapter" data-level="11.3.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#check-features-1"><i class="fa fa-check"></i><b>11.3.2</b> Check Features</a></li>
+<li class="chapter" data-level="11.3.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#access-1"><i class="fa fa-check"></i><b>11.3.3</b> Access</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#data-frame"><i class="fa fa-check"></i><b>11.4</b> Data Frame</a></li>
+<li class="chapter" data-level="11.5" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#exercise"><i class="fa fa-check"></i><b>11.5</b> Exercise</a>
+<ul>
+<li class="chapter" data-level="11.5.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#vector-1"><i class="fa fa-check"></i><b>11.5.1</b> Vector</a></li>
+<li class="chapter" data-level="11.5.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#matrix-1"><i class="fa fa-check"></i><b>11.5.2</b> Matrix</a></li>
+<li class="chapter" data-level="11.5.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#data-frame-1"><i class="fa fa-check"></i><b>11.5.3</b> Data Frame</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html"><i class="fa fa-check"></i><b>12</b> Appendix: Tidyverse</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#overview-1"><i class="fa fa-check"></i><b>12.1</b> Overview</a></li>
+<li class="chapter" data-level="12.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#data-manipulation"><i class="fa fa-check"></i><b>12.2</b> Data Manipulation</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#data-format"><i class="fa fa-check"></i><b>12.2.1</b> Data Format</a></li>
+<li class="chapter" data-level="12.2.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#row-manipulation"><i class="fa fa-check"></i><b>12.2.2</b> Row Manipulation</a></li>
+<li class="chapter" data-level="12.2.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#column-manipulation"><i class="fa fa-check"></i><b>12.2.3</b> Column Manipulation</a></li>
+<li class="chapter" data-level="12.2.4" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#piping"><i class="fa fa-check"></i><b>12.2.4</b> Piping</a></li>
+<li class="chapter" data-level="12.2.5" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#reshape"><i class="fa fa-check"></i><b>12.2.5</b> Reshape</a></li>
+<li class="chapter" data-level="12.2.6" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#group-operation"><i class="fa fa-check"></i><b>12.2.6</b> Group Operation</a></li>
+<li class="chapter" data-level="12.2.7" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#join"><i class="fa fa-check"></i><b>12.2.7</b> Join</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#visualization"><i class="fa fa-check"></i><b>12.3</b> Visualization</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#point"><i class="fa fa-check"></i><b>12.3.1</b> Point</a></li>
+<li class="chapter" data-level="12.3.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#line"><i class="fa fa-check"></i><b>12.3.2</b> Line</a></li>
+<li class="chapter" data-level="12.3.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#histogram"><i class="fa fa-check"></i><b>12.3.3</b> Histogram</a></li>
+<li class="chapter" data-level="12.3.4" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#boxplot"><i class="fa fa-check"></i><b>12.3.4</b> Boxplot</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html"><i class="fa fa-check"></i><b>13</b> Appendix: Base Plot</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#overview-2"><i class="fa fa-check"></i><b>13.1</b> Overview</a></li>
+<li class="chapter" data-level="13.2" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#plot"><i class="fa fa-check"></i><b>13.2</b> Plot</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#symbol"><i class="fa fa-check"></i><b>13.2.1</b> Symbol</a></li>
+<li class="chapter" data-level="13.2.2" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#symbol-size"><i class="fa fa-check"></i><b>13.2.2</b> Symbol size</a></li>
+<li class="chapter" data-level="13.2.3" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#symbol-color-border"><i class="fa fa-check"></i><b>13.2.3</b> Symbol color (border)</a></li>
+<li class="chapter" data-level="13.2.4" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#symbol-color-fill"><i class="fa fa-check"></i><b>13.2.4</b> Symbol color (fill)</a></li>
+<li class="chapter" data-level="13.2.5" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#label"><i class="fa fa-check"></i><b>13.2.5</b> Label</a></li>
+<li class="chapter" data-level="13.2.6" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#axis"><i class="fa fa-check"></i><b>13.2.6</b> Axis</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#boxplot-1"><i class="fa fa-check"></i><b>13.3</b> Boxplot</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#box-color"><i class="fa fa-check"></i><b>13.3.1</b> Box color</a></li>
+<li class="chapter" data-level="13.3.2" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#border-color"><i class="fa fa-check"></i><b>13.3.2</b> Border color</a></li>
+<li class="chapter" data-level="13.3.3" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#box-width"><i class="fa fa-check"></i><b>13.3.3</b> Box width</a></li>
+<li class="chapter" data-level="13.3.4" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#axis-1"><i class="fa fa-check"></i><b>13.3.4</b> Axis</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">BIOSTATS</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="probabilistic-view" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Probabilistic View<a href="probabilistic-view.html#probabilistic-view" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Chapter <a href="sampling.html#sampling">2</a> emphasized the concept of sampling and introduced the crucial aspect of statistics: randomness. Although the mean represents the central tendency of the data, it does not encompass all the data points. Inevitable deviations occur, and we need a way to express this “randomness.” The concept of probability distributions aids in fully understanding the stochastic nature of observed data.</p>
+<div id="probability-distribution-of-a-continuous-variable" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Probability Distribution of a Continuous Variable<a href="probabilistic-view.html#probability-distribution-of-a-continuous-variable" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="probability-density-function" class="section level3 hasAnchor" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Probability Density Function<a href="probabilistic-view.html#probability-density-function" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let me use the plant height example in Chapter <a href="sampling.html#sampling">2</a>:</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="probabilistic-view.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load csv data on R</span></span>
+<span id="cb77-2"><a href="probabilistic-view.html#cb77-2" aria-hidden="true" tabindex="-1"></a>df_h0 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data_raw/data_plant_height.csv&quot;</span>)</span></code></pre></div>
+<p>While Chapter <a href="sampling.html#sampling">2</a> primarily focused on exploring mean and variance, let’s broaden our perspective to gain a comprehensive understanding of the entire distribution of height.</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="probabilistic-view.html#cb78-1" aria-hidden="true" tabindex="-1"></a>df_h0 <span class="sc">%&gt;%</span> </span>
+<span id="cb78-2"><a href="probabilistic-view.html#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> height)) <span class="sc">+</span> </span>
+<span id="cb78-3"><a href="probabilistic-view.html#cb78-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="co"># specify binwidth</span></span>
+<span id="cb78-4"><a href="probabilistic-view.html#cb78-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(height))) <span class="co"># draw vertical line at the mean</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:histogram-height"></span>
+<img src="_main_files/figure-html/histogram-height-1.png" alt="Distribution of plant height" width="672" />
+<p class="caption">
+Figure 3.1: Distribution of plant height
+</p>
+</div>
+<p>This distribution comprises a thousand height measurements. However, there are certain patterns to consider. The data is centered around the mean and exhibits a symmetrical distribution. This characteristic implies that the distribution can be approximated by a simple formula that relies on only a few <em>key parameters</em>.</p>
+<p>In statistics, the symmetrical bell-shaped form is commonly approximated by a Normal distribution, often denoted as “<em>variable</em> <span class="math inline">\(x\)</span> <em>is assumed to follow a Normal distribution.</em>” We express this using the following mathematical expression:</p>
+<p><span class="math display">\[
+x \sim Normal(\mu, \sigma^2)
+\]</span></p>
+<p>Unlike an “equation,” we do not use the “<span class="math inline">\(=\)</span>” sign because variable <span class="math inline">\(x\)</span> is not equivalent to the Normal distribution. Rather, it represents a “stochastic” relationship that signifies the probability of <span class="math inline">\(x\)</span> taking on a specific range of values.</p>
+<p>A Normal distribution is characterized by two parameters: the mean and the variance. Once these parameters are determined, the formula that defines the Normal distribution will yield the probability density for a given range of values. This formula <span class="math inline">\(f(x)\)</span> is known as the <strong>probability density function (PDF)</strong> and is displayed below:</p>
+<p><span class="math display">\[
+f(x) = \frac{1}{\sqrt{2 \pi} \sigma} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
+\]</span></p>
+</div>
+<div id="pdf-to-frequency-distribution" class="section level3 hasAnchor" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> PDF to frequency distribution<a href="probabilistic-view.html#pdf-to-frequency-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In R, the function <code>dnorm()</code> can be used to calculate the probability density for a given value. The first argument, <code>x</code>, should be a vector of values for which you want to calculate the probability density. The second argument, <code>mean</code>, and the third argument, <code>sd</code>, correspond to the mean and standard deviation of the distribution, respectively. Note that we must provide <code>mean</code> and <code>sd</code> to calculate the probability density.</p>
+<p>To encompass the entire range of observed heights, we can use <span class="math inline">\(\text{min}(x)\)</span> and <span class="math inline">\(\text{max}(x)\)</span> as the lower and upper limits, respectively.</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="probabilistic-view.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># vector of x values</span></span>
+<span id="cb79-2"><a href="probabilistic-view.html#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="co"># seq() generate min to max values with specified numbers of elements or interval</span></span>
+<span id="cb79-3"><a href="probabilistic-view.html#cb79-3" aria-hidden="true" tabindex="-1"></a><span class="co"># the following produce 100 elements</span></span>
+<span id="cb79-4"><a href="probabilistic-view.html#cb79-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(df_h0<span class="sc">$</span>height), <span class="fu">max</span>(df_h0<span class="sc">$</span>height), <span class="at">length =</span> <span class="dv">100</span>)</span>
+<span id="cb79-5"><a href="probabilistic-view.html#cb79-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-6"><a href="probabilistic-view.html#cb79-6" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate probability density</span></span>
+<span id="cb79-7"><a href="probabilistic-view.html#cb79-7" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">mean</span>(df_h0<span class="sc">$</span>height)</span>
+<span id="cb79-8"><a href="probabilistic-view.html#cb79-8" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="fu">sd</span>(df_h0<span class="sc">$</span>height)</span>
+<span id="cb79-9"><a href="probabilistic-view.html#cb79-9" aria-hidden="true" tabindex="-1"></a>pd <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(x, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma)</span>
+<span id="cb79-10"><a href="probabilistic-view.html#cb79-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-11"><a href="probabilistic-view.html#cb79-11" aria-hidden="true" tabindex="-1"></a><span class="co"># figure</span></span>
+<span id="cb79-12"><a href="probabilistic-view.html#cb79-12" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">y =</span> pd, <span class="at">x =</span> x) <span class="sc">%&gt;%</span> <span class="co"># data frame</span></span>
+<span id="cb79-13"><a href="probabilistic-view.html#cb79-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb79-14"><a href="probabilistic-view.html#cb79-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="co"># draw lines</span></span>
+<span id="cb79-15"><a href="probabilistic-view.html#cb79-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Probability density&quot;</span>) <span class="co"># re-label</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:dnorm"></span>
+<img src="_main_files/figure-html/dnorm-1.png" alt="Probability density function of a Normal distribution" width="672" />
+<p class="caption">
+Figure 3.2: Probability density function of a Normal distribution
+</p>
+</div>
+<p>The shape of the curve appears quite similar to what we observed; however, the scale of the y-axis is different. This is because the y-axis represents “probability density.” To convert it into actual “probability,” we need to calculate the area under the curve. In R, we can utilize the <code>pnorm()</code> function for this purpose. It calculates the probability of a variable being less than the specified value, which is provided in the first argument <code>q</code>.</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="probabilistic-view.html#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># probability of x &lt; 10</span></span>
+<span id="cb80-2"><a href="probabilistic-view.html#cb80-2" aria-hidden="true" tabindex="-1"></a>p10 <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(<span class="at">q =</span> <span class="dv">10</span>, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma)</span>
+<span id="cb80-3"><a href="probabilistic-view.html#cb80-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p10)</span></code></pre></div>
+<pre><code>## [1] 0.02731905</code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="probabilistic-view.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># probability of x &lt; 20</span></span>
+<span id="cb82-2"><a href="probabilistic-view.html#cb82-2" aria-hidden="true" tabindex="-1"></a>p20 <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(<span class="at">q =</span> <span class="dv">20</span>, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma)</span>
+<span id="cb82-3"><a href="probabilistic-view.html#cb82-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p20)</span></code></pre></div>
+<pre><code>## [1] 0.504426</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="probabilistic-view.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="co"># probability of 10 &lt; x &lt; 20</span></span>
+<span id="cb84-2"><a href="probabilistic-view.html#cb84-2" aria-hidden="true" tabindex="-1"></a>p20_10 <span class="ot">&lt;-</span> p20 <span class="sc">-</span> p10</span>
+<span id="cb84-3"><a href="probabilistic-view.html#cb84-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p20_10)</span></code></pre></div>
+<pre><code>## [1] 0.4771069</code></pre>
+<p>To make the estimates comparable to the frequency data, you can calculate the probability for each 1 cm bin. The expected frequency can be obtained by multiplying the probability by the sample size, which in this case is 1000. This allows you to estimate the number of observations you would expect in each 1 cm bin based on the calculated probabilities.</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="probabilistic-view.html#cb86-1" aria-hidden="true" tabindex="-1"></a>x_min <span class="ot">&lt;-</span> <span class="fu">floor</span>(<span class="fu">min</span>(df_h0<span class="sc">$</span>height)) <span class="co"># floor takes the integer part of the value</span></span>
+<span id="cb86-2"><a href="probabilistic-view.html#cb86-2" aria-hidden="true" tabindex="-1"></a>x_max <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(<span class="fu">max</span>(df_h0<span class="sc">$</span>height)) <span class="co"># ceiling takes the next closest integer</span></span>
+<span id="cb86-3"><a href="probabilistic-view.html#cb86-3" aria-hidden="true" tabindex="-1"></a>bin <span class="ot">&lt;-</span> <span class="fu">seq</span>(x_min, x_max, <span class="at">by =</span> <span class="dv">1</span>) <span class="co"># each bin has 1cm</span></span>
+<span id="cb86-4"><a href="probabilistic-view.html#cb86-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-5"><a href="probabilistic-view.html#cb86-5" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="cn">NULL</span> <span class="co"># empty object for probability</span></span>
+<span id="cb86-6"><a href="probabilistic-view.html#cb86-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(<span class="fu">length</span>(bin) <span class="sc">-</span> <span class="dv">1</span>)) {</span>
+<span id="cb86-7"><a href="probabilistic-view.html#cb86-7" aria-hidden="true" tabindex="-1"></a>  p[i] <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(bin[i<span class="sc">+</span><span class="dv">1</span>], <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma) <span class="sc">-</span> <span class="fu">pnorm</span>(bin[i], <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma)</span>
+<span id="cb86-8"><a href="probabilistic-view.html#cb86-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb86-9"><a href="probabilistic-view.html#cb86-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-10"><a href="probabilistic-view.html#cb86-10" aria-hidden="true" tabindex="-1"></a><span class="co"># data frame for probability</span></span>
+<span id="cb86-11"><a href="probabilistic-view.html#cb86-11" aria-hidden="true" tabindex="-1"></a><span class="co"># bin: last element [-length(bin)] was removed to match length</span></span>
+<span id="cb86-12"><a href="probabilistic-view.html#cb86-12" aria-hidden="true" tabindex="-1"></a><span class="co"># expected frequency in each bin is &quot;prob times sample size&quot;</span></span>
+<span id="cb86-13"><a href="probabilistic-view.html#cb86-13" aria-hidden="true" tabindex="-1"></a>df_prob <span class="ot">&lt;-</span> <span class="fu">tibble</span>(p, <span class="at">bin =</span> bin[<span class="sc">-</span><span class="fu">length</span>(bin)]) <span class="sc">%&gt;%</span> </span>
+<span id="cb86-14"><a href="probabilistic-view.html#cb86-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">freq =</span> p <span class="sc">*</span> <span class="fu">nrow</span>(df_h0))</span></code></pre></div>
+<p>Overlay:</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="probabilistic-view.html#cb87-1" aria-hidden="true" tabindex="-1"></a>df_h0 <span class="sc">%&gt;%</span> </span>
+<span id="cb87-2"><a href="probabilistic-view.html#cb87-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> height)) <span class="sc">+</span> </span>
+<span id="cb87-3"><a href="probabilistic-view.html#cb87-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb87-4"><a href="probabilistic-view.html#cb87-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> df_prob,</span>
+<span id="cb87-5"><a href="probabilistic-view.html#cb87-5" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">y =</span> freq,</span>
+<span id="cb87-6"><a href="probabilistic-view.html#cb87-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">x =</span> bin),</span>
+<span id="cb87-7"><a href="probabilistic-view.html#cb87-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">&quot;salmon&quot;</span>) <span class="sc">+</span></span>
+<span id="cb87-8"><a href="probabilistic-view.html#cb87-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> df_prob,</span>
+<span id="cb87-9"><a href="probabilistic-view.html#cb87-9" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">y =</span> freq,</span>
+<span id="cb87-10"><a href="probabilistic-view.html#cb87-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">x =</span> bin),</span>
+<span id="cb87-11"><a href="probabilistic-view.html#cb87-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">&quot;salmon&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:histogram-overlaid"></span>
+<img src="_main_files/figure-html/histogram-overlaid-1.png" alt="Histogram overlaid with predicted frequency (red dots and line)" width="672" />
+<p class="caption">
+Figure 3.3: Histogram overlaid with predicted frequency (red dots and line)
+</p>
+</div>
+<p>It is remarkable that the probability distribution, characterized by just two parameters (mean and variance), can effectively reproduce the overall shape observed in the original data set of 1000 data points. This is great news because it means that once we determine these key parameters, we can infer the general pattern of the data.</p>
+</div>
+</div>
+<div id="probability-distribution-of-a-discrete-variable" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Probability Distribution of a Discrete Variable<a href="probabilistic-view.html#probability-distribution-of-a-discrete-variable" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="probability-mass-function" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Probability Mass Function<a href="probabilistic-view.html#probability-mass-function" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let’s shift our perspective and examine the density of plants in the garden. For this analysis, we have counted the number of plant individuals within 30 plots, with each plot covering an area of one square meter (refer to Figure <a href="probabilistic-view.html#fig:garden">3.4</a>).</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:garden"></span>
+<img src="image/figure_garden.jpg" alt="Garden view with sampling plots. White squares represent plots. Red dots indicate plant individuals counted." width="600" />
+<p class="caption">
+Figure 3.4: Garden view with sampling plots. White squares represent plots. Red dots indicate plant individuals counted.
+</p>
+</div>
+<p>Download the data <a href="https://github.com/aterui/biostats/blob/master/data_raw/data_garden_count.csv">here</a> and load it onto R:</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="probabilistic-view.html#cb88-1" aria-hidden="true" tabindex="-1"></a>df_count <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data_raw/data_garden_count.csv&quot;</span>)</span>
+<span id="cb88-2"><a href="probabilistic-view.html#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_count)</span></code></pre></div>
+<pre><code>## # A tibble: 30 × 3
+##     plot count nitrate
+##    &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+##  1     1     1    14.6
+##  2     2     4    32.6
+##  3     3     6    29.3
+##  4     4     4    30.4
+##  5     5     7    34.1
+##  6     6     2    26.6
+##  7     7     2    30.2
+##  8     8     2    28.7
+##  9     9     3    32.5
+## 10    10     2    26  
+## # ℹ 20 more rows</code></pre>
+<p>Make a histogram:</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="probabilistic-view.html#cb90-1" aria-hidden="true" tabindex="-1"></a>df_count <span class="sc">%&gt;%</span> </span>
+<span id="cb90-2"><a href="probabilistic-view.html#cb90-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> count)) <span class="sc">+</span></span>
+<span id="cb90-3"><a href="probabilistic-view.html#cb90-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>, <span class="co"># define binwidth</span></span>
+<span id="cb90-4"><a href="probabilistic-view.html#cb90-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">center =</span> <span class="dv">0</span>) <span class="co"># relative position of each bin</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:hist-density"></span>
+<img src="_main_files/figure-html/hist-density-1.png" alt="Histogram of plant individuals per plot" width="672" />
+<p class="caption">
+Figure 3.5: Histogram of plant individuals per plot
+</p>
+</div>
+<p>There are several significant differences compared to the plant height example when considering the density of plants in the garden:</p>
+<ol style="list-style-type: decimal">
+<li><p>The possible values are discrete (count data) since we are counting the number of plant individuals in each plot.</p></li>
+<li><p>The possible values are always positive, as counts cannot be negative.</p></li>
+<li><p>The distribution appears to be non-symmetric around the sample mean.</p></li>
+</ol>
+<p>Given these characteristics, a Normal distribution may not be an appropriate choice for representing such a variable. Instead, it would be more suitable to use a Poisson distribution to characterize the observed distribution of the discrete variable.</p>
+<p><span class="math display">\[
+x \sim Poisson(\lambda)
+\]</span></p>
+<p>In a Poisson distribution, the mean parameter (<span class="math inline">\(\lambda\)</span>) serves as the sole parameter<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. Probability distributions that describe discrete variables are expressed using a <strong>probability mass function</strong> (PMF):</p>
+<p><span class="math display">\[
+g(x) = \frac{\lambda^x \exp(-\lambda)}{x!}
+\]</span></p>
+<p>Unlike a probability density function (PDF), a probability mass function (PMF) represents the probability of a discrete variable <span class="math inline">\(x\)</span> taking a specific value. For instance, the probability of <span class="math inline">\(x=2\)</span>, denoted as <span class="math inline">\(\Pr(x=2)\)</span>, can be calculated as follows:</p>
+<p><span class="math display">\[
+\Pr(x=2) = g(2) = \frac{\lambda^2 \exp(-\lambda)}{2!}
+\]</span></p>
+<p>In a generalized form, we write:</p>
+<p><span class="math display">\[
+\Pr(x=k) = g(k) = \frac{\lambda^k \exp(-\lambda)}{k!}
+\]</span></p>
+</div>
+<div id="pmf-to-frequency-distribution" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> PMF to frequency distribution<a href="probabilistic-view.html#pmf-to-frequency-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In R, you can use the <code>dpois()</code> function to visualize a Poisson distribution. This function allows you to plot the probability mass function (PMF) of the Poisson distribution and gain insights into the distribution of the discrete variable.</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="probabilistic-view.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="co"># vector of x values</span></span>
+<span id="cb91-2"><a href="probabilistic-view.html#cb91-2" aria-hidden="true" tabindex="-1"></a><span class="co"># create a vector of 0 to 10 with an interval one</span></span>
+<span id="cb91-3"><a href="probabilistic-view.html#cb91-3" aria-hidden="true" tabindex="-1"></a><span class="co"># must be integer of &gt; 0</span></span>
+<span id="cb91-4"><a href="probabilistic-view.html#cb91-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
+<span id="cb91-5"><a href="probabilistic-view.html#cb91-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-6"><a href="probabilistic-view.html#cb91-6" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate probability mass</span></span>
+<span id="cb91-7"><a href="probabilistic-view.html#cb91-7" aria-hidden="true" tabindex="-1"></a>lambda_hat <span class="ot">&lt;-</span> <span class="fu">mean</span>(df_count<span class="sc">$</span>count)</span>
+<span id="cb91-8"><a href="probabilistic-view.html#cb91-8" aria-hidden="true" tabindex="-1"></a>pm <span class="ot">&lt;-</span> <span class="fu">dpois</span>(x, <span class="at">lambda =</span> lambda_hat)</span>
+<span id="cb91-9"><a href="probabilistic-view.html#cb91-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-10"><a href="probabilistic-view.html#cb91-10" aria-hidden="true" tabindex="-1"></a><span class="co"># figure</span></span>
+<span id="cb91-11"><a href="probabilistic-view.html#cb91-11" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">y =</span> pm, <span class="at">x =</span> x) <span class="sc">%&gt;%</span> <span class="co"># data frame</span></span>
+<span id="cb91-12"><a href="probabilistic-view.html#cb91-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb91-13"><a href="probabilistic-view.html#cb91-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span> <span class="co"># draw dashed lines</span></span>
+<span id="cb91-14"><a href="probabilistic-view.html#cb91-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="co"># draw points</span></span>
+<span id="cb91-15"><a href="probabilistic-view.html#cb91-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Probability&quot;</span>,</span>
+<span id="cb91-16"><a href="probabilistic-view.html#cb91-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Count&quot;</span>) <span class="co"># re-label</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:dpois"></span>
+<img src="_main_files/figure-html/dpois-1.png" alt="Example of a Poisson distribution" width="672" />
+<p class="caption">
+Figure 3.6: Example of a Poisson distribution
+</p>
+</div>
+<p>To convert the y-axis from probability to frequency, multiply the probabilities by the sample size (total number of observations) to obtain the expected frequency. As in the plant height example, you can plot the expected frequency on the histogram, providing a visual representation of the distribution of the discrete variable.</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="probabilistic-view.html#cb92-1" aria-hidden="true" tabindex="-1"></a>df_prob <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> x, <span class="at">y =</span> pm) <span class="sc">%&gt;%</span> </span>
+<span id="cb92-2"><a href="probabilistic-view.html#cb92-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">freq =</span> y <span class="sc">*</span> <span class="fu">nrow</span>(df_count)) <span class="co"># prob x sample size</span></span>
+<span id="cb92-3"><a href="probabilistic-view.html#cb92-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-4"><a href="probabilistic-view.html#cb92-4" aria-hidden="true" tabindex="-1"></a>df_count <span class="sc">%&gt;%</span> </span>
+<span id="cb92-5"><a href="probabilistic-view.html#cb92-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> count)) <span class="sc">+</span></span>
+<span id="cb92-6"><a href="probabilistic-view.html#cb92-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>,</span>
+<span id="cb92-7"><a href="probabilistic-view.html#cb92-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">center =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb92-8"><a href="probabilistic-view.html#cb92-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> df_prob,</span>
+<span id="cb92-9"><a href="probabilistic-view.html#cb92-9" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x =</span> x,</span>
+<span id="cb92-10"><a href="probabilistic-view.html#cb92-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> freq),</span>
+<span id="cb92-11"><a href="probabilistic-view.html#cb92-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
+<span id="cb92-12"><a href="probabilistic-view.html#cb92-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> df_prob,</span>
+<span id="cb92-13"><a href="probabilistic-view.html#cb92-13" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> x,</span>
+<span id="cb92-14"><a href="probabilistic-view.html#cb92-14" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> freq))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:pois-hist"></span>
+<img src="_main_files/figure-html/pois-hist-1.png" alt="Observed histogram of the discrete variable overlaid with the Poisson expectation." width="672" />
+<p class="caption">
+Figure 3.7: Observed histogram of the discrete variable overlaid with the Poisson expectation.
+</p>
+</div>
+<p>Cool, the Poisson distribution does an excellent job of characterizing the distribution of plant counts.</p>
+</div>
+</div>
+<div id="why-probability-distributions" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Why Probability Distributions?<a href="probabilistic-view.html#why-probability-distributions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>As we have seen in the above examples, probability distributions provide a framework for describing the likelihood of different outcomes or events. By utilizing probability distributions, we can:</p>
+<ol style="list-style-type: decimal">
+<li>Make predictions and estimate probabilities of specific events or ranges of values.</li>
+<li>Determine the most likely values or outcomes based on available information.</li>
+<li>Quantify and analyze the uncertainty associated with random variables or processes.</li>
+</ol>
+<p>Probability distributions serve as fundamental tools in statistics, enabling us to model, analyze, and make informed decisions in the face of uncertainty.</p>
+</div>
+<div id="laboratory-2" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Laboratory<a href="probabilistic-view.html#laboratory-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="normal-distribution" class="section level3 hasAnchor" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> Normal Distribution<a href="probabilistic-view.html#normal-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The function <code>rnorm()</code> produces a random variable that follows a Normal distribution with a specified mean and SD. Using this function,</p>
+<ol style="list-style-type: decimal">
+<li>Generate a variable with 50 observations.</li>
+<li>Create a figure similar to Figure <a href="probabilistic-view.html#fig:histogram-overlaid">3.3</a></li>
+</ol>
+</div>
+<div id="poisson-distribution" class="section level3 hasAnchor" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> Poisson Distribution<a href="probabilistic-view.html#poisson-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The function <code>rpois()</code> produces a random variable that follows a Poisson distribution with a specified mean. Using this function,</p>
+<ol style="list-style-type: decimal">
+<li>Generate a variable with 1000 observations.</li>
+<li>Create a figure similar to Figure <a href="probabilistic-view.html#fig:pois-hist">3.7</a></li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>In a Poisson distribution, mean = variance<a href="probabilistic-view.html#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="sampling.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="two-group-comparison.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/aterui/biostats/chapters/03-probability.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 Regression | BIOSTATS</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 Regression | BIOSTATS" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Regression | BIOSTATS" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Akira Terui" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="multiple-group-comparison.html"/>
+<link rel="next" href="linear-model.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">BIOSTATS</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html"><i class="fa fa-check"></i><b>1</b> Descriptive Statistics</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#central-tendency"><i class="fa fa-check"></i><b>1.1</b> Central Tendency</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#measures-of-central-tendency"><i class="fa fa-check"></i><b>1.1.1</b> Measures of Central Tendency</a></li>
+<li class="chapter" data-level="1.1.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#r-exercise"><i class="fa fa-check"></i><b>1.1.2</b> R Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#variation"><i class="fa fa-check"></i><b>1.2</b> Variation</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#measures-of-variation"><i class="fa fa-check"></i><b>1.2.1</b> Measures of Variation</a></li>
+<li class="chapter" data-level="1.2.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#r-exercise-1"><i class="fa fa-check"></i><b>1.2.2</b> R Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#laboratory"><i class="fa fa-check"></i><b>1.3</b> Laboratory</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#comparing-central-tendency-measures"><i class="fa fa-check"></i><b>1.3.1</b> Comparing Central Tendency Measures</a></li>
+<li class="chapter" data-level="1.3.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#comparing-variation-measures"><i class="fa fa-check"></i><b>1.3.2</b> Comparing Variation Measures</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="sampling.html"><a href="sampling.html"><i class="fa fa-check"></i><b>2</b> Sampling</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="sampling.html"><a href="sampling.html#the-unknown-garden-plant-example"><i class="fa fa-check"></i><b>2.1</b> The Unknown: Garden Plant Example</a></li>
+<li class="chapter" data-level="2.2" data-path="sampling.html"><a href="sampling.html#linking-part-to-the-whole"><i class="fa fa-check"></i><b>2.2</b> Linking Part to the Whole</a></li>
+<li class="chapter" data-level="2.3" data-path="sampling.html"><a href="sampling.html#laboratory-1"><i class="fa fa-check"></i><b>2.3</b> Laboratory</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="probabilistic-view.html"><a href="probabilistic-view.html"><i class="fa fa-check"></i><b>3</b> Probabilistic View</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="probabilistic-view.html"><a href="probabilistic-view.html#probability-distribution-of-a-continuous-variable"><i class="fa fa-check"></i><b>3.1</b> Probability Distribution of a Continuous Variable</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="probabilistic-view.html"><a href="probabilistic-view.html#probability-density-function"><i class="fa fa-check"></i><b>3.1.1</b> Probability Density Function</a></li>
+<li class="chapter" data-level="3.1.2" data-path="probabilistic-view.html"><a href="probabilistic-view.html#pdf-to-frequency-distribution"><i class="fa fa-check"></i><b>3.1.2</b> PDF to frequency distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="probabilistic-view.html"><a href="probabilistic-view.html#probability-distribution-of-a-discrete-variable"><i class="fa fa-check"></i><b>3.2</b> Probability Distribution of a Discrete Variable</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="probabilistic-view.html"><a href="probabilistic-view.html#probability-mass-function"><i class="fa fa-check"></i><b>3.2.1</b> Probability Mass Function</a></li>
+<li class="chapter" data-level="3.2.2" data-path="probabilistic-view.html"><a href="probabilistic-view.html#pmf-to-frequency-distribution"><i class="fa fa-check"></i><b>3.2.2</b> PMF to frequency distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="probabilistic-view.html"><a href="probabilistic-view.html#why-probability-distributions"><i class="fa fa-check"></i><b>3.3</b> Why Probability Distributions?</a></li>
+<li class="chapter" data-level="3.4" data-path="probabilistic-view.html"><a href="probabilistic-view.html#laboratory-2"><i class="fa fa-check"></i><b>3.4</b> Laboratory</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="probabilistic-view.html"><a href="probabilistic-view.html#normal-distribution"><i class="fa fa-check"></i><b>3.4.1</b> Normal Distribution</a></li>
+<li class="chapter" data-level="3.4.2" data-path="probabilistic-view.html"><a href="probabilistic-view.html#poisson-distribution"><i class="fa fa-check"></i><b>3.4.2</b> Poisson Distribution</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="two-group-comparison.html"><a href="two-group-comparison.html"><i class="fa fa-check"></i><b>4</b> Two-Group Comparison</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="two-group-comparison.html"><a href="two-group-comparison.html#explore-data-structure"><i class="fa fa-check"></i><b>4.1</b> Explore Data Structure</a></li>
+<li class="chapter" data-level="4.2" data-path="two-group-comparison.html"><a href="two-group-comparison.html#test-statistic"><i class="fa fa-check"></i><b>4.2</b> Test Statistic</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="two-group-comparison.html"><a href="two-group-comparison.html#t-statistic"><i class="fa fa-check"></i><b>4.2.1</b> t-statistic</a></li>
+<li class="chapter" data-level="4.2.2" data-path="two-group-comparison.html"><a href="two-group-comparison.html#null-hypothesis"><i class="fa fa-check"></i><b>4.2.2</b> Null Hypothesis</a></li>
+<li class="chapter" data-level="4.2.3" data-path="two-group-comparison.html"><a href="two-group-comparison.html#interpretation"><i class="fa fa-check"></i><b>4.2.3</b> Interpretation</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="two-group-comparison.html"><a href="two-group-comparison.html#t-test-in-r"><i class="fa fa-check"></i><b>4.3</b> t-test in R</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="two-group-comparison.html"><a href="two-group-comparison.html#t-test-with-equal-variance"><i class="fa fa-check"></i><b>4.3.1</b> t-test with equal variance</a></li>
+<li class="chapter" data-level="4.3.2" data-path="two-group-comparison.html"><a href="two-group-comparison.html#t-test-with-unequal-variance"><i class="fa fa-check"></i><b>4.3.2</b> t-test with unequal variance</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="two-group-comparison.html"><a href="two-group-comparison.html#laboratory-3"><i class="fa fa-check"></i><b>4.4</b> Laboratory</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html"><i class="fa fa-check"></i><b>5</b> Multiple-Group Comparison</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#partition-the-variability"><i class="fa fa-check"></i><b>5.1</b> Partition the Variability</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#between-group-variability"><i class="fa fa-check"></i><b>5.1.1</b> Between-group variability</a></li>
+<li class="chapter" data-level="5.1.2" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#within-group-variability"><i class="fa fa-check"></i><b>5.1.2</b> Within-group variability</a></li>
+<li class="chapter" data-level="5.1.3" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#variability-to-variance"><i class="fa fa-check"></i><b>5.1.3</b> Variability to Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#test-statistic-1"><i class="fa fa-check"></i><b>5.2</b> Test Statistic</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#f-statistic"><i class="fa fa-check"></i><b>5.2.1</b> F-statistic</a></li>
+<li class="chapter" data-level="5.2.2" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#null-hypothesis-1"><i class="fa fa-check"></i><b>5.2.2</b> Null Hypothesis</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#anova-in-r"><i class="fa fa-check"></i><b>5.3</b> ANOVA in R</a></li>
+<li class="chapter" data-level="5.4" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#post-hoc-tests"><i class="fa fa-check"></i><b>5.4</b> Post-hoc Tests</a></li>
+<li class="chapter" data-level="5.5" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#laboratory-4"><i class="fa fa-check"></i><b>5.5</b> Laboratory</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="regression.html"><a href="regression.html"><i class="fa fa-check"></i><b>6</b> Regression</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="regression.html"><a href="regression.html#explore-data-structure-1"><i class="fa fa-check"></i><b>6.1</b> Explore Data Structure</a></li>
+<li class="chapter" data-level="6.2" data-path="regression.html"><a href="regression.html#drawing-the-fittest-line"><i class="fa fa-check"></i><b>6.2</b> Drawing the “fittest” line</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="regression.html"><a href="regression.html#linear-formula"><i class="fa fa-check"></i><b>6.2.1</b> Linear formula</a></li>
+<li class="chapter" data-level="6.2.2" data-path="regression.html"><a href="regression.html#minimizing-the-errors"><i class="fa fa-check"></i><b>6.2.2</b> Minimizing the errors</a></li>
+<li class="chapter" data-level="6.2.3" data-path="regression.html"><a href="regression.html#least-squares"><i class="fa fa-check"></i><b>6.2.3</b> Least Squares</a></li>
+<li class="chapter" data-level="6.2.4" data-path="regression.html"><a href="regression.html#standard-errors-and-t-values"><i class="fa fa-check"></i><b>6.2.4</b> Standard Errors and t-values</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="regression.html"><a href="regression.html#unexplained-variation"><i class="fa fa-check"></i><b>6.3</b> Unexplained Variation</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="regression.html"><a href="regression.html#retrieve-errors"><i class="fa fa-check"></i><b>6.3.1</b> Retrieve Errors</a></li>
+<li class="chapter" data-level="6.3.2" data-path="regression.html"><a href="regression.html#visualize-errors"><i class="fa fa-check"></i><b>6.3.2</b> Visualize Errors</a></li>
+<li class="chapter" data-level="6.3.3" data-path="regression.html"><a href="regression.html#coefficient-of-determination"><i class="fa fa-check"></i><b>6.3.3</b> Coefficient of Determination</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="regression.html"><a href="regression.html#laboratory-5"><i class="fa fa-check"></i><b>6.4</b> Laboratory</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="linear-model.html"><a href="linear-model.html"><i class="fa fa-check"></i><b>7</b> Linear Model</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="linear-model.html"><a href="linear-model.html#the-frame"><i class="fa fa-check"></i><b>7.1</b> The Frame</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="linear-model.html"><a href="linear-model.html#two-group-case"><i class="fa fa-check"></i><b>7.1.1</b> Two-Group Case</a></li>
+<li class="chapter" data-level="7.1.2" data-path="linear-model.html"><a href="linear-model.html#multiple-group-case"><i class="fa fa-check"></i><b>7.1.2</b> Multiple-Group Case</a></li>
+<li class="chapter" data-level="7.1.3" data-path="linear-model.html"><a href="linear-model.html#the-common-structure"><i class="fa fa-check"></i><b>7.1.3</b> The Common Structure</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="linear-model.html"><a href="linear-model.html#combine-multiple-types-of-variables"><i class="fa fa-check"></i><b>7.2</b> Combine Multiple Types of Variables</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="linear-model.html"><a href="linear-model.html#iris-example"><i class="fa fa-check"></i><b>7.2.1</b> <code>iris</code> Example</a></li>
+<li class="chapter" data-level="7.2.2" data-path="linear-model.html"><a href="linear-model.html#variable-types"><i class="fa fa-check"></i><b>7.2.2</b> Variable Types</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="linear-model.html"><a href="linear-model.html#laboratory-6"><i class="fa fa-check"></i><b>7.3</b> Laboratory</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html"><i class="fa fa-check"></i><b>8</b> Generalized Linear Model</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html#count-data"><i class="fa fa-check"></i><b>8.1</b> Count Data</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html#plant-density"><i class="fa fa-check"></i><b>8.1.1</b> Plant Density</a></li>
+<li class="chapter" data-level="8.1.2" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html#poisson-model"><i class="fa fa-check"></i><b>8.1.2</b> Poisson Model</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html#proportional-data"><i class="fa fa-check"></i><b>8.2</b> Proportional Data</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html#mussel-egg-fertilization"><i class="fa fa-check"></i><b>8.2.1</b> Mussel Egg Fertilization</a></li>
+<li class="chapter" data-level="8.2.2" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html#binomial-model"><i class="fa fa-check"></i><b>8.2.2</b> Binomial Model</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html#the-glm-framework"><i class="fa fa-check"></i><b>8.3</b> The GLM Framework</a></li>
+<li class="chapter" data-level="8.4" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html#laboratory-7"><i class="fa fa-check"></i><b>8.4</b> Laboratory</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="appendix-project-management.html"><a href="appendix-project-management.html"><i class="fa fa-check"></i><b>9</b> Appendix: Project Management</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="appendix-project-management.html"><a href="appendix-project-management.html#r-project"><i class="fa fa-check"></i><b>9.1</b> R Project</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="appendix-project-management.html"><a href="appendix-project-management.html#script-editor"><i class="fa fa-check"></i><b>9.1.1</b> Script Editor</a></li>
+<li class="chapter" data-level="9.1.2" data-path="appendix-project-management.html"><a href="appendix-project-management.html#file-name"><i class="fa fa-check"></i><b>9.1.2</b> File Name</a></li>
+<li class="chapter" data-level="9.1.3" data-path="appendix-project-management.html"><a href="appendix-project-management.html#structure-your-project"><i class="fa fa-check"></i><b>9.1.3</b> Structure Your Project</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="appendix-project-management.html"><a href="appendix-project-management.html#robust-coding"><i class="fa fa-check"></i><b>9.2</b> Robust coding</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="appendix-git-github.html"><a href="appendix-git-github.html"><i class="fa fa-check"></i><b>10</b> Appendix: Git &amp; GitHub</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="appendix-git-github.html"><a href="appendix-git-github.html#git-github"><i class="fa fa-check"></i><b>10.1</b> Git &amp; GitHub</a></li>
+<li class="chapter" data-level="10.2" data-path="appendix-git-github.html"><a href="appendix-git-github.html#commit-push"><i class="fa fa-check"></i><b>10.2</b> Commit &amp; Push</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="appendix-git-github.html"><a href="appendix-git-github.html#register-your-git-repo"><i class="fa fa-check"></i><b>10.2.1</b> Register Your Git repo</a></li>
+<li class="chapter" data-level="10.2.2" data-path="appendix-git-github.html"><a href="appendix-git-github.html#commit"><i class="fa fa-check"></i><b>10.2.2</b> Commit</a></li>
+<li class="chapter" data-level="10.2.3" data-path="appendix-git-github.html"><a href="appendix-git-github.html#push"><i class="fa fa-check"></i><b>10.2.3</b> Push</a></li>
+<li class="chapter" data-level="10.2.4" data-path="appendix-git-github.html"><a href="appendix-git-github.html#edit"><i class="fa fa-check"></i><b>10.2.4</b> Edit</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html"><i class="fa fa-check"></i><b>11</b> Appendix: Data Structure</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#overview"><i class="fa fa-check"></i><b>11.1</b> Overview</a></li>
+<li class="chapter" data-level="11.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#vector"><i class="fa fa-check"></i><b>11.2</b> Vector</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#create-vector"><i class="fa fa-check"></i><b>11.2.1</b> Create Vector</a></li>
+<li class="chapter" data-level="11.2.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#check-features"><i class="fa fa-check"></i><b>11.2.2</b> Check Features</a></li>
+<li class="chapter" data-level="11.2.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#access"><i class="fa fa-check"></i><b>11.2.3</b> Access</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#matrix"><i class="fa fa-check"></i><b>11.3</b> Matrix</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#create-matrix"><i class="fa fa-check"></i><b>11.3.1</b> Create Matrix</a></li>
+<li class="chapter" data-level="11.3.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#check-features-1"><i class="fa fa-check"></i><b>11.3.2</b> Check Features</a></li>
+<li class="chapter" data-level="11.3.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#access-1"><i class="fa fa-check"></i><b>11.3.3</b> Access</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#data-frame"><i class="fa fa-check"></i><b>11.4</b> Data Frame</a></li>
+<li class="chapter" data-level="11.5" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#exercise"><i class="fa fa-check"></i><b>11.5</b> Exercise</a>
+<ul>
+<li class="chapter" data-level="11.5.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#vector-1"><i class="fa fa-check"></i><b>11.5.1</b> Vector</a></li>
+<li class="chapter" data-level="11.5.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#matrix-1"><i class="fa fa-check"></i><b>11.5.2</b> Matrix</a></li>
+<li class="chapter" data-level="11.5.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#data-frame-1"><i class="fa fa-check"></i><b>11.5.3</b> Data Frame</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html"><i class="fa fa-check"></i><b>12</b> Appendix: Tidyverse</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#overview-1"><i class="fa fa-check"></i><b>12.1</b> Overview</a></li>
+<li class="chapter" data-level="12.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#data-manipulation"><i class="fa fa-check"></i><b>12.2</b> Data Manipulation</a>
+<ul>
+<li class="chapter" data-level="12.2.1" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#data-format"><i class="fa fa-check"></i><b>12.2.1</b> Data Format</a></li>
+<li class="chapter" data-level="12.2.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#row-manipulation"><i class="fa fa-check"></i><b>12.2.2</b> Row Manipulation</a></li>
+<li class="chapter" data-level="12.2.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#column-manipulation"><i class="fa fa-check"></i><b>12.2.3</b> Column Manipulation</a></li>
+<li class="chapter" data-level="12.2.4" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#piping"><i class="fa fa-check"></i><b>12.2.4</b> Piping</a></li>
+<li class="chapter" data-level="12.2.5" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#reshape"><i class="fa fa-check"></i><b>12.2.5</b> Reshape</a></li>
+<li class="chapter" data-level="12.2.6" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#group-operation"><i class="fa fa-check"></i><b>12.2.6</b> Group Operation</a></li>
+<li class="chapter" data-level="12.2.7" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#join"><i class="fa fa-check"></i><b>12.2.7</b> Join</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#visualization"><i class="fa fa-check"></i><b>12.3</b> Visualization</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#point"><i class="fa fa-check"></i><b>12.3.1</b> Point</a></li>
+<li class="chapter" data-level="12.3.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#line"><i class="fa fa-check"></i><b>12.3.2</b> Line</a></li>
+<li class="chapter" data-level="12.3.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#histogram"><i class="fa fa-check"></i><b>12.3.3</b> Histogram</a></li>
+<li class="chapter" data-level="12.3.4" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#boxplot"><i class="fa fa-check"></i><b>12.3.4</b> Boxplot</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html"><i class="fa fa-check"></i><b>13</b> Appendix: Base Plot</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#overview-2"><i class="fa fa-check"></i><b>13.1</b> Overview</a></li>
+<li class="chapter" data-level="13.2" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#plot"><i class="fa fa-check"></i><b>13.2</b> Plot</a>
+<ul>
+<li class="chapter" data-level="13.2.1" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#symbol"><i class="fa fa-check"></i><b>13.2.1</b> Symbol</a></li>
+<li class="chapter" data-level="13.2.2" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#symbol-size"><i class="fa fa-check"></i><b>13.2.2</b> Symbol size</a></li>
+<li class="chapter" data-level="13.2.3" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#symbol-color-border"><i class="fa fa-check"></i><b>13.2.3</b> Symbol color (border)</a></li>
+<li class="chapter" data-level="13.2.4" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#symbol-color-fill"><i class="fa fa-check"></i><b>13.2.4</b> Symbol color (fill)</a></li>
+<li class="chapter" data-level="13.2.5" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#label"><i class="fa fa-check"></i><b>13.2.5</b> Label</a></li>
+<li class="chapter" data-level="13.2.6" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#axis"><i class="fa fa-check"></i><b>13.2.6</b> Axis</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#boxplot-1"><i class="fa fa-check"></i><b>13.3</b> Boxplot</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#box-color"><i class="fa fa-check"></i><b>13.3.1</b> Box color</a></li>
+<li class="chapter" data-level="13.3.2" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#border-color"><i class="fa fa-check"></i><b>13.3.2</b> Border color</a></li>
+<li class="chapter" data-level="13.3.3" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#box-width"><i class="fa fa-check"></i><b>13.3.3</b> Box width</a></li>
+<li class="chapter" data-level="13.3.4" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#axis-1"><i class="fa fa-check"></i><b>13.3.4</b> Axis</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">BIOSTATS</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="regression" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Chapter 6</span> Regression<a href="regression.html#regression" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Our previous examples focused on cases that involved a distinct group structure. However, it is not always the case that such a structure exists. Instead, we might examine the relationship between continuous variables. In this chapter, I will introduce a technique called linear regression.</p>
+<div id="explore-data-structure-1" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Explore Data Structure<a href="regression.html#explore-data-structure-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>For this exercise, we will use algae biomass data from streams. Download the data <a href="https://github.com/aterui/biostats/blob/master/data_raw/data_algae.csv">here</a> and locate it in <code>data_raw/</code>.</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="regression.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb149-2"><a href="regression.html#cb149-2" aria-hidden="true" tabindex="-1"></a>df_algae <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data_raw/data_algae.csv&quot;</span>)</span>
+<span id="cb149-3"><a href="regression.html#cb149-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_algae)</span></code></pre></div>
+<pre><code>## # A tibble: 50 × 4
+##    biomass unit_biomass conductivity unit_cond
+##      &lt;dbl&gt; &lt;chr&gt;               &lt;dbl&gt; &lt;chr&gt;    
+##  1   19.8  mg_per_m2            30.2 ms       
+##  2   24.4  mg_per_m2            40.4 ms       
+##  3   27.4  mg_per_m2            59.4 ms       
+##  4   48.2  mg_per_m2            91.3 ms       
+##  5   19.2  mg_per_m2            24.2 ms       
+##  6   57.0  mg_per_m2            90.4 ms       
+##  7   51.9  mg_per_m2            94.7 ms       
+##  8   40.8  mg_per_m2            67.8 ms       
+##  9   37.1  mg_per_m2            64.8 ms       
+## 10    3.55 mg_per_m2            10.9 ms       
+## # ℹ 40 more rows</code></pre>
+<p>This dataset comprises data collected from 50 sampling sites. The variable <code>biomass</code> represents the standing biomass, indicating the dry mass of algae at the time of collection. On the other hand, <code>conductivity</code> serves as a proxy for water quality, with higher values usually indicating a higher nutrient content in the water. Let me now proceed to draw a scatter plot that will help visualize the relationship between these two variables.</p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="regression.html#cb151-1" aria-hidden="true" tabindex="-1"></a>df_algae <span class="sc">%&gt;%</span> </span>
+<span id="cb151-2"><a href="regression.html#cb151-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> conductivity,</span>
+<span id="cb151-3"><a href="regression.html#cb151-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> biomass)) <span class="sc">+</span></span>
+<span id="cb151-4"><a href="regression.html#cb151-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:scatter"></span>
+<img src="_main_files/figure-html/scatter-1.png" alt="The relationship between algae biomass and conductivity." width="672" />
+<p class="caption">
+Figure 6.1: The relationship between algae biomass and conductivity.
+</p>
+</div>
+<p>It seems that there is a noticeable positive correlation where increased conductivity results in higher algal biomass. Nevertheless, how can we accurately represent this relationship with a line?</p>
+</div>
+<div id="drawing-the-fittest-line" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Drawing the “fittest” line<a href="regression.html#drawing-the-fittest-line" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="linear-formula" class="section level3 hasAnchor" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> Linear formula<a href="regression.html#linear-formula" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The first step is to represent the relationship as a formula; let me ASSUME that the relationship can be described by the following linear formula:</p>
+<p><span class="math display">\[
+y_i = \alpha + \beta x_i
+\]</span></p>
+<p>In this formula, the algal biomass, denoted as <span class="math inline">\(y_i\)</span>, at site <span class="math inline">\(i\)</span>, is expressed as a function of conductivity, represented by <span class="math inline">\(x_i\)</span>. The variable being explained (<span class="math inline">\(y_i\)</span>) is referred to as a <strong>response (or dependent) variable</strong>, while the variable used to predict the response variable (<span class="math inline">\(x_i\)</span>) is referred to as <strong>an explanatory (or independent) variable.</strong> However, there are two additional constants, namely <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>. <span class="math inline">\(\alpha\)</span> is commonly known as the <strong>intercept</strong>, while <span class="math inline">\(\beta\)</span> is referred to as the <strong>slope</strong> or <strong>coefficient</strong>. The intercept represents the value of <span class="math inline">\(y\)</span> when <span class="math inline">\(x\)</span> is equal to zero, while the slope indicates the change in <span class="math inline">\(y\)</span> associated with a unit increase in <span class="math inline">\(x\)</span> (refer to Figure <a href="regression.html#fig:intercept-slope">6.2</a>).</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:intercept-slope"></span>
+<img src="image/figure_lm.png" alt="Intercept and slope." width="525" />
+<p class="caption">
+Figure 6.2: Intercept and slope.
+</p>
+</div>
+<p>However, this formula, or “model,” is incomplete. We must add the error term <span class="math inline">\(\varepsilon_i\)</span> (<strong>residual</strong>) to consider the uncertainty associated with the observation process.</p>
+<p><span class="math display">\[
+y_i = \alpha + \beta x_i + \varepsilon_i\\
+\varepsilon_i \sim \text{Normal}(0, \sigma^2)
+\]</span></p>
+<p>Notice that <span class="math inline">\(y_i\)</span>, <span class="math inline">\(x_i\)</span>, and <span class="math inline">\(\varepsilon_i\)</span> have subscripts, while <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> do not. This means that <span class="math inline">\(y_i\)</span>, <span class="math inline">\(x_i\)</span>, and <span class="math inline">\(\varepsilon_i\)</span> vary by data point <span class="math inline">\(i\)</span>, and <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are constants. Although <span class="math inline">\(\alpha + \beta x_i\)</span> cannot reproduce <span class="math inline">\(y_i\)</span> perfectly, we “fill” the gaps with the error term <span class="math inline">\(\varepsilon_i\)</span>, which is assumed to follow a Normal distribution.</p>
+<p>In R, finding the best <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> – i.e., the parameters in this model – is very easy. Function <code>lm()</code> does everything for you. Let me apply this function to the example data set:</p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="regression.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="co"># lm() takes a formula as the first argument</span></span>
+<span id="cb152-2"><a href="regression.html#cb152-2" aria-hidden="true" tabindex="-1"></a><span class="co"># don&#39;t forget to supply your data</span></span>
+<span id="cb152-3"><a href="regression.html#cb152-3" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(biomass <span class="sc">~</span> conductivity,</span>
+<span id="cb152-4"><a href="regression.html#cb152-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> df_algae)</span>
+<span id="cb152-5"><a href="regression.html#cb152-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb152-6"><a href="regression.html#cb152-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = biomass ~ conductivity, data = df_algae)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -9.5578 -2.8729 -0.7307  2.5479 11.4700 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   5.29647    1.57178    3.37  0.00149 ** 
+## conductivity  0.50355    0.02568   19.61  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 4.649 on 48 degrees of freedom
+## Multiple R-squared:  0.889,  Adjusted R-squared:  0.8867 
+## F-statistic: 384.5 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>In <code>Coefficients:</code>, it says <code>(Intercept)</code> is 5.3 and <code>conductivity</code> is 0.5. These values corresponds to <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>. Meanwhile, <code>Residual standard error:</code> indicates the SD of the error term <span class="math inline">\(\sigma\)</span>. Thus, substituting these values into the formula yields:</p>
+<p><span class="math display">\[
+y_i = 5.30 + 0.50 x_i + \varepsilon_i\\
+\varepsilon_i \sim \text{Normal}(0, 4.6^2)
+\]</span></p>
+<p>We can draw this “fittest” line on the figure:</p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="regression.html#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="co"># coef() extracts estimated coefficients</span></span>
+<span id="cb154-2"><a href="regression.html#cb154-2" aria-hidden="true" tabindex="-1"></a><span class="co"># e.g., coef(m)[1] is (Intercept)</span></span>
+<span id="cb154-3"><a href="regression.html#cb154-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb154-4"><a href="regression.html#cb154-4" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fu">coef</span>(m)[<span class="dv">1</span>]</span>
+<span id="cb154-5"><a href="regression.html#cb154-5" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fu">coef</span>(m)[<span class="dv">2</span>]</span>
+<span id="cb154-6"><a href="regression.html#cb154-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb154-7"><a href="regression.html#cb154-7" aria-hidden="true" tabindex="-1"></a>df_algae <span class="sc">%&gt;%</span> </span>
+<span id="cb154-8"><a href="regression.html#cb154-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> conductivity,</span>
+<span id="cb154-9"><a href="regression.html#cb154-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> biomass)) <span class="sc">+</span></span>
+<span id="cb154-10"><a href="regression.html#cb154-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb154-11"><a href="regression.html#cb154-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> alpha,</span>
+<span id="cb154-12"><a href="regression.html#cb154-12" aria-hidden="true" tabindex="-1"></a>              <span class="at">slope =</span> beta) <span class="co"># draw the line</span></span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fittest-line"></span>
+<img src="_main_files/figure-html/fittest-line-1.png" alt="Drawing the fitted model prediction." width="672" />
+<p class="caption">
+Figure 6.3: Drawing the fitted model prediction.
+</p>
+</div>
+<p>However, how did <code>lm()</code> find <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>?</p>
+</div>
+<div id="minimizing-the-errors" class="section level3 hasAnchor" number="6.2.2">
+<h3><span class="header-section-number">6.2.2</span> Minimizing the errors<a href="regression.html#minimizing-the-errors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Notice that the error term is the difference between <span class="math inline">\(y_i\)</span> and <span class="math inline">\(\alpha + \beta x_i\)</span>:</p>
+<p><span class="math display">\[
+\varepsilon_i = y_i - (\alpha + \beta x_i)
+\]</span>In other words, this term represents the portion of the observation <span class="math inline">\(y_i\)</span> that cannot be explained by the conductivity <span class="math inline">\(x_i\)</span>. Therefore, a logical approach would be to find values for <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> that minimize this unexplained portion across all data points <span class="math inline">\(i\)</span>.</p>
+<p><strong>Least squares methods</strong> are a widely employed statistical approach to achieve this objective. These methods aim to minimize the sum of squared errors, denoted as <span class="math inline">\(\sum_i \varepsilon_i^2\)</span>, across all data points. As the deviation from the expected value of <span class="math inline">\(\alpha + \beta x_i\)</span> increases, this quantity also increases. Consequently, determining parameter values (<span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>) that minimize this sum of squared errors yields the best-fitting formula (see Section <a href="regression.html#least-squares">6.2.3</a> for further details).</p>
+</div>
+<div id="least-squares" class="section level3 hasAnchor" number="6.2.3">
+<h3><span class="header-section-number">6.2.3</span> Least Squares<a href="regression.html#least-squares" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Introducing a matrix representation is indeed a helpful way to explain the least square method. Here, I represent the vector of observed values <span class="math inline">\(y_i\)</span> as <span class="math inline">\(Y\)</span> (<span class="math inline">\(Y = \{y_1, y_2,...,y_n\}^T\)</span>), the vector of parameters as <span class="math inline">\(\Theta\)</span> (<span class="math inline">\(\Theta = \{\alpha, \beta\}^T\)</span>), and the matrix composed of <span class="math inline">\(1\)</span>s and <span class="math inline">\(x_i\)</span> values as <span class="math inline">\(X\)</span>. The matrix <span class="math inline">\(X\)</span> can be written as:</p>
+<p><span class="math display">\[
+X =
+\begin{pmatrix}
+  1 &amp; x_1\\
+  1 &amp; x_2\\
+  1 &amp; x_3\\
+  \vdots &amp; \vdots\\
+  1 &amp; x_n
+\end{pmatrix}
+\]</span></p>
+<p>Using matrix notation, we can express the error vector <span class="math inline">\(\pmb{\varepsilon}\)</span> as:</p>
+<p><span class="math display">\[
+\pmb{\varepsilon} = Y - X\Theta
+\]</span></p>
+<p>The column of <span class="math inline">\(1\)</span>s is required to represent the intercept; <span class="math inline">\(X\Theta\)</span> reads:</p>
+<p><span class="math display">\[
+X\Theta =
+\begin{pmatrix}
+  1 &amp; x_1\\
+  1 &amp; x_2\\
+  1 &amp; x_3\\
+  \vdots &amp; \vdots\\
+  1 &amp; x_n
+\end{pmatrix}
+\begin{pmatrix}
+  \alpha\\
+  \beta
+\end{pmatrix}
+=
+\begin{pmatrix}
+  \alpha + \beta x_1\\
+  \alpha + \beta x_2\\
+  \alpha + \beta x_3\\
+  \vdots\\
+  \alpha + \beta x_n
+\end{pmatrix}
+\]</span></p>
+<p>Minimizing the squared magnitude of <span class="math inline">\(\pmb{\varepsilon}\)</span> (solve the partial derivative of <span class="math inline">\(||\pmb{\varepsilon}||^2\)</span> about <span class="math inline">\(\Theta\)</span>) leads to the solution (for detailed derivation, refer to <a href="https://en.wikipedia.org/wiki/Least_squares">Wikipedia</a>):</p>
+<p><span class="math display">\[
+\hat{\Theta} = (X^TX)^{-1}X^{T}Y
+\]</span></p>
+<p>Let me see if this reproduces the result of <code>lm()</code>:</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="regression.html#cb155-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create matrix X</span></span>
+<span id="cb155-2"><a href="regression.html#cb155-2" aria-hidden="true" tabindex="-1"></a>v_x <span class="ot">&lt;-</span> df_algae <span class="sc">%&gt;%</span> <span class="fu">pull</span>(conductivity)</span>
+<span id="cb155-3"><a href="regression.html#cb155-3" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, v_x)</span>
+<span id="cb155-4"><a href="regression.html#cb155-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-5"><a href="regression.html#cb155-5" aria-hidden="true" tabindex="-1"></a><span class="co"># create a vector of y</span></span>
+<span id="cb155-6"><a href="regression.html#cb155-6" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> df_algae <span class="sc">%&gt;%</span> <span class="fu">pull</span>(biomass)</span>
+<span id="cb155-7"><a href="regression.html#cb155-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb155-8"><a href="regression.html#cb155-8" aria-hidden="true" tabindex="-1"></a><span class="co"># %*%: matrix multiplication</span></span>
+<span id="cb155-9"><a href="regression.html#cb155-9" aria-hidden="true" tabindex="-1"></a><span class="co"># t(): transpose a matrix</span></span>
+<span id="cb155-10"><a href="regression.html#cb155-10" aria-hidden="true" tabindex="-1"></a><span class="co"># solve(): computes the inverse matrix</span></span>
+<span id="cb155-11"><a href="regression.html#cb155-11" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">t</span>(X) <span class="sc">%*%</span> X) <span class="sc">%*%</span> <span class="fu">t</span>(X) <span class="sc">%*%</span> Y</span>
+<span id="cb155-12"><a href="regression.html#cb155-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(theta)</span></code></pre></div>
+<pre><code>##          [,1]
+##     5.2964689
+## v_x 0.5035548</code></pre>
+<p><code>lm()</code> output for a reference:</p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="regression.html#cb157-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(biomass <span class="sc">~</span> conductivity,</span>
+<span id="cb157-2"><a href="regression.html#cb157-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> df_algae)</span>
+<span id="cb157-3"><a href="regression.html#cb157-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb157-4"><a href="regression.html#cb157-4" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(m)</span></code></pre></div>
+<pre><code>##  (Intercept) conductivity 
+##    5.2964689    0.5035548</code></pre>
+</div>
+<div id="standard-errors-and-t-values" class="section level3 hasAnchor" number="6.2.4">
+<h3><span class="header-section-number">6.2.4</span> Standard Errors and t-values<a href="regression.html#standard-errors-and-t-values" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Ensuring the reliability of the estimated point estimates for <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> is crucial. In the <code>summary(m)</code> output, two statistical quantities, namely the <code>Std. Error</code> and <code>t-value</code>, play a significant role in assessing the uncertainty associated with these estimates.</p>
+<p>The standard error (<code>Std. Error</code>; “SE”) represents the estimated standard deviation of the parameter estimates (<span class="math inline">\(\hat{\theta}\)</span> is either <span class="math inline">\(\hat{\alpha}\)</span> or <span class="math inline">\(\hat{\beta}\)</span>). A smaller value of the standard error indicates a higher degree of statistical reliability in the estimate. On the other hand, the <code>t-value</code> is a concept we have covered in Chapter <a href="two-group-comparison.html#two-group-comparison">4</a>. This value is defined as:</p>
+<p><span class="math display">\[
+t = \frac{\hat{\theta} - \theta_0}{\text{SE}(\hat{\theta})}
+\]</span></p>
+<p>The t-statistic is akin to the t-test; however, in the context of regression analysis, we do not have another group to compare with (i.e., <span class="math inline">\(\theta_0\)</span>). Typically, in regression analysis, we use zero as the reference (<span class="math inline">\(\theta_0 = 0\)</span>). Therefore, higher t-values in <code>lm()</code> indicate a greater deviation from zero. Consequently, the <strong>Null Hypothesis in regression analysis is</strong> <span class="math inline">\(\beta = 0\)</span>. This hypothesis is sensible in our specific example since we are interested in quantifying the effect of conductivity. If <span class="math inline">\(\beta = 0\)</span>, it implies that conductivity has no effect on algal biomass. Since <span class="math inline">\(\theta_0 = 0\)</span>, the following code reproduces the reported t-values:</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="regression.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="co"># extract coefficients</span></span>
+<span id="cb159-2"><a href="regression.html#cb159-2" aria-hidden="true" tabindex="-1"></a>theta <span class="ot">&lt;-</span> <span class="fu">coef</span>(m)</span>
+<span id="cb159-3"><a href="regression.html#cb159-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb159-4"><a href="regression.html#cb159-4" aria-hidden="true" tabindex="-1"></a><span class="co"># extract standard errors</span></span>
+<span id="cb159-5"><a href="regression.html#cb159-5" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">diag</span>(<span class="fu">vcov</span>(m)))</span>
+<span id="cb159-6"><a href="regression.html#cb159-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb159-7"><a href="regression.html#cb159-7" aria-hidden="true" tabindex="-1"></a><span class="co"># t-value</span></span>
+<span id="cb159-8"><a href="regression.html#cb159-8" aria-hidden="true" tabindex="-1"></a>t_value <span class="ot">&lt;-</span> theta <span class="sc">/</span> se</span>
+<span id="cb159-9"><a href="regression.html#cb159-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(t_value)</span></code></pre></div>
+<pre><code>##  (Intercept) conductivity 
+##     3.369732    19.609446</code></pre>
+<p>After defining the Null Hypothesis and t-values, we can compute the probability of observing the estimated parameters under the Null Hypothesis. Similar to the t-test, <code>lm()</code> utilizes a Student’s t-distribution for this purpose. However, the difference lies in how we estimate the degrees of freedom. In our case, we have 50 data points but need to subtract the number of parameters, which are <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>. Therefore, the degrees of freedom would be <span class="math inline">\(50 - 2 = 48\)</span>. This value is employed when calculating the p-value:</p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="regression.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="co"># for intercept</span></span>
+<span id="cb161-2"><a href="regression.html#cb161-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (1 - pt(t_value[1], df = 48)) calculates pr(t &gt; t_value[1])</span></span>
+<span id="cb161-3"><a href="regression.html#cb161-3" aria-hidden="true" tabindex="-1"></a><span class="co"># pt(-t_value[1], df = 48) calculates pr(t &lt; -t_value[1])</span></span>
+<span id="cb161-4"><a href="regression.html#cb161-4" aria-hidden="true" tabindex="-1"></a>p_alpha <span class="ot">&lt;-</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(t_value[<span class="dv">1</span>], <span class="at">df =</span> <span class="dv">48</span>)) <span class="sc">+</span> <span class="fu">pt</span>(<span class="sc">-</span>t_value[<span class="dv">1</span>], <span class="at">df =</span> <span class="dv">48</span>)</span>
+<span id="cb161-5"><a href="regression.html#cb161-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb161-6"><a href="regression.html#cb161-6" aria-hidden="true" tabindex="-1"></a><span class="co"># for slope</span></span>
+<span id="cb161-7"><a href="regression.html#cb161-7" aria-hidden="true" tabindex="-1"></a>p_beta <span class="ot">&lt;-</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pt</span>(t_value[<span class="dv">2</span>], <span class="at">df =</span> <span class="dv">48</span>)) <span class="sc">+</span> <span class="fu">pt</span>(<span class="sc">-</span>t_value[<span class="dv">2</span>], <span class="at">df =</span> <span class="dv">48</span>)</span>
+<span id="cb161-8"><a href="regression.html#cb161-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb161-9"><a href="regression.html#cb161-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p_alpha)</span></code></pre></div>
+<pre><code>## (Intercept) 
+## 0.001492023</code></pre>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="regression.html#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p_beta)</span></code></pre></div>
+<pre><code>## conductivity 
+## 7.377061e-25</code></pre>
+</div>
+</div>
+<div id="unexplained-variation" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Unexplained Variation<a href="regression.html#unexplained-variation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="retrieve-errors" class="section level3 hasAnchor" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> Retrieve Errors<a href="regression.html#retrieve-errors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The function <code>lm()</code> provides estimates for <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>, but it does not directly provide the values of <span class="math inline">\(\varepsilon_i\)</span>. To gain a deeper understanding of the statistical model, it is necessary to examine the residuals <span class="math inline">\(\varepsilon_i\)</span>. By using the <code>resid()</code> function, you can obtain the values of <span class="math inline">\(\varepsilon_i\)</span>. This allows you to explore and extract insights from the developed statistical model.</p>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="regression.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="co"># eps - stands for epsilon</span></span>
+<span id="cb165-2"><a href="regression.html#cb165-2" aria-hidden="true" tabindex="-1"></a>eps <span class="ot">&lt;-</span> <span class="fu">resid</span>(m)</span>
+<span id="cb165-3"><a href="regression.html#cb165-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(eps)</span></code></pre></div>
+<pre><code>##          1          2          3          4          5          6 
+## -0.6838937 -1.2149034 -7.8576927 -3.0109473  1.7076481  6.1773586</code></pre>
+<p>Each element retains the order of data point in the original data frame, so <code>eps[1]</code> (<span class="math inline">\(\varepsilon_1\)</span>) should be identical to <span class="math inline">\(y_1 - (\alpha + \beta x_1)\)</span>. Let me confirm:</p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="regression.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pull vector data</span></span>
+<span id="cb167-2"><a href="regression.html#cb167-2" aria-hidden="true" tabindex="-1"></a>v_x <span class="ot">&lt;-</span> df_algae <span class="sc">%&gt;%</span> <span class="fu">pull</span>(conductivity)</span>
+<span id="cb167-3"><a href="regression.html#cb167-3" aria-hidden="true" tabindex="-1"></a>v_y <span class="ot">&lt;-</span> df_algae <span class="sc">%&gt;%</span> <span class="fu">pull</span>(biomass)</span>
+<span id="cb167-4"><a href="regression.html#cb167-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb167-5"><a href="regression.html#cb167-5" aria-hidden="true" tabindex="-1"></a><span class="co"># theta[1] = alpha</span></span>
+<span id="cb167-6"><a href="regression.html#cb167-6" aria-hidden="true" tabindex="-1"></a><span class="co"># theta[2] = beta</span></span>
+<span id="cb167-7"><a href="regression.html#cb167-7" aria-hidden="true" tabindex="-1"></a>error <span class="ot">&lt;-</span> v_y <span class="sc">-</span> (theta[<span class="dv">1</span>] <span class="sc">+</span> theta[<span class="dv">2</span>] <span class="sc">*</span> v_x)</span>
+<span id="cb167-8"><a href="regression.html#cb167-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb167-9"><a href="regression.html#cb167-9" aria-hidden="true" tabindex="-1"></a><span class="co"># cbind() combines vectors column-wise</span></span>
+<span id="cb167-10"><a href="regression.html#cb167-10" aria-hidden="true" tabindex="-1"></a><span class="co"># head() retrieves the first 6 rows</span></span>
+<span id="cb167-11"><a href="regression.html#cb167-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">cbind</span>(eps, error))</span></code></pre></div>
+<pre><code>##          eps      error
+## 1 -0.6838937 -0.6838937
+## 2 -1.2149034 -1.2149034
+## 3 -7.8576927 -7.8576927
+## 4 -3.0109473 -3.0109473
+## 5  1.7076481  1.7076481
+## 6  6.1773586  6.1773586</code></pre>
+<p>To ensure that the two columns are indeed identical, a visual check may be prone to overlooking small differences. To perform a more precise comparison, you can use the <code>all()</code> function to check if the data aligns (here, evaluated at the five decimal points using <code>round()</code>). By comparing the two columns in this manner, you can confirm whether they are identical or not.</p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="regression.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="co"># round values at 5 decimal</span></span>
+<span id="cb169-2"><a href="regression.html#cb169-2" aria-hidden="true" tabindex="-1"></a>eps <span class="ot">&lt;-</span> <span class="fu">round</span>(eps, <span class="dv">5</span>)</span>
+<span id="cb169-3"><a href="regression.html#cb169-3" aria-hidden="true" tabindex="-1"></a>error <span class="ot">&lt;-</span> <span class="fu">round</span>(error, <span class="dv">5</span>)</span>
+<span id="cb169-4"><a href="regression.html#cb169-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb169-5"><a href="regression.html#cb169-5" aria-hidden="true" tabindex="-1"></a><span class="co"># eps == error return &quot;TRUE&quot; or &quot;FALSE&quot;</span></span>
+<span id="cb169-6"><a href="regression.html#cb169-6" aria-hidden="true" tabindex="-1"></a><span class="co"># all() returns TRUE if all elements meet eps == error</span></span>
+<span id="cb169-7"><a href="regression.html#cb169-7" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(eps <span class="sc">==</span> error)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+</div>
+<div id="visualize-errors" class="section level3 hasAnchor" number="6.3.2">
+<h3><span class="header-section-number">6.3.2</span> Visualize Errors<a href="regression.html#visualize-errors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To visualize the errors or residuals, which represent the distance from the best-fitted line to each data point, you can make use of the <code>geom_segment()</code> function:</p>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="regression.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add error column</span></span>
+<span id="cb171-2"><a href="regression.html#cb171-2" aria-hidden="true" tabindex="-1"></a>df_algae <span class="ot">&lt;-</span> df_algae <span class="sc">%&gt;%</span> </span>
+<span id="cb171-3"><a href="regression.html#cb171-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">eps =</span> eps)</span>
+<span id="cb171-4"><a href="regression.html#cb171-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb171-5"><a href="regression.html#cb171-5" aria-hidden="true" tabindex="-1"></a>df_algae <span class="sc">%&gt;%</span> </span>
+<span id="cb171-6"><a href="regression.html#cb171-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> conductivity,</span>
+<span id="cb171-7"><a href="regression.html#cb171-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> biomass)) <span class="sc">+</span></span>
+<span id="cb171-8"><a href="regression.html#cb171-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb171-9"><a href="regression.html#cb171-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> alpha,</span>
+<span id="cb171-10"><a href="regression.html#cb171-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">slope =</span> beta) <span class="sc">+</span> </span>
+<span id="cb171-11"><a href="regression.html#cb171-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> conductivity, <span class="co"># start-coord x</span></span>
+<span id="cb171-12"><a href="regression.html#cb171-12" aria-hidden="true" tabindex="-1"></a>                   <span class="at">xend =</span> conductivity, <span class="co"># end-coord x</span></span>
+<span id="cb171-13"><a href="regression.html#cb171-13" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> biomass, <span class="co"># start-coord y</span></span>
+<span id="cb171-14"><a href="regression.html#cb171-14" aria-hidden="true" tabindex="-1"></a>                   <span class="at">yend =</span> biomass <span class="sc">-</span> eps), <span class="co"># end-coord y</span></span>
+<span id="cb171-15"><a href="regression.html#cb171-15" aria-hidden="true" tabindex="-1"></a>               <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:geom-errors"></span>
+<img src="_main_files/figure-html/geom-errors-1.png" alt="Vertical segments indicate errors." width="672" />
+<p class="caption">
+Figure 6.4: Vertical segments indicate errors.
+</p>
+</div>
+</div>
+<div id="coefficient-of-determination" class="section level3 hasAnchor" number="6.3.3">
+<h3><span class="header-section-number">6.3.3</span> Coefficient of Determination<a href="regression.html#coefficient-of-determination" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>One crucial motivation for developing a regression model, or any statistical model, is to assess the extent to which the explanatory variable (<span class="math inline">\(x_i\)</span>) explains the variation in the response variable (<span class="math inline">\(y_i\)</span>). By fitting a regression model, we can quantify the amount of variability in the response variable that can be attributed to the explanatory variable. This assessment provides valuable insights into the strength and significance of the relationship between the variables under consideration.</p>
+<p>The <strong>coefficient of determination</strong>, denoted as R², is a statistical measure that assesses the proportion of the variance in the response variable that can be explained by the explanatory variable(s) in a regression model. It provides an indication of how well the regression model fits the observed data. The formula for R² is:</p>
+<p><span class="math display">\[
+\text{R}^2 = 1 - \frac{SS}{SS_0}
+\]</span></p>
+<p>where <span class="math inline">\(SS\)</span> is the summed squares of residuals (<span class="math inline">\(\sum_i \varepsilon_i^2\)</span>), and <span class="math inline">\(SS_0\)</span> is the summed squares of the response variable (<span class="math inline">\(SS_0 = \sum_i(y_i - \hat{\mu}_y)^2\)</span>). The term <span class="math inline">\(\frac{SS}{SS_0}\)</span> represents the proportion of variability “unexplained” – therefore, <span class="math inline">\(1 - \frac{SS}{SS_0}\)</span> gives the proportion of variability “explained.” R² is a value between 0 and 1. An R² value of 0 indicates that the explanatory variable(s) cannot explain any of the variability in the response variable, while an R² value of 1 indicates that the explanatory variable(s) can fully explain the variability in the response variable.</p>
+<p>While R<sup>2</sup> is provided as a default output of <code>lm()</code>, let’s confirm if the above equation reproduces the reported value:</p>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="regression.html#cb172-1" aria-hidden="true" tabindex="-1"></a><span class="co"># residual variance</span></span>
+<span id="cb172-2"><a href="regression.html#cb172-2" aria-hidden="true" tabindex="-1"></a>ss <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">resid</span>(m)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb172-3"><a href="regression.html#cb172-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb172-4"><a href="regression.html#cb172-4" aria-hidden="true" tabindex="-1"></a><span class="co"># null variance</span></span>
+<span id="cb172-5"><a href="regression.html#cb172-5" aria-hidden="true" tabindex="-1"></a>ss_0 <span class="ot">&lt;-</span> <span class="fu">sum</span>((v_y <span class="sc">-</span> <span class="fu">mean</span>(v_y))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb172-6"><a href="regression.html#cb172-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb172-7"><a href="regression.html#cb172-7" aria-hidden="true" tabindex="-1"></a><span class="co"># coefficient of determination</span></span>
+<span id="cb172-8"><a href="regression.html#cb172-8" aria-hidden="true" tabindex="-1"></a>r2 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> ss <span class="sc">/</span> ss_0</span>
+<span id="cb172-9"><a href="regression.html#cb172-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb172-10"><a href="regression.html#cb172-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(r2)</span></code></pre></div>
+<pre><code>## [1] 0.8890251</code></pre>
+<p>Compare it with <code>lm()</code> output:</p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="regression.html#cb174-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = biomass ~ conductivity, data = df_algae)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -9.5578 -2.8729 -0.7307  2.5479 11.4700 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   5.29647    1.57178    3.37  0.00149 ** 
+## conductivity  0.50355    0.02568   19.61  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 4.649 on 48 degrees of freedom
+## Multiple R-squared:  0.889,  Adjusted R-squared:  0.8867 
+## F-statistic: 384.5 on 1 and 48 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p><code>Multiple R-squared:</code> corresponds to the calculated coefficient of determination.</p>
+</div>
+</div>
+<div id="laboratory-5" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Laboratory<a href="regression.html#laboratory-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="multiple-group-comparison.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="linear-model.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/aterui/biostats/chapters/06-regression.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

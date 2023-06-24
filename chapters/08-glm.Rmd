@@ -1,0 +1,313 @@
+```{r, include=FALSE}
+source(here::here("code/library.R"))
+df_count <- read_csv(here::here("data_raw/data_garden_count.csv"))
+df_mussel <- read_csv(here::here("data_raw/data_mussel.csv"))
+```
+
+# Generalized Linear Model
+
+One of the key assumptions in the Linear Model framework is Normality -- that the error term follows a normal distribution (Chapter \@ref(linear-model)). However, this assumption frequently leads to situations where models predict unrealistic values for a response variable. In this chapter, I will introduce the Generalized Linear Model (GLM) framework, which enables more flexible modeling.
+
+## Count Data
+
+### Plant Density
+
+Recall our data set of garden plant counts (Chapter \@ref(probabilistic-view)):
+
+```{r garden-recall, echo = F, fig.cap="Garden view with sampling plots. White squares represent plots. Red dots indicate plant individuals counted."}
+
+knitr::include_graphics(here::here("image/figure_garden.jpg"))
+```
+
+```{r, eval=F}
+df_count <- read_csv("data_raw/data_garden_count.csv")
+print(df_count)
+```
+
+```{r, echo=FALSE}
+print(df_count)
+```
+
+The variable of plant count had the following characteristics:
+
+1.  The possible values are discrete (count data) since we are counting the number of plant individuals in each plot.
+
+2.  The possible values are always positive, as counts cannot be negative.
+
+3.  The distribution appears to be non-symmetric around the sample mean.
+
+What happens if we apply a simple linear model that assumes a Normal distribution? Let me model the plant count as a function of nitrate as follows:
+
+$$
+\begin{aligned}
+y_i &\sim \text{Normal}(\mu_i, \sigma^2)\\
+\mu_i &= \alpha + \beta~\text{nitrate}_i
+\end{aligned}
+$$
+
+```{r}
+m_normal <- lm(count ~ nitrate,
+               df_count)
+
+summary(m_normal)
+```
+
+This seems satisfactory, but an anomalous behavior occurs during the plotting process on the figure. Plot the data and the predicted values together.
+
+```{r}
+# extract estimates
+alpha <- coef(m_normal)[1] # intercept
+beta <- coef(m_normal)[2] # slope
+
+df_count %>% 
+  ggplot(aes(x = nitrate,
+             y = count)) +
+  geom_point() +
+  geom_abline(intercept = alpha,
+              slope = beta)
+```
+
+The intersection of the predicted line with the x-axis suggests the presence of negative predicted values for plant counts. However, it is logically implausible for plant counts to be negative.
+
+This occurrence stems from the nature of the model employed.
+
+1.  In the Linear Model with a Normal error distribution, we allow the mean to encompass a wide range of values, including negative values.
+2.  Even when the mean predicted values do not intersect the x-axis, we consider the possibility of observations taking negative values, as dictated by the nature of a Normal distribution ($\mu_i + \varepsilon_i$ can be negative even when $\mu_i > 0$), which in reality can never occur.
+
+### Poisson Model
+
+One possible approach is to consider the assumption that the error term follows a Poisson distribution. For the purpose of this discussion, let's assume that a model based on the Poisson distribution is appropriate. Unlike a Normal distribution, the Poisson distribution generates only non-negative discrete values, which makes it a suitable fit for the plant count variable. To incorporate this, we can make the following modifications to the model:
+
+$$
+\begin{aligned}
+y_i &\sim \text{Poisson}(\lambda_i)\\
+\log\lambda_i &= \alpha + \beta~\text{nitrate}_i
+\end{aligned}
+$$
+
+These changes are crucial:
+
+1.  The plant count, denoted as $y_i$, is now assumed to follow a Poisson distribution with parameter $\lambda_i$. This ensures that negative values of $y_i$ are not possible (i.e., $\Pr(y_i < 0) = 0$).
+2.  The mean $\lambda_i$ is log-transformed when expressing it as a function of nitrate. Given that the mean of a Poisson distribution cannot be negative, we must restrict the range of $\lambda_i$ to positive values. The log-transformation guarantees positivity of $\lambda_i$ ($\lambda_i = \exp(\alpha + \beta~\text{nitrate}_i)$) irrespective of the values of $\alpha$, $\beta$, and $\text{nitrate}_i$.
+
+The implementation of the Poisson model is quite simple. In the following example, we will use the function `glm()`:
+
+```{r}
+m_pois <- glm(count ~ nitrate,
+              data = df_count,
+              family = "poisson")
+```
+
+The major difference from `lm()` is the argument `family = "poisson"`. This argument specifies the probability distribution to be used; in this example, I used a Poisson distribution to model count data. However, in looking at estimates...
+
+```{r}
+summary(m_pois)
+```
+
+The estimated intercept is still negative...what's wrong? No sweat, we estimated these parameters in a log scale; this result translates into:
+
+$$
+\lambda_i = \exp(-4.05 + 0.17~\text{nitrate}_i)
+$$
+
+Therefore, even when the intercept is estimated to be negative, the mean $\lambda_i$ is guaranteed to be non-negative.
+
+Another important difference from `lm()` is that the test-statistic is no long the t-statistic -- instead, `glm()` reports the z-statistic. However, the z-statistic is very similar to the t-statistic, defined as $z=\frac{\hat{\theta} - \theta_0}{\text{SE}(\hat{\theta})}$ ($\hat{\theta} = \{\hat{\alpha}, \hat{\beta}\}$, $\theta_0 = 0$). Therefore, you can reproduce the z-statistic by dividing the parameter estimates ($\hat{\alpha}$ and $\hat{\beta}$) by their standard errors:
+
+```{r}
+# parameter estimates and their SEs
+theta <- coef(m_pois)
+se <- sqrt(diag(vcov(m_pois)))
+z_value <- theta / se
+
+print(z_value)
+```
+
+We call this statistic "z-statistic" as it is known to follow the z-distribution (also known as the standardized Normal distribution $\text{Normal}(0, 1)$), as opposed to the Student's t-distribution. The reported p-value (`Pr(>|z|)`) is estimated under this assumption, which can be seen as follows.
+
+```{r}
+# estimate Pr(>|z|) using a standardized normal distribution
+p_value <- (1 - pnorm(abs(z_value), mean = 0, sd = 1)) * 2
+print(p_value)
+```
+
+Let's visualize the difference between the Normal and Poisson models (Figure \@ref(fig:normal-pois)). Clearly, the Poisson model does a better job.
+
+```{r normal-pois, fig.cap="Comparison of the predicted values between Normal (broken, black) and Poisson models (solid, red)."}
+# make predictions
+df_pred <- tibble(nitrate = seq(min(df_count$nitrate),
+                                max(df_count$nitrate),
+                                length = 100))
+
+# y_pois is exponentiated because predict() returns values in log-scale
+y_normal <- predict(m_normal, newdata = df_pred)
+y_pois <- predict(m_pois, newdata = df_pred) %>% exp()
+
+df_pred <- df_pred %>% 
+  mutate(y_normal,
+         y_pois)
+
+# figure
+df_count %>% 
+  ggplot(aes(x = nitrate,
+             y = count)) +
+  geom_point() +
+  geom_line(data = df_pred,
+            aes(y = y_normal),
+            linetype = "dashed") +
+  geom_line(data = df_pred,
+            aes(y = y_pois),
+            color = "salmon")
+```
+
+## Proportional Data
+
+### Mussel Egg Fertilization
+
+There is another type of data for which a Normal distribution is not suitable - proportional data. Let's consider an example dataset where an investigation was conducted on the number of fertilized eggs out of 30 eggs examined for 100 female freshwater mussels. You can download the dataset [here](https://github.com/aterui/biostats/blob/master/data_raw/data_mussel.csv).
+
+```{r, echo=F}
+knitr::include_graphics(here::here("image/image_mussel.jpg"))
+```
+
+Male freshwater mussels release sperm into the water, which is then drawn into female mussels downstream. Considering the nature of the fertilization process, female mussels are expected to have a higher probability of fertilization when they are surrounded by a greater number of males. To explore this relationship, the data can be loaded into R and visualized using a plot. By examining the data, we can observe the proportion of fertilized eggs based on the number of males. This visualization will provide insights into the impact of male presence on the fertilization process of female mussels.
+
+```{r, eval=FALSE}
+df_mussel <- read_csv("data_raw/data_mussel.csv")
+print(df_mussel)
+```
+
+```{r, echo=FALSE}
+print(df_mussel)
+```
+
+This data frame contains variables such as `ind_id` (mussel individual ID), `n_fertilized` (number of fertilized eggs), `n_examined` (number of eggs examined), and `density` (number of mussels in a 1 m$^2$ quadrat). To visualize the relationship between the proportion of eggs fertilized and the density gradient, plot the proportion of fertilized eggs against the density gradient (Figure \@ref(fig:mussel-egg)).
+
+```{r mussel-egg, fig.cap="Relationship between the proportion of fertilized eggs and mussel density in the surround."}
+
+# calculate the proportion of fertilized eggs
+df_mussel <- df_mussel %>% 
+  mutate(prop_fert = n_fertilized / n_examined)
+
+# plot
+df_mussel %>% 
+  ggplot(aes(x = density,
+             y = prop_fert)) +
+  geom_point() +
+  labs(y = "Proportion of eggs fertilized",
+       x = "Mussel density")
+```
+
+In this example, the response variable, which represents the number of eggs fertilized, possesses the following characteristics:
+
+1.  Discreteness: The variable takes on discrete values rather than continuous ones.
+
+2.  Upper limit: The number of eggs fertilized is bounded by an upper limit (in this case, 30).
+
+The discrete nature of the variable might initially lead one to consider the Poisson distribution as a potential candidate. However, due to the presence of an upper limit where the number of fertilized eggs cannot exceed the number of eggs examined, the Poisson distribution is not a suitable option.
+
+### Binomial Model
+
+A Binomial distribution is a natural and appropriate choice for modeling this variable. The Binomial distribution is characterized by two parameters: the number of trials ($N$) and the probability of success ($p$). Each trial has a certain probability of success, and the outcome of each trial is either assigned a value of 1 (indicating success) or 0 (indicating failure). In the given example, we can consider the "fertilization" as a successful outcome among the 30 trials. Consequently, the number of eggs fertilized ($y_i$) for each individual mussel ($i$) can be described as:
+
+$$
+y_i \sim \text{Binomial}(N_i, p_i)
+$$
+
+This formulation adequately captures the nature of the response variable, as the outcome of the Binomial distribution is constrained within the range of $0$ to $N_i$, aligning with the upper limit imposed by the number of examined eggs.
+
+Our prediction was that the fertilization probability $p_i$ would increase with increasing mussel's density -- how do we relate $p_i$ to mussel density? The value of $p_i$ must be constrained within a range of $0.0-1.0$ because it is a "probability." Given this, the log-transformation, which we used in the Poisson model, is not a suitable choice. Instead, we can use a logit-transformation to convert the linear formula to fall within a range of $0.0 - 1.0$.
+
+$$
+\begin{aligned}
+y_i &\sim \text{Binomial}(N_i, p_i)\\
+\log(\frac{p_i}{1-p_i}) &= \alpha + \beta~\text{density}_i 
+\end{aligned}
+$$
+
+The logit transformation, represented as $\log\left(\frac{p_i}{1-p_i}\right)$, guarantees that the values of $p_i$ are confined within the range of 0.0 to 1.0. This relationship is expressed by the following equation:
+
+$$
+p_i = \frac{\exp(\alpha + \beta~\text{density}_i)}{1 + \exp(\alpha + \beta~\text{density}_i)}
+$$
+
+A straightforward coding can verify this.
+
+```{r logit-transform, fig.cap="Logit-transformation ensures that the transformed variable to fall in the range of zero to one."}
+# x: produce 100 numbers from -100 to 100 (assume logit scale)
+# y: convert with inverse-logit transformation (ordinary scale)
+df_test <- tibble(logit_x = seq(-10, 10, length = 100),
+                  x = exp(logit_x) / (1 + exp(logit_x)))
+
+df_test %>% 
+  ggplot(aes(x = logit_x,
+             y = x)) +
+  geom_point() +
+  geom_line() +
+  labs(y = "x",
+       x = "logit(x)")
+```
+
+The `glm()` function can be used to implement this modeling approach. However, certain modifications need to be made to the response variable in order to ensure compatibility with the binomial distribution.
+
+```{r}
+m_binom <- glm(cbind(n_fertilized, n_examined - n_fertilized) ~ density,
+               data = df_mussel,
+               family = "binomial")
+```
+
+In contrast to the Normal or Poisson models, the response variable was encoded using the `cbind(n_fertilized, n_examined - n_fertilized)` function. The `cbind()` function combines the number of successes (fertilized) and failures (not fertilized) into a single matrix. This approach allows for modeling the data using the binomial distribution, taking into account both the successes and the total number of trials within each observation.
+
+```{r}
+cbind(df_mussel$n_fertilized, df_mussel$n_examined - df_mussel$n_fertilized) %>% 
+  head()
+```
+
+Similar to the previous examples, the `summary()` function provides estimates of the model parameters. By applying the `summary()` function to the fitted model, you can obtain information such as coefficient estimates, standard errors, p-values, and other relevant statistics.
+
+```{r}
+summary(m_binom)
+```
+
+This result translates into:
+
+$$
+\begin{aligned}
+y_i &\sim \text{Binomial}(N_i, p_i)\\
+\log(\frac{p_i}{1 - p_i}) &= -8.06 + 0.34~\text{density}_i
+\end{aligned}
+$$
+
+To make predictions, it is necessary to back-transform the predicted fertilization probability since it is estimated on a logit scale. The back-transformation will convert the predicted values back to the original probability scale ($0.0-1.0$).
+
+```{r}
+# make prediction
+df_pred <- tibble(density = seq(min(df_mussel$density),
+                                max(df_mussel$density),
+                                length = 100))
+
+# y_binom is inv.logit-transformed because predict() returns values in logit-scale
+y_binom <- predict(m_binom, newdata = df_pred) %>% boot::inv.logit()
+
+df_pred <- df_pred %>% 
+  mutate(y_binom)
+```
+
+Draw on the figure (Figure \@ref(fig:binom-fit-figure)).
+
+```{r binom-fit-figure,fig.cap="Prediction by the Binomial model."}
+df_mussel %>% 
+  ggplot(aes(x = density,
+             y = prop_fert)) +
+  geom_point() +
+  geom_line(data = df_pred,
+            aes(y = y_binom)) +
+  labs(y = "Proportion of eggs fertilized",
+       x = "Mussel density")
+```
+
+Perfect.
+
+## The GLM Framework
+
+## Laboratory

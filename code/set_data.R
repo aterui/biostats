@@ -51,7 +51,7 @@ write_csv(df_algae, "data_raw/data_algae.csv")
 
 # garden plant density ----------------------------------------------------
 
-set.seed(10)
+set.seed(1)
 
 garden_size <- 15
 n_plot <- 225
@@ -93,8 +93,33 @@ df_garden_count <- df_garden_sub %>%
   group_by(plot) %>% 
   summarize(count = unique(count)) %>% 
   filter(plot %in% plot30) %>% 
-  mutate(plot = as.numeric(factor(plot)))
+  mutate(plot = as.numeric(factor(plot)),
+         nitrate = (log(count + 1) - mean(count + 1)) / rnorm(nrow(.), 0.2, 0.05) + 40,
+         nitrate = round(nitrate, 1))
 
 saveRDS(df_garden, "data_raw/data_garden.rds")
 saveRDS(df_garden_sub, "data_raw/data_garden_sub.rds")
 write_csv(df_garden_count, "data_raw/data_garden_count.csv")
+
+
+# fertilization rate ------------------------------------------------------
+
+n_sample <- 100
+b0 <- -8
+b1 <- 0.35
+x <- rpois(n = n_sample, lambda = 10 + rnorm(n_sample, 0, 3))
+p <- boot::inv.logit(model.matrix(~x) %*% c(b0, b1))
+y <- rbinom(n = n_sample, size = 30, prob = p)
+
+df_fert <- dplyr::tibble(n_fertilized = y,
+                         n_examined = 30,
+                         density = x) %>% 
+  mutate(ind_id = row_number()) %>% 
+  relocate(ind_id)
+
+df_fert %>% 
+  ggplot(aes(x = density,
+             y = n_fertilized)) +
+  geom_point()
+
+write_csv(df_fert, "data_raw/data_mussel.csv")

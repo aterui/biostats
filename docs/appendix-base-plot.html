@@ -391,35 +391,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">13.2</span> Plot<a href="appendix-base-plot.html#plot" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>When creating a plot, you typically need to specify the <strong>formula</strong> to define the relationship between variables. For instance, if you wish to visualize the association between <code>x</code> and <code>y</code> (with <code>y</code> on the vertical axis and <code>x</code> on the horizontal axis), the formula would be <code>y ~ x</code> (where the left side of the formula represents the vertical axis). In the <code>iris</code> dataset, you have access to the following columns: <code>Sepal.Length</code>, <code>Sepal.Width</code>, <code>Petal.Length</code>, <code>Petal.Width</code>, and <code>Species</code>. In the subsequent example, we will plot the relationship between <code>Sepal.Length</code> and <code>Sepal.Width</code>:</p>
 <div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="appendix-base-plot.html#cb389-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Sepal.Length <span class="sc">~</span> Sepal.Width, <span class="at">data =</span> iris)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-116-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="biostats_files/figure-html/unnamed-chunk-116-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>The <code>data =</code> argument informs the function about the dataset from which the variables (<code>Sepal.Length</code> and <code>Sepal.Width</code>) should be extracted.</p>
 <div id="symbol" class="section level3 hasAnchor" number="13.2.1">
 <h3><span class="header-section-number">13.2.1</span> Symbol<a href="appendix-base-plot.html#symbol" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><code>pch</code> argument. Choose from <code>1</code> to <code>25</code> (google <strong>r plot pch</strong> for details)</p>
 <div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="appendix-base-plot.html#cb390-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Sepal.Length <span class="sc">~</span> Sepal.Width, <span class="at">data =</span> iris,</span>
 <span id="cb390-2"><a href="appendix-base-plot.html#cb390-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">19</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-117-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="biostats_files/figure-html/unnamed-chunk-117-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="symbol-size" class="section level3 hasAnchor" number="13.2.2">
 <h3><span class="header-section-number">13.2.2</span> Symbol size<a href="appendix-base-plot.html#symbol-size" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><code>cex</code> argument. <code>cex = 1</code> is the default value. <code>cex = 2</code> is as twice large as default value.</p>
 <div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="appendix-base-plot.html#cb391-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Sepal.Length <span class="sc">~</span> Sepal.Width, <span class="at">data =</span> iris,</span>
 <span id="cb391-2"><a href="appendix-base-plot.html#cb391-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">cex =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-118-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="biostats_files/figure-html/unnamed-chunk-118-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="symbol-color-border" class="section level3 hasAnchor" number="13.2.3">
 <h3><span class="header-section-number">13.2.3</span> Symbol color (border)<a href="appendix-base-plot.html#symbol-color-border" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><code>col</code> argument (quote <code>"color name"</code> when specifying). Google <strong>r color name</strong> for color options.</p>
 <div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="appendix-base-plot.html#cb392-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Sepal.Length <span class="sc">~</span> Sepal.Width, <span class="at">data =</span> iris,</span>
 <span id="cb392-2"><a href="appendix-base-plot.html#cb392-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">cex =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;gray&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-119-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="biostats_files/figure-html/unnamed-chunk-119-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="symbol-color-fill" class="section level3 hasAnchor" number="13.2.4">
 <h3><span class="header-section-number">13.2.4</span> Symbol color (fill)<a href="appendix-base-plot.html#symbol-color-fill" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><code>bg</code> argument (quote <code>"color name"</code> when specifying). Available for a subset of symbol options (some symbols have pre-defined filled color).</p>
 <div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="appendix-base-plot.html#cb393-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Sepal.Length <span class="sc">~</span> Sepal.Width, <span class="at">data =</span> iris,</span>
 <span id="cb393-2"><a href="appendix-base-plot.html#cb393-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">cex =</span> <span class="dv">2</span>, <span class="at">bg =</span> <span class="st">&quot;lightgray&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-120-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="biostats_files/figure-html/unnamed-chunk-120-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="label" class="section level3 hasAnchor" number="13.2.5">
 <h3><span class="header-section-number">13.2.5</span> Label<a href="appendix-base-plot.html#label" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -427,7 +427,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="appendix-base-plot.html#cb394-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Sepal.Length <span class="sc">~</span> Sepal.Width, <span class="at">data =</span> iris,</span>
 <span id="cb394-2"><a href="appendix-base-plot.html#cb394-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">cex =</span> <span class="dv">2</span>, <span class="at">bg =</span> <span class="st">&quot;lightgray&quot;</span>,</span>
 <span id="cb394-3"><a href="appendix-base-plot.html#cb394-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Sepal width (cm)&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Sepal length (cm)&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-121-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="biostats_files/figure-html/unnamed-chunk-121-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="axis" class="section level3 hasAnchor" number="13.2.6">
 <h3><span class="header-section-number">13.2.6</span> Axis<a href="appendix-base-plot.html#axis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -439,28 +439,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb395-5"><a href="appendix-base-plot.html#cb395-5" aria-hidden="true" tabindex="-1"></a><span class="fu">box</span>(<span class="at">bty =</span> <span class="st">&quot;l&quot;</span>) <span class="co"># L-shaped border lines</span></span>
 <span id="cb395-6"><a href="appendix-base-plot.html#cb395-6" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>) <span class="co"># 1: draw x-axis</span></span>
 <span id="cb395-7"><a href="appendix-base-plot.html#cb395-7" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">2</span>, <span class="at">las =</span> <span class="dv">2</span>) <span class="co"># 2: draw y-axis, las = 2: make axis lables horizontal</span></span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-122-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="biostats_files/figure-html/unnamed-chunk-122-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 <div id="boxplot-1" class="section level2 hasAnchor" number="13.3">
 <h2><span class="header-section-number">13.3</span> Boxplot<a href="appendix-base-plot.html#boxplot-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><code>boxplot()</code> is used when the x-axis is factor-type data (by default, <code>plot()</code> will produce a boxplot when x-axis is a factor variable). In the <code>iris</code> dataset, the column <code>Species</code> is a factor variable. Compare <code>Sepal.Length</code> among species using <code>boxplot()</code>.</p>
 <div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="appendix-base-plot.html#cb396-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Sepal.Length <span class="sc">~</span> Species, <span class="at">data =</span> iris)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-123-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="biostats_files/figure-html/unnamed-chunk-123-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>You can customize as in <code>plot()</code>, but slighlty different.</p>
 <div id="box-color" class="section level3 hasAnchor" number="13.3.1">
 <h3><span class="header-section-number">13.3.1</span> Box color<a href="appendix-base-plot.html#box-color" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><code>col</code> argument.</p>
 <div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="appendix-base-plot.html#cb397-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Sepal.Length <span class="sc">~</span> Species, <span class="at">data =</span> iris,</span>
 <span id="cb397-2"><a href="appendix-base-plot.html#cb397-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="st">&quot;lightgray&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-124-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="biostats_files/figure-html/unnamed-chunk-124-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="border-color" class="section level3 hasAnchor" number="13.3.2">
 <h3><span class="header-section-number">13.3.2</span> Border color<a href="appendix-base-plot.html#border-color" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><code>border</code> argument.</p>
 <div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="appendix-base-plot.html#cb398-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Sepal.Length <span class="sc">~</span> Species, <span class="at">data =</span> iris,</span>
 <span id="cb398-2"><a href="appendix-base-plot.html#cb398-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="st">&quot;lightgray&quot;</span>, <span class="at">border =</span> <span class="st">&quot;grey48&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-125-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="biostats_files/figure-html/unnamed-chunk-125-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="box-width" class="section level3 hasAnchor" number="13.3.3">
 <h3><span class="header-section-number">13.3.3</span> Box width<a href="appendix-base-plot.html#box-width" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -468,7 +468,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="appendix-base-plot.html#cb399-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(Sepal.Length <span class="sc">~</span> Species, <span class="at">data =</span> iris,</span>
 <span id="cb399-2"><a href="appendix-base-plot.html#cb399-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="st">&quot;lightgray&quot;</span>, <span class="at">border =</span> <span class="st">&quot;grey48&quot;</span>,</span>
 <span id="cb399-3"><a href="appendix-base-plot.html#cb399-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">boxwex =</span> <span class="fl">0.4</span> )</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-126-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="biostats_files/figure-html/unnamed-chunk-126-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="axis-1" class="section level3 hasAnchor" number="13.3.4">
 <h3><span class="header-section-number">13.3.4</span> Axis<a href="appendix-base-plot.html#axis-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -480,7 +480,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb400-5"><a href="appendix-base-plot.html#cb400-5" aria-hidden="true" tabindex="-1"></a><span class="fu">box</span>(<span class="at">bty =</span> <span class="st">&quot;l&quot;</span>)</span>
 <span id="cb400-6"><a href="appendix-base-plot.html#cb400-6" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>, <span class="at">at =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Setosa&quot;</span>, <span class="st">&quot;Versicolor&quot;</span>, <span class="st">&quot;Virginica&quot;</span>) )</span>
 <span id="cb400-7"><a href="appendix-base-plot.html#cb400-7" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">2</span>, <span class="at">las =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-127-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="biostats_files/figure-html/unnamed-chunk-127-1.png" width="672" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>
@@ -543,7 +543,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.epub"],
+"download": ["biostats.epub"],
 "search": {
 "engine": "fuse",
 "options": null

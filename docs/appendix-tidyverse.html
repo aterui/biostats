@@ -727,14 +727,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb378-3"><a href="appendix-tidyverse.html#cb378-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length,</span>
 <span id="cb378-4"><a href="appendix-tidyverse.html#cb378-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> Sepal.Width)) <span class="sc">+</span></span>
 <span id="cb378-5"><a href="appendix-tidyverse.html#cb378-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-111-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="biostats_files/figure-html/unnamed-chunk-111-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="appendix-tidyverse.html#cb379-1" aria-hidden="true" tabindex="-1"></a><span class="co"># change color by &quot;Species&quot; column</span></span>
 <span id="cb379-2"><a href="appendix-tidyverse.html#cb379-2" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
 <span id="cb379-3"><a href="appendix-tidyverse.html#cb379-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length,</span>
 <span id="cb379-4"><a href="appendix-tidyverse.html#cb379-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> Sepal.Width,</span>
 <span id="cb379-5"><a href="appendix-tidyverse.html#cb379-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> Species)) <span class="sc">+</span></span>
 <span id="cb379-6"><a href="appendix-tidyverse.html#cb379-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-111-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="biostats_files/figure-html/unnamed-chunk-111-2.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="line" class="section level3 hasAnchor" number="12.3.2">
 <h3><span class="header-section-number">12.3.2</span> Line<a href="appendix-tidyverse.html#line" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -748,7 +748,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb380-7"><a href="appendix-tidyverse.html#cb380-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x,</span>
 <span id="cb380-8"><a href="appendix-tidyverse.html#cb380-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> y)) <span class="sc">+</span></span>
 <span id="cb380-9"><a href="appendix-tidyverse.html#cb380-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-112-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="biostats_files/figure-html/unnamed-chunk-112-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="histogram" class="section level3 hasAnchor" number="12.3.3">
 <h3><span class="header-section-number">12.3.3</span> Histogram<a href="appendix-tidyverse.html#histogram" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -757,17 +757,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb381-2"><a href="appendix-tidyverse.html#cb381-2" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
 <span id="cb381-3"><a href="appendix-tidyverse.html#cb381-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length)) <span class="sc">+</span></span>
 <span id="cb381-4"><a href="appendix-tidyverse.html#cb381-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-113-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="biostats_files/figure-html/unnamed-chunk-113-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="appendix-tidyverse.html#cb382-1" aria-hidden="true" tabindex="-1"></a><span class="co"># change bin width</span></span>
 <span id="cb382-2"><a href="appendix-tidyverse.html#cb382-2" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
 <span id="cb382-3"><a href="appendix-tidyverse.html#cb382-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length)) <span class="sc">+</span></span>
 <span id="cb382-4"><a href="appendix-tidyverse.html#cb382-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-113-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="biostats_files/figure-html/unnamed-chunk-113-2.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="appendix-tidyverse.html#cb383-1" aria-hidden="true" tabindex="-1"></a><span class="co"># change bin number</span></span>
 <span id="cb383-2"><a href="appendix-tidyverse.html#cb383-2" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
 <span id="cb383-3"><a href="appendix-tidyverse.html#cb383-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length)) <span class="sc">+</span></span>
 <span id="cb383-4"><a href="appendix-tidyverse.html#cb383-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">50</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-113-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="biostats_files/figure-html/unnamed-chunk-113-3.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="boxplot" class="section level3 hasAnchor" number="12.3.4">
 <h3><span class="header-section-number">12.3.4</span> Boxplot<a href="appendix-tidyverse.html#boxplot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -777,21 +777,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb384-3"><a href="appendix-tidyverse.html#cb384-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Species,</span>
 <span id="cb384-4"><a href="appendix-tidyverse.html#cb384-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> Sepal.Length)) <span class="sc">+</span></span>
 <span id="cb384-5"><a href="appendix-tidyverse.html#cb384-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-114-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="biostats_files/figure-html/unnamed-chunk-114-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="appendix-tidyverse.html#cb385-1" aria-hidden="true" tabindex="-1"></a><span class="co"># change fill by &quot;Species&quot;</span></span>
 <span id="cb385-2"><a href="appendix-tidyverse.html#cb385-2" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
 <span id="cb385-3"><a href="appendix-tidyverse.html#cb385-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Species,</span>
 <span id="cb385-4"><a href="appendix-tidyverse.html#cb385-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> Sepal.Length,</span>
 <span id="cb385-5"><a href="appendix-tidyverse.html#cb385-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> Species)) <span class="sc">+</span></span>
 <span id="cb385-6"><a href="appendix-tidyverse.html#cb385-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-114-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="biostats_files/figure-html/unnamed-chunk-114-2.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="appendix-tidyverse.html#cb386-1" aria-hidden="true" tabindex="-1"></a><span class="co"># change fill by &quot;Species&quot;, but consistent color</span></span>
 <span id="cb386-2"><a href="appendix-tidyverse.html#cb386-2" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
 <span id="cb386-3"><a href="appendix-tidyverse.html#cb386-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Species,</span>
 <span id="cb386-4"><a href="appendix-tidyverse.html#cb386-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> Sepal.Length,</span>
 <span id="cb386-5"><a href="appendix-tidyverse.html#cb386-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> Species)) <span class="sc">+</span></span>
 <span id="cb386-6"><a href="appendix-tidyverse.html#cb386-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">color =</span> <span class="st">&quot;darkgrey&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-114-3.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="biostats_files/figure-html/unnamed-chunk-114-3.png" width="672" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>
@@ -844,7 +844,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.epub"],
+"download": ["biostats.epub"],
 "search": {
 "engine": "fuse",
 "options": null

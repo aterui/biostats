@@ -387,7 +387,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb78-3"><a href="probabilistic-view.html#cb78-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="co"># specify binwidth</span></span>
 <span id="cb78-4"><a href="probabilistic-view.html#cb78-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="fu">aes</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(height))) <span class="co"># draw vertical line at the mean</span></span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:histogram-height"></span>
-<img src="_main_files/figure-html/histogram-height-1.png" alt="Distribution of plant height" width="672" />
+<img src="biostats_files/figure-html/histogram-height-1.png" alt="Distribution of plant height" width="672" />
 <p class="caption">
 Figure 3.1: Distribution of plant height
 </p>
@@ -423,7 +423,7 @@ f(x) = \frac{1}{\sqrt{2 \pi} \sigma} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\righ
 <span id="cb79-14"><a href="probabilistic-view.html#cb79-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="co"># draw lines</span></span>
 <span id="cb79-15"><a href="probabilistic-view.html#cb79-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Probability density&quot;</span>) <span class="co"># re-label</span></span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:dnorm"></span>
-<img src="_main_files/figure-html/dnorm-1.png" alt="Probability density function of a Normal distribution" width="672" />
+<img src="biostats_files/figure-html/dnorm-1.png" alt="Probability density function of a Normal distribution" width="672" />
 <p class="caption">
 Figure 3.2: Probability density function of a Normal distribution
 </p>
@@ -469,7 +469,7 @@ Figure 3.2: Probability density function of a Normal distribution
 <span id="cb87-10"><a href="probabilistic-view.html#cb87-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">x =</span> bin),</span>
 <span id="cb87-11"><a href="probabilistic-view.html#cb87-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">&quot;salmon&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:histogram-overlaid"></span>
-<img src="_main_files/figure-html/histogram-overlaid-1.png" alt="Histogram overlaid with predicted frequency (red dots and line)" width="672" />
+<img src="biostats_files/figure-html/histogram-overlaid-1.png" alt="Histogram overlaid with predicted frequency (red dots and line)" width="672" />
 <p class="caption">
 Figure 3.3: Histogram overlaid with predicted frequency (red dots and line)
 </p>
@@ -511,7 +511,7 @@ Figure 3.4: Garden view with sampling plots. White squares represent plots. Red 
 <span id="cb90-3"><a href="probabilistic-view.html#cb90-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>, <span class="co"># define binwidth</span></span>
 <span id="cb90-4"><a href="probabilistic-view.html#cb90-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">center =</span> <span class="dv">0</span>) <span class="co"># relative position of each bin</span></span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:hist-density"></span>
-<img src="_main_files/figure-html/hist-density-1.png" alt="Histogram of plant individuals per plot" width="672" />
+<img src="biostats_files/figure-html/hist-density-1.png" alt="Histogram of plant individuals per plot" width="672" />
 <p class="caption">
 Figure 3.5: Histogram of plant individuals per plot
 </p>
@@ -559,7 +559,7 @@ g(x) = \frac{\lambda^x \exp(-\lambda)}{x!}
 <span id="cb91-15"><a href="probabilistic-view.html#cb91-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Probability&quot;</span>,</span>
 <span id="cb91-16"><a href="probabilistic-view.html#cb91-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Count&quot;</span>) <span class="co"># re-label</span></span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:dpois"></span>
-<img src="_main_files/figure-html/dpois-1.png" alt="Example of a Poisson distribution" width="672" />
+<img src="biostats_files/figure-html/dpois-1.png" alt="Example of a Poisson distribution" width="672" />
 <p class="caption">
 Figure 3.6: Example of a Poisson distribution
 </p>
@@ -580,7 +580,7 @@ Figure 3.6: Example of a Poisson distribution
 <span id="cb92-13"><a href="probabilistic-view.html#cb92-13" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x =</span> x,</span>
 <span id="cb92-14"><a href="probabilistic-view.html#cb92-14" aria-hidden="true" tabindex="-1"></a>                <span class="at">y =</span> freq))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:pois-hist"></span>
-<img src="_main_files/figure-html/pois-hist-1.png" alt="Observed histogram of the discrete variable overlaid with the Poisson expectation." width="672" />
+<img src="biostats_files/figure-html/pois-hist-1.png" alt="Observed histogram of the discrete variable overlaid with the Poisson expectation." width="672" />
 <p class="caption">
 Figure 3.7: Observed histogram of the discrete variable overlaid with the Poisson expectation.
 </p>
@@ -673,7 +673,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.epub"],
+"download": ["biostats.epub"],
 "search": {
 "engine": "fuse",
 "options": null

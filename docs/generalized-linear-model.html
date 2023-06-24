@@ -447,7 +447,7 @@ y_i &amp;\sim \text{Normal}(\mu_i, \sigma^2)\\
 <span id="cb207-8"><a href="generalized-linear-model.html#cb207-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb207-9"><a href="generalized-linear-model.html#cb207-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">intercept =</span> alpha,</span>
 <span id="cb207-10"><a href="generalized-linear-model.html#cb207-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">slope =</span> beta)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-59-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="biostats_files/figure-html/unnamed-chunk-59-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>The intersection of the predicted line with the x-axis suggests the presence of negative predicted values for plant counts. However, it is logically implausible for plant counts to be negative.</p>
 <p>This occurrence stems from the nature of the model employed.</p>
 <ol style="list-style-type: decimal">
@@ -543,7 +543,7 @@ y_i &amp;\sim \text{Poisson}(\lambda_i)\\
 <span id="cb215-23"><a href="generalized-linear-model.html#cb215-23" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">y =</span> y_pois),</span>
 <span id="cb215-24"><a href="generalized-linear-model.html#cb215-24" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">&quot;salmon&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:normal-pois"></span>
-<img src="_main_files/figure-html/normal-pois-1.png" alt="Comparison of the predicted values between Normal (broken, black) and Poisson models (solid, red)." width="672" />
+<img src="biostats_files/figure-html/normal-pois-1.png" alt="Comparison of the predicted values between Normal (broken, black) and Poisson models (solid, red)." width="672" />
 <p class="caption">
 Figure 8.2: Comparison of the predicted values between Normal (broken, black) and Poisson models (solid, red).
 </p>
@@ -586,7 +586,7 @@ Figure 8.2: Comparison of the predicted values between Normal (broken, black) an
 <span id="cb218-10"><a href="generalized-linear-model.html#cb218-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Proportion of eggs fertilized&quot;</span>,</span>
 <span id="cb218-11"><a href="generalized-linear-model.html#cb218-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Mussel density&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:mussel-egg"></span>
-<img src="_main_files/figure-html/mussel-egg-1.png" alt="Relationship between the proportion of fertilized eggs and mussel density in the surround." width="672" />
+<img src="biostats_files/figure-html/mussel-egg-1.png" alt="Relationship between the proportion of fertilized eggs and mussel density in the surround." width="672" />
 <p class="caption">
 Figure 8.3: Relationship between the proportion of fertilized eggs and mussel density in the surround.
 </p>
@@ -630,7 +630,7 @@ p_i = \frac{\exp(\alpha + \beta~\text{density}_i)}{1 + \exp(\alpha + \beta~\text
 <span id="cb219-11"><a href="generalized-linear-model.html#cb219-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;x&quot;</span>,</span>
 <span id="cb219-12"><a href="generalized-linear-model.html#cb219-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;logit(x)&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:logit-transform"></span>
-<img src="_main_files/figure-html/logit-transform-1.png" alt="Logit-transformation ensures that the transformed variable to fall in the range of zero to one." width="672" />
+<img src="biostats_files/figure-html/logit-transform-1.png" alt="Logit-transformation ensures that the transformed variable to fall in the range of zero to one." width="672" />
 <p class="caption">
 Figure 8.4: Logit-transformation ensures that the transformed variable to fall in the range of zero to one.
 </p>
@@ -702,7 +702,7 @@ y_i &amp;\sim \text{Binomial}(N_i, p_i)\\
 <span id="cb226-7"><a href="generalized-linear-model.html#cb226-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&quot;Proportion of eggs fertilized&quot;</span>,</span>
 <span id="cb226-8"><a href="generalized-linear-model.html#cb226-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Mussel density&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:binom-fit-figure"></span>
-<img src="_main_files/figure-html/binom-fit-figure-1.png" alt="Prediction by the Binomial model." width="672" />
+<img src="biostats_files/figure-html/binom-fit-figure-1.png" alt="Prediction by the Binomial model." width="672" />
 <p class="caption">
 Figure 8.5: Prediction by the Binomial model.
 </p>
@@ -766,7 +766,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.epub"],
+"download": ["biostats.epub"],
 "search": {
 "engine": "fuse",
 "options": null

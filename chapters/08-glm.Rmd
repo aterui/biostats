@@ -319,7 +319,7 @@ These models, including those assuming a Normal distribution, fall into the cate
 $$
 \begin{aligned}
 y_i &\sim \text{D}(\Theta)\\
-\text{Link}(f(\Theta)) &= g(x)
+\text{Link}(f(\Theta)) &= \alpha + \sum_k \beta_k x_{k, i}
 \end{aligned}
 $$
 

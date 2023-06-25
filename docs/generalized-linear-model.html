@@ -718,7 +718,7 @@ Figure 8.5: Prediction by the Binomial model.
 <p><span class="math display">\[
 \begin{aligned}
 y_i &amp;\sim \text{D}(\Theta)\\
-\text{Link}(f(\Theta)) &amp;= g(x)
+\text{Link}(f(\Theta)) &amp;= \alpha + \sum_k \beta_k x_{k, i}
 \end{aligned}
 \]</span></p>
 <p>In this structure, <span class="math inline">\(\Theta\)</span> represents a parameter vector of the probability distribution, while <span class="math inline">\(\text{D}(\cdot)\)</span> and <span class="math inline">\(\text{Link}(\cdot)\)</span> denote the chosen probability distribution and its associated link function, respectively. For example, if we select a Poisson distribution as <span class="math inline">\(\text{D}(\cdot)\)</span>, then the corresponding <span class="math inline">\(\text{Link}(\cdot)\)</span> function is the natural logarithm (log) (see Section <a href="generalized-linear-model.html#poisson-model">8.1.2</a>). The function <span class="math inline">\(f(\Theta)\)</span> defines the modeled parameter of the probability distribution, which is related to the explanatory variables <span class="math inline">\(x\)</span> and represented as <span class="math inline">\(g(x)\)</span>. For instance, in Normal and Poisson models, we model the mean, while in the Binomial model, we model the success probability. In certain distributions, <span class="math inline">\(f(\Theta)\)</span> may be a function of multiple parameters.</p>

@@ -3294,6 +3294,22 @@ By plotting the predicted values against the observed data points, we can visual
 \hypertarget{variable-types}{%
 \subsection{Variable Types}\label{variable-types}}
 
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Categorical Variables}: Qualitative or discrete characteristics that fall into specific categories or groups. They do not have a numerical value or order associated with them. Examples: gender (male/female), marital status (single/married/divorced), and color (red/green/blue).
+\item
+  \textbf{Ordinal Variables}: Categories or levels with a natural order or ranking. Examples: survey ratings (e.g., Likert scale), education levels (e.g., high school, bachelor's, master's), or socioeconomic status (e.g., low, medium, high).
+\item
+  \textbf{Interval Variables}: Numerical values representing a continuous scale where the intervals between the values are meaningful and consistent. Unlike ordinal variables, interval variables have equally spaced intervals between adjacent values, allowing for meaningful arithmetic operations like addition and subtraction. However, interval variables do not contain a natural zero point; zero is arbitrary and merely a reference point. Examples: temperature
+\item
+  \textbf{Ratio Variables}: Numerical variable that shares the characteristics of interval variables but also has a meaningful and absolute zero point. Thus, this type of variables has the complete absence of the measured attribute/quantity. Examples: height (in centimeters), weight (in kilograms), time (in seconds), distance (in meters), and income (in dollars).
+\end{enumerate}
+
+We cannot carry out meaningful arithmetic operations on categorical and ordinal variables; therefore, we should treat these variables as as ``character'' or ``factors'' in R. This is because R recognizes that the intervals between different groups or levels of these variables are not meaningful in a numerical sense.
+
+In contrast, interval and ratio variables should be considered ``numerical'' variables in R. These variables possess a meaningful numerical scale with equal intervals, and in the case of ratio variables, a true zero point.
+
 \hypertarget{laboratory-6}{%
 \section{Laboratory}\label{laboratory-6}}
 
@@ -3829,7 +3845,7 @@ These models, including those assuming a Normal distribution, fall into the cate
 \[
 \begin{aligned}
 y_i &\sim \text{D}(\Theta)\\
-\text{Link}(f(\Theta)) &= g(x)
+\text{Link}(f(\Theta)) &= \alpha + \sum_k \beta_k x_{k, i}
 \end{aligned}
 \]
 

@@ -24,6 +24,8 @@ fig:normal-pois
 fig:mussel-egg
 fig:logit-transform
 fig:binom-fit-figure
+fig:dendrogram
+tab:table-dist
 fig:ui
 tab:str
 fig:gitcheck

@@ -517,7 +517,8 @@ y_i &amp;\sim \text{Poisson}(\lambda_i)\\
 <span id="cb213-3"><a href="generalized-linear-model.html#cb213-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p_value)</span></code></pre></div>
 <pre><code>##  (Intercept)      nitrate 
 ## 1.209323e-04 9.064303e-07</code></pre>
-<p>Let’s visualize the difference between the Normal and Poisson models (Figure <a href="generalized-linear-model.html#fig:normal-pois">8.2</a>). Clearly, the Poisson model does a better job.</p>
+<p><strong>Notice that these p-values are not identical to the output from the Normal model</strong> – therefore, the choice of the probability distribution critically affects the results of statistical analysis, and often times, qualitatively (not in this particular example though).</p>
+<p>Visualization provides the convincing difference between the Normal and Poisson models (Figure <a href="generalized-linear-model.html#fig:normal-pois">8.2</a>).</p>
 <div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="generalized-linear-model.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make predictions</span></span>
 <span id="cb215-2"><a href="generalized-linear-model.html#cb215-2" aria-hidden="true" tabindex="-1"></a>df_pred <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">nitrate =</span> <span class="fu">seq</span>(<span class="fu">min</span>(df_count<span class="sc">$</span>nitrate),</span>
 <span id="cb215-3"><a href="generalized-linear-model.html#cb215-3" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">max</span>(df_count<span class="sc">$</span>nitrate),</span>
@@ -548,6 +549,7 @@ y_i &amp;\sim \text{Poisson}(\lambda_i)\\
 Figure 8.2: Comparison of the predicted values between Normal (broken, black) and Poisson models (solid, red).
 </p>
 </div>
+<p>Clearly, the Poisson model does a better job.</p>
 </div>
 </div>
 <div id="proportional-data" class="section level2 hasAnchor" number="8.2">
@@ -712,6 +714,77 @@ Figure 8.5: Prediction by the Binomial model.
 </div>
 <div id="the-glm-framework" class="section level2 hasAnchor" number="8.3">
 <h2><span class="header-section-number">8.3</span> The GLM Framework<a href="generalized-linear-model.html#the-glm-framework" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>These models, including those assuming a Normal distribution, fall into the category of the Generalized Linear Model (GLM) framework. The framework follows a common structure:</p>
+<p><span class="math display">\[
+\begin{aligned}
+y_i &amp;\sim \text{D}(\Theta)\\
+\text{Link}(f(\Theta)) &amp;= g(x)
+\end{aligned}
+\]</span></p>
+<p>In this structure, <span class="math inline">\(\Theta\)</span> represents a parameter vector of the probability distribution, while <span class="math inline">\(\text{D}(\cdot)\)</span> and <span class="math inline">\(\text{Link}(\cdot)\)</span> denote the chosen probability distribution and its associated link function, respectively. For example, if we select a Poisson distribution as <span class="math inline">\(\text{D}(\cdot)\)</span>, then the corresponding <span class="math inline">\(\text{Link}(\cdot)\)</span> function is the natural logarithm (log) (see Section <a href="generalized-linear-model.html#poisson-model">8.1.2</a>). The function <span class="math inline">\(f(\Theta)\)</span> defines the modeled parameter of the probability distribution, which is related to the explanatory variables <span class="math inline">\(x\)</span> and represented as <span class="math inline">\(g(x)\)</span>. For instance, in Normal and Poisson models, we model the mean, while in the Binomial model, we model the success probability. In certain distributions, <span class="math inline">\(f(\Theta)\)</span> may be a function of multiple parameters.</p>
+<p>The GLM framework differs from the Linear Model framework by offering greater flexibility in the choice of probability distribution, achieved through the introduction of the Link function. This function allows us to constrain the modeled parameter within a specific range. As non-normal distributions are common in natural phenomena, this framework plays a critical role in modern statistical analysis.</p>
+<p>However, how do we determine the appropriate probability distribution? While there is no single correct answer to this question, there are clear factors to consider—specifically, the characteristics of the response variable. The following criteria can be particularly helpful:</p>
+<ol style="list-style-type: decimal">
+<li>Is the variable discrete?</li>
+<li>Is there an upper bound?</li>
+<li>Is the sample variance far greater than the mean?</li>
+</ol>
+<p>To assist you in selecting an appropriate probability distribution for modeling, I have provided a concise decision tree graph. Please note that the choices presented are frequently encountered in ecological modeling, rather than an exhaustive list of probability distributions (see Table <a href="generalized-linear-model.html#tab:table-dist">8.1</a>). The full list of probability distributions can be found here (<a href="https://en.wikipedia.org/wiki/List_of_probability_distributions">Wikipedia page</a>)</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:dendrogram"></span>
+<img src="image/figure_dendro.jpg" alt="Tree chart on how to choose a probability distribution in GLM analysis." width="1500" />
+<p class="caption">
+Figure 8.6: Tree chart on how to choose a probability distribution in GLM analysis.
+</p>
+</div>
+<table>
+<caption><span id="tab:table-dist">Table 8.1: </span>Common distributions used in GLM analysis</caption>
+<thead>
+<tr class="header">
+<th align="right">Node</th>
+<th align="left">Distribution</th>
+<th align="left">Range</th>
+<th align="left">R</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">Beta-binomial</td>
+<td align="left"><span class="math inline">\(0 \le y \le N\)</span></td>
+<td align="left"><code>glmmTMB::glmmTMB()</code></td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">Binomial</td>
+<td align="left"><span class="math inline">\(0 \le y \le N\)</span></td>
+<td align="left"><code>glm()</code></td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="left">Negative binomial</td>
+<td align="left"><span class="math inline">\(0 \le y\)</span></td>
+<td align="left"><code>glm.nb()</code></td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="left">Poisson</td>
+<td align="left"><span class="math inline">\(0 \le y\)</span></td>
+<td align="left"><code>glm()</code></td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="left">Beta</td>
+<td align="left"><span class="math inline">\(0 &lt; y &lt; 1\)</span></td>
+<td align="left"><code>glmmTMB::glmmTMB()</code></td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="left">Normal</td>
+<td align="left"><span class="math inline">\(-\inf &lt; y &lt; \inf\)</span></td>
+<td align="left"><code>lm()</code>, <code>glm()</code></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="laboratory-7" class="section level2 hasAnchor" number="8.4">
 <h2><span class="header-section-number">8.4</span> Laboratory<a href="generalized-linear-model.html#laboratory-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>

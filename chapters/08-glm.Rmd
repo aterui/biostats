@@ -131,7 +131,9 @@ p_value <- (1 - pnorm(abs(z_value), mean = 0, sd = 1)) * 2
 print(p_value)
 ```
 
-Let's visualize the difference between the Normal and Poisson models (Figure \@ref(fig:normal-pois)). Clearly, the Poisson model does a better job.
+**Notice that these p-values are not identical to the output from the Normal model** -- therefore, the choice of the probability distribution critically affects the results of statistical analysis, and often times, qualitatively (not in this particular example though).
+
+Visualization provides the convincing difference between the Normal and Poisson models (Figure \@ref(fig:normal-pois)).
 
 ```{r normal-pois, fig.cap="Comparison of the predicted values between Normal (broken, black) and Poisson models (solid, red)."}
 # make predictions
@@ -159,6 +161,8 @@ df_count %>%
             aes(y = y_pois),
             color = "salmon")
 ```
+
+Clearly, the Poisson model does a better job.
 
 ## Proportional Data
 
@@ -309,5 +313,55 @@ df_mussel %>%
 Perfect.
 
 ## The GLM Framework
+
+These models, including those assuming a Normal distribution, fall into the category of the Generalized Linear Model (GLM) framework. The framework follows a common structure:
+
+$$
+\begin{aligned}
+y_i &\sim \text{D}(\Theta)\\
+\text{Link}(f(\Theta)) &= g(x)
+\end{aligned}
+$$
+
+In this structure, $\Theta$ represents a parameter vector of the probability distribution, while $\text{D}(\cdot)$ and $\text{Link}(\cdot)$ denote the chosen probability distribution and its associated link function, respectively. For example, if we select a Poisson distribution as $\text{D}(\cdot)$, then the corresponding $\text{Link}(\cdot)$ function is the natural logarithm (log) (see Section \@ref(poisson-model)). The function $f(\Theta)$ defines the modeled parameter of the probability distribution, which is related to the explanatory variables $x$ and represented as $g(x)$. For instance, in Normal and Poisson models, we model the mean, while in the Binomial model, we model the success probability. In certain distributions, $f(\Theta)$ may be a function of multiple parameters.
+
+The GLM framework differs from the Linear Model framework by offering greater flexibility in the choice of probability distribution, achieved through the introduction of the Link function. This function allows us to constrain the modeled parameter within a specific range. As non-normal distributions are common in natural phenomena, this framework plays a critical role in modern statistical analysis.
+
+However, how do we determine the appropriate probability distribution? While there is no single correct answer to this question, there are clear factors to consider—specifically, the characteristics of the response variable. The following criteria can be particularly helpful:
+
+1. Is the variable discrete?
+2. Is there an upper bound?
+3. Is the sample variance far greater than the mean?
+
+To assist you in selecting an appropriate probability distribution for modeling, I have provided a concise decision tree graph. Please note that the choices presented are frequently encountered in ecological modeling, rather than an exhaustive list of probability distributions (see Table \@ref(tab:table-dist)). The full list of probability distributions can be found here ([Wikipedia page](https://en.wikipedia.org/wiki/List_of_probability_distributions))
+
+```{r dendrogram, fig.cap="Tree chart on how to choose a probability distribution in GLM analysis.", echo = F}
+
+knitr::include_graphics(here::here("image/figure_dendro.jpg"))
+```
+
+```{r table-dist, echo=F}
+
+tibble(Node = 1:6,
+       Distribution = c("Beta-binomial",
+                        "Binomial",
+                        "Negative binomial",
+                        "Poisson",
+                        "Beta",
+                        "Normal"),
+       Range = c("$0 \\le y \\le N$",
+                 "$0 \\le y \\le N$",
+                 "$0 \\le y$",
+                 "$0 \\le y$",
+                 "$0 < y < 1$",
+                 "$-\\inf < y < \\inf$"),
+       R = c("`glmmTMB::glmmTMB()`",
+             "`glm()`",
+             "`glm.nb()`",
+             "`glm()`",
+             "`glmmTMB::glmmTMB()`",
+             "`lm()`, `glm()`")) %>% 
+  knitr::kable(caption = "Common distributions used in GLM analysis")
+```
 
 ## Laboratory

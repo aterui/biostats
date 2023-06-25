@@ -111,8 +111,8 @@ x <- x + t(x)
 graph <- graph.adjacency(x, mode = "undirected")
 E(graph)$weight <- rep(c("Yes", "No"), 5)
 V(graph)$label <- c("Is the variable discrete?",
-                    "Are there upper/lower limits?",
-                    "Are there upper/lower limits?",
+                    "Is there an upper bound?",
+                    "Is there an upper bound?",
                     "Variance >> Mean?",
                     "Variance >> Mean?",
                     "5",
@@ -138,4 +138,4 @@ g_dendro <- graph %>%
 
 ggsave(g_dendro,
        height = 8, width = 10,
-       filename = here::here("image/figure_dendro.pdf"))
+       filename = here::here("image/figure_dendro.jpg"))

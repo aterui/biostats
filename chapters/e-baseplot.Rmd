@@ -1,4 +1,4 @@
-# Appendix: Base Plot
+# Appendix: Base Plot {.unnumbered}
 
 ## Overview
 

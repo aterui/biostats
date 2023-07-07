@@ -2,7 +2,7 @@
 source(here::here("code/library.R"))
 ```
 
-# Appendix: Tidyverse
+# Appendix: Tidyverse {.unnumbered}
 
 ## Overview
 

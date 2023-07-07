@@ -8,7 +8,7 @@ df_count <- read_csv(here::here("data_raw/data_garden_count.csv"))
 
 Chapter \@ref(sampling) emphasized the concept of sampling and introduced the crucial aspect of statistics: randomness. Although the mean represents the central tendency of the data, it does not encompass all the data points. Inevitable deviations occur, and we need a way to express this "randomness." The concept of probability distributions aids in fully understanding the stochastic nature of observed data.
 
-## Probability Distribution of a Continuous Variable
+## Continuous Variable
 
 ### Probability Density Function
 
@@ -34,7 +34,7 @@ This distribution comprises a thousand height measurements. However, there are c
 In statistics, the symmetrical bell-shaped form is commonly approximated by a Normal distribution, often denoted as "*variable* $x$ *is assumed to follow a Normal distribution.*" We express this using the following mathematical expression:
 
 $$
-x \sim Normal(\mu, \sigma^2)
+x \sim \mbox{Normal}(\mu, \sigma^2)
 $$
 
 Unlike an "equation," we do not use the "$=$" sign because variable $x$ is not equivalent to the Normal distribution. Rather, it represents a "stochastic" relationship that signifies the probability of $x$ taking on a specific range of values.
@@ -124,7 +124,7 @@ df_h0 %>%
 
 It is remarkable that the probability distribution, characterized by just two parameters (mean and variance), can effectively reproduce the overall shape observed in the original data set of 1000 data points. This is great news because it means that once we determine these key parameters, we can infer the general pattern of the data.
 
-## Probability Distribution of a Discrete Variable
+## Discrete Variable
 
 ### Probability Mass Function
 
@@ -165,7 +165,7 @@ There are several significant differences compared to the plant height example w
 Given these characteristics, a Normal distribution may not be an appropriate choice for representing such a variable. Instead, it would be more suitable to use a Poisson distribution to characterize the observed distribution of the discrete variable.
 
 $$
-x \sim Poisson(\lambda)
+x \sim \mbox{Poisson}(\lambda)
 $$
 
 In a Poisson distribution, the mean parameter ($\lambda$) serves as the sole parameter[^03-probability-1]. Probability distributions that describe discrete variables are expressed using a **probability mass function** (PMF):

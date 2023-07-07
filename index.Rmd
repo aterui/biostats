@@ -1,17 +1,14 @@
 ---
 title: "BIOSTATS"
 author: "Akira Terui"
-date: "Last updated on `r Sys.Date()`"
+date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
-documentclass: book
-# url: your book url like https://bookdown.org/yihui/bookdown
-# cover-image: path to the social sharing image like images/cover.jpg
-description: |
-  This is a minimal example of using the bookdown package to write a book.
-  The HTML output format for this example is bookdown::gitbook,
-  set in the _output.yml file.
+output: bookdown::bs4_book
+url: https://bookdown.org/janedoe/bookdown-demo
 link-citations: yes
 github-repo: rstudio/bookdown-demo
+description: |
+  Biostats I course material.
 header-includes: 
   - \usepackage{amsmath}
 ---

@@ -174,7 +174,7 @@ There is another type of data for which a Normal distribution is not suitable - 
 knitr::include_graphics(here::here("image/image_mussel.jpg"))
 ```
 
-Male freshwater mussels release sperm into the water, which is then drawn into female mussels downstream. Considering the nature of the fertilization process, female mussels are expected to have a higher probability of fertilization when they are surrounded by a greater number of males. To explore this relationship, the data can be loaded into R and visualized using a plot. By examining the data, we can observe the proportion of fertilized eggs based on the number of males. This visualization will provide insights into the impact of male presence on the fertilization process of female mussels.
+Male freshwater mussels release sperm into the water, which is then drawn into female mussels downstream. Considering the nature of the fertilization process, female mussels are expected to have a higher probability of fertilization when they are surrounded by a greater number of males. To explore this relationship, let's load the data into R and visualize it.
 
 ```{r, eval=FALSE}
 df_mussel <- read_csv("data_raw/data_mussel.csv")
@@ -337,7 +337,42 @@ To assist you in selecting an appropriate probability distribution for modeling,
 
 ```{r dendrogram, fig.cap="Tree chart on how to choose a probability distribution in GLM analysis.", echo = F}
 
-knitr::include_graphics(here::here("image/figure_dendro.jpg"))
+## base adjacency matrix
+x <- matrix(0, 11, 11)
+for (i in 1:5) {
+  x[i, (i * 2) :(i * 2 + 1)] <- 1
+}
+x <- x + t(x)
+
+graph <- graph.adjacency(x, mode = "undirected")
+E(graph)$weight <- rep(c("Yes", "No"), 5)
+V(graph)$label <- c("Is the variable discrete?",
+                    "Is there an upper bound?",
+                    "Is there an upper bound?",
+                    "Variance >> Mean?",
+                    "Variance >> Mean?",
+                    "5",
+                    "6",
+                    "1",
+                    "2",
+                    "3",
+                    "4")
+
+g_dendro <- graph %>% 
+  ggraph(layout = layout_as_tree(.,
+                                 flip.y = TRUE,
+                                 root = 1)) +
+  geom_edge_link(aes(label = weight),
+                 color = "gray") +
+  geom_node_label(aes(label = label),
+                  label.padding = unit(0.5, "lines"),
+                  fill = grey(0.95),
+                  label.r = unit(0.75, "lines")) +
+  theme_void() +
+  theme(legend.position = "bottom") +
+  guides(color = "none")
+
+print(g_dendro)
 ```
 
 ```{r table-dist, echo=F}

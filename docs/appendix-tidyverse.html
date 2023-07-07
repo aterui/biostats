@@ -1,385 +1,83 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 12 Appendix: Tidyverse | BIOSTATS</title>
-  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
-  <meta name="generator" content="bookdown 0.29 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Chapter 12 Appendix: Tidyverse | BIOSTATS" />
-  <meta property="og:type" content="book" />
-  
-  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
-  <meta name="github-repo" content="rstudio/bookdown-demo" />
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 12 Appendix: Tidyverse | BIOSTATS" />
-  
-  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
-  
-
-<meta name="author" content="Akira Terui" />
-
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="appendix-data-structure.html"/>
-<link rel="next" href="appendix-base-plot.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-
-
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-
-<link rel="stylesheet" href="style.css" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Appendix: Tidyverse | BIOSTATS</title>
+<meta name="author" content="Akira Terui">
+<meta name="description" content="9.13 Overview R packages are collections of functions that extend the functionality of the R programming language. They provide a convenient way for users to access and utilize specialized tools...">
+<meta name="generator" content="bookdown 0.29 with bs4_book()">
+<meta property="og:title" content="Appendix: Tidyverse | BIOSTATS">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://bookdown.org/janedoe/bookdown-demo/appendix-tidyverse.html">
+<meta property="og:description" content="9.13 Overview R packages are collections of functions that extend the functionality of the R programming language. They provide a convenient way for users to access and utilize specialized tools...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Appendix: Tidyverse | BIOSTATS">
+<meta name="twitter:description" content="9.13 Overview R packages are collections of functions that extend the functionality of the R programming language. They provide a convenient way for users to access and utilize specialized tools...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><a href="./">BIOSTATS</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
-<li class="chapter" data-level="1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html"><i class="fa fa-check"></i><b>1</b> Descriptive Statistics</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#central-tendency"><i class="fa fa-check"></i><b>1.1</b> Central Tendency</a>
-<ul>
-<li class="chapter" data-level="1.1.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#measures-of-central-tendency"><i class="fa fa-check"></i><b>1.1.1</b> Measures of Central Tendency</a></li>
-<li class="chapter" data-level="1.1.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#r-exercise"><i class="fa fa-check"></i><b>1.1.2</b> R Exercise</a></li>
-</ul></li>
-<li class="chapter" data-level="1.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#variation"><i class="fa fa-check"></i><b>1.2</b> Variation</a>
-<ul>
-<li class="chapter" data-level="1.2.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#measures-of-variation"><i class="fa fa-check"></i><b>1.2.1</b> Measures of Variation</a></li>
-<li class="chapter" data-level="1.2.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#r-exercise-1"><i class="fa fa-check"></i><b>1.2.2</b> R Exercise</a></li>
-</ul></li>
-<li class="chapter" data-level="1.3" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#laboratory"><i class="fa fa-check"></i><b>1.3</b> Laboratory</a>
-<ul>
-<li class="chapter" data-level="1.3.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#comparing-central-tendency-measures"><i class="fa fa-check"></i><b>1.3.1</b> Comparing Central Tendency Measures</a></li>
-<li class="chapter" data-level="1.3.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#comparing-variation-measures"><i class="fa fa-check"></i><b>1.3.2</b> Comparing Variation Measures</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="sampling.html"><a href="sampling.html"><i class="fa fa-check"></i><b>2</b> Sampling</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="sampling.html"><a href="sampling.html#the-unknown-garden-plant-example"><i class="fa fa-check"></i><b>2.1</b> The Unknown: Garden Plant Example</a></li>
-<li class="chapter" data-level="2.2" data-path="sampling.html"><a href="sampling.html#linking-part-to-the-whole"><i class="fa fa-check"></i><b>2.2</b> Linking Part to the Whole</a></li>
-<li class="chapter" data-level="2.3" data-path="sampling.html"><a href="sampling.html#laboratory-1"><i class="fa fa-check"></i><b>2.3</b> Laboratory</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="probabilistic-view.html"><a href="probabilistic-view.html"><i class="fa fa-check"></i><b>3</b> Probabilistic View</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="probabilistic-view.html"><a href="probabilistic-view.html#probability-distribution-of-a-continuous-variable"><i class="fa fa-check"></i><b>3.1</b> Probability Distribution of a Continuous Variable</a>
-<ul>
-<li class="chapter" data-level="3.1.1" data-path="probabilistic-view.html"><a href="probabilistic-view.html#probability-density-function"><i class="fa fa-check"></i><b>3.1.1</b> Probability Density Function</a></li>
-<li class="chapter" data-level="3.1.2" data-path="probabilistic-view.html"><a href="probabilistic-view.html#pdf-to-frequency-distribution"><i class="fa fa-check"></i><b>3.1.2</b> PDF to frequency distribution</a></li>
-</ul></li>
-<li class="chapter" data-level="3.2" data-path="probabilistic-view.html"><a href="probabilistic-view.html#probability-distribution-of-a-discrete-variable"><i class="fa fa-check"></i><b>3.2</b> Probability Distribution of a Discrete Variable</a>
-<ul>
-<li class="chapter" data-level="3.2.1" data-path="probabilistic-view.html"><a href="probabilistic-view.html#probability-mass-function"><i class="fa fa-check"></i><b>3.2.1</b> Probability Mass Function</a></li>
-<li class="chapter" data-level="3.2.2" data-path="probabilistic-view.html"><a href="probabilistic-view.html#pmf-to-frequency-distribution"><i class="fa fa-check"></i><b>3.2.2</b> PMF to frequency distribution</a></li>
-</ul></li>
-<li class="chapter" data-level="3.3" data-path="probabilistic-view.html"><a href="probabilistic-view.html#why-probability-distributions"><i class="fa fa-check"></i><b>3.3</b> Why Probability Distributions?</a></li>
-<li class="chapter" data-level="3.4" data-path="probabilistic-view.html"><a href="probabilistic-view.html#laboratory-2"><i class="fa fa-check"></i><b>3.4</b> Laboratory</a>
-<ul>
-<li class="chapter" data-level="3.4.1" data-path="probabilistic-view.html"><a href="probabilistic-view.html#normal-distribution"><i class="fa fa-check"></i><b>3.4.1</b> Normal Distribution</a></li>
-<li class="chapter" data-level="3.4.2" data-path="probabilistic-view.html"><a href="probabilistic-view.html#poisson-distribution"><i class="fa fa-check"></i><b>3.4.2</b> Poisson Distribution</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="two-group-comparison.html"><a href="two-group-comparison.html"><i class="fa fa-check"></i><b>4</b> Two-Group Comparison</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="two-group-comparison.html"><a href="two-group-comparison.html#explore-data-structure"><i class="fa fa-check"></i><b>4.1</b> Explore Data Structure</a></li>
-<li class="chapter" data-level="4.2" data-path="two-group-comparison.html"><a href="two-group-comparison.html#test-statistic"><i class="fa fa-check"></i><b>4.2</b> Test Statistic</a>
-<ul>
-<li class="chapter" data-level="4.2.1" data-path="two-group-comparison.html"><a href="two-group-comparison.html#t-statistic"><i class="fa fa-check"></i><b>4.2.1</b> t-statistic</a></li>
-<li class="chapter" data-level="4.2.2" data-path="two-group-comparison.html"><a href="two-group-comparison.html#null-hypothesis"><i class="fa fa-check"></i><b>4.2.2</b> Null Hypothesis</a></li>
-<li class="chapter" data-level="4.2.3" data-path="two-group-comparison.html"><a href="two-group-comparison.html#interpretation"><i class="fa fa-check"></i><b>4.2.3</b> Interpretation</a></li>
-</ul></li>
-<li class="chapter" data-level="4.3" data-path="two-group-comparison.html"><a href="two-group-comparison.html#t-test-in-r"><i class="fa fa-check"></i><b>4.3</b> t-test in R</a>
-<ul>
-<li class="chapter" data-level="4.3.1" data-path="two-group-comparison.html"><a href="two-group-comparison.html#t-test-with-equal-variance"><i class="fa fa-check"></i><b>4.3.1</b> t-test with equal variance</a></li>
-<li class="chapter" data-level="4.3.2" data-path="two-group-comparison.html"><a href="two-group-comparison.html#t-test-with-unequal-variance"><i class="fa fa-check"></i><b>4.3.2</b> t-test with unequal variance</a></li>
-</ul></li>
-<li class="chapter" data-level="4.4" data-path="two-group-comparison.html"><a href="two-group-comparison.html#laboratory-3"><i class="fa fa-check"></i><b>4.4</b> Laboratory</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html"><i class="fa fa-check"></i><b>5</b> Multiple-Group Comparison</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#partition-the-variability"><i class="fa fa-check"></i><b>5.1</b> Partition the Variability</a>
-<ul>
-<li class="chapter" data-level="5.1.1" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#between-group-variability"><i class="fa fa-check"></i><b>5.1.1</b> Between-group variability</a></li>
-<li class="chapter" data-level="5.1.2" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#within-group-variability"><i class="fa fa-check"></i><b>5.1.2</b> Within-group variability</a></li>
-<li class="chapter" data-level="5.1.3" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#variability-to-variance"><i class="fa fa-check"></i><b>5.1.3</b> Variability to Variance</a></li>
-</ul></li>
-<li class="chapter" data-level="5.2" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#test-statistic-1"><i class="fa fa-check"></i><b>5.2</b> Test Statistic</a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#f-statistic"><i class="fa fa-check"></i><b>5.2.1</b> F-statistic</a></li>
-<li class="chapter" data-level="5.2.2" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#null-hypothesis-1"><i class="fa fa-check"></i><b>5.2.2</b> Null Hypothesis</a></li>
-</ul></li>
-<li class="chapter" data-level="5.3" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#anova-in-r"><i class="fa fa-check"></i><b>5.3</b> ANOVA in R</a></li>
-<li class="chapter" data-level="5.4" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#post-hoc-tests"><i class="fa fa-check"></i><b>5.4</b> Post-hoc Tests</a></li>
-<li class="chapter" data-level="5.5" data-path="multiple-group-comparison.html"><a href="multiple-group-comparison.html#laboratory-4"><i class="fa fa-check"></i><b>5.5</b> Laboratory</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="regression.html"><a href="regression.html"><i class="fa fa-check"></i><b>6</b> Regression</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="regression.html"><a href="regression.html#explore-data-structure-1"><i class="fa fa-check"></i><b>6.1</b> Explore Data Structure</a></li>
-<li class="chapter" data-level="6.2" data-path="regression.html"><a href="regression.html#drawing-the-fittest-line"><i class="fa fa-check"></i><b>6.2</b> Drawing the “fittest” line</a>
-<ul>
-<li class="chapter" data-level="6.2.1" data-path="regression.html"><a href="regression.html#linear-formula"><i class="fa fa-check"></i><b>6.2.1</b> Linear formula</a></li>
-<li class="chapter" data-level="6.2.2" data-path="regression.html"><a href="regression.html#minimizing-the-errors"><i class="fa fa-check"></i><b>6.2.2</b> Minimizing the errors</a></li>
-<li class="chapter" data-level="6.2.3" data-path="regression.html"><a href="regression.html#least-squares"><i class="fa fa-check"></i><b>6.2.3</b> Least Squares</a></li>
-<li class="chapter" data-level="6.2.4" data-path="regression.html"><a href="regression.html#standard-errors-and-t-values"><i class="fa fa-check"></i><b>6.2.4</b> Standard Errors and t-values</a></li>
-</ul></li>
-<li class="chapter" data-level="6.3" data-path="regression.html"><a href="regression.html#unexplained-variation"><i class="fa fa-check"></i><b>6.3</b> Unexplained Variation</a>
-<ul>
-<li class="chapter" data-level="6.3.1" data-path="regression.html"><a href="regression.html#retrieve-errors"><i class="fa fa-check"></i><b>6.3.1</b> Retrieve Errors</a></li>
-<li class="chapter" data-level="6.3.2" data-path="regression.html"><a href="regression.html#visualize-errors"><i class="fa fa-check"></i><b>6.3.2</b> Visualize Errors</a></li>
-<li class="chapter" data-level="6.3.3" data-path="regression.html"><a href="regression.html#coefficient-of-determination"><i class="fa fa-check"></i><b>6.3.3</b> Coefficient of Determination</a></li>
-</ul></li>
-<li class="chapter" data-level="6.4" data-path="regression.html"><a href="regression.html#laboratory-5"><i class="fa fa-check"></i><b>6.4</b> Laboratory</a></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="linear-model.html"><a href="linear-model.html"><i class="fa fa-check"></i><b>7</b> Linear Model</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="linear-model.html"><a href="linear-model.html#the-frame"><i class="fa fa-check"></i><b>7.1</b> The Frame</a>
-<ul>
-<li class="chapter" data-level="7.1.1" data-path="linear-model.html"><a href="linear-model.html#two-group-case"><i class="fa fa-check"></i><b>7.1.1</b> Two-Group Case</a></li>
-<li class="chapter" data-level="7.1.2" data-path="linear-model.html"><a href="linear-model.html#multiple-group-case"><i class="fa fa-check"></i><b>7.1.2</b> Multiple-Group Case</a></li>
-<li class="chapter" data-level="7.1.3" data-path="linear-model.html"><a href="linear-model.html#the-common-structure"><i class="fa fa-check"></i><b>7.1.3</b> The Common Structure</a></li>
-</ul></li>
-<li class="chapter" data-level="7.2" data-path="linear-model.html"><a href="linear-model.html#combine-multiple-types-of-variables"><i class="fa fa-check"></i><b>7.2</b> Combine Multiple Types of Variables</a>
-<ul>
-<li class="chapter" data-level="7.2.1" data-path="linear-model.html"><a href="linear-model.html#iris-example"><i class="fa fa-check"></i><b>7.2.1</b> <code>iris</code> Example</a></li>
-<li class="chapter" data-level="7.2.2" data-path="linear-model.html"><a href="linear-model.html#variable-types"><i class="fa fa-check"></i><b>7.2.2</b> Variable Types</a></li>
-</ul></li>
-<li class="chapter" data-level="7.3" data-path="linear-model.html"><a href="linear-model.html#laboratory-6"><i class="fa fa-check"></i><b>7.3</b> Laboratory</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html"><i class="fa fa-check"></i><b>8</b> Generalized Linear Model</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html#count-data"><i class="fa fa-check"></i><b>8.1</b> Count Data</a>
-<ul>
-<li class="chapter" data-level="8.1.1" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html#plant-density"><i class="fa fa-check"></i><b>8.1.1</b> Plant Density</a></li>
-<li class="chapter" data-level="8.1.2" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html#poisson-model"><i class="fa fa-check"></i><b>8.1.2</b> Poisson Model</a></li>
-</ul></li>
-<li class="chapter" data-level="8.2" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html#proportional-data"><i class="fa fa-check"></i><b>8.2</b> Proportional Data</a>
-<ul>
-<li class="chapter" data-level="8.2.1" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html#mussel-egg-fertilization"><i class="fa fa-check"></i><b>8.2.1</b> Mussel Egg Fertilization</a></li>
-<li class="chapter" data-level="8.2.2" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html#binomial-model"><i class="fa fa-check"></i><b>8.2.2</b> Binomial Model</a></li>
-</ul></li>
-<li class="chapter" data-level="8.3" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html#the-glm-framework"><i class="fa fa-check"></i><b>8.3</b> The GLM Framework</a></li>
-<li class="chapter" data-level="8.4" data-path="generalized-linear-model.html"><a href="generalized-linear-model.html#laboratory-7"><i class="fa fa-check"></i><b>8.4</b> Laboratory</a></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="appendix-project-management.html"><a href="appendix-project-management.html"><i class="fa fa-check"></i><b>9</b> Appendix: Project Management</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="appendix-project-management.html"><a href="appendix-project-management.html#r-project"><i class="fa fa-check"></i><b>9.1</b> R Project</a>
-<ul>
-<li class="chapter" data-level="9.1.1" data-path="appendix-project-management.html"><a href="appendix-project-management.html#script-editor"><i class="fa fa-check"></i><b>9.1.1</b> Script Editor</a></li>
-<li class="chapter" data-level="9.1.2" data-path="appendix-project-management.html"><a href="appendix-project-management.html#file-name"><i class="fa fa-check"></i><b>9.1.2</b> File Name</a></li>
-<li class="chapter" data-level="9.1.3" data-path="appendix-project-management.html"><a href="appendix-project-management.html#structure-your-project"><i class="fa fa-check"></i><b>9.1.3</b> Structure Your Project</a></li>
-</ul></li>
-<li class="chapter" data-level="9.2" data-path="appendix-project-management.html"><a href="appendix-project-management.html#robust-coding"><i class="fa fa-check"></i><b>9.2</b> Robust coding</a></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="appendix-git-github.html"><a href="appendix-git-github.html"><i class="fa fa-check"></i><b>10</b> Appendix: Git &amp; GitHub</a>
-<ul>
-<li class="chapter" data-level="10.1" data-path="appendix-git-github.html"><a href="appendix-git-github.html#git-github"><i class="fa fa-check"></i><b>10.1</b> Git &amp; GitHub</a></li>
-<li class="chapter" data-level="10.2" data-path="appendix-git-github.html"><a href="appendix-git-github.html#commit-push"><i class="fa fa-check"></i><b>10.2</b> Commit &amp; Push</a>
-<ul>
-<li class="chapter" data-level="10.2.1" data-path="appendix-git-github.html"><a href="appendix-git-github.html#register-your-git-repo"><i class="fa fa-check"></i><b>10.2.1</b> Register Your Git repo</a></li>
-<li class="chapter" data-level="10.2.2" data-path="appendix-git-github.html"><a href="appendix-git-github.html#commit"><i class="fa fa-check"></i><b>10.2.2</b> Commit</a></li>
-<li class="chapter" data-level="10.2.3" data-path="appendix-git-github.html"><a href="appendix-git-github.html#push"><i class="fa fa-check"></i><b>10.2.3</b> Push</a></li>
-<li class="chapter" data-level="10.2.4" data-path="appendix-git-github.html"><a href="appendix-git-github.html#edit"><i class="fa fa-check"></i><b>10.2.4</b> Edit</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="11" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html"><i class="fa fa-check"></i><b>11</b> Appendix: Data Structure</a>
-<ul>
-<li class="chapter" data-level="11.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#overview"><i class="fa fa-check"></i><b>11.1</b> Overview</a></li>
-<li class="chapter" data-level="11.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#vector"><i class="fa fa-check"></i><b>11.2</b> Vector</a>
-<ul>
-<li class="chapter" data-level="11.2.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#create-vector"><i class="fa fa-check"></i><b>11.2.1</b> Create Vector</a></li>
-<li class="chapter" data-level="11.2.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#check-features"><i class="fa fa-check"></i><b>11.2.2</b> Check Features</a></li>
-<li class="chapter" data-level="11.2.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#access"><i class="fa fa-check"></i><b>11.2.3</b> Access</a></li>
-</ul></li>
-<li class="chapter" data-level="11.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#matrix"><i class="fa fa-check"></i><b>11.3</b> Matrix</a>
-<ul>
-<li class="chapter" data-level="11.3.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#create-matrix"><i class="fa fa-check"></i><b>11.3.1</b> Create Matrix</a></li>
-<li class="chapter" data-level="11.3.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#check-features-1"><i class="fa fa-check"></i><b>11.3.2</b> Check Features</a></li>
-<li class="chapter" data-level="11.3.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#access-1"><i class="fa fa-check"></i><b>11.3.3</b> Access</a></li>
-</ul></li>
-<li class="chapter" data-level="11.4" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#data-frame"><i class="fa fa-check"></i><b>11.4</b> Data Frame</a></li>
-<li class="chapter" data-level="11.5" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#exercise"><i class="fa fa-check"></i><b>11.5</b> Exercise</a>
-<ul>
-<li class="chapter" data-level="11.5.1" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#vector-1"><i class="fa fa-check"></i><b>11.5.1</b> Vector</a></li>
-<li class="chapter" data-level="11.5.2" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#matrix-1"><i class="fa fa-check"></i><b>11.5.2</b> Matrix</a></li>
-<li class="chapter" data-level="11.5.3" data-path="appendix-data-structure.html"><a href="appendix-data-structure.html#data-frame-1"><i class="fa fa-check"></i><b>11.5.3</b> Data Frame</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="12" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html"><i class="fa fa-check"></i><b>12</b> Appendix: Tidyverse</a>
-<ul>
-<li class="chapter" data-level="12.1" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#overview-1"><i class="fa fa-check"></i><b>12.1</b> Overview</a></li>
-<li class="chapter" data-level="12.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#data-manipulation"><i class="fa fa-check"></i><b>12.2</b> Data Manipulation</a>
-<ul>
-<li class="chapter" data-level="12.2.1" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#data-format"><i class="fa fa-check"></i><b>12.2.1</b> Data Format</a></li>
-<li class="chapter" data-level="12.2.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#row-manipulation"><i class="fa fa-check"></i><b>12.2.2</b> Row Manipulation</a></li>
-<li class="chapter" data-level="12.2.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#column-manipulation"><i class="fa fa-check"></i><b>12.2.3</b> Column Manipulation</a></li>
-<li class="chapter" data-level="12.2.4" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#piping"><i class="fa fa-check"></i><b>12.2.4</b> Piping</a></li>
-<li class="chapter" data-level="12.2.5" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#reshape"><i class="fa fa-check"></i><b>12.2.5</b> Reshape</a></li>
-<li class="chapter" data-level="12.2.6" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#group-operation"><i class="fa fa-check"></i><b>12.2.6</b> Group Operation</a></li>
-<li class="chapter" data-level="12.2.7" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#join"><i class="fa fa-check"></i><b>12.2.7</b> Join</a></li>
-</ul></li>
-<li class="chapter" data-level="12.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#visualization"><i class="fa fa-check"></i><b>12.3</b> Visualization</a>
-<ul>
-<li class="chapter" data-level="12.3.1" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#point"><i class="fa fa-check"></i><b>12.3.1</b> Point</a></li>
-<li class="chapter" data-level="12.3.2" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#line"><i class="fa fa-check"></i><b>12.3.2</b> Line</a></li>
-<li class="chapter" data-level="12.3.3" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#histogram"><i class="fa fa-check"></i><b>12.3.3</b> Histogram</a></li>
-<li class="chapter" data-level="12.3.4" data-path="appendix-tidyverse.html"><a href="appendix-tidyverse.html#boxplot"><i class="fa fa-check"></i><b>12.3.4</b> Boxplot</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="13" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html"><i class="fa fa-check"></i><b>13</b> Appendix: Base Plot</a>
-<ul>
-<li class="chapter" data-level="13.1" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#overview-2"><i class="fa fa-check"></i><b>13.1</b> Overview</a></li>
-<li class="chapter" data-level="13.2" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#plot"><i class="fa fa-check"></i><b>13.2</b> Plot</a>
-<ul>
-<li class="chapter" data-level="13.2.1" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#symbol"><i class="fa fa-check"></i><b>13.2.1</b> Symbol</a></li>
-<li class="chapter" data-level="13.2.2" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#symbol-size"><i class="fa fa-check"></i><b>13.2.2</b> Symbol size</a></li>
-<li class="chapter" data-level="13.2.3" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#symbol-color-border"><i class="fa fa-check"></i><b>13.2.3</b> Symbol color (border)</a></li>
-<li class="chapter" data-level="13.2.4" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#symbol-color-fill"><i class="fa fa-check"></i><b>13.2.4</b> Symbol color (fill)</a></li>
-<li class="chapter" data-level="13.2.5" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#label"><i class="fa fa-check"></i><b>13.2.5</b> Label</a></li>
-<li class="chapter" data-level="13.2.6" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#axis"><i class="fa fa-check"></i><b>13.2.6</b> Axis</a></li>
-</ul></li>
-<li class="chapter" data-level="13.3" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#boxplot-1"><i class="fa fa-check"></i><b>13.3</b> Boxplot</a>
-<ul>
-<li class="chapter" data-level="13.3.1" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#box-color"><i class="fa fa-check"></i><b>13.3.1</b> Box color</a></li>
-<li class="chapter" data-level="13.3.2" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#border-color"><i class="fa fa-check"></i><b>13.3.2</b> Border color</a></li>
-<li class="chapter" data-level="13.3.3" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#box-width"><i class="fa fa-check"></i><b>13.3.3</b> Box width</a></li>
-<li class="chapter" data-level="13.3.4" data-path="appendix-base-plot.html"><a href="appendix-base-plot.html#axis-1"><i class="fa fa-check"></i><b>13.3.4</b> Axis</a></li>
-</ul></li>
-</ul></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
-</ul>
-
-      </nav>
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">BIOSTATS</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
 
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">BIOSTATS</a>
-          </h1>
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Introduction</a></li>
+<li><a class="" href="descriptive-statistics.html"><span class="header-section-number">1</span> Descriptive Statistics</a></li>
+<li><a class="" href="sampling.html"><span class="header-section-number">2</span> Sampling</a></li>
+<li><a class="" href="probabilistic-view.html"><span class="header-section-number">3</span> Probabilistic View</a></li>
+<li><a class="" href="two-group-comparison.html"><span class="header-section-number">4</span> Two-Group Comparison</a></li>
+<li><a class="" href="multiple-group-comparison.html"><span class="header-section-number">5</span> Multiple-Group Comparison</a></li>
+<li><a class="" href="regression.html"><span class="header-section-number">6</span> Regression</a></li>
+<li><a class="" href="linear-model.html"><span class="header-section-number">7</span> Linear Model</a></li>
+<li><a class="" href="generalized-linear-model.html"><span class="header-section-number">8</span> Generalized Linear Model</a></li>
+<li><a class="" href="likelihood.html"><span class="header-section-number">9</span> Likelihood</a></li>
+<li><a class="" href="appendix-project.html">Appendix: Project</a></li>
+<li><a class="" href="appendix-git-github.html">Appendix: Git &amp; GitHub</a></li>
+<li><a class="" href="appendix-data-structure.html">Appendix: Data Structure</a></li>
+<li><a class="active" href="appendix-tidyverse.html">Appendix: Tidyverse</a></li>
+<li><a class="" href="appendix-base-plot.html">Appendix: Base Plot</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/aterui/biostats">View book source <i class="fab fa-github"></i></a></p>
         </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="appendix-tidyverse" class="section level1 hasAnchor" number="12">
-<h1><span class="header-section-number">Chapter 12</span> Appendix: Tidyverse<a href="appendix-tidyverse.html#appendix-tidyverse" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="overview-1" class="section level2 hasAnchor" number="12.1">
-<h2><span class="header-section-number">12.1</span> Overview<a href="appendix-tidyverse.html#overview-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="appendix-tidyverse" class="section level1 unnumbered">
+<h1>Appendix: Tidyverse<a class="anchor" aria-label="anchor" href="#appendix-tidyverse"><i class="fas fa-link"></i></a>
+</h1>
+<div id="overview-1" class="section level2" number="9.13">
+<h2>
+<span class="header-section-number">9.13</span> Overview<a class="anchor" aria-label="anchor" href="#overview-1"><i class="fas fa-link"></i></a>
+</h2>
 <p>R packages are collections of functions that extend the functionality of the R programming language. They provide a convenient way for users to access and utilize specialized tools for data analysis, visualization, statistical modeling, and more. Among them, <code>tidyverse</code> provides very useful functions for data manipulation and visualization.</p>
 <p><code>tidyverse::</code> bundles R packages designed to make data manipulation, exploration, and visualization more efficient and intuitive. Developed by Hadley Wickham and other contributors, the Tidyverse packages share a common philosophy and syntax, emphasizing a consistent and tidy data format. The core packages, such as <code>dplyr::</code>, <code>tidyr::</code>, and <code>ggplot2::</code>, provide powerful tools for data wrangling, reshaping, and creating visualizations.</p>
-<p>In this Chapter, we will use <code>iris</code> data, which is available by default in R. While the default data structure <code>iris</code> is prepared in <code>data.frame()</code>, I convert this data format to <code>tibble()</code> in this exercise.</p>
-<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="appendix-tidyverse.html#cb345-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb345-2"><a href="appendix-tidyverse.html#cb345-2" aria-hidden="true" tabindex="-1"></a>iris <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(iris)</span></code></pre></div>
+<p>In this Chapter, we will use <code>iris</code> data, which is available by default in R. While the default data structure <code>iris</code> is prepared in <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code>, I convert this data format to <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code> in this exercise.</p>
+<div class="sourceCode" id="cb366"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="va">iris</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span></code></pre></div>
 <p>I cover the basics for those who are not familiar with <code>tidyverse::</code>, but there is plenty of documentation available for the tidyverse package.</p>
 <ul>
 <li><a href="https://www.tidyverse.org/">Tidyverse website</a></li>
@@ -389,73 +87,85 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="https://www.data-to-viz.com/">from Data to Viz</a></li>
 </ul>
 </div>
-<div id="data-manipulation" class="section level2 hasAnchor" number="12.2">
-<h2><span class="header-section-number">12.2</span> Data Manipulation<a href="appendix-tidyverse.html#data-manipulation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="data-format" class="section level3 hasAnchor" number="12.2.1">
-<h3><span class="header-section-number">12.2.1</span> Data Format<a href="appendix-tidyverse.html#data-format" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="data-manipulation" class="section level2" number="9.14">
+<h2>
+<span class="header-section-number">9.14</span> Data Manipulation<a class="anchor" aria-label="anchor" href="#data-manipulation"><i class="fas fa-link"></i></a>
+</h2>
+<div id="data-format" class="section level3" number="9.14.1">
+<h3>
+<span class="header-section-number">9.14.1</span> Data Format<a class="anchor" aria-label="anchor" href="#data-format"><i class="fas fa-link"></i></a>
+</h3>
 <p><code>dplyr::</code> and <code>tidyr::</code> (and others) offer useful functions for data manipulation. Key manipulations include: row/column manipulations, group operation, reshape, and more.</p>
 </div>
-<div id="row-manipulation" class="section level3 hasAnchor" number="12.2.2">
-<h3><span class="header-section-number">12.2.2</span> Row Manipulation<a href="appendix-tidyverse.html#row-manipulation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><code>filter()</code>: select/remove rows</p>
-<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="appendix-tidyverse.html#cb346-1" aria-hidden="true" tabindex="-1"></a><span class="co"># single match &quot;==&quot;</span></span>
-<span id="cb346-2"><a href="appendix-tidyverse.html#cb346-2" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(iris, Species <span class="sc">==</span> <span class="st">&quot;virginica&quot;</span>)</span>
-<span id="cb346-3"><a href="appendix-tidyverse.html#cb346-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb346-4"><a href="appendix-tidyverse.html#cb346-4" aria-hidden="true" tabindex="-1"></a><span class="co"># multiple match &quot;%in%&quot;</span></span>
-<span id="cb346-5"><a href="appendix-tidyverse.html#cb346-5" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(iris, Species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;virginica&quot;</span>, <span class="st">&quot;versicolor&quot;</span>))</span>
-<span id="cb346-6"><a href="appendix-tidyverse.html#cb346-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb346-7"><a href="appendix-tidyverse.html#cb346-7" aria-hidden="true" tabindex="-1"></a><span class="co"># except &quot;!=&quot;</span></span>
-<span id="cb346-8"><a href="appendix-tidyverse.html#cb346-8" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(iris, Species <span class="sc">!=</span> <span class="st">&quot;virginica&quot;</span>)</span>
-<span id="cb346-9"><a href="appendix-tidyverse.html#cb346-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb346-10"><a href="appendix-tidyverse.html#cb346-10" aria-hidden="true" tabindex="-1"></a><span class="co"># except multiple &quot;!(x %in% c(&quot;a&quot;, &quot;b&quot;))</span></span>
-<span id="cb346-11"><a href="appendix-tidyverse.html#cb346-11" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(iris, <span class="sc">!</span>(Species <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;virginica&quot;</span>, <span class="st">&quot;versicolor&quot;</span>)))</span>
-<span id="cb346-12"><a href="appendix-tidyverse.html#cb346-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb346-13"><a href="appendix-tidyverse.html#cb346-13" aria-hidden="true" tabindex="-1"></a><span class="co"># greater than &quot;&gt;&quot;</span></span>
-<span id="cb346-14"><a href="appendix-tidyverse.html#cb346-14" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(iris, Sepal.Length <span class="sc">&gt;</span> <span class="dv">5</span>)</span>
-<span id="cb346-15"><a href="appendix-tidyverse.html#cb346-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb346-16"><a href="appendix-tidyverse.html#cb346-16" aria-hidden="true" tabindex="-1"></a><span class="co"># equal &amp; greater than &quot;&gt;=&quot;</span></span>
-<span id="cb346-17"><a href="appendix-tidyverse.html#cb346-17" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(iris, Sepal.Length <span class="sc">&gt;=</span> <span class="dv">5</span>)</span>
-<span id="cb346-18"><a href="appendix-tidyverse.html#cb346-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb346-19"><a href="appendix-tidyverse.html#cb346-19" aria-hidden="true" tabindex="-1"></a><span class="co"># less than &quot;&lt;&quot;</span></span>
-<span id="cb346-20"><a href="appendix-tidyverse.html#cb346-20" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(iris, Sepal.Length <span class="sc">&lt;</span> <span class="dv">5</span>)</span>
-<span id="cb346-21"><a href="appendix-tidyverse.html#cb346-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb346-22"><a href="appendix-tidyverse.html#cb346-22" aria-hidden="true" tabindex="-1"></a><span class="co"># equal &amp; less than &quot;&lt;=&quot;</span></span>
-<span id="cb346-23"><a href="appendix-tidyverse.html#cb346-23" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(iris, Sepal.Length <span class="sc">&lt;=</span> <span class="dv">5</span>)</span></code></pre></div>
-<p><code>arrange()</code> : arrange the order of rows</p>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="appendix-tidyverse.html#cb347-1" aria-hidden="true" tabindex="-1"></a><span class="co"># arrange in an ascending order</span></span>
-<span id="cb347-2"><a href="appendix-tidyverse.html#cb347-2" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(iris, Sepal.Length)</span>
-<span id="cb347-3"><a href="appendix-tidyverse.html#cb347-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb347-4"><a href="appendix-tidyverse.html#cb347-4" aria-hidden="true" tabindex="-1"></a><span class="co"># arrange in an descending order</span></span>
-<span id="cb347-5"><a href="appendix-tidyverse.html#cb347-5" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(iris, <span class="fu">desc</span>(Sepal.Length))</span></code></pre></div>
+<div id="row-manipulation" class="section level3" number="9.14.2">
+<h3>
+<span class="header-section-number">9.14.2</span> Row Manipulation<a class="anchor" aria-label="anchor" href="#row-manipulation"><i class="fas fa-link"></i></a>
+</h3>
+<p><code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code>: select/remove rows</p>
+<div class="sourceCode" id="cb367"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># single match "=="</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">Species</span> <span class="op">==</span> <span class="st">"virginica"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># multiple match "%in%"</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">Species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"virginica"</span>, <span class="st">"versicolor"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># except "!="</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">Species</span> <span class="op">!=</span> <span class="st">"virginica"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># except multiple "!(x %in% c("a", "b"))</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">iris</span>, <span class="op">!</span><span class="op">(</span><span class="va">Species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"virginica"</span>, <span class="st">"versicolor"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># greater than "&gt;"</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">Sepal.Length</span> <span class="op">&gt;</span> <span class="fl">5</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># equal &amp; greater than "&gt;="</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">Sepal.Length</span> <span class="op">&gt;=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># less than "&lt;"</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">Sepal.Length</span> <span class="op">&lt;</span> <span class="fl">5</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># equal &amp; less than "&lt;="</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">Sepal.Length</span> <span class="op">&lt;=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
+<p><code><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a></code> : arrange the order of rows</p>
+<div class="sourceCode" id="cb368"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># arrange in an ascending order</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">Sepal.Length</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># arrange in an descending order</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="column-manipulation" class="section level3 hasAnchor" number="12.2.3">
-<h3><span class="header-section-number">12.2.3</span> Column Manipulation<a href="appendix-tidyverse.html#column-manipulation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><code>select()</code>: select/remove column(s)</p>
-<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="appendix-tidyverse.html#cb348-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select one column</span></span>
-<span id="cb348-2"><a href="appendix-tidyverse.html#cb348-2" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(iris, Sepal.Length)</span>
-<span id="cb348-3"><a href="appendix-tidyverse.html#cb348-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb348-4"><a href="appendix-tidyverse.html#cb348-4" aria-hidden="true" tabindex="-1"></a><span class="co"># select multiple columns</span></span>
-<span id="cb348-5"><a href="appendix-tidyverse.html#cb348-5" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(iris, <span class="fu">c</span>(Sepal.Length, Sepal.Width))</span>
-<span id="cb348-6"><a href="appendix-tidyverse.html#cb348-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb348-7"><a href="appendix-tidyverse.html#cb348-7" aria-hidden="true" tabindex="-1"></a><span class="co"># remove one column</span></span>
-<span id="cb348-8"><a href="appendix-tidyverse.html#cb348-8" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(iris, <span class="sc">-</span>Sepal.Length)</span>
-<span id="cb348-9"><a href="appendix-tidyverse.html#cb348-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb348-10"><a href="appendix-tidyverse.html#cb348-10" aria-hidden="true" tabindex="-1"></a><span class="co"># remove multiple columns</span></span>
-<span id="cb348-11"><a href="appendix-tidyverse.html#cb348-11" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(iris, <span class="sc">-</span><span class="fu">c</span>(Sepal.Length, Sepal.Width))</span>
-<span id="cb348-12"><a href="appendix-tidyverse.html#cb348-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb348-13"><a href="appendix-tidyverse.html#cb348-13" aria-hidden="true" tabindex="-1"></a><span class="co"># select/remove multiple columns with a start rule</span></span>
-<span id="cb348-14"><a href="appendix-tidyverse.html#cb348-14" aria-hidden="true" tabindex="-1"></a><span class="co"># starts_with(&quot;x&quot;)</span></span>
-<span id="cb348-15"><a href="appendix-tidyverse.html#cb348-15" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(iris, <span class="fu">starts_with</span>(<span class="st">&quot;Sepal&quot;</span>))</span>
-<span id="cb348-16"><a href="appendix-tidyverse.html#cb348-16" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(iris, <span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">&quot;Sepal&quot;</span>))</span>
-<span id="cb348-17"><a href="appendix-tidyverse.html#cb348-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb348-18"><a href="appendix-tidyverse.html#cb348-18" aria-hidden="true" tabindex="-1"></a><span class="co"># select/remove multiple columns with an end rule</span></span>
-<span id="cb348-19"><a href="appendix-tidyverse.html#cb348-19" aria-hidden="true" tabindex="-1"></a><span class="co"># ends_with(&quot;x&quot;)</span></span>
-<span id="cb348-20"><a href="appendix-tidyverse.html#cb348-20" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(iris, <span class="fu">ends_with</span>(<span class="st">&quot;Width&quot;</span>))</span>
-<span id="cb348-21"><a href="appendix-tidyverse.html#cb348-21" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(iris, <span class="sc">-</span><span class="fu">ends_with</span>(<span class="st">&quot;Width&quot;</span>))</span></code></pre></div>
-<p><code>mutate()</code>: add column(s)</p>
-<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="appendix-tidyverse.html#cb349-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add a new column</span></span>
-<span id="cb349-2"><a href="appendix-tidyverse.html#cb349-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">150</span></span>
-<span id="cb349-3"><a href="appendix-tidyverse.html#cb349-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(iris, <span class="at">x =</span> x)</span></code></pre></div>
+<div id="column-manipulation" class="section level3" number="9.14.3">
+<h3>
+<span class="header-section-number">9.14.3</span> Column Manipulation<a class="anchor" aria-label="anchor" href="#column-manipulation"><i class="fas fa-link"></i></a>
+</h3>
+<p><code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code>: select/remove column(s)</p>
+<div class="sourceCode" id="cb369"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># select one column</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">Sepal.Length</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># select multiple columns</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">Sepal.Length</span>, <span class="va">Sepal.Width</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># remove one column</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris</span>, <span class="op">-</span><span class="va">Sepal.Length</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># remove multiple columns</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris</span>, <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">Sepal.Length</span>, <span class="va">Sepal.Width</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># select/remove multiple columns with a start rule</span></span>
+<span><span class="co"># starts_with("x")</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"Sepal"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris</span>, <span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"Sepal"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># select/remove multiple columns with an end rule</span></span>
+<span><span class="co"># ends_with("x")</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with</a></span><span class="op">(</span><span class="st">"Width"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris</span>, <span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with</a></span><span class="op">(</span><span class="st">"Width"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code>: add column(s)</p>
+<div class="sourceCode" id="cb370"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># add a new column</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">150</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">iris</span>, x <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 150 × 6
 ##    Sepal.Length Sepal.Width Petal.Length Petal.Width Species     x
 ##           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;   &lt;int&gt;
@@ -471,14 +181,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 10          4.9         3.1          1.5         0.1 setosa     10
 ## # ℹ 140 more rows</code></pre>
 </div>
-<div id="piping" class="section level3 hasAnchor" number="12.2.4">
-<h3><span class="header-section-number">12.2.4</span> Piping<a href="appendix-tidyverse.html#piping" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="piping" class="section level3" number="9.14.4">
+<h3>
+<span class="header-section-number">9.14.4</span> Piping<a class="anchor" aria-label="anchor" href="#piping"><i class="fas fa-link"></i></a>
+</h3>
 <p><code>%&gt;%</code> (pipe) allows sequential operations of multiple functions (shortcut: <code>Ctr + Shift + M</code>). The pipe passes the object to the following function as the first argument.</p>
-<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="appendix-tidyverse.html#cb351-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the following codes produce the same data frame</span></span>
-<span id="cb351-2"><a href="appendix-tidyverse.html#cb351-2" aria-hidden="true" tabindex="-1"></a><span class="co"># apply functions separately</span></span>
-<span id="cb351-3"><a href="appendix-tidyverse.html#cb351-3" aria-hidden="true" tabindex="-1"></a>df_vir <span class="ot">&lt;-</span> <span class="fu">filter</span>(iris, Species <span class="sc">==</span> <span class="st">&quot;virginica&quot;</span>)</span>
-<span id="cb351-4"><a href="appendix-tidyverse.html#cb351-4" aria-hidden="true" tabindex="-1"></a>df_vir_sl <span class="ot">&lt;-</span> <span class="fu">select</span>(df_vir, Sepal.Length)</span>
-<span id="cb351-5"><a href="appendix-tidyverse.html#cb351-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_vir_sl)</span></code></pre></div>
+<div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># the following codes produce the same data frame</span></span>
+<span><span class="co"># apply functions separately</span></span>
+<span><span class="va">df_vir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">Species</span> <span class="op">==</span> <span class="st">"virginica"</span><span class="op">)</span></span>
+<span><span class="va">df_vir_sl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">df_vir</span>, <span class="va">Sepal.Length</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_vir_sl</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 50 × 1
 ##    Sepal.Length
 ##           &lt;dbl&gt;
@@ -493,10 +206,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  9          6.7
 ## 10          7.2
 ## # ℹ 40 more rows</code></pre>
-<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="appendix-tidyverse.html#cb353-1" aria-hidden="true" tabindex="-1"></a><span class="co"># piping</span></span>
-<span id="cb353-2"><a href="appendix-tidyverse.html#cb353-2" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
-<span id="cb353-3"><a href="appendix-tidyverse.html#cb353-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">&quot;virginica&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb353-4"><a href="appendix-tidyverse.html#cb353-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Sepal.Length)</span></code></pre></div>
+<div class="sourceCode" id="cb374"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># piping</span></span>
+<span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Species</span> <span class="op">==</span> <span class="st">"virginica"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Sepal.Length</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 50 × 1
 ##    Sepal.Length
 ##           &lt;dbl&gt;
@@ -512,17 +226,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 10          7.2
 ## # ℹ 40 more rows</code></pre>
 </div>
-<div id="reshape" class="section level3 hasAnchor" number="12.2.5">
-<h3><span class="header-section-number">12.2.5</span> Reshape<a href="appendix-tidyverse.html#reshape" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><code>pivot_wider()</code> : reshape a data frame to a wide format</p>
-<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="appendix-tidyverse.html#cb355-1" aria-hidden="true" tabindex="-1"></a>iris_w <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> </span>
-<span id="cb355-2"><a href="appendix-tidyverse.html#cb355-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">3</span>)) <span class="sc">%&gt;%</span> <span class="co"># add an ID column</span></span>
-<span id="cb355-3"><a href="appendix-tidyverse.html#cb355-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id, Sepal.Length, Species) <span class="sc">%&gt;%</span> </span>
-<span id="cb355-4"><a href="appendix-tidyverse.html#cb355-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> <span class="st">&quot;id&quot;</span>, <span class="co"># unique row ID based on</span></span>
-<span id="cb355-5"><a href="appendix-tidyverse.html#cb355-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> <span class="st">&quot;Sepal.Length&quot;</span>, <span class="co"># values in each cell from</span></span>
-<span id="cb355-6"><a href="appendix-tidyverse.html#cb355-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">names_from =</span> <span class="st">&quot;Species&quot;</span>) <span class="co"># new column names from</span></span>
-<span id="cb355-7"><a href="appendix-tidyverse.html#cb355-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb355-8"><a href="appendix-tidyverse.html#cb355-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(iris_w)</span></code></pre></div>
+<div id="reshape" class="section level3" number="9.14.5">
+<h3>
+<span class="header-section-number">9.14.5</span> Reshape<a class="anchor" aria-label="anchor" href="#reshape"><i class="fas fa-link"></i></a>
+</h3>
+<p><code><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider()</a></code> : reshape a data frame to a wide format</p>
+<div class="sourceCode" id="cb376"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">iris_w</span> <span class="op">&lt;-</span> <span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">50</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># add an ID column</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">Sepal.Length</span>, <span class="va">Species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>id_cols <span class="op">=</span> <span class="st">"id"</span>, <span class="co"># unique row ID based on</span></span>
+<span>              values_from <span class="op">=</span> <span class="st">"Sepal.Length"</span>, <span class="co"># values in each cell from</span></span>
+<span>              names_from <span class="op">=</span> <span class="st">"Species"</span><span class="op">)</span> <span class="co"># new column names from</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">iris_w</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 50 × 4
 ##       id setosa versicolor virginica
 ##    &lt;int&gt;  &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;
@@ -537,15 +254,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  9     9    4.4        6.6       6.7
 ## 10    10    4.9        5.2       7.2
 ## # ℹ 40 more rows</code></pre>
-<p><code>pivot_longer()</code>: reshape a data frame to a long format</p>
-<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="appendix-tidyverse.html#cb357-1" aria-hidden="true" tabindex="-1"></a>iris_l <span class="ot">&lt;-</span> iris_w <span class="sc">%&gt;%</span> </span>
-<span id="cb357-2"><a href="appendix-tidyverse.html#cb357-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">&quot;setosa&quot;</span>,</span>
-<span id="cb357-3"><a href="appendix-tidyverse.html#cb357-3" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;versicolor&quot;</span>,</span>
-<span id="cb357-4"><a href="appendix-tidyverse.html#cb357-4" aria-hidden="true" tabindex="-1"></a>                        <span class="st">&quot;virginica&quot;</span>), <span class="co"># columns with values to be reshaped</span></span>
-<span id="cb357-5"><a href="appendix-tidyverse.html#cb357-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;Species&quot;</span>, <span class="co"># column IDs move to &quot;Species&quot;</span></span>
-<span id="cb357-6"><a href="appendix-tidyverse.html#cb357-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;Sepal.Length&quot;</span>) <span class="co"># column values move to &quot;Sepal.Length&quot;</span></span>
-<span id="cb357-7"><a href="appendix-tidyverse.html#cb357-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb357-8"><a href="appendix-tidyverse.html#cb357-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(iris_l)</span></code></pre></div>
+<p><code><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer()</a></code>: reshape a data frame to a long format</p>
+<div class="sourceCode" id="cb378"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">iris_l</span> <span class="op">&lt;-</span> <span class="va">iris_w</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"setosa"</span>,</span>
+<span>                        <span class="st">"versicolor"</span>,</span>
+<span>                        <span class="st">"virginica"</span><span class="op">)</span>, <span class="co"># columns with values to be reshaped</span></span>
+<span>               names_to <span class="op">=</span> <span class="st">"Species"</span>, <span class="co"># column IDs move to "Species"</span></span>
+<span>               values_to <span class="op">=</span> <span class="st">"Sepal.Length"</span><span class="op">)</span> <span class="co"># column values move to "Sepal.Length"</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">iris_l</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 150 × 3
 ##       id Species    Sepal.Length
 ##    &lt;int&gt; &lt;chr&gt;             &lt;dbl&gt;
@@ -561,36 +279,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 10     4 setosa              4.6
 ## # ℹ 140 more rows</code></pre>
 </div>
-<div id="group-operation" class="section level3 hasAnchor" number="12.2.6">
-<h3><span class="header-section-number">12.2.6</span> Group Operation<a href="appendix-tidyverse.html#group-operation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><code>group_by()</code> &amp; <code>summarize()</code>: group-by-group operation. <code>summarize()</code> does not retain individual rows.</p>
-<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="appendix-tidyverse.html#cb359-1" aria-hidden="true" tabindex="-1"></a><span class="co"># grouping by &quot;Species&quot;, then take means &quot;Speal.Length&quot; for each species</span></span>
-<span id="cb359-2"><a href="appendix-tidyverse.html#cb359-2" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
-<span id="cb359-3"><a href="appendix-tidyverse.html#cb359-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Species) <span class="sc">%&gt;%</span> </span>
-<span id="cb359-4"><a href="appendix-tidyverse.html#cb359-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mu_sl =</span> <span class="fu">mean</span>(Sepal.Length))</span></code></pre></div>
+<div id="group-operation" class="section level3" number="9.14.6">
+<h3>
+<span class="header-section-number">9.14.6</span> Group Operation<a class="anchor" aria-label="anchor" href="#group-operation"><i class="fas fa-link"></i></a>
+</h3>
+<p><code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> &amp; <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code>: group-by-group operation. <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> does not retain individual rows.</p>
+<div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># grouping by "Species", then take means "Speal.Length" for each species</span></span>
+<span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>mu_sl <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 3 × 2
 ##   Species    mu_sl
 ##   &lt;fct&gt;      &lt;dbl&gt;
 ## 1 setosa      5.01
 ## 2 versicolor  5.94
 ## 3 virginica   6.59</code></pre>
-<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="appendix-tidyverse.html#cb361-1" aria-hidden="true" tabindex="-1"></a><span class="co"># grouping by &quot;Species&quot;, then take means &amp; SD &quot;Speal.Length&quot; for each species</span></span>
-<span id="cb361-2"><a href="appendix-tidyverse.html#cb361-2" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
-<span id="cb361-3"><a href="appendix-tidyverse.html#cb361-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Species) <span class="sc">%&gt;%</span> </span>
-<span id="cb361-4"><a href="appendix-tidyverse.html#cb361-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mu_sl =</span> <span class="fu">mean</span>(Sepal.Length),</span>
-<span id="cb361-5"><a href="appendix-tidyverse.html#cb361-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_sl =</span> <span class="fu">sd</span>(Sepal.Length))</span></code></pre></div>
+<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># grouping by "Species", then take means &amp; SD "Speal.Length" for each species</span></span>
+<span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>mu_sl <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Sepal.Length</span><span class="op">)</span>,</span>
+<span>            sd_sl <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 3 × 3
 ##   Species    mu_sl sd_sl
 ##   &lt;fct&gt;      &lt;dbl&gt; &lt;dbl&gt;
 ## 1 setosa      5.01 0.352
 ## 2 versicolor  5.94 0.516
 ## 3 virginica   6.59 0.636</code></pre>
-<p><code>group_by()</code> &amp; <code>mutate()</code>: group-by-group operation. <code>mutate()</code> retains individual rows along with summary columns. Do not forget <code>ungroup()</code> to avoid errors in following operations.</p>
-<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="appendix-tidyverse.html#cb363-1" aria-hidden="true" tabindex="-1"></a><span class="co"># grouping by &quot;Species&quot;, then take means &quot;Speal.Length&quot; for each species</span></span>
-<span id="cb363-2"><a href="appendix-tidyverse.html#cb363-2" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
-<span id="cb363-3"><a href="appendix-tidyverse.html#cb363-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Species) <span class="sc">%&gt;%</span> </span>
-<span id="cb363-4"><a href="appendix-tidyverse.html#cb363-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mu_sl =</span> <span class="fu">mean</span>(Sepal.Length)) <span class="sc">%&gt;%</span> </span>
-<span id="cb363-5"><a href="appendix-tidyverse.html#cb363-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div>
+<p><code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> &amp; <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code>: group-by-group operation. <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> retains individual rows along with summary columns. Do not forget <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup()</a></code> to avoid errors in following operations.</p>
+<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># grouping by "Species", then take means "Speal.Length" for each species</span></span>
+<span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>mu_sl <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 150 × 6
 ##    Sepal.Length Sepal.Width Petal.Length Petal.Width Species mu_sl
 ##           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;   &lt;dbl&gt;
@@ -606,34 +329,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 10          4.9         3.1          1.5         0.1 setosa   5.01
 ## # ℹ 140 more rows</code></pre>
 </div>
-<div id="join" class="section level3 hasAnchor" number="12.2.7">
-<h3><span class="header-section-number">12.2.7</span> Join<a href="appendix-tidyverse.html#join" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><code>left_join()</code>: merge data frames based on column(s)</p>
-<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="appendix-tidyverse.html#cb365-1" aria-hidden="true" tabindex="-1"></a><span class="co"># matching by a single column</span></span>
-<span id="cb365-2"><a href="appendix-tidyverse.html#cb365-2" aria-hidden="true" tabindex="-1"></a><span class="do">## left join by &quot;Species&quot;: one to one</span></span>
-<span id="cb365-3"><a href="appendix-tidyverse.html#cb365-3" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">Species =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>),</span>
-<span id="cb365-4"><a href="appendix-tidyverse.html#cb365-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span>
-<span id="cb365-5"><a href="appendix-tidyverse.html#cb365-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb365-6"><a href="appendix-tidyverse.html#cb365-6" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">Species =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>),</span>
-<span id="cb365-7"><a href="appendix-tidyverse.html#cb365-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>))</span>
-<span id="cb365-8"><a href="appendix-tidyverse.html#cb365-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb365-9"><a href="appendix-tidyverse.html#cb365-9" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(<span class="at">x =</span> df1,</span>
-<span id="cb365-10"><a href="appendix-tidyverse.html#cb365-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">y =</span> df2,</span>
-<span id="cb365-11"><a href="appendix-tidyverse.html#cb365-11" aria-hidden="true" tabindex="-1"></a>          <span class="at">by =</span> <span class="st">&quot;Species&quot;</span>)</span></code></pre></div>
+<div id="join" class="section level3" number="9.14.7">
+<h3>
+<span class="header-section-number">9.14.7</span> Join<a class="anchor" aria-label="anchor" href="#join"><i class="fas fa-link"></i></a>
+</h3>
+<p><code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join()</a></code>: merge data frames based on column(s)</p>
+<div class="sourceCode" id="cb386"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># matching by a single column</span></span>
+<span><span class="co">## left join by "Species": one to one</span></span>
+<span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>Species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,</span>
+<span>              x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">df2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>Species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,</span>
+<span>              y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df1</span>,</span>
+<span>          y <span class="op">=</span> <span class="va">df2</span>,</span>
+<span>          by <span class="op">=</span> <span class="st">"Species"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 3 × 3
 ##   Species     x     y
 ##   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;
 ## 1 A           1     4
 ## 2 B           2     5
 ## 3 C           3     6</code></pre>
-<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="appendix-tidyverse.html#cb367-1" aria-hidden="true" tabindex="-1"></a><span class="co"># matching by a single column</span></span>
-<span id="cb367-2"><a href="appendix-tidyverse.html#cb367-2" aria-hidden="true" tabindex="-1"></a><span class="do">## left join by &quot;Species&quot;: one to many</span></span>
-<span id="cb367-3"><a href="appendix-tidyverse.html#cb367-3" aria-hidden="true" tabindex="-1"></a>df3 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">Species =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>),</span>
-<span id="cb367-4"><a href="appendix-tidyverse.html#cb367-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>))</span>
-<span id="cb367-5"><a href="appendix-tidyverse.html#cb367-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb367-6"><a href="appendix-tidyverse.html#cb367-6" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(<span class="at">x =</span> df1,</span>
-<span id="cb367-7"><a href="appendix-tidyverse.html#cb367-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">y =</span> df3,</span>
-<span id="cb367-8"><a href="appendix-tidyverse.html#cb367-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">by =</span> <span class="st">&quot;Species&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb388"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># matching by a single column</span></span>
+<span><span class="co">## left join by "Species": one to many</span></span>
+<span><span class="va">df3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>Species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,</span>
+<span>              y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">7</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df1</span>,</span>
+<span>          y <span class="op">=</span> <span class="va">df3</span>,</span>
+<span>          by <span class="op">=</span> <span class="st">"Species"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 4 × 3
 ##   Species     x     y
 ##   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;
@@ -641,14 +368,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 2 A           1     5
 ## 3 B           2     6
 ## 4 C           3     7</code></pre>
-<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="appendix-tidyverse.html#cb369-1" aria-hidden="true" tabindex="-1"></a><span class="co"># matching by a single column</span></span>
-<span id="cb369-2"><a href="appendix-tidyverse.html#cb369-2" aria-hidden="true" tabindex="-1"></a><span class="do">## left join by &quot;Species&quot;: one to missing</span></span>
-<span id="cb369-3"><a href="appendix-tidyverse.html#cb369-3" aria-hidden="true" tabindex="-1"></a>df4 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">Species =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;C&quot;</span>),</span>
-<span id="cb369-4"><a href="appendix-tidyverse.html#cb369-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">7</span>))</span>
-<span id="cb369-5"><a href="appendix-tidyverse.html#cb369-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb369-6"><a href="appendix-tidyverse.html#cb369-6" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(<span class="at">x =</span> df1,</span>
-<span id="cb369-7"><a href="appendix-tidyverse.html#cb369-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">y =</span> df4,</span>
-<span id="cb369-8"><a href="appendix-tidyverse.html#cb369-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">by =</span> <span class="st">&quot;Species&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb390"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># matching by a single column</span></span>
+<span><span class="co">## left join by "Species": one to missing</span></span>
+<span><span class="va">df4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>Species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"C"</span><span class="op">)</span>,</span>
+<span>              y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">7</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df1</span>,</span>
+<span>          y <span class="op">=</span> <span class="va">df4</span>,</span>
+<span>          by <span class="op">=</span> <span class="st">"Species"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 4 × 3
 ##   Species     x     y
 ##   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;
@@ -656,30 +384,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 2 A           1     5
 ## 3 B           2    NA
 ## 4 C           3     7</code></pre>
-<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="appendix-tidyverse.html#cb371-1" aria-hidden="true" tabindex="-1"></a><span class="co"># matching by multiple columns</span></span>
-<span id="cb371-2"><a href="appendix-tidyverse.html#cb371-2" aria-hidden="true" tabindex="-1"></a><span class="do">## one to one</span></span>
-<span id="cb371-3"><a href="appendix-tidyverse.html#cb371-3" aria-hidden="true" tabindex="-1"></a>df5 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">Species =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>),</span>
-<span id="cb371-4"><a href="appendix-tidyverse.html#cb371-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
-<span id="cb371-5"><a href="appendix-tidyverse.html#cb371-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">z =</span> <span class="fu">c</span>(<span class="st">&quot;cool&quot;</span>, <span class="st">&quot;awesome&quot;</span>, <span class="st">&quot;magical&quot;</span>))</span>
-<span id="cb371-6"><a href="appendix-tidyverse.html#cb371-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb371-7"><a href="appendix-tidyverse.html#cb371-7" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(<span class="at">x =</span> df1,</span>
-<span id="cb371-8"><a href="appendix-tidyverse.html#cb371-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">y =</span> df5,</span>
-<span id="cb371-9"><a href="appendix-tidyverse.html#cb371-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;Species&quot;</span>, <span class="st">&quot;x&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb392"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># matching by multiple columns</span></span>
+<span><span class="co">## one to one</span></span>
+<span><span class="va">df5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>Species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,</span>
+<span>              x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>              z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"cool"</span>, <span class="st">"awesome"</span>, <span class="st">"magical"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df1</span>,</span>
+<span>          y <span class="op">=</span> <span class="va">df5</span>,</span>
+<span>          by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Species"</span>, <span class="st">"x"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 3 × 3
 ##   Species     x z      
 ##   &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;  
 ## 1 A           1 cool   
 ## 2 B           2 awesome
 ## 3 C           3 magical</code></pre>
-<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="appendix-tidyverse.html#cb373-1" aria-hidden="true" tabindex="-1"></a><span class="co"># matching by multiple columns</span></span>
-<span id="cb373-2"><a href="appendix-tidyverse.html#cb373-2" aria-hidden="true" tabindex="-1"></a><span class="do">## one to many</span></span>
-<span id="cb373-3"><a href="appendix-tidyverse.html#cb373-3" aria-hidden="true" tabindex="-1"></a>df6 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">Species =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>),</span>
-<span id="cb373-4"><a href="appendix-tidyverse.html#cb373-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
-<span id="cb373-5"><a href="appendix-tidyverse.html#cb373-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">z =</span> <span class="fu">c</span>(<span class="st">&quot;cool&quot;</span>, <span class="st">&quot;cool&quot;</span>, <span class="st">&quot;awesome&quot;</span>, <span class="st">&quot;magical&quot;</span>))</span>
-<span id="cb373-6"><a href="appendix-tidyverse.html#cb373-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb373-7"><a href="appendix-tidyverse.html#cb373-7" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(<span class="at">x =</span> df1,</span>
-<span id="cb373-8"><a href="appendix-tidyverse.html#cb373-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">y =</span> df6,</span>
-<span id="cb373-9"><a href="appendix-tidyverse.html#cb373-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;Species&quot;</span>, <span class="st">&quot;x&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb394"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># matching by multiple columns</span></span>
+<span><span class="co">## one to many</span></span>
+<span><span class="va">df6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>Species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,</span>
+<span>              x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>              z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"cool"</span>, <span class="st">"cool"</span>, <span class="st">"awesome"</span>, <span class="st">"magical"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df1</span>,</span>
+<span>          y <span class="op">=</span> <span class="va">df6</span>,</span>
+<span>          by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Species"</span>, <span class="st">"x"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 4 × 3
 ##   Species     x z      
 ##   &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;  
@@ -687,15 +417,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 2 A           1 cool   
 ## 3 B           2 awesome
 ## 4 C           3 magical</code></pre>
-<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="appendix-tidyverse.html#cb375-1" aria-hidden="true" tabindex="-1"></a><span class="co"># matching by multiple columns</span></span>
-<span id="cb375-2"><a href="appendix-tidyverse.html#cb375-2" aria-hidden="true" tabindex="-1"></a><span class="do">## one to missing</span></span>
-<span id="cb375-3"><a href="appendix-tidyverse.html#cb375-3" aria-hidden="true" tabindex="-1"></a>df6 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">Species =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>),</span>
-<span id="cb375-4"><a href="appendix-tidyverse.html#cb375-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>),</span>
-<span id="cb375-5"><a href="appendix-tidyverse.html#cb375-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">z =</span> <span class="fu">c</span>(<span class="st">&quot;cool&quot;</span>, <span class="st">&quot;awesome&quot;</span>, <span class="st">&quot;magical&quot;</span>))</span>
-<span id="cb375-6"><a href="appendix-tidyverse.html#cb375-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb375-7"><a href="appendix-tidyverse.html#cb375-7" aria-hidden="true" tabindex="-1"></a><span class="fu">left_join</span>(<span class="at">x =</span> df1,</span>
-<span id="cb375-8"><a href="appendix-tidyverse.html#cb375-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">y =</span> df6,</span>
-<span id="cb375-9"><a href="appendix-tidyverse.html#cb375-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;Species&quot;</span>, <span class="st">&quot;x&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb396"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># matching by multiple columns</span></span>
+<span><span class="co">## one to missing</span></span>
+<span><span class="va">df6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>Species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,</span>
+<span>              x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span>,</span>
+<span>              z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"cool"</span>, <span class="st">"awesome"</span>, <span class="st">"magical"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df1</span>,</span>
+<span>          y <span class="op">=</span> <span class="va">df6</span>,</span>
+<span>          by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Species"</span>, <span class="st">"x"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 3 × 3
 ##   Species     x z      
 ##   &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;  
@@ -704,160 +435,170 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 3 C           3 &lt;NA&gt;</code></pre>
 </div>
 </div>
-<div id="visualization" class="section level2 hasAnchor" number="12.3">
-<h2><span class="header-section-number">12.3</span> Visualization<a href="appendix-tidyverse.html#visualization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><code>ggplot2::</code> offers a range of convenient functions for data visualization. The foundational function, <code>ggplot()</code>, provides the initial framework for adding supplementary layers using the <code>+</code> operator. In ggplot(), we define variables plotted on x- and y-axis through <code>aes()</code>. For example:</p>
-<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="appendix-tidyverse.html#cb377-1" aria-hidden="true" tabindex="-1"></a><span class="co"># without pipe</span></span>
-<span id="cb377-2"><a href="appendix-tidyverse.html#cb377-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> iris,</span>
-<span id="cb377-3"><a href="appendix-tidyverse.html#cb377-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length,</span>
-<span id="cb377-4"><a href="appendix-tidyverse.html#cb377-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> Sepal.Width)) <span class="sc">+</span></span>
-<span id="cb377-5"><a href="appendix-tidyverse.html#cb377-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># additional layers...</span></span>
-<span id="cb377-6"><a href="appendix-tidyverse.html#cb377-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb377-7"><a href="appendix-tidyverse.html#cb377-7" aria-hidden="true" tabindex="-1"></a><span class="co"># with pipe</span></span>
-<span id="cb377-8"><a href="appendix-tidyverse.html#cb377-8" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
-<span id="cb377-9"><a href="appendix-tidyverse.html#cb377-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length,</span>
-<span id="cb377-10"><a href="appendix-tidyverse.html#cb377-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> Sepal.Width)) <span class="sc">+</span></span>
-<span id="cb377-11"><a href="appendix-tidyverse.html#cb377-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># additional layers...  </span></span></code></pre></div>
-<p>Please note that <code>aes()</code> refers to columns in the data frame. Variables names that do not exist in the data frame cannot be used.</p>
-<div id="point" class="section level3 hasAnchor" number="12.3.1">
-<h3><span class="header-section-number">12.3.1</span> Point<a href="appendix-tidyverse.html#point" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><code>geom_point()</code> : Add a point layer</p>
-<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="appendix-tidyverse.html#cb378-1" aria-hidden="true" tabindex="-1"></a><span class="co"># basic plot</span></span>
-<span id="cb378-2"><a href="appendix-tidyverse.html#cb378-2" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
-<span id="cb378-3"><a href="appendix-tidyverse.html#cb378-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length,</span>
-<span id="cb378-4"><a href="appendix-tidyverse.html#cb378-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> Sepal.Width)) <span class="sc">+</span></span>
-<span id="cb378-5"><a href="appendix-tidyverse.html#cb378-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="biostats_files/figure-html/unnamed-chunk-111-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="appendix-tidyverse.html#cb379-1" aria-hidden="true" tabindex="-1"></a><span class="co"># change color by &quot;Species&quot; column</span></span>
-<span id="cb379-2"><a href="appendix-tidyverse.html#cb379-2" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
-<span id="cb379-3"><a href="appendix-tidyverse.html#cb379-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length,</span>
-<span id="cb379-4"><a href="appendix-tidyverse.html#cb379-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> Sepal.Width,</span>
-<span id="cb379-5"><a href="appendix-tidyverse.html#cb379-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> Species)) <span class="sc">+</span></span>
-<span id="cb379-6"><a href="appendix-tidyverse.html#cb379-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="biostats_files/figure-html/unnamed-chunk-111-2.png" width="672" style="display: block; margin: auto;" /></p>
+<div id="visualization" class="section level2" number="9.15">
+<h2>
+<span class="header-section-number">9.15</span> Visualization<a class="anchor" aria-label="anchor" href="#visualization"><i class="fas fa-link"></i></a>
+</h2>
+<p><code>ggplot2::</code> offers a range of convenient functions for data visualization. The foundational function, <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code>, provides the initial framework for adding supplementary layers using the <code>+</code> operator. In ggplot(), we define variables plotted on x- and y-axis through <code><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes()</a></code>. For example:</p>
+<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="appendix-tidyverse.html#cb398-1" aria-hidden="true" tabindex="-1"></a><span class="co"># without pipe</span></span>
+<span id="cb398-2"><a href="appendix-tidyverse.html#cb398-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> iris,</span>
+<span id="cb398-3"><a href="appendix-tidyverse.html#cb398-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length,</span>
+<span id="cb398-4"><a href="appendix-tidyverse.html#cb398-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">y =</span> Sepal.Width)) <span class="sc">+</span></span>
+<span id="cb398-5"><a href="appendix-tidyverse.html#cb398-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># additional layers...</span></span>
+<span id="cb398-6"><a href="appendix-tidyverse.html#cb398-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb398-7"><a href="appendix-tidyverse.html#cb398-7" aria-hidden="true" tabindex="-1"></a><span class="co"># with pipe</span></span>
+<span id="cb398-8"><a href="appendix-tidyverse.html#cb398-8" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
+<span id="cb398-9"><a href="appendix-tidyverse.html#cb398-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length,</span>
+<span id="cb398-10"><a href="appendix-tidyverse.html#cb398-10" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> Sepal.Width)) <span class="sc">+</span></span>
+<span id="cb398-11"><a href="appendix-tidyverse.html#cb398-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># additional layers...  </span></span></code></pre></div>
+<p>Please note that <code><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes()</a></code> refers to columns in the data frame. Variables names that do not exist in the data frame cannot be used.</p>
+<div id="point" class="section level3" number="9.15.1">
+<h3>
+<span class="header-section-number">9.15.1</span> Point<a class="anchor" aria-label="anchor" href="#point"><i class="fas fa-link"></i></a>
+</h3>
+<p><code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code> : Add a point layer</p>
+<div class="sourceCode" id="cb399"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># basic plot</span></span>
+<span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span>,</span>
+<span>             y <span class="op">=</span> <span class="va">Sepal.Width</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-122-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb400"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># change color by "Species" column</span></span>
+<span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span>,</span>
+<span>             y <span class="op">=</span> <span class="va">Sepal.Width</span>,</span>
+<span>             color <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-122-2.png" width="672" style="display: block; margin: auto;"></div>
 </div>
-<div id="line" class="section level3 hasAnchor" number="12.3.2">
-<h3><span class="header-section-number">12.3.2</span> Line<a href="appendix-tidyverse.html#line" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><code>geom_line()</code> : Add a line layer</p>
-<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="appendix-tidyverse.html#cb380-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sample data</span></span>
-<span id="cb380-2"><a href="appendix-tidyverse.html#cb380-2" aria-hidden="true" tabindex="-1"></a>df0 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>, <span class="dv">3</span>),</span>
-<span id="cb380-3"><a href="appendix-tidyverse.html#cb380-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">y =</span> x <span class="sc">*</span> <span class="dv">2</span>)</span>
-<span id="cb380-4"><a href="appendix-tidyverse.html#cb380-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb380-5"><a href="appendix-tidyverse.html#cb380-5" aria-hidden="true" tabindex="-1"></a><span class="co"># basic plot</span></span>
-<span id="cb380-6"><a href="appendix-tidyverse.html#cb380-6" aria-hidden="true" tabindex="-1"></a>df0 <span class="sc">%&gt;%</span> </span>
-<span id="cb380-7"><a href="appendix-tidyverse.html#cb380-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x,</span>
-<span id="cb380-8"><a href="appendix-tidyverse.html#cb380-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> y)) <span class="sc">+</span></span>
-<span id="cb380-9"><a href="appendix-tidyverse.html#cb380-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div>
-<p><img src="biostats_files/figure-html/unnamed-chunk-112-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div id="line" class="section level3" number="9.15.2">
+<h3>
+<span class="header-section-number">9.15.2</span> Line<a class="anchor" aria-label="anchor" href="#line"><i class="fas fa-link"></i></a>
+</h3>
+<p><code><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line()</a></code> : Add a line layer</p>
+<div class="sourceCode" id="cb401"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># sample data</span></span>
+<span><span class="va">df0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">50</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>              y <span class="op">=</span> <span class="va">x</span> <span class="op">*</span> <span class="fl">2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># basic plot</span></span>
+<span><span class="va">df0</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>,</span>
+<span>             y <span class="op">=</span> <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-123-1.png" width="672" style="display: block; margin: auto;"></div>
 </div>
-<div id="histogram" class="section level3 hasAnchor" number="12.3.3">
-<h3><span class="header-section-number">12.3.3</span> Histogram<a href="appendix-tidyverse.html#histogram" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><code>geom_histogram()</code> : add a histogram layer</p>
-<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="appendix-tidyverse.html#cb381-1" aria-hidden="true" tabindex="-1"></a><span class="co"># basic plot; bins = 30 by default</span></span>
-<span id="cb381-2"><a href="appendix-tidyverse.html#cb381-2" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
-<span id="cb381-3"><a href="appendix-tidyverse.html#cb381-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length)) <span class="sc">+</span></span>
-<span id="cb381-4"><a href="appendix-tidyverse.html#cb381-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code></pre></div>
-<p><img src="biostats_files/figure-html/unnamed-chunk-113-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="appendix-tidyverse.html#cb382-1" aria-hidden="true" tabindex="-1"></a><span class="co"># change bin width</span></span>
-<span id="cb382-2"><a href="appendix-tidyverse.html#cb382-2" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
-<span id="cb382-3"><a href="appendix-tidyverse.html#cb382-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length)) <span class="sc">+</span></span>
-<span id="cb382-4"><a href="appendix-tidyverse.html#cb382-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>)</span></code></pre></div>
-<p><img src="biostats_files/figure-html/unnamed-chunk-113-2.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="appendix-tidyverse.html#cb383-1" aria-hidden="true" tabindex="-1"></a><span class="co"># change bin number</span></span>
-<span id="cb383-2"><a href="appendix-tidyverse.html#cb383-2" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
-<span id="cb383-3"><a href="appendix-tidyverse.html#cb383-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length)) <span class="sc">+</span></span>
-<span id="cb383-4"><a href="appendix-tidyverse.html#cb383-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">50</span>)</span></code></pre></div>
-<p><img src="biostats_files/figure-html/unnamed-chunk-113-3.png" width="672" style="display: block; margin: auto;" /></p>
+<div id="histogram" class="section level3" number="9.15.3">
+<h3>
+<span class="header-section-number">9.15.3</span> Histogram<a class="anchor" aria-label="anchor" href="#histogram"><i class="fas fa-link"></i></a>
+</h3>
+<p><code><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram()</a></code> : add a histogram layer</p>
+<div class="sourceCode" id="cb402"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># basic plot; bins = 30 by default</span></span>
+<span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-124-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb403"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># change bin width</span></span>
+<span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-124-2.png" width="672" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb404"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># change bin number</span></span>
+<span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-124-3.png" width="672" style="display: block; margin: auto;"></div>
 </div>
-<div id="boxplot" class="section level3 hasAnchor" number="12.3.4">
-<h3><span class="header-section-number">12.3.4</span> Boxplot<a href="appendix-tidyverse.html#boxplot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><code>geom_boxplot()</code> : add a boxplot layer</p>
-<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="appendix-tidyverse.html#cb384-1" aria-hidden="true" tabindex="-1"></a><span class="co"># basic plot</span></span>
-<span id="cb384-2"><a href="appendix-tidyverse.html#cb384-2" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
-<span id="cb384-3"><a href="appendix-tidyverse.html#cb384-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Species,</span>
-<span id="cb384-4"><a href="appendix-tidyverse.html#cb384-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> Sepal.Length)) <span class="sc">+</span></span>
-<span id="cb384-5"><a href="appendix-tidyverse.html#cb384-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
-<p><img src="biostats_files/figure-html/unnamed-chunk-114-1.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="appendix-tidyverse.html#cb385-1" aria-hidden="true" tabindex="-1"></a><span class="co"># change fill by &quot;Species&quot;</span></span>
-<span id="cb385-2"><a href="appendix-tidyverse.html#cb385-2" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
-<span id="cb385-3"><a href="appendix-tidyverse.html#cb385-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Species,</span>
-<span id="cb385-4"><a href="appendix-tidyverse.html#cb385-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> Sepal.Length,</span>
-<span id="cb385-5"><a href="appendix-tidyverse.html#cb385-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> Species)) <span class="sc">+</span></span>
-<span id="cb385-6"><a href="appendix-tidyverse.html#cb385-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
-<p><img src="biostats_files/figure-html/unnamed-chunk-114-2.png" width="672" style="display: block; margin: auto;" /></p>
-<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="appendix-tidyverse.html#cb386-1" aria-hidden="true" tabindex="-1"></a><span class="co"># change fill by &quot;Species&quot;, but consistent color</span></span>
-<span id="cb386-2"><a href="appendix-tidyverse.html#cb386-2" aria-hidden="true" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
-<span id="cb386-3"><a href="appendix-tidyverse.html#cb386-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Species,</span>
-<span id="cb386-4"><a href="appendix-tidyverse.html#cb386-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> Sepal.Length,</span>
-<span id="cb386-5"><a href="appendix-tidyverse.html#cb386-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> Species)) <span class="sc">+</span></span>
-<span id="cb386-6"><a href="appendix-tidyverse.html#cb386-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">color =</span> <span class="st">&quot;darkgrey&quot;</span>)</span></code></pre></div>
-<p><img src="biostats_files/figure-html/unnamed-chunk-114-3.png" width="672" style="display: block; margin: auto;" /></p>
+<div id="boxplot" class="section level3" number="9.15.4">
+<h3>
+<span class="header-section-number">9.15.4</span> Boxplot<a class="anchor" aria-label="anchor" href="#boxplot"><i class="fas fa-link"></i></a>
+</h3>
+<p><code><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot()</a></code> : add a boxplot layer</p>
+<div class="sourceCode" id="cb405"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># basic plot</span></span>
+<span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Species</span>,</span>
+<span>             y <span class="op">=</span> <span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-125-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb406"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># change fill by "Species"</span></span>
+<span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Species</span>,</span>
+<span>             y <span class="op">=</span> <span class="va">Sepal.Length</span>,</span>
+<span>             fill <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-125-2.png" width="672" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb407"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># change fill by "Species", but consistent color</span></span>
+<span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Species</span>,</span>
+<span>             y <span class="op">=</span> <span class="va">Sepal.Length</span>,</span>
+<span>             fill <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"darkgrey"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-125-3.png" width="672" style="display: block; margin: auto;"></div>
 
 </div>
 </div>
 </div>
-            </section>
+  <div class="chapter-nav">
+<div class="prev"><a href="appendix-data-structure.html">Appendix: Data Structure</a></div>
+<div class="next"><a href="appendix-base-plot.html">Appendix: Base Plot</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#appendix-tidyverse">Appendix: Tidyverse</a></li>
+<li><a class="nav-link" href="#overview-1"><span class="header-section-number">9.13</span> Overview</a></li>
+<li>
+<a class="nav-link" href="#data-manipulation"><span class="header-section-number">9.14</span> Data Manipulation</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#data-format"><span class="header-section-number">9.14.1</span> Data Format</a></li>
+<li><a class="nav-link" href="#row-manipulation"><span class="header-section-number">9.14.2</span> Row Manipulation</a></li>
+<li><a class="nav-link" href="#column-manipulation"><span class="header-section-number">9.14.3</span> Column Manipulation</a></li>
+<li><a class="nav-link" href="#piping"><span class="header-section-number">9.14.4</span> Piping</a></li>
+<li><a class="nav-link" href="#reshape"><span class="header-section-number">9.14.5</span> Reshape</a></li>
+<li><a class="nav-link" href="#group-operation"><span class="header-section-number">9.14.6</span> Group Operation</a></li>
+<li><a class="nav-link" href="#join"><span class="header-section-number">9.14.7</span> Join</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#visualization"><span class="header-section-number">9.15</span> Visualization</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#point"><span class="header-section-number">9.15.1</span> Point</a></li>
+<li><a class="nav-link" href="#line"><span class="header-section-number">9.15.2</span> Line</a></li>
+<li><a class="nav-link" href="#histogram"><span class="header-section-number">9.15.3</span> Histogram</a></li>
+<li><a class="nav-link" href="#boxplot"><span class="header-section-number">9.15.4</span> Boxplot</a></li>
+</ul>
+</li>
+</ul>
 
-          </div>
-        </div>
-      </div>
-<a href="appendix-data-structure.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="appendix-base-plot.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/aterui/biostats/blob/main/chapters/d-tidyverse.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/aterui/biostats/edit/main/chapters/d-tidyverse.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2023-07-06.</p>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/aterui/biostats/chapters/d-tidyverse.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["biostats.epub"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
-});
-});
-</script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -869,7 +610,22 @@ gitbook.start({
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
 </script>
 </body>
-
 </html>

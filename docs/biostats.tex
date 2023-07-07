@@ -3,7 +3,7 @@
 \PassOptionsToPackage{hyphens}{url}
 %
 \documentclass[
-]{book}
+]{article}
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
 \usepackage{iftex}
@@ -33,6 +33,7 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -119,25 +120,25 @@
 
 \title{BIOSTATS}
 \author{Akira Terui}
-\date{Last updated on 2023-06-24}
+\date{Last updated on 2023-07-06}
 
 \begin{document}
 \maketitle
 
 {
-\setcounter{tocdepth}{1}
+\setcounter{tocdepth}{2}
 \tableofcontents
 }
 \hypertarget{introduction}{%
-\chapter*{Introduction}\label{introduction}}
-\addcontentsline{toc}{chapter}{Introduction}
+\section*{Introduction}\label{introduction}}
+\addcontentsline{toc}{section}{Introduction}
 
 This textbook is designed to provide a comprehensive introduction to fundamental statistical techniques and their practical applications in the context of biological data analysis. What sets this book apart is its ``flipped-order'' approach to teaching. Unlike traditional statistics courses that often begin with theoretical concepts, this book takes a different approach by initially presenting real-world data. By grounding the material in practical scenarios, it aims to make the learning process more accessible, particularly for those who are new to statistics.
 
 Through the ``flipped-order'' introduction, readers will be able to engage with concrete examples of statistical methods in use before delving into the underlying theories and concepts that support them. This pedagogical approach aims to provide a solid foundation for readers to comprehend and apply statistical techniques effectively in the biological sciences.
 
 \hypertarget{descriptive-statistics}{%
-\chapter{Descriptive Statistics}\label{descriptive-statistics}}
+\section{Descriptive Statistics}\label{descriptive-statistics}}
 
 Descriptive statistics are a set of summary measures that provide a concise overview of a dataset. They help us understand the characteristics and properties of the data without delving into complex statistical analyses. Some commonly used descriptive statistics include the mean, standard deviation, and median.
 
@@ -158,10 +159,10 @@ x_5 = 24.4\\
 Now let's see how we represent summary statistics of vector \(\pmb{x}\).
 
 \hypertarget{central-tendency}{%
-\section{Central Tendency}\label{central-tendency}}
+\subsection{Central Tendency}\label{central-tendency}}
 
 \hypertarget{measures-of-central-tendency}{%
-\subsection{Measures of Central Tendency}\label{measures-of-central-tendency}}
+\subsubsection{Measures of Central Tendency}\label{measures-of-central-tendency}}
 
 Central tendency measures (Table \ref{tab:central}) provide insights into the typical or central value of a dataset. There are three commonly used measures:
 
@@ -209,7 +210,7 @@ Median \(\mu_{med}\) & \(
 \end{longtable}
 
 \hypertarget{r-exercise}{%
-\subsection{R Exercise}\label{r-exercise}}
+\subsubsection{R Exercise}\label{r-exercise}}
 
 To learn more about these measures, let's create vectors \(\pmb{x} = \{15.9, 15.1, 21.9, 13.3, 24.4\}\) and \(\pmb{y} = \{15.9, 15.1, 21.9, 53.3, 24.4\}\) -- \(\pmb{y}\) is identical to \(\pmb{x}\) but contains one outlier value. How does this make difference? To construct vectors in R, we use \texttt{c()}, a function that stands for ``construct.'' Below is the script:
 
@@ -381,10 +382,10 @@ Compare with outputs from \texttt{median()}
 \end{verbatim}
 
 \hypertarget{variation}{%
-\section{Variation}\label{variation}}
+\subsection{Variation}\label{variation}}
 
 \hypertarget{measures-of-variation}{%
-\subsection{Measures of Variation}\label{measures-of-variation}}
+\subsubsection{Measures of Variation}\label{measures-of-variation}}
 
 Variation measures (Table \ref{tab:variation}) provide information about the spread of data points.
 
@@ -440,7 +441,7 @@ MAD/Median & \(
 \end{longtable}
 
 \hypertarget{r-exercise-1}{%
-\subsection{R Exercise}\label{r-exercise-1}}
+\subsubsection{R Exercise}\label{r-exercise-1}}
 
 \textbf{Variance, SD, and CV}
 
@@ -610,10 +611,10 @@ Let's try IQR, MAD, and MAD/Median. IQR can be defined for given percentiles. He
 \end{verbatim}
 
 \hypertarget{laboratory}{%
-\section{Laboratory}\label{laboratory}}
+\subsection{Laboratory}\label{laboratory}}
 
 \hypertarget{comparing-central-tendency-measures}{%
-\subsection{Comparing Central Tendency Measures}\label{comparing-central-tendency-measures}}
+\subsubsection{Comparing Central Tendency Measures}\label{comparing-central-tendency-measures}}
 
 What are the differences of the three measures of central tendency? To investigate this further, let's perform the following exercise.
 
@@ -632,7 +633,7 @@ What are the differences of the three measures of central tendency? To investiga
 \end{enumerate}
 
 \hypertarget{comparing-variation-measures}{%
-\subsection{Comparing Variation Measures}\label{comparing-variation-measures}}
+\subsubsection{Comparing Variation Measures}\label{comparing-variation-measures}}
 
 Why do we have absolute (variance, SD, MAD, IQR) and relative measures (CV, MAD/Median) of variation? To understand this, suppose we have 100 measurements of fish weight in unit ``gram.'' (\texttt{w} in the following script)
 
@@ -660,12 +661,12 @@ Using this data, perform the following exercise:
 \end{enumerate}
 
 \hypertarget{sampling}{%
-\chapter{Sampling}\label{sampling}}
+\section{Sampling}\label{sampling}}
 
 \emph{``Why do I need statistics in the first place?''} This was the initial question that arose when I entered the field of ecology. Initially, I assumed it would be a straightforward query with an immediate response. However, I soon realized that it is a profound question with a complex answer. In short, ``we need statistics because we often possess only partial information about what we seek to understand.'' Now, let's explore the more elaborate explanation below.
 
 \hypertarget{the-unknown-garden-plant-example}{%
-\section{The Unknown: Garden Plant Example}\label{the-unknown-garden-plant-example}}
+\subsection{The Unknown: Garden Plant Example}\label{the-unknown-garden-plant-example}}
 
 Consider a scenario where we are conducting a study on plant height in a garden. In this garden, there exists a thousand of individual plants, making it impractical for a single researcher to measure all of them. Instead, due to resource limitations, a sample of \(10\) plants was selected to \textbf{\emph{calculate}} the average height and the extent of variation among these plant individuals:
 
@@ -763,7 +764,7 @@ Create another \texttt{tibble()} :
 Wow, that's totally different.
 
 \hypertarget{linking-part-to-the-whole}{%
-\section{Linking Part to the Whole}\label{linking-part-to-the-whole}}
+\subsection{Linking Part to the Whole}\label{linking-part-to-the-whole}}
 
 The exercise highlights an important takeaway: what we can determine from the above data is the average and variance of the sample, \textbf{which may not perfectly represent the characteristics of the entire garden.}
 
@@ -1070,7 +1071,7 @@ In summary, samples can only provide information about a part of the whole popul
 Recognizing the limitations and uncertainties associated with working with samples is essential for proper statistical analysis and interpretation of results in various fields of study.
 
 \hypertarget{laboratory-1}{%
-\section{Laboratory}\label{laboratory-1}}
+\subsection{Laboratory}\label{laboratory-1}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1090,15 +1091,15 @@ Recognizing the limitations and uncertainties associated with working with sampl
 \end{enumerate}
 
 \hypertarget{probabilistic-view}{%
-\chapter{Probabilistic View}\label{probabilistic-view}}
+\section{Probabilistic View}\label{probabilistic-view}}
 
 Chapter \ref{sampling} emphasized the concept of sampling and introduced the crucial aspect of statistics: randomness. Although the mean represents the central tendency of the data, it does not encompass all the data points. Inevitable deviations occur, and we need a way to express this ``randomness.'' The concept of probability distributions aids in fully understanding the stochastic nature of observed data.
 
 \hypertarget{probability-distribution-of-a-continuous-variable}{%
-\section{Probability Distribution of a Continuous Variable}\label{probability-distribution-of-a-continuous-variable}}
+\subsection{Probability Distribution of a Continuous Variable}\label{probability-distribution-of-a-continuous-variable}}
 
 \hypertarget{probability-density-function}{%
-\subsection{Probability Density Function}\label{probability-density-function}}
+\subsubsection{Probability Density Function}\label{probability-density-function}}
 
 Let me use the plant height example in Chapter \ref{sampling}:
 
@@ -1146,7 +1147,7 @@ f(x) = \frac{1}{\sqrt{2 \pi} \sigma} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\righ
 \]
 
 \hypertarget{pdf-to-frequency-distribution}{%
-\subsection{PDF to frequency distribution}\label{pdf-to-frequency-distribution}}
+\subsubsection{PDF to frequency distribution}\label{pdf-to-frequency-distribution}}
 
 In R, the function \texttt{dnorm()} can be used to calculate the probability density for a given value. The first argument, \texttt{x}, should be a vector of values for which you want to calculate the probability density. The second argument, \texttt{mean}, and the third argument, \texttt{sd}, correspond to the mean and standard deviation of the distribution, respectively. Note that we must provide \texttt{mean} and \texttt{sd} to calculate the probability density.
 
@@ -1270,10 +1271,10 @@ Overlay:
 It is remarkable that the probability distribution, characterized by just two parameters (mean and variance), can effectively reproduce the overall shape observed in the original data set of 1000 data points. This is great news because it means that once we determine these key parameters, we can infer the general pattern of the data.
 
 \hypertarget{probability-distribution-of-a-discrete-variable}{%
-\section{Probability Distribution of a Discrete Variable}\label{probability-distribution-of-a-discrete-variable}}
+\subsection{Probability Distribution of a Discrete Variable}\label{probability-distribution-of-a-discrete-variable}}
 
 \hypertarget{probability-mass-function}{%
-\subsection{Probability Mass Function}\label{probability-mass-function}}
+\subsubsection{Probability Mass Function}\label{probability-mass-function}}
 
 Let's shift our perspective and examine the density of plants in the garden. For this analysis, we have counted the number of plant individuals within 30 plots, with each plot covering an area of one square meter (refer to Figure \ref{fig:garden}).
 
@@ -1369,7 +1370,7 @@ In a generalized form, we write:
 \]
 
 \hypertarget{pmf-to-frequency-distribution}{%
-\subsection{PMF to frequency distribution}\label{pmf-to-frequency-distribution}}
+\subsubsection{PMF to frequency distribution}\label{pmf-to-frequency-distribution}}
 
 In R, you can use the \texttt{dpois()} function to visualize a Poisson distribution. This function allows you to plot the probability mass function (PMF) of the Poisson distribution and gain insights into the distribution of the discrete variable.
 
@@ -1436,7 +1437,7 @@ To convert the y-axis from probability to frequency, multiply the probabilities 
 Cool, the Poisson distribution does an excellent job of characterizing the distribution of plant counts.
 
 \hypertarget{why-probability-distributions}{%
-\section{Why Probability Distributions?}\label{why-probability-distributions}}
+\subsection{Why Probability Distributions?}\label{why-probability-distributions}}
 
 As we have seen in the above examples, probability distributions provide a framework for describing the likelihood of different outcomes or events. By utilizing probability distributions, we can:
 
@@ -1454,10 +1455,10 @@ As we have seen in the above examples, probability distributions provide a frame
 Probability distributions serve as fundamental tools in statistics, enabling us to model, analyze, and make informed decisions in the face of uncertainty.
 
 \hypertarget{laboratory-2}{%
-\section{Laboratory}\label{laboratory-2}}
+\subsection{Laboratory}\label{laboratory-2}}
 
 \hypertarget{normal-distribution}{%
-\subsection{Normal Distribution}\label{normal-distribution}}
+\subsubsection{Normal Distribution}\label{normal-distribution}}
 
 The function \texttt{rnorm()} produces a random variable that follows a Normal distribution with a specified mean and SD. Using this function,
 
@@ -1471,7 +1472,7 @@ The function \texttt{rnorm()} produces a random variable that follows a Normal d
 \end{enumerate}
 
 \hypertarget{poisson-distribution}{%
-\subsection{Poisson Distribution}\label{poisson-distribution}}
+\subsubsection{Poisson Distribution}\label{poisson-distribution}}
 
 The function \texttt{rpois()} produces a random variable that follows a Poisson distribution with a specified mean. Using this function,
 
@@ -1485,7 +1486,7 @@ The function \texttt{rpois()} produces a random variable that follows a Poisson 
 \end{enumerate}
 
 \hypertarget{two-group-comparison}{%
-\chapter{Two-Group Comparison}\label{two-group-comparison}}
+\section{Two-Group Comparison}\label{two-group-comparison}}
 
 Data consists of ``samples'' extracted from the population of interest, but it's important to acknowledge that these samples are not flawless replicas of the entire population. Given this imperfect information, how can we effectively investigate and discern the distinction between two populations? In this Chapter, I will introduce one of the most basic statistical tests -- ``t-test.'' The t-test takes the following steps:
 
@@ -1501,7 +1502,7 @@ Data consists of ``samples'' extracted from the population of interest, but it's
 \end{enumerate}
 
 \hypertarget{explore-data-structure}{%
-\section{Explore Data Structure}\label{explore-data-structure}}
+\subsection{Explore Data Structure}\label{explore-data-structure}}
 
 Suppose that we study fish populations of the same species in two lakes (Lake \texttt{a} and \texttt{b}). These lakes are in stark contrast of productivity (Lake \texttt{b} looks more productive), and our interest is the difference in \emph{mean} body size between the two lakes. We obtained \(50\) data points of fish length from each lake (download \href{https://github.com/aterui/biostats/blob/master/data_raw/data_fish_length.csv}{here}). Save under \texttt{data\_raw/} and use \texttt{read\_csv()} to read data:
 
@@ -1604,10 +1605,10 @@ Visualization provides a powerful tool for summarizing data effectively. By plot
 Hmm, it is possible that there is a noticeable disparity in body size between Lake \texttt{a} and Lake \texttt{b}. However, how can we ascertain and provide evidence for this claim?
 
 \hypertarget{test-statistic}{%
-\section{Test Statistic}\label{test-statistic}}
+\subsection{Test Statistic}\label{test-statistic}}
 
 \hypertarget{t-statistic}{%
-\subsection{t-statistic}\label{t-statistic}}
+\subsubsection{t-statistic}\label{t-statistic}}
 
 Since our focus is on examining the difference in means, it is logical to estimate the disparity between the sample means in each lake. Let me denote the sample means as \(\hat{\mu}_a\) and \(\hat{\mu}_b\) for Lake \texttt{a} and Lake \texttt{b}, respectively. We can estimate the difference between the means using the following approach:
 
@@ -1725,7 +1726,7 @@ The difference in sample means were -2.06; therefore, t-statistic further emphas
 In the denominator, we observe the inclusion of \(\hat{\sigma}^2_p\) (estimated pooled variance), as well as the inverses of sample sizes \(N_a\) and \(N_b\). Consequently, as \(\hat{\sigma}^2_p\) decreases and/or the sample sizes increase, the t-statistic increases. This is a reasonable outcome since a decrease in variance and/or an increase in sample size enhance the certainty of the mean difference.
 
 \hypertarget{null-hypothesis}{%
-\subsection{Null Hypothesis}\label{null-hypothesis}}
+\subsubsection{Null Hypothesis}\label{null-hypothesis}}
 
 The observed t-statistic serves a dual purpose in accounting for both the disparity of means and the accompanying uncertainty. However, the significance of this t-statistic remains unclear.
 
@@ -1820,7 +1821,7 @@ The \textbf{p-value,} i.e., \emph{the probability of observing t-statistics} les
 \end{verbatim}
 
 \hypertarget{interpretation}{%
-\subsection{Interpretation}\label{interpretation}}
+\subsubsection{Interpretation}\label{interpretation}}
 
 The above exercise is called \textbf{t-test} -- perhaps, the most well-known hypothesis testing. To explain the interpretation of the results, let me use the following notations. \(t_{obs}\), the observed t-statistic; \(t_0\), possible t-statistics under the null hypothesis; \(\Pr(\cdot)\), the probability of ``\(\cdot\)'' occurs -- for example, \(\Pr(x > 2)\) means that the probability of \(x\) exceeding \(2\).
 
@@ -1831,10 +1832,10 @@ The same logic is used in many statistical analyses -- define the null hypothesi
 However, it is crucial to recognize that, \textbf{even if we found the observed t-statistic that results in very high p-value (i.e., very common under the null hypothesis), finding such a result does NOT support the null hypothesis -- we just can't reject it.}
 
 \hypertarget{t-test-in-r}{%
-\section{t-test in R}\label{t-test-in-r}}
+\subsection{t-test in R}\label{t-test-in-r}}
 
 \hypertarget{t-test-with-equal-variance}{%
-\subsection{t-test with equal variance}\label{t-test-with-equal-variance}}
+\subsubsection{t-test with equal variance}\label{t-test-with-equal-variance}}
 
 In R, this t-test can be performed with \texttt{t.test()}. Let me examine if the function gives us identical results:
 
@@ -1869,7 +1870,7 @@ In R, this t-test can be performed with \texttt{t.test()}. Let me examine if the
 The reported t-statistic \texttt{t\ =\ -3.2473}, the p-value \texttt{p-value\ =\ 0.001596}, and the degrees of freedom all agreed (\texttt{df\ =\ 98}) with what we have estimated manually. Importantly, this t-test assumes relative similarity of variance between groups.
 
 \hypertarget{t-test-with-unequal-variance}{%
-\subsection{t-test with unequal variance}\label{t-test-with-unequal-variance}}
+\subsubsection{t-test with unequal variance}\label{t-test-with-unequal-variance}}
 
 The relative similarity of variance between groups could be an unrealistic assumption. Luckily, there is a variant of t-test ``Welch's t-test,'' in which we assume unequal variance between groups. The implementation is easy -- set \texttt{var.equal\ =\ FALSE} in \texttt{t.test()}:
 
@@ -1908,10 +1909,10 @@ d.f. = \frac{\frac{\hat{\sigma}^2_a}{N_a} + \frac{\hat{\sigma}^2_b}{N_b}}{\frac{
 Therefore, the reported values of t-statistic and d.f. are different from what we estimated. The Welch's t-test covers the cases for equal variances; therefore, by default, we use the Welch's test.
 
 \hypertarget{laboratory-3}{%
-\section{Laboratory}\label{laboratory-3}}
+\subsection{Laboratory}\label{laboratory-3}}
 
 \hypertarget{multiple-group-comparison}{%
-\chapter{Multiple-Group Comparison}\label{multiple-group-comparison}}
+\section{Multiple-Group Comparison}\label{multiple-group-comparison}}
 
 The t-test is used to compare two groups, but when there are more than two groups, ANOVA (Analysis of Variance) is employed. ANOVA allows for simultaneous comparison of means among multiple groups to determine if there are statistically significant differences. ANOVA uses the following steps:
 
@@ -1931,7 +1932,7 @@ The t-test is used to compare two groups, but when there are more than two group
 If appropriate, post-hoc tests can be conducted to identify specific differing groups.
 
 \hypertarget{partition-the-variability}{%
-\section{Partition the Variability}\label{partition-the-variability}}
+\subsection{Partition the Variability}\label{partition-the-variability}}
 
 The first step is to determine what aspect to examine. In the case of a t-test, we focus on the difference in sample means between groups. One might initially consider conducting t-tests for all possible combinations. However, this approach leads to a problem known as the \href{https://en.wikipedia.org/wiki/Multiple_comparisons_problem\#:~:text=In\%20statistics\%2C\%20the\%20multiple\%20comparisons,based\%20on\%20the\%20observed\%20values.}{multiple comparisons problem}. Hence, this is not a viable option. Therefore, we need to explore the data from a different perspective.
 
@@ -1992,7 +1993,7 @@ S_w &= \sum_g \sum_i (x_{i} - \hat{\mu}_{g(i)})^2
 The double summation \(\sum_g \sum_i\) might scare you, but no worries. We can decompose this equation into two steps.
 
 \hypertarget{between-group-variability}{%
-\subsection{Between-group variability}\label{between-group-variability}}
+\subsubsection{Between-group variability}\label{between-group-variability}}
 
 Let me first consider \(S_b = \sum_g \sum_i (\hat{\mu}_{g(i)} - \hat{\mu})^2\). In this equation, \(\hat{\mu}\) is the overall mean of the fish length and \(\hat{\mu}_{g(i)}\) is the group-mean in a given lake (\(g = \{a, b, c\}\)). Let's perform this estimation in R:
 
@@ -2055,7 +2056,7 @@ Sum over \(g\) (lake) to get \(S_b\).
 \end{verbatim}
 
 \hypertarget{within-group-variability}{%
-\subsection{Within-group variability}\label{within-group-variability}}
+\subsubsection{Within-group variability}\label{within-group-variability}}
 
 We can follow the same steps to estimate the within-group variability \(S_w = \sum_g \sum_i (x_{i} - \hat{\mu}_{g(i)})^2\). Let's estimate \((x_{i} - \hat{\mu}_{g(i)})^2\) first:
 
@@ -2117,7 +2118,7 @@ Then sum over \(g\) to get \(S_w\):
 \end{verbatim}
 
 \hypertarget{variability-to-variance}{%
-\subsection{Variability to Variance}\label{variability-to-variance}}
+\subsubsection{Variability to Variance}\label{variability-to-variance}}
 
 I referred to \(S_b\) and \(S_w\) as ``variability,'' which essentially represents the summation of squared deviations. To convert them into variances, we can divide them by appropriate numbers. In Chapter \ref{sampling}, I mentioned that the denominator for variance is the sample size minus one. The same principle applies here, but with caution.
 
@@ -2158,10 +2159,10 @@ Meanwhile, we need to be careful when estimating the within-group variance. Sinc
 \end{verbatim}
 
 \hypertarget{test-statistic-1}{%
-\section{Test Statistic}\label{test-statistic-1}}
+\subsection{Test Statistic}\label{test-statistic-1}}
 
 \hypertarget{f-statistic}{%
-\subsection{F-statistic}\label{f-statistic}}
+\subsubsection{F-statistic}\label{f-statistic}}
 
 In ANOVA, we use F-statistic -- the ratio of between-group variability to within-group variability. The above exercise was essentially performed to yield this test statistic:
 
@@ -2183,7 +2184,7 @@ F = \frac{\text{between-group variance}}{\text{within-group variance}} = \frac{\
 The F-statistic in our data was calculated to be 5.31. This indicates that the between-group variance is approximately five times higher than the within-group variance. While this difference appears significant, it is important to determine whether it is statistically substantial. To make such a claim, we can use the Null Hypothesis as a reference.
 
 \hypertarget{null-hypothesis-1}{%
-\subsection{Null Hypothesis}\label{null-hypothesis-1}}
+\subsubsection{Null Hypothesis}\label{null-hypothesis-1}}
 
 The F-statistic follows an F-distribution when there is no difference in means among the groups. Therefore, the null hypothesis we are considering in our example is that the means of all groups are equal, represented as \(\mu_a = \mu_b = \mu_c\). It's worth noting that the alternative hypotheses can take different forms, such as \(\mu_a \ne \mu_b = \mu_c\), \(\mu_a = \mu_b \ne \mu_c\), or \(\mu_a \ne \mu_b \ne \mu_c\). ANOVA, however, is unable to distinguish between these alternative hypotheses.
 
@@ -2228,7 +2229,7 @@ Unlike t-statistics, F-statistics can take only positive values (because F-stati
 \end{verbatim}
 
 \hypertarget{anova-in-r}{%
-\section{ANOVA in R}\label{anova-in-r}}
+\subsection{ANOVA in R}\label{anova-in-r}}
 
 Like the t-test, R provides functions to perform ANOVA easily. In this case, we will utilize the \texttt{aov()} function. The first argument of this function is the ``formula,'' which is used to describe the structure of the model. In our scenario, we aim to explain the fish body length by grouping them according to lakes. In the formula expression, we represent this relationship as \texttt{length\ \textasciitilde{}\ lake}, using the tilde symbol (\textasciitilde) to indicate the stochastic nature of the relationship.
 
@@ -2276,7 +2277,7 @@ The function returns \texttt{Sum\ of\ Squares} and \texttt{Deg.\ of\ Freedom} --
 The F-statistic and p-value are identical to our manual estimate.
 
 \hypertarget{post-hoc-tests}{%
-\section{Post-hoc Tests}\label{post-hoc-tests}}
+\subsection{Post-hoc Tests}\label{post-hoc-tests}}
 
 When conducting an ANOVA and finding a significant difference among group means, a post-hoc test is often performed to determine which specific groups differ significantly from each other. Post-hoc tests help to identify pairwise comparisons that contribute to the observed overall difference.
 
@@ -2297,15 +2298,15 @@ There are several post-hoc tests available for ANOVA, including:
 The choice of post-hoc test depends on the specific research question, assumptions, and desired control of the Type I error rate. It is important to select an appropriate test and interpret the results accordingly to draw valid conclusions about group differences in an ANOVA analysis.
 
 \hypertarget{laboratory-4}{%
-\section{Laboratory}\label{laboratory-4}}
+\subsection{Laboratory}\label{laboratory-4}}
 
 \hypertarget{regression}{%
-\chapter{Regression}\label{regression}}
+\section{Regression}\label{regression}}
 
 Our previous examples focused on cases that involved a distinct group structure. However, it is not always the case that such a structure exists. Instead, we might examine the relationship between continuous variables. In this chapter, I will introduce a technique called linear regression.
 
 \hypertarget{explore-data-structure-1}{%
-\section{Explore Data Structure}\label{explore-data-structure-1}}
+\subsection{Explore Data Structure}\label{explore-data-structure-1}}
 
 For this exercise, we will use algae biomass data from streams. Download the data \href{https://github.com/aterui/biostats/blob/master/data_raw/data_algae.csv}{here} and locate it in \texttt{data\_raw/}.
 
@@ -2357,10 +2358,10 @@ This dataset comprises data collected from 50 sampling sites. The variable \text
 It seems that there is a noticeable positive correlation where increased conductivity results in higher algal biomass. Nevertheless, how can we accurately represent this relationship with a line?
 
 \hypertarget{drawing-the-fittest-line}{%
-\section{Drawing the ``fittest'' line}\label{drawing-the-fittest-line}}
+\subsection{Drawing the ``fittest'' line}\label{drawing-the-fittest-line}}
 
 \hypertarget{linear-formula}{%
-\subsection{Linear formula}\label{linear-formula}}
+\subsubsection{Linear formula}\label{linear-formula}}
 
 The first step is to represent the relationship as a formula; let me ASSUME that the relationship can be described by the following linear formula:
 
@@ -2460,7 +2461,7 @@ We can draw this ``fittest'' line on the figure:
 However, how did \texttt{lm()} find \(\alpha\) and \(\beta\)?
 
 \hypertarget{minimizing-the-errors}{%
-\subsection{Minimizing the errors}\label{minimizing-the-errors}}
+\subsubsection{Minimizing the errors}\label{minimizing-the-errors}}
 
 Notice that the error term is the difference between \(y_i\) and \(\alpha + \beta x_i\):
 
@@ -2471,7 +2472,7 @@ Notice that the error term is the difference between \(y_i\) and \(\alpha + \bet
 \textbf{Least squares methods} are a widely employed statistical approach to achieve this objective. These methods aim to minimize the sum of squared errors, denoted as \(\sum_i \varepsilon_i^2\), across all data points. As the deviation from the expected value of \(\alpha + \beta x_i\) increases, this quantity also increases. Consequently, determining parameter values (\(\alpha\) and \(\beta\)) that minimize this sum of squared errors yields the best-fitting formula (see Section \ref{least-squares} for further details).
 
 \hypertarget{least-squares}{%
-\subsection{Least Squares}\label{least-squares}}
+\subsubsection{Least Squares}\label{least-squares}}
 
 Introducing a matrix representation is indeed a helpful way to explain the least square method. Here, I represent the vector of observed values \(y_i\) as \(Y\) (\(Y = \{y_1, y_2,...,y_n\}^T\)), the vector of parameters as \(\Theta\) (\(\Theta = \{\alpha, \beta\}^T\)), and the matrix composed of \(1\)s and \(x_i\) values as \(X\). The matrix \(X\) can be written as:
 
@@ -2565,7 +2566,7 @@ Let me see if this reproduces the result of \texttt{lm()}:
 \end{verbatim}
 
 \hypertarget{standard-errors-and-t-values}{%
-\subsection{Standard Errors and t-values}\label{standard-errors-and-t-values}}
+\subsubsection{Standard Errors and t-values}\label{standard-errors-and-t-values}}
 
 Ensuring the reliability of the estimated point estimates for \(\alpha\) and \(\beta\) is crucial. In the \texttt{summary(m)} output, two statistical quantities, namely the \texttt{Std.\ Error} and \texttt{t-value}, play a significant role in assessing the uncertainty associated with these estimates.
 
@@ -2629,10 +2630,10 @@ After defining the Null Hypothesis and t-values, we can compute the probability 
 \end{verbatim}
 
 \hypertarget{unexplained-variation}{%
-\section{Unexplained Variation}\label{unexplained-variation}}
+\subsection{Unexplained Variation}\label{unexplained-variation}}
 
 \hypertarget{retrieve-errors}{%
-\subsection{Retrieve Errors}\label{retrieve-errors}}
+\subsubsection{Retrieve Errors}\label{retrieve-errors}}
 
 The function \texttt{lm()} provides estimates for \(\alpha\) and \(\beta\), but it does not directly provide the values of \(\varepsilon_i\). To gain a deeper understanding of the statistical model, it is necessary to examine the residuals \(\varepsilon_i\). By using the \texttt{resid()} function, you can obtain the values of \(\varepsilon_i\). This allows you to explore and extract insights from the developed statistical model.
 
@@ -2696,7 +2697,7 @@ To ensure that the two columns are indeed identical, a visual check may be prone
 \end{verbatim}
 
 \hypertarget{visualize-errors}{%
-\subsection{Visualize Errors}\label{visualize-errors}}
+\subsubsection{Visualize Errors}\label{visualize-errors}}
 
 To visualize the errors or residuals, which represent the distance from the best-fitted line to each data point, you can make use of the \texttt{geom\_segment()} function:
 
@@ -2730,7 +2731,7 @@ To visualize the errors or residuals, which represent the distance from the best
 \end{figure}
 
 \hypertarget{coefficient-of-determination}{%
-\subsection{Coefficient of Determination}\label{coefficient-of-determination}}
+\subsubsection{Coefficient of Determination}\label{coefficient-of-determination}}
 
 One crucial motivation for developing a regression model, or any statistical model, is to assess the extent to which the explanatory variable (\(x_i\)) explains the variation in the response variable (\(y_i\)). By fitting a regression model, we can quantify the amount of variability in the response variable that can be attributed to the explanatory variable. This assessment provides valuable insights into the strength and significance of the relationship between the variables under consideration.
 
@@ -2795,17 +2796,17 @@ Compare it with \texttt{lm()} output:
 \texttt{Multiple\ R-squared:} corresponds to the calculated coefficient of determination.
 
 \hypertarget{laboratory-5}{%
-\section{Laboratory}\label{laboratory-5}}
+\subsection{Laboratory}\label{laboratory-5}}
 
 \hypertarget{linear-model}{%
-\chapter{Linear Model}\label{linear-model}}
+\section{Linear Model}\label{linear-model}}
 
 We have extensively covered three important statistical analyses: the t-test, ANOVA, and regression analysis. While these methods may seem distinct, they all fall under the umbrella of the Linear Model framework\footnote{Some textbooks refer to this framework as ``General Linear Model.'' However, to distinguish from Generalized Linear Model, I call this ``Linear Model.''}.
 
 The Linear Model encompasses models that depict the connection between a response variable and one or more explanatory variables. It assumes that the error term follows a normal distribution. In this chapter, I will elucidate this framework and illustrate its relationship to the t-test, ANOVA, and regression analysis.
 
 \hypertarget{the-frame}{%
-\section{The Frame}\label{the-frame}}
+\subsection{The Frame}\label{the-frame}}
 
 The apparent distinctiveness between the t-test, ANOVA, and regression analysis arises because they are applied to different types of data:
 
@@ -2840,7 +2841,7 @@ y_i &\sim \text{Normal}(\mu_i, \sigma^2)\\
 This structure provides insight into the relationship between the t-test, ANOVA, and regression analysis. The fundamental purpose of regression analysis is to model how the mean \(\mu_i\) changes with increasing or decreasing values of \(x_{1,i}\). Thus, the t-test, ANOVA, and regression all analyze the mean -- the expected value of a Normal distribution. The primary distinction between the t-test, ANOVA, and regression lies in the nature of the explanatory variable, which can be either continuous or categorical (group).
 
 \hypertarget{two-group-case}{%
-\subsection{Two-Group Case}\label{two-group-case}}
+\subsubsection{Two-Group Case}\label{two-group-case}}
 
 To establish a connection among these approaches, one can employ ``dummy indicator'' variables to represent group variables. In the case of the t-test, where a categorical variable consists of two groups, typically denoted as \texttt{a} and \texttt{b} (although they can be represented by numbers as well), one can convert these categories into numerical values. For instance, assigning \texttt{a} to 0 and \texttt{b} to 1 enables the following conversion:
 
@@ -2996,7 +2997,7 @@ The estimated coefficient of Lake \texttt{b} (\texttt{lakeb}) is identical to th
 The t-statistic and p-value match the \texttt{lm()} output.
 
 \hypertarget{multiple-group-case}{%
-\subsection{Multiple-Group Case}\label{multiple-group-case}}
+\subsubsection{Multiple-Group Case}\label{multiple-group-case}}
 
 The same argument applies to ANOVA. In ANOVA, we deal with more than two groups in the explanatory variable. To handle this, we can convert the group variable into multiple dummy variables. For instance, if we have a variable \(\pmb{x'}_2 = \{a, b, c\}\), we can convert it to \(x_2 = \{0, 1, 0\}\) (where \(b \rightarrow 1\) and the others are \(0\)) and \(\pmb{x}_3 = \{0, 0, 1\}\) (where \(c \rightarrow 1\) and the others are \(0\)). Thus, the model formula would be:
 
@@ -3117,7 +3118,7 @@ Also, there is a report for F-statistic (\texttt{5.305}) and p-value (\texttt{0.
 The results are identical.
 
 \hypertarget{the-common-structure}{%
-\subsection{The Common Structure}\label{the-common-structure}}
+\subsubsection{The Common Structure}\label{the-common-structure}}
 
 The above examples show that the t-test, ANOVA, and regression has the same model structure:
 
@@ -3142,10 +3143,10 @@ y_i = \text{(deterministic component)} + \text{(stochastic component)}
 Violations of these assumptions can affect the validity and reliability of the results obtained from the Linear Model.
 
 \hypertarget{combine-multiple-types-of-variables}{%
-\section{Combine Multiple Types of Variables}\label{combine-multiple-types-of-variables}}
+\subsection{Combine Multiple Types of Variables}\label{combine-multiple-types-of-variables}}
 
 \hypertarget{iris-example}{%
-\subsection{\texorpdfstring{\texttt{iris} Example}{iris Example}}\label{iris-example}}
+\subsubsection{\texorpdfstring{\texttt{iris} Example}{iris Example}}\label{iris-example}}
 
 The previous section clarified that the t-test, ANOVA, and regression have a common model structure; therefore, categorical and continuous variables can be included in the same model. Here, let me use the \texttt{iris} data (available in R by default) to show an example. This data set comprises continuous (Sepal.Length, Sepal.Width, Petal.Length, Petal.Width) and categorical variables (Species):
 
@@ -3292,7 +3293,7 @@ By plotting the predicted values against the observed data points, we can visual
 \end{figure}
 
 \hypertarget{variable-types}{%
-\subsection{Variable Types}\label{variable-types}}
+\subsubsection{Variable Types}\label{variable-types}}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -3311,18 +3312,18 @@ We cannot carry out meaningful arithmetic operations on categorical and ordinal 
 In contrast, interval and ratio variables should be considered ``numerical'' variables in R. These variables possess a meaningful numerical scale with equal intervals, and in the case of ratio variables, a true zero point.
 
 \hypertarget{laboratory-6}{%
-\section{Laboratory}\label{laboratory-6}}
+\subsection{Laboratory}\label{laboratory-6}}
 
 \hypertarget{generalized-linear-model}{%
-\chapter{Generalized Linear Model}\label{generalized-linear-model}}
+\section{Generalized Linear Model}\label{generalized-linear-model}}
 
 One of the key assumptions in the Linear Model framework is Normality -- that the error term follows a normal distribution (Chapter \ref{linear-model}). However, this assumption frequently leads to situations where models predict unrealistic values for a response variable. In this chapter, I will introduce the Generalized Linear Model (GLM) framework, which enables more flexible modeling.
 
 \hypertarget{count-data}{%
-\section{Count Data}\label{count-data}}
+\subsection{Count Data}\label{count-data}}
 
 \hypertarget{plant-density}{%
-\subsection{Plant Density}\label{plant-density}}
+\subsubsection{Plant Density}\label{plant-density}}
 
 Recall our data set of garden plant counts (Chapter \ref{probabilistic-view}):
 
@@ -3443,7 +3444,7 @@ This occurrence stems from the nature of the model employed.
 \end{enumerate}
 
 \hypertarget{poisson-model}{%
-\subsection{Poisson Model}\label{poisson-model}}
+\subsubsection{Poisson Model}\label{poisson-model}}
 
 One possible approach is to consider the assumption that the error term follows a Poisson distribution. For the purpose of this discussion, let's assume that a model based on the Poisson distribution is appropriate. Unlike a Normal distribution, the Poisson distribution generates only non-negative discrete values, which makes it a suitable fit for the plant count variable. To incorporate this, we can make the following modifications to the model:
 
@@ -3594,10 +3595,10 @@ Visualization provides the convincing difference between the Normal and Poisson 
 Clearly, the Poisson model does a better job.
 
 \hypertarget{proportional-data}{%
-\section{Proportional Data}\label{proportional-data}}
+\subsection{Proportional Data}\label{proportional-data}}
 
 \hypertarget{mussel-egg-fertilization}{%
-\subsection{Mussel Egg Fertilization}\label{mussel-egg-fertilization}}
+\subsubsection{Mussel Egg Fertilization}\label{mussel-egg-fertilization}}
 
 There is another type of data for which a Normal distribution is not suitable - proportional data. Let's consider an example dataset where an investigation was conducted on the number of fertilized eggs out of 30 eggs examined for 100 female freshwater mussels. You can download the dataset \href{https://github.com/aterui/biostats/blob/master/data_raw/data_mussel.csv}{here}.
 
@@ -3669,7 +3670,7 @@ In this example, the response variable, which represents the number of eggs fert
 The discrete nature of the variable might initially lead one to consider the Poisson distribution as a potential candidate. However, due to the presence of an upper limit where the number of fertilized eggs cannot exceed the number of eggs examined, the Poisson distribution is not a suitable option.
 
 \hypertarget{binomial-model}{%
-\subsection{Binomial Model}\label{binomial-model}}
+\subsubsection{Binomial Model}\label{binomial-model}}
 
 A Binomial distribution is a natural and appropriate choice for modeling this variable. The Binomial distribution is characterized by two parameters: the number of trials (\(N\)) and the probability of success (\(p\)). Each trial has a certain probability of success, and the outcome of each trial is either assigned a value of 1 (indicating success) or 0 (indicating failure). In the given example, we can consider the ``fertilization'' as a successful outcome among the 30 trials. Consequently, the number of eggs fertilized (\(y_i\)) for each individual mussel (\(i\)) can be described as:
 
@@ -3838,7 +3839,7 @@ Draw on the figure (Figure \ref{fig:binom-fit-figure}).
 Perfect.
 
 \hypertarget{the-glm-framework}{%
-\section{The GLM Framework}\label{the-glm-framework}}
+\subsection{The GLM Framework}\label{the-glm-framework}}
 
 These models, including those assuming a Normal distribution, fall into the category of the Generalized Linear Model (GLM) framework. The framework follows a common structure:
 
@@ -3901,13 +3902,358 @@ Node & Distribution & Range & R\\
 \end{table}
 
 \hypertarget{laboratory-7}{%
-\section{Laboratory}\label{laboratory-7}}
+\subsection{Laboratory}\label{laboratory-7}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{source}\NormalTok{(here}\SpecialCharTok{::}\FunctionTok{here}\NormalTok{(}\StringTok{"code/library.R"}\NormalTok{))}
+\NormalTok{df\_count }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(here}\SpecialCharTok{::}\FunctionTok{here}\NormalTok{(}\StringTok{"data\_raw/data\_garden\_count.csv"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{likelihood}{%
+\section{Likelihood}\label{likelihood}}
+
+In Chapter \ref{generalized-linear-model}, we introduced non-normal distributions to represent count and proportional data. The \texttt{glm()} function was used to obtain parameter estimates, but how does this function achieve that? \textbf{In reality, the least squares approach is only applicable to normal distributions.} Therefore, we require an alternative approach to estimate parameters within the GLM framework. In this section, I will introduce the concept of likelihood as a fundamental principle for parameter estimation in the GLM framework.
+
+\hypertarget{finding-the-more-likely}{%
+\subsection{Finding the ``More Likely''}\label{finding-the-more-likely}}
+
+In the least squares method, our goal is to minimize the sum of squared errors, ensuring that the fitted model has the smallest deviation from the observed data points. However, this approach is not applicable to non-normal variables. In such cases, we need to rely on the ``probability'' of observing a data point or numerical value.
+
+Let's consider an example where we have count data, denoted as \(\pmb{y} = \{y_1, y_2, ..., y_N\}\). To simplify the matter, let's focus on a specific data point, say \(y_1 = 3\). Assuming a Poisson distribution, we can calculate the probability of observing this particular value by using an arbitrary parameter value for the mean, denoted as \(\lambda\). To refresh our memory, we can refer back to the Poisson distribution discussed in Chapter \ref{probabilistic-view}.
+
+\[
+\Pr(y = k) = \frac{\lambda^{k}\exp(-\lambda)}{k!}
+\]
+
+This equation represents the probability of the variable \(y\) taking a specific value \(k\). In our current example, we are interested in the case where \(k = 3\). By specifying a value for the mean parameter \(\lambda\), we can compute the probability associated with this value. Let's try using \(\lambda = 3.5\) for this calculation:
+
+\[
+\Pr(y_1 = 3) = \frac{3.5^3 \exp(-3.5)}{3!} \approx 0.215
+\]
+
+We can calculate this with \texttt{dpois()} in R:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# dpois()}
+\CommentTok{\# the first argument is "k"}
+\CommentTok{\# the second argument is "lambda"}
+\FunctionTok{dpois}\NormalTok{(}\DecValTok{3}\NormalTok{, }\AttributeTok{lambda =} \FloatTok{3.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.2157855
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# write the formula to confirm}
+\NormalTok{(p }\OtherTok{\textless{}{-}}\NormalTok{ (}\FloatTok{3.5}\SpecialCharTok{\^{}}\DecValTok{3} \SpecialCharTok{*} \FunctionTok{exp}\NormalTok{(}\SpecialCharTok{{-}}\FloatTok{3.5}\NormalTok{)) }\SpecialCharTok{/} \FunctionTok{factorial}\NormalTok{(}\DecValTok{3}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.2157855
+\end{verbatim}
+
+If we assume a mean of \(3.5\) in the Poisson distribution, the probability of observing a value of \(3\) is approximately \(0.215\). We can experiment with different values of \(\lambda\) to see if there is a potentially ``better'' value. By exploring different values of \(\lambda\), we can observe how the probability of observing a specific value changes. This allows us to assess which value of \(\lambda\) provides a better fit or captures the data more accurately. The following example explores \(\lambda = 0 - 10\) with a \(0.1\) interval.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# change lambda from 0 to 10 by 0.1}
+\NormalTok{lambda }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{, }\AttributeTok{by =} \FloatTok{0.1}\NormalTok{)}
+
+\CommentTok{\# probability}
+\NormalTok{pr }\OtherTok{\textless{}{-}} \FunctionTok{dpois}\NormalTok{(}\DecValTok{3}\NormalTok{, }\AttributeTok{lambda =}\NormalTok{ lambda)}
+
+\CommentTok{\# create a data frame}
+\NormalTok{df\_pois }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{y =} \DecValTok{3}\NormalTok{,}
+                  \AttributeTok{lambda =}\NormalTok{ lambda,}
+                  \AttributeTok{pr =}\NormalTok{ pr)}
+
+\FunctionTok{print}\NormalTok{(df\_pois)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 101 x 3
+##        y lambda       pr
+##    <dbl>  <dbl>    <dbl>
+##  1     3    0   0       
+##  2     3    0.1 0.000151
+##  3     3    0.2 0.00109 
+##  4     3    0.3 0.00333 
+##  5     3    0.4 0.00715 
+##  6     3    0.5 0.0126  
+##  7     3    0.6 0.0198  
+##  8     3    0.7 0.0284  
+##  9     3    0.8 0.0383  
+## 10     3    0.9 0.0494  
+## # i 91 more rows
+\end{verbatim}
+
+Make a plot:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df\_pois }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ lambda,}
+             \AttributeTok{y =}\NormalTok{ pr)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{"lambda"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Pr(k = 3)"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{biostats_files/figure-latex/dpois-plot-1} 
+
+}
+
+\caption{Relationship between the parameter $\lambda$ and the probability of observing a value of three.}\label{fig:dpois-plot}
+\end{figure}
+
+By examining the figure or data, it appears that the probability is highest around \(\lambda = 3\). To confirm this observation, let's arrange the data frame \texttt{df\_pois}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# arrange() re{-}orders the dataframe based on the speficied column in an ascending order}
+\CommentTok{\# desc() flips the order (descending)}
+
+\NormalTok{df\_pois }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(pr)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{print}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 101 x 3
+##        y lambda    pr
+##    <dbl>  <dbl> <dbl>
+##  1     3    3   0.224
+##  2     3    3.1 0.224
+##  3     3    2.9 0.224
+##  4     3    3.2 0.223
+##  5     3    2.8 0.222
+##  6     3    3.3 0.221
+##  7     3    2.7 0.220
+##  8     3    3.4 0.219
+##  9     3    2.6 0.218
+## 10     3    3.5 0.216
+## # i 91 more rows
+\end{verbatim}
+
+That reasoning is sound because the probability of \(y_1\) being equal to \(3\) is maximized when \(\lambda = 3\). This represents the simplest form of a \textbf{likelihood function} denoted as \(L(\lambda~|~y_1)\), where \((\cdot~|~y_1)\) indicates that \(y_1\) is fixed or given. To evaluate the probability of observing the fixed value of \(y_1\), we vary the value of \(\lambda\).
+
+However, what if we have multiple values of \(y_i\)? Let's consider the scenario where \(\pmb{y} = \{3, 2, 5\}\). In such cases, we must account for the probability of simultaneously observing these values. When the events are independent, the probability of observing multiple events can be expressed as the product of their individual probabilities. Consequently, the likelihood function takes the following form:
+
+\[
+\begin{aligned}
+L(\lambda~|~\pmb{y}) &= \Pr(y_1 = 3) \times \Pr(y_2 = 2) \times \Pr(y_3 = 5)\\
+&= \frac{\lambda^{3}\exp(-\lambda)}{3!} \times \frac{\lambda^{2}\exp(-\lambda)}{2!} \times \frac{\lambda^{5}\exp(-\lambda)}{5!}\\
+&= \prod_i^3 \frac{\lambda^{y_i} \exp(-\lambda)}{y_i!}
+\end{aligned}
+\]
+
+Implement this in R:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# try lambda = 3 for y = 3, 2, 5}
+\NormalTok{pr }\OtherTok{\textless{}{-}} \FunctionTok{dpois}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{), }\AttributeTok{lambda =} \DecValTok{3}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(pr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.2240418 0.2240418 0.1008188
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# probability of observing 3, 2, 5 simultaneously}
+\CommentTok{\# with lambda = 3}
+\FunctionTok{prod}\NormalTok{(pr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.005060573
+\end{verbatim}
+
+Similar to the previous example, let's search for a more suitable value of \(\lambda\) that better captures the observed data.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# lambda = 0 {-} 10 by 0.01}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{)}
+\NormalTok{lambda }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{10}\NormalTok{, }\AttributeTok{by =} \FloatTok{0.01}\NormalTok{)}
+
+\CommentTok{\# sapply repeats the task in FUN}
+\CommentTok{\# each element in "X" will be sequencially substituted in "z"}
+\NormalTok{pr }\OtherTok{\textless{}{-}} \FunctionTok{sapply}\NormalTok{(}\AttributeTok{X =}\NormalTok{ lambda,}
+             \AttributeTok{FUN =} \ControlFlowTok{function}\NormalTok{(z) }\FunctionTok{prod}\NormalTok{(}\FunctionTok{dpois}\NormalTok{(y, }\AttributeTok{lambda =}\NormalTok{ z)))}
+
+\CommentTok{\# make a data frame and arrange by pr (likelihood)}
+\NormalTok{df\_pois }\OtherTok{\textless{}{-}} \FunctionTok{tibble}\NormalTok{(}\AttributeTok{lambda =}\NormalTok{ lambda,}
+                  \AttributeTok{pr =}\NormalTok{ pr)}
+
+\NormalTok{df\_pois }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(pr)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{print}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1,001 x 2
+##    lambda      pr
+##     <dbl>   <dbl>
+##  1   3.33 0.00534
+##  2   3.34 0.00534
+##  3   3.32 0.00534
+##  4   3.35 0.00534
+##  5   3.31 0.00534
+##  6   3.36 0.00534
+##  7   3.3  0.00534
+##  8   3.37 0.00534
+##  9   3.29 0.00533
+## 10   3.38 0.00533
+## # i 991 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# visualize}
+\NormalTok{df\_pois }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ lambda,}
+             \AttributeTok{y =}\NormalTok{ pr)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y =} \StringTok{"Likelihood"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{biostats_files/figure-latex/dpois-likelihood-1} 
+
+}
+
+\caption{Likelihood of observing three count data points $\pmb{y}$ simultaneously.}\label{fig:dpois-likelihood}
+\end{figure}
+
+In this exercise with an interval of \(0.01\), \(\lambda \approx 3.33\) is identified as the most suitable value. Interestingly, the sample mean matches this value:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3.333333
+\end{verbatim}
+
+Why? See below.
+
+\hypertarget{maximum-likelihood-method}{%
+\subsection{Maximum Likelihood Method}\label{maximum-likelihood-method}}
+
+\hypertarget{simple-case}{%
+\subsubsection{Simple case}\label{simple-case}}
+
+Finding the parameter value that maximizes the probability of observing a set of observed values is known as the \textbf{Maximum Likelihood Estimate (MLE)}. This estimation method is commonly employed in the GLM framework and various other statistical inference techniques. The MLE approach is applicable as long as the likelihood can be defined, making it a versatile method for many statistical analyses.
+
+However, the procedure I employed in the previous section (Section \ref{finding-the-more-likely}) is not mathematically rigorous because the optimal value of \(\lambda\) is dependent on the resolution of the interval. As the interval becomes smaller, it is possible to discover an even better value of \(\lambda\) ad infinitum due to its continuous nature.
+
+A more reliable approach to identifying the ``peak'' is by utilizing the first-order derivative. The first-order derivative represents the slope of the likelihood function at a given \(\lambda\) value. If the derivative equals zero, it indicates that we have reached the peak of the likelihood function. We can leverage this mathematical principle to determine the maximum likelihood estimate of \(\lambda\). Since computing the derivative of a product is mathematically challenging, we can apply a logarithm transformation to the likelihood function. Recall that \(\log ab = \log a + \log b\). By taking the logarithm, we can convert the product operation \(\prod\) into a summation operation \(\sum\). Specifically:
+
+\[
+\begin{aligned}
+\log L(\lambda | \pmb{y}) &= \log \prod_i^N \frac{\lambda^{y_i} \exp(-\lambda)}{y_i!}\\
+&= \log \frac{\lambda^{y_1} \exp(-\lambda)}{y_1!} + \log \frac{\lambda^{y_2} \exp(-\lambda)}{y_2!} + ... + \log \frac{\lambda^{y_N} \exp(-\lambda)}{y_N!}\\
+&= \sum_i^N \log \frac{\lambda^{y_i} \exp(-\lambda)}{y_i!}\\
+&= \sum_i^N (y_i \log \lambda -\lambda -\log y_i!)
+\end{aligned}
+\]
+
+Taking the first derivative of \(\log L(\lambda | \pmb{y})\):
+
+\[
+\begin{aligned}
+\frac{\partial\log L(\lambda|\pmb{y})}{\partial \lambda} &= \sum_i^N (\frac{y_i}{\lambda} -1)\\
+&= \frac{\sum_i^N y_i}{\lambda} - \sum_i^N 1\\
+&= \frac{\sum_i^N y_i}{\lambda} - N\\
+\end{aligned}
+\] To obtain the value of \(\lambda\) that maximizes the likelihood, we set the derivative equal to zero:
+
+\[
+\begin{aligned}
+\frac{\partial\log L(\lambda|\pmb{y})}{\partial \lambda} &= \frac{\sum_i^N y_i}{\lambda} - N = 0\\
+\lambda &= \frac{\sum_i^N y_i}{N} 
+\end{aligned}
+\]
+
+Interesting -- the maximum likelihood estimate of \(\lambda\) is equal to the sample mean. This is THE reason why we could use the sample mean as the estimate of \(\lambda\) in Chapter \ref{probabilistic-view}.
+
+\hypertarget{general-case}{%
+\subsubsection{General case}\label{general-case}}
+
+In practice, obtaining the MLE analytically can be highly complex and often infeasible. Consequently, the GLM framework relies on numerical search algorithms to approximate the MLE estimates. Within GLMs, it is common to establish relationships between the mean \(\lambda\) and explanatory variables in order to investigate their influences. For instance:
+
+\[
+\begin{aligned}
+y_i &\sim \mbox{Poisson}(\lambda_i)\\
+\log(\lambda_i) &= \alpha + \sum_k \beta_k x_k
+\end{aligned}
+\]
+
+where \(x_k\) represents \(k\)th explanatory variable. This translates into:
+
+\[
+\log L(\alpha, \beta_k|\pmb{y}) = \sum_i \left[y_i (\alpha + \sum_k\beta_k x_k) - \exp(\alpha + \sum_k \beta_k x_k) - \log y_i! \right]
+\]
+
+and solving the \(k+1\) partial derivatives:
+
+\[
+\begin{aligned}
+\frac{\partial \log L(\alpha, \beta_k|\pmb{y})}{\partial \alpha} &= 0\\
+\frac{\partial \log L(\alpha, \beta_k|\pmb{y})}{\partial \beta_1} &= 0\\
+&...\\
+\frac{\partial \log L(\alpha, \beta_k|\pmb{y})}{\partial \beta_k} &= 0\\
+\end{aligned}
+\]Thus, the function \texttt{glm()} does a lot for us! The log likelihood of the fitted model can be extracted with \texttt{logLik()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# load garden plant data}
+\CommentTok{\# df\_count \textless{}{-} read\_csv("data\_raw/data\_garden\_count.csv")}
+
+\NormalTok{m\_pois }\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(count }\SpecialCharTok{\textasciitilde{}}\NormalTok{ nitrate,}
+              \AttributeTok{data =}\NormalTok{ df\_count,}
+              \AttributeTok{family =} \StringTok{"poisson"}\NormalTok{)}
+
+\FunctionTok{logLik}\NormalTok{(m\_pois)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'log Lik.' -44.92912 (df=2)
+\end{verbatim}
+
+\hypertarget{laboratory-8}{%
+\subsection{Laboratory}\label{laboratory-8}}
 
 \hypertarget{appendix-project-management}{%
-\chapter{Appendix: Project Management}\label{appendix-project-management}}
+\section{Appendix: Project Management}\label{appendix-project-management}}
 
 \hypertarget{r-project}{%
-\section{R Project}\label{r-project}}
+\subsection{R Project}\label{r-project}}
 
 Throughout this book, I will use the `R Project' as the core workspace unit. It serves as a centralized location where all relevant materials, such as R scripts (\texttt{.R}) and data files, are consolidated. There are various ways to organize your project, but I prefer creating a single `R Project' for a set of scripts and data that contribute to a specific publication (see example \href{https://github.com/aterui/public-proj_stream-diversity}{here}). To set up an `R Project,' you'll need to have both \emph{RStudio} and the base \emph{R} software installed. While \emph{R} can be used independently, I highly recommend using it in conjunction with \emph{RStudio} due to the latter's numerous features that facilitate data analysis. You can download \emph{R} and \emph{RStudio} from the following websites:
 
@@ -3953,7 +4299,7 @@ After pasting the script into the console, you will notice that the variable \te
 Excellent! While it is possible to work with your data using this approach, it is important to highlight that \textbf{it is generally regarded as a poor practice}. As your project evolves, you will accumulate a substantial amount of material, such as writing more than 2000 lines of code for a single project. Consequently, it becomes essential to implement effective code management strategies. How do you presently handle code management?
 
 \hypertarget{script-editor}{%
-\subsection{Script Editor}\label{script-editor}}
+\subsubsection{Script Editor}\label{script-editor}}
 
 It is highly recommended to manage your scripts in the \texttt{Editor} instead. The \texttt{Editor} is where you draft and fine-tune your code before executing it in the \texttt{Console}. To create space for the \texttt{Editor}, press \texttt{Ctrl\ +\ Shift\ +\ N}. A new panel will appear in the top left corner. Let's type the following script in the \texttt{Editor}. Please note that the key combination \texttt{Ctrl\ +\ Shift\ +\ N} assumes a Windows or Linux operating system. If you're using a Mac, you can use \texttt{Command\ +\ Shift\ +\ N} instead.
 
@@ -3966,7 +4312,7 @@ It is highly recommended to manage your scripts in the \texttt{Editor} instead. 
 Then, hit \texttt{Ctr\ +\ S} to save the \texttt{Editor} file. \emph{RStudio} will prompt you to enter the file name of the \texttt{Editor}\footnote{In \emph{R}, an editor file has an extension of \texttt{.R}.}.
 
 \hypertarget{file-name}{%
-\subsection{File Name}\label{file-name}}
+\subsubsection{File Name}\label{file-name}}
 
 It is also crucial to establish consistent naming \textbf{rules} for your files. As your project progresses, the number of files within each sub-directory may increase significantly. Without clear and consistent naming rules for your files, navigating through the project can become challenging, not only for yourself but also for others involved. To alleviate this issue, consider implementing the following recommendations for file naming:
 
@@ -4005,7 +4351,7 @@ It is also crucial to establish consistent naming \textbf{rules} for your files.
 \end{itemize}
 
 \hypertarget{structure-your-project}{%
-\subsection{Structure Your Project}\label{structure-your-project}}
+\subsubsection{Structure Your Project}\label{structure-your-project}}
 
 If you fail to save or haphazardly store your code files on your computer, the risk of losing essential items becomes inevitable sooner or later. To mitigate this risk, I highly recommend gathering all the relevant materials within a single \texttt{R\ Project}. To create a new \texttt{R\ Project}, follow the procedure outlined below:
 
@@ -4054,15 +4400,15 @@ Content
 \end{longtable}
 
 \hypertarget{robust-coding}{%
-\section{Robust coding}\label{robust-coding}}
+\subsection{Robust coding}\label{robust-coding}}
 
 While it is not mandatory, I highly recommend using \emph{RStudio} in conjunction with \emph{Git} and \emph{GitHub}. Coding is inherently prone to errors, and even the most skilled programmers make mistakes---without exception. However, the crucial difference between beginner and advanced programmers lies in their ability to develop robust coding practices accompanied by a self-error-detection system. \emph{Git} plays a vital role in this process. Throughout this book, I will occasionally delve into the importance of \emph{Git} and its usage.
 
 \hypertarget{appendix-git-github}{%
-\chapter{Appendix: Git \& GitHub}\label{appendix-git-github}}
+\section{Appendix: Git \& GitHub}\label{appendix-git-github}}
 
 \hypertarget{git-github}{%
-\section{Git \& GitHub}\label{git-github}}
+\subsection{Git \& GitHub}\label{git-github}}
 
 In this section, I will explain how to integrate Git and GitHub into R Studio. While R Studio is already an excellent tool, it becomes even more powerful when combined with Git and GitHub. Git is a free and open-source distributed version control system that tracks changes in your code as you work on your project, ensuring you are aware of any modifications made to your script (and other) files. Tracking changes is crucial to avoid unintended errors in your code and helps prevent the creation of redundant files. Although Git is primarily a local system, it has an online counterpart called GitHub.
 
@@ -4110,10 +4456,10 @@ After setting up Git, you can proceed to create an account on \href{https://gith
 While R Studio seamlessly integrates with Git and GitHub, using a Git client can provide additional visual aids. There are various options for Git clients (see choices \href{https://happygitwithr.com/git-client.html}{here}), but for this exercise, we will use GitHub Desktop. Install GitHub Desktop on your computer from \href{https://desktop.github.com/}{here}.
 
 \hypertarget{commit-push}{%
-\section{Commit \& Push}\label{commit-push}}
+\subsection{Commit \& Push}\label{commit-push}}
 
 \hypertarget{register-your-git-repo}{%
-\subsection{Register Your Git repo}\label{register-your-git-repo}}
+\subsubsection{Register Your Git repo}\label{register-your-git-repo}}
 
 To open the \texttt{R\ Project} you've just created as a git repository, follow these steps:
 
@@ -4187,7 +4533,7 @@ Click on the ``Current Repository'' button located at the top left corner of the
 \end{figure}
 
 \hypertarget{commit}{%
-\subsection{Commit}\label{commit}}
+\subsubsection{Commit}\label{commit}}
 
 GitHub Desktop will prompt you to enter a local path to your Git repository. Browse and select the directory where your \texttt{R\ Project} is located. Once you have selected the directory, the local Git repository will appear in the list of repositories on the left side bar of GitHub Desktop, as shown in Figure \ref{fig:gitdesktop2}.
 
@@ -4231,7 +4577,7 @@ At this stage, your file (\texttt{.R} or any other file) is saved in your local 
 Now, the changes to the selected files have been successfully recorded in Git as a commit. It's important to commit regularly and provide meaningful commit messages so that you can track changes and understand the evolution of your project when needed.
 
 \hypertarget{push}{%
-\subsection{Push}\label{push}}
+\subsubsection{Push}\label{push}}
 
 It's important to note that your changes are currently recorded in your local computer's Git repository but have not been published to your online GitHub repository. To send the local changes to the online GitHub repository, you need to use the ``Push'' operation through GitHub Desktop.
 
@@ -4249,7 +4595,7 @@ If you are comfortable with the changes you made and want to send them to the on
 \end{figure}
 
 \hypertarget{edit}{%
-\subsection{Edit}\label{edit}}
+\subsubsection{Edit}\label{edit}}
 
 We have created a file named \texttt{sample.R} as per the previous instructions. Now, let's make a minor change to the content of the \texttt{sample.R} file. Open the \texttt{sample.R} file in your preferred text editor or in R Studio, and make a modification to the code. For example, you can update the code from:
 
@@ -4297,10 +4643,10 @@ This feature provided by GitHub Desktop makes it easier to track modifications a
 \end{figure}
 
 \hypertarget{appendix-data-structure}{%
-\chapter{Appendix: Data Structure}\label{appendix-data-structure}}
+\section{Appendix: Data Structure}\label{appendix-data-structure}}
 
 \hypertarget{overview}{%
-\section{Overview}\label{overview}}
+\subsection{Overview}\label{overview}}
 
 R has 6 basic \textbf{data types}.
 
@@ -4333,10 +4679,10 @@ These elements form one of the following \textbf{data structures}.
 \end{itemize}
 
 \hypertarget{vector}{%
-\section{Vector}\label{vector}}
+\subsection{Vector}\label{vector}}
 
 \hypertarget{create-vector}{%
-\subsection{Create Vector}\label{create-vector}}
+\subsubsection{Create Vector}\label{create-vector}}
 
 Below are examples of atomic character vectors, numeric vectors, integer vectors, etc. There are many ways to create vector data. The following examples use \texttt{c()}, \texttt{:}, \texttt{seq()}, \texttt{rep()}:
 
@@ -4439,7 +4785,7 @@ Below are examples of atomic character vectors, numeric vectors, integer vectors
 \end{verbatim}
 
 \hypertarget{check-features}{%
-\subsection{Check Features}\label{check-features}}
+\subsubsection{Check Features}\label{check-features}}
 
 R provides many functions to examine features of vectors and other objects, for example:
 
@@ -4546,7 +4892,7 @@ R provides many functions to examine features of vectors and other objects, for 
 \end{verbatim}
 
 \hypertarget{access}{%
-\subsection{Access}\label{access}}
+\subsubsection{Access}\label{access}}
 
 \textbf{Element ID}\\
 Use brackets \texttt{{[}{]}} when accessing specific elements in an object. For example, if you want to access element \#2 in the vector \texttt{x}, you may specify as \texttt{x{[}2{]}}:
@@ -4677,10 +5023,10 @@ Using \texttt{which()}, you can see which elements (i.e., \#) matches what you n
 \end{verbatim}
 
 \hypertarget{matrix}{%
-\section{Matrix}\label{matrix}}
+\subsection{Matrix}\label{matrix}}
 
 \hypertarget{create-matrix}{%
-\subsection{Create Matrix}\label{create-matrix}}
+\subsubsection{Create Matrix}\label{create-matrix}}
 
 Matrix is a set of elements (\emph{single data type}) that are organized into rows and columns:
 
@@ -4729,7 +5075,7 @@ Matrix is a set of elements (\emph{single data type}) that are organized into ro
 \end{verbatim}
 
 \hypertarget{check-features-1}{%
-\subsection{Check Features}\label{check-features-1}}
+\subsubsection{Check Features}\label{check-features-1}}
 
 R provides many functions to examine features of matrix data, for example:
 
@@ -4836,7 +5182,7 @@ R provides many functions to examine features of matrix data, for example:
 \end{verbatim}
 
 \hypertarget{access-1}{%
-\subsection{Access}\label{access-1}}
+\subsubsection{Access}\label{access-1}}
 
 When accessing matrix elements, you need to pick row(s) and/or column(s), for example:
 
@@ -4980,7 +5326,7 @@ However, care must be taken when accessing elements, as it will be automatically
 \end{verbatim}
 
 \hypertarget{data-frame}{%
-\section{Data Frame}\label{data-frame}}
+\subsection{Data Frame}\label{data-frame}}
 
 A data frame is a collection of elements organized into rows and columns, but it differs from a matrix in several ways.
 
@@ -5088,10 +5434,10 @@ You can access elements like a matrix as well:
 \end{verbatim}
 
 \hypertarget{exercise}{%
-\section{Exercise}\label{exercise}}
+\subsection{Exercise}\label{exercise}}
 
 \hypertarget{vector-1}{%
-\subsection{Vector}\label{vector-1}}
+\subsubsection{Vector}\label{vector-1}}
 
 \begin{enumerate}
 \def\labelenumi{\alph{enumi}.}
@@ -5120,7 +5466,7 @@ You can access elements like a matrix as well:
 \end{Shaded}
 
 \hypertarget{matrix-1}{%
-\subsection{Matrix}\label{matrix-1}}
+\subsubsection{Matrix}\label{matrix-1}}
 
 \begin{enumerate}
 \def\labelenumi{\alph{enumi}.}
@@ -5153,7 +5499,7 @@ You can access elements like a matrix as well:
 \end{Shaded}
 
 \hypertarget{data-frame-1}{%
-\subsection{Data Frame}\label{data-frame-1}}
+\subsubsection{Data Frame}\label{data-frame-1}}
 
 \begin{enumerate}
 \def\labelenumi{\alph{enumi}.}
@@ -5183,10 +5529,10 @@ You can access elements like a matrix as well:
 \end{Shaded}
 
 \hypertarget{appendix-tidyverse}{%
-\chapter{Appendix: Tidyverse}\label{appendix-tidyverse}}
+\section{Appendix: Tidyverse}\label{appendix-tidyverse}}
 
 \hypertarget{overview-1}{%
-\section{Overview}\label{overview-1}}
+\subsection{Overview}\label{overview-1}}
 
 R packages are collections of functions that extend the functionality of the R programming language. They provide a convenient way for users to access and utilize specialized tools for data analysis, visualization, statistical modeling, and more. Among them, \texttt{tidyverse} provides very useful functions for data manipulation and visualization.
 
@@ -5218,15 +5564,15 @@ I cover the basics for those who are not familiar with \texttt{tidyverse::}, but
 \end{itemize}
 
 \hypertarget{data-manipulation}{%
-\section{Data Manipulation}\label{data-manipulation}}
+\subsection{Data Manipulation}\label{data-manipulation}}
 
 \hypertarget{data-format}{%
-\subsection{Data Format}\label{data-format}}
+\subsubsection{Data Format}\label{data-format}}
 
 \texttt{dplyr::} and \texttt{tidyr::} (and others) offer useful functions for data manipulation. Key manipulations include: row/column manipulations, group operation, reshape, and more.
 
 \hypertarget{row-manipulation}{%
-\subsection{Row Manipulation}\label{row-manipulation}}
+\subsubsection{Row Manipulation}\label{row-manipulation}}
 
 \texttt{filter()}: select/remove rows
 
@@ -5271,7 +5617,7 @@ I cover the basics for those who are not familiar with \texttt{tidyverse::}, but
 \end{Shaded}
 
 \hypertarget{column-manipulation}{%
-\subsection{Column Manipulation}\label{column-manipulation}}
+\subsubsection{Column Manipulation}\label{column-manipulation}}
 
 \texttt{select()}: select/remove column(s)
 
@@ -5329,7 +5675,7 @@ I cover the basics for those who are not familiar with \texttt{tidyverse::}, but
 \end{verbatim}
 
 \hypertarget{piping}{%
-\subsection{Piping}\label{piping}}
+\subsubsection{Piping}\label{piping}}
 
 \texttt{\%\textgreater{}\%} (pipe) allows sequential operations of multiple functions (shortcut: \texttt{Ctr\ +\ Shift\ +\ M}). The pipe passes the object to the following function as the first argument.
 
@@ -5387,7 +5733,7 @@ I cover the basics for those who are not familiar with \texttt{tidyverse::}, but
 \end{verbatim}
 
 \hypertarget{reshape}{%
-\subsection{Reshape}\label{reshape}}
+\subsubsection{Reshape}\label{reshape}}
 
 \texttt{pivot\_wider()} : reshape a data frame to a wide format
 
@@ -5454,7 +5800,7 @@ I cover the basics for those who are not familiar with \texttt{tidyverse::}, but
 \end{verbatim}
 
 \hypertarget{group-operation}{%
-\subsection{Group Operation}\label{group-operation}}
+\subsubsection{Group Operation}\label{group-operation}}
 
 \texttt{group\_by()} \& \texttt{summarize()}: group-by-group operation. \texttt{summarize()} does not retain individual rows.
 
@@ -5525,7 +5871,7 @@ I cover the basics for those who are not familiar with \texttt{tidyverse::}, but
 \end{verbatim}
 
 \hypertarget{join}{%
-\subsection{Join}\label{join}}
+\subsubsection{Join}\label{join}}
 
 \texttt{left\_join()}: merge data frames based on column(s)
 
@@ -5671,7 +6017,7 @@ I cover the basics for those who are not familiar with \texttt{tidyverse::}, but
 \end{verbatim}
 
 \hypertarget{visualization}{%
-\section{Visualization}\label{visualization}}
+\subsection{Visualization}\label{visualization}}
 
 \texttt{ggplot2::} offers a range of convenient functions for data visualization. The foundational function, \texttt{ggplot()}, provides the initial framework for adding supplementary layers using the \texttt{+} operator. In ggplot(), we define variables plotted on x- and y-axis through \texttt{aes()}. For example:
 
@@ -5694,7 +6040,7 @@ I cover the basics for those who are not familiar with \texttt{tidyverse::}, but
 Please note that \texttt{aes()} refers to columns in the data frame. Variables names that do not exist in the data frame cannot be used.
 
 \hypertarget{point}{%
-\subsection{Point}\label{point}}
+\subsubsection{Point}\label{point}}
 
 \texttt{geom\_point()} : Add a point layer
 
@@ -5708,7 +6054,7 @@ Please note that \texttt{aes()} refers to columns in the data frame. Variables n
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-111-1} \end{center}
+\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-118-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5721,10 +6067,10 @@ Please note that \texttt{aes()} refers to columns in the data frame. Variables n
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-111-2} \end{center}
+\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-118-2} \end{center}
 
 \hypertarget{line}{%
-\subsection{Line}\label{line}}
+\subsubsection{Line}\label{line}}
 
 \texttt{geom\_line()} : Add a line layer
 
@@ -5742,10 +6088,10 @@ Please note that \texttt{aes()} refers to columns in the data frame. Variables n
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-112-1} \end{center}
+\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-119-1} \end{center}
 
 \hypertarget{histogram}{%
-\subsection{Histogram}\label{histogram}}
+\subsubsection{Histogram}\label{histogram}}
 
 \texttt{geom\_histogram()} : add a histogram layer
 
@@ -5758,7 +6104,7 @@ Please note that \texttt{aes()} refers to columns in the data frame. Variables n
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-113-1} \end{center}
+\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-120-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5769,7 +6115,7 @@ Please note that \texttt{aes()} refers to columns in the data frame. Variables n
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-113-2} \end{center}
+\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-120-2} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5780,10 +6126,10 @@ Please note that \texttt{aes()} refers to columns in the data frame. Variables n
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-113-3} \end{center}
+\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-120-3} \end{center}
 
 \hypertarget{boxplot}{%
-\subsection{Boxplot}\label{boxplot}}
+\subsubsection{Boxplot}\label{boxplot}}
 
 \texttt{geom\_boxplot()} : add a boxplot layer
 
@@ -5797,7 +6143,7 @@ Please note that \texttt{aes()} refers to columns in the data frame. Variables n
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-114-1} \end{center}
+\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-121-1} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5810,7 +6156,7 @@ Please note that \texttt{aes()} refers to columns in the data frame. Variables n
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-114-2} \end{center}
+\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-121-2} \end{center}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5823,13 +6169,13 @@ Please note that \texttt{aes()} refers to columns in the data frame. Variables n
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-114-3} \end{center}
+\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-121-3} \end{center}
 
 \hypertarget{appendix-base-plot}{%
-\chapter{Appendix: Base Plot}\label{appendix-base-plot}}
+\section{Appendix: Base Plot}\label{appendix-base-plot}}
 
 \hypertarget{overview-2}{%
-\section{Overview}\label{overview-2}}
+\subsection{Overview}\label{overview-2}}
 
 R offers a variety of functions that aid in visualizing data. The \texttt{graphics} package in R provides a set of functions for basic graphics (\href{https://www.rdocumentation.org/packages/graphics/versions/3.6.2}{list of functions}). To demonstrate the functionality of these \texttt{graphics} functions, I will utilize the built-in \texttt{iris} dataset in R.
 
@@ -5852,7 +6198,7 @@ R offers a variety of functions that aid in visualizing data. The \texttt{graphi
 \end{verbatim}
 
 \hypertarget{plot}{%
-\section{Plot}\label{plot}}
+\subsection{Plot}\label{plot}}
 
 When creating a plot, you typically need to specify the \textbf{formula} to define the relationship between variables. For instance, if you wish to visualize the association between \texttt{x} and \texttt{y} (with \texttt{y} on the vertical axis and \texttt{x} on the horizontal axis), the formula would be \texttt{y\ \textasciitilde{}\ x} (where the left side of the formula represents the vertical axis). In the \texttt{iris} dataset, you have access to the following columns: \texttt{Sepal.Length}, \texttt{Sepal.Width}, \texttt{Petal.Length}, \texttt{Petal.Width}, and \texttt{Species}. In the subsequent example, we will plot the relationship between \texttt{Sepal.Length} and \texttt{Sepal.Width}:
 
@@ -5862,12 +6208,12 @@ When creating a plot, you typically need to specify the \textbf{formula} to defi
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-116-1} \end{center}
+\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-123-1} \end{center}
 
 The \texttt{data\ =} argument informs the function about the dataset from which the variables (\texttt{Sepal.Length} and \texttt{Sepal.Width}) should be extracted.
 
 \hypertarget{symbol}{%
-\subsection{Symbol}\label{symbol}}
+\subsubsection{Symbol}\label{symbol}}
 
 \texttt{pch} argument. Choose from \texttt{1} to \texttt{25} (google \textbf{r plot pch} for details)
 
@@ -5878,10 +6224,10 @@ The \texttt{data\ =} argument informs the function about the dataset from which 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-117-1} \end{center}
+\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-124-1} \end{center}
 
 \hypertarget{symbol-size}{%
-\subsection{Symbol size}\label{symbol-size}}
+\subsubsection{Symbol size}\label{symbol-size}}
 
 \texttt{cex} argument. \texttt{cex\ =\ 1} is the default value. \texttt{cex\ =\ 2} is as twice large as default value.
 
@@ -5892,10 +6238,10 @@ The \texttt{data\ =} argument informs the function about the dataset from which 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-118-1} \end{center}
+\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-125-1} \end{center}
 
 \hypertarget{symbol-color-border}{%
-\subsection{Symbol color (border)}\label{symbol-color-border}}
+\subsubsection{Symbol color (border)}\label{symbol-color-border}}
 
 \texttt{col} argument (quote \texttt{"color\ name"} when specifying). Google \textbf{r color name} for color options.
 
@@ -5906,10 +6252,10 @@ The \texttt{data\ =} argument informs the function about the dataset from which 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-119-1} \end{center}
+\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-126-1} \end{center}
 
 \hypertarget{symbol-color-fill}{%
-\subsection{Symbol color (fill)}\label{symbol-color-fill}}
+\subsubsection{Symbol color (fill)}\label{symbol-color-fill}}
 
 \texttt{bg} argument (quote \texttt{"color\ name"} when specifying). Available for a subset of symbol options (some symbols have pre-defined filled color).
 
@@ -5920,10 +6266,10 @@ The \texttt{data\ =} argument informs the function about the dataset from which 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-120-1} \end{center}
+\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-127-1} \end{center}
 
 \hypertarget{label}{%
-\subsection{Label}\label{label}}
+\subsubsection{Label}\label{label}}
 
 \texttt{ylab} or \texttt{xlab} arguments. Provide \texttt{"quoted\ text"}.
 
@@ -5935,10 +6281,10 @@ The \texttt{data\ =} argument informs the function about the dataset from which 
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-121-1} \end{center}
+\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-128-1} \end{center}
 
 \hypertarget{axis}{%
-\subsection{Axis}\label{axis}}
+\subsubsection{Axis}\label{axis}}
 
 Delete axes with \texttt{axes\ =\ F} and re-draw with \texttt{box()} and \texttt{axis()} functions.
 
@@ -5954,10 +6300,10 @@ Delete axes with \texttt{axes\ =\ F} and re-draw with \texttt{box()} and \texttt
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-122-1} \end{center}
+\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-129-1} \end{center}
 
 \hypertarget{boxplot-1}{%
-\section{Boxplot}\label{boxplot-1}}
+\subsection{Boxplot}\label{boxplot-1}}
 
 \texttt{boxplot()} is used when the x-axis is factor-type data (by default, \texttt{plot()} will produce a boxplot when x-axis is a factor variable). In the \texttt{iris} dataset, the column \texttt{Species} is a factor variable. Compare \texttt{Sepal.Length} among species using \texttt{boxplot()}.
 
@@ -5967,12 +6313,12 @@ Delete axes with \texttt{axes\ =\ F} and re-draw with \texttt{box()} and \texttt
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-123-1} \end{center}
+\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-130-1} \end{center}
 
 You can customize as in \texttt{plot()}, but slighlty different.
 
 \hypertarget{box-color}{%
-\subsection{Box color}\label{box-color}}
+\subsubsection{Box color}\label{box-color}}
 
 \texttt{col} argument.
 
@@ -5983,10 +6329,10 @@ You can customize as in \texttt{plot()}, but slighlty different.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-124-1} \end{center}
+\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-131-1} \end{center}
 
 \hypertarget{border-color}{%
-\subsection{Border color}\label{border-color}}
+\subsubsection{Border color}\label{border-color}}
 
 \texttt{border} argument.
 
@@ -5997,10 +6343,10 @@ You can customize as in \texttt{plot()}, but slighlty different.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-125-1} \end{center}
+\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-132-1} \end{center}
 
 \hypertarget{box-width}{%
-\subsection{Box width}\label{box-width}}
+\subsubsection{Box width}\label{box-width}}
 
 \texttt{boxwex} argument.
 
@@ -6012,10 +6358,10 @@ You can customize as in \texttt{plot()}, but slighlty different.
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-126-1} \end{center}
+\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-133-1} \end{center}
 
 \hypertarget{axis-1}{%
-\subsection{Axis}\label{axis-1}}
+\subsubsection{Axis}\label{axis-1}}
 
 Delete axes with \texttt{axes\ =\ F} and re-draw with \texttt{box()} and \texttt{axis()} functions.
 
@@ -6031,6 +6377,6 @@ Delete axes with \texttt{axes\ =\ F} and re-draw with \texttt{box()} and \texttt
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-127-1} \end{center}
+\begin{center}\includegraphics{biostats_files/figure-latex/unnamed-chunk-134-1} \end{center}
 
 \end{document}

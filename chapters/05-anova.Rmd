@@ -102,7 +102,7 @@ df_i <- df_anova %>%
   mutate(dev_i = (length - mu_g)^2) # deviation from group mean for each fish
 ```
 
-You can take a look at group-level data with the following code; the column `mu_g` contains group-specific means of fish length, and `dev_i` contains $(x_{g(i)} - \hat{\mu}_{g(i)})^2$:
+You can take a look at group-level data with the following code; the column `mu_g` contains group-specific means of fish length, and `dev_i` contains $(x_i - \hat{\mu}_{g(i)})^2$:
 
 ```{r, eval=FALSE}
 
@@ -114,7 +114,7 @@ print(df_i %>% filter(lake == "b") %>% slice(1:3))
 print(df_i %>% filter(lake == "c") %>% slice(1:3))
 ```
 
-Sum over $i$ in each lake $g$ ($\sum_i (x_{g(i)} - \hat{\mu}_{g(i)})^2$):
+Sum over $i$ in each lake $g$ ($\sum_i (x_i - \hat{\mu}_{g(i)})^2$):
 
 ```{r}
 df_i_g <- df_i %>% 

@@ -1,4 +1,4 @@
-# Appendix: Git & GitHub
+# Appendix: Git & GitHub {.unnumbered}
 
 ## Git & GitHub
 

@@ -28,6 +28,7 @@ fig:dendrogram
 tab:table-dist
 fig:dpois-plot
 fig:dpois-likelihood
+fig:sim-data
 fig:ui
 tab:str
 fig:gitcheck
@@ -118,6 +119,12 @@ maximum-likelihood-method
 simple-case
 general-case
 laboratory-8
+model-comparison
+model-fit-and-complexity
+comparison-metrics
+adjusted-mboxr2
+likelihood-ratio-test
+aic
 r-project
 script-editor
 file-name

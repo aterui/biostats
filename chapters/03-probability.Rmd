@@ -8,6 +8,8 @@ df_count <- read_csv(here::here("data_raw/data_garden_count.csv"))
 
 Chapter \@ref(sampling) emphasized the concept of sampling and introduced the crucial aspect of statistics: randomness. Although the mean represents the central tendency of the data, it does not encompass all the data points. Inevitable deviations occur, and we need a way to express this "randomness." The concept of probability distributions aids in fully understanding the stochastic nature of observed data.
 
+**Key words:** probability density function (PDF), probability mass function (PMF), expected value
+
 ## Continuous Variable
 
 ### Probability Density Function
@@ -39,11 +41,15 @@ $$
 
 Unlike an "equation," we do not use the "$=$" sign because variable $x$ is not equivalent to the Normal distribution. Rather, it represents a "stochastic" relationship that signifies the probability of $x$ taking on a specific range of values.
 
-A Normal distribution is characterized by two parameters: the mean and the variance. Once these parameters are determined, the formula that defines the Normal distribution will yield the probability density for a given range of values. This formula $f(x)$ is known as the **probability density function (PDF)** and is displayed below:
+A Normal distribution is characterized by two parameters: the mean and the variance. Strictly speaking, the terms "mean" and "variance" in a probability distribution differ from "sample mean" and "sample variance," although they converge when the variable $x$ is assumed to follow a Normal distribution (refer to Chapter \@ref(likelihood) for more details). More precisely, the mean is referred to as the "expected value" and is denoted as $\mbox{E}(x)$. The variance represents the expected value of $x^2$ and is denoted as $\mbox{E}(x^2)$. **The expected value serves as the central tendency of a random variable, indicating where values are most likely to occur.** On the other hand, **the variance quantifies the extent to which individual data points deviate from this expected value**. Although I use the terms mean and variance for simplicity, it is important to recognize the distinction.
+
+Once these parameters are determined, the formula that defines the Normal distribution will yield the probability density for a given range of values. This formula $f(x)$ is known as the **probability density function (PDF)** and is displayed below:
 
 $$
 f(x) = \frac{1}{\sqrt{2 \pi} \sigma} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
 $$
+
+Well, understanding the meaning of a formula can be challenging without context. However, visualization can be a useful tool to help comprehend mathematical expressions.
 
 ### PDF to frequency distribution
 
@@ -190,7 +196,7 @@ $$
 
 ### PMF to frequency distribution
 
-In R, you can use the `dpois()` function to visualize a Poisson distribution. This function allows you to plot the probability mass function (PMF) of the Poisson distribution and gain insights into the distribution of the discrete variable.
+In R, you can use the `dpois()` function to visualize a Poisson distribution. This function allows you to plot the probability mass function (PMF) of the Poisson distribution and gain insights into the distribution of the discrete variable. In the given example, I utilize the sample mean as an estimate for $\lambda$ --- a somewhat counter-intuitive approach since $x$ does not conform to a Normal distribution. However, I will delve into a detailed explanation in Chapter \@ref(likelihood), allowing me to assume its validity for the time being.
 
 ```{r dpois, fig.cap="Example of a Poisson distribution"}
 

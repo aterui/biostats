@@ -18,7 +18,8 @@
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -129,7 +130,7 @@ y_i &amp;\sim \text{Normal}(\mu_i, \sigma^2)\\
 \]</span></p>
 <p>When incorporating this variable into the model, some interesting outcomes arise. Since <span class="math inline">\(x_{2,i} = 0\)</span> when an observation belongs to group <code>a</code>, the mean of group <code>a</code> (<span class="math inline">\(\mu_i = \mu_a\)</span>) is determined as <span class="math inline">\(\mu_a = \alpha + \beta \times 0 = \alpha\)</span>. Consequently, the intercept represents the mean value of the first group. On the other hand, if an observation is from group <code>b</code>, the mean of group <code>b</code> (<span class="math inline">\(\mu_i = \mu_b\)</span>) is given by <span class="math inline">\(\mu_b = \alpha + \beta \times 1 = \alpha + \beta\)</span>. It’s important to recall that <span class="math inline">\(\mu_a = \alpha\)</span>. By substituting <span class="math inline">\(\alpha\)</span> with <span class="math inline">\(\mu_a\)</span>, the equation <span class="math inline">\(\beta = \mu_b - \mu_a\)</span> is obtained, indicating that the slope represents the difference between the means of the two groups – the key statistic in the t-test.</p>
 <p>Let me confirm this using the dataset in Chapter <a href="two-group-comparison.html#two-group-comparison">4</a> (fish body length in two lakes):</p>
-<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="va">df_fl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data_raw/data_fish_length.csv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_fl</span><span class="op">)</span></span></code></pre></div>
@@ -148,7 +149,7 @@ y_i &amp;\sim \text{Normal}(\mu_i, \sigma^2)\\
 ## 10 a       11.9 cm   
 ## # ℹ 90 more rows</code></pre>
 <p>In the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function, when you provide a “categorical” variable in character or factor form, it is automatically converted to a binary (0/1) variable internally. This means that you can include this variable in the formula as if you were conducting a standard regression analysis. The <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function takes care of this conversion process, allowing you to seamlessly incorporate categorical variables into the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function.</p>
-<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># group means</span></span>
 <span><span class="va">v_mu</span> <span class="op">&lt;-</span> <span class="va">df_fl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">lake</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -158,11 +159,11 @@ y_i &amp;\sim \text{Normal}(\mu_i, \sigma^2)\\
 <span><span class="co"># mu_a: should be identical to intercept</span></span>
 <span><span class="va">v_mu</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span></code></pre></div>
 <pre><code>## [1] 13.35</code></pre>
-<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># mu_b - mu_a: should be identical to slope</span></span>
 <span><span class="va">v_mu</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">-</span> <span class="va">v_mu</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span></code></pre></div>
 <pre><code>## [1] 2.056</code></pre>
-<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># in lm(), letters are automatically converted to 0/1 binary variable.</span></span>
 <span><span class="co"># alphabetically ordered (in this case, a = 0, b = 1)</span></span>
 <span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">lake</span>,</span>
@@ -188,7 +189,7 @@ y_i &amp;\sim \text{Normal}(\mu_i, \sigma^2)\\
 ## Multiple R-squared:  0.09715,    Adjusted R-squared:  0.08794 
 ## F-statistic: 10.55 on 1 and 98 DF,  p-value: 0.001596</code></pre>
 <p>The estimated coefficient of Lake <code>b</code> (<code>lakeb</code>) is identical to the difference between group means. We can compare other statistics (<code>t value</code> and <code>Pr(&gt;|t|</code>) with the output from <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code> as well:</p>
-<div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lake_a</span> <span class="op">&lt;-</span> <span class="va">df_fl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">lake</span> <span class="op">==</span> <span class="st">"a"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">length</span><span class="op">)</span></span>
@@ -231,7 +232,7 @@ y_i &amp;\sim \text{Normal}(\mu_i, \sigma^2)\\
 \end{aligned}
 \]</span></p>
 <p>Therefore, the group <code>a</code> serves as the reference, and the <span class="math inline">\(\beta\)</span>s represent the deviations from the reference group. Now, let me attempt the ANOVA dataset provided in Chapter <a href="multiple-group-comparison.html#multiple-group-comparison">5</a>:</p>
-<div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_anova</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data_raw/data_fish_length_anova.csv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_anova</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 150 × 3
@@ -249,7 +250,7 @@ y_i &amp;\sim \text{Normal}(\mu_i, \sigma^2)\\
 ## 10 a       11.9 cm   
 ## # ℹ 140 more rows</code></pre>
 <p>Again, the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function converts the categorical variable to the dummy variables internally. Compare the mean and differences with the estimated parameters:</p>
-<div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># group means</span></span>
 <span><span class="va">v_mu</span> <span class="op">&lt;-</span> <span class="va">df_fl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">lake</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -260,7 +261,7 @@ y_i &amp;\sim \text{Normal}(\mu_i, \sigma^2)\\
 <span>        <span class="va">v_mu</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">-</span> <span class="va">v_mu</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="co"># mu_b - mu_a: should be identical to the slope for lakeb</span></span>
 <span>        <span class="va">v_mu</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span> <span class="op">-</span> <span class="va">v_mu</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="co"># mu_c - mu_a: should be identical to the slope for lakec</span></span></code></pre></div>
 <pre><code>## [1] 13.350  2.056     NA</code></pre>
-<div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># lm() output</span></span>
 <span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">lake</span>,</span>
 <span>        data <span class="op">=</span> <span class="va">df_anova</span><span class="op">)</span></span>
@@ -286,7 +287,7 @@ y_i &amp;\sim \text{Normal}(\mu_i, \sigma^2)\\
 ## Multiple R-squared:  0.06732,    Adjusted R-squared:  0.05463 
 ## F-statistic: 5.305 on 2 and 147 DF,  p-value: 0.005961</code></pre>
 <p>Also, there is a report for F-statistic (<code>5.305</code>) and p-value (<code>0.005961</code>). Compare them with the <code><a href="https://rdrr.io/r/stats/aov.html">aov()</a></code> output:</p>
-<div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_aov</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">lake</span>,</span>
 <span>             data <span class="op">=</span> <span class="va">df_anova</span><span class="op">)</span></span>
 <span></span>
@@ -325,7 +326,7 @@ y_i = \text{(deterministic component)} + \text{(stochastic component)}
 <span class="header-section-number">7.2.1</span> <code>iris</code> Example<a class="anchor" aria-label="anchor" href="#iris-example"><i class="fas fa-link"></i></a>
 </h3>
 <p>The previous section clarified that the t-test, ANOVA, and regression have a common model structure; therefore, categorical and continuous variables can be included in the same model. Here, let me use the <code>iris</code> data (available in R by default) to show an example. This data set comprises continuous (Sepal.Length, Sepal.Width, Petal.Length, Petal.Width) and categorical variables (Species):</p>
-<div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb196"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># convert the data format to tibble</span></span>
 <span><span class="va">iris</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span></code></pre></div>
@@ -343,7 +344,7 @@ y_i = \text{(deterministic component)} + \text{(stochastic component)}
 ##  9          4.4         2.9          1.4         0.2 setosa 
 ## 10          4.9         3.1          1.5         0.1 setosa 
 ## # ℹ 140 more rows</code></pre>
-<div class="sourceCode" id="cb196"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">Species</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 3 × 1
 ##   Species   
@@ -352,7 +353,7 @@ y_i = \text{(deterministic component)} + \text{(stochastic component)}
 ## 2 versicolor
 ## 3 virginica</code></pre>
 <p>Here, let me model <code>Petal.Length</code> as a function of <code>Petal.Width</code> and <code>Species</code>:</p>
-<div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># develop iris model</span></span>
 <span><span class="va">m_iris</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Petal.Length</span> <span class="op">~</span> <span class="va">Petal.Width</span> <span class="op">+</span> <span class="va">Species</span>,</span>
 <span>             data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
@@ -380,7 +381,7 @@ y_i = \text{(deterministic component)} + \text{(stochastic component)}
 ## F-statistic:  1036 on 3 and 146 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>Please note that the model output does not include <code>setosa</code> because it was used as the reference group (<code>(Intercept)</code>).</p>
 <p>If you want to obtain predicted values, you can use the <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> function. To make predictions, you need to provide a new data frame containing the values of explanatory variables for the prediction.</p>
-<div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># create a data frame for prediction</span></span>
 <span><span class="co"># variable names must be identical to the original dataframe for analysis</span></span>
 <span><span class="va">n_rep</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
@@ -414,7 +415,7 @@ y_i = \text{(deterministic component)} + \text{(stochastic component)}
 ## 10       0.318 setosa    1.54
 ## # ℹ 290 more rows</code></pre>
 <p>By plotting the predicted values against the observed data points, we can visually evaluate the accuracy of the model and assess its goodness of fit.</p>
-<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Petal.Width</span>,</span>
 <span>             y <span class="op">=</span> <span class="va">Petal.Length</span>,</span>
@@ -489,7 +490,7 @@ Figure 7.1: Example of model fitting to iris data. Points are observations, and 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2023-07-15.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2023-07-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

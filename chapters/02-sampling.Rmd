@@ -7,6 +7,8 @@ df_h0 <- read_csv(here::here("data_raw/data_plant_height.csv"))
 
 *"Why do I need statistics in the first place?"* This was the initial question that arose when I entered the field of ecology. Initially, I assumed it would be a straightforward query with an immediate response. However, I soon realized that it is a profound question with a complex answer. In short, "we need statistics because we often possess only partial information about what we seek to understand." Now, let's explore the more elaborate explanation below.
 
+**Key words:** parameter, sample mean, sample variance, biased/unbiased
+
 ## The Unknown: Garden Plant Example
 
 Consider a scenario where we are conducting a study on plant height in a garden. In this garden, there exists a thousand of individual plants, making it impractical for a single researcher to measure all of them. Instead, due to resource limitations, a sample of $10$ plants was selected to ***calculate*** the average height and the extent of variation among these plant individuals:
@@ -36,6 +38,8 @@ This format (`tibble()`) is better than a raw vector of height because it allows
 df_h1 <- df_h1 %>% 
   mutate(mu_height = mean(height),
          var_height = sum((height - mu_height)^2) / nrow(.))
+
+print(df_h1)
 ```
 
 Awesome, we were able to get the average height and the variance! -- **however, how confident are you?** We obtained plant height only from 10...out of 1000. Are they different if we measure another set of 10 plant individuals? Let's see:
@@ -153,7 +157,7 @@ print(mu_i)
 print(var_i)
 ```
 
-In each element of `mu_i` and `var_i`, we have saved estimated mean ($\hat{\mu}$; reads mu hat) and variance ($\hat{\sigma^2}$) of 10 plant height measures for dataset `i`. By drawing a histogram of these values, we can examine the distributions of mean and variance estimates. I use R package `patchwork` to make a better figure:
+In each element of `mu_i` and `var_i`, we have saved estimated mean ($\hat{\mu}$; reads mu hat) and variance ($\hat{\sigma}^2$) of 10 plant height measures for dataset `i`. By drawing a histogram of these values, we can examine the distributions of mean and variance estimates. I use R package `patchwork` to make a better figure:
 
 ```{r mu-var-dist, fig.cap="Sample mean and biased variance."}
 #install.packages("patchwork") # install only once

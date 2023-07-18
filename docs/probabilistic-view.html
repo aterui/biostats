@@ -18,7 +18,8 @@
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -71,6 +72,7 @@
 <span class="header-section-number">3</span> Probabilistic View<a class="anchor" aria-label="anchor" href="#probabilistic-view"><i class="fas fa-link"></i></a>
 </h1>
 <p>Chapter <a href="sampling.html#sampling">2</a> emphasized the concept of sampling and introduced the crucial aspect of statistics: randomness. Although the mean represents the central tendency of the data, it does not encompass all the data points. Inevitable deviations occur, and we need a way to express this “randomness.” The concept of probability distributions aids in fully understanding the stochastic nature of observed data.</p>
+<p><strong>Key words:</strong> probability density function (PDF), probability mass function (PMF), expected value</p>
 <div id="continuous-variable" class="section level2" number="3.1">
 <h2>
 <span class="header-section-number">3.1</span> Continuous Variable<a class="anchor" aria-label="anchor" href="#continuous-variable"><i class="fas fa-link"></i></a>
@@ -80,11 +82,11 @@
 <span class="header-section-number">3.1.1</span> Probability Density Function<a class="anchor" aria-label="anchor" href="#probability-density-function"><i class="fas fa-link"></i></a>
 </h3>
 <p>Let me use the plant height example in Chapter <a href="sampling.html#sampling">2</a>:</p>
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load csv data on R</span></span>
 <span><span class="va">df_h0</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data_raw/data_plant_height.csv"</span><span class="op">)</span></span></code></pre></div>
 <p>While Chapter <a href="sampling.html#sampling">2</a> primarily focused on exploring mean and variance, let’s broaden our perspective to gain a comprehensive understanding of the entire distribution of height.</p>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_h0</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">height</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu">geom_histogram</span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span> <span class="co"># specify binwidth</span></span>
@@ -101,10 +103,12 @@ Figure 3.1: Distribution of plant height
 x \sim \mbox{Normal}(\mu, \sigma^2)
 \]</span></p>
 <p>Unlike an “equation,” we do not use the “<span class="math inline">\(=\)</span>” sign because variable <span class="math inline">\(x\)</span> is not equivalent to the Normal distribution. Rather, it represents a “stochastic” relationship that signifies the probability of <span class="math inline">\(x\)</span> taking on a specific range of values.</p>
-<p>A Normal distribution is characterized by two parameters: the mean and the variance. Once these parameters are determined, the formula that defines the Normal distribution will yield the probability density for a given range of values. This formula <span class="math inline">\(f(x)\)</span> is known as the <strong>probability density function (PDF)</strong> and is displayed below:</p>
+<p>A Normal distribution is characterized by two parameters: the mean and the variance. Strictly speaking, the terms “mean” and “variance” in a probability distribution differ from “sample mean” and “sample variance,” although they converge when the variable <span class="math inline">\(x\)</span> is assumed to follow a Normal distribution (refer to Chapter <a href="likelihood.html#likelihood">9</a> for more details). More precisely, the mean is referred to as the “expected value” and is denoted as <span class="math inline">\(\mbox{E}(x)\)</span>. The variance represents the expected value of <span class="math inline">\(x^2\)</span> and is denoted as <span class="math inline">\(\mbox{E}(x^2)\)</span>. <strong>The expected value serves as the central tendency of a random variable, indicating where values are most likely to occur.</strong> On the other hand, <strong>the variance quantifies the extent to which individual data points deviate from this expected value</strong>. Although I use the terms mean and variance for simplicity, it is important to recognize the distinction.</p>
+<p>Once these parameters are determined, the formula that defines the Normal distribution will yield the probability density for a given range of values. This formula <span class="math inline">\(f(x)\)</span> is known as the <strong>probability density function (PDF)</strong> and is displayed below:</p>
 <p><span class="math display">\[
 f(x) = \frac{1}{\sqrt{2 \pi} \sigma} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
 \]</span></p>
+<p>Well, understanding the meaning of a formula can be challenging without context. However, visualization can be a useful tool to help comprehend mathematical expressions.</p>
 </div>
 <div id="pdf-to-frequency-distribution" class="section level3" number="3.1.2">
 <h3>
@@ -112,7 +116,7 @@ f(x) = \frac{1}{\sqrt{2 \pi} \sigma} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\righ
 </h3>
 <p>In R, the function <code><a href="https://rdrr.io/r/stats/Normal.html">dnorm()</a></code> can be used to calculate the probability density for a given value. The first argument, <code>x</code>, should be a vector of values for which you want to calculate the probability density. The second argument, <code>mean</code>, and the third argument, <code>sd</code>, correspond to the mean and standard deviation of the distribution, respectively. Note that we must provide <code>mean</code> and <code>sd</code> to calculate the probability density.</p>
 <p>To encompass the entire range of observed heights, we can use <span class="math inline">\(\text{min}(x)\)</span> and <span class="math inline">\(\text{max}(x)\)</span> as the lower and upper limits, respectively.</p>
-<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># vector of x values</span></span>
 <span><span class="co"># seq() generate min to max values with specified numbers of elements or interval</span></span>
 <span><span class="co"># the following produce 100 elements</span></span>
@@ -135,23 +139,23 @@ Figure 3.2: Probability density function of a Normal distribution
 </p>
 </div>
 <p>The shape of the curve appears quite similar to what we observed; however, the scale of the y-axis is different. This is because the y-axis represents “probability density.” To convert it into actual “probability,” we need to calculate the area under the curve. In R, we can utilize the <code><a href="https://rdrr.io/r/stats/Normal.html">pnorm()</a></code> function for this purpose. It calculates the probability of a variable being less than the specified value, which is provided in the first argument <code>q</code>.</p>
-<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># probability of x &lt; 10</span></span>
 <span><span class="va">p10</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span>q <span class="op">=</span> <span class="fl">10</span>, mean <span class="op">=</span> <span class="va">mu</span>, sd <span class="op">=</span> <span class="va">sigma</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">p10</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.02731905</code></pre>
-<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># probability of x &lt; 20</span></span>
 <span><span class="va">p20</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span>q <span class="op">=</span> <span class="fl">20</span>, mean <span class="op">=</span> <span class="va">mu</span>, sd <span class="op">=</span> <span class="va">sigma</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">p20</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.504426</code></pre>
-<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># probability of 10 &lt; x &lt; 20</span></span>
 <span><span class="va">p20_10</span> <span class="op">&lt;-</span> <span class="va">p20</span> <span class="op">-</span> <span class="va">p10</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">p20_10</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.4771069</code></pre>
 <p>To make the estimates comparable to the frequency data, you can calculate the probability for each 1 cm bin. The expected frequency can be obtained by multiplying the probability by the sample size, which in this case is 1000. This allows you to estimate the number of observations you would expect in each 1 cm bin based on the calculated probabilities.</p>
-<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x_min</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">df_h0</span><span class="op">$</span><span class="va">height</span><span class="op">)</span><span class="op">)</span> <span class="co"># floor takes the integer part of the value</span></span>
 <span><span class="va">x_max</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">df_h0</span><span class="op">$</span><span class="va">height</span><span class="op">)</span><span class="op">)</span> <span class="co"># ceiling takes the next closest integer</span></span>
 <span><span class="va">bin</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="va">x_min</span>, <span class="va">x_max</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="co"># each bin has 1cm</span></span>
@@ -167,7 +171,7 @@ Figure 3.2: Probability density function of a Normal distribution
 <span><span class="va">df_prob</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span><span class="va">p</span>, bin <span class="op">=</span> <span class="va">bin</span><span class="op">[</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">bin</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">mutate</span><span class="op">(</span>freq <span class="op">=</span> <span class="va">p</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">df_h0</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Overlay:</p>
-<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_h0</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">height</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu">geom_histogram</span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
@@ -204,7 +208,7 @@ Figure 3.4: Garden view with sampling plots. White squares represent plots. Red 
 </p>
 </div>
 <p>Download the data <a href="https://github.com/aterui/biostats/blob/master/data_raw/data_garden_count.csv">here</a> and load it onto R:</p>
-<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_count</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data_raw/data_garden_count.csv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_count</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 30 × 3
@@ -222,7 +226,7 @@ Figure 3.4: Garden view with sampling plots. White squares represent plots. Red 
 ## 10    10     2    26  
 ## # ℹ 20 more rows</code></pre>
 <p>Make a histogram:</p>
-<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_count</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">count</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">geom_histogram</span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.5</span>, <span class="co"># define binwidth</span></span>
@@ -260,8 +264,8 @@ g(x) = \frac{\lambda^x \exp(-\lambda)}{x!}
 <h3>
 <span class="header-section-number">3.2.2</span> PMF to frequency distribution<a class="anchor" aria-label="anchor" href="#pmf-to-frequency-distribution"><i class="fas fa-link"></i></a>
 </h3>
-<p>In R, you can use the <code><a href="https://rdrr.io/r/stats/Poisson.html">dpois()</a></code> function to visualize a Poisson distribution. This function allows you to plot the probability mass function (PMF) of the Poisson distribution and gain insights into the distribution of the discrete variable.</p>
-<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<p>In R, you can use the <code><a href="https://rdrr.io/r/stats/Poisson.html">dpois()</a></code> function to visualize a Poisson distribution. This function allows you to plot the probability mass function (PMF) of the Poisson distribution and gain insights into the distribution of the discrete variable. In the given example, I utilize the sample mean as an estimate for <span class="math inline">\(\lambda\)</span> — a somewhat counter-intuitive approach since <span class="math inline">\(x\)</span> does not conform to a Normal distribution. However, I will delve into a detailed explanation in Chapter <a href="likelihood.html#likelihood">9</a>, allowing me to assume its validity for the time being.</p>
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># vector of x values</span></span>
 <span><span class="co"># create a vector of 0 to 10 with an interval one</span></span>
 <span><span class="co"># must be integer of &gt; 0</span></span>
@@ -285,7 +289,7 @@ Figure 3.6: Example of a Poisson distribution
 </p>
 </div>
 <p>To convert the y-axis from probability to frequency, multiply the probabilities by the sample size (total number of observations) to obtain the expected frequency. As in the plant height example, you can plot the expected frequency on the histogram, providing a visual representation of the distribution of the discrete variable.</p>
-<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_prob</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">pm</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">mutate</span><span class="op">(</span>freq <span class="op">=</span> <span class="va">y</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">df_count</span><span class="op">)</span><span class="op">)</span> <span class="co"># prob x sample size</span></span>
 <span></span>
@@ -393,7 +397,7 @@ Figure 3.7: Observed histogram of the discrete variable overlaid with the Poisso
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2023-07-15.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2023-07-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

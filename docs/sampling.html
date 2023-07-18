@@ -18,7 +18,8 @@
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -71,6 +72,7 @@
 <span class="header-section-number">2</span> Sampling<a class="anchor" aria-label="anchor" href="#sampling"><i class="fas fa-link"></i></a>
 </h1>
 <p><em>“Why do I need statistics in the first place?”</em> This was the initial question that arose when I entered the field of ecology. Initially, I assumed it would be a straightforward query with an immediate response. However, I soon realized that it is a profound question with a complex answer. In short, “we need statistics because we often possess only partial information about what we seek to understand.” Now, let’s explore the more elaborate explanation below.</p>
+<p><strong>Key words:</strong> parameter, sample mean, sample variance, biased/unbiased</p>
 <div id="the-unknown-garden-plant-example" class="section level2" number="2.1">
 <h2>
 <span class="header-section-number">2.1</span> The Unknown: Garden Plant Example<a class="anchor" aria-label="anchor" href="#the-unknown-garden-plant-example"><i class="fas fa-link"></i></a>
@@ -103,7 +105,22 @@
 <span><span class="co"># i.e., nrow(.) counts the number of rows in df_h1</span></span>
 <span><span class="va">df_h1</span> <span class="op">&lt;-</span> <span class="va">df_h1</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">mutate</span><span class="op">(</span>mu_height <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span>,</span>
-<span>         var_height <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">height</span> <span class="op">-</span> <span class="va">mu_height</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>         var_height <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">height</span> <span class="op">-</span> <span class="va">mu_height</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_h1</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 10 × 5
+##    plant_id height unit  mu_height var_height
+##       &lt;int&gt;  &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+##  1        1   16.9 cm         20.7       13.7
+##  2        2   20.9 cm         20.7       13.7
+##  3        3   15.8 cm         20.7       13.7
+##  4        4   28   cm         20.7       13.7
+##  5        5   21.6 cm         20.7       13.7
+##  6        6   15.9 cm         20.7       13.7
+##  7        7   22.4 cm         20.7       13.7
+##  8        8   23.7 cm         20.7       13.7
+##  9        9   22.9 cm         20.7       13.7
+## 10       10   18.5 cm         20.7       13.7</code></pre>
 <p>Awesome, we were able to get the average height and the variance! – <strong>however, how confident are you?</strong> We obtained plant height only from 10…out of 1000. Are they different if we measure another set of 10 plant individuals? Let’s see:</p>
 <pre><code>## # A tibble: 10 × 4
 ##     ...1 plant_id height unit 
@@ -119,7 +136,7 @@
 ##  9    19       19   24.1 cm   
 ## 10    20       20   23   cm</code></pre>
 <p>Create another <code>tibble()</code> :</p>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">h</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">27.6</span>, <span class="fl">21.9</span>, <span class="fl">16.9</span>, <span class="fl">8.9</span>, <span class="fl">25.6</span>, <span class="fl">19.8</span>, <span class="fl">19.9</span>, <span class="fl">24.7</span>, <span class="fl">24.1</span>, <span class="fl">23</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">df_h2</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>plant_id <span class="op">=</span> <span class="fl">11</span><span class="op">:</span><span class="fl">20</span>, <span class="co"># a vector from 11 to 20 by 1</span></span>
@@ -154,7 +171,7 @@
 <p>Provided that certain assumptions are met, the <em>sample mean</em> is the unbiased point estimate of the <em>population</em> <em>mean</em>. The <strong>“<em>unbiased</em>”</strong> means that the sample means – if we repeat the sampling process – are centered around the population mean. In the meantime, the sample variance – if we use the formula in Chapter <a href="descriptive-statistics.html#descriptive-statistics">1</a> – is “<strong><em>biased</em></strong>.” It tends to be smaller than the population variance.</p>
 <p>Let’s explore this concept further through simple simulations. Suppose we have data on a thousand plant individuals, although this scenario may be unrealistic in practice. However, by conducting these simulations, we can examine how different sample means and variances can deviate from the true values.</p>
 <p>Download the data <a href="https://github.com/aterui/biostats/blob/master/data_raw/data_plant_height.csv">here</a> containing height measurements of thousand individuals, and place this file under <code>data_raw/</code> in your project directory. You can load this <code>csv</code> file in R as follows:</p>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load csv data on R</span></span>
 <span><span class="va">df_h0</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data_raw/data_plant_height.csv"</span><span class="op">)</span></span>
 <span></span>
@@ -175,17 +192,17 @@
 ## 10    10       10   18.5 cm   
 ## # ℹ 990 more rows</code></pre>
 <p>Using this synthetic dataset (I generated through a random value generator), we can calculate the true mean and variance (reference values). It is important to note that in this case, we use the term “calculate” for the mean and variance because they represent the parameters of the entire population, which are known to us in this scenario.</p>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">df_h0</span><span class="op">$</span><span class="va">height</span><span class="op">)</span></span>
 <span><span class="va">sigma2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">df_h0</span><span class="op">$</span><span class="va">height</span> <span class="op">-</span> <span class="va">mu</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">df_h0</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">mu</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 19.9426</code></pre>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">sigma2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 26.74083</code></pre>
 <p>We can simulate the sampling of 10 plant individuals by randomly selecting 10 rows from <code>df_h0</code>:</p>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_i</span> <span class="op">&lt;-</span> <span class="va">df_h0</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">sample_n</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="co"># size specifies the number of rows to be selected randomly</span></span>
 <span></span>
@@ -204,7 +221,7 @@
 ##  9   853      853   14.8 cm   
 ## 10   987      987   15.9 cm</code></pre>
 <p>Since <code>sample_n()</code> selects rows randomly, you will (very likely) get different set of 10 individuals/rows every single time. Below is another set of 10 rows (notice that <code>df_i</code> is overwritten with the new data set):</p>
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_i</span> <span class="op">&lt;-</span> <span class="va">df_h0</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">sample_n</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span></span>
@@ -223,7 +240,7 @@
 ##  9   270      270   15.3 cm   
 ## 10   524      524   21   cm</code></pre>
 <p>Let’s obtain 100 sets of 10 plant individuals (randomly selected) and <em>estimate</em> the mean and variance in each. While we can perform random sampling one by one, this is cumbersome – at least, I do not want to do it. Instead, we can leverage a technique of <code>for</code> loop:</p>
-<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for reproducibility</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span>
 <span></span>
@@ -243,7 +260,7 @@
 <span>  </span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>Take a look at <code>mu_i</code> and <code>var_i</code> :</p>
-<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">mu_i</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##   [1] 19.97 17.86 22.55 22.03 17.00 23.28 21.33 21.23 18.55 19.29 22.14 19.84
 ##  [13] 22.43 22.13 21.13 19.40 19.39 20.43 19.12 20.66 21.01 19.48 21.73 19.63
@@ -254,7 +271,7 @@
 ##  [73] 18.65 19.74 21.47 17.95 16.98 18.30 19.77 17.25 19.60 21.27 19.28 20.42
 ##  [85] 19.60 18.41 20.15 21.24 19.70 21.56 20.75 19.54 17.54 18.52 19.85 18.40
 ##  [97] 20.39 17.07 17.84 20.66</code></pre>
-<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">var_i</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##   [1] 14.1961 21.6884 28.2685 21.6341  6.5700 24.5996 23.6941 24.8681 21.6485
 ##  [10] 36.3689 17.8844 31.5784 21.0521 34.2341 20.6281 10.4420 20.0469 31.2781
@@ -268,8 +285,8 @@
 ##  [82] 28.8841 26.6976 22.7356 35.2900 19.2229 34.3905 17.3784 23.1880 42.4264
 ##  [91] 18.5365 18.5424 21.5204 13.1276 17.7185 21.2940 27.1649 35.3141 43.5624
 ## [100] 55.1484</code></pre>
-<p>In each element of <code>mu_i</code> and <code>var_i</code>, we have saved estimated mean (<span class="math inline">\(\hat{\mu}\)</span>; reads mu hat) and variance (<span class="math inline">\(\hat{\sigma^2}\)</span>) of 10 plant height measures for dataset <code>i</code>. By drawing a histogram of these values, we can examine the distributions of mean and variance estimates. I use R package <code>patchwork</code> to make a better figure:</p>
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<p>In each element of <code>mu_i</code> and <code>var_i</code>, we have saved estimated mean (<span class="math inline">\(\hat{\mu}\)</span>; reads mu hat) and variance (<span class="math inline">\(\hat{\sigma}^2\)</span>) of 10 plant height measures for dataset <code>i</code>. By drawing a histogram of these values, we can examine the distributions of mean and variance estimates. I use R package <code>patchwork</code> to make a better figure:</p>
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#install.packages("patchwork") # install only once</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span>
 <span></span>
@@ -302,7 +319,7 @@ Figure 2.1: Sample mean and biased variance.
 \frac{\sum_i^N (x_i - \mu)^2}{N-1}
 \]</span></p>
 <p>The correction in the denominator (<span class="math inline">\(N\)</span> replaced with <span class="math inline">\(N-1\)</span>) compensates for the bias, providing an estimate of the true variance without systematic underestimation (although this seems a simple correction, a <a href="https://en.wikipedia.org/wiki/Bessel%27s_correction">deep math</a> underlies the derivation of <span class="math inline">\(N-1\)</span>). This is the default formula in <code><a href="https://rdrr.io/r/stats/cor.html">var()</a></code> in R, a function used to estimate <em>unbiased</em> variance (and <em>unbiased</em> SD <code><a href="https://rdrr.io/r/stats/sd.html">sd()</a></code>). Comparison reveals how this works:</p>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for reproducibility</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span>
 <span></span>
@@ -324,7 +341,7 @@ Figure 2.1: Sample mean and biased variance.
 <span>  <span class="va">var_ub_i</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">df_i</span><span class="op">$</span><span class="va">height</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>Add the histogram of unbiased variance:</p>
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># draw histograms ----</span></span>
 <span><span class="va">df_sample</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>mu_hat <span class="op">=</span> <span class="va">mu_i</span>,</span>
 <span>                    var_hat <span class="op">=</span> <span class="va">var_i</span>,</span>
@@ -371,7 +388,7 @@ Figure 2.2: Comparison of biased and unbiased variances.
 <li><p>We used 10 plants to estimate sample means and variances. Obtain 100 sub-datasets with 50 and 100 measures each, and draw histograms of sample means and unbiased variances (use <code><a href="https://rdrr.io/r/stats/cor.html">var()</a></code>).</p></li>
 <li>
 <p>Sample means and unbiased variances are unbiased if samples are randomly selected. What happens if samples are non-random? Suppose the investigator was unable to find plants less than 10 cm in height – the following code excludes those less than 10 cm in height:</p>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_h10</span> <span class="op">&lt;-</span> <span class="va">df_h0</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">height</span> <span class="op">&gt;=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <p>Repeat step 1 with <code>df_h10</code> instead of <code>df_h0</code> and compare the results.</p>
@@ -406,7 +423,7 @@ Figure 2.2: Comparison of biased and unbiased variances.
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2023-07-15.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2023-07-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -72,6 +72,8 @@ t-test-in-r
 t-test-with-equal-variance
 t-test-with-unequal-variance
 laboratory-3
+welchs-t-test
+difference-and-uncertainty
 multiple-group-comparison
 partition-the-variability
 between-group-variability
@@ -83,6 +85,7 @@ null-hypothesis-1
 anova-in-r
 post-hoc-tests
 laboratory-4
+iris-data-set
 regression
 explore-data-structure-1
 drawing-the-fittest-line

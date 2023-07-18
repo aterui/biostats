@@ -18,7 +18,8 @@
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -85,18 +86,18 @@
 \Pr(y_1 = 3) = \frac{3.5^3 \exp(-3.5)}{3!} \approx 0.215
 \]</span></p>
 <p>We can calculate this with <code><a href="https://rdrr.io/r/stats/Poisson.html">dpois()</a></code> in R:</p>
-<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># dpois()</span></span>
 <span><span class="co"># the first argument is "k"</span></span>
 <span><span class="co"># the second argument is "lambda"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">dpois</a></span><span class="op">(</span><span class="fl">3</span>, lambda <span class="op">=</span> <span class="fl">3.5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.2157855</code></pre>
-<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># write the formula to confirm</span></span>
 <span><span class="op">(</span><span class="va">p</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">3.5</span><span class="op">^</span><span class="fl">3</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3.5</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/Special.html">factorial</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.2157855</code></pre>
 <p>If we assume a mean of <span class="math inline">\(3.5\)</span> in the Poisson distribution, the probability of observing a value of <span class="math inline">\(3\)</span> is approximately <span class="math inline">\(0.215\)</span>. We can experiment with different values of <span class="math inline">\(\lambda\)</span> to see if there is a potentially “better” value. By exploring different values of <span class="math inline">\(\lambda\)</span>, we can observe how the probability of observing a specific value changes. This allows us to assess which value of <span class="math inline">\(\lambda\)</span> provides a better fit or captures the data more accurately. The following example explores <span class="math inline">\(\lambda = 0 - 10\)</span> with a <span class="math inline">\(0.1\)</span> interval.</p>
-<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># change lambda from 0 to 10 by 0.1</span></span>
 <span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span>, by <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span>
 <span></span>
@@ -124,7 +125,7 @@
 ## 10     3    0.9 0.0494  
 ## # ℹ 91 more rows</code></pre>
 <p>Make a plot:</p>
-<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_pois</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">lambda</span>,</span>
 <span>             y <span class="op">=</span> <span class="va">pr</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -139,7 +140,7 @@ Figure 9.1: Relationship between the parameter <span class="math inline">\(\lamb
 </p>
 </div>
 <p>By examining the figure or data, it appears that the probability is highest around <span class="math inline">\(\lambda = 3\)</span>. To confirm this observation, let’s arrange the data frame <code>df_pois</code>.</p>
-<div class="sourceCode" id="cb235"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># arrange() re-orders the dataframe based on the speficied column in an ascending order</span></span>
 <span><span class="co"># desc() flips the order (descending)</span></span>
 <span></span>
@@ -170,18 +171,18 @@ L(\lambda~|~\pmb{y}) &amp;= \Pr(y_1 = 3) \times \Pr(y_2 = 2) \times \Pr(y_3 = 5)
 \end{aligned}
 \]</span></p>
 <p>Implement this in R:</p>
-<div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># try lambda = 3 for y = 3, 2, 5</span></span>
 <span><span class="va">pr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">dpois</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">5</span><span class="op">)</span>, lambda <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">pr</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.2240418 0.2240418 0.1008188</code></pre>
-<div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># probability of observing 3, 2, 5 simultaneously</span></span>
 <span><span class="co"># with lambda = 3</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/prod.html">prod</a></span><span class="op">(</span><span class="va">pr</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.005060573</code></pre>
 <p>Similar to the previous example, let’s search for a more suitable value of <span class="math inline">\(\lambda\)</span> that better captures the observed data.</p>
-<div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># lambda = 0 - 10 by 0.01</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span>, by <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span>
@@ -212,7 +213,7 @@ L(\lambda~|~\pmb{y}) &amp;= \Pr(y_1 = 3) \times \Pr(y_2 = 2) \times \Pr(y_3 = 5)
 ##  9   3.29 0.00533
 ## 10   3.38 0.00533
 ## # ℹ 991 more rows</code></pre>
-<div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb245"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># visualize</span></span>
 <span><span class="va">df_pois</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">lambda</span>,</span>
@@ -226,7 +227,7 @@ Figure 9.2: Likelihood of observing three count data points <span class="math in
 </p>
 </div>
 <p>In this exercise with an interval of <span class="math inline">\(0.01\)</span>, <span class="math inline">\(\lambda \approx 3.33\)</span> is identified as the most suitable value. Interestingly, the sample mean matches this value:</p>
-<div class="sourceCode" id="cb244"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 3.333333</code></pre>
 <p>Why? See below.</p>
@@ -290,7 +291,7 @@ y_i &amp;\sim \mbox{Poisson}(\lambda_i)\\
 \frac{\partial \log L(\alpha, \beta_k|\pmb{y})}{\partial \beta_k} &amp;= 0\\
 \end{aligned}
 \]</span>Thus, the function <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> does a lot for us! The log likelihood of the fitted model can be extracted with <code><a href="https://rdrr.io/r/stats/logLik.html">logLik()</a></code>:</p>
-<div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load garden plant data</span></span>
 <span><span class="co"># df_count &lt;- read_csv("data_raw/data_garden_count.csv")</span></span>
 <span></span>
@@ -341,7 +342,7 @@ y_i &amp;\sim \mbox{Poisson}(\lambda_i)\\
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2023-07-15.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2023-07-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

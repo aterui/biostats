@@ -7,9 +7,11 @@ df_fl <- readr::read_csv(here::here("data_raw/data_fish_length.csv"))
 
 Data consists of "samples" extracted from the population of interest, but it's important to acknowledge that these samples are not flawless replicas of the entire population. Given this imperfect information, how can we effectively investigate and discern the distinction between two populations? In this Chapter, I will introduce one of the most basic statistical tests -- "t-test." The t-test takes the following steps:
 
-1.  Define a **test statistic** to signify the difference between groups (t-statistic).
-2.  Define a probability distribution of t-statistic under the **null hypothesis**, i.e., a scenario that we assume no difference between groups.
-3.  Estimate the probability of yielding greater or less than the observed test statistic.
+1.  Define a test statistic to signify the difference between groups (t-statistic).
+2.  Define a probability distribution of t-statistic under the null hypothesis, i.e., a scenario that we assume no difference between groups.
+3.  Estimate the probability of yielding greater or less than the observed test statistic under the null hypothesis.
+
+**Key words:** t-statistic, null hypothesis, alternative hypothesis, p-value
 
 ## Explore Data Structure
 
@@ -264,3 +266,25 @@ $$
 Therefore, the reported values of t-statistic and d.f. are different from what we estimated. The Welch's t-test covers the cases for equal variances; therefore, by default, we use the Welch's test.
 
 ## Laboratory
+
+### Welch's t-test
+
+Reproduce the results of `t.test(x, y, var.equal = FALSE)` without using this function (report t-statistic, degrees of freedom, and p-value).
+
+### Difference and Uncertainty
+
+We have four vectors - `a1` and `a2` & `b1` and `b2`.
+
+```{r}
+a1 <- c(13.9, 14.9 ,13.4, 14.3, 11.8, 13.9, 14.5, 15.1, 13.3, 13.9)
+a2 <- c(17.4, 17.3, 20.1, 17.2, 18.4, 19.6, 16.8, 18.7, 17.8, 18.9)
+
+b1 <- c(10.9, 20.3, 9.6, 8.3, 14.5, 12.3, 14.5, 16.7, 9.3, 22.0)
+b2 <- c(26.9, 12.9, 11.1, 16.7, 20.0, 20.9, 16.6, 15.4, 16.2, 16.2)
+```
+
+Perform the following analysis:
+
+1.  Estimate sample means and SDs for each vector. To do so, create a `tibble()` object with `group` (consist of characters `a1`, `a2`, `b1`, `b2`) and `value` columns (consist of values above). Then use `group_by()` and `summarize()` functions to estimate means and SDs for each `group`.
+2.  Estimate t-statistics for each pair of vectors (`a1` vs. `a2` and `b1` vs. `b2`).
+3.  Perform Welch's t-test for each pair and compare results.

@@ -162,11 +162,13 @@ piping
 reshape
 group-operation
 join
+exercise-1
 visualization
 point
 line
 histogram
 boxplot
+exercise-2
 overview-2
 plot
 symbol

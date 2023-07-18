@@ -389,14 +389,15 @@ tibble(Node = 1:6,
                  "$0 \\le y$",
                  "$0 \\le y$",
                  "$0 < y < 1$",
-                 "$-\\inf < y < \\inf$"),
+                 "$-\\infty < y < \\infty$"),
        R = c("`glmmTMB::glmmTMB()`",
              "`glm()`, `glmmTMB::glmmTMB()`",
              "`MASS::glm.nb()`, `glmmTMB::glmmTMB()`",
              "`glm()`, `glmmTMB::glmmTMB()`",
              "`glmmTMB::glmmTMB()`",
              "`lm()`, `glm()`, `glmmTMB::glmmTMB()`")) %>% 
-  knitr::kable(caption = "Common distributions used in GLM analysis")
+  knitr::kable(caption = "Common distributions used in GLM analysis") %>% 
+  kableExtra::kable_styling(full_width = T)
 ```
 
 ## Laboratory

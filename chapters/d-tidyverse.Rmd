@@ -246,6 +246,10 @@ left_join(x = df1,
           by = c("Species", "x"))
 ```
 
+### Exercise
+
+Complete the exercise [here](https://m-clark.github.io/data-processing-and-visualization/tidyverse.html#tidyverse-exercises).
+
 ## Visualization
 
 `ggplot2::` offers a range of convenient functions for data visualization. The foundational function, `ggplot()`, provides the initial framework for adding supplementary layers using the `+` operator. In ggplot(), we define variables plotted on x- and y-axis through `aes()`. For example:
@@ -347,3 +351,7 @@ iris %>%
              fill = Species)) +
   geom_boxplot(color = "darkgrey")
 ```
+
+### Exercise
+
+In maintenance

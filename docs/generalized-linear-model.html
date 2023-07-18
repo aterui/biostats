@@ -211,7 +211,7 @@ y_i &amp;\sim \text{Poisson}(\lambda_i)\\
 \lambda_i = \exp(-4.05 + 0.17~\text{nitrate}_i)
 \]</span></p>
 <p>Therefore, even when the intercept is estimated to be negative, the mean <span class="math inline">\(\lambda_i\)</span> is guaranteed to be non-negative.</p>
-<p>Another important difference from <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> is that the test-statistic is no long the t-statistic – instead, <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> reports the z-statistic. However, the z-statistic is very similar to the t-statistic, defined as <span class="math inline">\(z=\frac{\hat{\theta} - \theta_0}{\text{SE}(\hat{\theta})}\)</span> (<span class="math inline">\(\hat{\theta} = \{\hat{\alpha}, \hat{\beta}\}\)</span>, <span class="math inline">\(\theta_0 = 0\)</span>). Therefore, you can reproduce the z-statistic by dividing the parameter estimates (<span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span>) by their standard errors:</p>
+<p>Another important difference from <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> is that the test-statistic is no long the t-statistic – instead, <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> reports the z-statistic. However, the z-statistic is very similar to the t-statistic, defined as <span class="math inline">\(z=\frac{\hat{\theta} - \theta_0}{\text{SE}(\hat{\theta})}\)</span> (<span class="math inline">\(\hat{\theta} \in \{\hat{\alpha}, \hat{\beta}\}\)</span>, <span class="math inline">\(\theta_0 = 0\)</span>). Therefore, you can reproduce the z-statistic by dividing the parameter estimates (<span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span>) by their standard errors:</p>
 <div class="sourceCode" id="cb213"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># parameter estimates and their SEs</span></span>
 <span><span class="va">theta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">m_pois</span><span class="op">)</span></span>
@@ -446,10 +446,10 @@ Figure 8.5: Prediction by the Binomial model.
 <p><span class="math display">\[
 \begin{aligned}
 y_i &amp;\sim \text{D}(\Theta)\\
-\text{Link}(f(\Theta)) &amp;= \alpha + \sum_k \beta_k x_{k, i}
+\text{Link}(\mbox{E}(y_i)) &amp;= \alpha + \sum_k \beta_k x_{k, i}
 \end{aligned}
 \]</span></p>
-<p>In this structure, <span class="math inline">\(\Theta\)</span> represents a parameter vector of the probability distribution, while <span class="math inline">\(\text{D}(\cdot)\)</span> and <span class="math inline">\(\text{Link}(\cdot)\)</span> denote the chosen probability distribution and its associated link function, respectively. For example, if we select a Poisson distribution as <span class="math inline">\(\text{D}(\cdot)\)</span>, then the corresponding <span class="math inline">\(\text{Link}(\cdot)\)</span> function is the natural logarithm (log) (see Section <a href="generalized-linear-model.html#poisson-model">8.1.2</a>). The function <span class="math inline">\(f(\Theta)\)</span> defines the modeled parameter of the probability distribution, which is related to the explanatory variables <span class="math inline">\(x\)</span> and represented as <span class="math inline">\(g(x)\)</span>. For instance, in Normal and Poisson models, we model the mean, while in the Binomial model, we model the success probability. In certain distributions, <span class="math inline">\(f(\Theta)\)</span> may be a function of multiple parameters.</p>
+<p>In this structure, <span class="math inline">\(\Theta\)</span> represents a parameter vector of the probability distribution, while <span class="math inline">\(\text{D}(\cdot)\)</span> and <span class="math inline">\(\text{Link}(\cdot)\)</span> denote the chosen probability distribution and its associated link function, respectively. For example, if we select a Poisson distribution as <span class="math inline">\(\text{D}(\cdot)\)</span>, then the corresponding <span class="math inline">\(\text{Link}(\cdot)\)</span> function is the natural logarithm (log) (see Section <a href="generalized-linear-model.html#poisson-model">8.1.2</a>). The expected value <span class="math inline">\(\mbox{E}(y_i)\)</span> is expressed as a function of parameter(s) of the probability distribution <span class="math inline">\(f(\Theta)\)</span>, which is related to the explanatory variables <span class="math inline">\(x\)</span>. For instance, in Normal and Poisson models, we model the mean, while in the Binomial model, we model the success probability. In certain distributions, <span class="math inline">\(f(\Theta)\)</span> may be a function of multiple parameters.</p>
 <p>The GLM framework differs from the Linear Model framework by offering greater flexibility in the choice of probability distribution, achieved through the introduction of the Link function. This function allows us to constrain the modeled parameter within a specific range. As non-normal distributions are common in natural phenomena, this framework plays a critical role in modern statistical analysis.</p>
 <p>However, how do we determine the appropriate probability distribution? While there is no single correct answer to this question, there are clear factors to consider—specifically, the characteristics of the response variable. The following criteria can be particularly helpful:</p>
 <ol style="list-style-type: decimal">
@@ -508,7 +508,7 @@ Binomial
 <span class="math inline">\(0 \le y \le N\)</span>
 </td>
 <td style="text-align:left;">
-<code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code>
+<code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code>, <code><a href="https://rdrr.io/pkg/glmmTMB/man/glmmTMB.html">glmmTMB::glmmTMB()</a></code>
 </td>
 </tr>
 <tr>
@@ -522,7 +522,7 @@ Negative binomial
 <span class="math inline">\(0 \le y\)</span>
 </td>
 <td style="text-align:left;">
-<code>glm.nb()</code>
+<code><a href="https://rdrr.io/pkg/MASS/man/glm.nb.html">MASS::glm.nb()</a></code>, <code><a href="https://rdrr.io/pkg/glmmTMB/man/glmmTMB.html">glmmTMB::glmmTMB()</a></code>
 </td>
 </tr>
 <tr>
@@ -536,7 +536,7 @@ Poisson
 <span class="math inline">\(0 \le y\)</span>
 </td>
 <td style="text-align:left;">
-<code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code>
+<code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code>, <code><a href="https://rdrr.io/pkg/glmmTMB/man/glmmTMB.html">glmmTMB::glmmTMB()</a></code>
 </td>
 </tr>
 <tr>
@@ -564,7 +564,7 @@ Normal
 <span class="math inline">\(-\inf &amp;lt; y &amp;lt; \inf\)</span>
 </td>
 <td style="text-align:left;">
-<code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>, <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code>
+<code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>, <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code>, <code><a href="https://rdrr.io/pkg/glmmTMB/man/glmmTMB.html">glmmTMB::glmmTMB()</a></code>
 </td>
 </tr>
 </tbody>

@@ -112,7 +112,7 @@ $$
 
 Therefore, even when the intercept is estimated to be negative, the mean $\lambda_i$ is guaranteed to be non-negative.
 
-Another important difference from `lm()` is that the test-statistic is no long the t-statistic -- instead, `glm()` reports the z-statistic. However, the z-statistic is very similar to the t-statistic, defined as $z=\frac{\hat{\theta} - \theta_0}{\text{SE}(\hat{\theta})}$ ($\hat{\theta} = \{\hat{\alpha}, \hat{\beta}\}$, $\theta_0 = 0$). Therefore, you can reproduce the z-statistic by dividing the parameter estimates ($\hat{\alpha}$ and $\hat{\beta}$) by their standard errors:
+Another important difference from `lm()` is that the test-statistic is no long the t-statistic -- instead, `glm()` reports the z-statistic. However, the z-statistic is very similar to the t-statistic, defined as $z=\frac{\hat{\theta} - \theta_0}{\text{SE}(\hat{\theta})}$ ($\hat{\theta} \in \{\hat{\alpha}, \hat{\beta}\}$, $\theta_0 = 0$). Therefore, you can reproduce the z-statistic by dividing the parameter estimates ($\hat{\alpha}$ and $\hat{\beta}$) by their standard errors:
 
 ```{r}
 # parameter estimates and their SEs
@@ -319,11 +319,11 @@ These models, including those assuming a Normal distribution, fall into the cate
 $$
 \begin{aligned}
 y_i &\sim \text{D}(\Theta)\\
-\text{Link}(f(\Theta)) &= \alpha + \sum_k \beta_k x_{k, i}
+\text{Link}(\mbox{E}(y_i)) &= \alpha + \sum_k \beta_k x_{k, i}
 \end{aligned}
 $$
 
-In this structure, $\Theta$ represents a parameter vector of the probability distribution, while $\text{D}(\cdot)$ and $\text{Link}(\cdot)$ denote the chosen probability distribution and its associated link function, respectively. For example, if we select a Poisson distribution as $\text{D}(\cdot)$, then the corresponding $\text{Link}(\cdot)$ function is the natural logarithm (log) (see Section \@ref(poisson-model)). The function $f(\Theta)$ defines the modeled parameter of the probability distribution, which is related to the explanatory variables $x$ and represented as $g(x)$. For instance, in Normal and Poisson models, we model the mean, while in the Binomial model, we model the success probability. In certain distributions, $f(\Theta)$ may be a function of multiple parameters.
+In this structure, $\Theta$ represents a parameter vector of the probability distribution, while $\text{D}(\cdot)$ and $\text{Link}(\cdot)$ denote the chosen probability distribution and its associated link function, respectively. For example, if we select a Poisson distribution as $\text{D}(\cdot)$, then the corresponding $\text{Link}(\cdot)$ function is the natural logarithm (log) (see Section \@ref(poisson-model)). The expected value $\mbox{E}(y_i)$ is expressed as a function of parameter(s) of the probability distribution $f(\Theta)$, which is related to the explanatory variables $x$. For instance, in Normal and Poisson models, we model the mean, while in the Binomial model, we model the success probability. In certain distributions, $f(\Theta)$ may be a function of multiple parameters.
 
 The GLM framework differs from the Linear Model framework by offering greater flexibility in the choice of probability distribution, achieved through the introduction of the Link function. This function allows us to constrain the modeled parameter within a specific range. As non-normal distributions are common in natural phenomena, this framework plays a critical role in modern statistical analysis.
 
@@ -391,11 +391,11 @@ tibble(Node = 1:6,
                  "$0 < y < 1$",
                  "$-\\inf < y < \\inf$"),
        R = c("`glmmTMB::glmmTMB()`",
-             "`glm()`",
-             "`glm.nb()`",
-             "`glm()`",
+             "`glm()`, `glmmTMB::glmmTMB()`",
+             "`MASS::glm.nb()`, `glmmTMB::glmmTMB()`",
+             "`glm()`, `glmmTMB::glmmTMB()`",
              "`glmmTMB::glmmTMB()`",
-             "`lm()`, `glm()`")) %>% 
+             "`lm()`, `glm()`, `glmmTMB::glmmTMB()`")) %>% 
   knitr::kable(caption = "Common distributions used in GLM analysis")
 ```
 

@@ -85,7 +85,7 @@ null-hypothesis-1
 anova-in-r
 post-hoc-tests
 laboratory-4
-iris-data-set
+application-to-plantgrowth
 regression
 explore-data-structure-1
 drawing-the-fittest-line
@@ -98,6 +98,8 @@ retrieve-errors
 visualize-errors
 coefficient-of-determination
 laboratory-5
+develop-regression-models
+multiple-explanatory-variables
 linear-model
 the-frame
 two-group-case
@@ -107,6 +109,9 @@ combine-multiple-types-of-variables
 iris-example
 variable-types
 laboratory-6
+normality-assumption
+model-interpretation
+alternative-model
 generalized-linear-model
 count-data
 plant-density
@@ -116,6 +121,8 @@ mussel-egg-fertilization
 binomial-model
 the-glm-framework
 laboratory-7
+glm-exercise
+effect-size
 likelihood
 finding-the-more-likely
 maximum-likelihood-method

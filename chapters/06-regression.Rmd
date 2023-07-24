@@ -7,6 +7,8 @@ df_algae <- read_csv(here::here("data_raw/data_algae.csv"))
 
 Our previous examples focused on cases that involved a distinct group structure. However, it is not always the case that such a structure exists. Instead, we might examine the relationship between continuous variables. In this chapter, I will introduce a technique called linear regression.
 
+**Key words:** intercept, slope (coefficient), least squares, residual, coefficient of determination ($\mbox{R}^2$)
+
 ## Explore Data Structure
 
 For this exercise, we will use algae biomass data from streams. Download the data [here](https://github.com/aterui/biostats/blob/master/data_raw/data_algae.csv) and locate it in `data_raw/`.
@@ -253,6 +255,7 @@ error <- v_y - (theta[1] + theta[2] * v_x)
 # head() retrieves the first 6 rows
 head(cbind(eps, error))
 ```
+
 To ensure that the two columns are indeed identical, a visual check may be prone to overlooking small differences. To perform a more precise comparison, you can use the `all()` function to check if the data aligns (here, evaluated at the five decimal points using `round()`). By comparing the two columns in this manner, you can confirm whether they are identical or not.
 
 ```{r}
@@ -320,6 +323,19 @@ Compare it with `lm()` output:
 ```{r}
 summary(m)
 ```
+
 `Multiple R-squared:` corresponds to the calculated coefficient of determination.
 
 ## Laboratory
+
+### Develop regression models
+
+R provides a built-in data set called `iris`. The `iris` data contain data points from three different species (`Species` column). Split this data set by species (create three separate data frames) and perform regression for each species separately to analyze the relationship between `Sepal.Width` (response variable) and `Petal.Width` (explanatory variable).
+
+```{r}
+head(iris)
+```
+
+### Multiple explanatory variables
+
+Regression analysis can involve multiple explanatory variables. To explore this, consider utilizing `Petal.Length` as an additional explanatory variable for each species. Then, investigate (1) the variations in estimates of regression coefficients and (2) the differences in the coefficients of determination compared to the model with only a single explanatory variable.

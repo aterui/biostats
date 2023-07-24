@@ -325,14 +325,15 @@ Figure 5.2: F-distribution. The vertical red line denotes the observed F-statist
 <h2>
 <span class="header-section-number">5.5</span> Laboratory<a class="anchor" aria-label="anchor" href="#laboratory-4"><i class="fas fa-link"></i></a>
 </h2>
-<div id="iris-data-set" class="section level3" number="5.5.1">
+<div id="application-to-plantgrowth" class="section level3" number="5.5.1">
 <h3>
-<span class="header-section-number">5.5.1</span> <code>iris</code> data set<a class="anchor" aria-label="anchor" href="#iris-data-set"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.5.1</span> Application to <code>PlantGrowth</code><a class="anchor" aria-label="anchor" href="#application-to-plantgrowth"><i class="fas fa-link"></i></a>
 </h3>
-<p>In R, there is a built-in data set called <code>iris</code>. To analyze this data set, carry out the following tasks:</p>
+<p>In R, there is a built-in data set called <code>PrantGrowth</code>. To analyze this data set, carry out the following tasks:</p>
 <ol style="list-style-type: decimal">
-<li><p>The <code>iris</code> data set consists of various columns. Create figures similar to Figure <a href="multiple-group-comparison.html#fig:violin">5.1</a> for the columns <code>Sepal.XXX</code> and <code>Petal.XXX</code>. If you need to create multiple plots, consider utilizing the functions <code><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">ggplot2::facet_wrap()</a></code> or <code><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">ggplot2::facet_grid()</a></code>.</p></li>
-<li><p>Conduct an ANOVA to examine whether there are differences in <code>Sepal.Length</code> and <code>Petal.Length</code> among the different <code>Species</code>.</p></li>
+<li><p>The data set consists of two columns: weight, group. Create figures similar to Figure <a href="two-group-comparison.html#fig:mean-plot">4.1</a> in Chapter <a href="two-group-comparison.html#two-group-comparison">4</a>.</p></li>
+<li><p>Conduct an ANOVA to examine whether there are differences in <code>weight</code> among the different <code>group</code>.</p></li>
+<li><p>Discuss what values to be reported in a scientific article?</p></li>
 </ol>
 </div>
 </div>
@@ -360,7 +361,7 @@ Figure 5.2: F-distribution. The vertical red line denotes the observed F-statist
 <li><a class="nav-link" href="#anova-in-r"><span class="header-section-number">5.3</span> ANOVA in R</a></li>
 <li><a class="nav-link" href="#post-hoc-tests"><span class="header-section-number">5.4</span> Post-hoc Tests</a></li>
 <li>
-<a class="nav-link" href="#laboratory-4"><span class="header-section-number">5.5</span> Laboratory</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#iris-data-set"><span class="header-section-number">5.5.1</span> iris data set</a></li></ul>
+<a class="nav-link" href="#laboratory-4"><span class="header-section-number">5.5</span> Laboratory</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#application-to-plantgrowth"><span class="header-section-number">5.5.1</span> Application to PlantGrowth</a></li></ul>
 </li>
 </ul>
 
@@ -379,7 +380,7 @@ Figure 5.2: F-distribution. The vertical red line denotes the observed F-statist
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2023-07-18.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2023-07-24.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

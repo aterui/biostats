@@ -401,3 +401,22 @@ tibble(Node = 1:6,
 ```
 
 ## Laboratory
+
+### GLM exercise
+
+There is a publicly available stream fish distribution dataset accessible from an online repository. You can download it using this link: [Download Dataset](https://github.com/aterui/public-proj_fish-richness-shubuto/blob/master/data/data_vpart.csv). The dataset comprises information on the number of species found at each site (`n_sp`) and several associated environmental variables, including distance to the sea (`distance`), catchment area (`cat_area`), and environmental heterogeneity (`hull_area`). To analyze this dataset, develop a Generalized Linear Model (GLM) with an appropriate probability distribution.
+
+### Effect size
+
+Often, we are interested in comparing the effect sizes of different explanatory variables. However, if we use raw environmental values, regression coefficients are not directly comparable due to their differing units. Recall that regression coefficients represent the increment of $y$ per unit increase of $x$. To facilitate comparison, we standardize the explanatory variables by subtracting their means and dividing them by their standard deviations:
+
+$$
+\mbox{E}(y) = \alpha + \beta x \rightarrow
+\mbox{E}(y) = \alpha' + \beta' \frac{(x - \mu_x)}{\sigma_x}
+$$
+
+Here, $\alpha'$ and $\beta'$ represent the intercept and slope after standardizing $x$, respectively.
+
+1. Express $\alpha'$ and $\beta'$ as a function of $\alpha$ and $\beta$, respectively.
+
+2. The function `scale()` will perform standardization. Perform a GLM analysis of fish species richness with the standardized variables `distance`, `cat_area`, and `hull_area`, and identify the most influential variable among them.

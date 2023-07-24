@@ -1,4 +1,4 @@
-```{r}
+```{r, include=FALSE}
 source(here::here("code/library.R"))
 df_count <- read_csv(here::here("data_raw/data_garden_count.csv"))
 ```

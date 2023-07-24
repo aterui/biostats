@@ -245,10 +245,12 @@ The choice of post-hoc test depends on the specific research question, assumptio
 
 ## Laboratory
 
-### `iris` data set
+### Application to `PlantGrowth` 
 
-In R, there is a built-in data set called `iris`. To analyze this data set, carry out the following tasks:
+In R, there is a built-in data set called `PrantGrowth`. To analyze this data set, carry out the following tasks:
 
-1. The `iris` data set consists of various columns. Create figures similar to Figure \@ref(fig:violin) for the columns `Sepal.XXX` and `Petal.XXX`. If you need to create multiple plots, consider utilizing the functions `ggplot2::facet_wrap()` or `ggplot2::facet_grid()`.
+1.  The data set consists of two columns: `r colnames(PlantGrowth)`. Create figures similar to Figure \@ref(fig:mean-plot) in Chapter \@ref(two-group-comparison).
 
-2. Conduct an ANOVA to examine whether there are differences in `Sepal.Length` and `Petal.Length` among the different `Species`.
+2.  Conduct an ANOVA to examine whether there are differences in `weight` among the different `group`.
+
+3.  Discuss what values to be reported in a scientific article?

@@ -77,7 +77,7 @@
 <span class="header-section-number">10.1</span> Model Fit and Complexity<a class="anchor" aria-label="anchor" href="#model-fit-and-complexity"><i class="fas fa-link"></i></a>
 </h2>
 <p>In the field of biological sciences, it is common to encounter multiple hypotheses or the need for exploratory analysis. In such instances, it becomes necessary to develop various models, each corresponding to a specific hypothesis, and subsequently compare their respective performances. The crucial aspect lies in how we quantify the “performance” of these models, acknowledging that this term can be somewhat ambiguous. As the determination of model performance ultimately dictates which model is superior, it profoundly impacts the conclusions drawn from the research. Thus, the significance of this process cannot be overstated.</p>
-<p>One potential approach is to utilize the Coefficient of Determination (Chapter <a href="regression.html#regression">6</a>) or its variation (Chapter <a href="generalized-linear-model.html#the-glm-framework">8.3</a>) as a measure of model performance. These metrics provide an indication of the proportion of variation in the response variable that is explained by the model, making them reasonable options. However, there are situations where these measures are not meaningful for model selection.</p>
+<p>One potential approach is to utilize the Coefficient of Determination (Chapter <a href="regression.html#regression">6</a>) as a measure of model performance. These metrics provide an indication of the proportion of variation in the response variable that is explained by the model, making them reasonable options. However, there are situations where these measures are not meaningful for model comparison.</p>
 <p>To illustrate this, let’s consider the following simulated data. The advantage of using simulated data is that we already know the correct outcomes, enabling us to validate and verify the analysis results.</p>
 <div class="sourceCode" id="cb251"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="co"># for reproducibility</span></span>
@@ -262,7 +262,7 @@ R^2 = 1 - \frac{SS}{SS_0}
 <span class="header-section-number">10.2.3</span> AIC<a class="anchor" aria-label="anchor" href="#aic"><i class="fas fa-link"></i></a>
 </h3>
 <p>The AIC takes a different approach to evaluating model performance compared to other measures. While measures like <span class="math inline">\(\mbox{R}^2\)</span> primarily assess the goodness of fit to the available dataset used for model fitting, the AIC is rooted in the information theoretic perspective. It evaluates a model’s ability to predict unseen data from the same population.</p>
-<p>The mathematical details of AIC are beyond the scope of this discussion, but for those interested, reference Burnham and Anderson 2002. However, <strong>it is crucial to understand that the AIC differs fundamentally from other measures as it assesses the model’s robustness when new data is added.</strong></p>
+<p>The mathematical details of AIC are beyond the scope of this discussion, but for those interested, reference <a href="https://link.springer.com/book/10.1007/b97636">Burnham and Anderson 2002</a>. However, <strong>it is crucial to understand that the AIC differs fundamentally from other measures as it assesses the model’s robustness when new data is added.</strong></p>
 <p>Despite the underlying mathematical complexity, the AIC formula is remarkably simple:</p>
 <p><span class="math display">\[
 \mbox{AIC} = 2k - 2\ln L
@@ -283,7 +283,7 @@ R^2 = 1 - \frac{SS}{SS_0}
 <li><p><strong>The model with the lowest AIC does not necessarily imply it is the “true” model.</strong> We are limited to the explanatory variables we have collected, and AIC can only indicate which model is better among the choices available. It is possible that all the candidate models are incorrect.</p></li>
 <li><p><strong>AIC is not designed to infer causal mechanisms.</strong> Variables that are not causally related may enhance the model’s ability to predict unseen data. If the goal is causal inference, a different criterion, such as the backdoor criterion, should be employed. For example, AIC is not suitable for analyzing controlled experiments aimed at uncovering causal mechanisms in biology.</p></li>
 </ol>
-<p>The proper application of AIC in biology has only been recently discussed, and there is often misuse of this metric, particularly in overlooking the second component. Therefore, it is crucial to clearly define the objective of your analysis to ensure the appropriate choice of statistical methods.</p>
+<p>There is often misuse of this metric, particularly in overlooking the second component (see arguments in <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/ele.14033">Arif and MacNeil 2022</a>). Therefore, it is crucial to clearly define the objective of your analysis to ensure the appropriate choice of statistical methods.</p>
 
 </div>
 </div>
@@ -321,7 +321,7 @@ R^2 = 1 - \frac{SS}{SS_0}
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2023-07-24.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2023-08-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

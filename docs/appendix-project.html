@@ -6,15 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Appendix: Project | BIOSTATS</title>
 <meta name="author" content="Akira Terui">
-<meta name="description" content="10.3 R Project Throughout this book, I will use the ‘R Project’ as the core workspace unit. It serves as a centralized location where all relevant materials, such as R scripts (.R) and data files,...">
+<meta name="description" content="R Project Throughout this book, I will use the ‘R Project’ as the core workspace unit. It serves as a centralized location where all relevant materials, such as R scripts (.R) and data files, are...">
 <meta name="generator" content="bookdown 0.29 with bs4_book()">
 <meta property="og:title" content="Appendix: Project | BIOSTATS">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://bookdown.org/janedoe/bookdown-demo/appendix-project.html">
-<meta property="og:description" content="10.3 R Project Throughout this book, I will use the ‘R Project’ as the core workspace unit. It serves as a centralized location where all relevant materials, such as R scripts (.R) and data files,...">
+<meta property="og:description" content="R Project Throughout this book, I will use the ‘R Project’ as the core workspace unit. It serves as a centralized location where all relevant materials, such as R scripts (.R) and data files, are...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Appendix: Project | BIOSTATS">
-<meta name="twitter:description" content="10.3 R Project Throughout this book, I will use the ‘R Project’ as the core workspace unit. It serves as a centralized location where all relevant materials, such as R scripts (.R) and data files,...">
+<meta name="twitter:description" content="R Project Throughout this book, I will use the ‘R Project’ as the core workspace unit. It serves as a centralized location where all relevant materials, such as R scripts (.R) and data files, are...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -70,9 +70,8 @@
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="appendix-project" class="section level1 unnumbered">
 <h1>Appendix: Project<a class="anchor" aria-label="anchor" href="#appendix-project"><i class="fas fa-link"></i></a>
 </h1>
-<div id="r-project" class="section level2" number="10.3">
-<h2>
-<span class="header-section-number">10.3</span> R Project<a class="anchor" aria-label="anchor" href="#r-project"><i class="fas fa-link"></i></a>
+<div id="r-project" class="section level2 unnumbered">
+<h2>R Project<a class="anchor" aria-label="anchor" href="#r-project"><i class="fas fa-link"></i></a>
 </h2>
 <p>Throughout this book, I will use the ‘R Project’ as the core workspace unit. It serves as a centralized location where all relevant materials, such as R scripts (<code>.R</code>) and data files, are consolidated. There are various ways to organize your project, but I prefer creating a single ‘R Project’ for a set of scripts and data that contribute to a specific publication (see example <a href="https://github.com/aterui/public-proj_stream-diversity">here</a>). To set up an ‘R Project,’ you’ll need to have both <em>RStudio</em> and the base <em>R</em> software installed. While <em>R</em> can be used independently, I highly recommend using it in conjunction with <em>RStudio</em> due to the latter’s numerous features that facilitate data analysis. You can download <em>R</em> and <em>RStudio</em> from the following websites:</p>
 <ul>
@@ -95,18 +94,16 @@ Figure 10.2: RStudio interface.
 <code class="sourceCode R"><span><span class="va">x</span></span></code></pre></div>
 <pre><code>## [1] 1 2</code></pre>
 <p>Excellent! While it is possible to work with your data using this approach, it is important to highlight that <strong>it is generally regarded as a poor practice</strong>. As your project evolves, you will accumulate a substantial amount of material, such as writing more than 2000 lines of code for a single project. Consequently, it becomes essential to implement effective code management strategies. How do you presently handle code management?</p>
-<div id="script-editor" class="section level3" number="10.3.1">
-<h3>
-<span class="header-section-number">10.3.1</span> Script Editor<a class="anchor" aria-label="anchor" href="#script-editor"><i class="fas fa-link"></i></a>
+<div id="script-editor" class="section level3 unnumbered">
+<h3>Script Editor<a class="anchor" aria-label="anchor" href="#script-editor"><i class="fas fa-link"></i></a>
 </h3>
 <p>It is highly recommended to manage your scripts in the <code>Editor</code> instead. The <code>Editor</code> is where you draft and fine-tune your code before executing it in the <code>Console</code>. To create space for the <code>Editor</code>, press <code>Ctrl + Shift + N</code>. A new panel will appear in the top left corner. Let’s type the following script in the <code>Editor</code>. Please note that the key combination <code>Ctrl + Shift + N</code> assumes a Windows or Linux operating system. If you’re using a Mac, you can use <code>Command + Shift + N</code> instead.</p>
 <div class="sourceCode" id="cb273"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 <p>Then, hit <code>Ctr + S</code> to save the <code>Editor</code> file. <em>RStudio</em> will prompt you to enter the file name of the <code>Editor</code><a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;In &lt;em&gt;R&lt;/em&gt;, an editor file has an extension of &lt;code&gt;.R&lt;/code&gt;.&lt;/p&gt;"><sup>7</sup></a>.</p>
 </div>
-<div id="file-name" class="section level3" number="10.3.2">
-<h3>
-<span class="header-section-number">10.3.2</span> File Name<a class="anchor" aria-label="anchor" href="#file-name"><i class="fas fa-link"></i></a>
+<div id="file-name" class="section level3 unnumbered">
+<h3>File Name<a class="anchor" aria-label="anchor" href="#file-name"><i class="fas fa-link"></i></a>
 </h3>
 <p>It is also crucial to establish consistent naming <strong>rules</strong> for your files. As your project progresses, the number of files within each sub-directory may increase significantly. Without clear and consistent naming rules for your files, navigating through the project can become challenging, not only for yourself but also for others involved. To alleviate this issue, consider implementing the following recommendations for file naming:</p>
 <ul>
@@ -137,9 +134,8 @@ Figure 10.2: RStudio interface.
 </li>
 </ul>
 </div>
-<div id="structure-your-project" class="section level3" number="10.3.3">
-<h3>
-<span class="header-section-number">10.3.3</span> Structure Your Project<a class="anchor" aria-label="anchor" href="#structure-your-project"><i class="fas fa-link"></i></a>
+<div id="structure-your-project" class="section level3 unnumbered">
+<h3>Structure Your Project<a class="anchor" aria-label="anchor" href="#structure-your-project"><i class="fas fa-link"></i></a>
 </h3>
 <p>If you fail to save or haphazardly store your code files on your computer, the risk of losing essential items becomes inevitable sooner or later. To mitigate this risk, I highly recommend gathering all the relevant materials within a single <code>R Project</code>. To create a new <code>R Project</code>, follow the procedure outlined below:</p>
 <ol style="list-style-type: lower-alpha">
@@ -192,9 +188,8 @@ Figure 10.2: RStudio interface.
 </table></div>
 </div>
 </div>
-<div id="robust-coding" class="section level2" number="10.4">
-<h2>
-<span class="header-section-number">10.4</span> Robust coding<a class="anchor" aria-label="anchor" href="#robust-coding"><i class="fas fa-link"></i></a>
+<div id="robust-coding" class="section level2 unnumbered">
+<h2>Robust coding<a class="anchor" aria-label="anchor" href="#robust-coding"><i class="fas fa-link"></i></a>
 </h2>
 <p>While it is not mandatory, I highly recommend using <em>RStudio</em> in conjunction with <em>Git</em> and <em>GitHub</em>. Coding is inherently prone to errors, and even the most skilled programmers make mistakes—without exception. However, the crucial difference between beginner and advanced programmers lies in their ability to develop robust coding practices accompanied by a self-error-detection system. <em>Git</em> plays a vital role in this process. Throughout this book, I will occasionally delve into the importance of <em>Git</em> and its usage.</p>
 
@@ -209,13 +204,13 @@ Figure 10.2: RStudio interface.
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#appendix-project">Appendix: Project</a></li>
 <li>
-<a class="nav-link" href="#r-project"><span class="header-section-number">10.3</span> R Project</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#script-editor"><span class="header-section-number">10.3.1</span> Script Editor</a></li>
-<li><a class="nav-link" href="#file-name"><span class="header-section-number">10.3.2</span> File Name</a></li>
-<li><a class="nav-link" href="#structure-your-project"><span class="header-section-number">10.3.3</span> Structure Your Project</a></li>
+<a class="nav-link" href="#r-project">R Project</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#script-editor">Script Editor</a></li>
+<li><a class="nav-link" href="#file-name">File Name</a></li>
+<li><a class="nav-link" href="#structure-your-project">Structure Your Project</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#robust-coding"><span class="header-section-number">10.4</span> Robust coding</a></li>
+<li><a class="nav-link" href="#robust-coding">Robust coding</a></li>
 </ul>
 
       <div class="book-extra">
@@ -233,7 +228,7 @@ Figure 10.2: RStudio interface.
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2023-07-24.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2023-08-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

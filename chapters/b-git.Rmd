@@ -1,6 +1,6 @@
 # Appendix: Git & GitHub {.unnumbered}
 
-## Git & GitHub
+## Git & GitHub {.unnumbered}
 
 In this section, I will explain how to integrate Git and GitHub into R Studio. While R Studio is already an excellent tool, it becomes even more powerful when combined with Git and GitHub. Git is a free and open-source distributed version control system that tracks changes in your code as you work on your project, ensuring you are aware of any modifications made to your script (and other) files. Tracking changes is crucial to avoid unintended errors in your code and helps prevent the creation of redundant files. Although Git is primarily a local system, it has an online counterpart called GitHub.
 
@@ -29,9 +29,9 @@ After setting up Git, you can proceed to create an account on [GitHub](https://g
 
 While R Studio seamlessly integrates with Git and GitHub, using a Git client can provide additional visual aids. There are various options for Git clients (see choices [here](https://happygitwithr.com/git-client.html)), but for this exercise, we will use GitHub Desktop. Install GitHub Desktop on your computer from [here](https://desktop.github.com/).
 
-## Commit & Push
+## Commit & Push {.unnumbered}
 
-### Register Your Git repo
+### Register Your Git repo {.unnumbered}
 
 To open the `R Project` you've just created as a git repository, follow these steps:
 
@@ -76,7 +76,7 @@ Click on the "Current Repository" button located at the top left corner of the G
 knitr::include_graphics(here::here("image/git_image03.png"))
 ```
 
-### Commit
+### Commit {.unnumbered}
 
 GitHub Desktop will prompt you to enter a local path to your Git repository. Browse and select the directory where your `R Project` is located. Once you have selected the directory, the local Git repository will appear in the list of repositories on the left side bar of GitHub Desktop, as shown in Figure \@ref(fig:gitdesktop2).
 
@@ -104,7 +104,7 @@ At this stage, your file (`.R` or any other file) is saved in your local directo
 
 Now, the changes to the selected files have been successfully recorded in Git as a commit. It's important to commit regularly and provide meaningful commit messages so that you can track changes and understand the evolution of your project when needed.
 
-### Push
+### Push {.unnumbered}
 
 It's important to note that your changes are currently recorded in your local computer's Git repository but have not been published to your online GitHub repository. To send the local changes to the online GitHub repository, you need to use the "Push" operation through GitHub Desktop.
 
@@ -116,7 +116,7 @@ If you are comfortable with the changes you made and want to send them to the on
 knitr::include_graphics(here::here("image/git_image05.png"))
 ```
 
-### Edit
+### Edit {.unnumbered}
 
 We have created a file named `sample.R` as per the previous instructions. Now, let's make a minor change to the content of the `sample.R` file. Open the `sample.R` file in your preferred text editor or in R Studio, and make a modification to the code. For example, you can update the code from:
 

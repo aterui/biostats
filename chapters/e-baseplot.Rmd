@@ -1,6 +1,6 @@
 # Appendix: Base Plot {.unnumbered}
 
-## Overview
+## Overview {.unnumbered}
 
 R offers a variety of functions that aid in visualizing data. The `graphics` package in R provides a set of functions for basic graphics ([list of functions](https://www.rdocumentation.org/packages/graphics/versions/3.6.2)). To demonstrate the functionality of these `graphics` functions, I will utilize the built-in `iris` dataset in R.
 
@@ -8,7 +8,7 @@ R offers a variety of functions that aid in visualizing data. The `graphics` pac
 head(iris)
 ```
 
-## Plot
+## Plot {.unnumbered}
 
 When creating a plot, you typically need to specify the **formula** to define the relationship between variables. For instance, if you wish to visualize the association between `x` and `y` (with `y` on the vertical axis and `x` on the horizontal axis), the formula would be `y ~ x` (where the left side of the formula represents the vertical axis). In the `iris` dataset, you have access to the following columns: `Sepal.Length`, `Sepal.Width`, `Petal.Length`, `Petal.Width`, and `Species`. In the subsequent example, we will plot the relationship between `Sepal.Length` and `Sepal.Width`:
 
@@ -20,7 +20,7 @@ plot(Sepal.Length ~ Sepal.Width, data = iris)
 
 The `data =` argument informs the function about the dataset from which the variables (`Sepal.Length` and `Sepal.Width`) should be extracted.
 
-### Symbol
+### Symbol {.unnumbered}
 
 `pch` argument. Choose from `1` to `25` (google **r plot pch** for details)
 
@@ -31,7 +31,7 @@ plot(Sepal.Length ~ Sepal.Width, data = iris,
 
 ```
 
-### Symbol size
+### Symbol size {.unnumbered}
 
 `cex` argument. `cex = 1` is the default value. `cex = 2` is as twice large as default value.
 
@@ -42,7 +42,7 @@ plot(Sepal.Length ~ Sepal.Width, data = iris,
 
 ```
 
-### Symbol color (border)
+### Symbol color (border) {.unnumbered}
 
 `col` argument (quote `"color name"` when specifying). Google **r color name** for color options.
 
@@ -53,7 +53,7 @@ plot(Sepal.Length ~ Sepal.Width, data = iris,
 
 ```
 
-### Symbol color (fill)
+### Symbol color (fill) {.unnumbered}
 
 `bg` argument (quote `"color name"` when specifying). Available for a subset of symbol options (some symbols have pre-defined filled color).
 
@@ -64,7 +64,7 @@ plot(Sepal.Length ~ Sepal.Width, data = iris,
 
 ```
 
-### Label
+### Label {.unnumbered}
 
 `ylab` or `xlab` arguments. Provide `"quoted text"`.
 
@@ -76,7 +76,7 @@ plot(Sepal.Length ~ Sepal.Width, data = iris,
 
 ```
 
-### Axis
+### Axis {.unnumbered}
 
 Delete axes with `axes = F` and re-draw with `box()` and `axis()` functions.
 
@@ -92,7 +92,7 @@ axis(2, las = 2) # 2: draw y-axis, las = 2: make axis lables horizontal
 
 ```
 
-## Boxplot
+## Boxplot {.unnumbered}
 
 `boxplot()` is used when the x-axis is factor-type data (by default, `plot()` will produce a boxplot when x-axis is a factor variable). In the `iris` dataset, the column `Species` is a factor variable. Compare `Sepal.Length` among species using `boxplot()`.
 
@@ -104,7 +104,7 @@ boxplot(Sepal.Length ~ Species, data = iris)
 
 You can customize as in `plot()`, but slighlty different.
 
-### Box color
+### Box color {.unnumbered}
 
 `col` argument.
 
@@ -115,7 +115,7 @@ boxplot(Sepal.Length ~ Species, data = iris,
 
 ```
 
-### Border color
+### Border color {.unnumbered}
 
 `border` argument.
 
@@ -126,7 +126,7 @@ boxplot(Sepal.Length ~ Species, data = iris,
 
 ```
 
-### Box width
+### Box width {.unnumbered}
 
 `boxwex` argument.
 
@@ -138,7 +138,7 @@ boxplot(Sepal.Length ~ Species, data = iris,
 
 ```
 
-### Axis
+### Axis {.unnumbered}
 
 Delete axes with `axes = F` and re-draw with `box()` and `axis()` functions.
 

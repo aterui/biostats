@@ -6,15 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Appendix: Data Structure | BIOSTATS</title>
 <meta name="author" content="Akira Terui">
-<meta name="description" content='10.7 Overview R has 6 basic data types. character: "aquatic", "ecology" (no order) factor: similar to character, but has levels (alphabetically ordered by default) numeric: 20.0 , 15.5 integer: 3,...'>
+<meta name="description" content='Overview R has 6 basic data types. character: "aquatic", "ecology" (no order) factor: similar to character, but has levels (alphabetically ordered by default) numeric: 20.0 , 15.5 integer: 3, 7...'>
 <meta name="generator" content="bookdown 0.29 with bs4_book()">
 <meta property="og:title" content="Appendix: Data Structure | BIOSTATS">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://bookdown.org/janedoe/bookdown-demo/appendix-data-structure.html">
-<meta property="og:description" content='10.7 Overview R has 6 basic data types. character: "aquatic", "ecology" (no order) factor: similar to character, but has levels (alphabetically ordered by default) numeric: 20.0 , 15.5 integer: 3,...'>
+<meta property="og:description" content='Overview R has 6 basic data types. character: "aquatic", "ecology" (no order) factor: similar to character, but has levels (alphabetically ordered by default) numeric: 20.0 , 15.5 integer: 3, 7...'>
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Appendix: Data Structure | BIOSTATS">
-<meta name="twitter:description" content='10.7 Overview R has 6 basic data types. character: "aquatic", "ecology" (no order) factor: similar to character, but has levels (alphabetically ordered by default) numeric: 20.0 , 15.5 integer: 3,...'>
+<meta name="twitter:description" content='Overview R has 6 basic data types. character: "aquatic", "ecology" (no order) factor: similar to character, but has levels (alphabetically ordered by default) numeric: 20.0 , 15.5 integer: 3, 7...'>
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -70,9 +70,8 @@
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="appendix-data-structure" class="section level1 unnumbered">
 <h1>Appendix: Data Structure<a class="anchor" aria-label="anchor" href="#appendix-data-structure"><i class="fas fa-link"></i></a>
 </h1>
-<div id="overview" class="section level2" number="10.7">
-<h2>
-<span class="header-section-number">10.7</span> Overview<a class="anchor" aria-label="anchor" href="#overview"><i class="fas fa-link"></i></a>
+<div id="overview" class="section level2 unnumbered">
+<h2>Overview<a class="anchor" aria-label="anchor" href="#overview"><i class="fas fa-link"></i></a>
 </h2>
 <p>R has 6 basic <strong>data types</strong>.</p>
 <ul>
@@ -96,13 +95,11 @@
 <strong>data frame</strong>: looks similar to a matrix, but allows different data types in different columns</li>
 </ul>
 </div>
-<div id="vector" class="section level2" number="10.8">
-<h2>
-<span class="header-section-number">10.8</span> Vector<a class="anchor" aria-label="anchor" href="#vector"><i class="fas fa-link"></i></a>
+<div id="vector" class="section level2 unnumbered">
+<h2>Vector<a class="anchor" aria-label="anchor" href="#vector"><i class="fas fa-link"></i></a>
 </h2>
-<div id="create-vector" class="section level3" number="10.8.1">
-<h3>
-<span class="header-section-number">10.8.1</span> Create Vector<a class="anchor" aria-label="anchor" href="#create-vector"><i class="fas fa-link"></i></a>
+<div id="create-vector" class="section level3 unnumbered">
+<h3>Create Vector<a class="anchor" aria-label="anchor" href="#create-vector"><i class="fas fa-link"></i></a>
 </h3>
 <p>Below are examples of atomic character vectors, numeric vectors, integer vectors, etc. There are many ways to create vector data. The following examples use <code><a href="https://rdrr.io/r/base/c.html">c()</a></code>, <code>:</code>, <code><a href="https://rdrr.io/r/base/seq.html">seq()</a></code>, <code><a href="https://rdrr.io/r/base/rep.html">rep()</a></code>:</p>
 <div class="sourceCode" id="cb277"><pre class="downlit sourceCode r">
@@ -148,9 +145,8 @@
 ## [20] 2.9 3.0 3.1 3.2 3.3 3.4 3.5 3.6 3.7 3.8 3.9 4.0 4.1 4.2 4.3 4.4 4.5 4.6 4.7
 ## [39] 4.8 4.9 5.0</code></pre>
 </div>
-<div id="check-features" class="section level3" number="10.8.2">
-<h3>
-<span class="header-section-number">10.8.2</span> Check Features<a class="anchor" aria-label="anchor" href="#check-features"><i class="fas fa-link"></i></a>
+<div id="check-features" class="section level3 unnumbered">
+<h3>Check Features<a class="anchor" aria-label="anchor" href="#check-features"><i class="fas fa-link"></i></a>
 </h3>
 <p>R provides many functions to examine features of vectors and other objects, for example:</p>
 <ul>
@@ -196,9 +192,8 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 </div>
-<div id="access" class="section level3" number="10.8.3">
-<h3>
-<span class="header-section-number">10.8.3</span> Access<a class="anchor" aria-label="anchor" href="#access"><i class="fas fa-link"></i></a>
+<div id="access" class="section level3 unnumbered">
+<h3>Access<a class="anchor" aria-label="anchor" href="#access"><i class="fas fa-link"></i></a>
 </h3>
 <p><strong>Element ID</strong><br>
 Use brackets <code>[]</code> when accessing specific elements in an object. For example, if you want to access element #2 in the vector <code>x</code>, you may specify as <code>x[2]</code>:</p>
@@ -260,13 +255,11 @@ R provides many ways to access elements that suffice specific conditions. You ca
 <pre><code>## [1] 3 5</code></pre>
 </div>
 </div>
-<div id="matrix" class="section level2" number="10.9">
-<h2>
-<span class="header-section-number">10.9</span> Matrix<a class="anchor" aria-label="anchor" href="#matrix"><i class="fas fa-link"></i></a>
+<div id="matrix" class="section level2 unnumbered">
+<h2>Matrix<a class="anchor" aria-label="anchor" href="#matrix"><i class="fas fa-link"></i></a>
 </h2>
-<div id="create-matrix" class="section level3" number="10.9.1">
-<h3>
-<span class="header-section-number">10.9.1</span> Create Matrix<a class="anchor" aria-label="anchor" href="#create-matrix"><i class="fas fa-link"></i></a>
+<div id="create-matrix" class="section level3 unnumbered">
+<h3>Create Matrix<a class="anchor" aria-label="anchor" href="#create-matrix"><i class="fas fa-link"></i></a>
 </h3>
 <p>Matrix is a set of elements (<em>single data type</em>) that are organized into rows and columns:</p>
 <div class="sourceCode" id="cb327"><pre class="downlit sourceCode r">
@@ -293,9 +286,8 @@ R provides many ways to access elements that suffice specific conditions. You ca
 ## [2,]    2    5    8
 ## [3,]    3    6    9</code></pre>
 </div>
-<div id="check-features-1" class="section level3" number="10.9.2">
-<h3>
-<span class="header-section-number">10.9.2</span> Check Features<a class="anchor" aria-label="anchor" href="#check-features-1"><i class="fas fa-link"></i></a>
+<div id="check-features-1" class="section level3 unnumbered">
+<h3>Check Features<a class="anchor" aria-label="anchor" href="#check-features-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>R provides many functions to examine features of matrix data, for example:</p>
 <ul>
@@ -341,9 +333,8 @@ R provides many ways to access elements that suffice specific conditions. You ca
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 3 2</code></pre>
 </div>
-<div id="access-1" class="section level3" number="10.9.3">
-<h3>
-<span class="header-section-number">10.9.3</span> Access<a class="anchor" aria-label="anchor" href="#access-1"><i class="fas fa-link"></i></a>
+<div id="access-1" class="section level3 unnumbered">
+<h3>Access<a class="anchor" aria-label="anchor" href="#access-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>When accessing matrix elements, you need to pick row(s) and/or column(s), for example:</p>
 <div class="sourceCode" id="cb349"><pre class="downlit sourceCode r">
@@ -407,9 +398,8 @@ R provides many ways to access elements that suffice specific conditions. You ca
 ## [7,]   3   3</code></pre>
 </div>
 </div>
-<div id="data-frame" class="section level2" number="10.10">
-<h2>
-<span class="header-section-number">10.10</span> Data Frame<a class="anchor" aria-label="anchor" href="#data-frame"><i class="fas fa-link"></i></a>
+<div id="data-frame" class="section level2 unnumbered">
+<h2>Data Frame<a class="anchor" aria-label="anchor" href="#data-frame"><i class="fas fa-link"></i></a>
 </h2>
 <p>A data frame is a collection of elements organized into rows and columns, but it differs from a matrix in several ways.</p>
 <ul>
@@ -457,13 +447,11 @@ In the following example, the variables <code>x</code> and <code>y</code> are or
 ## 2  Pristine  2.2
 ## 4 Disturbed 50.0</code></pre>
 </div>
-<div id="exercise" class="section level2" number="10.11">
-<h2>
-<span class="header-section-number">10.11</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise"><i class="fas fa-link"></i></a>
+<div id="exercise" class="section level2 unnumbered">
+<h2>Exercise<a class="anchor" aria-label="anchor" href="#exercise"><i class="fas fa-link"></i></a>
 </h2>
-<div id="vector-1" class="section level3" number="10.11.1">
-<h3>
-<span class="header-section-number">10.11.1</span> Vector<a class="anchor" aria-label="anchor" href="#vector-1"><i class="fas fa-link"></i></a>
+<div id="vector-1" class="section level3 unnumbered">
+<h3>Vector<a class="anchor" aria-label="anchor" href="#vector-1"><i class="fas fa-link"></i></a>
 </h3>
 <ol style="list-style-type: lower-alpha">
 <li>Create three numeric vectors with length 3, 6 and 20, respectively. Each vector must be created using different functions in R.</li>
@@ -480,9 +468,8 @@ In the following example, the variables <code>x</code> and <code>y</code> are or
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="matrix-1" class="section level3" number="10.11.2">
-<h3>
-<span class="header-section-number">10.11.2</span> Matrix<a class="anchor" aria-label="anchor" href="#matrix-1"><i class="fas fa-link"></i></a>
+<div id="matrix-1" class="section level3 unnumbered">
+<h3>Matrix<a class="anchor" aria-label="anchor" href="#matrix-1"><i class="fas fa-link"></i></a>
 </h3>
 <ol style="list-style-type: lower-alpha">
 <li>Create a numeric matrix with 4 rows and 4 columns. Each column must contain identical elements.</li>
@@ -499,9 +486,8 @@ In the following example, the variables <code>x</code> and <code>y</code> are or
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">10</span>, ncol <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="data-frame-1" class="section level3" number="10.11.3">
-<h3>
-<span class="header-section-number">10.11.3</span> Data Frame<a class="anchor" aria-label="anchor" href="#data-frame-1"><i class="fas fa-link"></i></a>
+<div id="data-frame-1" class="section level3 unnumbered">
+<h3>Data Frame<a class="anchor" aria-label="anchor" href="#data-frame-1"><i class="fas fa-link"></i></a>
 </h3>
 <ol style="list-style-type: lower-alpha">
 <li>Create a data frame of 3 variables with 10 elements (name variables as <code>x</code>, <code>y</code> and <code>z</code>. <code>x</code> must be <code>character</code> while <code>y</code> and <code>z</code> must be <code>numeric</code>.</li>
@@ -529,27 +515,27 @@ In the following example, the variables <code>x</code> and <code>y</code> are or
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#appendix-data-structure">Appendix: Data Structure</a></li>
-<li><a class="nav-link" href="#overview"><span class="header-section-number">10.7</span> Overview</a></li>
+<li><a class="nav-link" href="#overview">Overview</a></li>
 <li>
-<a class="nav-link" href="#vector"><span class="header-section-number">10.8</span> Vector</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#create-vector"><span class="header-section-number">10.8.1</span> Create Vector</a></li>
-<li><a class="nav-link" href="#check-features"><span class="header-section-number">10.8.2</span> Check Features</a></li>
-<li><a class="nav-link" href="#access"><span class="header-section-number">10.8.3</span> Access</a></li>
+<a class="nav-link" href="#vector">Vector</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#create-vector">Create Vector</a></li>
+<li><a class="nav-link" href="#check-features">Check Features</a></li>
+<li><a class="nav-link" href="#access">Access</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#matrix"><span class="header-section-number">10.9</span> Matrix</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#create-matrix"><span class="header-section-number">10.9.1</span> Create Matrix</a></li>
-<li><a class="nav-link" href="#check-features-1"><span class="header-section-number">10.9.2</span> Check Features</a></li>
-<li><a class="nav-link" href="#access-1"><span class="header-section-number">10.9.3</span> Access</a></li>
+<a class="nav-link" href="#matrix">Matrix</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#create-matrix">Create Matrix</a></li>
+<li><a class="nav-link" href="#check-features-1">Check Features</a></li>
+<li><a class="nav-link" href="#access-1">Access</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#data-frame"><span class="header-section-number">10.10</span> Data Frame</a></li>
+<li><a class="nav-link" href="#data-frame">Data Frame</a></li>
 <li>
-<a class="nav-link" href="#exercise"><span class="header-section-number">10.11</span> Exercise</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#vector-1"><span class="header-section-number">10.11.1</span> Vector</a></li>
-<li><a class="nav-link" href="#matrix-1"><span class="header-section-number">10.11.2</span> Matrix</a></li>
-<li><a class="nav-link" href="#data-frame-1"><span class="header-section-number">10.11.3</span> Data Frame</a></li>
+<a class="nav-link" href="#exercise">Exercise</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#vector-1">Vector</a></li>
+<li><a class="nav-link" href="#matrix-1">Matrix</a></li>
+<li><a class="nav-link" href="#data-frame-1">Data Frame</a></li>
 </ul>
 </li>
 </ul>
@@ -569,7 +555,7 @@ In the following example, the variables <code>x</code> and <code>y</code> are or
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2023-07-24.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2023-08-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -271,7 +271,7 @@ Figure 9.2: Likelihood of observing three count data points <span class="math in
 <h3>
 <span class="header-section-number">9.2.2</span> General case<a class="anchor" aria-label="anchor" href="#general-case"><i class="fas fa-link"></i></a>
 </h3>
-<p>In practice, obtaining the MLE analytically can be highly complex and often infeasible. Consequently, the GLM framework relies on numerical search algorithms to approximate the MLE estimates. Within GLMs, it is common to establish relationships between the mean <span class="math inline">\(\lambda\)</span> and explanatory variables in order to investigate their influences. For instance:</p>
+<p>In practice, obtaining the MLE analytically can be highly complex and often infeasible. Consequently, the GLM framework relies on numerical search algorithms to approximate the MLE estimates (see <a href="https://math.mcmaster.ca/~bolker/emdbook/chap7A.pdf">Ben Bolker’s book chapter</a> for full details; in particular, quasi-Newton methods). Within GLMs, it is common to establish relationships between the mean <span class="math inline">\(\lambda\)</span> and explanatory variables in order to investigate their influences. For instance:</p>
 <p><span class="math display">\[
 \begin{aligned}
 y_i &amp;\sim \mbox{Poisson}(\lambda_i)\\
@@ -307,7 +307,42 @@ y_i &amp;\sim \mbox{Poisson}(\lambda_i)\\
 <h2>
 <span class="header-section-number">9.3</span> Laboratory<a class="anchor" aria-label="anchor" href="#laboratory-8"><i class="fas fa-link"></i></a>
 </h2>
-
+<div id="binomial-distribution" class="section level3" number="9.3.1">
+<h3>
+<span class="header-section-number">9.3.1</span> Binomial Distribution<a class="anchor" aria-label="anchor" href="#binomial-distribution"><i class="fas fa-link"></i></a>
+</h3>
+<p>The binomial distribution is a probability distribution that describes the number of successes in a fixed number of independent Bernoulli trials, where each trial has the same probability of success, denoted by <span class="math inline">\(p\)</span>. The probability mass function (PMF) of a binomial distribution is given by:</p>
+<p><span class="math display">\[
+\Pr(y = k) = \begin{pmatrix} N\\ k \end{pmatrix} p^k(1 - p)^{N-k}
+\]</span></p>
+<p>where <span class="math inline">\(\begin{pmatrix} N\\ k \end{pmatrix}\)</span> is the binomial coefficient, representing the number of ways to choose <span class="math inline">\(k\)</span> successes out of <span class="math inline">\(N\)</span> trials.</p>
+<ol style="list-style-type: decimal">
+<li><p>The function <code><a href="https://rdrr.io/r/stats/Binomial.html">dbinom()</a></code> calculates <span class="math inline">\(\Pr(y = k)\)</span> for a binomial distribution. Using this function, calculate the likelihood of observing the vector <span class="math inline">\(\pmb{y} = \{2, 2, 0, 0, 3, 1, 3, 3, 4, 3\}\)</span> for the following values of <span class="math inline">\(p\)</span>: <span class="math inline">\(p \in \{0, 0.01, 0.02, ..., 1.0\}\)</span>, where <span class="math inline">\(N = 10\)</span>.</p></li>
+<li><p>From the set of <span class="math inline">\(p\)</span> examined, find the parameter value that maximizes the likelihood.</p></li>
+<li><p>Using the <span class="math inline">\(p\)</span> that maximizes the likelihood, calculate <span class="math inline">\(N \times p\)</span>. Compare this value with the sample mean of the vector <span class="math inline">\(\pmb{y}\)</span>.</p></li>
+</ol>
+</div>
+<div id="normal-distribution-1" class="section level3" number="9.3.2">
+<h3>
+<span class="header-section-number">9.3.2</span> Normal Distribution<a class="anchor" aria-label="anchor" href="#normal-distribution-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>The normal distribution is a continuous probability distribution that describes the distribution of a continuous random variable. It is characterized by its mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma\)</span>. The probability density function (PDF) of a normal distribution is given by:</p>
+<p><span class="math display">\[
+f(y) = \frac{1}{\sqrt{2 \pi} \sigma} \exp\left(-\frac{(y - \mu)^2}{2 \sigma^2}\right)
+\]</span></p>
+<p>As the normal distribution deals with continuous variables, we need a technique to derive the Maximum Likelihood Estimation (MLE). For this purpose, we will consider <span class="math inline">\(f(y)\)</span> as the height of a rectangle to simplify the problem, and use <span class="math inline">\(\Delta y\)</span> as the base length. The probability of observing a value <span class="math inline">\(y = k\)</span>, denoted as <span class="math inline">\(\Pr(y = k)\)</span>, can then be approximated as the area of this rectangle:</p>
+<p><span class="math display">\[
+\Pr(y = k) = \text{rectangle area} = f(y) \times \Delta y
+\]</span></p>
+<p>Assuming we have <span class="math inline">\(N\)</span> observations, the likelihood of observing the entire vector <span class="math inline">\(\pmb{y}\)</span> is given by:</p>
+<p><span class="math display">\[
+L(\mu, \sigma | \pmb{y}) = \prod_{i}^N f(y_i) \Delta y
+\]</span></p>
+<ol style="list-style-type: decimal">
+<li><p>Yield the logarithm of <span class="math inline">\(L(\mu, \sigma | \pmb{y})\)</span>.</p></li>
+<li><p>Derive the first-order derivative of the log-likelihood function with respect to <span class="math inline">\(\mu\)</span> and solve for <span class="math inline">\(\mu\)</span> by setting <span class="math inline">\(\frac{\partial \log L(\mu, \sigma)}{\partial \mu} = 0\)</span>. Assume <span class="math inline">\(\sigma\)</span> is a constant.</p></li>
+</ol>
+</div>
 </div>
 </div>
   <div class="chapter-nav">
@@ -324,7 +359,12 @@ y_i &amp;\sim \mbox{Poisson}(\lambda_i)\\
 <li><a class="nav-link" href="#general-case"><span class="header-section-number">9.2.2</span> General case</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#laboratory-8"><span class="header-section-number">9.3</span> Laboratory</a></li>
+<li>
+<a class="nav-link" href="#laboratory-8"><span class="header-section-number">9.3</span> Laboratory</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#binomial-distribution"><span class="header-section-number">9.3.1</span> Binomial Distribution</a></li>
+<li><a class="nav-link" href="#normal-distribution-1"><span class="header-section-number">9.3.2</span> Normal Distribution</a></li>
+</ul>
+</li>
 </ul>
 
       <div class="book-extra">
@@ -342,7 +382,7 @@ y_i &amp;\sim \mbox{Poisson}(\lambda_i)\\
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2023-07-24.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2023-08-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

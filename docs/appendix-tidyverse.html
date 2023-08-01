@@ -6,15 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Appendix: Tidyverse | BIOSTATS</title>
 <meta name="author" content="Akira Terui">
-<meta name="description" content="10.12 Overview R packages are collections of functions that extend the functionality of the R programming language. They provide a convenient way for users to access and utilize specialized tools...">
+<meta name="description" content="Overview R packages are collections of functions that extend the functionality of the R programming language. They provide a convenient way for users to access and utilize specialized tools for...">
 <meta name="generator" content="bookdown 0.29 with bs4_book()">
 <meta property="og:title" content="Appendix: Tidyverse | BIOSTATS">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://bookdown.org/janedoe/bookdown-demo/appendix-tidyverse.html">
-<meta property="og:description" content="10.12 Overview R packages are collections of functions that extend the functionality of the R programming language. They provide a convenient way for users to access and utilize specialized tools...">
+<meta property="og:description" content="Overview R packages are collections of functions that extend the functionality of the R programming language. They provide a convenient way for users to access and utilize specialized tools for...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Appendix: Tidyverse | BIOSTATS">
-<meta name="twitter:description" content="10.12 Overview R packages are collections of functions that extend the functionality of the R programming language. They provide a convenient way for users to access and utilize specialized tools...">
+<meta name="twitter:description" content="Overview R packages are collections of functions that extend the functionality of the R programming language. They provide a convenient way for users to access and utilize specialized tools for...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -70,9 +70,8 @@
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="appendix-tidyverse" class="section level1 unnumbered">
 <h1>Appendix: Tidyverse<a class="anchor" aria-label="anchor" href="#appendix-tidyverse"><i class="fas fa-link"></i></a>
 </h1>
-<div id="overview-1" class="section level2" number="10.12">
-<h2>
-<span class="header-section-number">10.12</span> Overview<a class="anchor" aria-label="anchor" href="#overview-1"><i class="fas fa-link"></i></a>
+<div id="overview-1" class="section level2 unnumbered">
+<h2>Overview<a class="anchor" aria-label="anchor" href="#overview-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>R packages are collections of functions that extend the functionality of the R programming language. They provide a convenient way for users to access and utilize specialized tools for data analysis, visualization, statistical modeling, and more. Among them, <code>tidyverse</code> provides very useful functions for data manipulation and visualization.</p>
 <p><code>tidyverse::</code> bundles R packages designed to make data manipulation, exploration, and visualization more efficient and intuitive. Developed by Hadley Wickham and other contributors, the Tidyverse packages share a common philosophy and syntax, emphasizing a consistent and tidy data format. The core packages, such as <code>dplyr::</code>, <code>tidyr::</code>, and <code>ggplot2::</code>, provide powerful tools for data wrangling, reshaping, and creating visualizations.</p>
@@ -89,19 +88,16 @@
 <li><a href="https://www.data-to-viz.com/">from Data to Viz</a></li>
 </ul>
 </div>
-<div id="data-manipulation" class="section level2" number="10.13">
-<h2>
-<span class="header-section-number">10.13</span> Data Manipulation<a class="anchor" aria-label="anchor" href="#data-manipulation"><i class="fas fa-link"></i></a>
+<div id="data-manipulation" class="section level2 unnumbered">
+<h2>Data Manipulation<a class="anchor" aria-label="anchor" href="#data-manipulation"><i class="fas fa-link"></i></a>
 </h2>
-<div id="data-format" class="section level3" number="10.13.1">
-<h3>
-<span class="header-section-number">10.13.1</span> Data Format<a class="anchor" aria-label="anchor" href="#data-format"><i class="fas fa-link"></i></a>
+<div id="data-format" class="section level3 unnumbered">
+<h3>Data Format<a class="anchor" aria-label="anchor" href="#data-format"><i class="fas fa-link"></i></a>
 </h3>
 <p><code>dplyr::</code> and <code>tidyr::</code> (and others) offer useful functions for data manipulation. Key manipulations include: row/column manipulations, group operation, reshape, and more.</p>
 </div>
-<div id="row-manipulation" class="section level3" number="10.13.2">
-<h3>
-<span class="header-section-number">10.13.2</span> Row Manipulation<a class="anchor" aria-label="anchor" href="#row-manipulation"><i class="fas fa-link"></i></a>
+<div id="row-manipulation" class="section level3 unnumbered">
+<h3>Row Manipulation<a class="anchor" aria-label="anchor" href="#row-manipulation"><i class="fas fa-link"></i></a>
 </h3>
 <p><code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code>: select/remove rows</p>
 <div class="sourceCode" id="cb389"><pre class="downlit sourceCode r">
@@ -136,9 +132,8 @@
 <span><span class="co"># arrange in an descending order</span></span>
 <span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="column-manipulation" class="section level3" number="10.13.3">
-<h3>
-<span class="header-section-number">10.13.3</span> Column Manipulation<a class="anchor" aria-label="anchor" href="#column-manipulation"><i class="fas fa-link"></i></a>
+<div id="column-manipulation" class="section level3 unnumbered">
+<h3>Column Manipulation<a class="anchor" aria-label="anchor" href="#column-manipulation"><i class="fas fa-link"></i></a>
 </h3>
 <p><code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code>: select/remove column(s)</p>
 <div class="sourceCode" id="cb391"><pre class="downlit sourceCode r">
@@ -183,9 +178,8 @@
 ## 10          4.9         3.1          1.5         0.1 setosa     10
 ## # ℹ 140 more rows</code></pre>
 </div>
-<div id="piping" class="section level3" number="10.13.4">
-<h3>
-<span class="header-section-number">10.13.4</span> Piping<a class="anchor" aria-label="anchor" href="#piping"><i class="fas fa-link"></i></a>
+<div id="piping" class="section level3 unnumbered">
+<h3>Piping<a class="anchor" aria-label="anchor" href="#piping"><i class="fas fa-link"></i></a>
 </h3>
 <p><code>%&gt;%</code> (pipe) allows sequential operations of multiple functions (shortcut: <code>Ctr + Shift + M</code>). The pipe passes the object to the following function as the first argument.</p>
 <div class="sourceCode" id="cb394"><pre class="downlit sourceCode r">
@@ -228,9 +222,8 @@
 ## 10          7.2
 ## # ℹ 40 more rows</code></pre>
 </div>
-<div id="reshape" class="section level3" number="10.13.5">
-<h3>
-<span class="header-section-number">10.13.5</span> Reshape<a class="anchor" aria-label="anchor" href="#reshape"><i class="fas fa-link"></i></a>
+<div id="reshape" class="section level3 unnumbered">
+<h3>Reshape<a class="anchor" aria-label="anchor" href="#reshape"><i class="fas fa-link"></i></a>
 </h3>
 <p><code><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider()</a></code> : reshape a data frame to a wide format</p>
 <div class="sourceCode" id="cb398"><pre class="downlit sourceCode r">
@@ -281,9 +274,8 @@
 ## 10     4 setosa              4.6
 ## # ℹ 140 more rows</code></pre>
 </div>
-<div id="group-operation" class="section level3" number="10.13.6">
-<h3>
-<span class="header-section-number">10.13.6</span> Group Operation<a class="anchor" aria-label="anchor" href="#group-operation"><i class="fas fa-link"></i></a>
+<div id="group-operation" class="section level3 unnumbered">
+<h3>Group Operation<a class="anchor" aria-label="anchor" href="#group-operation"><i class="fas fa-link"></i></a>
 </h3>
 <p><code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> &amp; <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code>: group-by-group operation. <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> does not retain individual rows.</p>
 <div class="sourceCode" id="cb402"><pre class="downlit sourceCode r">
@@ -331,9 +323,8 @@
 ## 10          4.9         3.1          1.5         0.1 setosa   5.01
 ## # ℹ 140 more rows</code></pre>
 </div>
-<div id="join" class="section level3" number="10.13.7">
-<h3>
-<span class="header-section-number">10.13.7</span> Join<a class="anchor" aria-label="anchor" href="#join"><i class="fas fa-link"></i></a>
+<div id="join" class="section level3 unnumbered">
+<h3>Join<a class="anchor" aria-label="anchor" href="#join"><i class="fas fa-link"></i></a>
 </h3>
 <p><code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join()</a></code>: merge data frames based on column(s)</p>
 <div class="sourceCode" id="cb408"><pre class="downlit sourceCode r">
@@ -436,16 +427,14 @@
 ## 2 B           2 awesome
 ## 3 C           3 &lt;NA&gt;</code></pre>
 </div>
-<div id="exercise-1" class="section level3" number="10.13.8">
-<h3>
-<span class="header-section-number">10.13.8</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-1"><i class="fas fa-link"></i></a>
+<div id="exercise-1" class="section level3 unnumbered">
+<h3>Exercise<a class="anchor" aria-label="anchor" href="#exercise-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>Complete the exercise <a href="https://m-clark.github.io/data-processing-and-visualization/tidyverse.html#tidyverse-exercises">here</a>.</p>
 </div>
 </div>
-<div id="visualization" class="section level2" number="10.14">
-<h2>
-<span class="header-section-number">10.14</span> Visualization<a class="anchor" aria-label="anchor" href="#visualization"><i class="fas fa-link"></i></a>
+<div id="visualization" class="section level2 unnumbered">
+<h2>Visualization<a class="anchor" aria-label="anchor" href="#visualization"><i class="fas fa-link"></i></a>
 </h2>
 <p><code>ggplot2::</code> offers a range of convenient functions for data visualization. The foundational function, <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code>, provides the initial framework for adding supplementary layers using the <code>+</code> operator. In ggplot(), we define variables plotted on x- and y-axis through <code><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes()</a></code>. For example:</p>
 <div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="appendix-tidyverse.html#cb420-1" tabindex="-1"></a><span class="co"># without pipe</span></span>
@@ -460,9 +449,8 @@
 <span id="cb420-10"><a href="appendix-tidyverse.html#cb420-10" tabindex="-1"></a>                       <span class="at">y =</span> Sepal.Width)) <span class="sc">+</span></span>
 <span id="cb420-11"><a href="appendix-tidyverse.html#cb420-11" tabindex="-1"></a>  <span class="co"># additional layers...  </span></span></code></pre></div>
 <p>Please note that <code><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes()</a></code> refers to columns in the data frame. Variables names that do not exist in the data frame cannot be used.</p>
-<div id="point" class="section level3" number="10.14.1">
-<h3>
-<span class="header-section-number">10.14.1</span> Point<a class="anchor" aria-label="anchor" href="#point"><i class="fas fa-link"></i></a>
+<div id="point" class="section level3 unnumbered">
+<h3>Point<a class="anchor" aria-label="anchor" href="#point"><i class="fas fa-link"></i></a>
 </h3>
 <p><code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code> : Add a point layer</p>
 <div class="sourceCode" id="cb421"><pre class="downlit sourceCode r">
@@ -481,9 +469,8 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-131-2.png" width="672" style="display: block; margin: auto;"></div>
 </div>
-<div id="line" class="section level3" number="10.14.2">
-<h3>
-<span class="header-section-number">10.14.2</span> Line<a class="anchor" aria-label="anchor" href="#line"><i class="fas fa-link"></i></a>
+<div id="line" class="section level3 unnumbered">
+<h3>Line<a class="anchor" aria-label="anchor" href="#line"><i class="fas fa-link"></i></a>
 </h3>
 <p><code><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line()</a></code> : Add a line layer</p>
 <div class="sourceCode" id="cb423"><pre class="downlit sourceCode r">
@@ -498,9 +485,8 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-132-1.png" width="672" style="display: block; margin: auto;"></div>
 </div>
-<div id="histogram" class="section level3" number="10.14.3">
-<h3>
-<span class="header-section-number">10.14.3</span> Histogram<a class="anchor" aria-label="anchor" href="#histogram"><i class="fas fa-link"></i></a>
+<div id="histogram" class="section level3 unnumbered">
+<h3>Histogram<a class="anchor" aria-label="anchor" href="#histogram"><i class="fas fa-link"></i></a>
 </h3>
 <p><code><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram()</a></code> : add a histogram layer</p>
 <div class="sourceCode" id="cb424"><pre class="downlit sourceCode r">
@@ -522,9 +508,8 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-133-3.png" width="672" style="display: block; margin: auto;"></div>
 </div>
-<div id="boxplot" class="section level3" number="10.14.4">
-<h3>
-<span class="header-section-number">10.14.4</span> Boxplot<a class="anchor" aria-label="anchor" href="#boxplot"><i class="fas fa-link"></i></a>
+<div id="boxplot" class="section level3 unnumbered">
+<h3>Boxplot<a class="anchor" aria-label="anchor" href="#boxplot"><i class="fas fa-link"></i></a>
 </h3>
 <p><code><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot()</a></code> : add a boxplot layer</p>
 <div class="sourceCode" id="cb427"><pre class="downlit sourceCode r">
@@ -551,9 +536,8 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"darkgrey"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-134-3.png" width="672" style="display: block; margin: auto;"></div>
 </div>
-<div id="exercise-2" class="section level3" number="10.14.5">
-<h3>
-<span class="header-section-number">10.14.5</span> Exercise<a class="anchor" aria-label="anchor" href="#exercise-2"><i class="fas fa-link"></i></a>
+<div id="exercise-2" class="section level3 unnumbered">
+<h3>Exercise<a class="anchor" aria-label="anchor" href="#exercise-2"><i class="fas fa-link"></i></a>
 </h3>
 <p>In maintenance</p>
 
@@ -567,26 +551,26 @@
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#appendix-tidyverse">Appendix: Tidyverse</a></li>
-<li><a class="nav-link" href="#overview-1"><span class="header-section-number">10.12</span> Overview</a></li>
+<li><a class="nav-link" href="#overview-1">Overview</a></li>
 <li>
-<a class="nav-link" href="#data-manipulation"><span class="header-section-number">10.13</span> Data Manipulation</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#data-format"><span class="header-section-number">10.13.1</span> Data Format</a></li>
-<li><a class="nav-link" href="#row-manipulation"><span class="header-section-number">10.13.2</span> Row Manipulation</a></li>
-<li><a class="nav-link" href="#column-manipulation"><span class="header-section-number">10.13.3</span> Column Manipulation</a></li>
-<li><a class="nav-link" href="#piping"><span class="header-section-number">10.13.4</span> Piping</a></li>
-<li><a class="nav-link" href="#reshape"><span class="header-section-number">10.13.5</span> Reshape</a></li>
-<li><a class="nav-link" href="#group-operation"><span class="header-section-number">10.13.6</span> Group Operation</a></li>
-<li><a class="nav-link" href="#join"><span class="header-section-number">10.13.7</span> Join</a></li>
-<li><a class="nav-link" href="#exercise-1"><span class="header-section-number">10.13.8</span> Exercise</a></li>
+<a class="nav-link" href="#data-manipulation">Data Manipulation</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#data-format">Data Format</a></li>
+<li><a class="nav-link" href="#row-manipulation">Row Manipulation</a></li>
+<li><a class="nav-link" href="#column-manipulation">Column Manipulation</a></li>
+<li><a class="nav-link" href="#piping">Piping</a></li>
+<li><a class="nav-link" href="#reshape">Reshape</a></li>
+<li><a class="nav-link" href="#group-operation">Group Operation</a></li>
+<li><a class="nav-link" href="#join">Join</a></li>
+<li><a class="nav-link" href="#exercise-1">Exercise</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#visualization"><span class="header-section-number">10.14</span> Visualization</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#point"><span class="header-section-number">10.14.1</span> Point</a></li>
-<li><a class="nav-link" href="#line"><span class="header-section-number">10.14.2</span> Line</a></li>
-<li><a class="nav-link" href="#histogram"><span class="header-section-number">10.14.3</span> Histogram</a></li>
-<li><a class="nav-link" href="#boxplot"><span class="header-section-number">10.14.4</span> Boxplot</a></li>
-<li><a class="nav-link" href="#exercise-2"><span class="header-section-number">10.14.5</span> Exercise</a></li>
+<a class="nav-link" href="#visualization">Visualization</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#point">Point</a></li>
+<li><a class="nav-link" href="#line">Line</a></li>
+<li><a class="nav-link" href="#histogram">Histogram</a></li>
+<li><a class="nav-link" href="#boxplot">Boxplot</a></li>
+<li><a class="nav-link" href="#exercise-2">Exercise</a></li>
 </ul>
 </li>
 </ul>
@@ -606,7 +590,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2023-07-24.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2023-08-01.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

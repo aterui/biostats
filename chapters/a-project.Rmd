@@ -1,6 +1,6 @@
 # Appendix: Project {.unnumbered}
 
-## R Project
+## R Project {.unnumbered}
 
 Throughout this book, I will use the 'R Project' as the core workspace unit. It serves as a centralized location where all relevant materials, such as R scripts (`.R`) and data files, are consolidated. There are various ways to organize your project, but I prefer creating a single 'R Project' for a set of scripts and data that contribute to a specific publication (see example [here](https://github.com/aterui/public-proj_stream-diversity)). To set up an 'R Project,' you'll need to have both *RStudio* and the base *R* software installed. While *R* can be used independently, I highly recommend using it in conjunction with *RStudio* due to the latter's numerous features that facilitate data analysis. You can download *R* and *RStudio* from the following websites:
 
@@ -28,7 +28,7 @@ x
 
 Excellent! While it is possible to work with your data using this approach, it is important to highlight that **it is generally regarded as a poor practice**. As your project evolves, you will accumulate a substantial amount of material, such as writing more than 2000 lines of code for a single project. Consequently, it becomes essential to implement effective code management strategies. How do you presently handle code management?
 
-### Script Editor
+### Script Editor {.unnumbered}
 
 It is highly recommended to manage your scripts in the `Editor` instead. The `Editor` is where you draft and fine-tune your code before executing it in the `Console`. To create space for the `Editor`, press `Ctrl + Shift + N`. A new panel will appear in the top left corner. Let's type the following script in the `Editor`. Please note that the key combination `Ctrl + Shift + N` assumes a Windows or Linux operating system. If you're using a Mac, you can use `Command + Shift + N` instead.
 
@@ -40,7 +40,7 @@ Then, hit `Ctr + S` to save the `Editor` file. *RStudio* will prompt you to ente
 
 [^a-project-1]: In *R*, an editor file has an extension of `.R`.
 
-### File Name
+### File Name {.unnumbered}
 
 It is also crucial to establish consistent naming **rules** for your files. As your project progresses, the number of files within each sub-directory may increase significantly. Without clear and consistent naming rules for your files, navigating through the project can become challenging, not only for yourself but also for others involved. To alleviate this issue, consider implementing the following recommendations for file naming:
 
@@ -54,7 +54,7 @@ It is also crucial to establish consistent naming **rules** for your files. As y
     -   Do: R scripts for figures always start with a common prefix, e.g., `figure_XXX.R` `figure_YYY.R`(`XXX` and `YYY` specifies further details).
     -   Don't: R scripts for figures start with random text, e.g., `XXX_fig.R` , `Figure_Y2.R` , `plotB.R`.
 
-### Structure Your Project
+### Structure Your Project {.unnumbered}
 
 If you fail to save or haphazardly store your code files on your computer, the risk of losing essential items becomes inevitable sooner or later. To mitigate this risk, I highly recommend gathering all the relevant materials within a single `R Project`. To create a new `R Project`, follow the procedure outlined below:
 
@@ -77,6 +77,6 @@ The internal structure of an `R Project` is crucial for effective navigation and
 
 : (#tab:str) Suggested internal structure of `R Project`
 
-## Robust coding
+## Robust coding {.unnumbered}
 
 While it is not mandatory, I highly recommend using *RStudio* in conjunction with *Git* and *GitHub*. Coding is inherently prone to errors, and even the most skilled programmers make mistakes---without exception. However, the crucial difference between beginner and advanced programmers lies in their ability to develop robust coding practices accompanied by a self-error-detection system. *Git* plays a vital role in this process. Throughout this book, I will occasionally delve into the importance of *Git* and its usage.

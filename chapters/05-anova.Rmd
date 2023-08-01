@@ -245,7 +245,7 @@ The choice of post-hoc test depends on the specific research question, assumptio
 
 ## Laboratory
 
-### Application to `PlantGrowth` 
+### Application to `PlantGrowth`
 
 In R, there is a built-in data set called `PrantGrowth`. To analyze this data set, carry out the following tasks:
 

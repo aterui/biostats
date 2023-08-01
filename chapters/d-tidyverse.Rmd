@@ -4,7 +4,7 @@ source(here::here("code/library.R"))
 
 # Appendix: Tidyverse {.unnumbered}
 
-## Overview
+## Overview {.unnumbered}
 
 R packages are collections of functions that extend the functionality of the R programming language. They provide a convenient way for users to access and utilize specialized tools for data analysis, visualization, statistical modeling, and more. Among them, `tidyverse` provides very useful functions for data manipulation and visualization.
 
@@ -25,13 +25,13 @@ I cover the basics for those who are not familiar with `tidyverse::`, but there 
 -   [ggplot2](https://r-graph-gallery.com/ggplot2-package.html)
 -   [from Data to Viz](https://www.data-to-viz.com/)
 
-## Data Manipulation
+## Data Manipulation {.unnumbered}
 
-### Data Format
+### Data Format {.unnumbered}
 
 `dplyr::` and `tidyr::` (and others) offer useful functions for data manipulation. Key manipulations include: row/column manipulations, group operation, reshape, and more.
 
-### Row Manipulation
+### Row Manipulation {.unnumbered}
 
 `filter()`: select/remove rows
 
@@ -72,7 +72,7 @@ arrange(iris, Sepal.Length)
 arrange(iris, desc(Sepal.Length))
 ```
 
-### Column Manipulation
+### Column Manipulation {.unnumbered}
 
 `select()`: select/remove column(s)
 
@@ -108,7 +108,7 @@ x <- 1:150
 mutate(iris, x = x)
 ```
 
-### Piping
+### Piping {.unnumbered}
 
 `%>%` (pipe) allows sequential operations of multiple functions (shortcut: `Ctr + Shift + M`). The pipe passes the object to the following function as the first argument.
 
@@ -125,7 +125,7 @@ iris %>%
   select(Sepal.Length)
 ```
 
-### Reshape
+### Reshape {.unnumbered}
 
 `pivot_wider()` : reshape a data frame to a wide format
 
@@ -153,7 +153,7 @@ iris_l <- iris_w %>%
 print(iris_l)
 ```
 
-### Group Operation
+### Group Operation {.unnumbered}
 
 `group_by()` & `summarize()`: group-by-group operation. `summarize()` does not retain individual rows.
 
@@ -180,7 +180,7 @@ iris %>%
   ungroup()
 ```
 
-### Join
+### Join {.unnumbered}
 
 `left_join()`: merge data frames based on column(s)
 
@@ -246,11 +246,11 @@ left_join(x = df1,
           by = c("Species", "x"))
 ```
 
-### Exercise
+### Exercise {.unnumbered}
 
 Complete the exercise [here](https://m-clark.github.io/data-processing-and-visualization/tidyverse.html#tidyverse-exercises).
 
-## Visualization
+## Visualization {.unnumbered}
 
 `ggplot2::` offers a range of convenient functions for data visualization. The foundational function, `ggplot()`, provides the initial framework for adding supplementary layers using the `+` operator. In ggplot(), we define variables plotted on x- and y-axis through `aes()`. For example:
 
@@ -270,7 +270,7 @@ iris %>%
 
 Please note that `aes()` refers to columns in the data frame. Variables names that do not exist in the data frame cannot be used.
 
-### Point
+### Point {.unnumbered}
 
 `geom_point()` : Add a point layer
 
@@ -289,7 +289,7 @@ iris %>%
   geom_point()
 ```
 
-### Line
+### Line {.unnumbered}
 
 `geom_line()` : Add a line layer
 
@@ -305,7 +305,7 @@ df0 %>%
   geom_line()
 ```
 
-### Histogram
+### Histogram {.unnumbered}
 
 `geom_histogram()` : add a histogram layer
 
@@ -326,7 +326,7 @@ iris %>%
   geom_histogram(bins = 50)
 ```
 
-### Boxplot
+### Boxplot {.unnumbered}
 
 `geom_boxplot()` : add a boxplot layer
 
@@ -352,6 +352,6 @@ iris %>%
   geom_boxplot(color = "darkgrey")
 ```
 
-### Exercise
+### Exercise {.unnumbered}
 
 In maintenance

@@ -12,6 +12,8 @@ We have extensively covered three important statistical analyses: the t-test, AN
 
 The Linear Model encompasses models that depict the connection between a response variable and one or more explanatory variables. It assumes that the error term follows a normal distribution. In this chapter, I will elucidate this framework and illustrate its relationship to the t-test, ANOVA, and regression analysis.
 
+**Key words**: level of measurement, dummy variable
+
 ## The Frame
 
 The apparent distinctiveness between the t-test, ANOVA, and regression analysis arises because they are applied to different types of data:
@@ -269,7 +271,7 @@ iris %>%
             aes(y = y_pred)) # redefine y values for lines; x and color are inherited from ggplot()
 ```
 
-### Variable Types
+### Level of Measurament
 
 1.  **Categorical Variables**: Qualitative or discrete characteristics that fall into specific categories or groups. They do not have a numerical value or order associated with them. Examples: gender (male/female), marital status (single/married/divorced), and color (red/green/blue).
 

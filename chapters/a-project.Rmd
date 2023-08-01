@@ -4,8 +4,8 @@
 
 Throughout this book, I will use the 'R Project' as the core workspace unit. It serves as a centralized location where all relevant materials, such as R scripts (`.R`) and data files, are consolidated. There are various ways to organize your project, but I prefer creating a single 'R Project' for a set of scripts and data that contribute to a specific publication (see example [here](https://github.com/aterui/public-proj_stream-diversity)). To set up an 'R Project,' you'll need to have both *RStudio* and the base *R* software installed. While *R* can be used independently, I highly recommend using it in conjunction with *RStudio* due to the latter's numerous features that facilitate data analysis. You can download *R* and *RStudio* from the following websites:
 
-- [R](https://www.r-project.org/) (you can choose any CRAN mirror for downloading)
-- RStudio
+-   [R](https://www.r-project.org/) (you can choose any CRAN mirror for downloading)
+-   RStudio
 
 Upon launching *RStudio*, you will encounter the interface depicted in Figure \@ref(fig:ui). Initially, the interface comprises three primary panels: the `Console`, `Environment`, and `Files`. The `Console` is where you write code and execute calculations, data manipulation, and analysis. The `Environment` panel lists the saved objects, while the `Files` panel displays files in a designated location on your computer.
 
@@ -67,12 +67,12 @@ A new window will appear, prompting you to name a directory and select a locatio
 The internal structure of an `R Project` is crucial for effective navigation and ensures clarity for both yourself and others when it is published. An `R Project` typically consists of various file types, such as `.R`, `.csv`, `.rds`, `.Rmd`, and others. Without an organized arrangement of these files, there is a high probability of encountering significant coding errors. Therefore, I place great importance on maintaining a well-structured project. In Table \@ref(tab:str), I present my recommended subdirectory structure.
 
 | Name        | Content                                                                                                                                                                       |
-|------------|-----------------------------------------------------------|
+|----------------|--------------------------------------------------------|
 | `README.md` | Markdown file explaining contents in the `R Project`. Can be derived from `README.Rmd`.                                                                                       |
-| `/code`     | Sub-directory for R scripts (`.R`).                                                                                                                                           |
-| `/data_raw` | Sub-directory for raw data before data manipulation (`.csv` or other formats). Files in this sub-directory MUST NOT be modified unless there are changes to raw data entries. |
-| `/data_fmt` | Sub-directory for formatted data (`.csv`, `.rds`, or other formats).                                                                                                          |
-| `/output`   | Sub-directory for result outputs (`.csv`, `.rds`, or other formats). This may include statistical estimates from linear regression models etc.                                |
+| `code/`     | Sub-directory for R scripts (`.R`).                                                                                                                                           |
+| `data_raw/` | Sub-directory for raw data before data manipulation (`.csv` or other formats). Files in this sub-directory MUST NOT be modified unless there are changes to raw data entries. |
+| `data_fmt/` | Sub-directory for formatted data (`.csv`, `.rds`, or other formats).                                                                                                          |
+| `output/`   | Sub-directory for result outputs (`.csv`, `.rds`, or other formats). This may include statistical estimates from linear regression models etc.                                |
 | `/rmd`      | (Optional) Sub-directory for Rmarkdown files (`.Rmd`). Rmarkdown allows seamless integration of R scripts and text.                                                           |
 
 : (#tab:str) Suggested internal structure of `R Project`

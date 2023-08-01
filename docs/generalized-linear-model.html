@@ -72,6 +72,7 @@
 <span class="header-section-number">8</span> Generalized Linear Model<a class="anchor" aria-label="anchor" href="#generalized-linear-model"><i class="fas fa-link"></i></a>
 </h1>
 <p>One of the key assumptions in the Linear Model framework is Normality – that the error term follows a normal distribution (Chapter <a href="linear-model.html#linear-model">7</a>). However, this assumption frequently leads to situations where models predict unrealistic values for a response variable. In this chapter, I will introduce the Generalized Linear Model (GLM) framework, which enables more flexible modeling.</p>
+<p><strong>Key words:</strong> link function</p>
 <div id="count-data" class="section level2" number="8.1">
 <h2>
 <span class="header-section-number">8.1</span> Count Data<a class="anchor" aria-label="anchor" href="#count-data"><i class="fas fa-link"></i></a>
@@ -187,10 +188,6 @@ y_i &amp;\sim \text{Poisson}(\lambda_i)\\
 <pre><code>## 
 ## Call:
 ## glm(formula = count ~ nitrate, family = "poisson", data = df_count)
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -1.6799  -0.5862  -0.1217   0.3250   1.8272  
 ## 
 ## Coefficients:
 ##             Estimate Std. Error z value Pr(&gt;|z|)    
@@ -381,10 +378,6 @@ Figure 8.4: Logit-transformation ensures that the transformed variable to fall i
 ## Call:
 ## glm(formula = cbind(n_fertilized, n_examined - n_fertilized) ~ 
 ##     density, family = "binomial", data = df_mussel)
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -1.4925  -0.6394  -0.3832  -0.0666   3.2751  
 ## 
 ## Coefficients:
 ##             Estimate Std. Error z value Pr(&gt;|z|)    

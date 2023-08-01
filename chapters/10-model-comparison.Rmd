@@ -7,6 +7,8 @@ df_anova <- read_csv(here::here("data_raw/data_fish_length_anova.csv"))
 
 We have acquired knowledge on constructing models and evaluating their performance. However, the challenge lies in selecting the "optimal" model from a pool of potential candidates. Some may think that we can employ metrics like the Coefficient of Determination ($\mbox{R}^2$) to compare and choose superior models; however, a predicament arises because these metrics tend to favor models with a larger number of explanatory variables, even if some of those variables are actually irrelevant and do not contribute meaningfully to the model's effectiveness. In this Chapter, I introduce some popular methods to balance the trade-off between a goodness of fit and model's complexity.
 
+**Key words:** adjusted $\mbox{R}^2$, likelihood ratio test, Akaike's Information Criterion
+
 ## Model Fit and Complexity
 
 In the field of biological sciences, it is common to encounter multiple hypotheses or the need for exploratory analysis. In such instances, it becomes necessary to develop various models, each corresponding to a specific hypothesis, and subsequently compare their respective performances. The crucial aspect lies in how we quantify the "performance" of these models, acknowledging that this term can be somewhat ambiguous. As the determination of model performance ultimately dictates which model is superior, it profoundly impacts the conclusions drawn from the research. Thus, the significance of this process cannot be overstated.
@@ -201,3 +203,7 @@ However, it is important to exercise caution when interpreting the results. Spec
 2.  **AIC is not designed to infer causal mechanisms.** Variables that are not causally related may enhance the model's ability to predict unseen data. If the goal is causal inference, a different criterion, such as the backdoor criterion, should be employed. For example, AIC is not suitable for analyzing controlled experiments aimed at uncovering causal mechanisms in biology.
 
 There is often misuse of this metric, particularly in overlooking the second component (see arguments in [Arif and MacNeil 2022](https://onlinelibrary.wiley.com/doi/full/10.1111/ele.14033)). Therefore, it is crucial to clearly define the objective of your analysis to ensure the appropriate choice of statistical methods.
+
+## Laboratory
+
+

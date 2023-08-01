@@ -8,6 +8,8 @@ df_mussel <- read_csv(here::here("data_raw/data_mussel.csv"))
 
 One of the key assumptions in the Linear Model framework is Normality -- that the error term follows a normal distribution (Chapter \@ref(linear-model)). However, this assumption frequently leads to situations where models predict unrealistic values for a response variable. In this chapter, I will introduce the Generalized Linear Model (GLM) framework, which enables more flexible modeling.
 
+**Key words:** link function
+
 ## Count Data
 
 ### Plant Density

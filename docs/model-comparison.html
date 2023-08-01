@@ -72,6 +72,7 @@
 <span class="header-section-number">10</span> Model Comparison<a class="anchor" aria-label="anchor" href="#model-comparison"><i class="fas fa-link"></i></a>
 </h1>
 <p>We have acquired knowledge on constructing models and evaluating their performance. However, the challenge lies in selecting the “optimal” model from a pool of potential candidates. Some may think that we can employ metrics like the Coefficient of Determination (<span class="math inline">\(\mbox{R}^2\)</span>) to compare and choose superior models; however, a predicament arises because these metrics tend to favor models with a larger number of explanatory variables, even if some of those variables are actually irrelevant and do not contribute meaningfully to the model’s effectiveness. In this Chapter, I introduce some popular methods to balance the trade-off between a goodness of fit and model’s complexity.</p>
+<p><strong>Key words:</strong> adjusted <span class="math inline">\(\mbox{R}^2\)</span>, likelihood ratio test, Akaike’s Information Criterion</p>
 <div id="model-fit-and-complexity" class="section level2" number="10.1">
 <h2>
 <span class="header-section-number">10.1</span> Model Fit and Complexity<a class="anchor" aria-label="anchor" href="#model-fit-and-complexity"><i class="fas fa-link"></i></a>
@@ -284,8 +285,13 @@ R^2 = 1 - \frac{SS}{SS_0}
 <li><p><strong>AIC is not designed to infer causal mechanisms.</strong> Variables that are not causally related may enhance the model’s ability to predict unseen data. If the goal is causal inference, a different criterion, such as the backdoor criterion, should be employed. For example, AIC is not suitable for analyzing controlled experiments aimed at uncovering causal mechanisms in biology.</p></li>
 </ol>
 <p>There is often misuse of this metric, particularly in overlooking the second component (see arguments in <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/ele.14033">Arif and MacNeil 2022</a>). Therefore, it is crucial to clearly define the objective of your analysis to ensure the appropriate choice of statistical methods.</p>
-
 </div>
+</div>
+<div id="laboratory-9" class="section level2" number="10.3">
+<h2>
+<span class="header-section-number">10.3</span> Laboratory<a class="anchor" aria-label="anchor" href="#laboratory-9"><i class="fas fa-link"></i></a>
+</h2>
+
 </div>
 </div>
 
@@ -304,6 +310,7 @@ R^2 = 1 - \frac{SS}{SS_0}
 <li><a class="nav-link" href="#aic"><span class="header-section-number">10.2.3</span> AIC</a></li>
 </ul>
 </li>
+<li><a class="nav-link" href="#laboratory-9"><span class="header-section-number">10.3</span> Laboratory</a></li>
 </ul>
 
       <div class="book-extra">

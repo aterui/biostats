@@ -107,7 +107,7 @@ multiple-group-case
 the-common-structure
 combine-multiple-types-of-variables
 iris-example
-variable-types
+level-of-measurament
 laboratory-6
 normality-assumption
 model-interpretation
@@ -137,3 +137,4 @@ comparison-metrics
 adjusted-mboxr2
 likelihood-ratio-test
 aic
+laboratory-9

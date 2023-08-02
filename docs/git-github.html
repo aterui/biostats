@@ -4,17 +4,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Appendix: Git &amp; GitHub | BIOSTATS</title>
+<title>Git &amp; GitHub | BIOSTATS</title>
 <meta name="author" content="Akira Terui">
-<meta name="description" content="Git &amp; GitHub In this section, I will explain how to integrate Git and GitHub into R Studio. While R Studio is already an excellent tool, it becomes even more powerful when combined with Git and...">
+<meta name="description" content="In this section, I will explain how to integrate Git and GitHub into R Studio. While R Studio is already an excellent tool, it becomes even more powerful when combined with Git and GitHub. Git is...">
 <meta name="generator" content="bookdown 0.29 with bs4_book()">
-<meta property="og:title" content="Appendix: Git &amp; GitHub | BIOSTATS">
+<meta property="og:title" content="Git &amp; GitHub | BIOSTATS">
 <meta property="og:type" content="book">
-<meta property="og:url" content="https://bookdown.org/janedoe/bookdown-demo/appendix-git-github.html">
-<meta property="og:description" content="Git &amp; GitHub In this section, I will explain how to integrate Git and GitHub into R Studio. While R Studio is already an excellent tool, it becomes even more powerful when combined with Git and...">
+<meta property="og:url" content="https://bookdown.org/janedoe/bookdown-demo/git-github.html">
+<meta property="og:description" content="In this section, I will explain how to integrate Git and GitHub into R Studio. While R Studio is already an excellent tool, it becomes even more powerful when combined with Git and GitHub. Git is...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Appendix: Git &amp; GitHub | BIOSTATS">
-<meta name="twitter:description" content="Git &amp; GitHub In this section, I will explain how to integrate Git and GitHub into R Studio. While R Studio is already an excellent tool, it becomes even more powerful when combined with Git and...">
+<meta name="twitter:title" content="Git &amp; GitHub | BIOSTATS">
+<meta name="twitter:description" content="In this section, I will explain how to integrate Git and GitHub into R Studio. While R Studio is already an excellent tool, it becomes even more powerful when combined with Git and GitHub. Git is...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -45,6 +45,7 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Introduction</a></li>
+<li class="book-part">Basics</li>
 <li><a class="" href="descriptive-statistics.html"><span class="header-section-number">1</span> Descriptive Statistics</a></li>
 <li><a class="" href="sampling.html"><span class="header-section-number">2</span> Sampling</a></li>
 <li><a class="" href="probabilistic-view.html"><span class="header-section-number">3</span> Probabilistic View</a></li>
@@ -55,11 +56,12 @@
 <li><a class="" href="generalized-linear-model.html"><span class="header-section-number">8</span> Generalized Linear Model</a></li>
 <li><a class="" href="likelihood.html"><span class="header-section-number">9</span> Likelihood</a></li>
 <li><a class="" href="model-comparison.html"><span class="header-section-number">10</span> Model Comparison</a></li>
-<li><a class="" href="appendix-project.html">Appendix: Project</a></li>
-<li><a class="active" href="appendix-git-github.html">Appendix: Git &amp; GitHub</a></li>
-<li><a class="" href="appendix-data-structure.html">Appendix: Data Structure</a></li>
-<li><a class="" href="appendix-tidyverse.html">Appendix: Tidyverse</a></li>
-<li><a class="" href="appendix-base-plot.html">Appendix: Base Plot</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="project.html">Project</a></li>
+<li><a class="active" href="git-github.html">Git &amp; GitHub</a></li>
+<li><a class="" href="data-structure.html">Data Structure</a></li>
+<li><a class="" href="tidyverse.html">Tidyverse</a></li>
+<li><a class="" href="base-plot.html">Base Plot</a></li>
 </ul>
 
         <div class="book-extra">
@@ -67,19 +69,16 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="appendix-git-github" class="section level1 unnumbered">
-<h1>Appendix: Git &amp; GitHub<a class="anchor" aria-label="anchor" href="#appendix-git-github"><i class="fas fa-link"></i></a>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="git-github" class="section level1 unnumbered">
+<h1>Git &amp; GitHub<a class="anchor" aria-label="anchor" href="#git-github"><i class="fas fa-link"></i></a>
 </h1>
-<div id="git-github" class="section level2 unnumbered">
-<h2>Git &amp; GitHub<a class="anchor" aria-label="anchor" href="#git-github"><i class="fas fa-link"></i></a>
-</h2>
 <p>In this section, I will explain how to integrate Git and GitHub into R Studio. While R Studio is already an excellent tool, it becomes even more powerful when combined with Git and GitHub. Git is a free and open-source distributed version control system that tracks changes in your code as you work on your project, ensuring you are aware of any modifications made to your script (and other) files. Tracking changes is crucial to avoid unintended errors in your code and helps prevent the creation of redundant files. Although Git is primarily a local system, it has an online counterpart called GitHub.</p>
 <p>To set up this system, you’ll need to follow a few steps. The first step is to install Git on your computer:</p>
 <ul>
 <li><p>For <strong>Windows</strong>: Install Git from <a href="https://gitforwindows.org/">here</a>. During the installation process, you’ll be prompted about “Adjusting your PATH environment.” Choose “Git from the command line and also from 3rd-party software” if it’s not already selected.</p></li>
 <li><p>For <strong>Mac</strong>: Follow the instructions provided <a href="https://happygitwithr.com/install-git.html">here</a>.</p></li>
 </ul>
-<p>Once Git is installed, open R Studio and navigate to <code>Create Project</code> &gt; <code>New Directory</code> &gt; <code>New Project</code>. If you see the checkbox labeled “Create a git repository,” make sure to select it before creating your new project (refer to Figure <a href="appendix-git-github.html#fig:gitcheck">10.3</a>). This action will display the Git pane on the upper right panel of R Studio, indicating that Git integration is enabled.</p>
+<p>Once Git is installed, open R Studio and navigate to <code>Create Project</code> &gt; <code>New Directory</code> &gt; <code>New Project</code>. If you see the checkbox labeled “Create a git repository,” make sure to select it before creating your new project (refer to Figure <a href="git-github.html#fig:gitcheck">10.3</a>). This action will display the Git pane on the upper right panel of R Studio, indicating that Git integration is enabled.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:gitcheck"></span>
 <img src="image/git_image01.png" alt="After installing Git, you should see `Create a git repository`." width="296"><p class="caption">
@@ -97,7 +96,6 @@ Figure 10.3: After installing Git, you should see <code>Create a git repository<
 </ol>
 <p>After setting up Git, you can proceed to create an account on <a href="https://github.com/">GitHub</a>. It’s a free platform, and when choosing a username, consider using lowercase letters and including your name to make it easier for others to find you.</p>
 <p>While R Studio seamlessly integrates with Git and GitHub, using a Git client can provide additional visual aids. There are various options for Git clients (see choices <a href="https://happygitwithr.com/git-client.html">here</a>), but for this exercise, we will use GitHub Desktop. Install GitHub Desktop on your computer from <a href="https://desktop.github.com/">here</a>.</p>
-</div>
 <div id="commit-push" class="section level2 unnumbered">
 <h2>Commit &amp; Push<a class="anchor" aria-label="anchor" href="#commit-push"><i class="fas fa-link"></i></a>
 </h2>
@@ -130,14 +128,14 @@ Figure 10.3: After installing Git, you should see <code>Create a git repository<
 <span></span>
 <span><span class="co">## estimate SD</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
-<p>To open the GitHub Desktop app, locate the application on your computer and launch it. Once opened, you will see a GUI similar to the one depicted in Figure <a href="appendix-git-github.html#fig:gitdesktop1">10.4</a>.</p>
+<p>To open the GitHub Desktop app, locate the application on your computer and launch it. Once opened, you will see a GUI similar to the one depicted in Figure <a href="git-github.html#fig:gitdesktop1">10.4</a>.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:gitdesktop1"></span>
 <img src="image/git_image02.png" alt="GUI for GitHub Desktop" width="550"><p class="caption">
 Figure 10.4: GUI for GitHub Desktop
 </p>
 </div>
-<p>Click on the “Current Repository” button located at the top left corner of the GitHub Desktop app interface. Then, select “Add” followed by “Add existing repository” from the drop down menu, as shown in Figure <a href="appendix-git-github.html#fig:gitdesktop2">10.5</a>.</p>
+<p>Click on the “Current Repository” button located at the top left corner of the GitHub Desktop app interface. Then, select “Add” followed by “Add existing repository” from the drop down menu, as shown in Figure <a href="git-github.html#fig:gitdesktop2">10.5</a>.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:gitdesktop2"></span>
 <img src="image/git_image03.png" alt="Add dropdown on the top left" width="550"><p class="caption">
@@ -148,7 +146,7 @@ Figure 10.5: Add dropdown on the top left
 <div id="commit" class="section level3 unnumbered">
 <h3>Commit<a class="anchor" aria-label="anchor" href="#commit"><i class="fas fa-link"></i></a>
 </h3>
-<p>GitHub Desktop will prompt you to enter a local path to your Git repository. Browse and select the directory where your <code>R Project</code> is located. Once you have selected the directory, the local Git repository will appear in the list of repositories on the left side bar of GitHub Desktop, as shown in Figure <a href="appendix-git-github.html#fig:gitdesktop2">10.5</a>.</p>
+<p>GitHub Desktop will prompt you to enter a local path to your Git repository. Browse and select the directory where your <code>R Project</code> is located. Once you have selected the directory, the local Git repository will appear in the list of repositories on the left side bar of GitHub Desktop, as shown in Figure <a href="git-github.html#fig:gitdesktop2">10.5</a>.</p>
 <p>Now that your repository is added to GitHub Desktop, you are ready to start committing your files to Git. Committing is the process of recording the changes made to your files in Git. To proceed with committing, click on your Git repository in GitHub Desktop. You will see the following options and information displayed:</p>
 <ul>
 <li>The list of changed files: This section shows the files that have been modified since the last commit.</li>
@@ -175,7 +173,7 @@ Figure 10.6: You will see <code>Create sample.R</code> or <code>summary (require
 <h3>Push<a class="anchor" aria-label="anchor" href="#push"><i class="fas fa-link"></i></a>
 </h3>
 <p>It’s important to note that your changes are currently recorded in your local computer’s Git repository but have not been published to your online GitHub repository. To send the local changes to the online GitHub repository, you need to use the “Push” operation through GitHub Desktop.</p>
-<p>After you make a commit in GitHub Desktop, you will be prompted with a dialog box asking if you want to push the commit to an online repository, as shown in Figure <a href="appendix-git-github.html#fig:gitdesktop4">10.7</a>. If this is your first push, there won’t be a corresponding repository on GitHub linked to your local repository. In this case, GitHub Desktop will ask if you want to publish it on GitHub. Please note that “publishing” here means making the repository available on GitHub, but it will remain private unless you explicitly choose to make it public.</p>
+<p>After you make a commit in GitHub Desktop, you will be prompted with a dialog box asking if you want to push the commit to an online repository, as shown in Figure <a href="git-github.html#fig:gitdesktop4">10.7</a>. If this is your first push, there won’t be a corresponding repository on GitHub linked to your local repository. In this case, GitHub Desktop will ask if you want to publish it on GitHub. Please note that “publishing” here means making the repository available on GitHub, but it will remain private unless you explicitly choose to make it public.</p>
 <p>If you are comfortable with the changes you made and want to send them to the online repository, click the “Push” button in GitHub Desktop. This action will push your commits to the remote repository on GitHub, effectively synchronizing your local repository with the online repository.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:gitdesktop4"></span>
@@ -221,12 +219,11 @@ Figure 10.8: Git detects edits to your codes
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="appendix-project.html">Appendix: Project</a></div>
-<div class="next"><a href="appendix-data-structure.html">Appendix: Data Structure</a></div>
+<div class="prev"><a href="project.html">Project</a></div>
+<div class="next"><a href="data-structure.html">Data Structure</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#appendix-git-github">Appendix: Git &amp; GitHub</a></li>
 <li><a class="nav-link" href="#git-github">Git &amp; GitHub</a></li>
 <li>
 <a class="nav-link" href="#commit-push">Commit &amp; Push</a><ul class="nav navbar-nav">

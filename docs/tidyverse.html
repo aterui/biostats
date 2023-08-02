@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Appendix: Tidyverse | BIOSTATS</title>
+<title>Tidyverse | BIOSTATS</title>
 <meta name="author" content="Akira Terui">
 <meta name="description" content="Overview R packages are collections of functions that extend the functionality of the R programming language. They provide a convenient way for users to access and utilize specialized tools for...">
 <meta name="generator" content="bookdown 0.29 with bs4_book()">
-<meta property="og:title" content="Appendix: Tidyverse | BIOSTATS">
+<meta property="og:title" content="Tidyverse | BIOSTATS">
 <meta property="og:type" content="book">
-<meta property="og:url" content="https://bookdown.org/janedoe/bookdown-demo/appendix-tidyverse.html">
+<meta property="og:url" content="https://bookdown.org/janedoe/bookdown-demo/tidyverse.html">
 <meta property="og:description" content="Overview R packages are collections of functions that extend the functionality of the R programming language. They provide a convenient way for users to access and utilize specialized tools for...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Appendix: Tidyverse | BIOSTATS">
+<meta name="twitter:title" content="Tidyverse | BIOSTATS">
 <meta name="twitter:description" content="Overview R packages are collections of functions that extend the functionality of the R programming language. They provide a convenient way for users to access and utilize specialized tools for...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -45,6 +45,7 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Introduction</a></li>
+<li class="book-part">Basics</li>
 <li><a class="" href="descriptive-statistics.html"><span class="header-section-number">1</span> Descriptive Statistics</a></li>
 <li><a class="" href="sampling.html"><span class="header-section-number">2</span> Sampling</a></li>
 <li><a class="" href="probabilistic-view.html"><span class="header-section-number">3</span> Probabilistic View</a></li>
@@ -55,11 +56,12 @@
 <li><a class="" href="generalized-linear-model.html"><span class="header-section-number">8</span> Generalized Linear Model</a></li>
 <li><a class="" href="likelihood.html"><span class="header-section-number">9</span> Likelihood</a></li>
 <li><a class="" href="model-comparison.html"><span class="header-section-number">10</span> Model Comparison</a></li>
-<li><a class="" href="appendix-project.html">Appendix: Project</a></li>
-<li><a class="" href="appendix-git-github.html">Appendix: Git &amp; GitHub</a></li>
-<li><a class="" href="appendix-data-structure.html">Appendix: Data Structure</a></li>
-<li><a class="active" href="appendix-tidyverse.html">Appendix: Tidyverse</a></li>
-<li><a class="" href="appendix-base-plot.html">Appendix: Base Plot</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="project.html">Project</a></li>
+<li><a class="" href="git-github.html">Git &amp; GitHub</a></li>
+<li><a class="" href="data-structure.html">Data Structure</a></li>
+<li><a class="active" href="tidyverse.html">Tidyverse</a></li>
+<li><a class="" href="base-plot.html">Base Plot</a></li>
 </ul>
 
         <div class="book-extra">
@@ -67,8 +69,8 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="appendix-tidyverse" class="section level1 unnumbered">
-<h1>Appendix: Tidyverse<a class="anchor" aria-label="anchor" href="#appendix-tidyverse"><i class="fas fa-link"></i></a>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="tidyverse" class="section level1 unnumbered">
+<h1>Tidyverse<a class="anchor" aria-label="anchor" href="#tidyverse"><i class="fas fa-link"></i></a>
 </h1>
 <div id="overview-1" class="section level2 unnumbered">
 <h2>Overview<a class="anchor" aria-label="anchor" href="#overview-1"><i class="fas fa-link"></i></a>
@@ -437,17 +439,17 @@
 <h2>Visualization<a class="anchor" aria-label="anchor" href="#visualization"><i class="fas fa-link"></i></a>
 </h2>
 <p><code>ggplot2::</code> offers a range of convenient functions for data visualization. The foundational function, <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code>, provides the initial framework for adding supplementary layers using the <code>+</code> operator. In ggplot(), we define variables plotted on x- and y-axis through <code><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes()</a></code>. For example:</p>
-<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="appendix-tidyverse.html#cb422-1" tabindex="-1"></a><span class="co"># without pipe</span></span>
-<span id="cb422-2"><a href="appendix-tidyverse.html#cb422-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> iris,</span>
-<span id="cb422-3"><a href="appendix-tidyverse.html#cb422-3" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length,</span>
-<span id="cb422-4"><a href="appendix-tidyverse.html#cb422-4" tabindex="-1"></a>                     <span class="at">y =</span> Sepal.Width)) <span class="sc">+</span></span>
-<span id="cb422-5"><a href="appendix-tidyverse.html#cb422-5" tabindex="-1"></a>  <span class="co"># additional layers...</span></span>
-<span id="cb422-6"><a href="appendix-tidyverse.html#cb422-6" tabindex="-1"></a></span>
-<span id="cb422-7"><a href="appendix-tidyverse.html#cb422-7" tabindex="-1"></a><span class="co"># with pipe</span></span>
-<span id="cb422-8"><a href="appendix-tidyverse.html#cb422-8" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
-<span id="cb422-9"><a href="appendix-tidyverse.html#cb422-9" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length,</span>
-<span id="cb422-10"><a href="appendix-tidyverse.html#cb422-10" tabindex="-1"></a>                       <span class="at">y =</span> Sepal.Width)) <span class="sc">+</span></span>
-<span id="cb422-11"><a href="appendix-tidyverse.html#cb422-11" tabindex="-1"></a>  <span class="co"># additional layers...  </span></span></code></pre></div>
+<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="tidyverse.html#cb422-1" tabindex="-1"></a><span class="co"># without pipe</span></span>
+<span id="cb422-2"><a href="tidyverse.html#cb422-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> iris,</span>
+<span id="cb422-3"><a href="tidyverse.html#cb422-3" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length,</span>
+<span id="cb422-4"><a href="tidyverse.html#cb422-4" tabindex="-1"></a>                     <span class="at">y =</span> Sepal.Width)) <span class="sc">+</span></span>
+<span id="cb422-5"><a href="tidyverse.html#cb422-5" tabindex="-1"></a>  <span class="co"># additional layers...</span></span>
+<span id="cb422-6"><a href="tidyverse.html#cb422-6" tabindex="-1"></a></span>
+<span id="cb422-7"><a href="tidyverse.html#cb422-7" tabindex="-1"></a><span class="co"># with pipe</span></span>
+<span id="cb422-8"><a href="tidyverse.html#cb422-8" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
+<span id="cb422-9"><a href="tidyverse.html#cb422-9" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length,</span>
+<span id="cb422-10"><a href="tidyverse.html#cb422-10" tabindex="-1"></a>                       <span class="at">y =</span> Sepal.Width)) <span class="sc">+</span></span>
+<span id="cb422-11"><a href="tidyverse.html#cb422-11" tabindex="-1"></a>  <span class="co"># additional layers...  </span></span></code></pre></div>
 <p>Please note that <code><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes()</a></code> refers to columns in the data frame. Variables names that do not exist in the data frame cannot be used.</p>
 <div id="point" class="section level3 unnumbered">
 <h3>Point<a class="anchor" aria-label="anchor" href="#point"><i class="fas fa-link"></i></a>
@@ -545,12 +547,12 @@
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="appendix-data-structure.html">Appendix: Data Structure</a></div>
-<div class="next"><a href="appendix-base-plot.html">Appendix: Base Plot</a></div>
+<div class="prev"><a href="data-structure.html">Data Structure</a></div>
+<div class="next"><a href="base-plot.html">Base Plot</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#appendix-tidyverse">Appendix: Tidyverse</a></li>
+<li><a class="nav-link" href="#tidyverse">Tidyverse</a></li>
 <li><a class="nav-link" href="#overview-1">Overview</a></li>
 <li>
 <a class="nav-link" href="#data-manipulation">Data Manipulation</a><ul class="nav navbar-nav">

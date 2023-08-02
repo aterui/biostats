@@ -1,3 +1,5 @@
+# (PART) Basics {-}
+
 # Descriptive Statistics
 
 Descriptive statistics are a set of summary measures that provide a concise overview of a dataset. They help us understand the characteristics and properties of the data without delving into complex statistical analyses. Some commonly used descriptive statistics include the mean, standard deviation, and median.

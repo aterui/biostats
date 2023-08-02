@@ -138,3 +138,5 @@ adjusted-mboxr2
 likelihood-ratio-test
 aic
 laboratory-9
+format-penguin-data
+analyze-penguin-data

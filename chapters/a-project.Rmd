@@ -1,4 +1,6 @@
-# Appendix: Project {.unnumbered}
+# (PART) Appendix {-}
+
+# Project {.unnumbered}
 
 ## R Project {.unnumbered}
 
@@ -62,18 +64,18 @@ a.  Go to `File > New Project` on the top menu
 b.  Select `New Directory`
 c.  Select `New Project`
 
-A new window will appear, prompting you to name a directory and select a location on your computer. To choose a location for the directory, click on the 'Browse' button. When organizing your project directories on your computer, I highly recommend creating a dedicated space. For instance, on my computer, I have a folder named `/github` where I store all my `R Project` directories.
+A new window will appear, prompting you to name a directory and select a location on your computer. To choose a location for the directory, click on the 'Browse' button. When organizing your project directories on your computer, I highly recommend creating a dedicated space. For instance, on my computer, I have a folder named `github/` where I store all my `R Project` directories.
 
 The internal structure of an `R Project` is crucial for effective navigation and ensures clarity for both yourself and others when it is published. An `R Project` typically consists of various file types, such as `.R`, `.csv`, `.rds`, `.Rmd`, and others. Without an organized arrangement of these files, there is a high probability of encountering significant coding errors. Therefore, I place great importance on maintaining a well-structured project. In Table \@ref(tab:str), I present my recommended subdirectory structure.
 
 | Name        | Content                                                                                                                                                                       |
-|----------------|--------------------------------------------------------|
+|-------------------|-----------------------------------------------------|
 | `README.md` | Markdown file explaining contents in the `R Project`. Can be derived from `README.Rmd`.                                                                                       |
 | `code/`     | Sub-directory for R scripts (`.R`).                                                                                                                                           |
 | `data_raw/` | Sub-directory for raw data before data manipulation (`.csv` or other formats). Files in this sub-directory MUST NOT be modified unless there are changes to raw data entries. |
 | `data_fmt/` | Sub-directory for formatted data (`.csv`, `.rds`, or other formats).                                                                                                          |
 | `output/`   | Sub-directory for result outputs (`.csv`, `.rds`, or other formats). This may include statistical estimates from linear regression models etc.                                |
-| `/rmd`      | (Optional) Sub-directory for Rmarkdown files (`.Rmd`). Rmarkdown allows seamless integration of R scripts and text.                                                           |
+| `rmd/`      | (Optional) Sub-directory for Rmarkdown files (`.Rmd`). Rmarkdown allows seamless integration of R scripts and text.                                                           |
 
 : (#tab:str) Suggested internal structure of `R Project`
 

@@ -45,6 +45,7 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Introduction</a></li>
+<li class="book-part">Basics</li>
 <li><a class="" href="descriptive-statistics.html"><span class="header-section-number">1</span> Descriptive Statistics</a></li>
 <li><a class="" href="sampling.html"><span class="header-section-number">2</span> Sampling</a></li>
 <li><a class="" href="probabilistic-view.html"><span class="header-section-number">3</span> Probabilistic View</a></li>
@@ -55,11 +56,12 @@
 <li><a class="" href="generalized-linear-model.html"><span class="header-section-number">8</span> Generalized Linear Model</a></li>
 <li><a class="" href="likelihood.html"><span class="header-section-number">9</span> Likelihood</a></li>
 <li><a class="active" href="model-comparison.html"><span class="header-section-number">10</span> Model Comparison</a></li>
-<li><a class="" href="appendix-project.html">Appendix: Project</a></li>
-<li><a class="" href="appendix-git-github.html">Appendix: Git &amp; GitHub</a></li>
-<li><a class="" href="appendix-data-structure.html">Appendix: Data Structure</a></li>
-<li><a class="" href="appendix-tidyverse.html">Appendix: Tidyverse</a></li>
-<li><a class="" href="appendix-base-plot.html">Appendix: Base Plot</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="project.html">Project</a></li>
+<li><a class="" href="git-github.html">Git &amp; GitHub</a></li>
+<li><a class="" href="data-structure.html">Data Structure</a></li>
+<li><a class="" href="tidyverse.html">Tidyverse</a></li>
+<li><a class="" href="base-plot.html">Base Plot</a></li>
 </ul>
 
         <div class="book-extra">
@@ -78,7 +80,7 @@
 <span class="header-section-number">10.1</span> Model Fit and Complexity<a class="anchor" aria-label="anchor" href="#model-fit-and-complexity"><i class="fas fa-link"></i></a>
 </h2>
 <p>In the field of biological sciences, it is common to encounter multiple hypotheses or the need for exploratory analysis. In such instances, it becomes necessary to develop various models, each corresponding to a specific hypothesis, and subsequently compare their respective performances. The crucial aspect lies in how we quantify the “performance” of these models, acknowledging that this term can be somewhat ambiguous. As the determination of model performance ultimately dictates which model is superior, it profoundly impacts the conclusions drawn from the research. Thus, the significance of this process cannot be overstated.</p>
-<p>One potential approach is to utilize the Coefficient of Determination (Chapter <a href="regression.html#regression">6</a>) as a measure of model performance. These metrics provide an indication of the proportion of variation in the response variable that is explained by the model, making them reasonable options. However, there are situations where these measures are not meaningful for model comparison.</p>
+<p>One potential approach is to utilize the Coefficient of Determination (Chapter <a href="regression.html#regression">6</a>) as a measure of model performance. These metrics provide an indication of the proportion of variation in the response variable that is explained by the model, making them reasonable options. However, there are situations where these measures are not meaningful for <strong>model comparison</strong>.</p>
 <p>To illustrate this, let’s consider the following simulated data. The advantage of using simulated data is that we already know the correct outcomes, enabling us to validate and verify the analysis results.</p>
 <div class="sourceCode" id="cb251"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="co"># for reproducibility</span></span>
@@ -117,7 +119,7 @@
 Figure 10.1: Simulated data
 </p>
 </div>
-<p>The aforementioned code generated the response variable, denoted as <span class="math inline">\(y\)</span>, as a function of the variable <span class="math inline">\(x_1\)</span> (<span class="math inline">\(y_i = \beta_0 + \beta_1 x_1 + \varepsilon_i\)</span>). The values of the intercept and slope were set to 0.1 and 0.5 respectively. Given our knowledge of how this data was generated, we can establish the “correct” model. Now, let’s assess the performance of this model:</p>
+<p>The above code generated the response variable, denoted as <span class="math inline">\(y\)</span>, as a function of the variable <span class="math inline">\(x_1\)</span> (<span class="math inline">\(y_i = \beta_0 + \beta_1 x_1 + \varepsilon_i\)</span>). The values of the intercept and slope were set to 0.1 and 0.5 respectively. Given our knowledge of how this data was generated, we can establish the “correct” model. Now, let’s assess the performance of this model:</p>
 <div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># correct model used to generate the data</span></span>
 <span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">x1</span>, data <span class="op">=</span> <span class="va">df0</span><span class="op">)</span></span>
@@ -255,7 +257,7 @@ R^2 = 1 - \frac{SS}{SS_0}
 ##   Res.Df    RSS Df Sum of Sq Pr(&gt;Chi)
 ## 1     98 22.709                      
 ## 2     97 22.653  1  0.055702   0.6253</code></pre>
-<p>The <code>Pr(&gt;Chi)</code> value, which represents the p-value, is significantly greater than 0.05. This indicates that the inclusion of variable <code>x2</code> does not improve the model’s likelihood to a degree that would be expected by chance.</p>
+<p>The <code>Pr(&gt;Chi)</code> value, which represents the p-value, is significantly greater than 0.05. This indicates that the inclusion of variable <code>x2</code> does not improve the model’s likelihood than what would be expected by chance.</p>
 <p>The likelihood ratio test can be applied to a wide range of models as long as they are capable of estimating likelihood. Therefore, this method is highly versatile. However, one limitation is that the competing models must be nested, meaning that the null model should be a subset of the alternative model. In the example provided, <code>m1</code> includes only the explanatory variable <code>x1</code>, while <code>m2</code> incorporates both <code>x1</code> and <code>x2</code>. However, <code>m1</code> can be viewed as a special case of <code>m2</code> where the slope of <code>x2</code> is fixed at zero. Thus, <code>m1</code> can be considered as a “nested” subset of <code>m2</code>.</p>
 </div>
 <div id="aic" class="section level3" number="10.2.3">
@@ -291,13 +293,49 @@ R^2 = 1 - \frac{SS}{SS_0}
 <h2>
 <span class="header-section-number">10.3</span> Laboratory<a class="anchor" aria-label="anchor" href="#laboratory-9"><i class="fas fa-link"></i></a>
 </h2>
+<div id="format-penguin-data" class="section level3" number="10.3.1">
+<h3>
+<span class="header-section-number">10.3.1</span> Format Penguin Data<a class="anchor" aria-label="anchor" href="#format-penguin-data"><i class="fas fa-link"></i></a>
+</h3>
+<p>The R package <code>palmerpenguins</code> provides penguin data that were collected and made available by Dr. Kristen Gorman and the Palmer Station, Antarctica LTER, a member of the Long Term Ecological Research Network. To get started, install this package onto your computer:</p>
+<div class="sourceCode" id="cb270"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Perform only once</span></span>
+<span><span class="co"># install.packages("palmerpenguins")</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/">palmerpenguins</a></span><span class="op">)</span></span></code></pre></div>
+<p>For this exercise, we will use the <code>penguins_raw</code> dataset. However, the dataset is not well-organized and may be prone to errors in its current format. Before delving into data analysis, let’s perform the following tasks:</p>
+<ol style="list-style-type: decimal">
+<li><p>Column names are a mix of upper and lower cases, and they contain white spaces. We need to format the column names as follows: (1) convert all characters to lowercase, (2) replace white spaces with underscores <code>_</code>, and (3) remove unit notations (e.g., <code>(mm)</code>). To accomplish this, we can use useful functions such as <code><a href="https://dplyr.tidyverse.org/reference/rename.html">dplyr::rename()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/rename.html">dplyr::rename_with()</a></code>, <code><a href="https://stringr.tidyverse.org/reference/case.html">stringr::str_to_lower()</a></code>, and <code><a href="https://stringr.tidyverse.org/reference/str_replace.html">stringr::str_replace_all()</a></code>. You can check their usage by typing <code>?function_name</code> in the R console.</p></li>
+<li><p>In the following exercise, we will focus on the data in the <code>Clutch Completion</code> column, which records data as <code>Yes</code> or <code>No</code>. To make it more suitable for analysis, we need to convert this information to binary values: <code>1</code> for <code>Yes</code> and <code>0</code> for <code>No</code>.</p></li>
+<li><p>The <code>Species</code> column in the dataset contains species names such as Adelie Penguin (Pygoscelis adeliae), Chinstrap penguin (Pygoscelis antarctica), Gentoo penguin (Pygoscelis papua). We need to convert these species names to standardized ones, specifically: <code>adelie</code>, <code>chinstrap</code>, and <code>gentoo</code>. We can make use of the <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">dplyr::case_when()</a></code> functions for this task.</p></li>
+<li><p>Lastly, we should remove any rows that contain missing values (<code>NA</code>) in the columns <code>Culmen Length (mm)</code>, <code>Culmen Depth (mm)</code>, <code>Flipper Length (mm)</code>, <code>Body Mass (g)</code>, and <code>Sex</code>. To achieve this, we can utilize the <code>dplyr::drop_na()</code> function.</p></li>
+</ol>
+</div>
+<div id="analyze-penguin-data" class="section level3" number="10.3.2">
+<h3>
+<span class="header-section-number">10.3.2</span> Analyze Penguin Data<a class="anchor" aria-label="anchor" href="#analyze-penguin-data"><i class="fas fa-link"></i></a>
+</h3>
+<p>After formatting the data, our next step is to perform the following:</p>
+<ol style="list-style-type: decimal">
+<li><p>Develop a statistical model that explains <code>Clutch Completion</code> using the variables <code>Species</code>, <code>Culmen Length (mm)</code>, <code>Culmen Depth (mm)</code>, <code>Flipper Length (mm)</code>, <code>Body Mass (g)</code>, and <code>Sex</code>. We need to determine an appropriate probability distribution for this model.</p></li>
+<li><p>Perform an AIC-based model selection using the <code><a href="https://rdrr.io/pkg/MuMIn/man/dredge.html">MuMIn::dredge()</a></code> function. This process will help us identify the variables that are most important for predicting the clutch completion status.</p></li>
+</ol>
+<div class="sourceCode" id="cb271"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">MuMIn</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>na.action <span class="op">=</span> <span class="st">"na.fail"</span><span class="op">)</span></span>
+<span><span class="va">m</span> <span class="op">&lt;-</span> <span class="co">#model object</span></span>
+<span><span class="va">m_set</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MuMIn/man/dredge.html">dredge</a></span><span class="op">(</span><span class="va">m</span>, rank <span class="op">=</span> <span class="st">"AIC"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">m_set</span>, <span class="va">delta</span> <span class="op">&lt;</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 
 </div>
 </div>
+</div>
+
+
+
 
   <div class="chapter-nav">
 <div class="prev"><a href="likelihood.html"><span class="header-section-number">9</span> Likelihood</a></div>
-<div class="next"><a href="appendix-project.html">Appendix: Project</a></div>
+<div class="next"><a href="project.html">Project</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -310,7 +348,12 @@ R^2 = 1 - \frac{SS}{SS_0}
 <li><a class="nav-link" href="#aic"><span class="header-section-number">10.2.3</span> AIC</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#laboratory-9"><span class="header-section-number">10.3</span> Laboratory</a></li>
+<li>
+<a class="nav-link" href="#laboratory-9"><span class="header-section-number">10.3</span> Laboratory</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#format-penguin-data"><span class="header-section-number">10.3.1</span> Format Penguin Data</a></li>
+<li><a class="nav-link" href="#analyze-penguin-data"><span class="header-section-number">10.3.2</span> Analyze Penguin Data</a></li>
+</ul>
+</li>
 </ul>
 
       <div class="book-extra">
@@ -328,7 +371,7 @@ R^2 = 1 - \frac{SS}{SS_0}
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2023-08-01.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2023-08-02.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

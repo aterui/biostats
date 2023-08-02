@@ -1,4 +1,4 @@
-# Appendix: Data Structure {.unnumbered}
+# Data Structure {.unnumbered}
 
 ## Overview {.unnumbered}
 

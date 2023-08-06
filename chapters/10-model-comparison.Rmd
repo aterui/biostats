@@ -218,21 +218,21 @@ library(palmerpenguins)
 
 For this exercise, we will use the `penguins_raw` dataset. However, the dataset is not well-organized and may be prone to errors in its current format. Before delving into data analysis, let's perform the following tasks:
 
-1. Column names are a mix of upper and lower cases, and they contain white spaces. We need to format the column names as follows: (1) convert all characters to lowercase,  (2) replace white spaces with underscores `_`, and (3) remove unit notations (e.g., `(mm)`). To accomplish this, we can use useful functions such as `dplyr::rename()`, `dplyr::rename_with()`, `stringr::str_to_lower()`, and `stringr::str_replace_all()`. You can check their usage by typing `?function_name` in the R console.
+1.  Column names are a mix of upper and lower cases, and they contain white spaces. We need to format the column names as follows: (1) convert all characters to lowercase, (2) replace white spaces with underscores `_`, and (3) remove unit notations (e.g., `(mm)`). To accomplish this, we can use useful functions such as `dplyr::rename()`, `dplyr::rename_with()`, `stringr::str_to_lower()`, and `stringr::str_replace_all()`. You can check their usage by typing `?function_name` in the R console.
 
-2. In the following exercise, we will focus on the data in the `Clutch Completion` column, which records data as `Yes` or `No`. To make it more suitable for analysis, we need to convert this information to binary values: `1` for `Yes` and `0` for `No`.
+2.  In the following exercise, we will focus on the data in the `Clutch Completion` column, which records data as `Yes` or `No`. To make it more suitable for analysis, we need to convert this information to binary values: `1` for `Yes` and `0` for `No`.
 
-3. The `Species` column in the dataset contains species names such as `r paste(sort(unique(penguins_raw$Species)), collapse = ", ")`. We need to convert these species names to standardized ones, specifically: `adelie`, `chinstrap`, and `gentoo`. We can make use of the `dplyr::mutate()` and `dplyr::case_when()` functions for this task.
+3.  The `Species` column in the dataset contains species names such as `r paste(sort(unique(penguins_raw$Species)), collapse = ", ")`. We need to convert these species names to standardized ones, specifically: `adelie`, `chinstrap`, and `gentoo`. We can make use of the `dplyr::mutate()` and `dplyr::case_when()` functions for this task.
 
-4. Lastly, we should remove any rows that contain missing values (`NA`) in the columns `Culmen Length (mm)`, `Culmen Depth (mm)`, `Flipper Length (mm)`, `Body Mass (g)`, and `Sex`. To achieve this, we can utilize the `dplyr::drop_na()` function.
+4.  Lastly, we should remove any rows that contain missing values (`NA`) in the columns `Culmen Length (mm)`, `Culmen Depth (mm)`, `Flipper Length (mm)`, `Body Mass (g)`, and `Sex`. To achieve this, we can utilize the `dplyr::drop_na()` function.
 
 ### Analyze Penguin Data
 
 After formatting the data, our next step is to perform the following:
 
-1. Develop a statistical model that explains `Clutch Completion` using the variables `Species`, `Culmen Length (mm)`, `Culmen Depth (mm)`, `Flipper Length (mm)`, `Body Mass (g)`, and `Sex`. We need to determine an appropriate probability distribution for this model.
+1.  Develop a statistical model that explains `Clutch Completion` using the variables `Species`, `Culmen Length (mm)`, `Culmen Depth (mm)`, `Flipper Length (mm)`, `Body Mass (g)`, and `Sex`. We need to determine an appropriate probability distribution for this model.
 
-2. Perform an AIC-based model selection using the `MuMIn::dredge()` function. This process will help us identify the variables that are most important for predicting the clutch completion status.
+2.  Perform an AIC-based model selection using the `MuMIn::dredge()` function. This process will help us identify the variables that are most important for predicting the clutch completion status.
 
 ```{r, eval = F}
 library(MuMIn)

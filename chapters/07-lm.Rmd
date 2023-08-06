@@ -163,7 +163,7 @@ Again, the `lm()` function converts the categorical variable to the dummy variab
 
 ```{r}
 # group means
-v_mu <- df_fl %>% 
+v_mu <- df_anova %>% 
   group_by(lake) %>% 
   summarize(mu = mean(length)) %>% 
   pull(mu)

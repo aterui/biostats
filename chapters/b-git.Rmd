@@ -155,3 +155,5 @@ This feature provided by GitHub Desktop makes it easier to track modifications a
 ```{r gitdesktop5, echo=F, fig.cap = "Git detects edits to your codes"}
 knitr::include_graphics(here::here("image/git_image06.png"))
 ```
+
+A sample repository can be found [here](https://github.com/aterui/public-proj_projstr).

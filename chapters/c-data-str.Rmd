@@ -299,8 +299,8 @@ df0[c(2,4),] # access row #2 and 4
 
 ### Vector {.unnumbered}
 
-a.  Create three numeric vectors with length 3, 6 and 20, respectively. Each vector must be created using different functions in R.
-b.  Create three character vectors with length 3, 6 and 20, respectively. Each vector must be created using different functions in R.
+a.  Create three numeric vectors with length 3, 6 and 20, respectively. Vectors must be created using at least two different functions in R.
+b.  Create three character vectors with length 3, 6 and 20, respectively. Vectors must be created using at least two different functions in R.
 c.  Copy the following script to your R script and perform the following analysis:
 
 -   Identify element IDs of `x` that are greater than `2.0`

@@ -227,12 +227,12 @@ print(iqr_y)
 
 ```{r}
 # for x
-ad_x <- abs(x - mean(x))
+ad_x <- abs(x - median(x))
 mad_x <- median(ad_x)
 print(mad_x)
 
 # for y
-mad_y <- median(abs(y - mean(y)))
+mad_y <- median(abs(y - median(y)))
 print(mad_y)
 ```
 

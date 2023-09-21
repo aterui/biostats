@@ -27,7 +27,8 @@ While Chapter \@ref(sampling) primarily focused on exploring mean and variance, 
 
 df_h0 %>% 
   ggplot(aes(x = height)) + 
-  geom_histogram(binwidth = 1) + # specify binwidth
+  geom_histogram(binwidth = 1, # specify bin width
+                 center = 0.5) + # bin's center specification
   geom_vline(aes(xintercept = mean(height))) # draw vertical line at the mean
 ```
 
@@ -107,7 +108,8 @@ for (i in 1:(length(bin) - 1)) {
 # data frame for probability
 # bin: last element [-length(bin)] was removed to match length
 # expected frequency in each bin is "prob times sample size"
-df_prob <- tibble(p, bin = bin[-length(bin)]) %>% 
+# "+ 0.5" was added to represent a midpoint in each bin
+df_prob <- tibble(p, bin = bin[-length(bin)] + 0.5) %>% 
   mutate(freq = p * nrow(df_h0))
 ```
 
@@ -117,7 +119,8 @@ Overlay:
 
 df_h0 %>% 
   ggplot(aes(x = height)) + 
-  geom_histogram(binwidth = 1) +
+  geom_histogram(binwidth = 1, # specify bin width; must match the bin width used for probability
+                 center = 0.5) + # bin's center position
   geom_point(data = df_prob,
              aes(y = freq,
                  x = bin),
@@ -227,7 +230,7 @@ df_prob <- tibble(x = x, y = pm) %>%
 
 df_count %>% 
   ggplot(aes(x = count)) +
-  geom_histogram(binwidth = 0.5,
+  geom_histogram(binwidth = 0.5, # must be divisible number of one; e.g., 0.1, 0.25, 0.5...
                  center = 0) +
   geom_line(data = df_prob,
             aes(x = x,

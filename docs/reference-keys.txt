@@ -72,8 +72,9 @@ t-test-in-r
 t-test-with-equal-variance
 t-test-with-unequal-variance
 laboratory-3
-welchs-t-test
+influence-of-sample-size
 difference-and-uncertainty
+bonus-exercise-welchs-t-test
 multiple-group-comparison
 partition-the-variability
 between-group-variability

@@ -364,11 +364,26 @@ d.f. = \frac{\frac{\hat{\sigma}^2_a}{N_a} + \frac{\hat{\sigma}^2_b}{N_b}}{\frac{
 <h2>
 <span class="header-section-number">4.4</span> Laboratory<a class="anchor" aria-label="anchor" href="#laboratory-3"><i class="fas fa-link"></i></a>
 </h2>
-<div id="welchs-t-test" class="section level3" number="4.4.1">
+<div id="influence-of-sample-size" class="section level3" number="4.4.1">
 <h3>
-<span class="header-section-number">4.4.1</span> Welch’s t-test<a class="anchor" aria-label="anchor" href="#welchs-t-test"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4.1</span> Influence of Sample Size<a class="anchor" aria-label="anchor" href="#influence-of-sample-size"><i class="fas fa-link"></i></a>
 </h3>
-<p>Reproduce the results of <code>t.test(x, y, var.equal = FALSE)</code> without using this function (report t-statistic, degrees of freedom, and p-value).</p>
+<p>Create the following vectors with <code><a href="https://rdrr.io/r/stats/Normal.html">rnorm()</a></code>:</p>
+<ul>
+<li>
+<code>xs</code> with mean <span class="math inline">\(10\)</span>, SD <span class="math inline">\(5\)</span>, and sample size <span class="math inline">\(10\)</span>
+</li>
+<li>
+<code>ys</code> with mean <span class="math inline">\(12\)</span>, SD <span class="math inline">\(5\)</span>, and sample size <span class="math inline">\(10\)</span>
+</li>
+<li>
+<code>xl</code> with mean <span class="math inline">\(10\)</span>, SD <span class="math inline">\(5\)</span>, and sample size <span class="math inline">\(100\)</span>
+</li>
+<li>
+<code>yl</code> with mean <span class="math inline">\(12\)</span>, SD <span class="math inline">\(5\)</span>, and sample size <span class="math inline">\(100\)</span>
+</li>
+</ul>
+<p>Perform Welch’s t-test for <code>xs</code> vs. <code>ys</code>, and <code>xl</code> vs. <code>yl</code> and compare p-values.</p>
 </div>
 <div id="difference-and-uncertainty" class="section level3" number="4.4.2">
 <h3>
@@ -384,9 +399,15 @@ d.f. = \frac{\frac{\hat{\sigma}^2_a}{N_a} + \frac{\hat{\sigma}^2_b}{N_b}}{\frac{
 <p>Perform the following analysis:</p>
 <ol style="list-style-type: decimal">
 <li>Estimate sample means and SDs for each vector. To do so, create a <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code> object with <code>group</code> (consist of characters <code>a1</code>, <code>a2</code>, <code>b1</code>, <code>b2</code>) and <code>value</code> columns (consist of values above). Then use <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> functions to estimate means and SDs for each <code>group</code>.</li>
-<li>Estimate t-statistics for each pair of vectors (<code>a1</code> vs. <code>a2</code> and <code>b1</code> vs. <code>b2</code>).</li>
 <li>Perform Welch’s t-test for each pair and compare results.</li>
 </ol>
+</div>
+<div id="bonus-exercise-welchs-t-test" class="section level3" number="4.4.3">
+<h3>
+<span class="header-section-number">4.4.3</span> Bonus Exercise: Welch’s t-test<a class="anchor" aria-label="anchor" href="#bonus-exercise-welchs-t-test"><i class="fas fa-link"></i></a>
+</h3>
+<p>Reproduce the results of <code>t.test(x, y, var.equal = FALSE)</code> without using this function (report t-statistic, degrees of freedom, and p-value).</p>
+
 </div>
 </div>
 </div>
@@ -414,8 +435,9 @@ d.f. = \frac{\frac{\hat{\sigma}^2_a}{N_a} + \frac{\hat{\sigma}^2_b}{N_b}}{\frac{
 </li>
 <li>
 <a class="nav-link" href="#laboratory-3"><span class="header-section-number">4.4</span> Laboratory</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#welchs-t-test"><span class="header-section-number">4.4.1</span> Welch’s t-test</a></li>
+<li><a class="nav-link" href="#influence-of-sample-size"><span class="header-section-number">4.4.1</span> Influence of Sample Size</a></li>
 <li><a class="nav-link" href="#difference-and-uncertainty"><span class="header-section-number">4.4.2</span> Difference and Uncertainty</a></li>
+<li><a class="nav-link" href="#bonus-exercise-welchs-t-test"><span class="header-section-number">4.4.3</span> Bonus Exercise: Welch’s t-test</a></li>
 </ul>
 </li>
 </ul>
@@ -435,7 +457,7 @@ d.f. = \frac{\frac{\hat{\sigma}^2_a}{N_a} + \frac{\hat{\sigma}^2_b}{N_b}}{\frac{
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2023-09-14.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2023-09-21.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

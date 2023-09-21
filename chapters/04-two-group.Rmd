@@ -267,9 +267,16 @@ Therefore, the reported values of t-statistic and d.f. are different from what w
 
 ## Laboratory
 
-### Welch's t-test
+### Influence of Sample Size
 
-Reproduce the results of `t.test(x, y, var.equal = FALSE)` without using this function (report t-statistic, degrees of freedom, and p-value).
+Create the following vectors with `rnorm()`:
+
+- `xs` with mean $10$, SD $5$, and sample size $10$ 
+- `ys` with mean $12$, SD $5$, and sample size $10$ 
+- `xl` with mean $10$, SD $5$, and sample size $100$ 
+- `yl` with mean $12$, SD $5$, and sample size $100$ 
+
+Perform Welch's t-test for `xs` vs. `ys`, and `xl` vs. `yl` and compare p-values.
 
 ### Difference and Uncertainty
 
@@ -286,5 +293,9 @@ b2 <- c(26.9, 12.9, 11.1, 16.7, 20.0, 20.9, 16.6, 15.4, 16.2, 16.2)
 Perform the following analysis:
 
 1.  Estimate sample means and SDs for each vector. To do so, create a `tibble()` object with `group` (consist of characters `a1`, `a2`, `b1`, `b2`) and `value` columns (consist of values above). Then use `group_by()` and `summarize()` functions to estimate means and SDs for each `group`.
-2.  Estimate t-statistics for each pair of vectors (`a1` vs. `a2` and `b1` vs. `b2`).
-3.  Perform Welch's t-test for each pair and compare results.
+2.  Perform Welch's t-test for each pair and compare results.
+
+### Bonus Exercise: Welch's t-test
+
+Reproduce the results of `t.test(x, y, var.equal = FALSE)` without using this function (report t-statistic, degrees of freedom, and p-value).
+

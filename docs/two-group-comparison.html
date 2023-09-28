@@ -355,7 +355,7 @@ t = \frac{\hat{\mu_a} - \hat{\mu_b}}{\sqrt{\left(\frac{\hat{\sigma}^2_a}{N_a} + 
 \]</span></p>
 <p>This t-statistic is known to follow the Student’s t-distribution with the degrees of freedom:</p>
 <p><span class="math display">\[
-d.f. = \frac{\frac{\hat{\sigma}^2_a}{N_a} + \frac{\hat{\sigma}^2_b}{N_b}}{\frac{(\hat{\sigma}^2_a / N_a)^2}{N_a - 1} + \frac{(\hat{\sigma}^2_b/N_b)^2}{N_b-1}}
+d.f. = \frac{(\frac{\hat{\sigma}^2_a}{N_a} + \frac{\hat{\sigma}^2_b}{N_b})^2}{\frac{(\hat{\sigma}^2_a / N_a)^2}{N_a - 1} + \frac{(\hat{\sigma}^2_b/N_b)^2}{N_b-1}}
 \]</span></p>
 <p>Therefore, the reported values of t-statistic and d.f. are different from what we estimated. The Welch’s t-test covers the cases for equal variances; therefore, by default, we use the Welch’s test.</p>
 </div>
@@ -457,7 +457,7 @@ d.f. = \frac{\frac{\hat{\sigma}^2_a}{N_a} + \frac{\hat{\sigma}^2_b}{N_b}}{\frac{
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2023-09-21.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2023-09-28.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

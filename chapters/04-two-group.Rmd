@@ -260,7 +260,7 @@ $$
 This t-statistic is known to follow the Student's t-distribution with the degrees of freedom:
 
 $$
-d.f. = \frac{\frac{\hat{\sigma}^2_a}{N_a} + \frac{\hat{\sigma}^2_b}{N_b}}{\frac{(\hat{\sigma}^2_a / N_a)^2}{N_a - 1} + \frac{(\hat{\sigma}^2_b/N_b)^2}{N_b-1}}
+d.f. = \frac{(\frac{\hat{\sigma}^2_a}{N_a} + \frac{\hat{\sigma}^2_b}{N_b})^2}{\frac{(\hat{\sigma}^2_a / N_a)^2}{N_a - 1} + \frac{(\hat{\sigma}^2_b/N_b)^2}{N_b-1}}
 $$
 
 Therefore, the reported values of t-statistic and d.f. are different from what we estimated. The Welch's t-test covers the cases for equal variances; therefore, by default, we use the Welch's test.

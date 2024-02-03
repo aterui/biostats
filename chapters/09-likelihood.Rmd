@@ -75,7 +75,7 @@ df_pois %>%
   print()
 ```
 
-That reasoning is sound because the probability of $y_1$ being equal to $3$ is maximized when $\lambda = 3$. This represents the simplest form of a **likelihood function** denoted as $L(\lambda~|~y_1)$, where $(\cdot~|~y_1)$ indicates that $y_1$ is fixed or given. To evaluate the probability of observing the fixed value of $y_1$, we vary the value of $\lambda$.
+That reasoning is sound because the probability of $y_1$ being equal to $3$ is maximized when $\lambda = 3$. This represents the simplest form of a **likelihood function** denoted as $L(\lambda~|~y_1)$, where $(\cdot~|~y_1)$ indicates that $y_1$ is fixed or given. We evaluated the likelihood of various $\lambda$ considering the given value of $y_1$.
 
 However, what if we have multiple values of $y_i$? Let's consider the scenario where $\pmb{y} = \{3, 2, 5\}$. In such cases, we must account for the probability of simultaneously observing these values. When the events are independent, the probability of observing multiple events can be expressed as the product of their individual probabilities. Consequently, the likelihood function takes the following form:
 
@@ -187,17 +187,17 @@ $$
 where $x_k$ represents $k$th explanatory variable. This translates into:
 
 $$
-\log L(\alpha, \beta_k|\pmb{y}) = \sum_i \left[y_i (\alpha + \sum_k\beta_k x_k) - \exp(\alpha + \sum_k \beta_k x_k) - \log y_i! \right]
+\log L(\alpha, \beta_1,...\beta_k|\pmb{y}) = \sum_i \left[y_i (\alpha + \sum_k\beta_k x_k) - \exp(\alpha + \sum_k \beta_k x_k) - \log y_i! \right]
 $$
 
 and solving the $k+1$ partial derivatives:
 
 $$
 \begin{aligned}
-\frac{\partial \log L(\alpha, \beta_k|\pmb{y})}{\partial \alpha} &= 0\\
-\frac{\partial \log L(\alpha, \beta_k|\pmb{y})}{\partial \beta_1} &= 0\\
+\frac{\partial \log L(\alpha, \beta_1,...\beta_k|\pmb{y})}{\partial \alpha} &= 0\\
+\frac{\partial \log L(\alpha, \beta_1,...\beta_k|\pmb{y})}{\partial \beta_1} &= 0\\
 &...\\
-\frac{\partial \log L(\alpha, \beta_k|\pmb{y})}{\partial \beta_k} &= 0\\
+\frac{\partial \log L(\alpha, \beta_1,...\beta_k|\pmb{y})}{\partial \beta_k} &= 0\\
 \end{aligned}
 $$Thus, the function `glm()` does a lot for us! The log likelihood of the fitted model can be extracted with `logLik()`:
 

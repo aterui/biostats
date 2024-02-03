@@ -163,7 +163,7 @@ Figure 9.1: Relationship between the parameter <span class="math inline">\(\lamb
 ##  9     3    2.6 0.218
 ## 10     3    3.5 0.216
 ## # ℹ 91 more rows</code></pre>
-<p>That reasoning is sound because the probability of <span class="math inline">\(y_1\)</span> being equal to <span class="math inline">\(3\)</span> is maximized when <span class="math inline">\(\lambda = 3\)</span>. This represents the simplest form of a <strong>likelihood function</strong> denoted as <span class="math inline">\(L(\lambda~|~y_1)\)</span>, where <span class="math inline">\((\cdot~|~y_1)\)</span> indicates that <span class="math inline">\(y_1\)</span> is fixed or given. To evaluate the probability of observing the fixed value of <span class="math inline">\(y_1\)</span>, we vary the value of <span class="math inline">\(\lambda\)</span>.</p>
+<p>That reasoning is sound because the probability of <span class="math inline">\(y_1\)</span> being equal to <span class="math inline">\(3\)</span> is maximized when <span class="math inline">\(\lambda = 3\)</span>. This represents the simplest form of a <strong>likelihood function</strong> denoted as <span class="math inline">\(L(\lambda~|~y_1)\)</span>, where <span class="math inline">\((\cdot~|~y_1)\)</span> indicates that <span class="math inline">\(y_1\)</span> is fixed or given. We evaluated the likelihood of various <span class="math inline">\(\lambda\)</span> considering the given value of <span class="math inline">\(y_1\)</span>.</p>
 <p>However, what if we have multiple values of <span class="math inline">\(y_i\)</span>? Let’s consider the scenario where <span class="math inline">\(\pmb{y} = \{3, 2, 5\}\)</span>. In such cases, we must account for the probability of simultaneously observing these values. When the events are independent, the probability of observing multiple events can be expressed as the product of their individual probabilities. Consequently, the likelihood function takes the following form:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -282,15 +282,15 @@ y_i &amp;\sim \mbox{Poisson}(\lambda_i)\\
 \]</span></p>
 <p>where <span class="math inline">\(x_k\)</span> represents <span class="math inline">\(k\)</span>th explanatory variable. This translates into:</p>
 <p><span class="math display">\[
-\log L(\alpha, \beta_k|\pmb{y}) = \sum_i \left[y_i (\alpha + \sum_k\beta_k x_k) - \exp(\alpha + \sum_k \beta_k x_k) - \log y_i! \right]
+\log L(\alpha, \beta_1,...\beta_k|\pmb{y}) = \sum_i \left[y_i (\alpha + \sum_k\beta_k x_k) - \exp(\alpha + \sum_k \beta_k x_k) - \log y_i! \right]
 \]</span></p>
 <p>and solving the <span class="math inline">\(k+1\)</span> partial derivatives:</p>
 <p><span class="math display">\[
 \begin{aligned}
-\frac{\partial \log L(\alpha, \beta_k|\pmb{y})}{\partial \alpha} &amp;= 0\\
-\frac{\partial \log L(\alpha, \beta_k|\pmb{y})}{\partial \beta_1} &amp;= 0\\
+\frac{\partial \log L(\alpha, \beta_1,...\beta_k|\pmb{y})}{\partial \alpha} &amp;= 0\\
+\frac{\partial \log L(\alpha, \beta_1,...\beta_k|\pmb{y})}{\partial \beta_1} &amp;= 0\\
 &amp;...\\
-\frac{\partial \log L(\alpha, \beta_k|\pmb{y})}{\partial \beta_k} &amp;= 0\\
+\frac{\partial \log L(\alpha, \beta_1,...\beta_k|\pmb{y})}{\partial \beta_k} &amp;= 0\\
 \end{aligned}
 \]</span>Thus, the function <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> does a lot for us! The log likelihood of the fitted model can be extracted with <code><a href="https://rdrr.io/r/stats/logLik.html">logLik()</a></code>:</p>
 <div class="sourceCode" id="cb249"><pre class="downlit sourceCode r">
@@ -384,7 +384,7 @@ L(\mu, \sigma | \pmb{y}) = \prod_{i}^N f(y_i) \Delta y
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2023-09-28.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2024-02-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

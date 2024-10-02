@@ -72,11 +72,30 @@ df_fl %>%
 
 Hmm, it is possible that there is a noticeable disparity in body size between Lake `a` and Lake `b`. However, how can we ascertain and provide evidence for this claim?
 
+## t-test in R
+
+For this simple data set, we can use t-test. R provides `t.test()` function to perform this analysis:
+
+```{r t-test-built-in}
+
+x <- df_fl %>%
+  filter(lake == "a") %>%  # subset lake a
+  pull(length)
+
+y <- df_fl %>%
+  filter(lake == "b") %>% # subset lake b
+  pull(length)
+
+t.test(x, y, var.equal = TRUE)
+```
+
+The reported t-statistic `t = -3.2473`, the p-value `p-value = 0.001596`, and the degrees of freedom all agreed (`df = 98`) -- however, what do these values mean? How are we supposed to interpret `t = -3.2473` and `p-value = 0.001596`?
+
 ## Test Statistic
 
 ### t-statistic
 
-Since our focus is on examining the difference in means, it is logical to estimate the disparity between the sample means in each lake. Let me denote the sample means as $\hat{\mu}_a$ and $\hat{\mu}_b$ for Lake `a` and Lake `b`, respectively. We can estimate the difference between the means using the following approach:
+The starting point is to define what we want to look at. Since our focus is on examining the difference in means, it is logical to estimate the disparity between the sample means in each lake. Let me denote the sample means as $\hat{\mu}_a$ and $\hat{\mu}_b$ for Lake `a` and Lake `b`, respectively. We can estimate the difference between the means using the following approach:
 
 ```{r sample-mean-difference}
 
@@ -219,30 +238,9 @@ The same logic is used in many statistical analyses -- define the null hypothesi
 
 However, it is crucial to recognize that, **even if we found the observed t-statistic that results in very high p-value (i.e., very common under the null hypothesis), finding such a result does NOT support the null hypothesis -- we just can't reject it.**
 
-## t-test in R
+## t-test with unequal variance
 
-### t-test with equal variance
-
-In R, this t-test can be performed with `t.test()`. Let me examine if the function gives us identical results:
-
-```{r t-test-built-in}
-
-x <- df_fl %>%
-  filter(lake == "a") %>%  # subset lake a
-  pull(length)
-
-y <- df_fl %>%
-  filter(lake == "b") %>% # subset lake b
-  pull(length)
-
-t.test(x, y, var.equal = TRUE)
-```
-
-The reported t-statistic `t = -3.2473`, the p-value `p-value = 0.001596`, and the degrees of freedom all agreed (`df = 98`) with what we have estimated manually. Importantly, this t-test assumes relative similarity of variance between groups.
-
-### t-test with unequal variance
-
-The relative similarity of variance between groups could be an unrealistic assumption. Luckily, there is a variant of t-test "Welch's t-test," in which we assume unequal variance between groups. The implementation is easy -- set `var.equal = FALSE` in `t.test()`:
+The above example assumes the relative similarity of variance between groups, which could be an unrealistic assumption. Luckily, there is a variant of t-test "Welch's t-test," in which we assume unequal variance between groups. The implementation is easy -- set `var.equal = FALSE` in `t.test()`:
 
 ```{r welch-test}
 
@@ -265,6 +263,7 @@ $$
 
 Therefore, the reported values of t-statistic and d.f. are different from what we estimated. The Welch's t-test covers the cases for equal variances; therefore, by default, we use the Welch's test.
 
+
 ## Laboratory
 
 ### Influence of Sample Size
@@ -276,7 +275,7 @@ Create the following vectors with `rnorm()`:
 - `xl` with mean $10$, SD $5$, and sample size $100$ 
 - `yl` with mean $12$, SD $5$, and sample size $100$ 
 
-Perform Welch's t-test for `xs` vs. `ys`, and `xl` vs. `yl` and compare p-values.
+Perform Welch's t-test for `xs` vs. `ys`, and `xl` vs. `yl` and compare p-values. Set `var.equal = TRUE` in `t.test()`.
 
 ### Difference and Uncertainty
 
@@ -293,7 +292,9 @@ b2 <- c(26.9, 12.9, 11.1, 16.7, 20.0, 20.9, 16.6, 15.4, 16.2, 16.2)
 Perform the following analysis:
 
 1.  Estimate sample means and SDs for each vector. To do so, create a `tibble()` object with `group` (consist of characters `a1`, `a2`, `b1`, `b2`) and `value` columns (consist of values above). Then use `group_by()` and `summarize()` functions to estimate means and SDs for each `group`.
-2.  Perform Welch's t-test for each pair and compare results.
+2.  Create a figure similar to Figure \@ref(fig:mean-plot) using data from `a1` and `a2`.
+
+3.  Perform Welch's t-test for each pair and compare results.
 
 ### Bonus Exercise: Welch's t-test
 

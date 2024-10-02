@@ -64,12 +64,11 @@ normal-distribution
 poisson-distribution
 two-group-comparison
 explore-data-structure
+t-test-in-r
 test-statistic
 t-statistic
 null-hypothesis
 interpretation
-t-test-in-r
-t-test-with-equal-variance
 t-test-with-unequal-variance
 laboratory-3
 influence-of-sample-size

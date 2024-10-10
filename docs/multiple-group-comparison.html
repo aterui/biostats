@@ -87,7 +87,7 @@
 <span class="header-section-number">5.1</span> Partition the Variability<a class="anchor" aria-label="anchor" href="#partition-the-variability"><i class="fas fa-link"></i></a>
 </h2>
 <p>The first step is to determine what aspect to examine. In the case of a t-test, we focus on the difference in sample means between groups. One might initially consider conducting t-tests for all possible combinations. However, this approach leads to a problem known as the <a href="https://en.wikipedia.org/wiki/Multiple_comparisons_problem#:~:text=In%20statistics%2C%20the%20multiple%20comparisons,based%20on%20the%20observed%20values.">multiple comparisons problem</a>. Hence, this is not a viable option. Therefore, we need to explore the data from a different perspective.</p>
-<p>To facilitate learning, let’s once again utilize the lake fish data, but this time we have three lakes in our analysis:</p>
+<p>To facilitate learning, let’s once again utilize the lake fish data (download <a href="https://github.com/aterui/biostats/blob/master/data_raw/data_fish_length_anova.csv">here</a>), but this time we have three lakes in our analysis:</p>
 <div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_anova</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data_raw/data_fish_length_anova.csv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">df_anova</span>, <span class="va">lake</span><span class="op">)</span></span></code></pre></div>
@@ -333,7 +333,7 @@ Figure 5.2: F-distribution. The vertical red line denotes the observed F-statist
 </h3>
 <p>In R, there is a built-in data set called <code>PrantGrowth</code>. To analyze this data set, carry out the following tasks:</p>
 <ol style="list-style-type: decimal">
-<li><p>The data set consists of two columns: weight, group. Create figures similar to Figure <a href="two-group-comparison.html#fig:mean-plot">4.1</a> in Chapter <a href="two-group-comparison.html#two-group-comparison">4</a>.</p></li>
+<li><p>The data set consists of two columns: weight, group. Create figures similar to Figure <a href="multiple-group-comparison.html#fig:violin">5.1</a>.</p></li>
 <li><p>Conduct an ANOVA to examine whether there are differences in <code>weight</code> among the different <code>group</code>.</p></li>
 <li><p>Discuss what values to be reported in a scientific article?</p></li>
 </ol>
@@ -382,7 +382,7 @@ Figure 5.2: F-distribution. The vertical red line denotes the observed F-statist
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2024-10-02.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2024-10-10.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

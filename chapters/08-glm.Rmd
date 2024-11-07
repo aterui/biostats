@@ -406,7 +406,7 @@ tibble(Node = 1:6,
 
 ### GLM exercise
 
-There is a publicly available stream fish distribution dataset accessible from an online repository. You can download it using this link: [Download Dataset](https://github.com/aterui/public-proj_fish-richness-shubuto/blob/master/data/data_vpart.csv). The dataset comprises information on the number of species found at each site (`n_sp`) and several associated environmental variables, including distance to the sea (`distance`), catchment area (`cat_area`), and environmental heterogeneity (`hull_area`). To analyze this dataset, develop a Generalized Linear Model (GLM) with an appropriate probability distribution.
+There is a publicly available stream fish distribution dataset accessible from an online repository. You can download it using this link: [Download Dataset](https://github.com/aterui/public-proj_fish-richness-shubuto/blob/master/data/data_vpart.csv). The dataset comprises information on the number of species found at each site (`n_sp`) and several associated environmental variables, including distance to the sea (`distance`), catchment area (`cat_area`), and environmental heterogeneity (`hull_area`). These environmental variables are factors that are known to influence fish distributions. To analyze this dataset, develop a Generalized Linear Model (GLM) with an appropriate probability distribution to explore which variable significantly influences the fish species richness observed at each sampling site.
 
 ### Effect size
 

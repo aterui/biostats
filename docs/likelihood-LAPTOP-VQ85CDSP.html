@@ -98,7 +98,7 @@
 <code class="sourceCode R"><span><span class="co"># write the formula to confirm</span></span>
 <span><span class="op">(</span><span class="va">p</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">3.5</span><span class="op">^</span><span class="fl">3</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3.5</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/Special.html">factorial</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.2157855</code></pre>
-<p>If we assume a mean of <span class="math inline">\(3.5\)</span> in the Poisson distribution, the probability of observing a value of <span class="math inline">\(3\)</span> is approximately <span class="math inline">\(0.216\)</span>. We can experiment with different values of <span class="math inline">\(\lambda\)</span> to see if there is a potentially “better” value. By exploring different values of <span class="math inline">\(\lambda\)</span>, we can observe how the probability of observing a specific value changes. This allows us to assess which value of <span class="math inline">\(\lambda\)</span> provides a better fit or captures the data more accurately. The following example explores <span class="math inline">\(\lambda = 0 - 10\)</span> with a <span class="math inline">\(0.1\)</span> interval.</p>
+<p>If we assume a mean of <span class="math inline">\(3.5\)</span> in the Poisson distribution, the probability of observing a value of <span class="math inline">\(3\)</span> is approximately <span class="math inline">\(0.215\)</span>. We can experiment with different values of <span class="math inline">\(\lambda\)</span> to see if there is a potentially “better” value. By exploring different values of <span class="math inline">\(\lambda\)</span>, we can observe how the probability of observing a specific value changes. This allows us to assess which value of <span class="math inline">\(\lambda\)</span> provides a better fit or captures the data more accurately. The following example explores <span class="math inline">\(\lambda = 0 - 10\)</span> with a <span class="math inline">\(0.1\)</span> interval.</p>
 <div class="sourceCode" id="cb235"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># change lambda from 0 to 10 by 0.1</span></span>
 <span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span>, by <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span>
@@ -332,9 +332,13 @@ y_i &amp;\sim \mbox{Poisson}(\lambda_i)\\
 <p><span class="math display">\[
 f(y) = \frac{1}{\sqrt{2 \pi} \sigma} \exp\left(-\frac{(y - \mu)^2}{2 \sigma^2}\right)
 \]</span></p>
-<p>As the normal distribution deals with continuous variables, the PDF returns <em>probability density</em> instead of <em>probability</em>. However, we can define the likelihood of observing the entire vector <span class="math inline">\(\pmb{y}\)</span> in a similar way:</p>
+<p>As the normal distribution deals with continuous variables, we need a technique to derive the Maximum Likelihood Estimation (MLE). For this purpose, we will consider <span class="math inline">\(f(y)\)</span> as the height of a rectangle to simplify the problem, and use <span class="math inline">\(\Delta y\)</span> as the base length. The probability of observing a value <span class="math inline">\(y = k\)</span>, denoted as <span class="math inline">\(\Pr(y = k)\)</span>, can then be approximated as the area of this rectangle:</p>
 <p><span class="math display">\[
-L(\mu, \sigma | \pmb{y}) = \prod_{i}^N f(y_i)
+\Pr(y = k) = \text{rectangle area} = f(y) \times \Delta y
+\]</span></p>
+<p>Assuming we have <span class="math inline">\(N\)</span> observations, the likelihood of observing the entire vector <span class="math inline">\(\pmb{y}\)</span> is given by:</p>
+<p><span class="math display">\[
+L(\mu, \sigma | \pmb{y}) = \prod_{i}^N f(y_i) \Delta y
 \]</span></p>
 <ol style="list-style-type: decimal">
 <li><p>Yield the logarithm of <span class="math inline">\(L(\mu, \sigma | \pmb{y})\)</span>.</p></li>
@@ -380,7 +384,7 @@ L(\mu, \sigma | \pmb{y}) = \prod_{i}^N f(y_i)
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2024-11-13.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2024-11-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

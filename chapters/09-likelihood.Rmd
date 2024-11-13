@@ -35,7 +35,7 @@ dpois(3, lambda = 3.5)
 (p <- (3.5^3 * exp(-3.5)) / factorial(3))
 ```
 
-If we assume a mean of $3.5$ in the Poisson distribution, the probability of observing a value of $3$ is approximately $0.215$. We can experiment with different values of $\lambda$ to see if there is a potentially "better" value. By exploring different values of $\lambda$, we can observe how the probability of observing a specific value changes. This allows us to assess which value of $\lambda$ provides a better fit or captures the data more accurately. The following example explores $\lambda = 0 - 10$ with a $0.1$ interval.
+If we assume a mean of $3.5$ in the Poisson distribution, the probability of observing a value of $3$ is approximately $0.216$. We can experiment with different values of $\lambda$ to see if there is a potentially "better" value. By exploring different values of $\lambda$, we can observe how the probability of observing a specific value changes. This allows us to assess which value of $\lambda$ provides a better fit or captures the data more accurately. The following example explores $\lambda = 0 - 10$ with a $0.1$ interval.
 
 ```{r}
 # change lambda from 0 to 10 by 0.1
@@ -238,16 +238,10 @@ $$
 f(y) = \frac{1}{\sqrt{2 \pi} \sigma} \exp\left(-\frac{(y - \mu)^2}{2 \sigma^2}\right)
 $$
 
-As the normal distribution deals with continuous variables, we need a technique to derive the Maximum Likelihood Estimation (MLE). For this purpose, we will consider $f(y)$ as the height of a rectangle to simplify the problem, and use $\Delta y$ as the base length. The probability of observing a value $y = k$, denoted as $\Pr(y = k)$, can then be approximated as the area of this rectangle:
+As the normal distribution deals with continuous variables, the PDF returns *probability density* instead of *probability*. However, we can define the likelihood of observing the entire vector $\pmb{y}$ in a similar way:
 
 $$
-\Pr(y = k) = \text{rectangle area} = f(y) \times \Delta y
-$$
-
-Assuming we have $N$ observations, the likelihood of observing the entire vector $\pmb{y}$ is given by:
-
-$$
-L(\mu, \sigma | \pmb{y}) = \prod_{i}^N f(y_i) \Delta y
+L(\mu, \sigma | \pmb{y}) = \prod_{i}^N f(y_i)
 $$
 
 1. Yield the logarithm of $L(\mu, \sigma | \pmb{y})$.

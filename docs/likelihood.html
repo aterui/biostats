@@ -4,17 +4,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 9 Likelihood | BIOSTATS</title>
+<title>Chapter 13 Likelihood | BIOSTATS</title>
 <meta name="author" content="Akira Terui">
-<meta name="description" content="In Chapter 8, we introduced non-normal distributions to represent count and proportional data. The glm() function was used to obtain parameter estimates, but how does this function achieve that?...">
+<meta name="description" content="In Chapter 12, we introduced non-normal distributions to represent count and proportional data. The glm() function was used to obtain parameter estimates, but how does this function achieve that?...">
 <meta name="generator" content="bookdown 0.40 with bs4_book()">
-<meta property="og:title" content="Chapter 9 Likelihood | BIOSTATS">
+<meta property="og:title" content="Chapter 13 Likelihood | BIOSTATS">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://bookdown.org/janedoe/bookdown-demo/likelihood.html">
-<meta property="og:description" content="In Chapter 8, we introduced non-normal distributions to represent count and proportional data. The glm() function was used to obtain parameter estimates, but how does this function achieve that?...">
+<meta property="og:description" content="In Chapter 12, we introduced non-normal distributions to represent count and proportional data. The glm() function was used to obtain parameter estimates, but how does this function achieve that?...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 9 Likelihood | BIOSTATS">
-<meta name="twitter:description" content="In Chapter 8, we introduced non-normal distributions to represent count and proportional data. The glm() function was used to obtain parameter estimates, but how does this function achieve that?...">
+<meta name="twitter:title" content="Chapter 13 Likelihood | BIOSTATS">
+<meta name="twitter:description" content="In Chapter 12, we introduced non-normal distributions to represent count and proportional data. The glm() function was used to obtain parameter estimates, but how does this function achieve that?...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -45,22 +45,25 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Introduction</a></li>
-<li class="book-part">Basics</li>
-<li><a class="" href="descriptive-statistics.html"><span class="header-section-number">1</span> Descriptive Statistics</a></li>
-<li><a class="" href="sampling.html"><span class="header-section-number">2</span> Sampling</a></li>
-<li><a class="" href="probabilistic-view.html"><span class="header-section-number">3</span> Probabilistic View</a></li>
-<li><a class="" href="two-group-comparison.html"><span class="header-section-number">4</span> Two-Group Comparison</a></li>
-<li><a class="" href="multiple-group-comparison.html"><span class="header-section-number">5</span> Multiple-Group Comparison</a></li>
-<li><a class="" href="regression.html"><span class="header-section-number">6</span> Regression</a></li>
-<li><a class="" href="linear-model.html"><span class="header-section-number">7</span> Linear Model</a></li>
-<li><a class="" href="generalized-linear-model.html"><span class="header-section-number">8</span> Generalized Linear Model</a></li>
-<li><a class="active" href="likelihood.html"><span class="header-section-number">9</span> Likelihood</a></li>
-<li><a class="" href="model-comparison.html"><span class="header-section-number">10</span> Model Comparison</a></li>
+<li class="book-part">Getting Started</li>
+<li><a class="" href="what-is-r-and-r-studio.html"><span class="header-section-number">1</span> What is R and R studio?</a></li>
+<li><a class="" href="installing-r-and-rstudio.html"><span class="header-section-number">2</span> Installing R and RStudio</a></li>
+<li><a class="" href="r-project.html"><span class="header-section-number">3</span> R Project</a></li>
+<li class="book-part">R Basics</li>
+<li><a class="" href="data-structure.html"><span class="header-section-number">4</span> Data Structure</a></li>
+<li class="book-part">Basic Statistics</li>
+<li><a class="" href="descriptive-statistics.html"><span class="header-section-number">5</span> Descriptive Statistics</a></li>
+<li><a class="" href="sampling.html"><span class="header-section-number">6</span> Sampling</a></li>
+<li><a class="" href="probabilistic-view.html"><span class="header-section-number">7</span> Probabilistic View</a></li>
+<li><a class="" href="two-group-comparison.html"><span class="header-section-number">8</span> Two-Group Comparison</a></li>
+<li><a class="" href="multiple-group-comparison.html"><span class="header-section-number">9</span> Multiple-Group Comparison</a></li>
+<li><a class="" href="regression.html"><span class="header-section-number">10</span> Regression</a></li>
+<li><a class="" href="linear-model.html"><span class="header-section-number">11</span> Linear Model</a></li>
+<li><a class="" href="generalized-linear-model.html"><span class="header-section-number">12</span> Generalized Linear Model</a></li>
+<li><a class="active" href="likelihood.html"><span class="header-section-number">13</span> Likelihood</a></li>
+<li><a class="" href="model-comparison.html"><span class="header-section-number">14</span> Model Comparison</a></li>
 <li class="book-part">Appendix</li>
-<li><a class="" href="project.html">Project</a></li>
 <li><a class="" href="git-github.html">Git &amp; GitHub</a></li>
-<li><a class="" href="data-structure.html">Data Structure</a></li>
-<li><a class="" href="tidyverse.html">Tidyverse</a></li>
 <li><a class="" href="base-plot.html">Base Plot</a></li>
 </ul>
 
@@ -69,17 +72,17 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="likelihood" class="section level1" number="9">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="likelihood" class="section level1" number="13">
 <h1>
-<span class="header-section-number">9</span> Likelihood<a class="anchor" aria-label="anchor" href="#likelihood"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13</span> Likelihood<a class="anchor" aria-label="anchor" href="#likelihood"><i class="fas fa-link"></i></a>
 </h1>
-<p>In Chapter <a href="generalized-linear-model.html#generalized-linear-model">8</a>, we introduced non-normal distributions to represent count and proportional data. The <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> function was used to obtain parameter estimates, but how does this function achieve that? <strong>In reality, the least squares approach is only applicable to normal distributions.</strong> Therefore, we require an alternative approach to estimate parameters within the GLM framework. In this section, I will introduce the concept of likelihood as a fundamental principle for parameter estimation in the GLM framework.</p>
-<div id="finding-the-more-likely" class="section level2" number="9.1">
+<p>In Chapter <a href="generalized-linear-model.html#generalized-linear-model">12</a>, we introduced non-normal distributions to represent count and proportional data. The <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> function was used to obtain parameter estimates, but how does this function achieve that? <strong>In reality, the least squares approach is only applicable to normal distributions.</strong> Therefore, we require an alternative approach to estimate parameters within the GLM framework. In this section, I will introduce the concept of likelihood as a fundamental principle for parameter estimation in the GLM framework.</p>
+<div id="finding-the-more-likely" class="section level2" number="13.1">
 <h2>
-<span class="header-section-number">9.1</span> Finding the “More Likely”<a class="anchor" aria-label="anchor" href="#finding-the-more-likely"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.1</span> Finding the “More Likely”<a class="anchor" aria-label="anchor" href="#finding-the-more-likely"><i class="fas fa-link"></i></a>
 </h2>
 <p>In the least squares method, our goal is to minimize the sum of squared errors, ensuring that the fitted model has the smallest deviation from the observed data points. However, this approach is not applicable to non-normal variables. In such cases, we need to rely on the “probability” of observing a data point or numerical value.</p>
-<p>Let’s consider an example where we have count data, denoted as <span class="math inline">\(\pmb{y} = \{y_1, y_2, ..., y_N\}\)</span>. To simplify the matter, let’s focus on a specific data point, say <span class="math inline">\(y_1 = 3\)</span>. Assuming a Poisson distribution, we can calculate the probability of observing this particular value by using an arbitrary parameter value for the mean, denoted as <span class="math inline">\(\lambda\)</span>. To refresh our memory, we can refer back to the Poisson distribution discussed in Chapter <a href="probabilistic-view.html#probabilistic-view">3</a>.</p>
+<p>Let’s consider an example where we have count data, denoted as <span class="math inline">\(\pmb{y} = \{y_1, y_2, ..., y_N\}\)</span>. To simplify the matter, let’s focus on a specific data point, say <span class="math inline">\(y_1 = 3\)</span>. Assuming a Poisson distribution, we can calculate the probability of observing this particular value by using an arbitrary parameter value for the mean, denoted as <span class="math inline">\(\lambda\)</span>. To refresh our memory, we can refer back to the Poisson distribution discussed in Chapter <a href="probabilistic-view.html#probabilistic-view">7</a>.</p>
 <p><span class="math display">\[
 \Pr(y = k) = \frac{\lambda^{k}\exp(-\lambda)}{k!}
 \]</span></p>
@@ -88,18 +91,18 @@
 \Pr(y_1 = 3) = \frac{3.5^3 \exp(-3.5)}{3!} \approx 0.215
 \]</span></p>
 <p>We can calculate this with <code><a href="https://rdrr.io/r/stats/Poisson.html">dpois()</a></code> in R:</p>
-<div class="sourceCode" id="cb231"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># dpois()</span></span>
 <span><span class="co"># the first argument is "k"</span></span>
 <span><span class="co"># the second argument is "lambda"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">dpois</a></span><span class="op">(</span><span class="fl">3</span>, lambda <span class="op">=</span> <span class="fl">3.5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.2157855</code></pre>
-<div class="sourceCode" id="cb233"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb336"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># write the formula to confirm</span></span>
 <span><span class="op">(</span><span class="va">p</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">3.5</span><span class="op">^</span><span class="fl">3</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3.5</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/Special.html">factorial</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.2157855</code></pre>
 <p>If we assume a mean of <span class="math inline">\(3.5\)</span> in the Poisson distribution, the probability of observing a value of <span class="math inline">\(3\)</span> is approximately <span class="math inline">\(0.216\)</span>. We can experiment with different values of <span class="math inline">\(\lambda\)</span> to see if there is a potentially “better” value. By exploring different values of <span class="math inline">\(\lambda\)</span>, we can observe how the probability of observing a specific value changes. This allows us to assess which value of <span class="math inline">\(\lambda\)</span> provides a better fit or captures the data more accurately. The following example explores <span class="math inline">\(\lambda = 0 - 10\)</span> with a <span class="math inline">\(0.1\)</span> interval.</p>
-<div class="sourceCode" id="cb235"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># change lambda from 0 to 10 by 0.1</span></span>
 <span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span>, by <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span>
 <span></span>
@@ -127,7 +130,7 @@
 ## 10     3    0.9 0.0494  
 ## # ℹ 91 more rows</code></pre>
 <p>Make a plot:</p>
-<div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb340"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_pois</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">lambda</span>,</span>
 <span>             y <span class="op">=</span> <span class="va">pr</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -138,11 +141,11 @@
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:dpois-plot"></span>
 <img src="biostats_files/figure-html/dpois-plot-1.png" alt="Relationship between the parameter $\lambda$ and the probability of observing a value of three." width="672"><p class="caption">
-Figure 9.1: Relationship between the parameter <span class="math inline">\(\lambda\)</span> and the probability of observing a value of three.
+Figure 13.1: Relationship between the parameter <span class="math inline">\(\lambda\)</span> and the probability of observing a value of three.
 </p>
 </div>
 <p>By examining the figure or data, it appears that the probability is highest around <span class="math inline">\(\lambda = 3\)</span>. To confirm this observation, let’s arrange the data frame <code>df_pois</code>.</p>
-<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb341"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># arrange() re-orders the dataframe based on the speficied column in an ascending order</span></span>
 <span><span class="co"># desc() flips the order (descending)</span></span>
 <span></span>
@@ -173,18 +176,18 @@ L(\lambda~|~\pmb{y}) &amp;= \Pr(y_1 = 3) \times \Pr(y_2 = 2) \times \Pr(y_3 = 5)
 \end{aligned}
 \]</span></p>
 <p>Implement this in R:</p>
-<div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb343"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># try lambda = 3 for y = 3, 2, 5</span></span>
 <span><span class="va">pr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">dpois</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">5</span><span class="op">)</span>, lambda <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">pr</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.2240418 0.2240418 0.1008188</code></pre>
-<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb345"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># probability of observing 3, 2, 5 simultaneously</span></span>
 <span><span class="co"># with lambda = 3</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/prod.html">prod</a></span><span class="op">(</span><span class="va">pr</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.005060573</code></pre>
 <p>Similar to the previous example, let’s search for a more suitable value of <span class="math inline">\(\lambda\)</span> that better captures the observed data.</p>
-<div class="sourceCode" id="cb244"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb347"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># lambda = 0 - 10 by 0.01</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span>, by <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span>
@@ -215,7 +218,7 @@ L(\lambda~|~\pmb{y}) &amp;= \Pr(y_1 = 3) \times \Pr(y_2 = 2) \times \Pr(y_3 = 5)
 ##  9   3.29 0.00533
 ## 10   3.38 0.00533
 ## # ℹ 991 more rows</code></pre>
-<div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb349"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># visualize</span></span>
 <span><span class="va">df_pois</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">lambda</span>,</span>
@@ -225,25 +228,25 @@ L(\lambda~|~\pmb{y}) &amp;= \Pr(y_1 = 3) \times \Pr(y_2 = 2) \times \Pr(y_3 = 5)
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:dpois-likelihood"></span>
 <img src="biostats_files/figure-html/dpois-likelihood-1.png" alt="Likelihood of observing three count data points $\pmb{y}$ simultaneously." width="672"><p class="caption">
-Figure 9.2: Likelihood of observing three count data points <span class="math inline">\(\pmb{y}\)</span> simultaneously.
+Figure 13.2: Likelihood of observing three count data points <span class="math inline">\(\pmb{y}\)</span> simultaneously.
 </p>
 </div>
 <p>In this exercise with an interval of <span class="math inline">\(0.01\)</span>, <span class="math inline">\(\lambda \approx 3.33\)</span> is identified as the most suitable value. Interestingly, the sample mean matches this value:</p>
-<div class="sourceCode" id="cb247"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb350"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 3.333333</code></pre>
 <p>Why? See below.</p>
 </div>
-<div id="maximum-likelihood-method" class="section level2" number="9.2">
+<div id="maximum-likelihood-method" class="section level2" number="13.2">
 <h2>
-<span class="header-section-number">9.2</span> Maximum Likelihood Method<a class="anchor" aria-label="anchor" href="#maximum-likelihood-method"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.2</span> Maximum Likelihood Method<a class="anchor" aria-label="anchor" href="#maximum-likelihood-method"><i class="fas fa-link"></i></a>
 </h2>
-<div id="simple-case" class="section level3" number="9.2.1">
+<div id="simple-case" class="section level3" number="13.2.1">
 <h3>
-<span class="header-section-number">9.2.1</span> Simple case<a class="anchor" aria-label="anchor" href="#simple-case"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.2.1</span> Simple case<a class="anchor" aria-label="anchor" href="#simple-case"><i class="fas fa-link"></i></a>
 </h3>
 <p>Finding the parameter value that maximizes the probability of observing a set of observed values is known as the <strong>Maximum Likelihood Estimate (MLE)</strong>. This estimation method is commonly employed in the GLM framework and various other statistical inference techniques. The MLE approach is applicable as long as the likelihood can be defined, making it a versatile method for many statistical analyses.</p>
-<p>However, the procedure I employed in the previous section (Section <a href="likelihood.html#finding-the-more-likely">9.1</a>) is not mathematically rigorous because the optimal value of <span class="math inline">\(\lambda\)</span> is dependent on the resolution of the interval. As the interval becomes smaller, it is possible to discover an even better value of <span class="math inline">\(\lambda\)</span> ad infinitum due to its continuous nature.</p>
+<p>However, the procedure I employed in the previous section (Section <a href="likelihood.html#finding-the-more-likely">13.1</a>) is not mathematically rigorous because the optimal value of <span class="math inline">\(\lambda\)</span> is dependent on the resolution of the interval. As the interval becomes smaller, it is possible to discover an even better value of <span class="math inline">\(\lambda\)</span> ad infinitum due to its continuous nature.</p>
 <p>A more reliable approach to identifying the “peak” is by utilizing the first-order derivative. The first-order derivative represents the slope of the likelihood function at a given <span class="math inline">\(\lambda\)</span> value. If the derivative equals zero, it indicates that we have reached the peak of the likelihood function. We can leverage this mathematical principle to determine the maximum likelihood estimate of <span class="math inline">\(\lambda\)</span>. Since computing the derivative of a product is mathematically challenging, we can apply a logarithm transformation to the likelihood function. Recall that <span class="math inline">\(\log ab = \log a + \log b\)</span>. By taking the logarithm, we can convert the product operation <span class="math inline">\(\prod\)</span> into a summation operation <span class="math inline">\(\sum\)</span>. Specifically:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -267,11 +270,11 @@ Figure 9.2: Likelihood of observing three count data points <span class="math in
 \lambda &amp;= \frac{\sum_i^N y_i}{N}
 \end{aligned}
 \]</span></p>
-<p>Interesting – the maximum likelihood estimate of <span class="math inline">\(\lambda\)</span> is equal to the sample mean. This is THE reason why we could use the sample mean as the estimate of <span class="math inline">\(\lambda\)</span> in Chapter <a href="probabilistic-view.html#probabilistic-view">3</a>.</p>
+<p>Interesting – the maximum likelihood estimate of <span class="math inline">\(\lambda\)</span> is equal to the sample mean. This is THE reason why we could use the sample mean as the estimate of <span class="math inline">\(\lambda\)</span> in Chapter <a href="probabilistic-view.html#probabilistic-view">7</a>.</p>
 </div>
-<div id="general-case" class="section level3" number="9.2.2">
+<div id="general-case" class="section level3" number="13.2.2">
 <h3>
-<span class="header-section-number">9.2.2</span> General case<a class="anchor" aria-label="anchor" href="#general-case"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.2.2</span> General case<a class="anchor" aria-label="anchor" href="#general-case"><i class="fas fa-link"></i></a>
 </h3>
 <p>In practice, obtaining the MLE analytically can be highly complex and often infeasible. Consequently, the GLM framework relies on numerical search algorithms to approximate the MLE estimates (see <a href="https://math.mcmaster.ca/~bolker/emdbook/chap7A.pdf">Ben Bolker’s book chapter</a> for full details; in particular, quasi-Newton methods). Within GLMs, it is common to establish relationships between the mean <span class="math inline">\(\lambda\)</span> and explanatory variables in order to investigate their influences. For instance:</p>
 <p><span class="math display">\[
@@ -293,7 +296,7 @@ y_i &amp;\sim \mbox{Poisson}(\lambda_i)\\
 \frac{\partial \log L(\alpha, \beta_1,...\beta_k|\pmb{y})}{\partial \beta_k} &amp;= 0\\
 \end{aligned}
 \]</span>Thus, the function <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> does a lot for us! The log likelihood of the fitted model can be extracted with <code><a href="https://rdrr.io/r/stats/logLik.html">logLik()</a></code>:</p>
-<div class="sourceCode" id="cb249"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb352"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load garden plant data</span></span>
 <span><span class="co"># df_count &lt;- read_csv("data_raw/data_garden_count.csv")</span></span>
 <span></span>
@@ -305,13 +308,13 @@ y_i &amp;\sim \mbox{Poisson}(\lambda_i)\\
 <pre><code>## 'log Lik.' -44.92912 (df=2)</code></pre>
 </div>
 </div>
-<div id="laboratory-8" class="section level2" number="9.3">
+<div id="laboratory-8" class="section level2" number="13.3">
 <h2>
-<span class="header-section-number">9.3</span> Laboratory<a class="anchor" aria-label="anchor" href="#laboratory-8"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.3</span> Laboratory<a class="anchor" aria-label="anchor" href="#laboratory-8"><i class="fas fa-link"></i></a>
 </h2>
-<div id="binomial-distribution" class="section level3" number="9.3.1">
+<div id="binomial-distribution" class="section level3" number="13.3.1">
 <h3>
-<span class="header-section-number">9.3.1</span> Binomial Distribution<a class="anchor" aria-label="anchor" href="#binomial-distribution"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.3.1</span> Binomial Distribution<a class="anchor" aria-label="anchor" href="#binomial-distribution"><i class="fas fa-link"></i></a>
 </h3>
 <p>The binomial distribution is a probability distribution that describes the number of successes in a fixed number of independent Bernoulli trials, where each trial has the same probability of success, denoted by <span class="math inline">\(p\)</span>. The probability mass function (PMF) of a binomial distribution is given by:</p>
 <p><span class="math display">\[
@@ -324,9 +327,9 @@ y_i &amp;\sim \mbox{Poisson}(\lambda_i)\\
 <li><p>Using the <span class="math inline">\(p\)</span> that maximizes the likelihood, calculate <span class="math inline">\(N \times p\)</span>. Compare this value with the sample mean of the vector <span class="math inline">\(\pmb{y}\)</span>.</p></li>
 </ol>
 </div>
-<div id="normal-distribution-1" class="section level3" number="9.3.2">
+<div id="normal-distribution-1" class="section level3" number="13.3.2">
 <h3>
-<span class="header-section-number">9.3.2</span> Normal Distribution<a class="anchor" aria-label="anchor" href="#normal-distribution-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.3.2</span> Normal Distribution<a class="anchor" aria-label="anchor" href="#normal-distribution-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>The normal distribution is a continuous probability distribution that describes the distribution of a continuous random variable. It is characterized by its mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma\)</span>. The probability density function (PDF) of a normal distribution is given by:</p>
 <p><span class="math display">\[
@@ -344,31 +347,31 @@ L(\mu, \sigma | \pmb{y}) = \prod_{i}^N f(y_i)
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="generalized-linear-model.html"><span class="header-section-number">8</span> Generalized Linear Model</a></div>
-<div class="next"><a href="model-comparison.html"><span class="header-section-number">10</span> Model Comparison</a></div>
+<div class="prev"><a href="generalized-linear-model.html"><span class="header-section-number">12</span> Generalized Linear Model</a></div>
+<div class="next"><a href="model-comparison.html"><span class="header-section-number">14</span> Model Comparison</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#likelihood"><span class="header-section-number">9</span> Likelihood</a></li>
-<li><a class="nav-link" href="#finding-the-more-likely"><span class="header-section-number">9.1</span> Finding the “More Likely”</a></li>
+<li><a class="nav-link" href="#likelihood"><span class="header-section-number">13</span> Likelihood</a></li>
+<li><a class="nav-link" href="#finding-the-more-likely"><span class="header-section-number">13.1</span> Finding the “More Likely”</a></li>
 <li>
-<a class="nav-link" href="#maximum-likelihood-method"><span class="header-section-number">9.2</span> Maximum Likelihood Method</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#simple-case"><span class="header-section-number">9.2.1</span> Simple case</a></li>
-<li><a class="nav-link" href="#general-case"><span class="header-section-number">9.2.2</span> General case</a></li>
+<a class="nav-link" href="#maximum-likelihood-method"><span class="header-section-number">13.2</span> Maximum Likelihood Method</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#simple-case"><span class="header-section-number">13.2.1</span> Simple case</a></li>
+<li><a class="nav-link" href="#general-case"><span class="header-section-number">13.2.2</span> General case</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#laboratory-8"><span class="header-section-number">9.3</span> Laboratory</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#binomial-distribution"><span class="header-section-number">9.3.1</span> Binomial Distribution</a></li>
-<li><a class="nav-link" href="#normal-distribution-1"><span class="header-section-number">9.3.2</span> Normal Distribution</a></li>
+<a class="nav-link" href="#laboratory-8"><span class="header-section-number">13.3</span> Laboratory</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#binomial-distribution"><span class="header-section-number">13.3.1</span> Binomial Distribution</a></li>
+<li><a class="nav-link" href="#normal-distribution-1"><span class="header-section-number">13.3.2</span> Normal Distribution</a></li>
 </ul>
 </li>
 </ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/aterui/biostats/blob/master/chapters/09-likelihood.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/aterui/biostats/edit/master/chapters/09-likelihood.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/aterui/biostats/blob/master/chapters/basics-09-likelihood.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/aterui/biostats/edit/master/chapters/basics-09-likelihood.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
@@ -380,7 +383,7 @@ L(\mu, \sigma | \pmb{y}) = \prod_{i}^N f(y_i)
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2024-11-13.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2024-12-27.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

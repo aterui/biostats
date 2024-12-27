@@ -4,20 +4,18 @@ language:
   ui:
     chapter_name: "Chapter "
 rmd_files: ["index.Rmd",
-            "chapters/01-descriptive.Rmd",
-            "chapters/02-sampling.Rmd",
-            "chapters/03-probability.Rmd",
-            "chapters/04-two-group.Rmd",
-            "chapters/05-anova.Rmd",
-            "chapters/06-regression.Rmd",
-            "chapters/07-lm.Rmd",
-            "chapters/08-glm.Rmd",
-            "chapters/09-likelihood.Rmd",
-            "chapters/10-model-comparison.Rmd",
-            "chapters/a-project.Rmd",
-            "chapters/b-git.Rmd",
-            "chapters/c-data-str.Rmd",
-            "chapters/d-tidyverse.Rmd",
-            "chapters/e-baseplot.Rmd"]
+            "chapters/gs-01-rstudio.Rmd",
+            "chapters/gs-02-r-basics.Rmd",
+            "chapters/basics-01-descriptive.Rmd",
+            "chapters/basics-02-sampling.Rmd",
+            "chapters/basics-03-probability.Rmd",
+            "chapters/basics-04-two-group.Rmd",
+            "chapters/basics-05-anova.Rmd",
+            "chapters/basics-06-regression.Rmd",
+            "chapters/basics-07-lm.Rmd",
+            "chapters/basics-08-glm.Rmd",
+            "chapters/basics-09-likelihood.Rmd",
+            "chapters/basics-10-model-comparison.Rmd",
+            "chapters/zzz-appendix.Rmd"]
 output_dir: "docs"
             

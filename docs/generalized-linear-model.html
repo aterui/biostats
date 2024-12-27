@@ -4,17 +4,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 8 Generalized Linear Model | BIOSTATS</title>
+<title>Chapter 12 Generalized Linear Model | BIOSTATS</title>
 <meta name="author" content="Akira Terui">
-<meta name="description" content="One of the key assumptions in the Linear Model framework is Normality – that the error term follows a normal distribution (Chapter 7). However, this assumption frequently leads to situations where...">
+<meta name="description" content="One of the key assumptions in the Linear Model framework is Normality – that the error term follows a normal distribution (Chapter 11). However, this assumption frequently leads to situations...">
 <meta name="generator" content="bookdown 0.40 with bs4_book()">
-<meta property="og:title" content="Chapter 8 Generalized Linear Model | BIOSTATS">
+<meta property="og:title" content="Chapter 12 Generalized Linear Model | BIOSTATS">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://bookdown.org/janedoe/bookdown-demo/generalized-linear-model.html">
-<meta property="og:description" content="One of the key assumptions in the Linear Model framework is Normality – that the error term follows a normal distribution (Chapter 7). However, this assumption frequently leads to situations where...">
+<meta property="og:description" content="One of the key assumptions in the Linear Model framework is Normality – that the error term follows a normal distribution (Chapter 11). However, this assumption frequently leads to situations...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 8 Generalized Linear Model | BIOSTATS">
-<meta name="twitter:description" content="One of the key assumptions in the Linear Model framework is Normality – that the error term follows a normal distribution (Chapter 7). However, this assumption frequently leads to situations where...">
+<meta name="twitter:title" content="Chapter 12 Generalized Linear Model | BIOSTATS">
+<meta name="twitter:description" content="One of the key assumptions in the Linear Model framework is Normality – that the error term follows a normal distribution (Chapter 11). However, this assumption frequently leads to situations...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -45,22 +45,25 @@
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Introduction</a></li>
-<li class="book-part">Basics</li>
-<li><a class="" href="descriptive-statistics.html"><span class="header-section-number">1</span> Descriptive Statistics</a></li>
-<li><a class="" href="sampling.html"><span class="header-section-number">2</span> Sampling</a></li>
-<li><a class="" href="probabilistic-view.html"><span class="header-section-number">3</span> Probabilistic View</a></li>
-<li><a class="" href="two-group-comparison.html"><span class="header-section-number">4</span> Two-Group Comparison</a></li>
-<li><a class="" href="multiple-group-comparison.html"><span class="header-section-number">5</span> Multiple-Group Comparison</a></li>
-<li><a class="" href="regression.html"><span class="header-section-number">6</span> Regression</a></li>
-<li><a class="" href="linear-model.html"><span class="header-section-number">7</span> Linear Model</a></li>
-<li><a class="active" href="generalized-linear-model.html"><span class="header-section-number">8</span> Generalized Linear Model</a></li>
-<li><a class="" href="likelihood.html"><span class="header-section-number">9</span> Likelihood</a></li>
-<li><a class="" href="model-comparison.html"><span class="header-section-number">10</span> Model Comparison</a></li>
+<li class="book-part">Getting Started</li>
+<li><a class="" href="what-is-r-and-r-studio.html"><span class="header-section-number">1</span> What is R and R studio?</a></li>
+<li><a class="" href="installing-r-and-rstudio.html"><span class="header-section-number">2</span> Installing R and RStudio</a></li>
+<li><a class="" href="r-project.html"><span class="header-section-number">3</span> R Project</a></li>
+<li class="book-part">R Basics</li>
+<li><a class="" href="data-structure.html"><span class="header-section-number">4</span> Data Structure</a></li>
+<li class="book-part">Basic Statistics</li>
+<li><a class="" href="descriptive-statistics.html"><span class="header-section-number">5</span> Descriptive Statistics</a></li>
+<li><a class="" href="sampling.html"><span class="header-section-number">6</span> Sampling</a></li>
+<li><a class="" href="probabilistic-view.html"><span class="header-section-number">7</span> Probabilistic View</a></li>
+<li><a class="" href="two-group-comparison.html"><span class="header-section-number">8</span> Two-Group Comparison</a></li>
+<li><a class="" href="multiple-group-comparison.html"><span class="header-section-number">9</span> Multiple-Group Comparison</a></li>
+<li><a class="" href="regression.html"><span class="header-section-number">10</span> Regression</a></li>
+<li><a class="" href="linear-model.html"><span class="header-section-number">11</span> Linear Model</a></li>
+<li><a class="active" href="generalized-linear-model.html"><span class="header-section-number">12</span> Generalized Linear Model</a></li>
+<li><a class="" href="likelihood.html"><span class="header-section-number">13</span> Likelihood</a></li>
+<li><a class="" href="model-comparison.html"><span class="header-section-number">14</span> Model Comparison</a></li>
 <li class="book-part">Appendix</li>
-<li><a class="" href="project.html">Project</a></li>
 <li><a class="" href="git-github.html">Git &amp; GitHub</a></li>
-<li><a class="" href="data-structure.html">Data Structure</a></li>
-<li><a class="" href="tidyverse.html">Tidyverse</a></li>
 <li><a class="" href="base-plot.html">Base Plot</a></li>
 </ul>
 
@@ -69,28 +72,28 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="generalized-linear-model" class="section level1" number="8">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="generalized-linear-model" class="section level1" number="12">
 <h1>
-<span class="header-section-number">8</span> Generalized Linear Model<a class="anchor" aria-label="anchor" href="#generalized-linear-model"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12</span> Generalized Linear Model<a class="anchor" aria-label="anchor" href="#generalized-linear-model"><i class="fas fa-link"></i></a>
 </h1>
-<p>One of the key assumptions in the Linear Model framework is Normality – that the error term follows a normal distribution (Chapter <a href="linear-model.html#linear-model">7</a>). However, this assumption frequently leads to situations where models predict unrealistic values for a response variable. In this chapter, I will introduce the Generalized Linear Model (GLM) framework, which enables more flexible modeling.</p>
+<p>One of the key assumptions in the Linear Model framework is Normality – that the error term follows a normal distribution (Chapter <a href="linear-model.html#linear-model">11</a>). However, this assumption frequently leads to situations where models predict unrealistic values for a response variable. In this chapter, I will introduce the Generalized Linear Model (GLM) framework, which enables more flexible modeling.</p>
 <p><strong>Key words:</strong> link function</p>
-<div id="count-data" class="section level2" number="8.1">
+<div id="count-data" class="section level2" number="12.1">
 <h2>
-<span class="header-section-number">8.1</span> Count Data<a class="anchor" aria-label="anchor" href="#count-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.1</span> Count Data<a class="anchor" aria-label="anchor" href="#count-data"><i class="fas fa-link"></i></a>
 </h2>
-<div id="plant-density" class="section level3" number="8.1.1">
+<div id="plant-density" class="section level3" number="12.1.1">
 <h3>
-<span class="header-section-number">8.1.1</span> Plant Density<a class="anchor" aria-label="anchor" href="#plant-density"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.1.1</span> Plant Density<a class="anchor" aria-label="anchor" href="#plant-density"><i class="fas fa-link"></i></a>
 </h3>
-<p>Recall our data set of garden plant counts (Chapter <a href="probabilistic-view.html#probabilistic-view">3</a>):</p>
+<p>Recall our data set of garden plant counts (Chapter <a href="probabilistic-view.html#probabilistic-view">7</a>):</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:garden-recall"></span>
 <img src="image/figure_garden.jpg" alt="Garden view with sampling plots. White squares represent plots. Red dots indicate plant individuals counted." width="600"><p class="caption">
-Figure 8.1: Garden view with sampling plots. White squares represent plots. Red dots indicate plant individuals counted.
+Figure 12.1: Garden view with sampling plots. White squares represent plots. Red dots indicate plant individuals counted.
 </p>
 </div>
-<div class="sourceCode" id="cb207"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb310"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_count</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data_raw/data_garden_count.csv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_count</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 30 × 3
@@ -120,7 +123,7 @@ y_i &amp;\sim \text{Normal}(\mu_i, \sigma^2)\\
 \mu_i &amp;= \alpha + \beta~\text{nitrate}_i
 \end{aligned}
 \]</span></p>
-<div class="sourceCode" id="cb209"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb312"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_normal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">count</span> <span class="op">~</span> <span class="va">nitrate</span>,</span>
 <span>               <span class="va">df_count</span><span class="op">)</span></span>
 <span></span>
@@ -144,7 +147,7 @@ y_i &amp;\sim \text{Normal}(\mu_i, \sigma^2)\\
 ## Multiple R-squared:  0.557,  Adjusted R-squared:  0.5411 
 ## F-statistic:  35.2 on 1 and 28 DF,  p-value: 2.193e-06</code></pre>
 <p>This seems satisfactory, but an anomalous behavior occurs during the plotting process on the figure. Plot the data and the predicted values together.</p>
-<div class="sourceCode" id="cb211"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb314"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># extract estimates</span></span>
 <span><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">m_normal</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="co"># intercept</span></span>
 <span><span class="va">beta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">m_normal</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="co"># slope</span></span>
@@ -155,7 +158,7 @@ y_i &amp;\sim \text{Normal}(\mu_i, \sigma^2)\\
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span><span class="op">(</span>intercept <span class="op">=</span> <span class="va">alpha</span>,</span>
 <span>              slope <span class="op">=</span> <span class="va">beta</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-65-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-93-1.png" width="672" style="display: block; margin: auto;"></div>
 <p>The intersection of the predicted line with the x-axis suggests the presence of negative predicted values for plant counts. However, it is logically implausible for plant counts to be negative.</p>
 <p>This occurrence stems from the nature of the model employed.</p>
 <ol style="list-style-type: decimal">
@@ -163,9 +166,9 @@ y_i &amp;\sim \text{Normal}(\mu_i, \sigma^2)\\
 <li>Even when the mean predicted values do not intersect the x-axis, we consider the possibility of observations taking negative values, as dictated by the nature of a Normal distribution (<span class="math inline">\(\mu_i + \varepsilon_i\)</span> can be negative even when <span class="math inline">\(\mu_i &gt; 0\)</span>), which in reality can never occur.</li>
 </ol>
 </div>
-<div id="poisson-model" class="section level3" number="8.1.2">
+<div id="poisson-model" class="section level3" number="12.1.2">
 <h3>
-<span class="header-section-number">8.1.2</span> Poisson Model<a class="anchor" aria-label="anchor" href="#poisson-model"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.1.2</span> Poisson Model<a class="anchor" aria-label="anchor" href="#poisson-model"><i class="fas fa-link"></i></a>
 </h3>
 <p>One possible approach is to consider the assumption that the error term follows a Poisson distribution. For the purpose of this discussion, let’s assume that a model based on the Poisson distribution is appropriate. Unlike a Normal distribution, the Poisson distribution generates only non-negative discrete values, which makes it a suitable fit for the plant count variable. To incorporate this, we can make the following modifications to the model:</p>
 <p><span class="math display">\[
@@ -180,12 +183,12 @@ y_i &amp;\sim \text{Poisson}(\lambda_i)\\
 <li>The mean <span class="math inline">\(\lambda_i\)</span> is log-transformed when expressing it as a function of nitrate. Given that the mean of a Poisson distribution cannot be negative, we must restrict the range of <span class="math inline">\(\lambda_i\)</span> to positive values. The log-transformation guarantees positivity of <span class="math inline">\(\lambda_i\)</span> (<span class="math inline">\(\lambda_i = \exp(\alpha + \beta~\text{nitrate}_i)\)</span>) irrespective of the values of <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span>, and <span class="math inline">\(\text{nitrate}_i\)</span>.</li>
 </ol>
 <p>The implementation of the Poisson model is quite simple. In the following example, we will use the function <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code>:</p>
-<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb315"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_pois</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">count</span> <span class="op">~</span> <span class="va">nitrate</span>,</span>
 <span>              data <span class="op">=</span> <span class="va">df_count</span>,</span>
 <span>              family <span class="op">=</span> <span class="st">"poisson"</span><span class="op">)</span></span></code></pre></div>
 <p>The major difference from <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> is the argument <code>family = "poisson"</code>. This argument specifies the probability distribution to be used; in this example, I used a Poisson distribution to model count data. However, in looking at estimates…</p>
-<div class="sourceCode" id="cb213"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb316"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">m_pois</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -211,7 +214,7 @@ y_i &amp;\sim \text{Poisson}(\lambda_i)\\
 \]</span></p>
 <p>Therefore, even when the intercept is estimated to be negative, the mean <span class="math inline">\(\lambda_i\)</span> is guaranteed to be non-negative.</p>
 <p>Another important difference from <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> is that the test-statistic is no long the t-statistic – instead, <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> reports the z-statistic. However, the z-statistic is very similar to the t-statistic, defined as <span class="math inline">\(z=\frac{\hat{\theta} - \theta_0}{\text{SE}(\hat{\theta})}\)</span> (<span class="math inline">\(\hat{\theta} \in \{\hat{\alpha}, \hat{\beta}\}\)</span>, <span class="math inline">\(\theta_0 = 0\)</span>). Therefore, you can reproduce the z-statistic by dividing the parameter estimates (<span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span>) by their standard errors:</p>
-<div class="sourceCode" id="cb215"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb318"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># parameter estimates and their SEs</span></span>
 <span><span class="va">theta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">m_pois</span><span class="op">)</span></span>
 <span><span class="va">se</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/vcov.html">vcov</a></span><span class="op">(</span><span class="va">m_pois</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
@@ -221,15 +224,15 @@ y_i &amp;\sim \text{Poisson}(\lambda_i)\\
 <pre><code>## (Intercept)     nitrate 
 ##   -3.844229    4.910935</code></pre>
 <p>We call this statistic “z-statistic” as it is known to follow the z-distribution (also known as the standardized Normal distribution <span class="math inline">\(\text{Normal}(0, 1)\)</span>), as opposed to the Student’s t-distribution. The reported p-value (<code>Pr(&gt;|z|)</code>) is estimated under this assumption, which can be seen as follows.</p>
-<div class="sourceCode" id="cb217"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb320"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># estimate Pr(&gt;|z|) using a standardized normal distribution</span></span>
 <span><span class="va">p_value</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">z_value</span><span class="op">)</span>, mean <span class="op">=</span> <span class="fl">0</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">*</span> <span class="fl">2</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">p_value</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##  (Intercept)      nitrate 
 ## 1.209323e-04 9.064303e-07</code></pre>
 <p><strong>Notice that these p-values are not identical to the output from the Normal model</strong> – therefore, the choice of the probability distribution critically affects the results of statistical analysis, and often times, qualitatively (not in this particular example though).</p>
-<p>Visualization provides the convincing difference between the Normal and Poisson models (Figure <a href="generalized-linear-model.html#fig:normal-pois">8.2</a>).</p>
-<div class="sourceCode" id="cb219"><pre class="downlit sourceCode r">
+<p>Visualization provides the convincing difference between the Normal and Poisson models (Figure <a href="generalized-linear-model.html#fig:normal-pois">12.2</a>).</p>
+<div class="sourceCode" id="cb322"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># make predictions</span></span>
 <span><span class="va">df_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>nitrate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">df_count</span><span class="op">$</span><span class="va">nitrate</span><span class="op">)</span>,</span>
 <span>                                <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">df_count</span><span class="op">$</span><span class="va">nitrate</span><span class="op">)</span>,</span>
@@ -257,24 +260,24 @@ y_i &amp;\sim \text{Poisson}(\lambda_i)\\
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:normal-pois"></span>
 <img src="biostats_files/figure-html/normal-pois-1.png" alt="Comparison of the predicted values between Normal (broken, black) and Poisson models (solid, red)." width="672"><p class="caption">
-Figure 8.2: Comparison of the predicted values between Normal (broken, black) and Poisson models (solid, red).
+Figure 12.2: Comparison of the predicted values between Normal (broken, black) and Poisson models (solid, red).
 </p>
 </div>
 <p>Clearly, the Poisson model does a better job.</p>
 </div>
 </div>
-<div id="proportional-data" class="section level2" number="8.2">
+<div id="proportional-data" class="section level2" number="12.2">
 <h2>
-<span class="header-section-number">8.2</span> Proportional Data<a class="anchor" aria-label="anchor" href="#proportional-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.2</span> Proportional Data<a class="anchor" aria-label="anchor" href="#proportional-data"><i class="fas fa-link"></i></a>
 </h2>
-<div id="mussel-egg-fertilization" class="section level3" number="8.2.1">
+<div id="mussel-egg-fertilization" class="section level3" number="12.2.1">
 <h3>
-<span class="header-section-number">8.2.1</span> Mussel Egg Fertilization<a class="anchor" aria-label="anchor" href="#mussel-egg-fertilization"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.2.1</span> Mussel Egg Fertilization<a class="anchor" aria-label="anchor" href="#mussel-egg-fertilization"><i class="fas fa-link"></i></a>
 </h3>
 <p>There is another type of data for which a Normal distribution is not suitable - proportional data. Let’s consider an example dataset where an investigation was conducted on the number of fertilized eggs out of 30 eggs examined for 100 female freshwater mussels. You can download the dataset <a href="https://github.com/aterui/biostats/blob/master/data_raw/data_mussel.csv">here</a>.</p>
 <div class="inline-figure"><img src="image/image_mussel.JPG" width="300" style="display: block; margin: auto;"></div>
 <p>Male freshwater mussels release sperm into the water, which is then drawn into female mussels downstream. Considering the nature of the fertilization process, female mussels are expected to have a higher probability of fertilization when they are surrounded by a greater number of males. To explore this relationship, let’s load the data into R and visualize it.</p>
-<div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb323"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_mussel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data_raw/data_mussel.csv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_mussel</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 100 × 4
@@ -291,8 +294,8 @@ Figure 8.2: Comparison of the predicted values between Normal (broken, black) an
 ##  9      9            0         30       7
 ## 10     10            0         30       7
 ## # ℹ 90 more rows</code></pre>
-<p>This data frame contains variables such as <code>ind_id</code> (mussel individual ID), <code>n_fertilized</code> (number of fertilized eggs), <code>n_examined</code> (number of eggs examined), and <code>density</code> (number of mussels in a 1 m<span class="math inline">\(^2\)</span> quadrat). To visualize the relationship between the proportion of eggs fertilized and the density gradient, plot the proportion of fertilized eggs against the density gradient (Figure <a href="generalized-linear-model.html#fig:mussel-egg">8.3</a>).</p>
-<div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
+<p>This data frame contains variables such as <code>ind_id</code> (mussel individual ID), <code>n_fertilized</code> (number of fertilized eggs), <code>n_examined</code> (number of eggs examined), and <code>density</code> (number of mussels in a 1 m<span class="math inline">\(^2\)</span> quadrat). To visualize the relationship between the proportion of eggs fertilized and the density gradient, plot the proportion of fertilized eggs against the density gradient (Figure <a href="generalized-linear-model.html#fig:mussel-egg">12.3</a>).</p>
+<div class="sourceCode" id="cb325"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># calculate the proportion of fertilized eggs</span></span>
 <span><span class="va">df_mussel</span> <span class="op">&lt;-</span> <span class="va">df_mussel</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>prop_fert <span class="op">=</span> <span class="va">n_fertilized</span> <span class="op">/</span> <span class="va">n_examined</span><span class="op">)</span></span>
@@ -307,7 +310,7 @@ Figure 8.2: Comparison of the predicted values between Normal (broken, black) an
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:mussel-egg"></span>
 <img src="biostats_files/figure-html/mussel-egg-1.png" alt="Relationship between the proportion of fertilized eggs and mussel density in the surround." width="672"><p class="caption">
-Figure 8.3: Relationship between the proportion of fertilized eggs and mussel density in the surround.
+Figure 12.3: Relationship between the proportion of fertilized eggs and mussel density in the surround.
 </p>
 </div>
 <p>In this example, the response variable, which represents the number of eggs fertilized, possesses the following characteristics:</p>
@@ -317,9 +320,9 @@ Figure 8.3: Relationship between the proportion of fertilized eggs and mussel de
 </ol>
 <p>The discrete nature of the variable might initially lead one to consider the Poisson distribution as a potential candidate. However, due to the presence of an upper limit where the number of fertilized eggs cannot exceed the number of eggs examined, the Poisson distribution is not a suitable option.</p>
 </div>
-<div id="binomial-model" class="section level3" number="8.2.2">
+<div id="binomial-model" class="section level3" number="12.2.2">
 <h3>
-<span class="header-section-number">8.2.2</span> Binomial Model<a class="anchor" aria-label="anchor" href="#binomial-model"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.2.2</span> Binomial Model<a class="anchor" aria-label="anchor" href="#binomial-model"><i class="fas fa-link"></i></a>
 </h3>
 <p>A Binomial distribution is a natural and appropriate choice for modeling this variable. The Binomial distribution is characterized by two parameters: the number of trials (<span class="math inline">\(N\)</span>) and the probability of success (<span class="math inline">\(p\)</span>). Each trial has a certain probability of success, and the outcome of each trial is either assigned a value of 1 (indicating success) or 0 (indicating failure). In the given example, we can consider the “fertilization” as a successful outcome among the 30 trials. Consequently, the number of eggs fertilized (<span class="math inline">\(y_i\)</span>) for each individual mussel (<span class="math inline">\(i\)</span>) can be described as:</p>
 <p><span class="math display">\[
@@ -338,7 +341,7 @@ y_i &amp;\sim \text{Binomial}(N_i, p_i)\\
 p_i = \frac{\exp(\alpha + \beta~\text{density}_i)}{1 + \exp(\alpha + \beta~\text{density}_i)}
 \]</span></p>
 <p>A straightforward coding can verify this.</p>
-<div class="sourceCode" id="cb223"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb326"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># x: produce 100 numbers from -100 to 100 (assume logit scale)</span></span>
 <span><span class="co"># y: convert with inverse-logit transformation (ordinary scale)</span></span>
 <span><span class="va">df_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>logit_x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10</span>, <span class="fl">10</span>, length <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>,</span>
@@ -354,16 +357,16 @@ p_i = \frac{\exp(\alpha + \beta~\text{density}_i)}{1 + \exp(\alpha + \beta~\text
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:logit-transform"></span>
 <img src="biostats_files/figure-html/logit-transform-1.png" alt="Logit-transformation ensures that the transformed variable to fall in the range of zero to one." width="672"><p class="caption">
-Figure 8.4: Logit-transformation ensures that the transformed variable to fall in the range of zero to one.
+Figure 12.4: Logit-transformation ensures that the transformed variable to fall in the range of zero to one.
 </p>
 </div>
 <p>The <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> function can be used to implement this modeling approach. However, certain modifications need to be made to the response variable in order to ensure compatibility with the binomial distribution.</p>
-<div class="sourceCode" id="cb224"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb327"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_binom</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">n_fertilized</span>, <span class="va">n_examined</span> <span class="op">-</span> <span class="va">n_fertilized</span><span class="op">)</span> <span class="op">~</span> <span class="va">density</span>,</span>
 <span>               data <span class="op">=</span> <span class="va">df_mussel</span>,</span>
 <span>               family <span class="op">=</span> <span class="st">"binomial"</span><span class="op">)</span></span></code></pre></div>
 <p>In contrast to the Normal or Poisson models, the response variable was encoded using the <code>cbind(n_fertilized, n_examined - n_fertilized)</code> function. The <code><a href="https://rdrr.io/r/base/cbind.html">cbind()</a></code> function combines the number of successes (fertilized) and failures (not fertilized) into a single matrix. This approach allows for modeling the data using the binomial distribution, taking into account both the successes and the total number of trials within each observation.</p>
-<div class="sourceCode" id="cb225"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb328"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">df_mussel</span><span class="op">$</span><span class="va">n_fertilized</span>, <span class="va">df_mussel</span><span class="op">$</span><span class="va">n_examined</span> <span class="op">-</span> <span class="va">df_mussel</span><span class="op">$</span><span class="va">n_fertilized</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##      [,1] [,2]
@@ -374,7 +377,7 @@ Figure 8.4: Logit-transformation ensures that the transformed variable to fall i
 ## [5,]    2   28
 ## [6,]    0   30</code></pre>
 <p>Similar to the previous examples, the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function provides estimates of the model parameters. By applying the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function to the fitted model, you can obtain information such as coefficient estimates, standard errors, p-values, and other relevant statistics.</p>
-<div class="sourceCode" id="cb227"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb330"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">m_binom</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -403,7 +406,7 @@ y_i &amp;\sim \text{Binomial}(N_i, p_i)\\
 \end{aligned}
 \]</span></p>
 <p>To make predictions, it is necessary to back-transform the predicted fertilization probability since it is estimated on a logit scale. The back-transformation will convert the predicted values back to the original probability scale (<span class="math inline">\(0.0-1.0\)</span>).</p>
-<div class="sourceCode" id="cb229"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb332"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># make prediction</span></span>
 <span><span class="va">df_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>density <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">df_mussel</span><span class="op">$</span><span class="va">density</span><span class="op">)</span>,</span>
 <span>                                <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">df_mussel</span><span class="op">$</span><span class="va">density</span><span class="op">)</span>,</span>
@@ -414,8 +417,8 @@ y_i &amp;\sim \text{Binomial}(N_i, p_i)\\
 <span></span>
 <span><span class="va">df_pred</span> <span class="op">&lt;-</span> <span class="va">df_pred</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">y_binom</span><span class="op">)</span></span></code></pre></div>
-<p>Draw on the figure (Figure <a href="generalized-linear-model.html#fig:binom-fit-figure">8.5</a>).</p>
-<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
+<p>Draw on the figure (Figure <a href="generalized-linear-model.html#fig:binom-fit-figure">12.5</a>).</p>
+<div class="sourceCode" id="cb333"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_mussel</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">density</span>,</span>
 <span>             y <span class="op">=</span> <span class="va">prop_fert</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -427,15 +430,15 @@ y_i &amp;\sim \text{Binomial}(N_i, p_i)\\
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:binom-fit-figure"></span>
 <img src="biostats_files/figure-html/binom-fit-figure-1.png" alt="Prediction by the Binomial model." width="672"><p class="caption">
-Figure 8.5: Prediction by the Binomial model.
+Figure 12.5: Prediction by the Binomial model.
 </p>
 </div>
 <p>Perfect.</p>
 </div>
 </div>
-<div id="the-glm-framework" class="section level2" number="8.3">
+<div id="the-glm-framework" class="section level2" number="12.3">
 <h2>
-<span class="header-section-number">8.3</span> The GLM Framework<a class="anchor" aria-label="anchor" href="#the-glm-framework"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.3</span> The GLM Framework<a class="anchor" aria-label="anchor" href="#the-glm-framework"><i class="fas fa-link"></i></a>
 </h2>
 <p>These models, including those assuming a Normal distribution, fall into the category of the Generalized Linear Model (GLM) framework. The framework follows a common structure:</p>
 <p><span class="math display">\[
@@ -444,7 +447,7 @@ y_i &amp;\sim \text{D}(\Theta)\\
 \text{Link}(\mbox{E}(y_i)) &amp;= \alpha + \sum_k \beta_k x_{k, i}
 \end{aligned}
 \]</span></p>
-<p>In this structure, <span class="math inline">\(\Theta\)</span> represents a parameter vector of the probability distribution, while <span class="math inline">\(\text{D}(\cdot)\)</span> and <span class="math inline">\(\text{Link}(\cdot)\)</span> denote the chosen probability distribution and its associated link function, respectively. For example, if we select a Poisson distribution as <span class="math inline">\(\text{D}(\cdot)\)</span>, then the corresponding <span class="math inline">\(\text{Link}(\cdot)\)</span> function is the natural logarithm (log) (see Section <a href="generalized-linear-model.html#poisson-model">8.1.2</a>). The expected value <span class="math inline">\(\mbox{E}(y_i)\)</span> is expressed as a function of parameter(s) of the probability distribution <span class="math inline">\(f(\Theta)\)</span>, which is related to the explanatory variables <span class="math inline">\(x\)</span>. For instance, in Normal and Poisson models, we model the mean, while in the Binomial model, we model the success probability. In certain distributions, <span class="math inline">\(f(\Theta)\)</span> may be a function of multiple parameters.</p>
+<p>In this structure, <span class="math inline">\(\Theta\)</span> represents a parameter vector of the probability distribution, while <span class="math inline">\(\text{D}(\cdot)\)</span> and <span class="math inline">\(\text{Link}(\cdot)\)</span> denote the chosen probability distribution and its associated link function, respectively. For example, if we select a Poisson distribution as <span class="math inline">\(\text{D}(\cdot)\)</span>, then the corresponding <span class="math inline">\(\text{Link}(\cdot)\)</span> function is the natural logarithm (log) (see Section <a href="generalized-linear-model.html#poisson-model">12.1.2</a>). The expected value <span class="math inline">\(\mbox{E}(y_i)\)</span> is expressed as a function of parameter(s) of the probability distribution <span class="math inline">\(f(\Theta)\)</span>, which is related to the explanatory variables <span class="math inline">\(x\)</span>. For instance, in Normal and Poisson models, we model the mean, while in the Binomial model, we model the success probability. In certain distributions, <span class="math inline">\(f(\Theta)\)</span> may be a function of multiple parameters.</p>
 <p>The GLM framework differs from the Linear Model framework by offering greater flexibility in the choice of probability distribution, achieved through the introduction of the Link function. This function allows us to constrain the modeled parameter within a specific range. As non-normal distributions are common in natural phenomena, this framework plays a critical role in modern statistical analysis.</p>
 <p>However, how do we determine the appropriate probability distribution? While there is no single correct answer to this question, there are clear factors to consider—specifically, the characteristics of the response variable. The following criteria can be particularly helpful:</p>
 <ol style="list-style-type: decimal">
@@ -452,16 +455,16 @@ y_i &amp;\sim \text{D}(\Theta)\\
 <li>Is there an upper bound?</li>
 <li>Is the sample variance far greater than the mean?</li>
 </ol>
-<p>To assist you in selecting an appropriate probability distribution for modeling, I have provided a concise decision tree graph. Please note that the choices presented are frequently encountered in ecological modeling, rather than an exhaustive list of probability distributions (see Table <a href="generalized-linear-model.html#tab:table-dist">8.1</a>). The full list of probability distributions can be found here (<a href="https://en.wikipedia.org/wiki/List_of_probability_distributions">Wikipedia page</a>)</p>
+<p>To assist you in selecting an appropriate probability distribution for modeling, I have provided a concise decision tree graph. Please note that the choices presented are frequently encountered in ecological modeling, rather than an exhaustive list of probability distributions (see Table <a href="generalized-linear-model.html#tab:table-dist">12.1</a>). The full list of probability distributions can be found here (<a href="https://en.wikipedia.org/wiki/List_of_probability_distributions">Wikipedia page</a>)</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:dendrogram"></span>
 <img src="biostats_files/figure-html/dendrogram-1.png" alt="Tree chart on how to choose a probability distribution in GLM analysis." width="672"><p class="caption">
-Figure 8.6: Tree chart on how to choose a probability distribution in GLM analysis.
+Figure 12.6: Tree chart on how to choose a probability distribution in GLM analysis.
 </p>
 </div>
 <div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:table-dist">Table 8.1: </span>Common distributions used in GLM analysis
+<span id="tab:table-dist">Table 12.1: </span>Common distributions used in GLM analysis
 </caption>
 <thead><tr>
 <th style="text-align:right;">
@@ -565,19 +568,19 @@ Normal
 </tbody>
 </table></div>
 </div>
-<div id="laboratory-7" class="section level2" number="8.4">
+<div id="laboratory-7" class="section level2" number="12.4">
 <h2>
-<span class="header-section-number">8.4</span> Laboratory<a class="anchor" aria-label="anchor" href="#laboratory-7"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.4</span> Laboratory<a class="anchor" aria-label="anchor" href="#laboratory-7"><i class="fas fa-link"></i></a>
 </h2>
-<div id="glm-exercise" class="section level3" number="8.4.1">
+<div id="glm-exercise" class="section level3" number="12.4.1">
 <h3>
-<span class="header-section-number">8.4.1</span> GLM exercise<a class="anchor" aria-label="anchor" href="#glm-exercise"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.4.1</span> GLM exercise<a class="anchor" aria-label="anchor" href="#glm-exercise"><i class="fas fa-link"></i></a>
 </h3>
 <p>There is a publicly available stream fish distribution dataset accessible from an online repository. You can download it using this link: <a href="https://github.com/aterui/public-proj_fish-richness-shubuto/blob/master/data/data_vpart.csv">Download Dataset</a>. The dataset comprises information on the number of species found at each site (<code>n_sp</code>) and several associated environmental variables, including distance to the sea (<code>distance</code>), catchment area (<code>cat_area</code>), and environmental heterogeneity (<code>hull_area</code>). These environmental variables are factors that are known to influence fish distributions. To analyze this dataset, develop a Generalized Linear Model (GLM) with an appropriate probability distribution to explore which variable significantly influences the fish species richness observed at each sampling site.</p>
 </div>
-<div id="effect-size" class="section level3" number="8.4.2">
+<div id="effect-size" class="section level3" number="12.4.2">
 <h3>
-<span class="header-section-number">8.4.2</span> Effect size<a class="anchor" aria-label="anchor" href="#effect-size"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.4.2</span> Effect size<a class="anchor" aria-label="anchor" href="#effect-size"><i class="fas fa-link"></i></a>
 </h3>
 <p>Often, we are interested in comparing the effect sizes of different explanatory variables. However, if we use raw environmental values, regression coefficients are not directly comparable due to their differing units. Recall that regression coefficients represent the increment of <span class="math inline">\(y\)</span> per unit increase of <span class="math inline">\(x\)</span>. To facilitate comparison, we standardize the explanatory variables by subtracting their means and dividing them by their standard deviations:</p>
 <p><span class="math display">\[
@@ -593,37 +596,37 @@ Normal
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="linear-model.html"><span class="header-section-number">7</span> Linear Model</a></div>
-<div class="next"><a href="likelihood.html"><span class="header-section-number">9</span> Likelihood</a></div>
+<div class="prev"><a href="linear-model.html"><span class="header-section-number">11</span> Linear Model</a></div>
+<div class="next"><a href="likelihood.html"><span class="header-section-number">13</span> Likelihood</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#generalized-linear-model"><span class="header-section-number">8</span> Generalized Linear Model</a></li>
+<li><a class="nav-link" href="#generalized-linear-model"><span class="header-section-number">12</span> Generalized Linear Model</a></li>
 <li>
-<a class="nav-link" href="#count-data"><span class="header-section-number">8.1</span> Count Data</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#plant-density"><span class="header-section-number">8.1.1</span> Plant Density</a></li>
-<li><a class="nav-link" href="#poisson-model"><span class="header-section-number">8.1.2</span> Poisson Model</a></li>
+<a class="nav-link" href="#count-data"><span class="header-section-number">12.1</span> Count Data</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#plant-density"><span class="header-section-number">12.1.1</span> Plant Density</a></li>
+<li><a class="nav-link" href="#poisson-model"><span class="header-section-number">12.1.2</span> Poisson Model</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#proportional-data"><span class="header-section-number">8.2</span> Proportional Data</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#mussel-egg-fertilization"><span class="header-section-number">8.2.1</span> Mussel Egg Fertilization</a></li>
-<li><a class="nav-link" href="#binomial-model"><span class="header-section-number">8.2.2</span> Binomial Model</a></li>
+<a class="nav-link" href="#proportional-data"><span class="header-section-number">12.2</span> Proportional Data</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#mussel-egg-fertilization"><span class="header-section-number">12.2.1</span> Mussel Egg Fertilization</a></li>
+<li><a class="nav-link" href="#binomial-model"><span class="header-section-number">12.2.2</span> Binomial Model</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#the-glm-framework"><span class="header-section-number">8.3</span> The GLM Framework</a></li>
+<li><a class="nav-link" href="#the-glm-framework"><span class="header-section-number">12.3</span> The GLM Framework</a></li>
 <li>
-<a class="nav-link" href="#laboratory-7"><span class="header-section-number">8.4</span> Laboratory</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#glm-exercise"><span class="header-section-number">8.4.1</span> GLM exercise</a></li>
-<li><a class="nav-link" href="#effect-size"><span class="header-section-number">8.4.2</span> Effect size</a></li>
+<a class="nav-link" href="#laboratory-7"><span class="header-section-number">12.4</span> Laboratory</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#glm-exercise"><span class="header-section-number">12.4.1</span> GLM exercise</a></li>
+<li><a class="nav-link" href="#effect-size"><span class="header-section-number">12.4.2</span> Effect size</a></li>
 </ul>
 </li>
 </ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/aterui/biostats/blob/master/chapters/08-glm.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/aterui/biostats/edit/master/chapters/08-glm.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/aterui/biostats/blob/master/chapters/basics-08-glm.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/aterui/biostats/edit/master/chapters/basics-08-glm.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
@@ -635,7 +638,7 @@ Normal
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2024-11-13.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2024-12-27.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

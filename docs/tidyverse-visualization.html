@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 6 Tidyverse: Visualization | BIOSTATS</title>
+<meta name="author" content="Akira Terui">
+<meta name="description" content="ggplot2:: offers a range of convenient functions for data visualization. The foundational function, ggplot(), provides the initial framework for adding supplementary layers using the + operator....">
+<meta name="generator" content="bookdown 0.40 with bs4_book()">
+<meta property="og:title" content="Chapter 6 Tidyverse: Visualization | BIOSTATS">
+<meta property="og:type" content="book">
+<meta property="og:url" content="https://bookdown.org/janedoe/bookdown-demo/tidyverse-visualization.html">
+<meta property="og:description" content="ggplot2:: offers a range of convenient functions for data visualization. The foundational function, ggplot(), provides the initial framework for adding supplementary layers using the + operator....">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 6 Tidyverse: Visualization | BIOSTATS">
+<meta name="twitter:description" content="ggplot2:: offers a range of convenient functions for data visualization. The foundational function, ggplot(), provides the initial framework for adding supplementary layers using the + operator....">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">BIOSTATS</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Introduction</a></li>
+<li class="book-part">Getting Started</li>
+<li><a class="" href="what-is-r-and-r-studio.html"><span class="header-section-number">1</span> What is R and R studio?</a></li>
+<li><a class="" href="installing-r-and-rstudio.html"><span class="header-section-number">2</span> Installing R and RStudio</a></li>
+<li><a class="" href="r-project.html"><span class="header-section-number">3</span> R Project</a></li>
+<li class="book-part">R Basics</li>
+<li><a class="" href="data-structure.html"><span class="header-section-number">4</span> Data Structure</a></li>
+<li><a class="" href="tidyverse-data-manipulation.html"><span class="header-section-number">5</span> Tidyverse: Data Manipulation</a></li>
+<li><a class="active" href="tidyverse-visualization.html"><span class="header-section-number">6</span> Tidyverse: Visualization</a></li>
+<li class="book-part">Basic Statistics</li>
+<li><a class="" href="descriptive-statistics.html"><span class="header-section-number">7</span> Descriptive Statistics</a></li>
+<li><a class="" href="sampling.html"><span class="header-section-number">8</span> Sampling</a></li>
+<li><a class="" href="probabilistic-view.html"><span class="header-section-number">9</span> Probabilistic View</a></li>
+<li><a class="" href="two-group-comparison.html"><span class="header-section-number">10</span> Two-Group Comparison</a></li>
+<li><a class="" href="multiple-group-comparison.html"><span class="header-section-number">11</span> Multiple-Group Comparison</a></li>
+<li><a class="" href="regression.html"><span class="header-section-number">12</span> Regression</a></li>
+<li><a class="" href="linear-model.html"><span class="header-section-number">13</span> Linear Model</a></li>
+<li><a class="" href="generalized-linear-model.html"><span class="header-section-number">14</span> Generalized Linear Model</a></li>
+<li><a class="" href="likelihood.html"><span class="header-section-number">15</span> Likelihood</a></li>
+<li><a class="" href="model-comparison.html"><span class="header-section-number">16</span> Model Comparison</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="git-github.html">Git &amp; GitHub</a></li>
+<li><a class="" href="base-plot.html">Base Plot</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/aterui/biostats">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="tidyverse-visualization" class="section level1" number="6">
+<h1>
+<span class="header-section-number">6</span> Tidyverse: Visualization<a class="anchor" aria-label="anchor" href="#tidyverse-visualization"><i class="fas fa-link"></i></a>
+</h1>
+<p><code>ggplot2::</code> offers a range of convenient functions for data visualization. The foundational function, <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code>, provides the initial framework for adding supplementary layers using the <code>+</code> operator. In ggplot(), we define variables plotted on x- and y-axis through <code><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes()</a></code>. For example:</p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="tidyverse-visualization.html#cb136-1" tabindex="-1"></a><span class="co"># without pipe</span></span>
+<span id="cb136-2"><a href="tidyverse-visualization.html#cb136-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> iris,</span>
+<span id="cb136-3"><a href="tidyverse-visualization.html#cb136-3" tabindex="-1"></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length,</span>
+<span id="cb136-4"><a href="tidyverse-visualization.html#cb136-4" tabindex="-1"></a>                     <span class="at">y =</span> Sepal.Width)) <span class="sc">+</span></span>
+<span id="cb136-5"><a href="tidyverse-visualization.html#cb136-5" tabindex="-1"></a>  <span class="co"># additional layers...</span></span>
+<span id="cb136-6"><a href="tidyverse-visualization.html#cb136-6" tabindex="-1"></a></span>
+<span id="cb136-7"><a href="tidyverse-visualization.html#cb136-7" tabindex="-1"></a><span class="co"># with pipe</span></span>
+<span id="cb136-8"><a href="tidyverse-visualization.html#cb136-8" tabindex="-1"></a>iris <span class="sc">%&gt;%</span> </span>
+<span id="cb136-9"><a href="tidyverse-visualization.html#cb136-9" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> Sepal.Length,</span>
+<span id="cb136-10"><a href="tidyverse-visualization.html#cb136-10" tabindex="-1"></a>                       <span class="at">y =</span> Sepal.Width)) <span class="sc">+</span></span>
+<span id="cb136-11"><a href="tidyverse-visualization.html#cb136-11" tabindex="-1"></a>  <span class="co"># additional layers...  </span></span></code></pre></div>
+<p>Please note that <code><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes()</a></code> refers to columns in the data frame. Variables names that do not exist in the data frame cannot be used.</p>
+<div id="point" class="section level3" number="6.0.1">
+<h3>
+<span class="header-section-number">6.0.1</span> Point<a class="anchor" aria-label="anchor" href="#point"><i class="fas fa-link"></i></a>
+</h3>
+<p><code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code> : Add a point layer</p>
+<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># basic plot</span></span>
+<span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span>,</span>
+<span>             y <span class="op">=</span> <span class="va">Sepal.Width</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-42-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># change color by "Species" column</span></span>
+<span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span>,</span>
+<span>             y <span class="op">=</span> <span class="va">Sepal.Width</span>,</span>
+<span>             color <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-42-2.png" width="672" style="display: block; margin: auto;"></div>
+</div>
+<div id="line" class="section level3" number="6.0.2">
+<h3>
+<span class="header-section-number">6.0.2</span> Line<a class="anchor" aria-label="anchor" href="#line"><i class="fas fa-link"></i></a>
+</h3>
+<p><code><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line()</a></code> : Add a line layer</p>
+<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># sample data</span></span>
+<span><span class="va">df0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">50</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>              y <span class="op">=</span> <span class="va">x</span> <span class="op">*</span> <span class="fl">2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># basic plot</span></span>
+<span><span class="va">df0</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>,</span>
+<span>             y <span class="op">=</span> <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-43-1.png" width="672" style="display: block; margin: auto;"></div>
+</div>
+<div id="histogram" class="section level3" number="6.0.3">
+<h3>
+<span class="header-section-number">6.0.3</span> Histogram<a class="anchor" aria-label="anchor" href="#histogram"><i class="fas fa-link"></i></a>
+</h3>
+<p><code><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram()</a></code> : add a histogram layer</p>
+<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># basic plot; bins = 30 by default</span></span>
+<span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-44-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># change bin width</span></span>
+<span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-44-2.png" width="672" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># change bin number</span></span>
+<span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-44-3.png" width="672" style="display: block; margin: auto;"></div>
+</div>
+<div id="boxplot" class="section level3" number="6.0.4">
+<h3>
+<span class="header-section-number">6.0.4</span> Boxplot<a class="anchor" aria-label="anchor" href="#boxplot"><i class="fas fa-link"></i></a>
+</h3>
+<p><code><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot()</a></code> : add a boxplot layer</p>
+<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># basic plot</span></span>
+<span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Species</span>,</span>
+<span>             y <span class="op">=</span> <span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-45-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># change fill by "Species"</span></span>
+<span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Species</span>,</span>
+<span>             y <span class="op">=</span> <span class="va">Sepal.Length</span>,</span>
+<span>             fill <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-45-2.png" width="672" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># change fill by "Species", but consistent color</span></span>
+<span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Species</span>,</span>
+<span>             y <span class="op">=</span> <span class="va">Sepal.Length</span>,</span>
+<span>             fill <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"darkgrey"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-45-3.png" width="672" style="display: block; margin: auto;"></div>
+
+</div>
+</div>
+
+
+
+  <div class="chapter-nav">
+<div class="prev"><a href="tidyverse-data-manipulation.html"><span class="header-section-number">5</span> Tidyverse: Data Manipulation</a></div>
+<div class="next"><a href="descriptive-statistics.html"><span class="header-section-number">7</span> Descriptive Statistics</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li>
+<a class="nav-link" href="#tidyverse-visualization"><span class="header-section-number">6</span> Tidyverse: Visualization</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#point"><span class="header-section-number">6.0.1</span> Point</a></li>
+<li><a class="nav-link" href="#line"><span class="header-section-number">6.0.2</span> Line</a></li>
+<li><a class="nav-link" href="#histogram"><span class="header-section-number">6.0.3</span> Histogram</a></li>
+<li><a class="nav-link" href="#boxplot"><span class="header-section-number">6.0.4</span> Boxplot</a></li>
+</ul>
+</li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/aterui/biostats/blob/master/chapters/gs-02-r-basics.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/aterui/biostats/edit/master/chapters/gs-02-r-basics.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2024-12-27.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 6 Sampling | BIOSTATS</title>
+<title>Chapter 8 Sampling | BIOSTATS</title>
 <meta name="author" content="Akira Terui">
 <meta name="description" content="“Why do I need statistics in the first place?” This was the initial question that arose when I entered the field of ecology. Initially, I assumed it would be a straightforward query with an...">
 <meta name="generator" content="bookdown 0.40 with bs4_book()">
-<meta property="og:title" content="Chapter 6 Sampling | BIOSTATS">
+<meta property="og:title" content="Chapter 8 Sampling | BIOSTATS">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://bookdown.org/janedoe/bookdown-demo/sampling.html">
 <meta property="og:description" content="“Why do I need statistics in the first place?” This was the initial question that arose when I entered the field of ecology. Initially, I assumed it would be a straightforward query with an...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 6 Sampling | BIOSTATS">
+<meta name="twitter:title" content="Chapter 8 Sampling | BIOSTATS">
 <meta name="twitter:description" content="“Why do I need statistics in the first place?” This was the initial question that arose when I entered the field of ecology. Initially, I assumed it would be a straightforward query with an...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -51,17 +51,19 @@
 <li><a class="" href="r-project.html"><span class="header-section-number">3</span> R Project</a></li>
 <li class="book-part">R Basics</li>
 <li><a class="" href="data-structure.html"><span class="header-section-number">4</span> Data Structure</a></li>
+<li><a class="" href="data-manipulation.html"><span class="header-section-number">5</span> Data Manipulation</a></li>
+<li><a class="" href="visualization.html"><span class="header-section-number">6</span> Visualization</a></li>
 <li class="book-part">Basic Statistics</li>
-<li><a class="" href="descriptive-statistics.html"><span class="header-section-number">5</span> Descriptive Statistics</a></li>
-<li><a class="active" href="sampling.html"><span class="header-section-number">6</span> Sampling</a></li>
-<li><a class="" href="probabilistic-view.html"><span class="header-section-number">7</span> Probabilistic View</a></li>
-<li><a class="" href="two-group-comparison.html"><span class="header-section-number">8</span> Two-Group Comparison</a></li>
-<li><a class="" href="multiple-group-comparison.html"><span class="header-section-number">9</span> Multiple-Group Comparison</a></li>
-<li><a class="" href="regression.html"><span class="header-section-number">10</span> Regression</a></li>
-<li><a class="" href="linear-model.html"><span class="header-section-number">11</span> Linear Model</a></li>
-<li><a class="" href="generalized-linear-model.html"><span class="header-section-number">12</span> Generalized Linear Model</a></li>
-<li><a class="" href="likelihood.html"><span class="header-section-number">13</span> Likelihood</a></li>
-<li><a class="" href="model-comparison.html"><span class="header-section-number">14</span> Model Comparison</a></li>
+<li><a class="" href="descriptive-statistics.html"><span class="header-section-number">7</span> Descriptive Statistics</a></li>
+<li><a class="active" href="sampling.html"><span class="header-section-number">8</span> Sampling</a></li>
+<li><a class="" href="probabilistic-view.html"><span class="header-section-number">9</span> Probabilistic View</a></li>
+<li><a class="" href="two-group-comparison.html"><span class="header-section-number">10</span> Two-Group Comparison</a></li>
+<li><a class="" href="multiple-group-comparison.html"><span class="header-section-number">11</span> Multiple-Group Comparison</a></li>
+<li><a class="" href="regression.html"><span class="header-section-number">12</span> Regression</a></li>
+<li><a class="" href="linear-model.html"><span class="header-section-number">13</span> Linear Model</a></li>
+<li><a class="" href="generalized-linear-model.html"><span class="header-section-number">14</span> Generalized Linear Model</a></li>
+<li><a class="" href="likelihood.html"><span class="header-section-number">15</span> Likelihood</a></li>
+<li><a class="" href="model-comparison.html"><span class="header-section-number">16</span> Model Comparison</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="git-github.html">Git &amp; GitHub</a></li>
 <li><a class="" href="base-plot.html">Base Plot</a></li>
@@ -72,15 +74,15 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="sampling" class="section level1" number="6">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="sampling" class="section level1" number="8">
 <h1>
-<span class="header-section-number">6</span> Sampling<a class="anchor" aria-label="anchor" href="#sampling"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8</span> Sampling<a class="anchor" aria-label="anchor" href="#sampling"><i class="fas fa-link"></i></a>
 </h1>
 <p><em>“Why do I need statistics in the first place?”</em> This was the initial question that arose when I entered the field of ecology. Initially, I assumed it would be a straightforward query with an immediate response. However, I soon realized that it is a profound question with a complex answer. In short, “we need statistics because we often possess only partial information about what we seek to understand.” Now, let’s explore the more elaborate explanation below.</p>
 <p><strong>Key words:</strong> parameter, sample mean, sample variance, biased/unbiased</p>
-<div id="the-unknown-garden-plant-example" class="section level2" number="6.1">
+<div id="the-unknown-garden-plant-example" class="section level2" number="8.1">
 <h2>
-<span class="header-section-number">6.1</span> The Unknown: Garden Plant Example<a class="anchor" aria-label="anchor" href="#the-unknown-garden-plant-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.1</span> The Unknown: Garden Plant Example<a class="anchor" aria-label="anchor" href="#the-unknown-garden-plant-example"><i class="fas fa-link"></i></a>
 </h2>
 <p>Consider a scenario where we are conducting a study on plant height in a garden. In this garden, there exists a thousand of individual plants, making it impractical for a single researcher to measure all of them. Instead, due to resource limitations, a sample of <span class="math inline">\(10\)</span> plants was selected to <strong><em>calculate</em></strong> the average height and the extent of variation among these plant individuals:</p>
 <pre><code>## # A tibble: 10 × 4
@@ -96,20 +98,20 @@
 ##  8     8        8   23.7 cm   
 ##  9     9        9   22.9 cm   
 ## 10    10       10   18.5 cm</code></pre>
-<p>Cool. Let’s use this data set to learn about the pitfall behind this. Create a vector of plant height <code>h</code> and put it in a <code>tibble()</code> to analyze it:</p>
-<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
+<p>Cool. Let’s use this data set to learn about the pitfall behind this. Create a vector of plant height <code>h</code> and put it in a <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code> to analyze it:</p>
+<div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">h</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">16.9</span>, <span class="fl">20.9</span>, <span class="fl">15.8</span>, <span class="fl">28</span>, <span class="fl">21.6</span>, <span class="fl">15.9</span>, <span class="fl">22.4</span>, <span class="fl">23.7</span>, <span class="fl">22.9</span>, <span class="fl">18.5</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">df_h1</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>plant_id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="co"># a vector from 1 to 10 by 1</span></span>
+<span><span class="va">df_h1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>plant_id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="co"># a vector from 1 to 10 by 1</span></span>
 <span>                height <span class="op">=</span> <span class="va">h</span>, <span class="co"># height</span></span>
 <span>                unit <span class="op">=</span> <span class="st">"cm"</span><span class="op">)</span> <span class="co"># unit</span></span></code></pre></div>
-<p>This format (<code>tibble()</code>) is better than a raw vector of height because it allows more flexible analysis. Let’s add columns of <code>mu_height</code> and <code>var_height</code> using <code>mutate()</code>, a function that adds new column(s) to an existing <code>tibble()</code> (or <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code>):</p>
-<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
+<p>This format (<code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code>) is better than a raw vector of height because it allows more flexible analysis. Let’s add columns of <code>mu_height</code> and <code>var_height</code> using <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code>, a function that adds new column(s) to an existing <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code> (or <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code>):</p>
+<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># nrow() returns the number of rows</span></span>
 <span><span class="co"># while piping, "." refers to the dataframe inherited </span></span>
 <span><span class="co"># i.e., nrow(.) counts the number of rows in df_h1</span></span>
-<span><span class="va">df_h1</span> <span class="op">&lt;-</span> <span class="va">df_h1</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>mu_height <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span>,</span>
+<span><span class="va">df_h1</span> <span class="op">&lt;-</span> <span class="va">df_h1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>mu_height <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span>,</span>
 <span>         var_height <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">height</span> <span class="op">-</span> <span class="va">mu_height</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_h1</span><span class="op">)</span></span></code></pre></div>
@@ -140,14 +142,14 @@
 ##  8    18       18   24.7 cm   
 ##  9    19       19   24.1 cm   
 ## 10    20       20   23   cm</code></pre>
-<p>Create another <code>tibble()</code> :</p>
-<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
+<p>Create another <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code> :</p>
+<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">h</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">27.6</span>, <span class="fl">21.9</span>, <span class="fl">16.9</span>, <span class="fl">8.9</span>, <span class="fl">25.6</span>, <span class="fl">19.8</span>, <span class="fl">19.9</span>, <span class="fl">24.7</span>, <span class="fl">24.1</span>, <span class="fl">23</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">df_h2</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>plant_id <span class="op">=</span> <span class="fl">11</span><span class="op">:</span><span class="fl">20</span>, <span class="co"># a vector from 11 to 20 by 1</span></span>
+<span><span class="va">df_h2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>plant_id <span class="op">=</span> <span class="fl">11</span><span class="op">:</span><span class="fl">20</span>, <span class="co"># a vector from 11 to 20 by 1</span></span>
 <span>                height <span class="op">=</span> <span class="va">h</span>,</span>
-<span>                unit <span class="op">=</span> <span class="st">"cm"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">mutate</span><span class="op">(</span>mu_height <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span>,</span>
+<span>                unit <span class="op">=</span> <span class="st">"cm"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>mu_height <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span>,</span>
 <span>         var_height <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">height</span> <span class="op">-</span> <span class="va">mu_height</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_h2</span><span class="op">)</span></span></code></pre></div>
@@ -166,19 +168,19 @@
 ## 10       20   23   cm         21.2       25.8</code></pre>
 <p>Wow, that’s totally different.</p>
 </div>
-<div id="linking-part-to-the-whole" class="section level2" number="6.2">
+<div id="linking-part-to-the-whole" class="section level2" number="8.2">
 <h2>
-<span class="header-section-number">6.2</span> Linking Part to the Whole<a class="anchor" aria-label="anchor" href="#linking-part-to-the-whole"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.2</span> Linking Part to the Whole<a class="anchor" aria-label="anchor" href="#linking-part-to-the-whole"><i class="fas fa-link"></i></a>
 </h2>
 <p>The exercise highlights an important takeaway: what we can determine from the above data is the average and variance of the sample, <strong>which may not perfectly represent the characteristics of the entire garden.</strong></p>
 <p>In the field of biological research, it is often impractical or impossible to sample the entire population, so we must rely on estimating the unknowns (in this case, the <em>mean</em> and <em>variance</em>) from the available samples. This is where statistics comes into play, offering a tool to infer information about the entire population based on partial information obtained from the samples.</p>
 <p>The unknowns we are interested in, which the population mean and variance in this example, are referred to as “<strong>parameters.</strong>” These parameters <u><em>cannot be directly measured</em></u> but can be <u><em>estimated</em></u> from samples through statistical inference.</p>
-<p>Provided that certain assumptions are met, the <em>sample mean</em> is the unbiased point estimate of the <em>population</em> <em>mean</em>. The <strong>“<em>unbiased</em>”</strong> means that the sample means – if we repeat the sampling process – are centered around the population mean. In the meantime, the sample variance – if we use the formula in Chapter <a href="descriptive-statistics.html#descriptive-statistics">5</a> – is “<strong><em>biased</em></strong>.” It tends to be smaller than the population variance.</p>
+<p>Provided that certain assumptions are met, the <em>sample mean</em> is the unbiased point estimate of the <em>population</em> <em>mean</em>. The <strong>“<em>unbiased</em>”</strong> means that the sample means – if we repeat the sampling process – are centered around the population mean. In the meantime, the sample variance – if we use the formula in Chapter <a href="descriptive-statistics.html#descriptive-statistics">7</a> – is “<strong><em>biased</em></strong>.” It tends to be smaller than the population variance.</p>
 <p>Let’s explore this concept further through simple simulations. Suppose we have data on a thousand plant individuals, although this scenario may be unrealistic in practice. However, by conducting these simulations, we can examine how different sample means and variances can deviate from the true values.</p>
 <p>Download the data <a href="https://github.com/aterui/biostats/blob/master/data_raw/data_plant_height.csv">here</a> containing height measurements of thousand individuals, and place this file under <code>data_raw/</code> in your project directory. You can load this <code>csv</code> file in R as follows:</p>
-<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load csv data on R</span></span>
-<span><span class="va">df_h0</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data_raw/data_plant_height.csv"</span><span class="op">)</span></span>
+<span><span class="va">df_h0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data_raw/data_plant_height.csv"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># show the first 10 rows</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_h0</span><span class="op">)</span></span></code></pre></div>
@@ -197,19 +199,19 @@
 ## 10    10       10   18.5 cm   
 ## # ℹ 990 more rows</code></pre>
 <p>Using this synthetic dataset (I generated through a random value generator), we can calculate the true mean and variance (reference values). It is important to note that in this case, we use the term “calculate” for the mean and variance because they represent the parameters of the entire population, which are known to us in this scenario.</p>
-<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">df_h0</span><span class="op">$</span><span class="va">height</span><span class="op">)</span></span>
 <span><span class="va">sigma2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">df_h0</span><span class="op">$</span><span class="va">height</span> <span class="op">-</span> <span class="va">mu</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">df_h0</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">mu</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 19.9426</code></pre>
-<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">sigma2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 26.74083</code></pre>
 <p>We can simulate the sampling of 10 plant individuals by randomly selecting 10 rows from <code>df_h0</code>:</p>
-<div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df_i</span> <span class="op">&lt;-</span> <span class="va">df_h0</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">sample_n</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="co"># size specifies the number of rows to be selected randomly</span></span>
+<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df_i</span> <span class="op">&lt;-</span> <span class="va">df_h0</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/sample_n.html">sample_n</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="co"># size specifies the number of rows to be selected randomly</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_i</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 10 × 4
@@ -225,10 +227,10 @@
 ##  8    96       96   22.8 cm   
 ##  9   853      853   14.8 cm   
 ## 10   987      987   15.9 cm</code></pre>
-<p>Since <code>sample_n()</code> selects rows randomly, you will (very likely) get different set of 10 individuals/rows every single time. Below is another set of 10 rows (notice that <code>df_i</code> is overwritten with the new data set):</p>
-<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df_i</span> <span class="op">&lt;-</span> <span class="va">df_h0</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">sample_n</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<p>Since <code><a href="https://dplyr.tidyverse.org/reference/sample_n.html">sample_n()</a></code> selects rows randomly, you will (very likely) get different set of 10 individuals/rows every single time. Below is another set of 10 rows (notice that <code>df_i</code> is overwritten with the new data set):</p>
+<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df_i</span> <span class="op">&lt;-</span> <span class="va">df_h0</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/sample_n.html">sample_n</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_i</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 10 × 4
@@ -245,7 +247,7 @@
 ##  9   270      270   15.3 cm   
 ## 10   524      524   21   cm</code></pre>
 <p>Let’s obtain 100 sets of 10 plant individuals (randomly selected) and <em>estimate</em> the mean and variance in each. While we can perform random sampling one by one, this is cumbersome – at least, I do not want to do it. Instead, we can leverage a technique of <code>for</code> loop:</p>
-<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for reproducibility</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span>
 <span></span>
@@ -254,8 +256,8 @@
 <span><span class="co"># repeat the work in {} from i = 1 to i = 100</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  </span>
-<span>  <span class="va">df_i</span> <span class="op">&lt;-</span> <span class="va">df_h0</span> <span class="op">%&gt;%</span> </span>
-<span>    <span class="fu">sample_n</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="co"># random samples of 10 individuals</span></span>
+<span>  <span class="va">df_i</span> <span class="op">&lt;-</span> <span class="va">df_h0</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/sample_n.html">sample_n</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="co"># random samples of 10 individuals</span></span>
 <span>  </span>
 <span>  <span class="co"># save mean for sample set i</span></span>
 <span>  <span class="va">mu_i</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">df_i</span><span class="op">$</span><span class="va">height</span><span class="op">)</span></span>
@@ -265,7 +267,7 @@
 <span>  </span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>Take a look at <code>mu_i</code> and <code>var_i</code> :</p>
-<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb215"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">mu_i</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##   [1] 19.97 17.86 22.55 22.03 17.00 23.28 21.33 21.23 18.55 19.29 22.14 19.84
 ##  [13] 22.43 22.13 21.13 19.40 19.39 20.43 19.12 20.66 21.01 19.48 21.73 19.63
@@ -276,7 +278,7 @@
 ##  [73] 18.65 19.74 21.47 17.95 16.98 18.30 19.77 17.25 19.60 21.27 19.28 20.42
 ##  [85] 19.60 18.41 20.15 21.24 19.70 21.56 20.75 19.54 17.54 18.52 19.85 18.40
 ##  [97] 20.39 17.07 17.84 20.66</code></pre>
-<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb217"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">var_i</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##   [1] 14.1961 21.6884 28.2685 21.6341  6.5700 24.5996 23.6941 24.8681 21.6485
 ##  [10] 36.3689 17.8844 31.5784 21.0521 34.2341 20.6281 10.4420 20.0469 31.2781
@@ -291,23 +293,23 @@
 ##  [91] 18.5365 18.5424 21.5204 13.1276 17.7185 21.2940 27.1649 35.3141 43.5624
 ## [100] 55.1484</code></pre>
 <p>In each element of <code>mu_i</code> and <code>var_i</code>, we have saved estimated mean (<span class="math inline">\(\hat{\mu}\)</span>; reads mu hat) and variance (<span class="math inline">\(\hat{\sigma}^2\)</span>) of 10 plant height measures for dataset <code>i</code>. By drawing a histogram of these values, we can examine the distributions of mean and variance estimates. I use R package <code>patchwork</code> to make a better figure:</p>
-<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb219"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#install.packages("patchwork") # install only once</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">df_sample</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>mu_hat <span class="op">=</span> <span class="va">mu_i</span>, var_hat <span class="op">=</span> <span class="va">var_i</span><span class="op">)</span></span>
+<span><span class="va">df_sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>mu_hat <span class="op">=</span> <span class="va">mu_i</span>, var_hat <span class="op">=</span> <span class="va">var_i</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># histogram for mean</span></span>
-<span><span class="va">g_mu</span> <span class="op">&lt;-</span> <span class="va">df_sample</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">mu_hat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_histogram</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">mu</span><span class="op">)</span></span>
+<span><span class="va">g_mu</span> <span class="op">&lt;-</span> <span class="va">df_sample</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">mu_hat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">mu</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># histogram for variance</span></span>
-<span><span class="va">g_var</span> <span class="op">&lt;-</span> <span class="va">df_sample</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">var_hat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_histogram</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">sigma2</span><span class="op">)</span></span>
+<span><span class="va">g_var</span> <span class="op">&lt;-</span> <span class="va">df_sample</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">var_hat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">sigma2</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># layout vertically</span></span>
 <span><span class="co"># possible only if "patchwork" is loaded</span></span>
@@ -315,7 +317,7 @@
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:mu-var-dist"></span>
 <img src="biostats_files/figure-html/mu-var-dist-1.png" alt="Sample mean and biased variance." width="672"><p class="caption">
-Figure 6.1: Sample mean and biased variance.
+Figure 8.1: Sample mean and biased variance.
 </p>
 </div>
 <p>While sample means are indeed symmetrically distributed around the true mean, sample variances tend to be biased and skewed to the right, often underestimating the true variance.</p>
@@ -324,7 +326,7 @@ Figure 6.1: Sample mean and biased variance.
 \frac{\sum_i^N (x_i - \mu)^2}{N-1}
 \]</span></p>
 <p>The correction in the denominator (<span class="math inline">\(N\)</span> replaced with <span class="math inline">\(N-1\)</span>) compensates for the bias, providing an estimate of the true variance without systematic underestimation (although this seems a simple correction, a <a href="https://en.wikipedia.org/wiki/Bessel%27s_correction">deep math</a> underlies the derivation of <span class="math inline">\(N-1\)</span>). This is the default formula in <code><a href="https://rdrr.io/r/stats/cor.html">var()</a></code> in R, a function used to estimate <em>unbiased</em> variance (and <em>unbiased</em> SD <code><a href="https://rdrr.io/r/stats/sd.html">sd()</a></code>). Comparison reveals how this works:</p>
-<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for reproducibility</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span>
 <span></span>
@@ -334,8 +336,8 @@ Figure 6.1: Sample mean and biased variance.
 <span><span class="co"># repeat the work in {} from i = 1 to i = 100</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  </span>
-<span>  <span class="va">df_i</span> <span class="op">&lt;-</span> <span class="va">df_h0</span> <span class="op">%&gt;%</span> </span>
-<span>    <span class="fu">sample_n</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="co"># random samples of 10 individuals</span></span>
+<span>  <span class="va">df_i</span> <span class="op">&lt;-</span> <span class="va">df_h0</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/sample_n.html">sample_n</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="co"># random samples of 10 individuals</span></span>
 <span>  </span>
 <span>  <span class="co"># save mean for sample set i</span></span>
 <span>  <span class="va">mu_i</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">df_i</span><span class="op">$</span><span class="va">height</span><span class="op">)</span></span>
@@ -346,71 +348,71 @@ Figure 6.1: Sample mean and biased variance.
 <span>  <span class="va">var_ub_i</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">df_i</span><span class="op">$</span><span class="va">height</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>Add the histogram of unbiased variance:</p>
-<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb221"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># draw histograms ----</span></span>
-<span><span class="va">df_sample</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="op">(</span>mu_hat <span class="op">=</span> <span class="va">mu_i</span>,</span>
+<span><span class="va">df_sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>mu_hat <span class="op">=</span> <span class="va">mu_i</span>,</span>
 <span>                    var_hat <span class="op">=</span> <span class="va">var_i</span>,</span>
 <span>                    var_ub_hat <span class="op">=</span> <span class="va">var_ub_i</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># histogram for mu</span></span>
-<span><span class="va">g_mu</span> <span class="op">&lt;-</span> <span class="va">df_sample</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">mu_hat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_histogram</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">mu</span><span class="op">)</span></span>
+<span><span class="va">g_mu</span> <span class="op">&lt;-</span> <span class="va">df_sample</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">mu_hat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">mu</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># histogram for variance</span></span>
 <span><span class="co"># scale_x_continuous() adjusts scale in x-axis</span></span>
-<span><span class="va">g_var</span> <span class="op">&lt;-</span> <span class="va">df_sample</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">var_hat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_histogram</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">sigma2</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_x_continuous</span><span class="op">(</span>limits<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">var_i</span>, <span class="va">var_ub_i</span><span class="op">)</span><span class="op">)</span>,</span>
+<span><span class="va">g_var</span> <span class="op">&lt;-</span> <span class="va">df_sample</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">var_hat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">sigma2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>limits<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">var_i</span>, <span class="va">var_ub_i</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                               <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">var_i</span>, <span class="va">var_ub_i</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># histogram for unbiased variance</span></span>
-<span><span class="va">g_var_ub</span> <span class="op">&lt;-</span> <span class="va">df_sample</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">var_ub_hat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_histogram</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">geom_vline</span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">sigma2</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_x_continuous</span><span class="op">(</span>limits<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">var_i</span>, <span class="va">var_ub_i</span><span class="op">)</span><span class="op">)</span>,</span>
+<span><span class="va">g_var_ub</span> <span class="op">&lt;-</span> <span class="va">df_sample</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">var_ub_hat</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">sigma2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>limits<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">var_i</span>, <span class="va">var_ub_i</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                               <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">var_i</span>, <span class="va">var_ub_i</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">g_mu</span> <span class="op">/</span> <span class="va">g_var</span> <span class="op">/</span> <span class="va">g_var_ub</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:var-ub"></span>
 <img src="biostats_files/figure-html/var-ub-1.png" alt="Comparison of biased and unbiased variances." width="672"><p class="caption">
-Figure 6.2: Comparison of biased and unbiased variances.
+Figure 8.2: Comparison of biased and unbiased variances.
 </p>
 </div>
 <p>In summary, samples can only provide information about a part of the whole population. The complete picture of the entire population is often unknown, and <strong>we rely on estimating key parameters from the available samples.</strong> This concept applies to a wide range of parametric analyses in statistics, where we use sample data to make inferences about the population parameters.</p>
 <p>Recognizing the limitations and uncertainties associated with working with samples is essential for proper statistical analysis and interpretation of results in various fields of study.</p>
 </div>
-<div id="laboratory-1" class="section level2" number="6.3">
+<div id="laboratory-1" class="section level2" number="8.3">
 <h2>
-<span class="header-section-number">6.3</span> Laboratory<a class="anchor" aria-label="anchor" href="#laboratory-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">8.3</span> Laboratory<a class="anchor" aria-label="anchor" href="#laboratory-1"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li><p>We used 10 plants to estimate sample means and variances. Obtain 100 sub-datasets with 50 and 100 measures each, and draw histograms of sample means and unbiased variances (use <code><a href="https://rdrr.io/r/stats/cor.html">var()</a></code>).</p></li>
 <li>
 <p>Sample means and unbiased variances are unbiased if samples are randomly selected. What happens if samples are non-random? Suppose the investigator was unable to find plants less than 10 cm in height – the following code excludes those less than 10 cm in height:</p>
-<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df_h10</span> <span class="op">&lt;-</span> <span class="va">df_h0</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">height</span> <span class="op">&gt;=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df_h10</span> <span class="op">&lt;-</span> <span class="va">df_h0</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">height</span> <span class="op">&gt;=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <p>Repeat step 1 with <code>df_h10</code> instead of <code>df_h0</code> and compare the results.</p>
 </li>
 </ol>
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="descriptive-statistics.html"><span class="header-section-number">5</span> Descriptive Statistics</a></div>
-<div class="next"><a href="probabilistic-view.html"><span class="header-section-number">7</span> Probabilistic View</a></div>
+<div class="prev"><a href="descriptive-statistics.html"><span class="header-section-number">7</span> Descriptive Statistics</a></div>
+<div class="next"><a href="probabilistic-view.html"><span class="header-section-number">9</span> Probabilistic View</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#sampling"><span class="header-section-number">6</span> Sampling</a></li>
-<li><a class="nav-link" href="#the-unknown-garden-plant-example"><span class="header-section-number">6.1</span> The Unknown: Garden Plant Example</a></li>
-<li><a class="nav-link" href="#linking-part-to-the-whole"><span class="header-section-number">6.2</span> Linking Part to the Whole</a></li>
-<li><a class="nav-link" href="#laboratory-1"><span class="header-section-number">6.3</span> Laboratory</a></li>
+<li><a class="nav-link" href="#sampling"><span class="header-section-number">8</span> Sampling</a></li>
+<li><a class="nav-link" href="#the-unknown-garden-plant-example"><span class="header-section-number">8.1</span> The Unknown: Garden Plant Example</a></li>
+<li><a class="nav-link" href="#linking-part-to-the-whole"><span class="header-section-number">8.2</span> Linking Part to the Whole</a></li>
+<li><a class="nav-link" href="#laboratory-1"><span class="header-section-number">8.3</span> Laboratory</a></li>
 </ul>
 
       <div class="book-extra">

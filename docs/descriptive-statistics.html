@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 5 Descriptive Statistics | BIOSTATS</title>
+<title>Chapter 7 Descriptive Statistics | BIOSTATS</title>
 <meta name="author" content="Akira Terui">
 <meta name="description" content="Descriptive statistics are a set of summary measures that provide a concise overview of a dataset. They help us understand the characteristics and properties of the data without delving into...">
 <meta name="generator" content="bookdown 0.40 with bs4_book()">
-<meta property="og:title" content="Chapter 5 Descriptive Statistics | BIOSTATS">
+<meta property="og:title" content="Chapter 7 Descriptive Statistics | BIOSTATS">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://bookdown.org/janedoe/bookdown-demo/descriptive-statistics.html">
 <meta property="og:description" content="Descriptive statistics are a set of summary measures that provide a concise overview of a dataset. They help us understand the characteristics and properties of the data without delving into...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 5 Descriptive Statistics | BIOSTATS">
+<meta name="twitter:title" content="Chapter 7 Descriptive Statistics | BIOSTATS">
 <meta name="twitter:description" content="Descriptive statistics are a set of summary measures that provide a concise overview of a dataset. They help us understand the characteristics and properties of the data without delving into...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -51,17 +51,19 @@
 <li><a class="" href="r-project.html"><span class="header-section-number">3</span> R Project</a></li>
 <li class="book-part">R Basics</li>
 <li><a class="" href="data-structure.html"><span class="header-section-number">4</span> Data Structure</a></li>
+<li><a class="" href="data-manipulation.html"><span class="header-section-number">5</span> Data Manipulation</a></li>
+<li><a class="" href="visualization.html"><span class="header-section-number">6</span> Visualization</a></li>
 <li class="book-part">Basic Statistics</li>
-<li><a class="active" href="descriptive-statistics.html"><span class="header-section-number">5</span> Descriptive Statistics</a></li>
-<li><a class="" href="sampling.html"><span class="header-section-number">6</span> Sampling</a></li>
-<li><a class="" href="probabilistic-view.html"><span class="header-section-number">7</span> Probabilistic View</a></li>
-<li><a class="" href="two-group-comparison.html"><span class="header-section-number">8</span> Two-Group Comparison</a></li>
-<li><a class="" href="multiple-group-comparison.html"><span class="header-section-number">9</span> Multiple-Group Comparison</a></li>
-<li><a class="" href="regression.html"><span class="header-section-number">10</span> Regression</a></li>
-<li><a class="" href="linear-model.html"><span class="header-section-number">11</span> Linear Model</a></li>
-<li><a class="" href="generalized-linear-model.html"><span class="header-section-number">12</span> Generalized Linear Model</a></li>
-<li><a class="" href="likelihood.html"><span class="header-section-number">13</span> Likelihood</a></li>
-<li><a class="" href="model-comparison.html"><span class="header-section-number">14</span> Model Comparison</a></li>
+<li><a class="active" href="descriptive-statistics.html"><span class="header-section-number">7</span> Descriptive Statistics</a></li>
+<li><a class="" href="sampling.html"><span class="header-section-number">8</span> Sampling</a></li>
+<li><a class="" href="probabilistic-view.html"><span class="header-section-number">9</span> Probabilistic View</a></li>
+<li><a class="" href="two-group-comparison.html"><span class="header-section-number">10</span> Two-Group Comparison</a></li>
+<li><a class="" href="multiple-group-comparison.html"><span class="header-section-number">11</span> Multiple-Group Comparison</a></li>
+<li><a class="" href="regression.html"><span class="header-section-number">12</span> Regression</a></li>
+<li><a class="" href="linear-model.html"><span class="header-section-number">13</span> Linear Model</a></li>
+<li><a class="" href="generalized-linear-model.html"><span class="header-section-number">14</span> Generalized Linear Model</a></li>
+<li><a class="" href="likelihood.html"><span class="header-section-number">15</span> Likelihood</a></li>
+<li><a class="" href="model-comparison.html"><span class="header-section-number">16</span> Model Comparison</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="git-github.html">Git &amp; GitHub</a></li>
 <li><a class="" href="base-plot.html">Base Plot</a></li>
@@ -72,9 +74,9 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="descriptive-statistics" class="section level1" number="5">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="descriptive-statistics" class="section level1" number="7">
 <h1>
-<span class="header-section-number">5</span> Descriptive Statistics<a class="anchor" aria-label="anchor" href="#descriptive-statistics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7</span> Descriptive Statistics<a class="anchor" aria-label="anchor" href="#descriptive-statistics"><i class="fas fa-link"></i></a>
 </h1>
 <p>Descriptive statistics are a set of summary measures that provide a concise overview of a dataset. They help us understand the characteristics and properties of the data without delving into complex statistical analyses. Some commonly used descriptive statistics include the mean, standard deviation, and median.</p>
 <p>To illustrate the concept, let’s consider fish length measurement <span class="math inline">\(x\)</span>. Each fish is identified by a subscript, and their lengths are denoted as follows:</p>
@@ -89,15 +91,15 @@ x_5 = 24.4\\
 \pmb{x} = \{15.9, 15.1, 21.9, 13.3, 24.4\}
 \]</span></p>
 <p>Now let’s see how we represent summary statistics of vector <span class="math inline">\(\pmb{x}\)</span>.</p>
-<div id="central-tendency" class="section level2" number="5.1">
+<div id="central-tendency" class="section level2" number="7.1">
 <h2>
-<span class="header-section-number">5.1</span> Central Tendency<a class="anchor" aria-label="anchor" href="#central-tendency"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.1</span> Central Tendency<a class="anchor" aria-label="anchor" href="#central-tendency"><i class="fas fa-link"></i></a>
 </h2>
-<div id="central-tendency-measures" class="section level3" number="5.1.1">
+<div id="central-tendency-measures" class="section level3" number="7.1.1">
 <h3>
-<span class="header-section-number">5.1.1</span> Central Tendency Measures<a class="anchor" aria-label="anchor" href="#central-tendency-measures"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.1.1</span> Central Tendency Measures<a class="anchor" aria-label="anchor" href="#central-tendency-measures"><i class="fas fa-link"></i></a>
 </h3>
-<p>Central tendency measures (Table <a href="descriptive-statistics.html#tab:central">5.1</a>) provide insights into the typical or central value of a dataset. There are three commonly used measures:</p>
+<p>Central tendency measures (Table <a href="descriptive-statistics.html#tab:central">7.1</a>) provide insights into the typical or central value of a dataset. There are three commonly used measures:</p>
 <ul>
 <li><p><strong>Arithmetic Mean</strong>. This is the most commonly used measure of central tendency. It represents the <em>additive</em> average of the data. To calculate the arithmetic mean, you sum up all the values and divide the total by the number of data points. It can be heavily influenced by extreme values, known as outliers.</p></li>
 <li><p><strong>Geometric Mean</strong>. The geometric mean is a <em>multiplicative</em> average. It is always smaller than the arithmetic mean and less sensitive to unusually large values. However, it is not applicable when the data contain negative values.</p></li>
@@ -105,7 +107,7 @@ x_5 = 24.4\\
 </ul>
 <div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:central">Table 5.1: </span>Common measures of central tendency. <span class="math inline">\(N\)</span> refers to the number of data points.
+<span id="tab:central">Table 7.1: </span>Common measures of central tendency. <span class="math inline">\(N\)</span> refers to the number of data points.
 </caption>
 <thead><tr>
 <th style="text-align:left;">
@@ -145,91 +147,91 @@ Median <span class="math inline">\(\mu_{med}\)</span>
 </tbody>
 </table></div>
 </div>
-<div id="r-exercise" class="section level3" number="5.1.2">
+<div id="r-exercise" class="section level3" number="7.1.2">
 <h3>
-<span class="header-section-number">5.1.2</span> R Exercise<a class="anchor" aria-label="anchor" href="#r-exercise"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.1.2</span> R Exercise<a class="anchor" aria-label="anchor" href="#r-exercise"><i class="fas fa-link"></i></a>
 </h3>
 <p>To learn more about these measures, let’s create vectors <span class="math inline">\(\pmb{x} = \{15.9, 15.1, 21.9, 13.3, 24.4\}\)</span> and <span class="math inline">\(\pmb{y} = \{15.9, 15.1, 21.9, 53.3, 24.4\}\)</span> – <span class="math inline">\(\pmb{y}\)</span> is identical to <span class="math inline">\(\pmb{x}\)</span> but contains one outlier value. How does this make difference? To construct vectors in R, we use <code><a href="https://rdrr.io/r/base/c.html">c()</a></code>, a function that stands for “construct.” Below is the script:</p>
-<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># construct vectors x and y</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">15.9</span>, <span class="fl">15.1</span>, <span class="fl">21.9</span>, <span class="fl">13.3</span>, <span class="fl">24.4</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">15.9</span>, <span class="fl">15.1</span>, <span class="fl">21.9</span>, <span class="fl">53.3</span>, <span class="fl">24.4</span><span class="op">)</span></span></code></pre></div>
 <p>Confirm you constructed them correctly:</p>
-<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span></span></code></pre></div>
 <pre><code>## [1] 15.9 15.1 21.9 13.3 24.4</code></pre>
-<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">y</span></span></code></pre></div>
 <pre><code>## [1] 15.9 15.1 21.9 53.3 24.4</code></pre>
 <p>Cool! Now we can calculate summary statistics of <code>x</code> and <code>y</code>.</p>
 <p><strong>Arithmetic Mean</strong></p>
 <p>While R has a function for arithmetic <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code>, let’s calculate the value from scratch:</p>
-<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for vector x</span></span>
 <span><span class="va">n_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># the number of elements in x = the number of data points</span></span>
 <span><span class="va">sum_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># summation for x</span></span>
 <span><span class="va">mu_x</span> <span class="op">&lt;-</span> <span class="va">sum_x</span> <span class="op">/</span> <span class="va">n_x</span> <span class="co"># arithmetic mean</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">mu_x</span><span class="op">)</span> <span class="co"># print calculated value</span></span></code></pre></div>
 <pre><code>## [1] 18.12</code></pre>
-<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for vector y; we can calculate directly too</span></span>
 <span><span class="va">mu_y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">mu_y</span><span class="op">)</span> <span class="co"># print calculated value</span></span></code></pre></div>
 <pre><code>## [1] 26.12</code></pre>
 <p>Compare with outputs from <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> :</p>
-<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 18.12</code></pre>
-<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 26.12</code></pre>
 <p><strong>Geometric Mean</strong></p>
 <p>Unfortunately, there is no build-in function for geometric mean <span class="math inline">\(\mu_{ge}\)</span> in R (as far as I know; there are packages though). But, we can calculate the value from scratch again:</p>
-<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for vector x</span></span>
 <span><span class="va">prod_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/prod.html">prod</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># product of vector x; x1 * x2 * x3...</span></span>
 <span><span class="va">n_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="va">mug_x</span> <span class="op">&lt;-</span> <span class="va">prod_x</span><span class="op">^</span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="va">n_x</span><span class="op">)</span> <span class="co"># ^ means power</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">mug_x</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 17.63648</code></pre>
-<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for vector y</span></span>
 <span><span class="va">mug_y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/prod.html">prod</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">^</span><span class="op">(</span><span class="fl">1</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">mug_y</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 23.28022</code></pre>
 <p><strong>Median</strong></p>
 <p>Lastly, let’s do the same for median:</p>
-<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for vector x</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># sort x from small to large</span></span>
 <span><span class="va">index</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span> <span class="op">/</span> <span class="fl">2</span> <span class="co"># (N + 1)/2 th index as length(x) is an odd number</span></span>
 <span><span class="va">med_x</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="va">index</span><span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">med_x</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 15.9</code></pre>
-<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for vector y</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="co"># sort y from small to large</span></span>
 <span><span class="va">med_y</span> <span class="op">&lt;-</span> <span class="va">y</span><span class="op">[</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span> <span class="op">/</span> <span class="fl">2</span><span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">med_y</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 21.9</code></pre>
 <p>Compare with outputs from <code><a href="https://rdrr.io/r/stats/median.html">median()</a></code></p>
-<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 15.9</code></pre>
-<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 21.9</code></pre>
 </div>
 </div>
-<div id="variation" class="section level2" number="5.2">
+<div id="variation" class="section level2" number="7.2">
 <h2>
-<span class="header-section-number">5.2</span> Variation<a class="anchor" aria-label="anchor" href="#variation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2</span> Variation<a class="anchor" aria-label="anchor" href="#variation"><i class="fas fa-link"></i></a>
 </h2>
-<div id="variation-measures" class="section level3" number="5.2.1">
+<div id="variation-measures" class="section level3" number="7.2.1">
 <h3>
-<span class="header-section-number">5.2.1</span> Variation Measures<a class="anchor" aria-label="anchor" href="#variation-measures"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2.1</span> Variation Measures<a class="anchor" aria-label="anchor" href="#variation-measures"><i class="fas fa-link"></i></a>
 </h3>
-<p>Variation measures (Table <a href="descriptive-statistics.html#tab:variation">5.2</a>) provide information about the spread of data points.</p>
+<p>Variation measures (Table <a href="descriptive-statistics.html#tab:variation">7.2</a>) provide information about the spread of data points.</p>
 <ul>
 <li><p><strong>Variance.</strong> Variance is a statistical measure that quantifies the spread or dispersion of a dataset. It provides a numerical value that indicates how far individual data points in a dataset deviate from the mean or average value. In other words, variance measures the average squared difference between each data point and the mean. <strong>Standard deviation (SD) is the square root of variance</strong>.</p></li>
 <li><p><strong>Inter-Quantile Range.</strong> The interquartile range (IQR) is a statistical measure that provides information about the spread or dispersion of a dataset, specifically focusing on the middle 50% of the data. It is a robust measure of variability that is less affected by outliers compared to variance.</p></li>
@@ -239,7 +241,7 @@ Median <span class="math inline">\(\mu_{med}\)</span>
 </ul>
 <div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:variation">Table 5.2: </span>Common measures of variation. <span class="math inline">\(N\)</span> refers to the number of data points. <span class="math inline">\(x_l\)</span> and <span class="math inline">\(x_h\)</span> are <span class="math inline">\(l^{th}\)</span> and <span class="math inline">\(h^{th}\)</span> percentiles.
+<span id="tab:variation">Table 7.2: </span>Common measures of variation. <span class="math inline">\(N\)</span> refers to the number of data points. <span class="math inline">\(x_l\)</span> and <span class="math inline">\(x_h\)</span> are <span class="math inline">\(l^{th}\)</span> and <span class="math inline">\(h^{th}\)</span> percentiles.
 </caption>
 <thead><tr>
 <th style="text-align:left;">
@@ -293,47 +295,47 @@ MAD/Median
 </tbody>
 </table></div>
 </div>
-<div id="r-exercise-1" class="section level3" number="5.2.2">
+<div id="r-exercise-1" class="section level3" number="7.2.2">
 <h3>
-<span class="header-section-number">5.2.2</span> R Exercise<a class="anchor" aria-label="anchor" href="#r-exercise-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2.2</span> R Exercise<a class="anchor" aria-label="anchor" href="#r-exercise-1"><i class="fas fa-link"></i></a>
 </h3>
 <p><strong>Variance</strong></p>
-<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for x</span></span>
 <span><span class="va">sqd_x</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="co"># sqared deviance</span></span>
 <span><span class="va">sum_sqd_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">sqd_x</span><span class="op">)</span></span>
 <span><span class="va">var_x</span> <span class="op">&lt;-</span> <span class="va">sum_sqd_x</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">var_x</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 18.2016</code></pre>
-<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for y</span></span>
 <span><span class="va">var_y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">y</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">var_y</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 197.0816</code></pre>
 <p><strong>Standard Deviation (SD)</strong></p>
-<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for x</span></span>
 <span><span class="va">sd_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">var_x</span><span class="op">)</span> <span class="co"># sqrt(): square root</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">sd_x</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 4.266333</code></pre>
-<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for y</span></span>
 <span><span class="va">sd_y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">var_y</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">sd_y</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 14.03858</code></pre>
 <p><strong>Coefficient of Variation (CV)</strong></p>
-<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for x</span></span>
 <span><span class="va">cv_x</span> <span class="op">&lt;-</span> <span class="va">sd_x</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">cv_x</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.2354489</code></pre>
-<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for y</span></span>
 <span><span class="va">cv_y</span> <span class="op">&lt;-</span> <span class="va">sd_y</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">cv_y</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.5374646</code></pre>
 <p><strong>IQR</strong>; Here, let me use 25 and 75 percentiles as <span class="math inline">\(x_l\)</span> and <span class="math inline">\(x_h\)</span>.</p>
-<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for x</span></span>
 <span><span class="va">x_l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">0.25</span><span class="op">)</span> <span class="co"># quantile(): return quantile values, 25 percentile</span></span>
 <span><span class="va">x_h</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">0.75</span><span class="op">)</span> <span class="co"># quantile(): return quantile values, 75 percentile</span></span>
@@ -341,7 +343,7 @@ MAD/Median
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">iqr_x</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 25% 
 ## 6.8</code></pre>
-<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for y</span></span>
 <span><span class="va">y_q</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">y</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">0.75</span><span class="op">)</span><span class="op">)</span> <span class="co"># return as a vector</span></span>
 <span><span class="va">iqr_y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">y_q</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">y_q</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span> <span class="co"># y_q[1] = 25 percentile; y_q[2] = 75 percentile</span></span>
@@ -349,53 +351,53 @@ MAD/Median
 <pre><code>## 25% 
 ## 8.5</code></pre>
 <p><strong>MAD</strong></p>
-<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for x</span></span>
 <span><span class="va">ad_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">mad_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">ad_x</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">mad_x</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 2.6</code></pre>
-<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for y</span></span>
 <span><span class="va">mad_y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">y</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">mad_y</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 6</code></pre>
 <p><strong>MAD / Median</strong></p>
-<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for x</span></span>
 <span><span class="va">mm_x</span> <span class="op">&lt;-</span> <span class="va">mad_x</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">mm_x</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.163522</code></pre>
-<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for y</span></span>
 <span><span class="va">mm_y</span> <span class="op">&lt;-</span> <span class="va">mad_y</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">mm_y</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.2739726</code></pre>
 </div>
 </div>
-<div id="laboratory" class="section level2" number="5.3">
+<div id="laboratory" class="section level2" number="7.3">
 <h2>
-<span class="header-section-number">5.3</span> Laboratory<a class="anchor" aria-label="anchor" href="#laboratory"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.3</span> Laboratory<a class="anchor" aria-label="anchor" href="#laboratory"><i class="fas fa-link"></i></a>
 </h2>
-<div id="comparing-central-tendency-measures" class="section level3" number="5.3.1">
+<div id="comparing-central-tendency-measures" class="section level3" number="7.3.1">
 <h3>
-<span class="header-section-number">5.3.1</span> Comparing Central Tendency Measures<a class="anchor" aria-label="anchor" href="#comparing-central-tendency-measures"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.3.1</span> Comparing Central Tendency Measures<a class="anchor" aria-label="anchor" href="#comparing-central-tendency-measures"><i class="fas fa-link"></i></a>
 </h3>
 <p>What are the differences of the three measures of central tendency? To investigate this further, let’s perform the following exercise.</p>
 <ol style="list-style-type: decimal">
 <li><p>Create a new vector <code>z</code> with length <span class="math inline">\(1000\)</span> as <code>exp(rnorm(n = 1000, mean = 0, sd = 0.1))</code>, and calculate the arithmetic mean, geometric mean, and median.</p></li>
-<li><p>Draw a histogram of <code>z</code> using functions <code>tibble()</code>, <code>ggplot()</code>, and <code>geom_histogram()</code>.</p></li>
-<li><p>Draw vertical lines of arithmetic mean, geometric mean, and median on the histogram with different colors using a function <code>geom_vline()</code> .</p></li>
+<li><p>Draw a histogram of <code>z</code> using functions <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code>, <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code>, and <code><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram()</a></code>.</p></li>
+<li><p>Draw vertical lines of arithmetic mean, geometric mean, and median on the histogram with different colors using a function <code><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline()</a></code> .</p></li>
 <li><p>Compare the values of the central tendency measures.</p></li>
 <li><p>Create a new vector <code>z_rev</code> as <code>-z + max(z) + 0.1</code>, and repeat step 1 – 4.</p></li>
 </ol>
 </div>
-<div id="comparing-variation-measures" class="section level3" number="5.3.2">
+<div id="comparing-variation-measures" class="section level3" number="7.3.2">
 <h3>
-<span class="header-section-number">5.3.2</span> Comparing Variation Measures<a class="anchor" aria-label="anchor" href="#comparing-variation-measures"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.3.2</span> Comparing Variation Measures<a class="anchor" aria-label="anchor" href="#comparing-variation-measures"><i class="fas fa-link"></i></a>
 </h3>
 <p>Why do we have absolute (variance, SD, MAD, IQR) and relative measures (CV, MAD/Median) of variation? To understand this, suppose we have 100 measurements of fish weight in unit “gram.” (<code>w</code> in the following script)</p>
-<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb195"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">w</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, mean <span class="op">=</span> <span class="fl">10</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">w</span><span class="op">)</span> <span class="co"># show first 10 elements in w</span></span></code></pre></div>
 <pre><code>## [1]  9.237455  9.171337 10.834474  9.032348  9.971185 10.232525</code></pre>
@@ -409,28 +411,28 @@ MAD/Median
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="data-structure.html"><span class="header-section-number">4</span> Data Structure</a></div>
-<div class="next"><a href="sampling.html"><span class="header-section-number">6</span> Sampling</a></div>
+<div class="prev"><a href="visualization.html"><span class="header-section-number">6</span> Visualization</a></div>
+<div class="next"><a href="sampling.html"><span class="header-section-number">8</span> Sampling</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#descriptive-statistics"><span class="header-section-number">5</span> Descriptive Statistics</a></li>
+<li><a class="nav-link" href="#descriptive-statistics"><span class="header-section-number">7</span> Descriptive Statistics</a></li>
 <li>
-<a class="nav-link" href="#central-tendency"><span class="header-section-number">5.1</span> Central Tendency</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#central-tendency-measures"><span class="header-section-number">5.1.1</span> Central Tendency Measures</a></li>
-<li><a class="nav-link" href="#r-exercise"><span class="header-section-number">5.1.2</span> R Exercise</a></li>
+<a class="nav-link" href="#central-tendency"><span class="header-section-number">7.1</span> Central Tendency</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#central-tendency-measures"><span class="header-section-number">7.1.1</span> Central Tendency Measures</a></li>
+<li><a class="nav-link" href="#r-exercise"><span class="header-section-number">7.1.2</span> R Exercise</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#variation"><span class="header-section-number">5.2</span> Variation</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#variation-measures"><span class="header-section-number">5.2.1</span> Variation Measures</a></li>
-<li><a class="nav-link" href="#r-exercise-1"><span class="header-section-number">5.2.2</span> R Exercise</a></li>
+<a class="nav-link" href="#variation"><span class="header-section-number">7.2</span> Variation</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#variation-measures"><span class="header-section-number">7.2.1</span> Variation Measures</a></li>
+<li><a class="nav-link" href="#r-exercise-1"><span class="header-section-number">7.2.2</span> R Exercise</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#laboratory"><span class="header-section-number">5.3</span> Laboratory</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#comparing-central-tendency-measures"><span class="header-section-number">5.3.1</span> Comparing Central Tendency Measures</a></li>
-<li><a class="nav-link" href="#comparing-variation-measures"><span class="header-section-number">5.3.2</span> Comparing Variation Measures</a></li>
+<a class="nav-link" href="#laboratory"><span class="header-section-number">7.3</span> Laboratory</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#comparing-central-tendency-measures"><span class="header-section-number">7.3.1</span> Comparing Central Tendency Measures</a></li>
+<li><a class="nav-link" href="#comparing-variation-measures"><span class="header-section-number">7.3.2</span> Comparing Variation Measures</a></li>
 </ul>
 </li>
 </ul>

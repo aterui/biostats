@@ -51,17 +51,19 @@
 <li><a class="" href="r-project.html"><span class="header-section-number">3</span> R Project</a></li>
 <li class="book-part">R Basics</li>
 <li><a class="active" href="data-structure.html"><span class="header-section-number">4</span> Data Structure</a></li>
+<li><a class="" href="data-manipulation.html"><span class="header-section-number">5</span> Data Manipulation</a></li>
+<li><a class="" href="visualization.html"><span class="header-section-number">6</span> Visualization</a></li>
 <li class="book-part">Basic Statistics</li>
-<li><a class="" href="descriptive-statistics.html"><span class="header-section-number">5</span> Descriptive Statistics</a></li>
-<li><a class="" href="sampling.html"><span class="header-section-number">6</span> Sampling</a></li>
-<li><a class="" href="probabilistic-view.html"><span class="header-section-number">7</span> Probabilistic View</a></li>
-<li><a class="" href="two-group-comparison.html"><span class="header-section-number">8</span> Two-Group Comparison</a></li>
-<li><a class="" href="multiple-group-comparison.html"><span class="header-section-number">9</span> Multiple-Group Comparison</a></li>
-<li><a class="" href="regression.html"><span class="header-section-number">10</span> Regression</a></li>
-<li><a class="" href="linear-model.html"><span class="header-section-number">11</span> Linear Model</a></li>
-<li><a class="" href="generalized-linear-model.html"><span class="header-section-number">12</span> Generalized Linear Model</a></li>
-<li><a class="" href="likelihood.html"><span class="header-section-number">13</span> Likelihood</a></li>
-<li><a class="" href="model-comparison.html"><span class="header-section-number">14</span> Model Comparison</a></li>
+<li><a class="" href="descriptive-statistics.html"><span class="header-section-number">7</span> Descriptive Statistics</a></li>
+<li><a class="" href="sampling.html"><span class="header-section-number">8</span> Sampling</a></li>
+<li><a class="" href="probabilistic-view.html"><span class="header-section-number">9</span> Probabilistic View</a></li>
+<li><a class="" href="two-group-comparison.html"><span class="header-section-number">10</span> Two-Group Comparison</a></li>
+<li><a class="" href="multiple-group-comparison.html"><span class="header-section-number">11</span> Multiple-Group Comparison</a></li>
+<li><a class="" href="regression.html"><span class="header-section-number">12</span> Regression</a></li>
+<li><a class="" href="linear-model.html"><span class="header-section-number">13</span> Linear Model</a></li>
+<li><a class="" href="generalized-linear-model.html"><span class="header-section-number">14</span> Generalized Linear Model</a></li>
+<li><a class="" href="likelihood.html"><span class="header-section-number">15</span> Likelihood</a></li>
+<li><a class="" href="model-comparison.html"><span class="header-section-number">16</span> Model Comparison</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="git-github.html">Git &amp; GitHub</a></li>
 <li><a class="" href="base-plot.html">Base Plot</a></li>
@@ -340,57 +342,58 @@
 <h3>
 <span class="header-section-number">4.3.2</span> Access<a class="anchor" aria-label="anchor" href="#access-1"><i class="fas fa-link"></i></a>
 </h3>
-<p>When accessing matrix elements, you need to pick row(s) and/or column(s), for example:</p>
+<p><strong>Element ID</strong> When accessing matrix elements, you need to pick row(s) and/or column(s).
+In brackets, specify row ID(s) before comma, column ID(s) after comma (<code>[row ID, column ID]</code>). For example:</p>
 <div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">9</span>, nrow <span class="op">=</span> <span class="fl">3</span>, ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">m_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">9</span>, nrow <span class="op">=</span> <span class="fl">3</span>, ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    1    4    7
 ## [2,]    2    5    8
 ## [3,]    3    6    9</code></pre>
 <div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">]</span> <span class="co"># access an element in row #2 and column #3</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">m_x</span><span class="op">[</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">]</span> <span class="co"># access an element in row #2 and column #3</span></span></code></pre></div>
 <pre><code>## [1] 8</code></pre>
 <div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span> <span class="co"># access elements in row #2</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">m_x</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span> <span class="co"># access elements in row #2</span></span></code></pre></div>
 <pre><code>## [1] 2 5 8</code></pre>
 <div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,<span class="op">]</span> <span class="co"># access elements in rows #2 and #3</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">m_x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,<span class="op">]</span> <span class="co"># access elements in rows #2 and #3</span></span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3]
 ## [1,]    2    5    8
 ## [2,]    3    6    9</code></pre>
 <div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">]</span> <span class="co"># access elements in columns #2 and #3</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">m_x</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">]</span> <span class="co"># access elements in columns #2 and #3</span></span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    4    7
 ## [2,]    5    8
 ## [3,]    6    9</code></pre>
-<p>You can assess each element with mathematical expressions just like vectors:</p>
+<p><strong>Equation</strong> You can assess each element with mathematical expressions just like vectors:</p>
 <div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x</span> <span class="op">==</span> <span class="fl">2</span> <span class="co"># equal</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">m_x</span> <span class="op">==</span> <span class="fl">2</span> <span class="co"># equal</span></span></code></pre></div>
 <pre><code>##       [,1]  [,2]  [,3]
 ## [1,] FALSE FALSE FALSE
 ## [2,]  TRUE FALSE FALSE
 ## [3,] FALSE FALSE FALSE</code></pre>
 <div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">2</span> <span class="co"># larger than</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">m_x</span> <span class="op">&gt;</span> <span class="fl">2</span> <span class="co"># larger than</span></span></code></pre></div>
 <pre><code>##       [,1] [,2] [,3]
 ## [1,] FALSE TRUE TRUE
 ## [2,] FALSE TRUE TRUE
 ## [3,]  TRUE TRUE TRUE</code></pre>
-<p>However, care must be taken when accessing elements, as it will be automatically converted to vector data:</p>
+<p>However, care must be taken when accessing elements, as it will be converted to vector data:</p>
 <div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="va">x</span> <span class="op">==</span> <span class="fl">2</span><span class="op">]</span> <span class="co"># equal</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">m_x</span><span class="op">[</span><span class="va">m_x</span> <span class="op">==</span> <span class="fl">2</span><span class="op">]</span> <span class="co"># equal</span></span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 <div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x</span><span class="op">[</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">2</span><span class="op">]</span> <span class="co"># larger than</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">m_x</span><span class="op">[</span><span class="va">m_x</span> <span class="op">&gt;</span> <span class="fl">2</span><span class="op">]</span> <span class="co"># larger than</span></span></code></pre></div>
 <pre><code>## [1] 3 4 5 6 7 8 9</code></pre>
 <p><code><a href="https://rdrr.io/r/base/which.html">which()</a></code> needs an additional argument to return both row and column #:</p>
 <div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="fl">2</span>, arr.ind <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">m_x</span> <span class="op">==</span> <span class="fl">2</span>, arr.ind <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##      row col
 ## [1,]   2   1</code></pre>
 <div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">x</span> <span class="op">&gt;</span> <span class="fl">2</span>, arr.ind <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">m_x</span> <span class="op">&gt;</span> <span class="fl">2</span>, arr.ind <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##      row col
 ## [1,]   3   1
 ## [2,]   1   2
@@ -500,12 +503,9 @@
 </div>
 </div>
 </div>
-
-
-
   <div class="chapter-nav">
 <div class="prev"><a href="r-project.html"><span class="header-section-number">3</span> R Project</a></div>
-<div class="next"><a href="descriptive-statistics.html"><span class="header-section-number">5</span> Descriptive Statistics</a></div>
+<div class="next"><a href="data-manipulation.html"><span class="header-section-number">5</span> Data Manipulation</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">

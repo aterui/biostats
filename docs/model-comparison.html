@@ -87,7 +87,7 @@
 <p>In the field of biological sciences, it is common to encounter multiple hypotheses or the need for exploratory analysis. In such instances, it becomes necessary to develop various models, each corresponding to a specific hypothesis, and subsequently compare their respective performances. The crucial aspect lies in how we quantify the “performance” of these models, acknowledging that this term can be somewhat ambiguous. As the determination of model performance ultimately dictates which model is superior, it profoundly impacts the conclusions drawn from the research. Thus, the significance of this process cannot be overstated.</p>
 <p>One potential approach is to utilize the Coefficient of Determination (Chapter <a href="regression.html#regression">12</a>) as a measure of model performance. These metrics provide an indication of the proportion of variation in the response variable that is explained by the model, making them reasonable options. However, there are situations where these measures are not meaningful for <strong>model comparison</strong>.</p>
 <p>To illustrate this, let’s consider the following simulated data. The advantage of using simulated data is that we already know the correct outcomes, enabling us to validate and verify the analysis results.</p>
-<div class="sourceCode" id="cb449"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb453"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="co"># for reproducibility</span></span>
 <span></span>
 <span><span class="co"># hypothetical sample size</span></span>
@@ -125,7 +125,7 @@ Figure 16.1: Simulated data
 </p>
 </div>
 <p>The above code generated the response variable, denoted as <span class="math inline">\(y\)</span>, as a function of the variable <span class="math inline">\(x_1\)</span> (<span class="math inline">\(y_i = \beta_0 + \beta_1 x_1 + \varepsilon_i\)</span>). The values of the intercept and slope were set to 0.1 and 0.5 respectively. Given our knowledge of how this data was generated, we can establish the “correct” model. Now, let’s assess the performance of this model:</p>
-<div class="sourceCode" id="cb450"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb454"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># correct model used to generate the data</span></span>
 <span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">x1</span>, data <span class="op">=</span> <span class="va">df0</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span></code></pre></div>
@@ -149,7 +149,7 @@ Figure 16.1: Simulated data
 ## F-statistic: 85.99 on 1 and 98 DF,  p-value: 4.583e-15</code></pre>
 <p>The estimated values for the intercept and slope of the model are approximately 0.08 and 0.5 respectively, which are reasonably close to the true values. The coefficient of determination, indicating the proportion of variation in the response variable explained by the model, is 0.467.</p>
 <p>Now, let’s consider the scenario where we include another variable, <code>x2</code>, that is completely irrelevant.</p>
-<div class="sourceCode" id="cb452"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb456"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># add a column x2 which is irrelevant for y</span></span>
 <span><span class="va">df0</span> <span class="op">&lt;-</span> <span class="va">df0</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>x2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
@@ -205,12 +205,12 @@ R^2 = 1 - \frac{SS}{SS_0}
 \end{align*}
 \]</span></p>
 <p>In the equation above, <span class="math inline">\(k\)</span> denotes the number of parameters utilized in the model. Hence, the numerator indicates the residual variance of the model, <span class="math inline">\(\sigma^2_{\varepsilon}\)</span>, while the denominator represents the variance of the response variable, <span class="math inline">\(y\)</span>. We can obtain these values from the model objects <code>m1</code> and <code>m2</code>:</p>
-<div class="sourceCode" id="cb454"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb458"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Adjusted R-square for m1 without x2</span></span>
 <span><span class="va">sm1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">sm1</span><span class="op">$</span><span class="va">adj.r.squared</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.4619164</code></pre>
-<div class="sourceCode" id="cb456"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb460"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Adjusted R-square for m2 with x2</span></span>
 <span><span class="va">sm2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">m2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">sm2</span><span class="op">$</span><span class="va">adj.r.squared</span><span class="op">)</span></span></code></pre></div>
@@ -241,17 +241,17 @@ R^2 = 1 - \frac{SS}{SS_0}
 \]</span></p>
 <p>The likelihoods of the null and alternative models are denoted as <span class="math inline">\(L_0\)</span> and <span class="math inline">\(L_1\)</span> respectively. Under the null hypothesis, the test statistic <span class="math inline">\(\mbox{LR}\)</span> follows a chi-square distribution, if the sample size approaches infinity. This enables us to determine whether the inclusion of a new variable (or variables) has significantly enhanced the model’s likelihood beyond what would be expected by chance.</p>
 <p>We employ this approach because likelihood encounters a problem similar to <span class="math inline">\(\mbox{R}^2\)</span>. The log likelihood of the models can be obtained using the <code><a href="https://rdrr.io/r/stats/logLik.html">logLik()</a></code> function:</p>
-<div class="sourceCode" id="cb458"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb462"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># log likelihood: correct model</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/logLik.html">logLik</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 'log Lik.' -67.77319 (df=3)</code></pre>
-<div class="sourceCode" id="cb460"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb464"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># log likelihood: incorrect model</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/logLik.html">logLik</a></span><span class="op">(</span><span class="va">m2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 'log Lik.' -67.6504 (df=4)</code></pre>
 <p>The model <code>m2</code> has a higher likelihood because likelihood is an absolute measure of model performance. However, the likelihood ratio test overcomes this limitation by comparing the observed increase in likelihood with what would be expected by chance. The test statistic <span class="math inline">\(\mbox{LR}\)</span> follows a chi-square distribution<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Rigorously speaking, if sample size approaches infinity. If the sample size is small, other methods (e.g., boot strap simulation) should be employed to calculate a p-value.&lt;/p&gt;"><sup>7</sup></a>, which serves as a reference distribution. The chi-square distribution has a single parameter - degrees of freedom - which, in this case, corresponds to the difference in the number of model parameters used.</p>
 <p>The model <code>m1</code> utilized two parameters (intercept and one slope), whereas the model <code>m2</code> employed three parameters (intercept and two slopes). Consequently, the test statistic is assumed to follow a chi-square distribution with one degree of freedom. While it is possible to calculate the p-value manually, the <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> function can perform this analysis:</p>
-<div class="sourceCode" id="cb462"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb466"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># test = "Chisq" specifies a chi-square distribution</span></span>
 <span><span class="co"># as a distribution of LR</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">m1</span>, <span class="va">m2</span>, test <span class="op">=</span> <span class="st">"Chisq"</span><span class="op">)</span></span></code></pre></div>
@@ -277,11 +277,11 @@ R^2 = 1 - \frac{SS}{SS_0}
 \]</span></p>
 <p>Here, <span class="math inline">\(k\)</span> represents the number of model parameters, and <span class="math inline">\(L\)</span> is the likelihood. Lower AIC values indicate better predictability of the model. The formula consists of two terms: the first term is twice the number of parameters, and the second term is the model’s deviance. Thus, a lower AIC value is preferred. While one might perceive it as a variant of <span class="math inline">\(\mbox{R}^2\)</span> or similar measures, it is important to note that the penalty term in AIC was derived from the <a href="https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence">Kullback–Leibler divergence</a>.</p>
 <p>As evident from the formula, AIC can be estimated for any model that has a valid likelihood, making this method widely applicable, including for GLMs. In R, the model’s AIC can be computed using the <code><a href="https://rdrr.io/r/stats/AIC.html">AIC()</a></code> function.</p>
-<div class="sourceCode" id="cb464"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb468"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># AIC: correct model</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/AIC.html">AIC</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 141.5464</code></pre>
-<div class="sourceCode" id="cb466"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb470"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># AIC: incorrect model</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/AIC.html">AIC</a></span><span class="op">(</span><span class="va">m2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 143.3008</code></pre>
@@ -303,7 +303,7 @@ R^2 = 1 - \frac{SS}{SS_0}
 <span class="header-section-number">16.3.1</span> Format Penguin Data<a class="anchor" aria-label="anchor" href="#format-penguin-data"><i class="fas fa-link"></i></a>
 </h3>
 <p>The R package <code>palmerpenguins</code> provides penguin data that were collected and made available by Dr. Kristen Gorman and the Palmer Station, Antarctica LTER, a member of the Long Term Ecological Research Network. To get started, install this package onto your computer:</p>
-<div class="sourceCode" id="cb468"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb472"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Perform only once</span></span>
 <span><span class="co"># install.packages("palmerpenguins")</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/">palmerpenguins</a></span><span class="op">)</span></span></code></pre></div>
@@ -324,7 +324,7 @@ R^2 = 1 - \frac{SS}{SS_0}
 <li><p>Develop a statistical model that explains <code>Clutch Completion</code> using the variables <code>Species</code>, <code>Culmen Length (mm)</code>, <code>Culmen Depth (mm)</code>, <code>Flipper Length (mm)</code>, <code>Body Mass (g)</code>, and <code>Sex</code>. We need to determine an appropriate probability distribution for this model.</p></li>
 <li><p>Perform an AIC-based model selection using the <code><a href="https://rdrr.io/pkg/MuMIn/man/dredge.html">MuMIn::dredge()</a></code> function. This process will help us identify the variables that are most important for predicting the clutch completion status.</p></li>
 </ol>
-<div class="sourceCode" id="cb469"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb473"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">MuMIn</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>na.action <span class="op">=</span> <span class="st">"na.fail"</span><span class="op">)</span></span>
 <span><span class="va">m</span> <span class="op">&lt;-</span> <span class="co">#model object</span></span>

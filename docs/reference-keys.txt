@@ -78,9 +78,11 @@ piping
 pipe
 exercise-5
 group-operation
+grouping-group_by
+summarize-with-summarize
+summarize-with-mutate
 reshape
 join
-exercise-6
 visualization
 point
 line

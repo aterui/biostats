@@ -633,26 +633,51 @@ Subset `iris_sub` by `Species` column (choose only `"setosa"` ) and add a new co
 
 ## Group Operation
 
-`group_by()` & `summarize()`: group-by-group operation. `summarize()` does not retain individual rows.
+### Grouping `group_by()`
+
+Often, we may want to calculate summary statistics by group. In such cases, the `group_by()` function in R provides an effective way to group the data before applying summary functions.
+
+In the original `iris_sub` dataframe, no group structure is imposed, meaning that when you print the dataframe, it does not display any information about grouping.
 
 ```{r}
-# grouping by "Species", then take means "Speal.Length" for each species
-iris %>% 
-  group_by(Species) %>% 
-  summarize(mu_sl = mean(Sepal.Length))
-
-# grouping by "Species", then take means & SD "Speal.Length" for each species
-iris %>% 
-  group_by(Species) %>% 
-  summarize(mu_sl = mean(Sepal.Length),
-            sd_sl = sd(Sepal.Length))
+print(iris_sub)
 ```
 
-`group_by()` & `mutate()`: group-by-group operation. `mutate()` retains individual rows along with summary columns. Do not forget `ungroup()` to avoid errors in following operations.
+Now, let's add a group structure to the dataframe. The following code groups the data based on the values in the `Species` column:
+
+```{r}
+iris_sub %>% 
+  group_by(Species)
+```
+
+The dataframe itself remains unchanged, but you'll notice additional text at the top, indicating `Groups: Species[3]`. This means that the dataframe now contains three groups, as defined by the unique values in the `Species` column.
+
+### Summarize with `summarize()`
+
+The `group_by()` function becomes especially useful when combined with functions like `summarize()` or `mutate()`. For instance, to calculate the mean values for each species in the `iris_sub` dataframe, you can use the following code:
+
+```{r}
+iris_sub %>% 
+  group_by(Species) %>% 
+  summarize(mu_sl = mean(Sepal.Length))
+```
+
+If you want to calculate multiple summary statistics, you can separate the operations with a comma `,` as shown below:
+
+```{r}
+iris_sub %>% 
+  group_by(Species) %>% 
+  summarize(mu_sl = mean(Sepal.Length),
+            sum_sl = sum(Sepal.Length))
+```
+
+### Summarize with `mutate()`
+
+The `summarize()` function returns a summary table, with each group represented by a single row. On the other hand, `mutate()` retains the original individual rows, adding summary columns. In this case, each row within the same group will have the same summary value. Remember to use `ungroup()` after grouping operations to prevent errors in subsequent operations.
 
 ```{r}
 # grouping by "Species", then take means "Speal.Length" for each species
-iris %>% 
+iris_sub %>% 
   group_by(Species) %>% 
   mutate(mu_sl = mean(Sepal.Length)) %>% 
   ungroup()
@@ -751,10 +776,6 @@ left_join(x = df1,
           y = df6,
           by = c("Species", "x"))
 ```
-
-## Exercise
-
-Complete the exercise [here](https://m-clark.github.io/data-processing-and-visualization/tidyverse.html#tidyverse-exercises).
 
 # Visualization
 

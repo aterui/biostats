@@ -90,7 +90,7 @@
 <span class="header-section-number">10.1</span> Explore Data Structure<a class="anchor" aria-label="anchor" href="#explore-data-structure"><i class="fas fa-link"></i></a>
 </h2>
 <p>Suppose that we study fish populations of the same species in two lakes (Lake <code>a</code> and <code>b</code>). These lakes are in stark contrast of productivity (Lake <code>b</code> looks more productive), and our interest is the difference in <em>mean</em> body size between the two lakes. We obtained <span class="math inline">\(50\)</span> data points of fish length from each lake (download <a href="https://github.com/aterui/biostats/blob/master/data_raw/data_fish_length.csv">here</a>). Save under <code>data_raw/</code> and use <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> to read data:</p>
-<div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb292"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span> <span class="co"># call add-in packages everytime you open new R session</span></span>
 <span><span class="va">df_fl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data_raw/data_fish_length.csv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_fl</span><span class="op">)</span></span></code></pre></div>
@@ -109,11 +109,11 @@
 ## 10 a       11.9 cm   
 ## # ℹ 90 more rows</code></pre>
 <p>In this data frame, fish length data from lake <code>a</code> and <code>b</code> are recorded. Confirm this with <code><a href="https://rdrr.io/r/base/unique.html">unique()</a></code> or <code><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct()</a></code> function:</p>
-<div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb294"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># unique returns unique values as a vector</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">df_fl</span><span class="op">$</span><span class="va">lake</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "a" "b"</code></pre>
-<div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb296"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># distinct returns unique values as a tibble</span></span>
 <span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">df_fl</span>, <span class="va">lake</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 2 × 1
@@ -122,7 +122,7 @@
 ## 1 a    
 ## 2 b</code></pre>
 <p>Visualization provides a powerful tool for summarizing data effectively. By plotting individual data points overlaid with mean values and error bars, we can observe the distribution and patterns within the data, allowing us to identify trends, variations, and potential outliers:</p>
-<div class="sourceCode" id="cb245"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb298"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># group mean and sd</span></span>
 <span><span class="va">df_fl_mu</span> <span class="op">&lt;-</span> <span class="va">df_fl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">lake</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># group operation</span></span>
@@ -163,7 +163,7 @@ Figure 10.1: Example of mean and SD plot
 <span class="header-section-number">10.2</span> t-test in R<a class="anchor" aria-label="anchor" href="#t-test-in-r"><i class="fas fa-link"></i></a>
 </h2>
 <p>For this simple data set, we can use t-test. R provides <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code> function to perform this analysis:</p>
-<div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb299"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">df_fl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">lake</span> <span class="op">==</span> <span class="st">"a"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>  <span class="co"># subset lake a</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">length</span><span class="op">)</span></span>
@@ -195,7 +195,7 @@ Figure 10.1: Example of mean and SD plot
 <span class="header-section-number">10.3.1</span> t-statistic<a class="anchor" aria-label="anchor" href="#t-statistic"><i class="fas fa-link"></i></a>
 </h3>
 <p>The starting point is to define what we want to look at. Since our focus is on examining the difference in means, it is logical to estimate the disparity between the sample means in each lake. Let me denote the sample means as <span class="math inline">\(\hat{\mu}_a\)</span> and <span class="math inline">\(\hat{\mu}_b\)</span> for Lake <code>a</code> and Lake <code>b</code>, respectively. We can estimate the difference between the means using the following approach:</p>
-<div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb301"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># take another look at df_fl_mu</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_fl_mu</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 2 × 3
@@ -203,7 +203,7 @@ Figure 10.1: Example of mean and SD plot
 ##   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1 a      13.4  2.92
 ## 2 b      15.4  3.39</code></pre>
-<div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb303"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># pull mu_l from tibble as vector</span></span>
 <span><span class="va">v_mu</span> <span class="op">&lt;-</span> <span class="va">df_fl_mu</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">mu_l</span><span class="op">)</span></span>
@@ -211,11 +211,11 @@ Figure 10.1: Example of mean and SD plot
 <span><span class="co"># lake a</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">v_mu</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 13.35</code></pre>
-<div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb305"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># lake b</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">v_mu</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 15.406</code></pre>
-<div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb307"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># difference</span></span>
 <span><span class="va">v_mu</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">v_mu</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span></code></pre></div>
 <pre><code>## [1] -2.056</code></pre>
@@ -229,7 +229,7 @@ t = \frac{\hat{\mu_a} - \hat{\mu_b}}{\sqrt{\hat{\sigma}^2_p \left(\frac{1}{N_a} 
 \hat{\sigma}^2_p = \frac{N_a-1}{N_a + N_b - 2}\hat{\sigma}^2_a + \frac{N_b-1}{N_a + N_b - 2}\hat{\sigma}^2_b
 \]</span></p>
 <p>We can calculate this value in R manually:</p>
-<div class="sourceCode" id="cb256"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb309"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># group mean, variance, and sample size</span></span>
 <span><span class="va">df_t</span> <span class="op">&lt;-</span> <span class="va">df_fl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">lake</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># group operation</span></span>
@@ -243,7 +243,7 @@ t = \frac{\hat{\mu_a} - \hat{\mu_b}}{\sqrt{\hat{\sigma}^2_p \left(\frac{1}{N_a} 
 ##   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
 ## 1 a      13.4  8.52    50
 ## 2 b      15.4 11.5     50</code></pre>
-<div class="sourceCode" id="cb258"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb311"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># pull values as a vector</span></span>
 <span><span class="va">v_mu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">df_t</span>, <span class="va">mu_l</span><span class="op">)</span></span>
 <span><span class="va">v_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">df_t</span>, <span class="va">var_l</span><span class="op">)</span></span>
@@ -268,7 +268,7 @@ t = \frac{\hat{\mu_a} - \hat{\mu_b}}{\sqrt{\hat{\sigma}^2_p \left(\frac{1}{N_a} 
 <p>Let’s begin by assuming that there is no difference in the mean body size of fish populations between the lakes, meaning the true difference in means is zero (<span class="math inline">\(\mu_a - \mu_b = 0\)</span>; without hats in this formula!). Under this assumption, we can define the probability distribution of t-statistics, which represents how t-statistics are distributed across a range of possible values.</p>
 <p>This probability distribution is known as the Student’s t-distribution and is characterized by three parameters: the mean, the variance, and the degrees of freedom (d.f.). Considering that we are evaluating the difference in body size as the test statistic, the mean (of the difference) is assumed to be zero. The variance is estimated using <span class="math inline">\(\hat{\sigma}^2_p\)</span>, and the degrees of freedom are determined by <span class="math inline">\(N_a + N_b - 2\)</span> (where d.f. can be considered as a measure related to the sample size<a class="footnote-ref" tabindex="0" data-toggle="popover" data-content="&lt;p&gt;Discussing the concept of degrees of freedom in depth would require a more comprehensive explanation, so I will refer to it here as a quantity relevant to the sample size.&lt;/p&gt;"><sup>3</sup></a>).</p>
 <p>R has a function to draw the Student’s t-distribution; let’s try that out:</p>
-<div class="sourceCode" id="cb260"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb313"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># produce 500 values from -5 to 5 with equal interval</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span>, length <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span>
 <span></span>
@@ -289,7 +289,7 @@ Figure 10.2: Distribution of t-statistics under null hypothesis. The probability
 </p>
 </div>
 <p>The probability density in a distribution (Figure <a href="two-group-comparison.html#fig:student-t">10.2</a>) determines the likelihood of observing a particular t-statistic. Higher probability density indicates a greater likelihood of the t-statistic occurring. Compare the observed t-statistic against this null distribution:</p>
-<div class="sourceCode" id="cb261"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb314"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># draw entire range</span></span>
 <span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>,</span>
@@ -309,14 +309,14 @@ Figure 10.3: Observed t-statistic in comparison to the null distrubution
 </div>
 <p>In a probability distribution, the area under the curve corresponds to the probability. Notably, <strong>the area under the curve that falls below or above the observed t-statistic (indicated by vertical red lines) is very small (Figure</strong> <a href="two-group-comparison.html#fig:student-t-obs">10.3</a><strong>)</strong>, meaning that the observed difference in body size is very unlikely to occur under the null hypothesis (no difference in true means).</p>
 <p>The function <code><a href="https://rdrr.io/r/stats/TDist.html">pt()</a></code> allows us to calculate the area under the curve:</p>
-<div class="sourceCode" id="cb262"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb315"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># calculate area under the curve from -infinity to t_value</span></span>
 <span><span class="va">pr_below</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">pt</a></span><span class="op">(</span>q <span class="op">=</span> <span class="va">t_value</span>, df <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">v_n</span><span class="op">)</span> <span class="op">-</span> <span class="fl">2</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># calculate area under the curve from abs(t_value) to infinity</span></span>
 <span><span class="va">pr_above</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">pt</a></span><span class="op">(</span>q <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">t_value</span><span class="op">)</span>, df <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">v_n</span><span class="op">)</span> <span class="op">-</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <p>The <strong>p-value,</strong> i.e., <em>the probability of observing t-statistics</em> less than ( <code>pr_below</code>) or greater than (<code>pr_above</code>) the observed t-statistic under the null hypothesis, can be estimated as the sum of <code>pr_below</code> and <code>pr_above</code>.</p>
-<div class="sourceCode" id="cb263"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb316"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># p_value</span></span>
 <span><span class="va">p_value</span> <span class="op">&lt;-</span> <span class="va">pr_below</span> <span class="op">+</span> <span class="va">pr_above</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">p_value</span><span class="op">)</span></span></code></pre></div>
@@ -337,7 +337,7 @@ Figure 10.3: Observed t-statistic in comparison to the null distrubution
 <span class="header-section-number">10.4</span> t-test with unequal variance<a class="anchor" aria-label="anchor" href="#t-test-with-unequal-variance"><i class="fas fa-link"></i></a>
 </h2>
 <p>The above example assumes the relative similarity of variance between groups, which could be an unrealistic assumption. Luckily, there is a variant of t-test “Welch’s t-test,” in which we assume unequal variance between groups. The implementation is easy – set <code>var.equal = FALSE</code> in <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code>:</p>
-<div class="sourceCode" id="cb265"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb318"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, var.equal <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
@@ -390,7 +390,7 @@ d.f. = \frac{(\frac{\hat{\sigma}^2_a}{N_a} + \frac{\hat{\sigma}^2_b}{N_b})^2}{\f
 <span class="header-section-number">10.5.2</span> Difference and Uncertainty<a class="anchor" aria-label="anchor" href="#difference-and-uncertainty"><i class="fas fa-link"></i></a>
 </h3>
 <p>We have four vectors - <code>a1</code> and <code>a2</code> &amp; <code>b1</code> and <code>b2</code>.</p>
-<div class="sourceCode" id="cb267"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb320"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">a1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">13.9</span>, <span class="fl">14.9</span> ,<span class="fl">13.4</span>, <span class="fl">14.3</span>, <span class="fl">11.8</span>, <span class="fl">13.9</span>, <span class="fl">14.5</span>, <span class="fl">15.1</span>, <span class="fl">13.3</span>, <span class="fl">13.9</span><span class="op">)</span></span>
 <span><span class="va">a2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">17.4</span>, <span class="fl">17.3</span>, <span class="fl">20.1</span>, <span class="fl">17.2</span>, <span class="fl">18.4</span>, <span class="fl">19.6</span>, <span class="fl">16.8</span>, <span class="fl">18.7</span>, <span class="fl">17.8</span>, <span class="fl">18.9</span><span class="op">)</span></span>
 <span></span>
@@ -454,7 +454,7 @@ d.f. = \frac{(\frac{\hat{\sigma}^2_a}{N_a} + \frac{\hat{\sigma}^2_b}{N_b})^2}{\f
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2024-12-27.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2024-12-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

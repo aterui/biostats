@@ -105,7 +105,7 @@ Let's play a little bit in the console to see what happens. After pasting the sc
 x <- 1
 ```
 
-`x` is an object that stores information. In this particular case, we have stored `1` in the object `x`. Once you have stored information in `x`, you can access it by simply typing `x`.
+`x` is an object that assigns information. In this particular case, we have assigned `1` to the object `x`. Once you have assigned information in `x`, you can access it by simply typing `x`.
 
 ```{r, echo = TRUE}
 x
@@ -113,11 +113,11 @@ x
 
 Excellent! Let's try the following simple exercise to get used to it:
 
-1.  Create object `y` and store `2` in it.
+1.  Create object `y` and assign `2` to it.
 
-2.  Create object `zero` and store `0` in it.
+2.  Create object `zero` and assign `0` to it.
 
-### Script Editor
+## Script Editor
 
 While you can type your code directly into the console, this approach is generally considered poor practice. As your project grows, the complexity increases, often leading to the accumulation of substantial material—potentially exceeding 2,000 lines of code in a single project. Managing and revisiting code written directly in the console quickly becomes unwieldy and inefficient.
 
@@ -131,7 +131,7 @@ Then, hit `Ctr + S` to save the `Editor` file. RStudio will prompt you to enter 
 
 [^gs-01-rstudio-1]: In *R*, an editor file has an extension of `.R`.
 
-### File Name {.unnumbered}
+## File Name
 
 It is also crucial to establish consistent naming **rules** for your files. As your project progresses, the number of files within each sub-directory may increase significantly. Without clear and consistent naming rules for your files, navigating through the project can become challenging, not only for yourself but also for others involved. To alleviate this issue, consider implementing the following recommendations for file naming:
 
@@ -145,7 +145,7 @@ It is also crucial to establish consistent naming **rules** for your files. As y
     -   Do: R scripts for figures always start with a common prefix, e.g., `figure_XXX.R` `figure_YYY.R`(`XXX` and `YYY` specifies further details).
     -   Don't: R scripts for figures start with random text, e.g., `XXX_fig.R` , `Figure_Y2.R` , `plotB.R`.
 
-### Structure Your Project {.unnumbered}
+## Structure Your Project
 
 The internal structure of an R Project is crucial for effective navigation and ensures clarity for both yourself and others when it is published. An `R Project` typically consists of various file types, such as `.R`, `.csv`, `.rds`, `.Rmd`, and others. Without an organized arrangement of these files, there is a high probability of encountering significant coding errors. Therefore, I place great importance on maintaining a well-structured project. In Table \@ref(tab:str), I present my recommended subdirectory structure.
 
@@ -160,6 +160,6 @@ The internal structure of an R Project is crucial for effective navigation and e
 
 : (#tab:str) Suggested internal structure of `R Project`
 
-## Robust coding {.unnumbered}
+## Robust coding
 
 While it is not mandatory, I highly recommend using RStudio in conjunction with *Git* and *GitHub*. Coding is inherently prone to errors, and even the most skilled programmers make mistakes – without exception. However, the crucial difference between beginner and advanced programmers lies in their ability to develop robust coding practices accompanied by a self-error-detection system. *Git* plays a vital role in this process. Throughout this book, I will occasionally delve into the importance of *Git* and its usage.

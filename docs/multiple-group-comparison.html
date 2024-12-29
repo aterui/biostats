@@ -93,7 +93,7 @@
 </h2>
 <p>The first step is to determine what aspect to examine. In the case of a t-test, we focus on the difference in sample means between groups. One might initially consider conducting t-tests for all possible combinations. However, this approach leads to a problem known as the <a href="https://en.wikipedia.org/wiki/Multiple_comparisons_problem#:~:text=In%20statistics%2C%20the%20multiple%20comparisons,based%20on%20the%20observed%20values.">multiple comparisons problem</a>. Hence, this is not a viable option. Therefore, we need to explore the data from a different perspective.</p>
 <p>To facilitate learning, let’s once again utilize the lake fish data (download <a href="https://github.com/aterui/biostats/blob/master/data_raw/data_fish_length_anova.csv">here</a>), but this time we have three lakes in our analysis:</p>
-<div class="sourceCode" id="cb268"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb321"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_anova</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data_raw/data_fish_length_anova.csv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">df_anova</span>, <span class="va">lake</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 3 × 1
@@ -103,7 +103,7 @@
 ## 2 b    
 ## 3 c</code></pre>
 <p>Visualization can be helpful in understanding how the data is distributed. While mean <span class="math inline">\(\pm\)</span> SD is perfectly fine here, let me use a violin plot to show a different way of visualization.</p>
-<div class="sourceCode" id="cb270"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb323"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># geom_violin() - function for violin plots</span></span>
 <span><span class="co"># geom_jitter() - jittered points</span></span>
 <span></span>
@@ -133,7 +133,7 @@ S_w &amp;= \sum_g \sum_i (x_{i} - \hat{\mu}_{g(i)})^2
 <span class="header-section-number">11.1.1</span> Between-group variability<a class="anchor" aria-label="anchor" href="#between-group-variability"><i class="fas fa-link"></i></a>
 </h3>
 <p>Let me first consider <span class="math inline">\(S_b = \sum_g \sum_i (\hat{\mu}_{g(i)} - \hat{\mu})^2\)</span>. In this equation, <span class="math inline">\(\hat{\mu}\)</span> is the overall mean of the fish length and <span class="math inline">\(\hat{\mu}_{g(i)}\)</span> is the group-mean in a given lake (<span class="math inline">\(g \in \{a, b, c\}\)</span>). Let’s perform this estimation in R:</p>
-<div class="sourceCode" id="cb271"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb324"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># estimate overall mean</span></span>
 <span><span class="va">mu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">df_anova</span><span class="op">$</span><span class="va">length</span><span class="op">)</span></span>
 <span></span>
@@ -152,7 +152,7 @@ S_w &amp;= \sum_g \sum_i (x_{i} - \hat{\mu}_{g(i)})^2
 ## 2 b      15.4 0.997      50
 ## 3 c      14.5 0.00344    50</code></pre>
 <p>In the column <code>dev_g</code>, we estimated <span class="math inline">\((\hat{\mu}_{g(i)} - \hat{\mu})^2\)</span>. We must sum over <span class="math inline">\(i\)</span> (fish individual) to get the variability in each lake (<span class="math inline">\(\sum_i (\hat{\mu}_{g(i)} - \hat{\mu})^2\)</span>). Since <span class="math inline">\(\hat{\mu}_{g(i)}\)</span> is constant in each lake, we can simply multiply <code>dev_g</code> with sample size <code>n</code> in each lake:</p>
-<div class="sourceCode" id="cb273"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb326"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_g</span> <span class="op">&lt;-</span> <span class="va">df_g</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>ss <span class="op">=</span> <span class="va">dev_g</span> <span class="op">*</span> <span class="va">n</span><span class="op">)</span></span>
 <span></span>
@@ -164,7 +164,7 @@ S_w &amp;= \sum_g \sum_i (x_{i} - \hat{\mu}_{g(i)})^2
 ## 2 b      15.4 0.997      50 49.9  
 ## 3 c      14.5 0.00344    50  0.172</code></pre>
 <p>Sum over <span class="math inline">\(g\)</span> (lake) to get <span class="math inline">\(S_b\)</span>.</p>
-<div class="sourceCode" id="cb275"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb328"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">s_b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">df_g</span><span class="op">$</span><span class="va">ss</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">s_b</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 105.9365</code></pre>
@@ -174,14 +174,14 @@ S_w &amp;= \sum_g \sum_i (x_{i} - \hat{\mu}_{g(i)})^2
 <span class="header-section-number">11.1.2</span> Within-group variability<a class="anchor" aria-label="anchor" href="#within-group-variability"><i class="fas fa-link"></i></a>
 </h3>
 <p>We can follow the same steps to estimate the within-group variability <span class="math inline">\(S_w = \sum_g \sum_i (x_{i} - \hat{\mu}_{g(i)})^2\)</span>. Let’s estimate <span class="math inline">\((x_{i} - \hat{\mu}_{g(i)})^2\)</span> first:</p>
-<div class="sourceCode" id="cb277"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb330"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_i</span> <span class="op">&lt;-</span> <span class="va">df_anova</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">lake</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>mu_g <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">length</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># use mutate() to retain individual rows</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>dev_i <span class="op">=</span> <span class="op">(</span><span class="va">length</span> <span class="op">-</span> <span class="va">mu_g</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span> <span class="co"># deviation from group mean for each fish</span></span></code></pre></div>
 <p>You can take a look at group-level data with the following code; the column <code>mu_g</code> contains group-specific means of fish length, and <code>dev_i</code> contains <span class="math inline">\((x_i - \hat{\mu}_{g(i)})^2\)</span>:</p>
-<div class="sourceCode" id="cb278"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb331"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># filter() &amp; slice(): show first 3 rows each group</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_i</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">lake</span> <span class="op">==</span> <span class="st">"a"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -189,7 +189,7 @@ S_w &amp;= \sum_g \sum_i (x_{i} - \hat{\mu}_{g(i)})^2
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_i</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">lake</span> <span class="op">==</span> <span class="st">"c"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Sum over <span class="math inline">\(i\)</span> in each lake <span class="math inline">\(g\)</span> (<span class="math inline">\(\sum_i (x_i - \hat{\mu}_{g(i)})^2\)</span>):</p>
-<div class="sourceCode" id="cb279"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb332"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_i_g</span> <span class="op">&lt;-</span> <span class="va">df_i</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">lake</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>ss <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">dev_i</span><span class="op">)</span><span class="op">)</span></span>
@@ -202,7 +202,7 @@ S_w &amp;= \sum_g \sum_i (x_{i} - \hat{\mu}_{g(i)})^2
 ## 2 b      565.
 ## 3 c      486.</code></pre>
 <p>Then sum over <span class="math inline">\(g\)</span> to get <span class="math inline">\(S_w\)</span>:</p>
-<div class="sourceCode" id="cb281"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">s_w</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">df_i_g</span><span class="op">$</span><span class="va">ss</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">s_w</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 1467.645</code></pre>
@@ -216,7 +216,7 @@ S_w &amp;= \sum_g \sum_i (x_{i} - \hat{\mu}_{g(i)})^2
 <p><span class="math display">\[
 \hat{\sigma}^2_b = \frac{S_b}{N_g-1}
 \]</span></p>
-<div class="sourceCode" id="cb283"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb336"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># n_distinct() count the number of unique elements</span></span>
 <span><span class="va">n_g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/n_distinct.html">n_distinct</a></span><span class="op">(</span><span class="va">df_anova</span><span class="op">$</span><span class="va">lake</span><span class="op">)</span></span>
 <span><span class="va">s2_b</span> <span class="op">&lt;-</span> <span class="va">s_b</span> <span class="op">/</span> <span class="op">(</span><span class="va">n_g</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span>
@@ -226,7 +226,7 @@ S_w &amp;= \sum_g \sum_i (x_{i} - \hat{\mu}_{g(i)})^2
 <p><span class="math display">\[
 \hat{\sigma}^2_w = \frac{S_w}{N-N_g}
 \]</span></p>
-<div class="sourceCode" id="cb285"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">s2_w</span> <span class="op">&lt;-</span> <span class="va">s_w</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">df_anova</span><span class="op">)</span> <span class="op">-</span> <span class="va">n_g</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">s2_w</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 9.983982</code></pre>
@@ -244,7 +244,7 @@ S_w &amp;= \sum_g \sum_i (x_{i} - \hat{\mu}_{g(i)})^2
 <p><span class="math display">\[
 F = \frac{\text{between-group variance}}{\text{within-group variance}} = \frac{\hat{\sigma}^2_b}{\hat{\sigma}^2_w}
 \]</span></p>
-<div class="sourceCode" id="cb287"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb340"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">f_value</span> <span class="op">&lt;-</span> <span class="va">s2_b</span> <span class="op">/</span> <span class="va">s2_w</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">f_value</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 5.305325</code></pre>
@@ -256,7 +256,7 @@ F = \frac{\text{between-group variance}}{\text{within-group variance}} = \frac{\
 </h3>
 <p>The F-statistic follows an F-distribution when there is no difference in means among the groups. Therefore, the null hypothesis we are considering in our example is that the means of all groups are equal, represented as <span class="math inline">\(\mu_a = \mu_b = \mu_c\)</span>. It’s worth noting that the alternative hypotheses can take different forms, such as <span class="math inline">\(\mu_a \ne \mu_b = \mu_c\)</span>, <span class="math inline">\(\mu_a = \mu_b \ne \mu_c\)</span>, or <span class="math inline">\(\mu_a \ne \mu_b \ne \mu_c\)</span>. ANOVA, however, is unable to distinguish between these alternative hypotheses.</p>
 <p>The degrees of freedom in an F-distribution are determined by two parameters: <span class="math inline">\(N_g - 1\)</span> and <span class="math inline">\(N - N_g\)</span>. To visualize the distribution, you can utilize the<code><a href="https://rdrr.io/r/stats/Fdist.html">df()</a></code> function. Similar to the t-test, we can plot the F-distribution and draw a vertical line to represent the observed F-statistic. This approach allows us to assess the position of the observed F-statistic within the distribution and determine the associated p-value.</p>
-<div class="sourceCode" id="cb289"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb342"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span>, by <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Fdist.html">df</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, df1 <span class="op">=</span> <span class="va">n_g</span> <span class="op">-</span> <span class="fl">1</span>, df2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">df_anova</span><span class="op">)</span> <span class="op">-</span> <span class="va">n_g</span><span class="op">)</span></span>
 <span></span>
@@ -273,7 +273,7 @@ Figure 11.2: F-distribution. The vertical red line denotes the observed F-statis
 </p>
 </div>
 <p>Unlike t-statistics, F-statistics can take only positive values (because F-statistics are the ratio of positive values). The p-value here is <span class="math inline">\(\Pr(F_0 &gt; F)\)</span>, where <span class="math inline">\(F_0\)</span> is the possible F-statistics under the null hypothesis. Let’s estimate this probability using <code><a href="https://rdrr.io/r/stats/Fdist.html">pf()</a></code>:</p>
-<div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb343"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># pf() estimate the probability of less than q</span></span>
 <span><span class="co"># Pr(F0 &gt; F) is 1 - Pr(F0 &lt; F)</span></span>
 <span><span class="va">p_value</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Fdist.html">pf</a></span><span class="op">(</span>q <span class="op">=</span> <span class="va">f_value</span>, df1 <span class="op">=</span> <span class="va">n_g</span> <span class="op">-</span> <span class="fl">1</span>, df2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">df_anova</span><span class="op">)</span> <span class="op">-</span> <span class="va">n_g</span><span class="op">)</span></span>
@@ -286,7 +286,7 @@ Figure 11.2: F-distribution. The vertical red line denotes the observed F-statis
 <span class="header-section-number">11.3</span> ANOVA in R<a class="anchor" aria-label="anchor" href="#anova-in-r"><i class="fas fa-link"></i></a>
 </h2>
 <p>Like the t-test, R provides functions to perform ANOVA easily. In this case, we will utilize the <code><a href="https://rdrr.io/r/stats/aov.html">aov()</a></code> function. The first argument of this function is the “formula,” which is used to describe the structure of the model. In our scenario, we aim to explain the fish body length by grouping them according to lakes. In the formula expression, we represent this relationship as <code>length ~ lake</code>, using the tilde symbol (~) to indicate the stochastic nature of the relationship.</p>
-<div class="sourceCode" id="cb292"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb345"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># first argument is formula</span></span>
 <span><span class="co"># second argument is data frame for reference</span></span>
 <span><span class="co"># do not forget specify data = XXX! aov() refer to columns in the data frame</span></span>
@@ -305,7 +305,7 @@ Figure 11.2: F-distribution. The vertical red line denotes the observed F-statis
 ## Residual standard error: 3.159744
 ## Estimated effects may be unbalanced</code></pre>
 <p>The function returns <code>Sum of Squares</code> and <code>Deg. of Freedom</code> – these value matches what we have calculated. To get deeper insights, wrap the object with <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>:</p>
-<div class="sourceCode" id="cb294"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb347"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##              Df Sum Sq Mean Sq F value  Pr(&gt;F)   
 ## lake          2  105.9   52.97   5.305 0.00596 **
@@ -387,7 +387,7 @@ Figure 11.2: F-distribution. The vertical red line denotes the observed F-statis
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2024-12-27.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2024-12-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

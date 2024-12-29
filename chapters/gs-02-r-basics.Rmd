@@ -4,20 +4,40 @@
 
 ## Overview
 
-R has 6 basic **data types**.
+R has six basic **data types**:
 
--   character: `"aquatic"`, `"ecology"` (no order)
--   factor: similar to character, but has *levels* (alphabetically ordered by default)
--   numeric: `20.0` , `15.5`
--   integer: `3`, `7`
--   logical: `TRUE` , `FALSE`
--   complex: `1+2i` (complex numbers with real and imaginary parts)
+-   **Character**: e.g., `"aquatic"`, `"ecology"` (no inherent order).\
+-   **Factor**: Similar to character but includes *levels*, which are ordered alphabetically by default.\
+-   **Numeric**: e.g., `20.0`, `15.5`.\
+-   **Integer**: e.g., `3`, `7`.\
+-   **Logical**: e.g., `TRUE`, `FALSE`.\
+-   **Complex**: e.g., `1 + 2i` (numbers with real and imaginary parts).
 
-These elements form one of the following **data structures**.
+These data types form the basis of R's **data structures**, which include:
 
--   **vector**: a series of elements. A single data type is allowed in a single vector
--   **matrix**: elements organized into rows and columns. A single data type is allowed in a single matrix
--   **dataframe**: looks similar to a matrix, but allows different data types in different columns
+-   **Vector**: A series of elements, all of the same data type.\
+-   **Matrix**: Elements arranged into rows and columns, all of the same data type.\
+-   **Dataframe**: Similar to a matrix but allows different data types in different columns.
+
+------------------------------------------------------------------------
+
+In the following examples, I will use `(x <- something)` to demonstrate code, as the outer parentheses `()` automatically print the contents of the object `x`. Without the parentheses, the assignedvalues in `x` are not displayed. For example, the following code assigns a value to `x` but does not print it:
+
+```{r, echo=TRUE}
+x <- 1
+```
+
+To see the value assigned to `x`, you would need to type:
+
+```{r, echo=TRUE}
+x
+```
+
+Using parentheses around the assignment performs both steps —- assigning the value and printing it -- simultaneously:
+
+```{r, echo=TRUE}
+(x <- 1)
+```
 
 ## Vector
 
@@ -53,16 +73,27 @@ Below are examples of atomic character vectors, numeric vectors, integer vectors
 (x <- rep(c(1, 2), each = 2))
 ```
 
-**Sequence function** `seq()` creates a vector base on starting and ending values with a specified interval or a vector length.
+**Sequence function** `seq()` creates a vector based on starting and ending values with a specified interval or a vector length.
 
 ```{r, echo=TRUE}
 # ex.4a use seq() function
-# create a vector from 1 to 5 with intervel 1
+# create a vector from 1 to 5 with interval 1
 (x <- seq(1, 5, by = 1))
 
 # ex.4b use seq() function
 # create a vector from 1 to 5 with 20 elements
 (x <- seq(1, 5, length = 20))
+```
+
+**Colon** `:` creates a vector based on starting and ending **integer** values with an interval **one**. It works with non-integer values, but the behavior is odd (NOT recommended; use other functions for non-integer vectors).
+
+```{r, echo=TRUE}
+# ex.5a use colon `:` - interval is fixed at one
+(x <- 1:5)
+
+# this works, but odd
+# NOT recommended
+1.5:4.7
 ```
 
 ### Extract Summary
@@ -227,8 +258,7 @@ Matrix is a set of elements (*single data type*) that are organized into rows an
 
 ### Access
 
-**Element ID** When accessing matrix elements, you need to pick row(s) and/or column(s).
-In brackets, specify row ID(s) before comma, column ID(s) after comma (`[row ID, column ID]`). For example:
+**Element ID** When accessing matrix elements, you need to pick row(s) and/or column(s). In brackets, specify row ID(s) before comma, column ID(s) after comma (`[row ID, column ID]`). For example:
 
 ```{r, echo=TRUE}
 
@@ -279,8 +309,8 @@ which(m_x > 2, arr.ind = TRUE)
 ### Matrix
 
 a.  Create a numeric matrix with 4 rows and 4 columns using either `rbind()` or `cbind()` function.
-d.  Create a character matrix with 4 rows and 4 columns using `matrix()` function.
-e.  Copy the following script to your R script and perform the following analysis:
+b.  Create a character matrix with 4 rows and 4 columns using `matrix()` function.
+c.  Copy the following script to your R script and perform the following analysis:
 
 ```{r, eval = FALSE}
 set.seed(1)
@@ -301,6 +331,7 @@ A data frame is a collection of elements organized into rows and columns, but it
 The data frame is the most commonly used data structure when manipulating ecological data. When loading a dataset from a spreadsheet (which we will discuss later), it is automatically recognized as a data frame. Let's consider an example:
 
 ### Creating a data frame
+
 In the following example, the variables `x` and `y` are organized into a single data frame named `df0`. The variables are renamed as part of the process of creating the data frame.
 
 ```{r, echo=TRUE}
@@ -360,12 +391,22 @@ R packages are collections of functions that extend the functionality of the R p
 
 `tidyverse::` bundles R packages designed to make data manipulation, exploration, and visualization more efficient and intuitive. Developed by Hadley Wickham and other contributors, the Tidyverse packages share a common philosophy and syntax, emphasizing a consistent and tidy data format. The core packages, such as `dplyr::`, `tidyr::`, and `ggplot2::`, provide powerful tools for data wrangling, reshaping, and creating visualizations.
 
-In this Chapter, we will use `iris` data, which is available by default in R. While the default data structure `iris` is prepared in `data.frame()`, I convert this data format to `tibble()` in this exercise.
+In this Chapter, we will use `iris` data, which is available by default in R. While the default data structure `iris` is prepared in `data.frame()`, I convert this data format to `tibble()` in this exercise. Copy and run the code below. We will use `iris_sub` in the following demonstration.
 
 ```{r}
 library(tidyverse)
-iris <- as_tibble(iris)
+
+set.seed(123)
+
+iris_sub <- as_tibble(iris) %>% 
+  group_by(Species) %>% 
+  sample_n(3) %>% 
+  ungroup()
+
+print(iris_sub)
 ```
+
+------------------------------------------------------------------------
 
 I cover the basics for those who are not familiar with `tidyverse::`, but there is plenty of documentation available for the tidyverse package.
 
@@ -379,97 +420,216 @@ In particular, `dplyr::` and `tidyr::` (and others) offer useful functions for d
 
 ## Row Manipulation
 
-`filter()`: select/remove rows
+### Subset rows
 
-```{r, eval=F}
-# single match "=="
-filter(iris, Species == "virginica")
+The `filter()` function (`dplyr` package) is used for subsetting rows of a data frame (or tibble) based on conditions.
 
-# multiple match "%in%"
-filter(iris, Species %in% c("virginica", "versicolor"))
+**Single match `==`**
 
-# except "!="
-filter(iris, Species != "virginica")
-
-# except multiple "!(x %in% c("a", "b"))
-filter(iris, !(Species %in% c("virginica", "versicolor")))
-
-# greater than ">"
-filter(iris, Sepal.Length > 5)
-
-# equal & greater than ">="
-filter(iris, Sepal.Length >= 5)
-
-# less than "<"
-filter(iris, Sepal.Length < 5)
-
-# equal & less than "<="
-filter(iris, Sepal.Length <= 5)
-
+```{r}
+filter(iris_sub, Species == "virginica")
 ```
 
-`arrange()` : arrange the order of rows
+**Multiple match `%in%`**
 
-```{r, eval=F}
-# arrange in an ascending order
-arrange(iris, Sepal.Length)
-
-# arrange in an descending order
-arrange(iris, desc(Sepal.Length))
+```{r}
+filter(iris_sub, Species %in% c("virginica", "versicolor"))
 ```
+
+**Except `!=`**
+
+```{r}
+filter(iris_sub, Species != "virginica")
+```
+
+**Except multiple `!=`**
+
+```{r}
+filter(iris_sub, !(Species %in% c("virginica", "versicolor")))
+```
+
+**Greater than `>`**
+
+```{r}
+filter(iris_sub, Sepal.Length > 5)
+```
+
+**Greater than and equal to `>=`**
+
+```{r}
+filter(iris_sub, Sepal.Length >= 5)
+```
+
+**Less than `<`**
+
+```{r}
+filter(iris_sub, Sepal.Length < 5)
+```
+
+**Less than and equal to `<=`**
+
+```{r}
+filter(iris_sub, Sepal.Length <= 5)
+```
+
+**Multiple conditions (AND) `&`** **(or `,`)**
+
+```{r}
+# Sepal.Length is less than 5 AND Species equals "setosa"
+filter(iris_sub,
+       Sepal.Length < 5 & Species == "setosa")
+
+# same; "," works like "&"
+filter(iris_sub,
+       Sepal.Length < 5, Species == "setosa")
+```
+
+**Multiple conditions (OR) `|`**
+
+```{r}
+# Either Sepal.Length is less than 5 OR Species equals "setosa"
+filter(iris_sub,
+       Sepal.Length < 5 | Species == "setosa")
+```
+
+### Arrange rows
+
+The `arrange()` function (package `dplyr`) is used to reorder rows of a data frame (or tibble) based on the values in one or more columns.
+
+**Increasing/ascending order**
+
+```{r}
+arrange(iris_sub, Sepal.Length)
+```
+
+**Decreasing/descending order**
+
+```{r}
+arrange(iris_sub, desc(Sepal.Length))
+```
+
+### Exercise
+
+Using `iris_sub` dataframe, select rows that match the following contidions
+
+1.  `Sepal.Width` is greater than `3.0` and assign the new dataframe to `iris_3`
+
+2.  `Species` is `"setosa"` and assign the new dataframe to `iris_setosa`
+
+3.  `Sepal.Width` is greater than `3.0` AND `Species` is `"setosa"`, and assign the new dataframe to `iris_3_setosa`
 
 ## Column Manipulation
 
-`select()`: select/remove column(s)
+### Select columns
 
-```{r, eval=F}
-# select one column
-select(iris, Sepal.Length)
+The `select()` function (package `dplyr`) is used to choose specific columns from a data frame or tibble. It is particularly useful for narrowing down a dataset to focus on relevant variables.
 
-# select multiple columns
-select(iris, c(Sepal.Length, Sepal.Width))
-
-# remove one column
-select(iris, -Sepal.Length)
-
-# remove multiple columns
-select(iris, -c(Sepal.Length, Sepal.Width))
-
-# select/remove multiple columns with a start rule
-# starts_with("x")
-select(iris, starts_with("Sepal"))
-select(iris, -starts_with("Sepal"))
-
-# select/remove multiple columns with an end rule
-# ends_with("x")
-select(iris, ends_with("Width"))
-select(iris, -ends_with("Width"))
-```
-
-`mutate()`: add column(s)
+**Select one column**
 
 ```{r}
-# add a new column
-x <- 1:150
-mutate(iris, x = x)
+select(iris_sub, Sepal.Length)
 ```
+
+**Select multiple columns**
+
+```{r}
+select(iris_sub, c(Sepal.Length, Sepal.Width))
+```
+
+**Remove one column**
+
+```{r}
+select(iris_sub, -Sepal.Length)
+```
+
+**Remove multiple columns**
+
+```{r}
+select(iris_sub, -c(Sepal.Length, Sepal.Width))
+```
+
+**Select/Remove with `starts_with()`**
+
+```{r}
+# select columns starting with "Sepal"
+select(iris_sub, starts_with("Sepal"))
+
+# remove columns starting with "Sepal"
+select(iris_sub, -starts_with("Sepal"))
+```
+
+**Select with `ends_with()`**
+
+```{r}
+# select columns ending with "Sepal"
+select(iris_sub, ends_with("Width"))
+
+# remove columns ending with "Sepal"
+select(iris_sub, -ends_with("Width"))
+```
+
+### Add columns
+
+The `mutate()` function (package `dplyr`) package and is used to add new variables or modify existing ones in a data frame or tibble. It allows you to apply transformations to columns without changing the original dataset.
+
+**Add a new column**
+
+```{r}
+# nrow() returns the number of rows of the dataframe
+(x_max <- nrow(iris_sub))
+
+# create a vector from 1 to x_max
+x <- 1:x_max
+
+# add as a new column
+# named `x` as `row_id` when added
+mutate(iris_sub, row_id = x)
+```
+
+**Modify an existing column**
+
+```{r}
+# twice `Sepal.Length` and add as a new column
+mutate(iris_sub, sl_two_times = 2 * Sepal.Length)
+```
+
+### Exercise
+
+Using `iris_sub` dataframe, select columns that match the following contidions
+
+1.  Select column `Petal.Width` and `Species` and assign the new dataframe to `iris_pw`
+
+2.  Select columns starting with text `"Petal"` and assign the new dataframe to `iris_petal`
+
+3.  Add new column `pw_two_times` by doubling values in column `Petal.Width`, and assign the new dataframe to `iris_pw_two`
 
 ## Piping
 
-`%>%` (pipe) allows sequential operations of multiple functions (shortcut: `Ctr + Shift + M`). The pipe passes the object to the following function as the first argument.
+### Pipe `%>%`
+
+`%>%` (pipe) allows sequential operations of multiple functions (hot key: `Ctr + Shift + M`). The pipe passes the object to the following function as the first argument. For example, the following code subset rows by `Species` column, then select column `Sepal.Length`.
 
 ```{r}
-# the following codes produce the same data frame
-# apply functions separately
-df_vir <- filter(iris, Species == "virginica")
+## 
+df_vir <- filter(iris_sub, Species == "virginica")
 df_vir_sl <- select(df_vir, Sepal.Length)
-print(df_vir_sl)
 
-# piping
-iris %>% 
+print(df_vir_sl)
+```
+
+With piping, the above example becomes:
+
+```{r}
+df_vir_sl <- iris_sub %>% 
   filter(Species == "virginica") %>% 
   select(Sepal.Length)
+
+print(df_vir_sl)
 ```
+
+### Exercise
+
+Subset `iris_sub` by `Species` column (choose only `"setosa"` ) and add a new column `pw_two_times` by doubling values in column `Petal.Width`. Assign the resultant dataframe to `iris_pipe`. **USE pipe `%>%` in this operation.**
 
 ## Group Operation
 

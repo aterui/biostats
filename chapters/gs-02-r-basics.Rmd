@@ -408,15 +408,15 @@ print(iris_sub)
 
 ------------------------------------------------------------------------
 
-I cover the basics for those who are not familiar with `tidyverse::`, but there is plenty of documentation available for the tidyverse package.
+I only cover the basics for those who are not familiar with `tidyverse::`, but there is plenty of documentation available for the tidyverse package.
 
 -   [Tidyverse website](https://www.tidyverse.org/)
 -   [dplyr](https://dplyr.tidyverse.org/)
 -   [tidyr](https://tidyr.tidyverse.org/)
--   [ggplot2](https://r-graph-gallery.com/ggplot2-package.html)
--   [from Data to Viz](https://www.data-to-viz.com/)
 
-In particular, `dplyr::` and `tidyr::` (and others) offer useful functions for data manipulation. Key manipulations include: row/column manipulations, group operation, reshape, and more.
+`dplyr::` and `tidyr::` (and others) offer useful functions for data manipulation. Key manipulations include: row/column manipulations, group operation, reshape, and more.
+
+------------------------------------------------------------------------
 
 ## Row Manipulation
 
@@ -785,17 +785,24 @@ left_join(x = df1,
 # without pipe
 ggplot(data = iris,
        mapping = aes(x = Sepal.Length,
-                     y = Sepal.Width)) +
-  # additional layers...
+                     y = Sepal.Width))
 
 # with pipe
 iris %>% 
   ggplot(mapping = aes(x = Sepal.Length,
-                       y = Sepal.Width)) +
-  # additional layers...  
+                       y = Sepal.Width))
 ```
 
-Please note that `aes()` refers to columns in the data frame. Variables names that do not exist in the data frame cannot be used.
+The above code does not display data points; rather, it creates a base frame for plotting. You may add additional point/line layers to visualize your data, as shown below. Please note that `aes()` refers to columns in the data frame. Variables names that do not exist in the data frame cannot be used.
+
+------------------------------------------------------------------------
+
+For more information, see:
+
+-   [ggplot2](https://r-graph-gallery.com/ggplot2-package.html)
+-   [from Data to Viz](https://www.data-to-viz.com/)
+
+------------------------------------------------------------------------
 
 ### Point
 

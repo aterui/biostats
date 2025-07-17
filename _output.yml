@@ -1,4 +1,6 @@
 bookdown::bs4_book:
+  includes: 
+    in_header: "_includes/head.html"
   repo:
     base: https://github.com/aterui/biostats
     branch: master

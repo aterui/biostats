@@ -1,4 +1,5 @@
 book_filename: "biostats"
+table_caption: false
 delete_merged_file: true
 language:
   ui:

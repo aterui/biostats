@@ -4,9 +4,7 @@ author: "Akira Terui"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::bs4_book
-url: https://bookdown.org/janedoe/bookdown-demo
-link-citations: yes
-github-repo: rstudio/bookdown-demo
+github-repo: https://github.com/aterui/biostats
 description: |
   Biostats I course material.
 header-includes: 

@@ -7,10 +7,9 @@
 <title>Chapter 7 Descriptive Statistics | BIOSTATS</title>
 <meta name="author" content="Akira Terui">
 <meta name="description" content="Descriptive statistics are a set of summary measures that provide a concise overview of a dataset. They help us understand the characteristics and properties of the data without delving into...">
-<meta name="generator" content="bookdown 0.40 with bs4_book()">
+<meta name="generator" content="bookdown 0.43 with bs4_book()">
 <meta property="og:title" content="Chapter 7 Descriptive Statistics | BIOSTATS">
 <meta property="og:type" content="book">
-<meta property="og:url" content="https://bookdown.org/janedoe/bookdown-demo/descriptive-statistics.html">
 <meta property="og:description" content="Descriptive statistics are a set of summary measures that provide a concise overview of a dataset. They help us understand the characteristics and properties of the data without delving into...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 7 Descriptive Statistics | BIOSTATS">
@@ -18,8 +17,7 @@
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QZSNHVQQNV"></script><script>
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QZSNHVQQNV"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
@@ -92,7 +90,8 @@ x_2 = 15.1\\
 x_3 = 21.9\\
 x_4 = 13.3\\
 x_5 = 24.4\\
-\]</span> Often times, we use subscript <span class="math inline">\(i\)</span> (or any character you like) instead of actual number to indicate a given data point. For example, we write fish length <span class="math inline">\(x_i\)</span> for individual <span class="math inline">\(i\)</span>. Alternatively, instead of writing each individual data point, we can represent them as a vector using boldface, denoted as <span class="math inline">\(\pmb{x}\)</span>. In this case, the vector <span class="math inline">\(\pmb{x}\)</span> can be expressed as:</p>
+\]</span></p>
+<p>Often times, we use subscript <span class="math inline">\(i\)</span> (or any character you like) instead of actual number to indicate a given data point. For example, we write fish length <span class="math inline">\(x_i\)</span> for individual <span class="math inline">\(i\)</span>. Alternatively, instead of writing each individual data point, we can represent them as a vector using boldface, denoted as <span class="math inline">\(\pmb{x}\)</span>. In this case, the vector <span class="math inline">\(\pmb{x}\)</span> can be expressed as:</p>
 <p><span class="math display">\[
 \pmb{x} = \{15.9, 15.1, 21.9, 13.3, 24.4\}
 \]</span></p>
@@ -111,43 +110,34 @@ x_5 = 24.4\\
 <li><p><strong>Geometric Mean</strong>. The geometric mean is a <em>multiplicative</em> average. It is always smaller than the arithmetic mean and less sensitive to unusually large values. However, it is not applicable when the data contain negative values.</p></li>
 <li><p><strong>Median</strong>. The median is the value that separates the higher half from the lower half of the dataset. It represents the 50th percentile data point. The median is less affected by outliers compared to the arithmetic mean. To calculate the median, you arrange the data in ascending order and select the middle value if the dataset has an odd number of values. If the dataset has an even number of values, you take the average of the two middle values.</p></li>
 </ul>
-<div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
+<div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:central">Table 7.1: </span><span id="tab:central">Table 7.2: </span>Common measures of central tendency. <span class="math inline">\(N\)</span> refers to the number of data points.
-</caption>
-<thead><tr>
-<th style="text-align:left;">
-Measure
-</th>
-<th style="text-align:left;">
-Formula
-</th>
+<span id="tab:central">Table 7.1: </span> Common measures of central tendency. <span class="math inline">\(N\)</span> refers to the number of data points.</caption>
+<colgroup>
+<col width="28%">
+<col width="72%">
+</colgroup>
+<thead><tr class="header">
+<th>Measure</th>
+<th>Formula</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Arithmetic mean <span class="math inline">\(\mu\)</span>
+<tr class="odd">
+<td>Arithmetic mean <span class="math inline">\(\mu\)</span>
 </td>
-<td style="text-align:left;">
-<span class="math inline">\(\frac{\sum_i^N x_i}{N}\)</span>
-</td>
+<td><span class="math inline">\(\frac{\sum_i^N x_i}{N}\)</span></td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Geometric mean <span class="math inline">\(\mu_{ge}\)</span>
+<tr class="even">
+<td>Geometric mean <span class="math inline">\(\mu_{ge}\)</span>
 </td>
-<td style="text-align:left;">
-<span class="math inline">\((\prod_i^N x_i)^{\frac{1}{N}}\)</span>
-</td>
+<td><span class="math inline">\((\prod_i^N x_i)^{\frac{1}{N}}\)</span></td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Median <span class="math inline">\(\mu_{med}\)</span>
+<tr class="odd">
+<td>Median <span class="math inline">\(\mu_{med}\)</span>
 </td>
-<td style="text-align:left;">
-<p><span class="math inline">\(x_{(\frac{N + 1}{2}^\text{th})}~\text{if N is odd}\)</span></p>
-<p>or</p>
-$[x_{(^)} + x_{( + 1^)}]~\text{if N is eve
+<td>
+<p><span class="math inline">\(x_{(\frac{N + 1}{2})}\)</span> if N is odd</p>
+<p><span class="math inline">\(\frac{1}{2}[x_{(\frac{N}{2})} + x_{(\frac{N}{2} + 1)}]\)</span> if N is even</p>
 </td>
 </tr>
 </tbody>
@@ -171,6 +161,7 @@ $[x_{(^)} + x_{( + 1^)}]~\text{if N is eve
 <pre><code>## [1] 15.9 15.1 21.9 53.3 24.4</code></pre>
 <p>Cool! Now we can calculate summary statistics of <code>x</code> and <code>y</code>.</p>
 <p><strong>Arithmetic Mean</strong></p>
+<p><span class="math inline">\(\frac{\sum_i^N x_i}{N}\)</span></p>
 <p>While R has a function for arithmetic <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code>, let’s calculate the value from scratch:</p>
 <div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for vector x</span></span>
@@ -192,6 +183,7 @@ $[x_{(^)} + x_{( + 1^)}]~\text{if N is eve
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 26.12</code></pre>
 <p><strong>Geometric Mean</strong></p>
+<p><span class="math inline">\((\prod_i^N x_i)^{\frac{1}{N}}\)</span></p>
 <p>Unfortunately, there is no build-in function for geometric mean <span class="math inline">\(\mu_{ge}\)</span> in R (as far as I know; there are packages though). But, we can calculate the value from scratch again:</p>
 <div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for vector x</span></span>
@@ -206,6 +198,7 @@ $[x_{(^)} + x_{( + 1^)}]~\text{if N is eve
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">mug_y</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 23.28022</code></pre>
 <p><strong>Median</strong></p>
+<p><span class="math inline">\(x_{(\frac{N + 1}{2})}\)</span> if N is odd; <span class="math inline">\(\frac{1}{2}[x_{(\frac{N}{2})} + x_{(\frac{N}{2} + 1)}]\)</span> if N is even</p>
 <p>Lastly, let’s do the same for median:</p>
 <div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for vector x</span></span>
@@ -237,7 +230,7 @@ $[x_{(^)} + x_{( + 1^)}]~\text{if N is eve
 <h3>
 <span class="header-section-number">7.2.1</span> Variation Measures<a class="anchor" aria-label="anchor" href="#variation-measures"><i class="fas fa-link"></i></a>
 </h3>
-<p>Variation measures (Table <a href="descriptive-statistics.html#tab:variation">7.3</a>) provide information about the spread of data points.</p>
+<p>Variation measures (Table <a href="descriptive-statistics.html#tab:variation">7.2</a>) provide information about the spread of data points.</p>
 <ul>
 <li><p><strong>Variance.</strong> Variance is a statistical measure that quantifies the spread or dispersion of a dataset. It provides a numerical value that indicates how far individual data points in a dataset deviate from the mean or average value. In other words, variance measures the average squared difference between each data point and the mean. <strong>Standard deviation (SD) is the square root of variance</strong>.</p></li>
 <li><p><strong>Inter-Quantile Range.</strong> The interquartile range (IQR) is a statistical measure that provides information about the spread or dispersion of a dataset, specifically focusing on the middle 50% of the data. It is a robust measure of variability that is less affected by outliers compared to variance.</p></li>
@@ -245,58 +238,38 @@ $[x_{(^)} + x_{( + 1^)}]~\text{if N is eve
 <li><p><strong>Coefficient of Variation.</strong> The coefficient of variation (CV) is a statistical measure that expresses the relative variability of a dataset in relation to its mean. It is particularly useful when comparing the variability of different datasets that have different scales or units of measurement.</p></li>
 <li><p><strong>MAD/Median.</strong> MAD/Median is a statistical measure used to assess the relative variability of a dataset without assuming any specific distribution or parametric model. CV is sensitive to outliers because of its reliance on the arithmetic mean. However, MAD/Median is robust to this issue.</p></li>
 </ul>
-<div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
+<div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:variation">Table 7.3: </span><span id="tab:variation">Table 7.4: </span>Common measures of variation. <span class="math inline">\(N\)</span> refers to the number of data points. <span class="math inline">\(x_l\)</span> and <span class="math inline">\(x_h\)</span> are <span class="math inline">\(l^{th}\)</span> and <span class="math inline">\(h^{th}\)</span> percentiles.
-</caption>
-<thead><tr>
-<th style="text-align:left;">
-Measure
-</th>
-<th style="text-align:left;">
-Formula
-</th>
+<span id="tab:variation">Table 7.2: </span> Metrics for variation.</caption>
+<colgroup>
+<col width="41%">
+<col width="58%">
+</colgroup>
+<thead><tr class="header">
+<th>Measure</th>
+<th>Formula</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Variance <span class="math inline">\(\sigma^2\)</span>
+<tr class="odd">
+<td>Variance <span class="math inline">\(\sigma^2\)</span>
 </td>
-<td style="text-align:left;">
-<span class="math inline">\(\frac{\sum_i^N (x_i - \mu)^2}{N}\)</span>
-</td>
+<td><span class="math inline">\(\frac{\sum_i^N (x_i - \mu)^2}{N}\)</span></td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Inter-Quantile Range IQR
-</td>
-<td style="text-align:left;">
-<span class="math inline">\(&amp;amp;#124;x_l - x_h&amp;amp;#124;\)</span>
-</td>
+<tr class="even">
+<td>Inter-Quantile Range IQR</td>
+<td><span class="math inline">\(\lvert x_l - x_h \rvert\)</span></td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Median Absolute Deviation (MAD)
-</td>
-<td style="text-align:left;">
-<span class="math inline">\(\text{Median}(&amp;amp;#124;x_i - \mu_{med}&amp;amp;#124;)\)</span>
-</td>
+<tr class="odd">
+<td>Median Absolute Deviation (MAD)</td>
+<td><span class="math inline">\(\text{Median}(\lvert x_i - \mu_{med} \rvert)\)</span></td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Coefficient of Variation (CV)
-</td>
-<td style="text-align:left;">
-<span class="math inline">\(\frac{\sigma}{\mu}\)</span>
-</td>
+<tr class="even">
+<td>Coefficient of Variation (CV)</td>
+<td><span class="math inline">\(\frac{\sigma}{\mu}\)</span></td>
 </tr>
-<tr>
-<td style="text-align:left;">
-MAD/Median
-</td>
-<td style="text-align:left;">
-<span class="math inline">\(\frac{\text{MAD}}{\mu_{med}}\)</span>
-</td>
+<tr class="odd">
+<td>MAD/Median</td>
+<td><span class="math inline">\(\frac{\text{MAD}}{\mu_{med}}\)</span></td>
 </tr>
 </tbody>
 </table></div>
@@ -306,6 +279,7 @@ MAD/Median
 <span class="header-section-number">7.2.2</span> R Exercise<a class="anchor" aria-label="anchor" href="#r-exercise-1"><i class="fas fa-link"></i></a>
 </h3>
 <p><strong>Variance</strong></p>
+<p><span class="math inline">\(\frac{\sum_i^N (x_i - \mu)^2}{N}\)</span></p>
 <div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for x</span></span>
 <span><span class="va">sqd_x</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="co"># sqared deviance</span></span>
@@ -319,6 +293,7 @@ MAD/Median
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">var_y</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 197.0816</code></pre>
 <p><strong>Standard Deviation (SD)</strong></p>
+<p><span class="math inline">\(\sqrt{\frac{\sum_i^N (x_i - \mu)^2}{N}}\)</span></p>
 <div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for x</span></span>
 <span><span class="va">sd_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">var_x</span><span class="op">)</span> <span class="co"># sqrt(): square root</span></span>
@@ -329,19 +304,9 @@ MAD/Median
 <span><span class="va">sd_y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">var_y</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">sd_y</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 14.03858</code></pre>
-<p><strong>Coefficient of Variation (CV)</strong></p>
-<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># for x</span></span>
-<span><span class="va">cv_x</span> <span class="op">&lt;-</span> <span class="va">sd_x</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">cv_x</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 0.2354489</code></pre>
-<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># for y</span></span>
-<span><span class="va">cv_y</span> <span class="op">&lt;-</span> <span class="va">sd_y</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">cv_y</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 0.5374646</code></pre>
 <p><strong>IQR</strong>; Here, let me use 25 and 75 percentiles as <span class="math inline">\(x_l\)</span> and <span class="math inline">\(x_h\)</span>.</p>
-<div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
+<p><span class="math inline">\(\lvert x_l - x_h \rvert\)</span></p>
+<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for x</span></span>
 <span><span class="va">x_l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">0.25</span><span class="op">)</span> <span class="co"># quantile(): return quantile values, 25 percentile</span></span>
 <span><span class="va">x_h</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">0.75</span><span class="op">)</span> <span class="co"># quantile(): return quantile values, 75 percentile</span></span>
@@ -349,7 +314,7 @@ MAD/Median
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">iqr_x</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 25% 
 ## 6.8</code></pre>
-<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for y</span></span>
 <span><span class="va">y_q</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">y</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.25</span>, <span class="fl">0.75</span><span class="op">)</span><span class="op">)</span> <span class="co"># return as a vector</span></span>
 <span><span class="va">iqr_y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">y_q</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">y_q</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span> <span class="co"># y_q[1] = 25 percentile; y_q[2] = 75 percentile</span></span>
@@ -357,18 +322,32 @@ MAD/Median
 <pre><code>## 25% 
 ## 8.5</code></pre>
 <p><strong>MAD</strong></p>
-<div class="sourceCode" id="cb244"><pre class="downlit sourceCode r">
+<p><span class="math inline">\(\text{Median}(\lvert x_i - \mu_{med} \rvert)\)</span></p>
+<div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for x</span></span>
 <span><span class="va">ad_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">mad_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">ad_x</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">mad_x</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 2.6</code></pre>
-<div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for y</span></span>
 <span><span class="va">mad_y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">y</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">mad_y</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 6</code></pre>
+<p><strong>Coefficient of Variation (CV)</strong></p>
+<p><span class="math inline">\(\frac{\sigma}{\mu}\)</span></p>
+<div class="sourceCode" id="cb244"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># for x </span></span>
+<span><span class="va">cv_x</span> <span class="op">&lt;-</span> <span class="va">sd_x</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">cv_x</span><span class="op">)</span>  </span></code></pre></div>
+<pre><code>## [1] 0.2354489</code></pre>
+<div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># for y </span></span>
+<span><span class="va">cv_y</span> <span class="op">&lt;-</span> <span class="va">sd_y</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">cv_y</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.5374646</code></pre>
 <p><strong>MAD / Median</strong></p>
+<p><span class="math inline">\(\frac{\text{MAD}}{\mu_{med}}\)</span></p>
 <div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for x</span></span>
 <span><span class="va">mm_x</span> <span class="op">&lt;-</span> <span class="va">mad_x</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -458,7 +437,7 @@ MAD/Median
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-07-17.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-08-19.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

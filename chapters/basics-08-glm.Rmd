@@ -331,9 +331,9 @@ The GLM framework differs from the Linear Model framework by offering greater fl
 
 However, how do we determine the appropriate probability distribution? While there is no single correct answer to this question, there are clear factors to consider—specifically, the characteristics of the response variable. The following criteria can be particularly helpful:
 
-1. Is the variable discrete?
-2. Is there an upper bound?
-3. Is the sample variance far greater than the mean?
+1.  Is the variable discrete?
+2.  Is there an upper bound?
+3.  Is the sample variance far greater than the mean?
 
 To assist you in selecting an appropriate probability distribution for modeling, I have provided a concise decision tree graph. Please note that the choices presented are frequently encountered in ecological modeling, rather than an exhaustive list of probability distributions (see Table \@ref(tab:table-dist)). The full list of probability distributions can be found here ([Wikipedia page](https://en.wikipedia.org/wiki/List_of_probability_distributions))
 
@@ -377,30 +377,16 @@ g_dendro <- graph %>%
 print(g_dendro)
 ```
 
-```{r table-dist, echo=F}
+| Distribution | Support | R |
+|----|----|----|
+| Beta-binomial | [0, N] | `glmmTMB::glmmTMB()` |
+| Binomial | [0, N] | `glm()`, `glmmTMB::glmmTMB()` |
+| Negative binomial | $\ge 0$ | `MASS::glm.nb()`, `glmmTMB::glmmTMB()` |
+| Poisson | $\ge 0$ | `glm()`, `glmmTMB::glmmTMB()` |
+| Beta | (0, 1) | `glmmTMB::glmmTMB()` |
+| Normal | $-\infty$ to $\infty$ | `lm()`, `glm()`, `glmmTMB::glmmTMB()` |
 
-tibble(Node = 1:6,
-       Distribution = c("Beta-binomial",
-                        "Binomial",
-                        "Negative binomial",
-                        "Poisson",
-                        "Beta",
-                        "Normal"),
-       Range = c("0 -- N",
-                 "0 -- N",
-                 "$\\ge$ 0",
-                 "$\\ge$ 0",
-                 "0 -- 1",
-                 "-inf -- inf"),
-       R = c("`glmmTMB::glmmTMB()`",
-             "`glm()`, `glmmTMB::glmmTMB()`",
-             "`MASS::glm.nb()`, `glmmTMB::glmmTMB()`",
-             "`glm()`, `glmmTMB::glmmTMB()`",
-             "`glmmTMB::glmmTMB()`",
-             "`lm()`, `glm()`, `glmmTMB::glmmTMB()`")) %>% 
-  knitr::kable(caption = "Common distributions used in GLM analysis") %>% 
-  kableExtra::kable_styling(full_width = T)
-```
+: (#tab:table-dist) Common distributions used in GLM analysis
 
 ## Laboratory
 
@@ -419,6 +405,6 @@ $$
 
 Here, $\alpha'$ and $\beta'$ represent the intercept and slope after standardizing $x$, respectively.
 
-1. Express $\alpha'$ and $\beta'$ as a function of $\alpha$ and $\beta$, respectively.
+1.  Express $\alpha'$ and $\beta'$ as a function of $\alpha$ and $\beta$, respectively.
 
-2. The function `scale()` will perform standardization. Perform a GLM analysis of fish species richness with the standardized variables `distance`, `cat_area`, and `hull_area`, and identify the most influential variable among them.
+2.  The function `scale()` will perform standardization. Perform a GLM analysis of fish species richness with the standardized variables `distance`, `cat_area`, and `hull_area`, and identify the most influential variable among them.

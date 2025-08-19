@@ -1,4 +1,4 @@
-# (PART) Basic Statistics {-}
+# (PART) Basic Statistics {.unnumbered}
 
 # Descriptive Statistics
 
@@ -12,7 +12,9 @@ x_2 = 15.1\\
 x_3 = 21.9\\
 x_4 = 13.3\\
 x_5 = 24.4\\
-$$ Often times, we use subscript $i$ (or any character you like) instead of actual number to indicate a given data point. For example, we write fish length $x_i$ for individual $i$. Alternatively, instead of writing each individual data point, we can represent them as a vector using boldface, denoted as $\pmb{x}$. In this case, the vector $\pmb{x}$ can be expressed as:
+$$
+
+Often times, we use subscript $i$ (or any character you like) instead of actual number to indicate a given data point. For example, we write fish length $x_i$ for individual $i$. Alternatively, instead of writing each individual data point, we can represent them as a vector using boldface, denoted as $\pmb{x}$. In this case, the vector $\pmb{x}$ can be expressed as:
 
 $$
 \pmb{x} = \{15.9, 15.1, 21.9, 13.3, 24.4\}
@@ -32,21 +34,19 @@ Central tendency measures (Table \@ref(tab:central)) provide insights into the t
 
 -   **Median**. The median is the value that separates the higher half from the lower half of the dataset. It represents the 50th percentile data point. The median is less affected by outliers compared to the arithmetic mean. To calculate the median, you arrange the data in ascending order and select the middle value if the dataset has an odd number of values. If the dataset has an even number of values, you take the average of the two middle values.
 
-```{r central, echo=FALSE}
++---------------------------+-----------------------------------------------------------------------+
+| Measure                   | Formula                                                               |
++===========================+=======================================================================+
+| Arithmetic mean $\mu$     | $\frac{\sum_i^N x_i}{N}$                                              |
++---------------------------+-----------------------------------------------------------------------+
+| Geometric mean $\mu_{ge}$ | $(\prod_i^N x_i)^{\frac{1}{N}}$                                       |
++---------------------------+-----------------------------------------------------------------------+
+| Median $\mu_{med}$        | $x_{(\frac{N + 1}{2})}$ if N is odd                                   |
+|                           |                                                                       |
+|                           | $\frac{1}{2}[x_{(\frac{N}{2})} + x_{(\frac{N}{2} + 1)}]$ if N is even |
++---------------------------+-----------------------------------------------------------------------+
 
-source(here::here("code/library.R"))
-
-dplyr::tibble(Measure = c("Arithmetic mean $\\mu$",
-                          "Geometric mean $\\mu_{ge}$",
-                          "Median $\\mu_{med}$"),
-              Formula = c("$\\frac{\\sum_i^N x_i}{N}$",
-                          "$(\\prod_i^N x_i)^{\\frac{1}{N}}$",
-                          "$x_{(\\frac{N + 1}{2}^\\text{th})}~\\text{if N is odd}$\n
-or \n
-$\\frac{1}{2}[x_{(\\frac{N}{2}^\\text{th})} + x_{(\\frac{N}{2} + 1^\\text{th})}]~\\text{if N is even}$")) %>% 
-  knitr::kable(caption = "Common measures of central tendency. $N$ refers to the number of data points.") %>% 
-  kableExtra::kable_styling(full_width = T)
-```
+: (#tab:central) Common measures of central tendency. $N$ refers to the number of data points.
 
 ### R Exercise
 
@@ -69,6 +69,8 @@ y
 Cool! Now we can calculate summary statistics of `x` and `y`.
 
 **Arithmetic Mean**
+
+$\frac{\sum_i^N x_i}{N}$
 
 While R has a function for arithmetic `mean()`, let's calculate the value from scratch:
 
@@ -95,6 +97,8 @@ print(mean(y))
 
 **Geometric Mean**
 
+$(\prod_i^N x_i)^{\frac{1}{N}}$
+
 Unfortunately, there is no build-in function for geometric mean $\mu_{ge}$ in R (as far as I know; there are packages though). But, we can calculate the value from scratch again:
 
 ```{r geometric-mean}
@@ -111,6 +115,8 @@ print(mug_y)
 ```
 
 **Median**
+
+$x_{(\frac{N + 1}{2})}$ if N is odd; $\frac{1}{2}[x_{(\frac{N}{2})} + x_{(\frac{N}{2} + 1)}]$ if N is even
 
 Lastly, let's do the same for median:
 
@@ -151,25 +157,27 @@ Variation measures (Table \@ref(tab:variation)) provide information about the sp
 
 -   **MAD/Median.** MAD/Median is a statistical measure used to assess the relative variability of a dataset without assuming any specific distribution or parametric model. CV is sensitive to outliers because of its reliance on the arithmetic mean. However, MAD/Median is robust to this issue.
 
-```{r variation, echo = F}
++----------------------------------+------------------------------------------------+
+| Measure                          | Formula                                        |
++==================================+================================================+
+| Variance $\sigma^2$              | $\frac{\sum_i^N (x_i - \mu)^2}{N}$             |
++----------------------------------+------------------------------------------------+
+| Inter-Quantile Range IQR         | $\lvert x_l - x_h \rvert$                      |
++----------------------------------+------------------------------------------------+
+| Median Absolute Deviation (MAD)  | $\text{Median}(\lvert x_i - \mu_{med} \rvert)$ |
++----------------------------------+------------------------------------------------+
+| Coefficient of Variation (CV)    | $\frac{\sigma}{\mu}$                           |
++----------------------------------+------------------------------------------------+
+| MAD/Median                       | $\frac{\text{MAD}}{\mu_{med}}$                 |
++----------------------------------+------------------------------------------------+
 
-tibble(Measure = c("Variance $\\sigma^2$",
-                   "Inter-Quantile Range IQR",
-                   "Median Absolute Deviation (MAD)",
-                   "Coefficient of Variation (CV)",
-                   "MAD/Median"),
-       Formula = c("$\\frac{\\sum_i^N (x_i - \\mu)^2}{N}$",
-                   "$|x_l - x_h|$",
-                   "$\\text{Median}(|x_i - \\mu_{med}|)$",
-                   "$\\frac{\\sigma}{\\mu}$",
-                   "$\\frac{\\text{MAD}}{\\mu_{med}}$")) %>% 
-  knitr::kable(caption = "Common measures of variation. $N$ refers to the number of data points. $x_l$ and $x_h$ are $l^{th}$ and $h^{th}$ percentiles.") %>% 
-  kableExtra::kable_styling(full_width = T)
-```
+: (#tab:variation) Metrics for variation.
 
 ### R Exercise
 
 **Variance**
+
+$\frac{\sum_i^N (x_i - \mu)^2}{N}$
 
 ```{r variance}
 # for x
@@ -185,6 +193,8 @@ print(var_y)
 
 **Standard Deviation (SD)**
 
+$\sqrt{\frac{\sum_i^N (x_i - \mu)^2}{N}}$
+
 ```{r}
 # for x
 sd_x <- sqrt(var_x) # sqrt(): square root
@@ -195,19 +205,9 @@ sd_y <- sqrt(var_y)
 print(sd_y)
 ```
 
-**Coefficient of Variation (CV)**
-
-```{r}
-# for x
-cv_x <- sd_x / mean(x)
-print(cv_x)
-
-# for y
-cv_y <- sd_y / mean(y)
-print(cv_y)
-```
-
 **IQR**; Here, let me use 25 and 75 percentiles as $x_l$ and $x_h$.
+
+$\lvert x_l - x_h \rvert$
 
 ```{r iqr}
 
@@ -225,6 +225,8 @@ print(iqr_y)
 
 **MAD**
 
+$\text{Median}(\lvert x_i - \mu_{med} \rvert)$
+
 ```{r}
 # for x
 ad_x <- abs(x - median(x))
@@ -236,7 +238,23 @@ mad_y <- median(abs(y - median(y)))
 print(mad_y)
 ```
 
+**Coefficient of Variation (CV)**
+
+$\frac{\sigma}{\mu}$
+
+```{r} 
+# for x 
+cv_x <- sd_x / mean(x) 
+print(cv_x)  
+
+# for y 
+cv_y <- sd_y / mean(y) 
+print(cv_y)
+```
+
 **MAD / Median**
+
+$\frac{\text{MAD}}{\mu_{med}}$
 
 ```{r}
 # for x

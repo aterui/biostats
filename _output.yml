@@ -4,21 +4,3 @@ bookdown::bs4_book:
   repo:
     base: https://github.com/aterui/biostats
     branch: master
-  # config:
-  #   toc:
-  #     before: |
-  #       <li><a href="https://aterui.github.io/biostats/">BIOSTATS</a></li>
-  #     after: |
-  #       <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-  #   edit: null
-  #   download: null
-  #   sharing:
-  #     facebook: true
-  #     github: true
-  #     twitter: true
-  #     linkedin: false
-  #     weibo: false
-  #     instapaper: false
-  #     vk: false
-  #     whatsapp: false
-  #     all: ['facebook', 'twitter', 'linkedin', 'weibo', 'instapaper']

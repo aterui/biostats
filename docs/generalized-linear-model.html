@@ -7,10 +7,9 @@
 <title>Chapter 14 Generalized Linear Model | BIOSTATS</title>
 <meta name="author" content="Akira Terui">
 <meta name="description" content="One of the key assumptions in the Linear Model framework is Normality – that the error term follows a normal distribution (Chapter 13). However, this assumption frequently leads to situations...">
-<meta name="generator" content="bookdown 0.40 with bs4_book()">
+<meta name="generator" content="bookdown 0.43 with bs4_book()">
 <meta property="og:title" content="Chapter 14 Generalized Linear Model | BIOSTATS">
 <meta property="og:type" content="book">
-<meta property="og:url" content="https://bookdown.org/janedoe/bookdown-demo/generalized-linear-model.html">
 <meta property="og:description" content="One of the key assumptions in the Linear Model framework is Normality – that the error term follows a normal distribution (Chapter 13). However, this assumption frequently leads to situations...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 14 Generalized Linear Model | BIOSTATS">
@@ -18,8 +17,7 @@
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QZSNHVQQNV"></script><script>
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QZSNHVQQNV"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
@@ -470,106 +468,57 @@ y_i &amp;\sim \text{D}(\Theta)\\
 Figure 14.6: Tree chart on how to choose a probability distribution in GLM analysis.
 </p>
 </div>
-<div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
+<div class="inline-table"><table class="table table-sm">
 <caption>
-<span id="tab:table-dist">Table 14.1: </span><span id="tab:table-dist">Table 14.2: </span>Common distributions used in GLM analysis
-</caption>
-<thead><tr>
-<th style="text-align:right;">
-Node
-</th>
-<th style="text-align:left;">
-Distribution
-</th>
-<th style="text-align:left;">
-Range
-</th>
-<th style="text-align:left;">
-R
-</th>
+<span id="tab:table-dist">Table 14.1: </span> Common distributions used in GLM analysis</caption>
+<colgroup>
+<col width="33%">
+<col width="33%">
+<col width="33%">
+</colgroup>
+<thead><tr class="header">
+<th>Distribution</th>
+<th>Support</th>
+<th>R</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:left;">
-Beta-binomial
-</td>
-<td style="text-align:left;">
-0 – N
-</td>
-<td style="text-align:left;">
-<code><a href="https://rdrr.io/pkg/glmmTMB/man/glmmTMB.html">glmmTMB::glmmTMB()</a></code>
-</td>
+<tr class="odd">
+<td>Beta-binomial</td>
+<td>[0, N]</td>
+<td><code><a href="https://rdrr.io/pkg/glmmTMB/man/glmmTMB.html">glmmTMB::glmmTMB()</a></code></td>
 </tr>
-<tr>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:left;">
-Binomial
-</td>
-<td style="text-align:left;">
-0 – N
-</td>
-<td style="text-align:left;">
+<tr class="even">
+<td>Binomial</td>
+<td>[0, N]</td>
+<td>
 <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code>, <code><a href="https://rdrr.io/pkg/glmmTMB/man/glmmTMB.html">glmmTMB::glmmTMB()</a></code>
 </td>
 </tr>
-<tr>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:left;">
-Negative binomial
-</td>
-<td style="text-align:left;">
-<span class="math inline">\(\ge\)</span> 0
-</td>
-<td style="text-align:left;">
+<tr class="odd">
+<td>Negative binomial</td>
+<td><span class="math inline">\(\ge 0\)</span></td>
+<td>
 <code><a href="https://rdrr.io/pkg/MASS/man/glm.nb.html">MASS::glm.nb()</a></code>, <code><a href="https://rdrr.io/pkg/glmmTMB/man/glmmTMB.html">glmmTMB::glmmTMB()</a></code>
 </td>
 </tr>
-<tr>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:left;">
-Poisson
-</td>
-<td style="text-align:left;">
-<span class="math inline">\(\ge\)</span> 0
-</td>
-<td style="text-align:left;">
+<tr class="even">
+<td>Poisson</td>
+<td><span class="math inline">\(\ge 0\)</span></td>
+<td>
 <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code>, <code><a href="https://rdrr.io/pkg/glmmTMB/man/glmmTMB.html">glmmTMB::glmmTMB()</a></code>
 </td>
 </tr>
-<tr>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:left;">
-Beta
-</td>
-<td style="text-align:left;">
-0 – 1
-</td>
-<td style="text-align:left;">
-<code><a href="https://rdrr.io/pkg/glmmTMB/man/glmmTMB.html">glmmTMB::glmmTMB()</a></code>
-</td>
+<tr class="odd">
+<td>Beta</td>
+<td>(0, 1)</td>
+<td><code><a href="https://rdrr.io/pkg/glmmTMB/man/glmmTMB.html">glmmTMB::glmmTMB()</a></code></td>
 </tr>
-<tr>
-<td style="text-align:right;">
-6
+<tr class="even">
+<td>Normal</td>
+<td>
+<span class="math inline">\(-\infty\)</span> to <span class="math inline">\(\infty\)</span>
 </td>
-<td style="text-align:left;">
-Normal
-</td>
-<td style="text-align:left;">
--inf – inf
-</td>
-<td style="text-align:left;">
+<td>
 <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>, <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code>, <code><a href="https://rdrr.io/pkg/glmmTMB/man/glmmTMB.html">glmmTMB::glmmTMB()</a></code>
 </td>
 </tr>
@@ -646,7 +595,7 @@ Normal
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-07-17.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-08-19.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

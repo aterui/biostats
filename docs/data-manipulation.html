@@ -623,28 +623,20 @@
 </h2>
 <p><code><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider()</a></code> : reshape a data frame to a wide format</p>
 <div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">iris_w</span> <span class="op">&lt;-</span> <span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">50</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># add an ID column</span></span>
+<code class="sourceCode R"><span><span class="va">iris_w</span> <span class="op">&lt;-</span> <span class="va">iris_sub</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># add an ID column</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">Sepal.Length</span>, <span class="va">Species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>id_cols <span class="op">=</span> <span class="st">"id"</span>, <span class="co"># unique row ID based on</span></span>
 <span>              values_from <span class="op">=</span> <span class="st">"Sepal.Length"</span>, <span class="co"># values in each cell from</span></span>
 <span>              names_from <span class="op">=</span> <span class="st">"Species"</span><span class="op">)</span> <span class="co"># new column names from</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">iris_w</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## # A tibble: 50 × 4
-##       id setosa versicolor virginica
-##    &lt;int&gt;  &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;
-##  1     1    5.1        7         6.3
-##  2     2    4.9        6.4       5.8
-##  3     3    4.7        6.9       7.1
-##  4     4    4.6        5.5       6.3
-##  5     5    5          6.5       6.5
-##  6     6    5.4        5.7       7.6
-##  7     7    4.6        6.3       4.9
-##  8     8    5          4.9       7.3
-##  9     9    4.4        6.6       6.7
-## 10    10    4.9        5.2       7.2
-## # ℹ 40 more rows</code></pre>
+<pre><code>## # A tibble: 3 × 4
+##      id setosa versicolor virginica
+##   &lt;int&gt;  &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;
+## 1     1    4.8        6.9       6.3
+## 2     2    5.8        6.1       5.7
+## 3     3    4.3        5.8       6.7</code></pre>
 <p><code><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer()</a></code>: reshape a data frame to a long format</p>
 <div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">iris_l</span> <span class="op">&lt;-</span> <span class="va">iris_w</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -655,20 +647,18 @@
 <span>               values_to <span class="op">=</span> <span class="st">"Sepal.Length"</span><span class="op">)</span> <span class="co"># column values move to "Sepal.Length"</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">iris_l</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## # A tibble: 150 × 3
-##       id Species    Sepal.Length
-##    &lt;int&gt; &lt;chr&gt;             &lt;dbl&gt;
-##  1     1 setosa              5.1
-##  2     1 versicolor          7  
-##  3     1 virginica           6.3
-##  4     2 setosa              4.9
-##  5     2 versicolor          6.4
-##  6     2 virginica           5.8
-##  7     3 setosa              4.7
-##  8     3 versicolor          6.9
-##  9     3 virginica           7.1
-## 10     4 setosa              4.6
-## # ℹ 140 more rows</code></pre>
+<pre><code>## # A tibble: 9 × 3
+##      id Species    Sepal.Length
+##   &lt;int&gt; &lt;chr&gt;             &lt;dbl&gt;
+## 1     1 setosa              4.8
+## 2     1 versicolor          6.9
+## 3     1 virginica           6.3
+## 4     2 setosa              5.8
+## 5     2 versicolor          6.1
+## 6     2 virginica           5.7
+## 7     3 setosa              4.3
+## 8     3 versicolor          5.8
+## 9     3 virginica           6.7</code></pre>
 </div>
 <div id="join" class="section level2" number="5.6">
 <h2>
@@ -829,7 +819,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-08-19.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-08-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

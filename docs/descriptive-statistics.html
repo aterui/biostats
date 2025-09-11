@@ -370,11 +370,11 @@ x_5 = 24.4\\
 </h3>
 <p>What are the differences of the three measures of central tendency? To investigate this further, let’s perform the following exercise.</p>
 <ol style="list-style-type: decimal">
-<li><p>Create a new vector <code>z</code> with length <span class="math inline">\(1000\)</span> as <code>exp(rnorm(n = 1000, mean = 0, sd = 0.1))</code>, and calculate the arithmetic mean, geometric mean, and median.</p></li>
+<li><p>Create a new vector <code>z</code> with length <span class="math inline">\(100\)</span> as <code>exp(rnorm(n = 1000, mean = 0, sd = 0.1))</code>, and calculate the arithmetic mean, geometric mean, and median.</p></li>
 <li><p>Draw a histogram of <code>z</code> using functions <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code>, <code><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot()</a></code>, and <code><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram()</a></code>.</p></li>
 <li><p>Draw vertical lines of arithmetic mean, geometric mean, and median on the histogram with different colors using a function <code><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline()</a></code> .</p></li>
-<li><p>Compare the values of the central tendency measures.</p></li>
-<li><p>Create a new vector <code>z_rev</code> as <code>-z + max(z) + 0.1</code>, and repeat step 1 – 4.</p></li>
+<li><p>Visually compare the values of the central tendency measures with the vertical lines drawn by <code><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline()</a></code>.</p></li>
+<li><p>Create a new vector <code>z_rev</code> as <code>-z + max(z) + 0.5</code>, and repeat step 1 – 4.</p></li>
 </ol>
 </div>
 <div id="comparing-variation-measures" class="section level3" number="7.3.2">
@@ -437,7 +437,7 @@ x_5 = 24.4\\
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-08-29.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-09-11.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

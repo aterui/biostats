@@ -272,15 +272,15 @@ print(mm_y)
 
 What are the differences of the three measures of central tendency? To investigate this further, let's perform the following exercise.
 
-1.  Create a new vector `z` with length $1000$ as `exp(rnorm(n = 1000, mean = 0, sd = 0.1))`, and calculate the arithmetic mean, geometric mean, and median.
+1.  Create a new vector `z` with length $100$ as `exp(rnorm(n = 1000, mean = 0, sd = 0.1))`, and calculate the arithmetic mean, geometric mean, and median.
 
 2.  Draw a histogram of `z` using functions `tibble()`, `ggplot()`, and `geom_histogram()`.
 
 3.  Draw vertical lines of arithmetic mean, geometric mean, and median on the histogram with different colors using a function `geom_vline()` .
 
-4.  Compare the values of the central tendency measures.
+4.  Visually compare the values of the central tendency measures with the vertical lines drawn by `geom_vline()`.
 
-5.  Create a new vector `z_rev` as `-z + max(z) + 0.1`, and repeat step 1 -- 4.
+5.  Create a new vector `z_rev` as `-z + max(z) + 0.5`, and repeat step 1 -- 4.
 
 ### Comparing Variation Measures
 

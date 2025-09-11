@@ -272,7 +272,7 @@ print(mm_y)
 
 What are the differences of the three measures of central tendency? To investigate this further, let's perform the following exercise.
 
-1.  Create a new vector `z` with length $100$ as `exp(rnorm(n = 1000, mean = 0, sd = 0.1))`, and calculate the arithmetic mean, geometric mean, and median.
+1.  Create a new vector `z` with length $100$ as `exp(rnorm(n = 100, mean = 0, sd = 0.1))`, and calculate the arithmetic mean, geometric mean, and median of `z`.
 
 2.  Draw a histogram of `z` using functions `tibble()`, `ggplot()`, and `geom_histogram()`.
 

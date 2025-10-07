@@ -137,6 +137,7 @@ anova-in-r
 post-hoc-tests
 laboratory-4
 application-to-plantgrowth
+power-analysis
 regression
 explore-data-structure-1
 drawing-the-fittest-line

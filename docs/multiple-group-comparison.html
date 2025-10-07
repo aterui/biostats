@@ -347,6 +347,58 @@ Figure 11.2: F-distribution. The vertical red line denotes the observed F-statis
 <li><p>Discuss what values to be reported in a scientific article?</p></li>
 </ol>
 </div>
+<div id="power-analysis" class="section level3" number="11.5.2">
+<h3>
+<span class="header-section-number">11.5.2</span> Power analysis<a class="anchor" aria-label="anchor" href="#power-analysis"><i class="fas fa-link"></i></a>
+</h3>
+<p>You’re planning to compare the mean plant biomass among three different wetlands using ANOVA. You expect a large effect size (Cohen’s <code>f = 0.5</code>) and want to achieve 80% power at a 0.05 significance level. How can you calculate the required sample size per group in R? You may use <code><a href="https://rdrr.io/pkg/pwr/man/pwr.anova.test.html">pwr::pwr.anova.test()</a></code> function in R (see arguments below).</p>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="24%">
+<col width="24%">
+<col width="25%">
+<col width="25%">
+</colgroup>
+<thead><tr class="header">
+<th align="left"><strong>Argument</strong></th>
+<th align="left"><strong>Description</strong></th>
+<th align="left"><strong>Example Value</strong></th>
+<th align="left"><strong>Interpretation</strong></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>k</code></td>
+<td align="left">Number of groups (levels of the independent variable)</td>
+<td align="left"><code>3</code></td>
+<td align="left">Comparing means across <strong>3 groups</strong> (e.g., three wetland treatments)</td>
+</tr>
+<tr class="even">
+<td align="left"><code>f</code></td>
+<td align="left">Effect size (Cohen’s <em>f</em>)</td>
+<td align="left"><code>0.5</code></td>
+<td align="left">Expected <strong>magnitude of group differences</strong>; 0.1 = small, 0.25 = medium, 0.4+ = large</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>sig.level</code></td>
+<td align="left">Significance level (α)</td>
+<td align="left"><code>0.05</code></td>
+<td align="left">Probability of a <strong>Type I error</strong> — rejecting <em>H₀</em> when it’s actually true</td>
+</tr>
+<tr class="even">
+<td align="left"><code>power</code></td>
+<td align="left">Desired statistical power (1 − β)</td>
+<td align="left"><code>0.8</code></td>
+<td align="left">Probability of <strong>detecting a true effect</strong> if one exists (80 % is typical)</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>n</code></td>
+<td align="left">Sample size per group</td>
+<td align="left"><em>computed by function</em></td>
+<td align="left">Returned by the function — number of observations needed per group</td>
+</tr>
+</tbody>
+</table></div>
+</div>
 </div>
 </div>
   <div class="chapter-nav">
@@ -372,7 +424,10 @@ Figure 11.2: F-distribution. The vertical red line denotes the observed F-statis
 <li><a class="nav-link" href="#anova-in-r"><span class="header-section-number">11.3</span> ANOVA in R</a></li>
 <li><a class="nav-link" href="#post-hoc-tests"><span class="header-section-number">11.4</span> Post-hoc Tests</a></li>
 <li>
-<a class="nav-link" href="#laboratory-4"><span class="header-section-number">11.5</span> Laboratory</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#application-to-plantgrowth"><span class="header-section-number">11.5.1</span> Application to PlantGrowth</a></li></ul>
+<a class="nav-link" href="#laboratory-4"><span class="header-section-number">11.5</span> Laboratory</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#application-to-plantgrowth"><span class="header-section-number">11.5.1</span> Application to PlantGrowth</a></li>
+<li><a class="nav-link" href="#power-analysis"><span class="header-section-number">11.5.2</span> Power analysis</a></li>
+</ul>
 </li>
 </ul>
 
@@ -391,7 +446,7 @@ Figure 11.2: F-distribution. The vertical red line denotes the observed F-statis
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-09-11.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-10-07.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

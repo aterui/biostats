@@ -158,12 +158,14 @@ two-group-case
 multiple-group-case
 the-common-structure
 combine-multiple-types-of-variables
-iris-example
+iris-example---additive-effects
+iris-example---interactive-effects
 level-of-measurament
+non-parametric-method
 laboratory-6
 normality-assumption
 model-interpretation
-alternative-model
+experimental-design
 generalized-linear-model
 count-data
 plant-density

@@ -74,9 +74,10 @@ g_lm <- tibble(y = y, x = x) %>%
                y = 5,
                yend = 5,
                color = "steelblue") +
-  geom_text(label = expression(alpha),
+  geom_text(label = "alpha",
             x = -1,
-            y = 5) +
+            y = 5,
+            parse = TRUE) +
   geom_segment(x = 2,
                xend = 3,
                y = 7,
@@ -87,9 +88,10 @@ g_lm <- tibble(y = y, x = x) %>%
                y = 7,
                yend = 8,
                color = "steelblue") +
-  geom_text(label = expression(beta),
+  geom_text(label = "beta",
             x = 3.25,
-            y = 7.5) +
+            y = 7.5,
+            parse = TRUE) +
   geom_text(label = "1",
             x = 2.5,
             y = 6.5) +
@@ -139,3 +141,4 @@ g_dendro <- graph %>%
 ggsave(g_dendro,
        height = 8, width = 10,
        filename = here::here("image/figure_dendro.jpg"))
+

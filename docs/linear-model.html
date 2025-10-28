@@ -333,9 +333,9 @@ y_i = \text{(deterministic component)} + \text{(stochastic component)}
 <h2>
 <span class="header-section-number">13.2</span> Combine Multiple Types of Variables<a class="anchor" aria-label="anchor" href="#combine-multiple-types-of-variables"><i class="fas fa-link"></i></a>
 </h2>
-<div id="iris-example" class="section level3" number="13.2.1">
+<div id="iris-example---additive-effects" class="section level3" number="13.2.1">
 <h3>
-<span class="header-section-number">13.2.1</span> <code>iris</code> Example<a class="anchor" aria-label="anchor" href="#iris-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.2.1</span> <code>iris</code> Example - additive effects<a class="anchor" aria-label="anchor" href="#iris-example---additive-effects"><i class="fas fa-link"></i></a>
 </h3>
 <p>The previous section clarified that the t-test, ANOVA, and regression have a common model structure; therefore, categorical and continuous variables can be included in the same model. Here, let me use the <code>iris</code> data (available in R by default) to show an example. This data set comprises continuous (Sepal.Length, Sepal.Width, Petal.Length, Petal.Width) and categorical variables (Species):</p>
 <div class="sourceCode" id="cb400"><pre class="downlit sourceCode r">
@@ -397,12 +397,11 @@ y_i = \text{(deterministic component)} + \text{(stochastic component)}
 <code class="sourceCode R"><span><span class="co"># create a data frame for prediction</span></span>
 <span><span class="co"># variable names must be identical to the original dataframe for analysis</span></span>
 <span><span class="va">n_rep</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
-<span><span class="va">df_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>Petal.Width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Petal.Width</span><span class="op">)</span>,</span>
-<span>                                        <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Petal.Width</span><span class="op">)</span>,</span>
-<span>                                        length <span class="op">=</span> <span class="va">n_rep</span><span class="op">)</span>,</span>
-<span>                                    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/n_distinct.html">n_distinct</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                  Species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span>,</span>
-<span>                                each <span class="op">=</span> <span class="va">n_rep</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">df_pred</span> <span class="op">&lt;-</span> <span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/reframe.html">reframe</a></span><span class="op">(</span>Petal.Width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">Petal.Width</span><span class="op">)</span>,</span>
+<span>                            <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">Petal.Width</span><span class="op">)</span>,</span>
+<span>                            length <span class="op">=</span> <span class="va">n_rep</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># make prediction based on supplied values of explanatory variables</span></span>
 <span><span class="va">y_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">m_iris</span>,</span>
@@ -413,18 +412,18 @@ y_i = \text{(deterministic component)} + \text{(stochastic component)}
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_pred</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 300 × 3
-##    Petal.Width Species y_pred
-##          &lt;dbl&gt; &lt;fct&gt;    &lt;dbl&gt;
-##  1       0.1   setosa    1.31
-##  2       0.124 setosa    1.34
-##  3       0.148 setosa    1.36
-##  4       0.173 setosa    1.39
-##  5       0.197 setosa    1.41
-##  6       0.221 setosa    1.44
-##  7       0.245 setosa    1.46
-##  8       0.270 setosa    1.49
-##  9       0.294 setosa    1.51
-## 10       0.318 setosa    1.54
+##    Species Petal.Width y_pred
+##    &lt;fct&gt;         &lt;dbl&gt;  &lt;dbl&gt;
+##  1 setosa        0.1     1.31
+##  2 setosa        0.105   1.32
+##  3 setosa        0.110   1.32
+##  4 setosa        0.115   1.33
+##  5 setosa        0.120   1.33
+##  6 setosa        0.125   1.34
+##  7 setosa        0.130   1.34
+##  8 setosa        0.135   1.35
+##  9 setosa        0.140   1.35
+## 10 setosa        0.145   1.36
 ## # ℹ 290 more rows</code></pre>
 <p>By plotting the predicted values against the observed data points, we can visually evaluate the accuracy of the model and assess its goodness of fit.</p>
 <div class="sourceCode" id="cb408"><pre class="downlit sourceCode r">
@@ -442,9 +441,76 @@ Figure 13.1: Example of model fitting to iris data. Points are observations, and
 </p>
 </div>
 </div>
-<div id="level-of-measurament" class="section level3" number="13.2.2">
+<div id="iris-example---interactive-effects" class="section level3" number="13.2.2">
 <h3>
-<span class="header-section-number">13.2.2</span> Level of Measurament<a class="anchor" aria-label="anchor" href="#level-of-measurament"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.2.2</span> <code>iris</code> Example - interactive effects<a class="anchor" aria-label="anchor" href="#iris-example---interactive-effects"><i class="fas fa-link"></i></a>
+</h3>
+<p>In statistical models, an <strong>interaction</strong> occurs when the effect of one factor depends on the level of another factor. In the <code>iris</code> dataset, for example, the relationship between <code>Petal.Length</code> and <code>Petal.Width</code> may depend on species. We can represent this scenario with the following model:</p>
+<div class="sourceCode" id="cb409"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># develop iris model with an interaction</span></span>
+<span><span class="va">m_iris_int</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Petal.Length</span> <span class="op">~</span> <span class="va">Petal.Width</span> <span class="op">*</span> <span class="va">Species</span>,</span>
+<span>                 data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">m_iris_int</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Petal.Length ~ Petal.Width * Species, data = iris)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.84099 -0.19343 -0.03686  0.16314  1.17065 
+## 
+## Coefficients:
+##                               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)                     1.3276     0.1309  10.139  &lt; 2e-16 ***
+## Petal.Width                     0.5465     0.4900   1.115   0.2666    
+## Speciesversicolor               0.4537     0.3737   1.214   0.2267    
+## Speciesvirginica                2.9131     0.4060   7.175 3.53e-11 ***
+## Petal.Width:Speciesversicolor   1.3228     0.5552   2.382   0.0185 *  
+## Petal.Width:Speciesvirginica    0.1008     0.5248   0.192   0.8480    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.3615 on 144 degrees of freedom
+## Multiple R-squared:  0.9595, Adjusted R-squared:  0.9581 
+## F-statistic: 681.9 on 5 and 144 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>In this model:</p>
+<ul>
+<li><p><code>Petal.Width</code> represents the effect of petal width on petal length for the reference species (<code>setosa</code>).</p></li>
+<li><p><code>Species</code> captures differences in petal length among species when <code>Petal.Width = 0</code>.</p></li>
+<li><p>The interaction term (<code>Petal.Width:Species</code>) allows the <strong>slope of Petal.Length vs. Petal.Width to vary by species</strong>, meaning the effect of petal width can differ across species.</p></li>
+</ul>
+<p>If the interaction term is significant, it indicates that the relationship between <code>Petal.Length</code> and <code>Petal.Width</code> <strong>depends on species</strong>, and visualizing the fitted lines for each species is helpful for interpretation.</p>
+<div class="sourceCode" id="cb411"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># recreate prdiction dataframe</span></span>
+<span><span class="va">n_rep</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
+<span><span class="va">df_pred</span> <span class="op">&lt;-</span> <span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/reframe.html">reframe</a></span><span class="op">(</span>Petal.Width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">Petal.Width</span><span class="op">)</span>,</span>
+<span>                            <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">Petal.Width</span><span class="op">)</span>,</span>
+<span>                            length <span class="op">=</span> <span class="va">n_rep</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># prediction with the interaction model</span></span>
+<span><span class="va">y_pred_int</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">m_iris_int</span>,</span>
+<span>                      newdata <span class="op">=</span> <span class="va">df_pred</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">df_pred</span> <span class="op">&lt;-</span> <span class="va">df_pred</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>y_pred_int <span class="op">=</span> <span class="va">y_pred_int</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># visualization</span></span>
+<span><span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Petal.Width</span>,</span>
+<span>             y <span class="op">=</span> <span class="va">Petal.Length</span>,</span>
+<span>             color <span class="op">=</span> <span class="va">Species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_pred</span>,</span>
+<span>            <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">y_pred_int</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-131-1.png" width="672" style="display: block; margin: auto;"></div>
+<p>In this case, the interaction was significant for <code>versicolor</code>, and the slope is estimated to be clearly different from the other two.</p>
+</div>
+<div id="level-of-measurament" class="section level3" number="13.2.3">
+<h3>
+<span class="header-section-number">13.2.3</span> Level of Measurament<a class="anchor" aria-label="anchor" href="#level-of-measurament"><i class="fas fa-link"></i></a>
 </h3>
 <ol style="list-style-type: decimal">
 <li><p><strong>Categorical Variables</strong>: Qualitative or discrete characteristics that fall into specific categories or groups. They do not have a numerical value or order associated with them. Examples: gender (male/female), marital status (single/married/divorced), and color (red/green/blue).</p></li>
@@ -456,28 +522,96 @@ Figure 13.1: Example of model fitting to iris data. Points are observations, and
 <p>In contrast, interval and ratio variables should be considered “numerical” variables in R. These variables possess a meaningful numerical scale with equal intervals, and in the case of ratio variables, a true zero point.</p>
 </div>
 </div>
-<div id="laboratory-6" class="section level2" number="13.3">
+<div id="non-parametric-method" class="section level2" number="13.3">
 <h2>
-<span class="header-section-number">13.3</span> Laboratory<a class="anchor" aria-label="anchor" href="#laboratory-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.3</span> Non-parametric method<a class="anchor" aria-label="anchor" href="#non-parametric-method"><i class="fas fa-link"></i></a>
 </h2>
-<div id="normality-assumption" class="section level3" number="13.3.1">
-<h3>
-<span class="header-section-number">13.3.1</span> Normality Assumption<a class="anchor" aria-label="anchor" href="#normality-assumption"><i class="fas fa-link"></i></a>
-</h3>
-<p>The Linear Model framework assumes normality. To verify the validity of the normality assumption, we typically employ the Shapiro-Wilk test (<code><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test()</a></code> in R). Discuss whether the test should be applied to (1) the response variable or (2) model residuals. Then apply the Shapiro-Wilk test to the model <code>m_iris</code>. Type <code><a href="https://rdrr.io/r/stats/shapiro.test.html">?shapiro.test</a></code> in the R console to learn more about its usage.</p>
+<p>When the assumptions of linear models (e.g., normality, equal variances) are not met, <strong>nonparametric methods</strong> can be used. These methods <strong>do not assume a specific probability distribution</strong> for the data and can provide valid inference even with skewed or ordinal data.</p>
+<p>Examples for common cases:</p>
+<div class="inline-table"><table style="width:99%;" class="table table-sm">
+<colgroup>
+<col width="29%">
+<col width="29%">
+<col width="40%">
+</colgroup>
+<thead><tr class="header">
+<th>Purpose</th>
+<th>Parametric Method (Normal Data)</th>
+<th>Nonparametric Alternative (Non-normal Data)</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Compare <strong>two groups</strong>
+</td>
+<td>t-test</td>
+<td>
+<p>Wilcoxon rank-sum test (Mann–Whitney U test)</p>
+<p><code><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test()</a></code></p>
+</td>
+</tr>
+<tr class="even">
+<td>Compare <strong>more than two groups</strong>
+</td>
+<td>ANOVA</td>
+<td>
+<p>Kruskal–Wallis test</p>
+<p><code><a href="https://rdrr.io/r/stats/kruskal.test.html">kruskal.test()</a></code></p>
+</td>
+</tr>
+</tbody>
+</table></div>
 </div>
-<div id="model-interpretation" class="section level3" number="13.3.2">
+<div id="laboratory-6" class="section level2" number="13.4">
+<h2>
+<span class="header-section-number">13.4</span> Laboratory<a class="anchor" aria-label="anchor" href="#laboratory-6"><i class="fas fa-link"></i></a>
+</h2>
+<div id="normality-assumption" class="section level3" number="13.4.1">
 <h3>
-<span class="header-section-number">13.3.2</span> Model Interpretation<a class="anchor" aria-label="anchor" href="#model-interpretation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.4.1</span> Normality Assumption<a class="anchor" aria-label="anchor" href="#normality-assumption"><i class="fas fa-link"></i></a>
 </h3>
-<p>The model depicted in Figure <a href="linear-model.html#fig:iris-plot">13.1</a> can be interpreted as follows: “each species has a distinct intercept value.” Extract the intercept values for each species from the <code>m_iris</code> object.</p>
+<p>The dataset <code>ToothGrowth</code> comes from a Guinea pig experiment that tested how Vitamin C affects tooth growth. Each observation represents a single guinea pig.</p>
+<p>The experiment compared:</p>
+<ul>
+<li><p>Two supplement types: orange juice (OJ) and ascorbic acid (VC)</p></li>
+<li><p>Three dose levels: 0.5, 1, and 2 mg/day</p></li>
+</ul>
+<p>Using this dataset,</p>
+<ol style="list-style-type: decimal">
+<li><p>Develop a linear model examining the effect of supplement type (<code>supp</code>), dose (<code>dose</code>), and their interaction on tooth length (<code>len</code>). Assign the developed model to <code>m_tooth</code>.</p></li>
+<li><p>The Linear Model framework assumes normality. To verify the validity of the normality assumption, we typically employ the Shapiro-Wilk test (<code><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test()</a></code> in R). Discuss whether the test should be applied to (1) the response variable or (2) model residuals. Then, apply the Shapiro-Wilk. Type <code><a href="https://rdrr.io/r/stats/shapiro.test.html">?shapiro.test</a></code> in the R console to learn more about its usage.</p></li>
+</ol>
 </div>
-<div id="alternative-model" class="section level3" number="13.3.3">
+<div id="model-interpretation" class="section level3" number="13.4.2">
 <h3>
-<span class="header-section-number">13.3.3</span> Alternative Model<a class="anchor" aria-label="anchor" href="#alternative-model"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.4.2</span> Model Interpretation<a class="anchor" aria-label="anchor" href="#model-interpretation"><i class="fas fa-link"></i></a>
 </h3>
-<p>Let’s explore an alternative model that does not consider the species’ identity. How would this modification affect the results? Develop a model excluding the <code>Species</code> variable and create a new figure resembling Figure <a href="linear-model.html#fig:iris-plot">13.1</a>, but with a single regression line.</p>
-
+<p>Using <code>m_tooth</code>, create a figure illustrating the relationship between tooth length (<code>len</code>; y-axis) and dose (<code>dose</code>; x-axis), with color indicating supplement type (<code>supp</code>). Include both the observed and predicted values, similar to Figure <a href="linear-model.html#fig:iris-plot">13.1</a>.</p>
+<p>Use the following data frame for prediction:</p>
+<div class="sourceCode" id="cb412"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df_pred</span> <span class="op">&lt;-</span> <span class="va">ToothGrowth</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">supp</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/reframe.html">reframe</a></span><span class="op">(</span>dose <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">dose</span><span class="op">)</span>,</span>
+<span>                     <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">dose</span><span class="op">)</span>,</span>
+<span>                     length <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="experimental-design" class="section level3" number="13.4.3">
+<h3>
+<span class="header-section-number">13.4.3</span> Experimental Design<a class="anchor" aria-label="anchor" href="#experimental-design"><i class="fas fa-link"></i></a>
+</h3>
+<p>You are designing an experiment to examine the effects of <strong>nutrient level</strong> and <strong>predation</strong> on <strong>prey fish growth</strong>. The proposed treatment combinations are:</p>
+<ol style="list-style-type: decimal">
+<li><p>Low nutrient and predator present</p></li>
+<li><p>High nutrient and predator present</p></li>
+<li><p>High nutrient and predator absent</p></li>
+</ol>
+<p>In addition, you plan to record the <strong>initial length of the prey fish</strong> (a continuous variable), as it may influence subsequent growth.</p>
+<p><strong>Question:</strong> Select the most appropriate statement regarding what this experiment can assess:</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>This experiment can capture the effects of nutrient, predation, and their interaction.</p></li>
+<li><p>This experiment can capture the effects of nutrient and predation. However, the nutrient effect may be limited to the presence of predators, and the predator effect is limited to the high nutrient condition.</p></li>
+<li><p>This experiment can capture the effects of nutrient and predation. Main effects can be assessed across all nutrient conditions.</p></li>
+<li><p>This experiment cannot capture either main effects or the interaction.</p></li>
+</ol>
 </div>
 </div>
 </div>
@@ -498,15 +632,17 @@ Figure 13.1: Example of model fitting to iris data. Points are observations, and
 </li>
 <li>
 <a class="nav-link" href="#combine-multiple-types-of-variables"><span class="header-section-number">13.2</span> Combine Multiple Types of Variables</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#iris-example"><span class="header-section-number">13.2.1</span> iris Example</a></li>
-<li><a class="nav-link" href="#level-of-measurament"><span class="header-section-number">13.2.2</span> Level of Measurament</a></li>
+<li><a class="nav-link" href="#iris-example---additive-effects"><span class="header-section-number">13.2.1</span> iris Example - additive effects</a></li>
+<li><a class="nav-link" href="#iris-example---interactive-effects"><span class="header-section-number">13.2.2</span> iris Example - interactive effects</a></li>
+<li><a class="nav-link" href="#level-of-measurament"><span class="header-section-number">13.2.3</span> Level of Measurament</a></li>
 </ul>
 </li>
+<li><a class="nav-link" href="#non-parametric-method"><span class="header-section-number">13.3</span> Non-parametric method</a></li>
 <li>
-<a class="nav-link" href="#laboratory-6"><span class="header-section-number">13.3</span> Laboratory</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#normality-assumption"><span class="header-section-number">13.3.1</span> Normality Assumption</a></li>
-<li><a class="nav-link" href="#model-interpretation"><span class="header-section-number">13.3.2</span> Model Interpretation</a></li>
-<li><a class="nav-link" href="#alternative-model"><span class="header-section-number">13.3.3</span> Alternative Model</a></li>
+<a class="nav-link" href="#laboratory-6"><span class="header-section-number">13.4</span> Laboratory</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#normality-assumption"><span class="header-section-number">13.4.1</span> Normality Assumption</a></li>
+<li><a class="nav-link" href="#model-interpretation"><span class="header-section-number">13.4.2</span> Model Interpretation</a></li>
+<li><a class="nav-link" href="#experimental-design"><span class="header-section-number">13.4.3</span> Experimental Design</a></li>
 </ul>
 </li>
 </ul>
@@ -526,7 +662,7 @@ Figure 13.1: Example of model fitting to iris data. Points are observations, and
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-10-09.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-10-28.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

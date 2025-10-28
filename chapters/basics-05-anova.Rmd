@@ -260,7 +260,7 @@ In R, there is a built-in data set called `PlantGrowth`. To analyze this data se
 You're planning to compare the mean plant biomass among three different wetlands using ANOVA. You expect a large effect size (Cohen’s `f = 0.5`) and want to achieve 80% power at a 0.05 significance level. How can you calculate the required sample size per group in R? You may use `pwr::pwr.anova.test()` function in R (see arguments below).
 
 | **Argument** | **Description** | **Example Value** | **Interpretation** |
-|:-----------------|:-----------------|:------------------|:------------------|
+|:-----------------|:-----------------|:-----------------|:-----------------|
 | `k` | Number of groups (levels of the independent variable) | `3` | Comparing means across **3 groups** (e.g., three wetland treatments) |
 | `f` | Effect size (Cohen’s *f*) | `0.5` | Expected **magnitude of group differences**; 0.1 = small, 0.25 = medium, 0.4+ = large |
 | `sig.level` | Significance level (α) | `0.05` | Probability of a **Type I error** — rejecting *H₀* when it’s actually true |

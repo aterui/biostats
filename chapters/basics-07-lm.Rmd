@@ -6,9 +6,9 @@ df_anova <- read_csv(here::here("data_raw/data_fish_length_anova.csv"))
 
 # Linear Model
 
-We have extensively covered three important statistical analyses: the t-test, ANOVA, and regression analysis. While these methods may seem distinct, they all fall under the umbrella of the Linear Model framework[^07-lm-1].
+We have extensively covered three important statistical analyses: the t-test, ANOVA, and regression analysis. While these methods may seem distinct, they all fall under the umbrella of the Linear Model framework[^basics-07-lm-1].
 
-[^07-lm-1]: Some textbooks refer to this framework as "General Linear Model." However, to distinguish from Generalized Linear Model, I call this "Linear Model."
+[^basics-07-lm-1]: Some textbooks refer to this framework as "General Linear Model." However, to distinguish from Generalized Linear Model, I call this "Linear Model."
 
 The Linear Model encompasses models that depict the connection between a response variable and one or more explanatory variables. It assumes that the error term follows a normal distribution. In this chapter, I will elucidate this framework and illustrate its relationship to the t-test, ANOVA, and regression analysis.
 
@@ -212,7 +212,7 @@ Violations of these assumptions can affect the validity and reliability of the r
 
 ## Combine Multiple Types of Variables
 
-### `iris` Example
+### `iris` Example - additive effects
 
 The previous section clarified that the t-test, ANOVA, and regression have a common model structure; therefore, categorical and continuous variables can be included in the same model. Here, let me use the `iris` data (available in R by default) to show an example. This data set comprises continuous (`r colnames(iris)[colnames(iris)!="Species"]`) and categorical variables (Species):
 
@@ -242,12 +242,11 @@ If you want to obtain predicted values, you can use the `predict()` function. To
 # create a data frame for prediction
 # variable names must be identical to the original dataframe for analysis
 n_rep <- 100
-df_pred <- tibble(Petal.Width = rep(seq(min(iris$Petal.Width),
-                                        max(iris$Petal.Width),
-                                        length = n_rep),
-                                    n_distinct(iris$Species)),
-                  Species = rep(unique(iris$Species),
-                                each = n_rep))
+df_pred <- iris %>% 
+  group_by(Species) %>% 
+  reframe(Petal.Width = seq(min(Petal.Width),
+                            max(Petal.Width),
+                            length = n_rep))
 
 # make prediction based on supplied values of explanatory variables
 y_pred <- predict(m_iris,
@@ -271,6 +270,56 @@ iris %>%
             aes(y = y_pred)) # redefine y values for lines; x and color are inherited from ggplot()
 ```
 
+### `iris` Example - interactive effects
+
+In statistical models, an **interaction** occurs when the effect of one factor depends on the level of another factor. In the `iris` dataset, for example, the relationship between `Petal.Length` and `Petal.Width` may depend on species. We can represent this scenario with the following model:
+
+```{r}
+# develop iris model with an interaction
+m_iris_int <- lm(Petal.Length ~ Petal.Width * Species,
+                 data = iris)
+
+summary(m_iris_int)
+```
+
+In this model:
+
+-   `Petal.Width` represents the effect of petal width on petal length for the reference species (`setosa`).
+
+-   `Species` captures differences in petal length among species when `Petal.Width = 0`.
+
+-   The interaction term (`Petal.Width:Species`) allows the **slope of Petal.Length vs. Petal.Width to vary by species**, meaning the effect of petal width can differ across species.
+
+If the interaction term is significant, it indicates that the relationship between `Petal.Length` and `Petal.Width` **depends on species**, and visualizing the fitted lines for each species is helpful for interpretation.
+
+```{r}
+# recreate prdiction dataframe
+n_rep <- 100
+df_pred <- iris %>% 
+  group_by(Species) %>% 
+  reframe(Petal.Width = seq(min(Petal.Width),
+                            max(Petal.Width),
+                            length = n_rep))
+
+# prediction with the interaction model
+y_pred_int <- predict(m_iris_int,
+                      newdata = df_pred)
+
+df_pred <- df_pred %>% 
+  mutate(y_pred_int = y_pred_int)
+
+# visualization
+iris %>% 
+  ggplot(aes(x = Petal.Width,
+             y = Petal.Length,
+             color = Species)) +
+  geom_point(alpha = 0.5) +
+  geom_line(data = df_pred,
+            aes(y = y_pred_int))
+```
+
+In this case, the interaction was significant for `versicolor`, and the slope is estimated to be clearly different from the other two.
+
 ### Level of Measurament
 
 1.  **Categorical Variables**: Qualitative or discrete characteristics that fall into specific categories or groups. They do not have a numerical value or order associated with them. Examples: gender (male/female), marital status (single/married/divorced), and color (red/green/blue).
@@ -285,16 +334,74 @@ We cannot carry out meaningful arithmetic operations on categorical and ordinal 
 
 In contrast, interval and ratio variables should be considered "numerical" variables in R. These variables possess a meaningful numerical scale with equal intervals, and in the case of ratio variables, a true zero point.
 
+## Non-parametric method
+
+When the assumptions of linear models (e.g., normality, equal variances) are not met, **nonparametric methods** can be used. These methods **do not assume a specific probability distribution** for the data and can provide valid inference even with skewed or ordinal data.
+
+Examples for common cases:
+
++----------------------------------+---------------------------------+----------------------------------------------+
+| Purpose                          | Parametric Method (Normal Data) | Nonparametric Alternative (Non-normal Data)  |
++==================================+=================================+==============================================+
+| Compare **two groups**           | t-test                          | Wilcoxon rank-sum test (Mann–Whitney U test) |
+|                                  |                                 |                                              |
+|                                  |                                 | `wilcox.test()`                              |
++----------------------------------+---------------------------------+----------------------------------------------+
+| Compare **more than two groups** | ANOVA                           | Kruskal–Wallis test                          |
+|                                  |                                 |                                              |
+|                                  |                                 | `kruskal.test()`                             |
++----------------------------------+---------------------------------+----------------------------------------------+
+
 ## Laboratory
 
 ### Normality Assumption
 
-The Linear Model framework assumes normality. To verify the validity of the normality assumption, we typically employ the Shapiro-Wilk test (`shapiro.test()` in R). Discuss whether the test should be applied to (1) the response variable or (2) model residuals. Then apply the Shapiro-Wilk test to the model `m_iris`. Type `?shapiro.test` in the R console to learn more about its usage.
+The dataset `ToothGrowth` comes from a Guinea pig experiment that tested how Vitamin C affects tooth growth. Each observation represents a single guinea pig.
+
+The experiment compared:
+
+-   Two supplement types: orange juice (OJ) and ascorbic acid (VC)
+
+-   Three dose levels: 0.5, 1, and 2 mg/day
+
+Using this dataset,
+
+1.  Develop a linear model examining the effect of supplement type (`supp`), dose (`dose`), and their interaction on tooth length (`len`). Assign the developed model to `m_tooth`.
+
+2.  The Linear Model framework assumes normality. To verify the validity of the normality assumption, we typically employ the Shapiro-Wilk test (`shapiro.test()` in R). Discuss whether the test should be applied to (1) the response variable or (2) model residuals. Then, apply the Shapiro-Wilk. Type `?shapiro.test` in the R console to learn more about its usage.
 
 ### Model Interpretation
 
-The model depicted in Figure \@ref(fig:iris-plot) can be interpreted as follows: "each species has a distinct intercept value." Extract the intercept values for each species from the `m_iris` object.
+Using `m_tooth`, create a figure illustrating the relationship between tooth length (`len`; y-axis) and dose (`dose`; x-axis), with color indicating supplement type (`supp`). Include both the observed and predicted values, similar to Figure \@ref(fig:iris-plot).
 
-### Alternative Model
+Use the following data frame for prediction:
 
-Let's explore an alternative model that does not consider the species' identity. How would this modification affect the results? Develop a model excluding the `Species` variable and create a new figure resembling Figure \@ref(fig:iris-plot), but with a single regression line.
+```{r}
+df_pred <- ToothGrowth %>%
+  group_by(supp) %>%
+  reframe(dose = seq(min(dose),
+                     max(dose),
+                     length = 100))
+```
+
+### Experimental Design
+
+You are designing an experiment to examine the effects of **nutrient level** and **predation** on **prey fish growth**. The proposed treatment combinations are:
+
+1.  Low nutrient and predator present
+
+2.  High nutrient and predator present
+
+3.  High nutrient and predator absent
+
+In addition, you plan to record the **initial length of the prey fish** (a continuous variable), as it may influence subsequent growth.
+
+**Question:** Select the most appropriate statement regarding what this experiment can assess:
+
+(a) This experiment can capture the effects of nutrient, predation, and their interaction.
+
+(b) This experiment can capture the effects of nutrient and predation. However, the nutrient effect may be limited to the presence of predators, and the predator effect is limited to the high nutrient condition.
+
+(c) This experiment can capture the effects of nutrient and predation. Main effects can be assessed across all nutrient conditions.
+
+(d) This experiment cannot capture either main effects or the interaction.

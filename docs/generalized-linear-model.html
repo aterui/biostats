@@ -99,7 +99,7 @@
 Figure 14.1: Garden view with sampling plots. White squares represent plots. Red dots indicate plant individuals counted.
 </p>
 </div>
-<div class="sourceCode" id="cb413"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb414"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_count</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data_raw/data_garden_count.csv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_count</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 30 × 3
@@ -129,7 +129,7 @@ y_i &amp;\sim \text{Normal}(\mu_i, \sigma^2)\\
 \mu_i &amp;= \alpha + \beta~\text{nitrate}_i
 \end{aligned}
 \]</span></p>
-<div class="sourceCode" id="cb415"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb416"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_normal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">count</span> <span class="op">~</span> <span class="va">nitrate</span>,</span>
 <span>               <span class="va">df_count</span><span class="op">)</span></span>
 <span></span>
@@ -153,7 +153,7 @@ y_i &amp;\sim \text{Normal}(\mu_i, \sigma^2)\\
 ## Multiple R-squared:  0.557,  Adjusted R-squared:  0.5411 
 ## F-statistic:  35.2 on 1 and 28 DF,  p-value: 2.193e-06</code></pre>
 <p>This seems satisfactory, but an anomalous behavior occurs during the plotting process on the figure. Plot the data and the predicted values together.</p>
-<div class="sourceCode" id="cb417"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb418"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># extract estimates</span></span>
 <span><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">m_normal</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="co"># intercept</span></span>
 <span><span class="va">beta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">m_normal</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="co"># slope</span></span>
@@ -164,7 +164,7 @@ y_i &amp;\sim \text{Normal}(\mu_i, \sigma^2)\\
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span><span class="op">(</span>intercept <span class="op">=</span> <span class="va">alpha</span>,</span>
 <span>              slope <span class="op">=</span> <span class="va">beta</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-137-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-138-1.png" width="672" style="display: block; margin: auto;"></div>
 <p>The intersection of the predicted line with the x-axis suggests the presence of negative predicted values for plant counts. However, it is logically implausible for plant counts to be negative.</p>
 <p>This occurrence stems from the nature of the model employed.</p>
 <ol style="list-style-type: decimal">
@@ -189,12 +189,12 @@ y_i &amp;\sim \text{Poisson}(\lambda_i)\\
 <li>The mean <span class="math inline">\(\lambda_i\)</span> is log-transformed when expressing it as a function of nitrate. Given that the mean of a Poisson distribution cannot be negative, we must restrict the range of <span class="math inline">\(\lambda_i\)</span> to positive values. The log-transformation guarantees positivity of <span class="math inline">\(\lambda_i\)</span> (<span class="math inline">\(\lambda_i = \exp(\alpha + \beta~\text{nitrate}_i)\)</span>) irrespective of the values of <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span>, and <span class="math inline">\(\text{nitrate}_i\)</span>.</li>
 </ol>
 <p>The implementation of the Poisson model is quite simple. In the following example, we will use the function <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code>:</p>
-<div class="sourceCode" id="cb418"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb419"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_pois</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">count</span> <span class="op">~</span> <span class="va">nitrate</span>,</span>
 <span>              data <span class="op">=</span> <span class="va">df_count</span>,</span>
 <span>              family <span class="op">=</span> <span class="st">"poisson"</span><span class="op">)</span></span></code></pre></div>
 <p>The major difference from <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> is the argument <code>family = "poisson"</code>. This argument specifies the probability distribution to be used; in this example, I used a Poisson distribution to model count data. However, in looking at estimates…</p>
-<div class="sourceCode" id="cb419"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb420"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">m_pois</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -220,7 +220,7 @@ y_i &amp;\sim \text{Poisson}(\lambda_i)\\
 \]</span></p>
 <p>Therefore, even when the intercept is estimated to be negative, the mean <span class="math inline">\(\lambda_i\)</span> is guaranteed to be non-negative.</p>
 <p>Another important difference from <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> is that the test-statistic is no long the t-statistic – instead, <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> reports the z-statistic. However, the z-statistic is very similar to the t-statistic, defined as <span class="math inline">\(z=\frac{\hat{\theta} - \theta_0}{\text{SE}(\hat{\theta})}\)</span> (<span class="math inline">\(\hat{\theta} \in \{\hat{\alpha}, \hat{\beta}\}\)</span>, <span class="math inline">\(\theta_0 = 0\)</span>). Therefore, you can reproduce the z-statistic by dividing the parameter estimates (<span class="math inline">\(\hat{\alpha}\)</span> and <span class="math inline">\(\hat{\beta}\)</span>) by their standard errors:</p>
-<div class="sourceCode" id="cb421"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb422"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># parameter estimates and their SEs</span></span>
 <span><span class="va">theta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">m_pois</span><span class="op">)</span></span>
 <span><span class="va">se</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/vcov.html">vcov</a></span><span class="op">(</span><span class="va">m_pois</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
@@ -230,7 +230,7 @@ y_i &amp;\sim \text{Poisson}(\lambda_i)\\
 <pre><code>## (Intercept)     nitrate 
 ##   -3.844229    4.910935</code></pre>
 <p>We call this statistic “z-statistic” as it is known to follow the z-distribution (also known as the standardized Normal distribution <span class="math inline">\(\text{Normal}(0, 1)\)</span>), as opposed to the Student’s t-distribution. The reported p-value (<code>Pr(&gt;|z|)</code>) is estimated under this assumption, which can be seen as follows.</p>
-<div class="sourceCode" id="cb423"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb424"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># estimate Pr(&gt;|z|) using a standardized normal distribution</span></span>
 <span><span class="va">p_value</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">z_value</span><span class="op">)</span>, mean <span class="op">=</span> <span class="fl">0</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">*</span> <span class="fl">2</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">p_value</span><span class="op">)</span></span></code></pre></div>
@@ -238,7 +238,7 @@ y_i &amp;\sim \text{Poisson}(\lambda_i)\\
 ## 1.209323e-04 9.064303e-07</code></pre>
 <p><strong>Notice that these p-values are not identical to the output from the Normal model</strong> – therefore, the choice of the probability distribution critically affects the results of statistical analysis, and often times, qualitatively (not in this particular example though).</p>
 <p>Visualization provides the convincing difference between the Normal and Poisson models (Figure <a href="generalized-linear-model.html#fig:normal-pois">14.2</a>).</p>
-<div class="sourceCode" id="cb425"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb426"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># make predictions</span></span>
 <span><span class="va">df_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>nitrate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">df_count</span><span class="op">$</span><span class="va">nitrate</span><span class="op">)</span>,</span>
 <span>                                <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">df_count</span><span class="op">$</span><span class="va">nitrate</span><span class="op">)</span>,</span>
@@ -283,7 +283,7 @@ Figure 14.2: Comparison of the predicted values between Normal (broken, black) a
 <p>There is another type of data for which a Normal distribution is not suitable - proportional data. Let’s consider an example dataset where an investigation was conducted on the number of fertilized eggs out of 30 eggs examined for 100 female freshwater mussels. You can download the dataset <a href="https://github.com/aterui/biostats/blob/master/data_raw/data_mussel.csv">here</a>.</p>
 <div class="inline-figure"><img src="image/image_mussel.JPG" width="300" style="display: block; margin: auto;"></div>
 <p>Male freshwater mussels release sperm into the water, which is then drawn into female mussels downstream. Considering the nature of the fertilization process, female mussels are expected to have a higher probability of fertilization when they are surrounded by a greater number of males. To explore this relationship, let’s load the data into R and visualize it.</p>
-<div class="sourceCode" id="cb426"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb427"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_mussel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data_raw/data_mussel.csv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_mussel</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 100 × 4
@@ -301,7 +301,7 @@ Figure 14.2: Comparison of the predicted values between Normal (broken, black) a
 ## 10     10            0         30       7
 ## # ℹ 90 more rows</code></pre>
 <p>This data frame contains variables such as <code>ind_id</code> (mussel individual ID), <code>n_fertilized</code> (number of fertilized eggs), <code>n_examined</code> (number of eggs examined), and <code>density</code> (number of mussels in a 1 m<span class="math inline">\(^2\)</span> quadrat). To visualize the relationship between the proportion of eggs fertilized and the density gradient, plot the proportion of fertilized eggs against the density gradient (Figure <a href="generalized-linear-model.html#fig:mussel-egg">14.3</a>).</p>
-<div class="sourceCode" id="cb428"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb429"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># calculate the proportion of fertilized eggs</span></span>
 <span><span class="va">df_mussel</span> <span class="op">&lt;-</span> <span class="va">df_mussel</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>prop_fert <span class="op">=</span> <span class="va">n_fertilized</span> <span class="op">/</span> <span class="va">n_examined</span><span class="op">)</span></span>
@@ -347,7 +347,7 @@ y_i &amp;\sim \text{Binomial}(N_i, p_i)\\
 p_i = \frac{\exp(\alpha + \beta~\text{density}_i)}{1 + \exp(\alpha + \beta~\text{density}_i)}
 \]</span></p>
 <p>A straightforward coding can verify this.</p>
-<div class="sourceCode" id="cb429"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb430"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># x: produce 100 numbers from -100 to 100 (assume logit scale)</span></span>
 <span><span class="co"># y: convert with inverse-logit transformation (ordinary scale)</span></span>
 <span><span class="va">df_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>logit_x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10</span>, <span class="fl">10</span>, length <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>,</span>
@@ -367,12 +367,12 @@ Figure 14.4: Logit-transformation ensures that the transformed variable to fall 
 </p>
 </div>
 <p>The <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> function can be used to implement this modeling approach. However, certain modifications need to be made to the response variable in order to ensure compatibility with the binomial distribution.</p>
-<div class="sourceCode" id="cb430"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb431"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_binom</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">n_fertilized</span>, <span class="va">n_examined</span> <span class="op">-</span> <span class="va">n_fertilized</span><span class="op">)</span> <span class="op">~</span> <span class="va">density</span>,</span>
 <span>               data <span class="op">=</span> <span class="va">df_mussel</span>,</span>
 <span>               family <span class="op">=</span> <span class="st">"binomial"</span><span class="op">)</span></span></code></pre></div>
 <p>In contrast to the Normal or Poisson models, the response variable was encoded using the <code>cbind(n_fertilized, n_examined - n_fertilized)</code> function. The <code><a href="https://rdrr.io/r/base/cbind.html">cbind()</a></code> function combines the number of successes (fertilized) and failures (not fertilized) into a single matrix. This approach allows for modeling the data using the binomial distribution, taking into account both the successes and the total number of trials within each observation.</p>
-<div class="sourceCode" id="cb431"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb432"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">df_mussel</span><span class="op">$</span><span class="va">n_fertilized</span>, <span class="va">df_mussel</span><span class="op">$</span><span class="va">n_examined</span> <span class="op">-</span> <span class="va">df_mussel</span><span class="op">$</span><span class="va">n_fertilized</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##      [,1] [,2]
@@ -383,7 +383,7 @@ Figure 14.4: Logit-transformation ensures that the transformed variable to fall 
 ## [5,]    2   28
 ## [6,]    0   30</code></pre>
 <p>Similar to the previous examples, the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function provides estimates of the model parameters. By applying the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function to the fitted model, you can obtain information such as coefficient estimates, standard errors, p-values, and other relevant statistics.</p>
-<div class="sourceCode" id="cb433"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb434"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">m_binom</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -412,7 +412,7 @@ y_i &amp;\sim \text{Binomial}(N_i, p_i)\\
 \end{aligned}
 \]</span></p>
 <p>To make predictions, it is necessary to back-transform the predicted fertilization probability since it is estimated on a logit scale. The back-transformation will convert the predicted values back to the original probability scale (<span class="math inline">\(0.0-1.0\)</span>).</p>
-<div class="sourceCode" id="cb435"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb436"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># make prediction</span></span>
 <span><span class="va">df_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>density <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">df_mussel</span><span class="op">$</span><span class="va">density</span><span class="op">)</span>,</span>
 <span>                                <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">df_mussel</span><span class="op">$</span><span class="va">density</span><span class="op">)</span>,</span>
@@ -424,7 +424,7 @@ y_i &amp;\sim \text{Binomial}(N_i, p_i)\\
 <span><span class="va">df_pred</span> <span class="op">&lt;-</span> <span class="va">df_pred</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">y_binom</span><span class="op">)</span></span></code></pre></div>
 <p>Draw on the figure (Figure <a href="generalized-linear-model.html#fig:binom-fit-figure">14.5</a>).</p>
-<div class="sourceCode" id="cb436"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb437"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_mussel</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">density</span>,</span>
 <span>             y <span class="op">=</span> <span class="va">prop_fert</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -595,7 +595,7 @@ Figure 14.6: Tree chart on how to choose a probability distribution in GLM analy
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-10-28.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-10-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

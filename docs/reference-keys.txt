@@ -165,6 +165,7 @@ non-parametric-method
 laboratory-6
 normality-assumption
 model-interpretation
+multicollinearity
 experimental-design
 generalized-linear-model
 count-data

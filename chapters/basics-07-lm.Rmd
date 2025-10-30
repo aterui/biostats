@@ -384,15 +384,62 @@ df_pred <- ToothGrowth %>%
                      length = 100))
 ```
 
+### Multicollinearity
+
+Copy and run the following code to create a simulated dataset:
+
+```{r}
+## variance-covariance matrix
+mv <- rbind(c(1, 0.9),
+            c(0.9, 1))
+
+## true regression coefficients
+b <- c(0.05, 1.00)
+
+## produce simulated data
+set.seed(523)
+X <- MASS::mvrnorm(100,
+                   mu = c(0, 0),
+                   Sigma = mv)
+
+df_y <- tibble(x1 = X[,1],
+               x2 = X[,2]) %>% 
+  mutate(y = rnorm(nrow(.),
+                   mean = 1 + b[1] * x1 + b[2] * x2))
+```
+
+1.  Create Figures of Response vs. Predictors.
+
+Using `df_y`, create the following figures:
+
+-   A scatter plot of `y` (y-axis) versus `x1` (x-axis)
+
+-   A scatter plot of `y` (y-axis) versus `x2` (x-axis)
+
+Based on these plots, interpret the effects of `x1` and `x2` on `y`. Do `x1` and `x2` appear to have positive or negative influences on `y`?
+
+2.  Examining statistical effects of `x1` and `x2` on `y`.
+
+Examine the statistical effects of `x1` and `x2` on `y` using the `lm()` function.\
+Suppose that `x1` and `x2` are factors that vary across samples. In this case, you want to account for the influence of one variable while assessing the effect of the other. To do so, include **both predictors** in a single linear model using the `+` operator. Discuss whether the statistical estimates of x1 and x2's effects make sense.
+
+3.  Create a Figure of Predictor vs. Predictor.
+
+Using `df_y`,
+
+-   Create a scatter plot of `x1` and `x2`.
+
+-   Examine the Pearson's correlation between `x1` and `x2` using a function `cor()`. (`?cor()` for its usage).
+
 ### Experimental Design
 
 You are designing an experiment to examine the effects of **nutrient level** and **predation** on **prey fish growth**. The proposed treatment combinations are:
 
-1.  Low nutrient and predator present
+-   Low nutrient and predator present
 
-2.  High nutrient and predator present
+-   High nutrient and predator present
 
-3.  High nutrient and predator absent
+-   High nutrient and predator absent
 
 In addition, you plan to record the **initial length of the prey fish** (a continuous variable), as it may influence subsequent growth.
 

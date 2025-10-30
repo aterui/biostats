@@ -594,16 +594,62 @@ Figure 13.1: Example of model fitting to iris data. Points are observations, and
 <span>                     <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">dose</span><span class="op">)</span>,</span>
 <span>                     length <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="experimental-design" class="section level3" number="13.4.3">
+<div id="multicollinearity" class="section level3" number="13.4.3">
 <h3>
-<span class="header-section-number">13.4.3</span> Experimental Design<a class="anchor" aria-label="anchor" href="#experimental-design"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.4.3</span> Multicollinearity<a class="anchor" aria-label="anchor" href="#multicollinearity"><i class="fas fa-link"></i></a>
+</h3>
+<p>Copy and run the following code to create a simulated dataset:</p>
+<div class="sourceCode" id="cb413"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## variance-covariance matrix</span></span>
+<span><span class="va">mv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0.9</span><span class="op">)</span>,</span>
+<span>            <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.9</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## true regression coefficients</span></span>
+<span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.05</span>, <span class="fl">1.00</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## produce simulated data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">523</span><span class="op">)</span></span>
+<span><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu">MASS</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/MASS/man/mvrnorm.html">mvrnorm</a></span><span class="op">(</span><span class="fl">100</span>,</span>
+<span>                   mu <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>,</span>
+<span>                   Sigma <span class="op">=</span> <span class="va">mv</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">df_y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>x1 <span class="op">=</span> <span class="va">X</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>,</span>
+<span>               x2 <span class="op">=</span> <span class="va">X</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>,</span>
+<span>                   mean <span class="op">=</span> <span class="fl">1</span> <span class="op">+</span> <span class="va">b</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">*</span> <span class="va">x1</span> <span class="op">+</span> <span class="va">b</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">*</span> <span class="va">x2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>Create Figures of Response vs. Predictors.</li>
+</ol>
+<p>Using <code>df_y</code>, create the following figures:</p>
+<ul>
+<li><p>A scatter plot of <code>y</code> (y-axis) versus <code>x1</code> (x-axis)</p></li>
+<li><p>A scatter plot of <code>y</code> (y-axis) versus <code>x2</code> (x-axis)</p></li>
+</ul>
+<p>Based on these plots, interpret the effects of <code>x1</code> and <code>x2</code> on <code>y</code>. Do <code>x1</code> and <code>x2</code> appear to have positive or negative influences on <code>y</code>?</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Examining statistical effects of <code>x1</code> and <code>x2</code> on <code>y</code>.</li>
+</ol>
+<p>Examine the statistical effects of <code>x1</code> and <code>x2</code> on <code>y</code> using the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function.<br>
+Suppose that <code>x1</code> and <code>x2</code> are factors that vary across samples. In this case, you want to account for the influence of one variable while assessing the effect of the other. To do so, include <strong>both predictors</strong> in a single linear model using the <code>+</code> operator. Discuss whether the statistical estimates of x1 and x2’s effects make sense.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Create a Figure of Predictor vs. Predictor.</li>
+</ol>
+<p>Using <code>df_y</code>,</p>
+<ul>
+<li><p>Create a scatter plot of <code>x1</code> and <code>x2</code>.</p></li>
+<li><p>Examine the Pearson’s correlation between <code>x1</code> and <code>x2</code> using a function <code><a href="https://rdrr.io/r/stats/cor.html">cor()</a></code>. (<code>?cor()</code> for its usage).</p></li>
+</ul>
+</div>
+<div id="experimental-design" class="section level3" number="13.4.4">
+<h3>
+<span class="header-section-number">13.4.4</span> Experimental Design<a class="anchor" aria-label="anchor" href="#experimental-design"><i class="fas fa-link"></i></a>
 </h3>
 <p>You are designing an experiment to examine the effects of <strong>nutrient level</strong> and <strong>predation</strong> on <strong>prey fish growth</strong>. The proposed treatment combinations are:</p>
-<ol style="list-style-type: decimal">
+<ul>
 <li><p>Low nutrient and predator present</p></li>
 <li><p>High nutrient and predator present</p></li>
 <li><p>High nutrient and predator absent</p></li>
-</ol>
+</ul>
 <p>In addition, you plan to record the <strong>initial length of the prey fish</strong> (a continuous variable), as it may influence subsequent growth.</p>
 <p><strong>Question:</strong> Select the most appropriate statement regarding what this experiment can assess:</p>
 <ol style="list-style-type: lower-alpha">
@@ -642,7 +688,8 @@ Figure 13.1: Example of model fitting to iris data. Points are observations, and
 <a class="nav-link" href="#laboratory-6"><span class="header-section-number">13.4</span> Laboratory</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#normality-assumption"><span class="header-section-number">13.4.1</span> Normality Assumption</a></li>
 <li><a class="nav-link" href="#model-interpretation"><span class="header-section-number">13.4.2</span> Model Interpretation</a></li>
-<li><a class="nav-link" href="#experimental-design"><span class="header-section-number">13.4.3</span> Experimental Design</a></li>
+<li><a class="nav-link" href="#multicollinearity"><span class="header-section-number">13.4.3</span> Multicollinearity</a></li>
+<li><a class="nav-link" href="#experimental-design"><span class="header-section-number">13.4.4</span> Experimental Design</a></li>
 </ul>
 </li>
 </ul>
@@ -662,7 +709,7 @@ Figure 13.1: Example of model fitting to iris data. Points are observations, and
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-10-28.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-10-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

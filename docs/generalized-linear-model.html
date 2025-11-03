@@ -533,7 +533,22 @@ Figure 14.6: Tree chart on how to choose a probability distribution in GLM analy
 <h3>
 <span class="header-section-number">14.4.1</span> GLM exercise<a class="anchor" aria-label="anchor" href="#glm-exercise"><i class="fas fa-link"></i></a>
 </h3>
-<p>There is a publicly available stream fish distribution dataset accessible from an online repository. You can download it using this link: <a href="https://github.com/aterui/public-proj_fish-richness-shubuto/blob/master/data/data_vpart.csv">Download Dataset</a>. The dataset comprises information on the number of species found at each site (<code>n_sp</code>) and several associated environmental variables, including distance to the sea (<code>distance</code>), catchment area (<code>cat_area</code>), and environmental heterogeneity (<code>hull_area</code>). These environmental variables are factors that are known to influence fish distributions. To analyze this dataset, develop a Generalized Linear Model (GLM) with an appropriate probability distribution to explore which variable significantly influences the fish species richness observed at each sampling site.</p>
+<ol style="list-style-type: decimal">
+<li>
+<p>A publicly available stream fish distribution dataset can be accessed from an online repository: <a href="https://github.com/aterui/public-proj_fish-richness-shubuto/blob/master/data/data_vpart.csv">Download Dataset</a>. The dataset comprises information on the number of species found at each site (<code>n_sp</code>) and several associated environmental variables, including distance to the sea (<code>distance</code>), catchment area (<code>cat_area</code>), and environmental heterogeneity (<code>hull_area</code>). These environmental variables are factors that are known to influence fish distributions. To analyze this dataset, develop a Generalized Linear Model (GLM) as follows:</p>
+<ul>
+<li>Use fish species richness <code>n_sp</code> as a response variable of the model with an appropriate probability distribution (<code>family</code>). Identify which predictor variable(s) significantly influence the response variable.</li>
+</ul>
+</li>
+<li>
+<p>The <code>mtcars</code> dataset contains information about 32 car models, including their performance and design characteristics. The variable <code>am</code> indicates the type of transmission, where <code>0 = automatic</code> and <code>1 = manual</code>.</p>
+<p>Using this dataset, develop a GLM to explore:</p>
+<ul>
+<li><p>Which variables significantly influence the probability that a car has a manual transmission with an appropriate probability distribution (<code>family</code>). Consider including the following predictors: miles per gallon (<code>mpg</code>), horsepower (<code>hp</code>), and weight (<code>wt</code>).</p></li>
+<li><p>Develop the same GLM but with a normal distribution (<code>family = "gaussian"</code>). Compare the results to the model with an appropriate probability distribution.</p></li>
+</ul>
+</li>
+</ol>
 </div>
 <div id="effect-size" class="section level3" number="14.4.2">
 <h3>
@@ -546,8 +561,8 @@ Figure 14.6: Tree chart on how to choose a probability distribution in GLM analy
 \]</span></p>
 <p>Here, <span class="math inline">\(\alpha'\)</span> and <span class="math inline">\(\beta'\)</span> represent the intercept and slope after standardizing <span class="math inline">\(x\)</span>, respectively.</p>
 <ol style="list-style-type: decimal">
-<li><p>Express <span class="math inline">\(\alpha'\)</span> and <span class="math inline">\(\beta'\)</span> as a function of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>, respectively.</p></li>
-<li><p>The function <code><a href="https://rdrr.io/r/base/scale.html">scale()</a></code> will perform standardization. Perform a GLM analysis of fish species richness with the standardized variables <code>distance</code>, <code>cat_area</code>, and <code>hull_area</code>, and identify the most influential variable among them.</p></li>
+<li><p>The function <code><a href="https://rdrr.io/r/base/scale.html">scale()</a></code> will perform standardization. Create columns of standardized <code>distance</code> (<code>std_dist</code>), <code>cat_area</code> (<code>std_cat</code>), and <code>hull_area</code> (<code>std_hull</code>).</p></li>
+<li><p>Perform a GLM analysis of fish species richness with the standardized variables, and identify the most influential variable among them in terms of effect size.</p></li>
 </ol>
 </div>
 </div>
@@ -595,7 +610,7 @@ Figure 14.6: Tree chart on how to choose a probability distribution in GLM analy
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-10-30.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-11-03.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

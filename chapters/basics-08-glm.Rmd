@@ -378,7 +378,7 @@ print(g_dendro)
 ```
 
 | Distribution | Support | R |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | Beta-binomial | [0, N] | `glmmTMB::glmmTMB()` |
 | Binomial | [0, N] | `glm()`, `glmmTMB::glmmTMB()` |
 | Negative binomial | $\ge 0$ | `MASS::glm.nb()`, `glmmTMB::glmmTMB()` |
@@ -392,7 +392,17 @@ print(g_dendro)
 
 ### GLM exercise
 
-There is a publicly available stream fish distribution dataset accessible from an online repository. You can download it using this link: [Download Dataset](https://github.com/aterui/public-proj_fish-richness-shubuto/blob/master/data/data_vpart.csv). The dataset comprises information on the number of species found at each site (`n_sp`) and several associated environmental variables, including distance to the sea (`distance`), catchment area (`cat_area`), and environmental heterogeneity (`hull_area`). These environmental variables are factors that are known to influence fish distributions. To analyze this dataset, develop a Generalized Linear Model (GLM) with an appropriate probability distribution to explore which variable significantly influences the fish species richness observed at each sampling site.
+1.  A publicly available stream fish distribution dataset can be accessed from an online repository: [Download Dataset](https://github.com/aterui/public-proj_fish-richness-shubuto/blob/master/data/data_vpart.csv). The dataset comprises information on the number of species found at each site (`n_sp`) and several associated environmental variables, including distance to the sea (`distance`), catchment area (`cat_area`), and environmental heterogeneity (`hull_area`). These environmental variables are factors that are known to influence fish distributions. To analyze this dataset, develop a Generalized Linear Model (GLM) as follows:
+
+    -   Use fish species richness `n_sp` as a response variable of the model with an appropriate probability distribution (`family`). Identify which predictor variable(s) significantly influence the response variable.
+
+2.  The `mtcars` dataset contains information about 32 car models, including their performance and design characteristics. The variable `am` indicates the type of transmission, where `0 = automatic` and `1 = manual`.
+
+    Using this dataset, develop a GLM to explore:
+
+    -   Which variables significantly influence the probability that a car has a manual transmission with an appropriate probability distribution (`family`). Consider including the following predictors: miles per gallon (`mpg`), horsepower (`hp`), and weight (`wt`).
+
+    -   Develop the same GLM but with a normal distribution (`family = "gaussian"`). Compare the results to the model with an appropriate probability distribution.
 
 ### Effect size
 
@@ -405,6 +415,6 @@ $$
 
 Here, $\alpha'$ and $\beta'$ represent the intercept and slope after standardizing $x$, respectively.
 
-1.  Express $\alpha'$ and $\beta'$ as a function of $\alpha$ and $\beta$, respectively.
+1.  The function `scale()` will perform standardization. Create columns of standardized `distance` (`std_dist`), `cat_area` (`std_cat`), and `hull_area` (`std_hull`).
 
-2.  The function `scale()` will perform standardization. Perform a GLM analysis of fish species richness with the standardized variables `distance`, `cat_area`, and `hull_area`, and identify the most influential variable among them.
+2.  Perform a GLM analysis of fish species richness with the standardized variables, and identify the most influential variable among them in terms of effect size.

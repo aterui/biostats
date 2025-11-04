@@ -178,6 +178,8 @@ the-glm-framework
 laboratory-7
 glm-exercise
 effect-size
+offset-term
+overdispersion
 likelihood
 finding-the-more-likely
 maximum-likelihood-method

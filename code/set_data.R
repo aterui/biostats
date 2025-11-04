@@ -123,3 +123,22 @@ df_fert %>%
   geom_point()
 
 write_csv(df_fert, "data_raw/data_mussel.csv")
+
+
+# offset ------------------------------------------------------------------
+
+set.seed(123)
+df_n <- tibble(area = runif(100, 5, 100),
+               nitrate = runif(100, 0, 1) + 3/area) %>% 
+  mutate(count = rpois(nrow(.), lambda = exp(-0.1 + 0.5 * nitrate) * area))
+
+write_csv(df_n, "data_raw/data_offset.csv")
+
+# negative binomial -------------------------------------------------------
+
+set.seed(111)
+df_tadpole <- tibble(aqveg = runif(100, 0, 1),
+                     permanence = round(runif(100, 10, 50)),
+                     tadpole = rnbinom(100, mu = exp(-0.5 + 0.05 * permanence), size = 0.5))
+
+write_csv(df_tadpole, "data_raw/data_tadpole.csv")

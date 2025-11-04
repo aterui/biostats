@@ -377,14 +377,14 @@ g_dendro <- graph %>%
 print(g_dendro)
 ```
 
-| Distribution | Support | R |
-|------------------------|------------------------|------------------------|
-| Beta-binomial | [0, N] | `glmmTMB::glmmTMB()` |
-| Binomial | [0, N] | `glm()`, `glmmTMB::glmmTMB()` |
-| Negative binomial | $\ge 0$ | `MASS::glm.nb()`, `glmmTMB::glmmTMB()` |
-| Poisson | $\ge 0$ | `glm()`, `glmmTMB::glmmTMB()` |
-| Beta | (0, 1) | `glmmTMB::glmmTMB()` |
-| Normal | $-\infty$ to $\infty$ | `lm()`, `glm()`, `glmmTMB::glmmTMB()` |
+| \# | Distribution | Support | R |
+|----|------------------------|------------------------|------------------------|
+| 1 | Beta-binomial | [0, N] | `glmmTMB::glmmTMB()` |
+| 2 | Binomial | [0, N] | `glm()`, `glmmTMB::glmmTMB()` |
+| 3 | Negative binomial | $\ge 0$ | `MASS::glm.nb()`, `glmmTMB::glmmTMB()` |
+| 4 | Poisson | $\ge 0$ | `glm()`, `glmmTMB::glmmTMB()` |
+| 5 | Beta | (0, 1) | `glmmTMB::glmmTMB()` |
+| 6 | Normal | $-\infty$ to $\infty$ | `lm()`, `glm()`, `glmmTMB::glmmTMB()` |
 
 : (#tab:table-dist) Common distributions used in GLM analysis
 
@@ -392,7 +392,14 @@ print(g_dendro)
 
 ### GLM exercise
 
-1.  A publicly available stream fish distribution dataset can be accessed from an online repository: [Download Dataset](https://github.com/aterui/public-proj_fish-richness-shubuto/blob/master/data/data_vpart.csv). The dataset comprises information on the number of species found at each site (`n_sp`) and several associated environmental variables, including distance to the sea (`distance`), catchment area (`cat_area`), and environmental heterogeneity (`hull_area`). These environmental variables are factors that are known to influence fish distributions. To analyze this dataset, develop a Generalized Linear Model (GLM) as follows:
+1.  A publicly available stream fish distribution dataset can be accessed from an online repository:
+
+    ```{r}
+    url <- "https://raw.githubusercontent.com/aterui/public-proj_fish-richness-shubuto/master/data/data_vpart.csv"
+    df_fish <- read.csv(url)
+    ```
+
+    The dataset comprises information on the number of species found at each site (`n_sp`) and several associated environmental variables, including distance to the sea (`distance`), catchment area (`cat_area`), and environmental heterogeneity (`hull_area`). These environmental variables are factors that are known to influence fish distributions. To analyze this dataset, develop a Generalized Linear Model (GLM) as follows:
 
     -   Use fish species richness `n_sp` as a response variable of the model with an appropriate probability distribution (`family`). Identify which predictor variable(s) significantly influence the response variable.
 
@@ -400,7 +407,7 @@ print(g_dendro)
 
     Using this dataset, develop a GLM to explore:
 
-    -   Which variables significantly influence the probability that a car has a manual transmission with an appropriate probability distribution (`family`). Consider including the following predictors: miles per gallon (`mpg`), horsepower (`hp`), and weight (`wt`).
+    -   Which variables significantly influence the probability that a car has a manual transmission? Choose an appropriate probability distribution (`family`). Consider including the following predictors: miles per gallon (`mpg`), horsepower (`hp`), and weight (`wt`).
 
     -   Develop the same GLM but with a normal distribution (`family = "gaussian"`). Compare the results to the model with an appropriate probability distribution.
 
@@ -408,13 +415,59 @@ print(g_dendro)
 
 Often, we are interested in comparing the effect sizes of different explanatory variables. However, if we use raw environmental values, regression coefficients are not directly comparable due to their differing units. Recall that regression coefficients represent the increment of $y$ per unit increase of $x$. To facilitate comparison, we standardize the explanatory variables by subtracting their means and dividing them by their standard deviations:
 
-$$
-\mbox{E}(y) = \alpha + \beta x \rightarrow
-\mbox{E}(y) = \alpha' + \beta' \frac{(x - \mu_x)}{\sigma_x}
-$$
+$$ \mbox{E}(y) = \alpha + \beta x \rightarrow \mbox{E}(y) = \alpha' + \beta' \frac{(x - \mu_x)}{\sigma_x} $$
 
 Here, $\alpha'$ and $\beta'$ represent the intercept and slope after standardizing $x$, respectively.
 
 1.  The function `scale()` will perform standardization. Create columns of standardized `distance` (`std_dist`), `cat_area` (`std_cat`), and `hull_area` (`std_hull`).
 
 2.  Perform a GLM analysis of fish species richness with the standardized variables, and identify the most influential variable among them in terms of effect size.
+
+### Offset term
+
+1.  The Poisson distribution (and other distributions used for modeling count data) assumes that all observations are collected under comparable sampling efforts. In practice, however, survey data often differ in effort — for example, some counts may come from surveys conducted over longer search times or larger areas. To see this issue, copy and paste the following code:
+
+    ```{r}
+    url <- "https://raw.githubusercontent.com/aterui/biostats/master/data_raw/data_offset.csv"
+    df_offset <- read_csv(url)
+    ```
+
+    Using `df_offset`, perform the following:
+
+    -   Plot the relationship between `count` and `nitrate`.
+    -   Plot the relationship between `count` and `area`.
+    -   Plot the relationship between `count/area` and `nitrate`.
+
+2.  Directly comparing such counts would be misleading because higher effort naturally increases the expected number of detections. One might consider dividing the response variable by effort to standardize it, but doing so changes the outcome from a discrete count to a continuous rate, violating the assumptions of count models. Confirm the following code returns numerous wranings – this is because `density` is not a discrete variable:
+
+    ```{r, eval=FALSE}
+    df_n <- df_n %>% 
+      mutate(density = count / area)
+
+    glm(density ~ nitrate,
+        data = df_n,
+        family = "poisson")
+    ```
+
+    A better approach is to incorporate sampling effort as an **offset term** in `glm()`, which allows the model to account for differences in effort while preserving the count nature of the response variable. Perform the following exercise:
+
+    -   Develop a GLM with the response variable `count` and the predictor `nitrate`.
+    -   Develop a GLM with the response variable `count`, the predictor `nitrate`, and the offset term `offset(log(area))` (`~ nitrate + offset(log(area))` will work).
+    -   Compare the results of the two models.
+
+### Overdispersion
+
+Copy and paste the following code:
+
+```{r}
+url <- "https://raw.githubusercontent.com/aterui/biostats/master/data_raw/data_tadpole.csv"
+df_tadpole <- read.csv(url)
+```
+
+This dataset contains the data of tadpole counts (`tadpole`), aquatic vegetation cover (`aqveg`), and pond permanence (the number of days persist; `permanence`).
+
+1.  Plot the relationships between (a) `tadpole` and `aqveg` and (b) `tadpole` and `permanence`.
+
+2.  Discuss in a group that which variable may have significant influence.
+
+3.  Develop a GLM (choose an appropriate distribution) explaining `tadpole` with `aqveg` and `permanence`.

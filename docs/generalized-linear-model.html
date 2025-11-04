@@ -468,14 +468,14 @@ y_i &amp;\sim \text{D}(\Theta)\\
 Figure 14.6: Tree chart on how to choose a probability distribution in GLM analysis.
 </p>
 </div>
-<div class="inline-table"><table style="width:100%;" class="table table-sm">
+<div class="inline-table"><table class="table table-sm">
 <caption>
 <span id="tab:table-dist">Table 14.1: </span> Common distributions used in GLM analysis</caption>
 <colgroup>
-<col width="5%">
-<col width="31%">
-<col width="31%">
-<col width="31%">
+<col width="20%">
+<col width="26%">
+<col width="26%">
+<col width="26%">
 </colgroup>
 <thead><tr class="header">
 <th>#</th>
@@ -594,11 +594,11 @@ Figure 14.6: Tree chart on how to choose a probability distribution in GLM analy
 <li>
 <p>Directly comparing such counts would be misleading because higher effort naturally increases the expected number of detections. One might consider dividing the response variable by effort to standardize it, but doing so changes the outcome from a discrete count to a continuous rate, violating the assumptions of count models. Confirm the following code returns numerous wranings – this is because <code>density</code> is not a discrete variable:</p>
 <div class="sourceCode" id="cb440"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df_n</span> <span class="op">&lt;-</span> <span class="va">df_n</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<code class="sourceCode R"><span><span class="va">df_offset</span> <span class="op">&lt;-</span> <span class="va">df_offset</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>density <span class="op">=</span> <span class="va">count</span> <span class="op">/</span> <span class="va">area</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">density</span> <span class="op">~</span> <span class="va">nitrate</span>,</span>
-<span>    data <span class="op">=</span> <span class="va">df_n</span>,</span>
+<span>    data <span class="op">=</span> <span class="va">df_offset</span>,</span>
 <span>    family <span class="op">=</span> <span class="st">"poisson"</span><span class="op">)</span></span></code></pre></div>
 <p>A better approach is to incorporate sampling effort as an <strong>offset term</strong> in <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code>, which allows the model to account for differences in effort while preserving the count nature of the response variable. Perform the following exercise:</p>
 <ul>

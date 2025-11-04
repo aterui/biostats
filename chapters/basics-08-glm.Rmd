@@ -378,7 +378,7 @@ print(g_dendro)
 ```
 
 | \# | Distribution | Support | R |
-|----|------------------------|------------------------|------------------------|
+|---------------|-------------------|-------------------|-------------------|
 | 1 | Beta-binomial | [0, N] | `glmmTMB::glmmTMB()` |
 | 2 | Binomial | [0, N] | `glm()`, `glmmTMB::glmmTMB()` |
 | 3 | Negative binomial | $\ge 0$ | `MASS::glm.nb()`, `glmmTMB::glmmTMB()` |
@@ -441,11 +441,11 @@ Here, $\alpha'$ and $\beta'$ represent the intercept and slope after standardizi
 2.  Directly comparing such counts would be misleading because higher effort naturally increases the expected number of detections. One might consider dividing the response variable by effort to standardize it, but doing so changes the outcome from a discrete count to a continuous rate, violating the assumptions of count models. Confirm the following code returns numerous wranings – this is because `density` is not a discrete variable:
 
     ```{r, eval=FALSE}
-    df_n <- df_n %>% 
+    df_offset <- df_offset %>% 
       mutate(density = count / area)
 
     glm(density ~ nitrate,
-        data = df_n,
+        data = df_offset,
         family = "poisson")
     ```
 

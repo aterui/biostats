@@ -546,7 +546,7 @@ Figure 14.6: Tree chart on how to choose a probability distribution in GLM analy
 <p>A publicly available stream fish distribution dataset can be accessed from an online repository:</p>
 <div class="sourceCode" id="cb438"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/aterui/public-proj_fish-richness-shubuto/master/data/data_vpart.csv"</span></span>
-<span><span class="va">df_fish</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">df_fish</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span></code></pre></div>
 <p>The dataset comprises information on the number of species found at each site (<code>n_sp</code>) and several associated environmental variables, including distance to the sea (<code>distance</code>), catchment area (<code>cat_area</code>), and environmental heterogeneity (<code>hull_area</code>). These environmental variables are factors that are known to influence fish distributions. To analyze this dataset, develop a Generalized Linear Model (GLM) as follows:</p>
 <ul>
 <li>Use fish species richness <code>n_sp</code> as a response variable of the model with an appropriate probability distribution (<code>family</code>). Identify which predictor variable(s) significantly influence the response variable.</li>
@@ -616,7 +616,7 @@ Figure 14.6: Tree chart on how to choose a probability distribution in GLM analy
 <p>Copy and paste the following code:</p>
 <div class="sourceCode" id="cb441"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/aterui/biostats/master/data_raw/data_tadpole.csv"</span></span>
-<span><span class="va">df_tadpole</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">df_tadpole</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span></code></pre></div>
 <p>This dataset contains the data of tadpole counts (<code>tadpole</code>), aquatic vegetation cover (<code>aqveg</code>), and pond permanence (the number of days persist; <code>permanence</code>).</p>
 <ol style="list-style-type: decimal">
 <li><p>Plot the relationships between (a) <code>tadpole</code> and <code>aqveg</code> and (b) <code>tadpole</code> and <code>permanence</code>.</p></li>

@@ -396,7 +396,7 @@ print(g_dendro)
 
     ```{r}
     url <- "https://raw.githubusercontent.com/aterui/public-proj_fish-richness-shubuto/master/data/data_vpart.csv"
-    df_fish <- read.csv(url)
+    df_fish <- read_csv(url)
     ```
 
     The dataset comprises information on the number of species found at each site (`n_sp`) and several associated environmental variables, including distance to the sea (`distance`), catchment area (`cat_area`), and environmental heterogeneity (`hull_area`). These environmental variables are factors that are known to influence fish distributions. To analyze this dataset, develop a Generalized Linear Model (GLM) as follows:
@@ -461,7 +461,7 @@ Copy and paste the following code:
 
 ```{r}
 url <- "https://raw.githubusercontent.com/aterui/biostats/master/data_raw/data_tadpole.csv"
-df_tadpole <- read.csv(url)
+df_tadpole <- read_csv(url)
 ```
 
 This dataset contains the data of tadpole counts (`tadpole`), aquatic vegetation cover (`aqveg`), and pond permanence (the number of days persist; `permanence`).

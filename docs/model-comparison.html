@@ -116,12 +116,12 @@
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, mean <span class="op">=</span> <span class="va">y_hat</span>, sd <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># plot</span></span>
-<span><span class="va">df0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">y</span>, x1 <span class="op">=</span> <span class="va">x1</span><span class="op">)</span></span>
+<span><span class="va">df0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tibble/man/tibble.html">tibble</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">y</span>, x1 <span class="op">=</span> <span class="va">x1</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">df0</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">y</span>,</span>
+<span><span class="va">df0</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">y</span>,</span>
 <span>             x <span class="op">=</span> <span class="va">x1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:sim-data"></span>
 <img src="biostats_files/figure-html/sim-data-1.png" alt="Simulated data" width="672"><p class="caption">
@@ -155,8 +155,8 @@ Figure 16.1: Simulated data
 <p>Now, let’s consider the scenario where we include another variable, <code>x2</code>, that is completely irrelevant.</p>
 <div class="sourceCode" id="cb465"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># add a column x2 which is irrelevant for y</span></span>
-<span><span class="va">df0</span> <span class="op">&lt;-</span> <span class="va">df0</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>x2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">df0</span> <span class="op">&lt;-</span> <span class="va">df0</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/mutate.html">mutate</a></span><span class="op">(</span>x2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># add x2 to the model</span></span>
 <span><span class="va">m2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">x1</span> <span class="op">+</span> <span class="va">x2</span>, data <span class="op">=</span> <span class="va">df0</span><span class="op">)</span></span>
@@ -313,9 +313,9 @@ R^2 = 1 - \frac{SS}{SS_0}
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/">palmerpenguins</a></span><span class="op">)</span></span></code></pre></div>
 <p>For this exercise, we will use the <code>penguins_raw</code> dataset. However, the dataset is not well-organized and may be prone to errors in its current format. Before delving into data analysis, let’s perform the following tasks:</p>
 <ol style="list-style-type: decimal">
-<li><p>Column names are a mix of upper and lower cases, and they contain white spaces. We need to format the column names as follows: (1) convert all characters to lowercase, (2) replace white spaces with underscores <code>_</code>, and (3) remove unit notations (e.g., <code>(mm)</code>). To accomplish this, we can use useful functions such as <code><a href="https://dplyr.tidyverse.org/reference/rename.html">dplyr::rename()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/rename.html">dplyr::rename_with()</a></code>, <code><a href="https://stringr.tidyverse.org/reference/case.html">stringr::str_to_lower()</a></code>, and <code><a href="https://stringr.tidyverse.org/reference/str_replace.html">stringr::str_replace_all()</a></code>. You can check their usage by typing <code>?function_name</code> in the R console.</p></li>
-<li><p>In the following exercise, we will focus on the data in the <code>Clutch Completion</code> column, which records data as <code>Yes</code> or <code>No</code>. To make it more suitable for analysis, we need to convert this information to binary values: <code>1</code> for <code>Yes</code> and <code>0</code> for <code>No</code>.</p></li>
-<li><p>The <code>Species</code> column in the dataset contains species names such as Adelie Penguin (Pygoscelis adeliae), Chinstrap penguin (Pygoscelis antarctica), Gentoo penguin (Pygoscelis papua). We need to convert these species names to standardized ones, specifically: <code>adelie</code>, <code>chinstrap</code>, and <code>gentoo</code>. We can make use of the <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">dplyr::case_when()</a></code> functions for this task.</p></li>
+<li><p>Column names are a mix of upper and lower cases, and they contain white spaces. We need to format the column names as follows: (1) convert all characters to lowercase, (2) replace white spaces with underscores <code>_</code>, and (3) remove parentheses (e.g., <code>(mm)</code>). To accomplish this, we can use <code>clean_names()</code> function from <code>janitor</code> package. You can check their usage by typing <code>?function_name</code> in the R console.</p></li>
+<li><p>In the following exercise, we will focus on the data in the <code>Clutch Completion</code> column, which records data as <code>Yes</code> or <code>No</code>. To make it more suitable for analysis, we need to convert this information to binary values: <code>1</code> for <code>Yes</code> and <code>0</code> for <code>No</code>. Use <code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code> function in combination with <code><a href="https://rdrr.io/pkg/dplyr/man/mutate.html">mutate()</a></code>.</p></li>
+<li><p>The <code>Species</code> column in the dataset contains species names such as Adelie Penguin (Pygoscelis adeliae), Chinstrap penguin (Pygoscelis antarctica), Gentoo penguin (Pygoscelis papua). We need to convert these species names to standardized ones, specifically: <code>adelie</code>, <code>chinstrap</code>, and <code>gentoo</code>. Use of the <code><a href="https://rdrr.io/pkg/dplyr/man/mutate.html">dplyr::mutate()</a></code> and <code><a href="https://rdrr.io/pkg/dplyr/man/case_when.html">dplyr::case_when()</a></code> functions for this task.</p></li>
 <li><p>Lastly, we should remove any rows that contain missing values (<code>NA</code>) in the columns <code>Culmen Length (mm)</code>, <code>Culmen Depth (mm)</code>, <code>Flipper Length (mm)</code>, <code>Body Mass (g)</code>, and <code>Sex</code>. To achieve this, we can utilize the <code>dplyr::drop_na()</code> function.</p></li>
 </ol>
 </div>
@@ -325,7 +325,7 @@ R^2 = 1 - \frac{SS}{SS_0}
 </h3>
 <p>After formatting the data, our next step is to perform the following:</p>
 <ol style="list-style-type: decimal">
-<li><p>Develop a statistical model that explains <code>Clutch Completion</code> using the variables <code>Species</code>, <code>Culmen Length (mm)</code>, <code>Culmen Depth (mm)</code>, <code>Flipper Length (mm)</code>, <code>Body Mass (g)</code>, and <code>Sex</code>. We need to determine an appropriate probability distribution for this model.</p></li>
+<li><p>Develop a statistical model that explains <code>Clutch Completion</code> using the variables <code>Species</code>, <code>Culmen Length (mm)</code>, <code>Culmen Depth (mm)</code>, <code>Flipper Length (mm)</code>, <code>Body Mass (g)</code>, and <code>Sex</code>. Use an appropriate probability distribution for this model.</p></li>
 <li><p>Perform an AIC-based model selection using the <code><a href="https://rdrr.io/pkg/MuMIn/man/dredge.html">MuMIn::dredge()</a></code> function. This process will help us identify the variables that are most important for predicting the clutch completion status.</p></li>
 </ol>
 <div class="sourceCode" id="cb482"><pre class="downlit sourceCode r">
@@ -333,7 +333,7 @@ R^2 = 1 - \frac{SS}{SS_0}
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>na.action <span class="op">=</span> <span class="st">"na.fail"</span><span class="op">)</span></span>
 <span><span class="va">m</span> <span class="op">&lt;-</span> <span class="co">#model object</span></span>
 <span><span class="va">m_set</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/MuMIn/man/dredge.html">dredge</a></span><span class="op">(</span><span class="va">m</span>, rank <span class="op">=</span> <span class="st">"AIC"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">m_set</span>, <span class="va">delta</span> <span class="op">&lt;</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">m_set</span>, <span class="va">delta</span> <span class="op">&lt;</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 
 </div>
 </div>
@@ -380,7 +380,7 @@ R^2 = 1 - \frac{SS}{SS_0}
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-11-04.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-11-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

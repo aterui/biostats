@@ -142,3 +142,26 @@ df_tadpole <- tibble(aqveg = runif(100, 0, 1),
                      tadpole = rnbinom(100, mu = exp(-0.5 + 0.05 * permanence), size = 0.5))
 
 write_csv(df_tadpole, "data_raw/data_tadpole.csv")
+
+
+# model selection ---------------------------------------------------------
+
+set.seed(1)
+
+n <- 200
+WaterTemp     <- rnorm(n, mean = 15, sd = 3)       # strong predictor
+NutrientLevel <- rnorm(n, mean = 5,  sd = 1)       # very weak predictor
+
+# True relationship: NutrientLevel effect is tiny
+FishDensity <- 20 + 4*WaterTemp + 0.01*NutrientLevel + rnorm(n, sd = 5)
+
+df <- data.frame(algae, water_temp, nutrient)
+
+m_simple  <- lm(FishDensity ~ WaterTemp, data = df)
+m_complex <- lm(FishDensity ~ WaterTemp + NutrientLevel, data = df)
+
+AIC(m_simple, m_complex)
+
+summary(m_simple)$adj.r.squared
+summary(m_complex)$adj.r.squared
+

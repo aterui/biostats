@@ -100,7 +100,7 @@ Figure 14.1: Garden view with sampling plots. White squares represent plots. Red
 </p>
 </div>
 <div class="sourceCode" id="cb414"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df_count</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data_raw/data_garden_count.csv"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">df_count</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/readr/man/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data_raw/data_garden_count.csv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_count</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 30 × 3
 ##     plot count nitrate
@@ -158,11 +158,11 @@ y_i &amp;\sim \text{Normal}(\mu_i, \sigma^2)\\
 <span><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">m_normal</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="co"># intercept</span></span>
 <span><span class="va">beta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">m_normal</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="co"># slope</span></span>
 <span></span>
-<span><span class="va">df_count</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">nitrate</span>,</span>
+<span><span class="va">df_count</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">nitrate</span>,</span>
 <span>             y <span class="op">=</span> <span class="va">count</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span><span class="op">(</span>intercept <span class="op">=</span> <span class="va">alpha</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_abline.html">geom_abline</a></span><span class="op">(</span>intercept <span class="op">=</span> <span class="va">alpha</span>,</span>
 <span>              slope <span class="op">=</span> <span class="va">beta</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-138-1.png" width="672" style="display: block; margin: auto;"></div>
 <p>The intersection of the predicted line with the x-axis suggests the presence of negative predicted values for plant counts. However, it is logically implausible for plant counts to be negative.</p>
@@ -240,28 +240,28 @@ y_i &amp;\sim \text{Poisson}(\lambda_i)\\
 <p>Visualization provides the convincing difference between the Normal and Poisson models (Figure <a href="generalized-linear-model.html#fig:normal-pois">14.2</a>).</p>
 <div class="sourceCode" id="cb426"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># make predictions</span></span>
-<span><span class="va">df_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>nitrate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">df_count</span><span class="op">$</span><span class="va">nitrate</span><span class="op">)</span>,</span>
+<span><span class="va">df_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tibble/man/tibble.html">tibble</a></span><span class="op">(</span>nitrate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">df_count</span><span class="op">$</span><span class="va">nitrate</span><span class="op">)</span>,</span>
 <span>                                <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">df_count</span><span class="op">$</span><span class="va">nitrate</span><span class="op">)</span>,</span>
 <span>                                length <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># y_pois is exponentiated because predict() returns values in log-scale</span></span>
 <span><span class="va">y_normal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">m_normal</span>, newdata <span class="op">=</span> <span class="va">df_pred</span><span class="op">)</span></span>
-<span><span class="va">y_pois</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">m_pois</span>, newdata <span class="op">=</span> <span class="va">df_pred</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">y_pois</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">m_pois</span>, newdata <span class="op">=</span> <span class="va">df_pred</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">df_pred</span> <span class="op">&lt;-</span> <span class="va">df_pred</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">y_normal</span>,</span>
+<span><span class="va">df_pred</span> <span class="op">&lt;-</span> <span class="va">df_pred</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/mutate.html">mutate</a></span><span class="op">(</span><span class="va">y_normal</span>,</span>
 <span>         <span class="va">y_pois</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># figure</span></span>
-<span><span class="va">df_count</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">nitrate</span>,</span>
+<span><span class="va">df_count</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">nitrate</span>,</span>
 <span>             y <span class="op">=</span> <span class="va">count</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_pred</span>,</span>
-<span>            <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">y_normal</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_path.html">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_pred</span>,</span>
+<span>            <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">y_normal</span><span class="op">)</span>,</span>
 <span>            linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_pred</span>,</span>
-<span>            <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">y_pois</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_path.html">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_pred</span>,</span>
+<span>            <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">y_pois</span><span class="op">)</span>,</span>
 <span>            color <span class="op">=</span> <span class="st">"salmon"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:normal-pois"></span>
@@ -284,7 +284,7 @@ Figure 14.2: Comparison of the predicted values between Normal (broken, black) a
 <div class="inline-figure"><img src="image/image_mussel.JPG" width="300" style="display: block; margin: auto;"></div>
 <p>Male freshwater mussels release sperm into the water, which is then drawn into female mussels downstream. Considering the nature of the fertilization process, female mussels are expected to have a higher probability of fertilization when they are surrounded by a greater number of males. To explore this relationship, let’s load the data into R and visualize it.</p>
 <div class="sourceCode" id="cb427"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df_mussel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data_raw/data_mussel.csv"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">df_mussel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/readr/man/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data_raw/data_mussel.csv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_mussel</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 100 × 4
 ##    ind_id n_fertilized n_examined density
@@ -303,15 +303,15 @@ Figure 14.2: Comparison of the predicted values between Normal (broken, black) a
 <p>This data frame contains variables such as <code>ind_id</code> (mussel individual ID), <code>n_fertilized</code> (number of fertilized eggs), <code>n_examined</code> (number of eggs examined), and <code>density</code> (number of mussels in a 1 m<span class="math inline">\(^2\)</span> quadrat). To visualize the relationship between the proportion of eggs fertilized and the density gradient, plot the proportion of fertilized eggs against the density gradient (Figure <a href="generalized-linear-model.html#fig:mussel-egg">14.3</a>).</p>
 <div class="sourceCode" id="cb429"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># calculate the proportion of fertilized eggs</span></span>
-<span><span class="va">df_mussel</span> <span class="op">&lt;-</span> <span class="va">df_mussel</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>prop_fert <span class="op">=</span> <span class="va">n_fertilized</span> <span class="op">/</span> <span class="va">n_examined</span><span class="op">)</span></span>
+<span><span class="va">df_mussel</span> <span class="op">&lt;-</span> <span class="va">df_mussel</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/mutate.html">mutate</a></span><span class="op">(</span>prop_fert <span class="op">=</span> <span class="va">n_fertilized</span> <span class="op">/</span> <span class="va">n_examined</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># plot</span></span>
-<span><span class="va">df_mussel</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">density</span>,</span>
+<span><span class="va">df_mussel</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">density</span>,</span>
 <span>             y <span class="op">=</span> <span class="va">prop_fert</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Proportion of eggs fertilized"</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Proportion of eggs fertilized"</span>,</span>
 <span>       x <span class="op">=</span> <span class="st">"Mussel density"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:mussel-egg"></span>
@@ -350,15 +350,15 @@ p_i = \frac{\exp(\alpha + \beta~\text{density}_i)}{1 + \exp(\alpha + \beta~\text
 <div class="sourceCode" id="cb430"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># x: produce 100 numbers from -100 to 100 (assume logit scale)</span></span>
 <span><span class="co"># y: convert with inverse-logit transformation (ordinary scale)</span></span>
-<span><span class="va">df_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>logit_x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10</span>, <span class="fl">10</span>, length <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>,</span>
+<span><span class="va">df_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tibble/man/tibble.html">tibble</a></span><span class="op">(</span>logit_x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10</span>, <span class="fl">10</span>, length <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>,</span>
 <span>                  x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">logit_x</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">logit_x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">df_test</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">logit_x</span>,</span>
+<span><span class="va">df_test</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">logit_x</span>,</span>
 <span>             y <span class="op">=</span> <span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"x"</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"x"</span>,</span>
 <span>       x <span class="op">=</span> <span class="st">"logit(x)"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:logit-transform"></span>
@@ -373,7 +373,7 @@ Figure 14.4: Logit-transformation ensures that the transformed variable to fall 
 <span>               family <span class="op">=</span> <span class="st">"binomial"</span><span class="op">)</span></span></code></pre></div>
 <p>In contrast to the Normal or Poisson models, the response variable was encoded using the <code>cbind(n_fertilized, n_examined - n_fertilized)</code> function. The <code><a href="https://rdrr.io/r/base/cbind.html">cbind()</a></code> function combines the number of successes (fertilized) and failures (not fertilized) into a single matrix. This approach allows for modeling the data using the binomial distribution, taking into account both the successes and the total number of trials within each observation.</p>
 <div class="sourceCode" id="cb432"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">df_mussel</span><span class="op">$</span><span class="va">n_fertilized</span>, <span class="va">df_mussel</span><span class="op">$</span><span class="va">n_examined</span> <span class="op">-</span> <span class="va">df_mussel</span><span class="op">$</span><span class="va">n_fertilized</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">df_mussel</span><span class="op">$</span><span class="va">n_fertilized</span>, <span class="va">df_mussel</span><span class="op">$</span><span class="va">n_examined</span> <span class="op">-</span> <span class="va">df_mussel</span><span class="op">$</span><span class="va">n_fertilized</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    0   30
@@ -414,24 +414,24 @@ y_i &amp;\sim \text{Binomial}(N_i, p_i)\\
 <p>To make predictions, it is necessary to back-transform the predicted fertilization probability since it is estimated on a logit scale. The back-transformation will convert the predicted values back to the original probability scale (<span class="math inline">\(0.0-1.0\)</span>).</p>
 <div class="sourceCode" id="cb436"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># make prediction</span></span>
-<span><span class="va">df_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>density <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">df_mussel</span><span class="op">$</span><span class="va">density</span><span class="op">)</span>,</span>
+<span><span class="va">df_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tibble/man/tibble.html">tibble</a></span><span class="op">(</span>density <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">df_mussel</span><span class="op">$</span><span class="va">density</span><span class="op">)</span>,</span>
 <span>                                <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">df_mussel</span><span class="op">$</span><span class="va">density</span><span class="op">)</span>,</span>
 <span>                                length <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># y_binom is inv.logit-transformed because predict() returns values in logit-scale</span></span>
-<span><span class="va">y_binom</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">m_binom</span>, newdata <span class="op">=</span> <span class="va">df_pred</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">boot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/boot/man/inv.logit.html">inv.logit</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">y_binom</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">m_binom</span>, newdata <span class="op">=</span> <span class="va">df_pred</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> <span class="fu">boot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/boot/man/inv.logit.html">inv.logit</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">df_pred</span> <span class="op">&lt;-</span> <span class="va">df_pred</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">y_binom</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">df_pred</span> <span class="op">&lt;-</span> <span class="va">df_pred</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/mutate.html">mutate</a></span><span class="op">(</span><span class="va">y_binom</span><span class="op">)</span></span></code></pre></div>
 <p>Draw on the figure (Figure <a href="generalized-linear-model.html#fig:binom-fit-figure">14.5</a>).</p>
 <div class="sourceCode" id="cb437"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df_mussel</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">density</span>,</span>
+<code class="sourceCode R"><span><span class="va">df_mussel</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">density</span>,</span>
 <span>             y <span class="op">=</span> <span class="va">prop_fert</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_pred</span>,</span>
-<span>            <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">y_binom</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Proportion of eggs fertilized"</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_path.html">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_pred</span>,</span>
+<span>            <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">y_binom</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Proportion of eggs fertilized"</span>,</span>
 <span>       x <span class="op">=</span> <span class="st">"Mussel density"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:binom-fit-figure"></span>
@@ -472,10 +472,10 @@ Figure 14.6: Tree chart on how to choose a probability distribution in GLM analy
 <caption>
 <span id="tab:table-dist">Table 14.1: </span> Common distributions used in GLM analysis</caption>
 <colgroup>
-<col width="20%">
-<col width="26%">
-<col width="26%">
-<col width="26%">
+<col width="25%">
+<col width="25%">
+<col width="25%">
+<col width="25%">
 </colgroup>
 <thead><tr class="header">
 <th>#</th>
@@ -546,7 +546,7 @@ Figure 14.6: Tree chart on how to choose a probability distribution in GLM analy
 <p>A publicly available stream fish distribution dataset can be accessed from an online repository:</p>
 <div class="sourceCode" id="cb438"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/aterui/public-proj_fish-richness-shubuto/master/data/data_vpart.csv"</span></span>
-<span><span class="va">df_fish</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">df_fish</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/readr/man/read_delim.html">read_csv</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span></code></pre></div>
 <p>The dataset comprises information on the number of species found at each site (<code>n_sp</code>) and several associated environmental variables, including distance to the sea (<code>distance</code>), catchment area (<code>cat_area</code>), and environmental heterogeneity (<code>hull_area</code>). These environmental variables are factors that are known to influence fish distributions. To analyze this dataset, develop a Generalized Linear Model (GLM) as follows:</p>
 <ul>
 <li>Use fish species richness <code>n_sp</code> as a response variable of the model with an appropriate probability distribution (<code>family</code>). Identify which predictor variable(s) significantly influence the response variable.</li>
@@ -583,7 +583,7 @@ Figure 14.6: Tree chart on how to choose a probability distribution in GLM analy
 <p>The Poisson distribution (and other distributions used for modeling count data) assumes that all observations are collected under comparable sampling efforts. In practice, however, survey data often differ in effort — for example, some counts may come from surveys conducted over longer search times or larger areas. To see this issue, copy and paste the following code:</p>
 <div class="sourceCode" id="cb439"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/aterui/biostats/master/data_raw/data_offset.csv"</span></span>
-<span><span class="va">df_offset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">df_offset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/readr/man/read_delim.html">read_csv</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span></code></pre></div>
 <p>Using <code>df_offset</code>, perform the following:</p>
 <ul>
 <li>Plot the relationship between <code>count</code> and <code>nitrate</code>.</li>
@@ -594,8 +594,8 @@ Figure 14.6: Tree chart on how to choose a probability distribution in GLM analy
 <li>
 <p>Directly comparing such counts would be misleading because higher effort naturally increases the expected number of detections. One might consider dividing the response variable by effort to standardize it, but doing so changes the outcome from a discrete count to a continuous rate, violating the assumptions of count models. Confirm the following code returns numerous wranings – this is because <code>density</code> is not a discrete variable:</p>
 <div class="sourceCode" id="cb440"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df_offset</span> <span class="op">&lt;-</span> <span class="va">df_offset</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>density <span class="op">=</span> <span class="va">count</span> <span class="op">/</span> <span class="va">area</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">df_offset</span> <span class="op">&lt;-</span> <span class="va">df_offset</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/mutate.html">mutate</a></span><span class="op">(</span>density <span class="op">=</span> <span class="va">count</span> <span class="op">/</span> <span class="va">area</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">density</span> <span class="op">~</span> <span class="va">nitrate</span>,</span>
 <span>    data <span class="op">=</span> <span class="va">df_offset</span>,</span>
@@ -616,7 +616,7 @@ Figure 14.6: Tree chart on how to choose a probability distribution in GLM analy
 <p>Copy and paste the following code:</p>
 <div class="sourceCode" id="cb441"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/aterui/biostats/master/data_raw/data_tadpole.csv"</span></span>
-<span><span class="va">df_tadpole</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">df_tadpole</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/readr/man/read_delim.html">read_csv</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span></code></pre></div>
 <p>This dataset contains the data of tadpole counts (<code>tadpole</code>), aquatic vegetation cover (<code>aqveg</code>), and pond permanence (the number of days persist; <code>permanence</code>).</p>
 <ol style="list-style-type: decimal">
 <li><p>Plot the relationships between (a) <code>tadpole</code> and <code>aqveg</code> and (b) <code>tadpole</code> and <code>permanence</code>.</p></li>
@@ -671,7 +671,7 @@ Figure 14.6: Tree chart on how to choose a probability distribution in GLM analy
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-11-04.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-11-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

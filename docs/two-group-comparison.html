@@ -93,10 +93,10 @@
 <h2>
 <span class="header-section-number">10.1</span> Explore Data Structure<a class="anchor" aria-label="anchor" href="#explore-data-structure"><i class="fas fa-link"></i></a>
 </h2>
-<p>Suppose that we study fish populations of the same species in two lakes (Lake <code>a</code> and <code>b</code>). These lakes are in stark contrast of productivity (Lake <code>b</code> looks more productive), and our interest is the difference in <em>mean</em> body size between the two lakes. We obtained <span class="math inline">\(50\)</span> data points of fish length from each lake (download <a href="https://github.com/aterui/biostats/blob/master/data_raw/data_fish_length.csv">here</a>). Save under <code>data_raw/</code> and use <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> to read data:</p>
+<p>Suppose that we study fish populations of the same species in two lakes (Lake <code>a</code> and <code>b</code>). These lakes are in stark contrast of productivity (Lake <code>b</code> looks more productive), and our interest is the difference in <em>mean</em> body size between the two lakes. We obtained <span class="math inline">\(50\)</span> data points of fish length from each lake (download <a href="https://github.com/aterui/biostats/blob/master/data_raw/data_fish_length.csv">here</a>). Save under <code>data_raw/</code> and use <code><a href="https://rdrr.io/pkg/readr/man/read_delim.html">read_csv()</a></code> to read data:</p>
 <div class="sourceCode" id="cb296"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span> <span class="co"># call add-in packages everytime you open new R session</span></span>
-<span><span class="va">df_fl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data_raw/data_fish_length.csv"</span><span class="op">)</span></span>
+<span><span class="va">df_fl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/readr/man/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data_raw/data_fish_length.csv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_fl</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 100 × 3
 ##    lake  length unit 
@@ -112,14 +112,14 @@
 ##  9 a       15   cm   
 ## 10 a       11.9 cm   
 ## # ℹ 90 more rows</code></pre>
-<p>In this data frame, fish length data from lake <code>a</code> and <code>b</code> are recorded. Confirm this with <code><a href="https://rdrr.io/r/base/unique.html">unique()</a></code> or <code><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct()</a></code> function:</p>
+<p>In this data frame, fish length data from lake <code>a</code> and <code>b</code> are recorded. Confirm this with <code><a href="https://rdrr.io/r/base/unique.html">unique()</a></code> or <code><a href="https://rdrr.io/pkg/dplyr/man/distinct.html">distinct()</a></code> function:</p>
 <div class="sourceCode" id="cb298"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># unique returns unique values as a vector</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">df_fl</span><span class="op">$</span><span class="va">lake</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "a" "b"</code></pre>
 <div class="sourceCode" id="cb300"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># distinct returns unique values as a tibble</span></span>
-<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">df_fl</span>, <span class="va">lake</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/distinct.html">distinct</a></span><span class="op">(</span><span class="va">df_fl</span>, <span class="va">lake</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 2 × 1
 ##   lake 
 ##   &lt;chr&gt;
@@ -128,31 +128,31 @@
 <p>Visualization provides a powerful tool for summarizing data effectively. By plotting individual data points overlaid with mean values and error bars, we can observe the distribution and patterns within the data, allowing us to identify trends, variations, and potential outliers:</p>
 <div class="sourceCode" id="cb302"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># group mean and sd</span></span>
-<span><span class="va">df_fl_mu</span> <span class="op">&lt;-</span> <span class="va">df_fl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">lake</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># group operation</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>mu_l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">length</span><span class="op">)</span>, <span class="co"># summarize by mean()</span></span>
+<span><span class="va">df_fl_mu</span> <span class="op">&lt;-</span> <span class="va">df_fl</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/group_by.html">group_by</a></span><span class="op">(</span><span class="va">lake</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> <span class="co"># group operation</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/summarise.html">summarize</a></span><span class="op">(</span>mu_l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">length</span><span class="op">)</span>, <span class="co"># summarize by mean()</span></span>
 <span>            sd_l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">length</span><span class="op">)</span><span class="op">)</span> <span class="co"># summarize with sd()</span></span>
 <span></span>
 <span><span class="co"># plot</span></span>
 <span><span class="co"># geom_jitter() plot data points with scatter</span></span>
 <span><span class="co"># geom_segment() draw lines</span></span>
 <span><span class="co"># geom_point() draw points</span></span>
-<span><span class="va">df_fl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">lake</span>,</span>
+<span><span class="va">df_fl</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">lake</span>,</span>
 <span>             y <span class="op">=</span> <span class="va">length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.1</span>, <span class="co"># scatter width</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_jitter.html">geom_jitter</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.1</span>, <span class="co"># scatter width</span></span>
 <span>              height <span class="op">=</span> <span class="fl">0</span>, <span class="co"># scatter height (no scatter with zero)</span></span>
 <span>              alpha <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span> <span class="op">+</span> <span class="co"># transparency of data points</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html">geom_segment</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_fl_mu</span>, <span class="co"># switch data frame</span></span>
-<span>               <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">lake</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_segment.html">geom_segment</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_fl_mu</span>, <span class="co"># switch data frame</span></span>
+<span>               <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">lake</span>,</span>
 <span>                   xend <span class="op">=</span> <span class="va">lake</span>,</span>
 <span>                   y <span class="op">=</span> <span class="va">mu_l</span> <span class="op">-</span> <span class="va">sd_l</span>,</span>
 <span>                   yend <span class="op">=</span> <span class="va">mu_l</span> <span class="op">+</span> <span class="va">sd_l</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_fl_mu</span>, <span class="co"># switch data frame</span></span>
-<span>             <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">lake</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_point.html">geom_point</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_fl_mu</span>, <span class="co"># switch data frame</span></span>
+<span>             <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">lake</span>,</span>
 <span>                 y <span class="op">=</span> <span class="va">mu_l</span><span class="op">)</span>,</span>
 <span>             size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Lake"</span>, <span class="co"># x label</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Lake"</span>, <span class="co"># x label</span></span>
 <span>       y <span class="op">=</span> <span class="st">"Fish body length"</span><span class="op">)</span> <span class="co"># y label</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:mean-plot"></span>
@@ -168,13 +168,13 @@ Figure 10.1: Example of mean and SD plot
 </h2>
 <p>For this simple data set, we can use t-test. R provides <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code> function to perform this analysis:</p>
 <div class="sourceCode" id="cb303"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">df_fl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">lake</span> <span class="op">==</span> <span class="st">"a"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>  <span class="co"># subset lake a</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">length</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">df_fl</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="va">lake</span> <span class="op">==</span> <span class="st">"a"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span>  <span class="co"># subset lake a</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/pull.html">pull</a></span><span class="op">(</span><span class="va">length</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">df_fl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">lake</span> <span class="op">==</span> <span class="st">"b"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># subset lake b</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">length</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">df_fl</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="va">lake</span> <span class="op">==</span> <span class="st">"b"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> <span class="co"># subset lake b</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/pull.html">pull</a></span><span class="op">(</span><span class="va">length</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
@@ -209,8 +209,8 @@ Figure 10.1: Example of mean and SD plot
 ## 2 b      15.4  3.39</code></pre>
 <div class="sourceCode" id="cb307"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># pull mu_l from tibble as vector</span></span>
-<span><span class="va">v_mu</span> <span class="op">&lt;-</span> <span class="va">df_fl_mu</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">mu_l</span><span class="op">)</span></span>
+<span><span class="va">v_mu</span> <span class="op">&lt;-</span> <span class="va">df_fl_mu</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/pull.html">pull</a></span><span class="op">(</span><span class="va">mu_l</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># lake a</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">v_mu</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
@@ -235,11 +235,11 @@ t = \frac{\hat{\mu_a} - \hat{\mu_b}}{\sqrt{\hat{\sigma}^2_p \left(\frac{1}{N_a} 
 <p>We can calculate this value in R manually:</p>
 <div class="sourceCode" id="cb313"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># group mean, variance, and sample size</span></span>
-<span><span class="va">df_t</span> <span class="op">&lt;-</span> <span class="va">df_fl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">lake</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># group operation</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>mu_l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">length</span><span class="op">)</span>, <span class="co"># summarize by mean()</span></span>
+<span><span class="va">df_t</span> <span class="op">&lt;-</span> <span class="va">df_fl</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/group_by.html">group_by</a></span><span class="op">(</span><span class="va">lake</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> <span class="co"># group operation</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/summarise.html">summarize</a></span><span class="op">(</span>mu_l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">length</span><span class="op">)</span>, <span class="co"># summarize by mean()</span></span>
 <span>            var_l <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">var</a></span><span class="op">(</span><span class="va">length</span><span class="op">)</span>, <span class="co"># summarize with sd()</span></span>
-<span>            n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="co"># count number of rows per group</span></span>
+<span>            n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="co"># count number of rows per group</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_t</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 2 × 4
@@ -249,9 +249,9 @@ t = \frac{\hat{\mu_a} - \hat{\mu_b}}{\sqrt{\hat{\sigma}^2_p \left(\frac{1}{N_a} 
 ## 2 b      15.4 11.5     50</code></pre>
 <div class="sourceCode" id="cb315"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># pull values as a vector</span></span>
-<span><span class="va">v_mu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">df_t</span>, <span class="va">mu_l</span><span class="op">)</span></span>
-<span><span class="va">v_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">df_t</span>, <span class="va">var_l</span><span class="op">)</span></span>
-<span><span class="va">v_n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">df_t</span>, <span class="va">n</span><span class="op">)</span></span>
+<span><span class="va">v_mu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/pull.html">pull</a></span><span class="op">(</span><span class="va">df_t</span>, <span class="va">mu_l</span><span class="op">)</span></span>
+<span><span class="va">v_var</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/pull.html">pull</a></span><span class="op">(</span><span class="va">df_t</span>, <span class="va">var_l</span><span class="op">)</span></span>
+<span><span class="va">v_n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/pull.html">pull</a></span><span class="op">(</span><span class="va">df_t</span>, <span class="va">n</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">var_p</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="op">(</span><span class="va">v_n</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">v_n</span><span class="op">)</span> <span class="op">-</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">*</span> <span class="va">v_var</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">+</span></span>
 <span>  <span class="op">(</span><span class="op">(</span><span class="va">v_n</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">v_n</span><span class="op">)</span> <span class="op">-</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">*</span> <span class="va">v_var</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span>
@@ -280,11 +280,11 @@ t = \frac{\hat{\mu_a} - \hat{\mu_b}}{\sqrt{\hat{\sigma}^2_p \left(\frac{1}{N_a} 
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/TDist.html">dt</a></span><span class="op">(</span><span class="va">x</span>, df <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">v_n</span><span class="op">)</span> <span class="op">-</span> <span class="fl">2</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># draw figure</span></span>
-<span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>,</span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/tibble/man/tibble.html">tibble</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>,</span>
 <span>             y <span class="op">=</span> <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Probability density"</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Probability density"</span>,</span>
 <span>       x <span class="op">=</span> <span class="st">"t-statistic"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:student-t"></span>
@@ -295,15 +295,15 @@ Figure 10.2: Distribution of t-statistics under null hypothesis. The probability
 <p>The probability density in a distribution (Figure <a href="two-group-comparison.html#fig:student-t">10.2</a>) determines the likelihood of observing a particular t-statistic. Higher probability density indicates a greater likelihood of the t-statistic occurring. Compare the observed t-statistic against this null distribution:</p>
 <div class="sourceCode" id="cb318"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># draw entire range</span></span>
-<span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>,</span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/tibble/man/tibble.html">tibble</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>,</span>
 <span>             y <span class="op">=</span> <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">t_value</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">t_value</span>,</span>
 <span>             color <span class="op">=</span> <span class="st">"salmon"</span><span class="op">)</span> <span class="op">+</span> <span class="co"># t_value is the observed t_value</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">t_value</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">t_value</span><span class="op">)</span>,</span>
 <span>             color <span class="op">=</span> <span class="st">"salmon"</span><span class="op">)</span> <span class="op">+</span> <span class="co"># t_value is the observed t_value</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Probability density"</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Probability density"</span>,</span>
 <span>       x <span class="op">=</span> <span class="st">"t-statistic"</span><span class="op">)</span> </span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:student-t-obs"></span>
@@ -402,7 +402,7 @@ d.f. = \frac{(\frac{\hat{\sigma}^2_a}{N_a} + \frac{\hat{\sigma}^2_b}{N_b})^2}{\f
 <span><span class="va">b2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">26.9</span>, <span class="fl">12.9</span>, <span class="fl">11.1</span>, <span class="fl">16.7</span>, <span class="fl">20.0</span>, <span class="fl">20.9</span>, <span class="fl">16.6</span>, <span class="fl">15.4</span>, <span class="fl">16.2</span>, <span class="fl">16.2</span><span class="op">)</span></span></code></pre></div>
 <p>Perform the following analysis:</p>
 <ol style="list-style-type: decimal">
-<li><p>Estimate sample means and SDs for each vector. To do so, create a <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code> object with <code>group</code> (consist of characters <code>a1</code>, <code>a2</code>, <code>b1</code>, <code>b2</code>) and <code>value</code> columns (consist of values above). Then use <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> functions to estimate means and SDs for each <code>group</code>.</p></li>
+<li><p>Estimate sample means and SDs for each vector. To do so, create a <code><a href="https://rdrr.io/pkg/tibble/man/tibble.html">tibble()</a></code> object with <code>group</code> (consist of characters <code>a1</code>, <code>a2</code>, <code>b1</code>, <code>b2</code>) and <code>value</code> columns (consist of values above). Then use <code><a href="https://rdrr.io/pkg/dplyr/man/group_by.html">group_by()</a></code> and <code><a href="https://rdrr.io/pkg/dplyr/man/summarise.html">summarize()</a></code> functions to estimate means and SDs for each <code>group</code>.</p></li>
 <li><p>Create a figure similar to Figure <a href="two-group-comparison.html#fig:mean-plot">10.1</a> using data from <code>a1</code> and <code>a2</code>.</p></li>
 <li><p>Perform Welch’s t-test for each pair and compare results.</p></li>
 </ol>
@@ -458,7 +458,7 @@ d.f. = \frac{(\frac{\hat{\sigma}^2_a}{N_a} + \frac{\hat{\sigma}^2_b}{N_b})^2}{\f
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-11-04.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-11-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

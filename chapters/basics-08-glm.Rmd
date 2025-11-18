@@ -378,7 +378,7 @@ print(g_dendro)
 ```
 
 | \# | Distribution | Support | R |
-|---------------|-------------------|-------------------|-------------------|
+|----|----|----|----|
 | 1 | Beta-binomial | [0, N] | `glmmTMB::glmmTMB()` |
 | 2 | Binomial | [0, N] | `glm()`, `glmmTMB::glmmTMB()` |
 | 3 | Negative binomial | $\ge 0$ | `MASS::glm.nb()`, `glmmTMB::glmmTMB()` |

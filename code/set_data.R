@@ -149,6 +149,12 @@ write_csv(df_tadpole, "data_raw/data_tadpole.csv")
 messy <- data.frame(
   ID = 1:12,
   
+  collector = c(
+    "Akira", "akira", "John", "John",
+    "Akira", "John", "John", "JoHn",
+    "Akira", "akira", "John", "John"
+  ),
+  
   # Inconsistent capitalization, periods, and whitespace
   species = c(
     "Bluehead chub", "blueHead Chub ", " BLUEHEAD CHUB",
@@ -159,8 +165,8 @@ messy <- data.frame(
   
   # Mixed numeric formats, commas, text, units
   length_mm = c(
-    "55", " 58 mm ", "60.0", "62mm", "63", " 64mm",
-    "70,0", "72 mm", "80.0", "82mm", "  90 ", "75"
+    "55 ", 58, 60, 62, 63, 64,
+    "70,0", "72 mm", 80.0, 82, 90, 75
   ),
   
   # Mixed date formats

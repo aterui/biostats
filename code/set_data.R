@@ -150,9 +150,9 @@ messy <- data.frame(
   ID = 1:12,
   
   collector = c(
-    "Akira", "akira", "John", "John",
-    "Akira", "John", "John", "JoHn",
-    "Akira", "akira", "John", "John"
+    "Akira", "akira", "Akira", "Akira",
+    "john", "John", "John", "JoHn",
+    "Akira", "akira", "Akira", "Akira"
   ),
   
   # Inconsistent capitalization, periods, and whitespace
@@ -171,10 +171,10 @@ messy <- data.frame(
   
   # Mixed date formats
   sample_date = c(
-    "2024-06-01", "06/02/24", "2024/06/03",
-    "June 4 2024", "2024.06.05", "6-6-24",
-    "2024-6-07", "20240608", "08 Jun 2024",
-    "2024/6/9", "2024-06-10", " 2024-06-11 "
+    "2024-06-01", "2024/06/01", "2024/06/01",
+    "June 4 2024", "2024.06.04", "2024-06-04",
+    "2024-06-07", "2024-06-07", "07 Jun 2024",
+    "2024-06-09", "2024-06-09", " 2024-06-09 "
   ),
   
   # Inconsistent yes/no coding

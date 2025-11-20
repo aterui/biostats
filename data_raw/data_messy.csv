@@ -1,13 +1,13 @@
 ID,collector,species,length_mm,sample_date,recaptured
 1,Akira,Bluehead chub,55 ,2024-06-01,yes
-2,akira,blueHead Chub ,58,06/02/24,Yes 
-3,John, BLUEHEAD CHUB,60,2024/06/03,Y
-4,John,green sunfish,62,June 4 2024,no
-5,Akira, Green SunFish,63,2024.06.05, NO
-6,John,green.sunfish,64,6-6-24,n
-7,John, creek chub ,"70,0",2024-6-07,yes
-8,JoHn,Creek.Chub,72 mm,20240608, y 
-9,Akira, creek   chub,80,08 Jun 2024,No.
-10,akira,Gizzard shad,82,2024/6/9,N
-11,John,gizzard Shad.,90,2024-06-10, YES
-12,John, gizzard.shad ,75, 2024-06-11 , no 
+2,akira,blueHead Chub ,58,2024/06/01,Yes 
+3,Akira, BLUEHEAD CHUB,60,2024/06/01,Y
+4,Akira,green sunfish,62,June 4 2024,no
+5,john, Green SunFish,63,2024.06.04, NO
+6,John,green.sunfish,64,2024-06-04,n
+7,John, creek chub ,"70,0",2024-06-07,yes
+8,JoHn,Creek.Chub,72 mm,2024-06-07, y 
+9,Akira, creek   chub,80,07 Jun 2024,No.
+10,akira,Gizzard shad,82,2024-06-09,N
+11,Akira,gizzard Shad.,90,2024-06-09, YES
+12,Akira, gizzard.shad ,75, 2024-06-09 , no 

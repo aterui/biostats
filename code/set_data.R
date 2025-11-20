@@ -144,24 +144,40 @@ df_tadpole <- tibble(aqveg = runif(100, 0, 1),
 write_csv(df_tadpole, "data_raw/data_tadpole.csv")
 
 
-# model selection ---------------------------------------------------------
+# messy data --------------------------------------------------------------
 
-set.seed(1)
+messy <- data.frame(
+  ID = 1:12,
+  
+  # Inconsistent capitalization, periods, and whitespace
+  species = c(
+    "Bluehead chub", "blueHead Chub ", " BLUEHEAD CHUB",
+    "green sunfish", " Green SunFish", "green.sunfish",
+    " creek chub ", "Creek.Chub", " creek   chub",
+    "Gizzard shad", "gizzard Shad.", " gizzard.shad "
+  ),
+  
+  # Mixed numeric formats, commas, text, units
+  length_mm = c(
+    "55", " 58 mm ", "60.0", "62mm", "63", " 64mm",
+    "70,0", "72 mm", "80.0", "82mm", "  90 ", "75"
+  ),
+  
+  # Mixed date formats
+  sample_date = c(
+    "2024-06-01", "06/02/24", "2024/06/03",
+    "June 4 2024", "2024.06.05", "6-6-24",
+    "2024-6-07", "20240608", "08 Jun 2024",
+    "2024/6/9", "2024-06-10", " 2024-06-11 "
+  ),
+  
+  # Inconsistent yes/no coding
+  recaptured = c(
+    "yes", "Yes ", "Y", "no", " NO", "n",
+    "yes", " y ", "No.", "N", " YES", " no "
+  ),
+  
+  stringsAsFactors = FALSE
+)
 
-n <- 200
-WaterTemp     <- rnorm(n, mean = 15, sd = 3)       # strong predictor
-NutrientLevel <- rnorm(n, mean = 5,  sd = 1)       # very weak predictor
-
-# True relationship: NutrientLevel effect is tiny
-FishDensity <- 20 + 4*WaterTemp + 0.01*NutrientLevel + rnorm(n, sd = 5)
-
-df <- data.frame(algae, water_temp, nutrient)
-
-m_simple  <- lm(FishDensity ~ WaterTemp, data = df)
-m_complex <- lm(FishDensity ~ WaterTemp + NutrientLevel, data = df)
-
-AIC(m_simple, m_complex)
-
-summary(m_simple)$adj.r.squared
-summary(m_complex)$adj.r.squared
-
+write_csv(messy, "data_raw/data_messy.csv")

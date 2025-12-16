@@ -3,7 +3,6 @@ title: "BIOSTATS"
 author: "Akira Terui"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
-output: bookdown::bs4_book
 github-repo: https://github.com/aterui/biostats
 description: |
   Biostats I course material.

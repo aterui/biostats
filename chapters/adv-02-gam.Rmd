@@ -1,0 +1,80 @@
+# (PART) (somewhat) Advanced Statistics {.unnumbered}
+
+# Generalized Linear Mixed Effect Model
+
+XXX
+
+Learning Objectives:
+
+-   Understand linearity assumptions
+
+-   Understand smoothing functions
+
+-   Understand advantage and disadvantage of additive models
+
+```{r}
+pacman::p_load(tidyverse,
+               mgcv)
+```
+
+## Seasonal Water Temperature
+
+```{r}
+# URLs pointing to the raw CSV files hosted on GitHub.
+# These use the "raw.githubusercontent.com" domain so that R
+# downloads the actual CSV content rather than an HTML webpage.
+link_woody <- "https://raw.githubusercontent.com/aterui/public-proj_restore-aqua-complex/master/data_raw/data_src_w_temp/wetland_site1_woody_230321.csv"
+
+link_open <- "https://raw.githubusercontent.com/aterui/public-proj_restore-aqua-complex/master/data_raw/data_src_w_temp/wetland_site2_open_230321.csv"
+
+# Read the woody wetland dataset directly from GitHub.
+# A new column, `site`, is added to label observations
+# originating from the woody wetland.
+df_wt_woody_raw <- read_csv(link_woody, 
+                            guess_max = 1E+6) %>% 
+  select(1:3) %>% 
+  set_names(c("id", "date_time", "temp")) %>% 
+  mutate(site = "woody")
+
+# Read the open wetland dataset directly from GitHub.
+# Similarly, add a `site` column to indicate the open wetland.
+df_wt_open_raw <- read_csv(link_open, 
+                            guess_max = 1E+6) %>% 
+  select(1:3) %>% 
+  set_names(c("id", "date_time", "temp")) %>% 
+  mutate(site = "open")
+
+# Combine the two datasets into a single data frame by stacking rows.
+# This is possible because both datasets share the same column structure.
+# The `site` column preserves information about the original data source.
+df_wt_raw <- bind_rows(df_wt_woody_raw,
+                       df_wt_open_raw)
+```
+
+```{r}
+df_wt_raw %>% 
+  janitor::clean_names() %>% 
+  select(date_time,
+         site,
+         temp)
+```
+
+## Linear vs. Non-linear
+
+In generalized linear models (GLMs) and generalized linear mixed models (GLMMs), a key structural assumption is linearity on the scale of the linear predictor. Specifically, these models assume that the expected value of the response, after applying the link function, can be expressed as a linear combination of predictors and parameters. While the response itself may be non-linear on the original scale (e.g., counts or proportions), the systematic component of the model takes the form:
+
+XXX
+
+where each covariate contributes additively and linearly. This assumption implies that a one-unit change in a predictor produces a constant change in the linear predictor, regardless of the predictor’s current value.
+
+In biological data, however, true relationships are often nonlinear but smooth, reflecting thresholds, saturation effects, or diminishing returns. When such patterns are forced into a linear form, GLMs and GLMMs can produce biased estimates, poor predictions, or misleading inference. Common workarounds—such as polynomial terms or ad hoc transformations—require the analyst to specify the functional form in advance and can behave erratically at the boundaries of the data.
+
+GAMs relax the linearity assumption by replacing strictly linear terms with smooth functions of predictors. Instead of assuming linear combination of predictors, a GAM formulate smoothing functions:
+
+where each $f(\cdot)$ is an unknown smooth function estimated from the data. These smooths are typically constructed from basis functions (e.g., splines) and constrained by a penalty that controls their wiggliness. As a result, GAMs allow the data to inform the shape of the relationship while avoiding overfitting.
+
+Importantly, GAMs retain the interpretability and structure of GLMs and GLMMs while extending their flexibility. The link function and response distribution are specified exactly as in GLMs, and random effects can be incorporated (e.g., via GAMMs) to account for hierarchical or grouped data.
+
+Thus, GAMs should be viewed not as a departure from the GLM framework, but as a generalization that replaces rigid linear terms with smooth, data-driven functions. This makes GAMs particularly well suited for ecological applications, where nonlinear responses are common but mechanistic forms are often unknown.
+
+## Laboratory

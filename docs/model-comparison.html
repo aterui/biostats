@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="We have acquired knowledge on constructing models and evaluating their performance. However, the challenge lies in selecting the “optimal” model from a pool of potential candidates. Some may think...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QZSNHVQQNV"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -68,6 +68,9 @@
 <li><a class="" href="generalized-linear-model.html"><span class="header-section-number">14</span> Generalized Linear Model</a></li>
 <li><a class="" href="likelihood.html"><span class="header-section-number">15</span> Likelihood</a></li>
 <li><a class="active" href="model-comparison.html"><span class="header-section-number">16</span> Model Comparison</a></li>
+<li class="book-part">(somewhat) Advanced Statistics</li>
+<li><a class="" href="generalized-linear-mixed-effect-model.html"><span class="header-section-number">17</span> Generalized Linear Mixed Effect Model</a></li>
+<li><a class="" href="generalized-additive-model.html"><span class="header-section-number">18</span> Generalized Additive Model</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="git-github.html">Git &amp; GitHub</a></li>
 <li><a class="" href="base-plot.html">Base Plot</a></li>
@@ -116,12 +119,12 @@
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">n</span>, mean <span class="op">=</span> <span class="va">y_hat</span>, sd <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># plot</span></span>
-<span><span class="va">df0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tibble/man/tibble.html">tibble</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">y</span>, x1 <span class="op">=</span> <span class="va">x1</span><span class="op">)</span></span>
+<span><span class="va">df0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">y</span>, x1 <span class="op">=</span> <span class="va">x1</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">df0</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">y</span>,</span>
+<span><span class="va">df0</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">y</span>,</span>
 <span>             x <span class="op">=</span> <span class="va">x1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/ggplot2/man/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:sim-data"></span>
 <img src="biostats_files/figure-html/sim-data-1.png" alt="Simulated data" width="672"><p class="caption">
@@ -155,8 +158,8 @@ Figure 16.1: Simulated data
 <p>Now, let’s consider the scenario where we include another variable, <code>x2</code>, that is completely irrelevant.</p>
 <div class="sourceCode" id="cb465"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># add a column x2 which is irrelevant for y</span></span>
-<span><span class="va">df0</span> <span class="op">&lt;-</span> <span class="va">df0</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/mutate.html">mutate</a></span><span class="op">(</span>x2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">df0</span> <span class="op">&lt;-</span> <span class="va">df0</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>x2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># add x2 to the model</span></span>
 <span><span class="va">m2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">x1</span> <span class="op">+</span> <span class="va">x2</span>, data <span class="op">=</span> <span class="va">df0</span><span class="op">)</span></span>
@@ -314,8 +317,8 @@ R^2 = 1 - \frac{SS}{SS_0}
 <p>For this exercise, we will use the <code>penguins_raw</code> dataset. However, the dataset is not well-organized and may be prone to errors in its current format. Before delving into data analysis, let’s perform the following tasks:</p>
 <ol style="list-style-type: decimal">
 <li><p>Column names are a mix of upper and lower cases, and they contain white spaces. We need to format the column names as follows: (1) convert all characters to lowercase, (2) replace white spaces with underscores <code>_</code>, and (3) remove parentheses (e.g., <code>(mm)</code>). To accomplish this, we can use <code>clean_names()</code> function from <code>janitor</code> package. You can check their usage by typing <code>?function_name</code> in the R console.</p></li>
-<li><p>In the following exercise, we will focus on the data in the <code>Clutch Completion</code> column, which records data as <code>Yes</code> or <code>No</code>. To make it more suitable for analysis, we need to convert this information to binary values: <code>1</code> for <code>Yes</code> and <code>0</code> for <code>No</code>. Use <code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code> function in combination with <code><a href="https://rdrr.io/pkg/dplyr/man/mutate.html">mutate()</a></code>.</p></li>
-<li><p>The <code>Species</code> column in the dataset contains species names such as Adelie Penguin (Pygoscelis adeliae), Chinstrap penguin (Pygoscelis antarctica), Gentoo penguin (Pygoscelis papua). We need to convert these species names to standardized ones, specifically: <code>adelie</code>, <code>chinstrap</code>, and <code>gentoo</code>. Use of the <code><a href="https://rdrr.io/pkg/dplyr/man/mutate.html">dplyr::mutate()</a></code> and <code><a href="https://rdrr.io/pkg/dplyr/man/case_when.html">dplyr::case_when()</a></code> functions for this task.</p></li>
+<li><p>In the following exercise, we will focus on the data in the <code>Clutch Completion</code> column, which records data as <code>Yes</code> or <code>No</code>. To make it more suitable for analysis, we need to convert this information to binary values: <code>1</code> for <code>Yes</code> and <code>0</code> for <code>No</code>. Use <code><a href="https://rdrr.io/r/base/ifelse.html">ifelse()</a></code> function in combination with <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code>.</p></li>
+<li><p>The <code>Species</code> column in the dataset contains species names such as Adelie Penguin (Pygoscelis adeliae), Chinstrap penguin (Pygoscelis antarctica), Gentoo penguin (Pygoscelis papua). We need to convert these species names to standardized ones, specifically: <code>adelie</code>, <code>chinstrap</code>, and <code>gentoo</code>. Use of the <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">dplyr::mutate()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/case_when.html">dplyr::case_when()</a></code> functions for this task.</p></li>
 <li><p>Lastly, we should remove any rows that contain missing values (<code>NA</code>) in the columns <code>Culmen Length (mm)</code>, <code>Culmen Depth (mm)</code>, <code>Flipper Length (mm)</code>, <code>Body Mass (g)</code>, and <code>Sex</code>. To achieve this, we can utilize the <code>dplyr::drop_na()</code> function.</p></li>
 </ol>
 </div>
@@ -344,7 +347,7 @@ R^2 = 1 - \frac{SS}{SS_0}
 
   <div class="chapter-nav">
 <div class="prev"><a href="likelihood.html"><span class="header-section-number">15</span> Likelihood</a></div>
-<div class="next"><a href="git-github.html">Git &amp; GitHub</a></div>
+<div class="next"><a href="generalized-linear-mixed-effect-model.html"><span class="header-section-number">17</span> Generalized Linear Mixed Effect Model</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -380,7 +383,7 @@ R^2 = 1 - \frac{SS}{SS_0}
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-11-18.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-12-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

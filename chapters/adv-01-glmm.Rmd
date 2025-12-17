@@ -1,4 +1,4 @@
-# (PART) (somewhat) Advanced Statistics {.unnumbered}
+# (PART) Applied Statistics {.unnumbered}
 
 # Generalized Linear Mixed Effect Model
 
@@ -364,7 +364,7 @@ where $\Sigma$ denotes the variance-covariance matrix of random effect terms.
 In statistical modeling, particularly in ecology, factors in a dataset can be treated as fixed effects or random effects. Choosing the appropriate type affects how we interpret model coefficients and account for variation in the data. Fixed effects are used when we are specifically interested in estimating and comparing the levels of a factor, while random effects are used when the levels represent a sample from a larger population and we are primarily interested in quantifying variability among them.
 
 | Type | Interpretation | Examples |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | Fixed effect | You are explicitly interested in the slope of specific levels of the factor or of continuous variable. **Can be categorical or continuous.** | Nutrient treatment (ambient vs. added), Sex (male vs. female), Temperature (continuous) |
 | Random effect | The levels are a sample from a larger population. You are not interested in estimating each level, but rather in modeling variation among them. **Must be categorical.** | Nest ID, Site, Year, Block, Individual ID |
 

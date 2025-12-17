@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="R packages are collections of functions that extend the functionality of the R programming language. They provide a convenient way for users to access and utilize specialized tools for data...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QZSNHVQQNV"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -68,6 +68,9 @@
 <li><a class="" href="generalized-linear-model.html"><span class="header-section-number">14</span> Generalized Linear Model</a></li>
 <li><a class="" href="likelihood.html"><span class="header-section-number">15</span> Likelihood</a></li>
 <li><a class="" href="model-comparison.html"><span class="header-section-number">16</span> Model Comparison</a></li>
+<li class="book-part">(somewhat) Advanced Statistics</li>
+<li><a class="" href="generalized-linear-mixed-effect-model.html"><span class="header-section-number">17</span> Generalized Linear Mixed Effect Model</a></li>
+<li><a class="" href="generalized-additive-model.html"><span class="header-section-number">18</span> Generalized Additive Model</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="git-github.html">Git &amp; GitHub</a></li>
 <li><a class="" href="base-plot.html">Base Plot</a></li>
@@ -84,16 +87,16 @@
 </h1>
 <p>R packages are collections of functions that extend the functionality of the R programming language. They provide a convenient way for users to access and utilize specialized tools for data analysis, visualization, statistical modeling, and more. Among them, <code>tidyverse</code> provides very useful functions for data manipulation and visualization.</p>
 <p><code>tidyverse::</code> bundles R packages designed to make data manipulation, exploration, and visualization more efficient and intuitive. Developed by Hadley Wickham and other contributors, the Tidyverse packages share a common philosophy and syntax, emphasizing a consistent and tidy data format. The core packages, such as <code>dplyr::</code>, <code>tidyr::</code>, and <code>ggplot2::</code>, provide powerful tools for data wrangling, reshaping, and creating visualizations.</p>
-<p>In this Chapter, we will use <code>iris</code> data, which is available by default in R. While the default data structure <code>iris</code> is prepared in <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code>, I convert this data format to <code><a href="https://rdrr.io/pkg/tibble/man/tibble.html">tibble()</a></code> in this exercise. Copy and run the code below. We will use <code>iris_sub</code> in the following demonstration.</p>
+<p>In this Chapter, we will use <code>iris</code> data, which is available by default in R. While the default data structure <code>iris</code> is prepared in <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code>, I convert this data format to <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code> in this exercise. Copy and run the code below. We will use <code>iris_sub</code> in the following demonstration.</p>
 <div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">iris_sub</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tibble/man/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/sample_n.html">sample_n</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">iris_sub</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/sample_n.html">sample_n</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">iris_sub</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 9 × 5
@@ -125,10 +128,10 @@
 <h3>
 <span class="header-section-number">5.1.1</span> Subset rows<a class="anchor" aria-label="anchor" href="#subset-rows"><i class="fas fa-link"></i></a>
 </h3>
-<p>The <code><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter()</a></code> function (<code>dplyr</code> package) is used for subsetting rows of a data frame (or tibble) based on conditions.</p>
+<p>The <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> function (<code>dplyr</code> package) is used for subsetting rows of a data frame (or tibble) based on conditions.</p>
 <p><strong>Single match <code>==</code></strong></p>
 <div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="va">Species</span> <span class="op">==</span> <span class="st">"virginica"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="va">Species</span> <span class="op">==</span> <span class="st">"virginica"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 3 × 5
 ##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species  
 ##          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;    
@@ -137,7 +140,7 @@
 ## 3          6.7         3.3          5.7         2.1 virginica</code></pre>
 <p><strong>Multiple match <code>%in%</code></strong></p>
 <div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="va">Species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"virginica"</span>, <span class="st">"versicolor"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="va">Species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"virginica"</span>, <span class="st">"versicolor"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 6 × 5
 ##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species   
 ##          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;     
@@ -149,7 +152,7 @@
 ## 6          6.7         3.3          5.7         2.1 virginica</code></pre>
 <p><strong>Except <code>!=</code></strong></p>
 <div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="va">Species</span> <span class="op">!=</span> <span class="st">"virginica"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="va">Species</span> <span class="op">!=</span> <span class="st">"virginica"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 6 × 5
 ##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species   
 ##          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;     
@@ -161,7 +164,7 @@
 ## 6          5.8         2.6          4           1.2 versicolor</code></pre>
 <p><strong>Except multiple <code>!=</code></strong></p>
 <div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="op">!</span><span class="op">(</span><span class="va">Species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"virginica"</span>, <span class="st">"versicolor"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="op">!</span><span class="op">(</span><span class="va">Species</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"virginica"</span>, <span class="st">"versicolor"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 3 × 5
 ##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 ##          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
@@ -170,7 +173,7 @@
 ## 3          4.3         3            1.1         0.1 setosa</code></pre>
 <p><strong>Greater than <code>&gt;</code></strong></p>
 <div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="va">Sepal.Length</span> <span class="op">&gt;</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="va">Sepal.Length</span> <span class="op">&gt;</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 7 × 5
 ##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species   
 ##          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;     
@@ -183,7 +186,7 @@
 ## 7          6.7         3.3          5.7         2.1 virginica</code></pre>
 <p><strong>Greater than and equal to <code>&gt;=</code></strong></p>
 <div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="va">Sepal.Length</span> <span class="op">&gt;=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="va">Sepal.Length</span> <span class="op">&gt;=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 7 × 5
 ##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species   
 ##          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;     
@@ -196,7 +199,7 @@
 ## 7          6.7         3.3          5.7         2.1 virginica</code></pre>
 <p><strong>Less than <code>&lt;</code></strong></p>
 <div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="va">Sepal.Length</span> <span class="op">&lt;</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="va">Sepal.Length</span> <span class="op">&lt;</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 2 × 5
 ##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 ##          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
@@ -204,7 +207,7 @@
 ## 2          4.3         3            1.1         0.1 setosa</code></pre>
 <p><strong>Less than and equal to <code>&lt;=</code></strong></p>
 <div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="va">Sepal.Length</span> <span class="op">&lt;=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="va">Sepal.Length</span> <span class="op">&lt;=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 2 × 5
 ##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 ##          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
@@ -213,7 +216,7 @@
 <p><strong>Multiple conditions (AND) <code>&amp;</code></strong> <strong>(or <code>,</code>)</strong></p>
 <div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Sepal.Length is less than 5 AND Species equals "setosa"</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="va">iris_sub</span>,</span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">iris_sub</span>,</span>
 <span>       <span class="va">Sepal.Length</span> <span class="op">&lt;</span> <span class="fl">5</span> <span class="op">&amp;</span> <span class="va">Species</span> <span class="op">==</span> <span class="st">"setosa"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 2 × 5
 ##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
@@ -222,7 +225,7 @@
 ## 2          4.3         3            1.1         0.1 setosa</code></pre>
 <div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># same; "," works like "&amp;"</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="va">iris_sub</span>,</span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">iris_sub</span>,</span>
 <span>       <span class="va">Sepal.Length</span> <span class="op">&lt;</span> <span class="fl">5</span>, <span class="va">Species</span> <span class="op">==</span> <span class="st">"setosa"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 2 × 5
 ##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
@@ -232,7 +235,7 @@
 <p><strong>Multiple conditions (OR) <code>|</code></strong></p>
 <div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Either Sepal.Length is less than 5 OR Species equals "setosa"</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="va">iris_sub</span>,</span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">iris_sub</span>,</span>
 <span>       <span class="va">Sepal.Length</span> <span class="op">&lt;</span> <span class="fl">5</span> <span class="op">|</span> <span class="va">Species</span> <span class="op">==</span> <span class="st">"setosa"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 3 × 5
 ##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
@@ -245,10 +248,10 @@
 <h3>
 <span class="header-section-number">5.1.2</span> Arrange rows<a class="anchor" aria-label="anchor" href="#arrange-rows"><i class="fas fa-link"></i></a>
 </h3>
-<p>The <code><a href="https://rdrr.io/pkg/dplyr/man/arrange.html">arrange()</a></code> function (package <code>dplyr</code>) is used to reorder rows of a data frame (or tibble) based on the values in one or more columns.</p>
+<p>The <code><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a></code> function (package <code>dplyr</code>) is used to reorder rows of a data frame (or tibble) based on the values in one or more columns.</p>
 <p><strong>Increasing/ascending order</strong></p>
 <div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/arrange.html">arrange</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="va">Sepal.Length</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="va">Sepal.Length</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 9 × 5
 ##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species   
 ##          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;     
@@ -263,7 +266,7 @@
 ## 9          6.9         3.1          4.9         1.5 versicolor</code></pre>
 <p><strong>Decreasing/descending order</strong></p>
 <div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/arrange.html">arrange</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/desc.html">desc</a></span><span class="op">(</span><span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 9 × 5
 ##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species   
 ##          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;     
@@ -297,10 +300,10 @@
 <h3>
 <span class="header-section-number">5.2.1</span> Select columns<a class="anchor" aria-label="anchor" href="#select-columns"><i class="fas fa-link"></i></a>
 </h3>
-<p>The <code><a href="https://rdrr.io/pkg/dplyr/man/select.html">select()</a></code> function (package <code>dplyr</code>) is used to choose specific columns from a data frame or tibble. It is particularly useful for narrowing down a dataset to focus on relevant variables.</p>
+<p>The <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code> function (package <code>dplyr</code>) is used to choose specific columns from a data frame or tibble. It is particularly useful for narrowing down a dataset to focus on relevant variables.</p>
 <p><strong>Select one column</strong></p>
 <div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/select.html">select</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="va">Sepal.Length</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="va">Sepal.Length</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 9 × 1
 ##   Sepal.Length
 ##          &lt;dbl&gt;
@@ -315,7 +318,7 @@
 ## 9          6.7</code></pre>
 <p><strong>Select multiple columns</strong></p>
 <div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/select.html">select</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">Sepal.Length</span>, <span class="va">Sepal.Width</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">Sepal.Length</span>, <span class="va">Sepal.Width</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 9 × 2
 ##   Sepal.Length Sepal.Width
 ##          &lt;dbl&gt;       &lt;dbl&gt;
@@ -330,7 +333,7 @@
 ## 9          6.7         3.3</code></pre>
 <p><strong>Remove one column</strong></p>
 <div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/select.html">select</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="op">-</span><span class="va">Sepal.Length</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="op">-</span><span class="va">Sepal.Length</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 9 × 4
 ##   Sepal.Width Petal.Length Petal.Width Species   
 ##         &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;     
@@ -345,7 +348,7 @@
 ## 9         3.3          5.7         2.1 virginica</code></pre>
 <p><strong>Remove multiple columns</strong></p>
 <div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/select.html">select</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">Sepal.Length</span>, <span class="va">Sepal.Width</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">Sepal.Length</span>, <span class="va">Sepal.Width</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 9 × 3
 ##   Petal.Length Petal.Width Species   
 ##          &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;     
@@ -358,10 +361,10 @@
 ## 7          5.6         2.4 virginica 
 ## 8          5           2   virginica 
 ## 9          5.7         2.1 virginica</code></pre>
-<p><strong>Select/Remove with <code><a href="https://rdrr.io/pkg/tidyselect/man/starts_with.html">starts_with()</a></code></strong></p>
+<p><strong>Select/Remove with <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with()</a></code></strong></p>
 <div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># select columns starting with "Sepal"</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/select.html">select</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="fu"><a href="https://rdrr.io/pkg/tidyselect/man/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"Sepal"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"Sepal"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 9 × 2
 ##   Sepal.Length Sepal.Width
 ##          &lt;dbl&gt;       &lt;dbl&gt;
@@ -376,7 +379,7 @@
 ## 9          6.7         3.3</code></pre>
 <div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># remove columns starting with "Sepal"</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/select.html">select</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="op">-</span><span class="fu"><a href="https://rdrr.io/pkg/tidyselect/man/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"Sepal"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"Sepal"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 9 × 3
 ##   Petal.Length Petal.Width Species   
 ##          &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;     
@@ -389,10 +392,10 @@
 ## 7          5.6         2.4 virginica 
 ## 8          5           2   virginica 
 ## 9          5.7         2.1 virginica</code></pre>
-<p><strong>Select with <code><a href="https://rdrr.io/pkg/tidyselect/man/starts_with.html">ends_with()</a></code></strong></p>
+<p><strong>Select with <code><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with()</a></code></strong></p>
 <div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># select columns ending with "Sepal"</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/select.html">select</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="fu"><a href="https://rdrr.io/pkg/tidyselect/man/starts_with.html">ends_with</a></span><span class="op">(</span><span class="st">"Width"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with</a></span><span class="op">(</span><span class="st">"Width"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 9 × 2
 ##   Sepal.Width Petal.Width
 ##         &lt;dbl&gt;       &lt;dbl&gt;
@@ -407,7 +410,7 @@
 ## 9         3.3         2.1</code></pre>
 <div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># remove columns ending with "Sepal"</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/select.html">select</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="op">-</span><span class="fu"><a href="https://rdrr.io/pkg/tidyselect/man/starts_with.html">ends_with</a></span><span class="op">(</span><span class="st">"Width"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with</a></span><span class="op">(</span><span class="st">"Width"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 9 × 3
 ##   Sepal.Length Petal.Length Species   
 ##          &lt;dbl&gt;        &lt;dbl&gt; &lt;fct&gt;     
@@ -425,7 +428,7 @@
 <h3>
 <span class="header-section-number">5.2.2</span> Add columns<a class="anchor" aria-label="anchor" href="#add-columns"><i class="fas fa-link"></i></a>
 </h3>
-<p>The <code><a href="https://rdrr.io/pkg/dplyr/man/mutate.html">mutate()</a></code> function (package <code>dplyr</code>) package and is used to add new variables or modify existing ones in a data frame or tibble. It allows you to apply transformations to columns without changing the original dataset.</p>
+<p>The <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> function (package <code>dplyr</code>) package and is used to add new variables or modify existing ones in a data frame or tibble. It allows you to apply transformations to columns without changing the original dataset.</p>
 <p><strong>Add a new column</strong></p>
 <div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># nrow() returns the number of rows of the dataframe</span></span>
@@ -437,7 +440,7 @@
 <span></span>
 <span><span class="co"># add as a new column</span></span>
 <span><span class="co"># named `x` as `row_id` when added</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/mutate.html">mutate</a></span><span class="op">(</span><span class="va">iris_sub</span>, row_id <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">iris_sub</span>, row_id <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 9 × 6
 ##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species    row_id
 ##          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;       &lt;int&gt;
@@ -453,7 +456,7 @@
 <p><strong>Modify an existing column</strong></p>
 <div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># twice `Sepal.Length` and add as a new column</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/mutate.html">mutate</a></span><span class="op">(</span><span class="va">iris_sub</span>, sl_two_times <span class="op">=</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">Sepal.Length</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">iris_sub</span>, sl_two_times <span class="op">=</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">Sepal.Length</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 9 × 6
 ##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species    sl_two_times
 ##          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;             &lt;dbl&gt;
@@ -490,8 +493,8 @@
 <p><code>%&gt;%</code> (pipe) allows sequential operations of multiple functions (hot key: <code>Ctr + Shift + M</code>). The pipe passes the object to the following function as the first argument. For example, the following code subset rows by <code>Species</code> column, then select column <code>Sepal.Length</code>.</p>
 <div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## </span></span>
-<span><span class="va">df_vir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="va">Species</span> <span class="op">==</span> <span class="st">"virginica"</span><span class="op">)</span></span>
-<span><span class="va">df_vir_sl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/select.html">select</a></span><span class="op">(</span><span class="va">df_vir</span>, <span class="va">Sepal.Length</span><span class="op">)</span></span>
+<span><span class="va">df_vir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">iris_sub</span>, <span class="va">Species</span> <span class="op">==</span> <span class="st">"virginica"</span><span class="op">)</span></span>
+<span><span class="va">df_vir_sl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">df_vir</span>, <span class="va">Sepal.Length</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_vir_sl</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 3 × 1
@@ -502,9 +505,9 @@
 ## 3          6.7</code></pre>
 <p>With piping, the above example becomes:</p>
 <div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df_vir_sl</span> <span class="op">&lt;-</span> <span class="va">iris_sub</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/filter.html">filter</a></span><span class="op">(</span><span class="va">Species</span> <span class="op">==</span> <span class="st">"virginica"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/select.html">select</a></span><span class="op">(</span><span class="va">Sepal.Length</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">df_vir_sl</span> <span class="op">&lt;-</span> <span class="va">iris_sub</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Species</span> <span class="op">==</span> <span class="st">"virginica"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Sepal.Length</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_vir_sl</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 3 × 1
@@ -529,7 +532,7 @@
 <h3>
 <span class="header-section-number">5.4.1</span> Grouping <code>group_by()</code><a class="anchor" aria-label="anchor" href="#grouping-group_by"><i class="fas fa-link"></i></a>
 </h3>
-<p>Often, we may want to calculate summary statistics by group. In such cases, the <code><a href="https://rdrr.io/pkg/dplyr/man/group_by.html">group_by()</a></code> function in R provides an effective way to group the data before applying summary functions.</p>
+<p>Often, we may want to calculate summary statistics by group. In such cases, the <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> function in R provides an effective way to group the data before applying summary functions.</p>
 <p>In the original <code>iris_sub</code> dataframe, no group structure is imposed, meaning that when you print the dataframe, it does not display any information about grouping.</p>
 <div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">iris_sub</span><span class="op">)</span></span></code></pre></div>
@@ -547,8 +550,8 @@
 ## 9          6.7         3.3          5.7         2.1 virginica</code></pre>
 <p>Now, let’s add a group structure to the dataframe. The following code groups the data based on the values in the <code>Species</code> column:</p>
 <div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">iris_sub</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">iris_sub</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 9 × 5
 ## # Groups:   Species [3]
 ##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species   
@@ -568,11 +571,11 @@
 <h3>
 <span class="header-section-number">5.4.2</span> Summarize with <code>summarize()</code><a class="anchor" aria-label="anchor" href="#summarize-with-summarize"><i class="fas fa-link"></i></a>
 </h3>
-<p>The <code><a href="https://rdrr.io/pkg/dplyr/man/group_by.html">group_by()</a></code> function becomes especially useful when combined with functions like <code><a href="https://rdrr.io/pkg/dplyr/man/summarise.html">summarize()</a></code> or <code><a href="https://rdrr.io/pkg/dplyr/man/mutate.html">mutate()</a></code>. For instance, to calculate the mean values for each species in the <code>iris_sub</code> dataframe, you can use the following code:</p>
+<p>The <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> function becomes especially useful when combined with functions like <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> or <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code>. For instance, to calculate the mean values for each species in the <code>iris_sub</code> dataframe, you can use the following code:</p>
 <div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">iris_sub</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/summarise.html">summarize</a></span><span class="op">(</span>mu_sl <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">iris_sub</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>mu_sl <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 3 × 2
 ##   Species    mu_sl
 ##   &lt;fct&gt;      &lt;dbl&gt;
@@ -581,9 +584,9 @@
 ## 3 virginica   6.23</code></pre>
 <p>If you want to calculate multiple summary statistics, you can separate the operations with a comma <code>,</code> as shown below:</p>
 <div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">iris_sub</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/summarise.html">summarize</a></span><span class="op">(</span>mu_sl <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Sepal.Length</span><span class="op">)</span>,</span>
+<code class="sourceCode R"><span><span class="va">iris_sub</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>mu_sl <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Sepal.Length</span><span class="op">)</span>,</span>
 <span>            sum_sl <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 3 × 3
 ##   Species    mu_sl sum_sl
@@ -596,13 +599,13 @@
 <h3>
 <span class="header-section-number">5.4.3</span> Summarize with <code>mutate()</code><a class="anchor" aria-label="anchor" href="#summarize-with-mutate"><i class="fas fa-link"></i></a>
 </h3>
-<p>The <code><a href="https://rdrr.io/pkg/dplyr/man/summarise.html">summarize()</a></code> function returns a summary table, with each group represented by a single row. On the other hand, <code><a href="https://rdrr.io/pkg/dplyr/man/mutate.html">mutate()</a></code> retains the original individual rows, adding summary columns. In this case, each row within the same group will have the same summary value. Remember to use <code><a href="https://rdrr.io/pkg/dplyr/man/group_by.html">ungroup()</a></code> after grouping operations to prevent errors in subsequent operations.</p>
+<p>The <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> function returns a summary table, with each group represented by a single row. On the other hand, <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> retains the original individual rows, adding summary columns. In this case, each row within the same group will have the same summary value. Remember to use <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup()</a></code> after grouping operations to prevent errors in subsequent operations.</p>
 <div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># grouping by "Species", then take means "Speal.Length" for each species</span></span>
-<span><span class="va">iris_sub</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/mutate.html">mutate</a></span><span class="op">(</span>mu_sl <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">iris_sub</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>mu_sl <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">Sepal.Length</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 9 × 6
 ##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species    mu_sl
 ##          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;      &lt;dbl&gt;
@@ -621,12 +624,12 @@
 <h2>
 <span class="header-section-number">5.5</span> Reshape<a class="anchor" aria-label="anchor" href="#reshape"><i class="fas fa-link"></i></a>
 </h2>
-<p><code><a href="https://rdrr.io/pkg/tidyr/man/pivot_wider.html">pivot_wider()</a></code> : reshape a data frame to a wide format</p>
+<p><code><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider()</a></code> : reshape a data frame to a wide format</p>
 <div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">iris_w</span> <span class="op">&lt;-</span> <span class="va">iris_sub</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/mutate.html">mutate</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> <span class="co"># add an ID column</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/select.html">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">Sepal.Length</span>, <span class="va">Species</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/tidyr/man/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>id_cols <span class="op">=</span> <span class="st">"id"</span>, <span class="co"># unique row ID based on</span></span>
+<code class="sourceCode R"><span><span class="va">iris_w</span> <span class="op">&lt;-</span> <span class="va">iris_sub</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># add an ID column</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">Sepal.Length</span>, <span class="va">Species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>id_cols <span class="op">=</span> <span class="st">"id"</span>, <span class="co"># unique row ID based on</span></span>
 <span>              values_from <span class="op">=</span> <span class="st">"Sepal.Length"</span>, <span class="co"># values in each cell from</span></span>
 <span>              names_from <span class="op">=</span> <span class="st">"Species"</span><span class="op">)</span> <span class="co"># new column names from</span></span>
 <span></span>
@@ -637,10 +640,10 @@
 ## 1     1    4.8        6.9       6.3
 ## 2     2    5.8        6.1       5.7
 ## 3     3    4.3        5.8       6.7</code></pre>
-<p><code><a href="https://rdrr.io/pkg/tidyr/man/pivot_longer.html">pivot_longer()</a></code>: reshape a data frame to a long format</p>
+<p><code><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer()</a></code>: reshape a data frame to a long format</p>
 <div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">iris_l</span> <span class="op">&lt;-</span> <span class="va">iris_w</span> <span class="op"><a href="https://rdrr.io/pkg/magrittr/man/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/tidyr/man/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"setosa"</span>,</span>
+<code class="sourceCode R"><span><span class="va">iris_l</span> <span class="op">&lt;-</span> <span class="va">iris_w</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"setosa"</span>,</span>
 <span>                        <span class="st">"versicolor"</span>,</span>
 <span>                        <span class="st">"virginica"</span><span class="op">)</span>, <span class="co"># columns with values to be reshaped</span></span>
 <span>               names_to <span class="op">=</span> <span class="st">"Species"</span>, <span class="co"># column IDs move to "Species"</span></span>
@@ -664,17 +667,17 @@
 <h2>
 <span class="header-section-number">5.6</span> Join<a class="anchor" aria-label="anchor" href="#join"><i class="fas fa-link"></i></a>
 </h2>
-<p><code><a href="https://rdrr.io/pkg/dplyr/man/mutate-joins.html">left_join()</a></code>: merge data frames based on column(s)</p>
+<p><code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join()</a></code>: merge data frames based on column(s)</p>
 <div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># matching by a single column</span></span>
 <span><span class="co">## left join by "Species": one to one</span></span>
-<span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tibble/man/tibble.html">tibble</a></span><span class="op">(</span>Species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,</span>
+<span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>Species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,</span>
 <span>              x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">df2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tibble/man/tibble.html">tibble</a></span><span class="op">(</span>Species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,</span>
+<span><span class="va">df2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>Species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,</span>
 <span>              y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/mutate-joins.html">left_join</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df1</span>,</span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df1</span>,</span>
 <span>          y <span class="op">=</span> <span class="va">df2</span>,</span>
 <span>          by <span class="op">=</span> <span class="st">"Species"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 3 × 3
@@ -686,10 +689,10 @@
 <div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># matching by a single column</span></span>
 <span><span class="co">## left join by "Species": one to many</span></span>
-<span><span class="va">df3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tibble/man/tibble.html">tibble</a></span><span class="op">(</span>Species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,</span>
+<span><span class="va">df3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>Species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,</span>
 <span>              y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">7</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/mutate-joins.html">left_join</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df1</span>,</span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df1</span>,</span>
 <span>          y <span class="op">=</span> <span class="va">df3</span>,</span>
 <span>          by <span class="op">=</span> <span class="st">"Species"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 4 × 3
@@ -702,10 +705,10 @@
 <div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># matching by a single column</span></span>
 <span><span class="co">## left join by "Species": one to missing</span></span>
-<span><span class="va">df4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tibble/man/tibble.html">tibble</a></span><span class="op">(</span>Species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"C"</span><span class="op">)</span>,</span>
+<span><span class="va">df4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>Species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"C"</span><span class="op">)</span>,</span>
 <span>              y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">7</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/mutate-joins.html">left_join</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df1</span>,</span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df1</span>,</span>
 <span>          y <span class="op">=</span> <span class="va">df4</span>,</span>
 <span>          by <span class="op">=</span> <span class="st">"Species"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 4 × 3
@@ -718,11 +721,11 @@
 <div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># matching by multiple columns</span></span>
 <span><span class="co">## one to one</span></span>
-<span><span class="va">df5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tibble/man/tibble.html">tibble</a></span><span class="op">(</span>Species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,</span>
+<span><span class="va">df5</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>Species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,</span>
 <span>              x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span>
 <span>              z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"cool"</span>, <span class="st">"awesome"</span>, <span class="st">"magical"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/mutate-joins.html">left_join</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df1</span>,</span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df1</span>,</span>
 <span>          y <span class="op">=</span> <span class="va">df5</span>,</span>
 <span>          by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Species"</span>, <span class="st">"x"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 3 × 3
@@ -734,11 +737,11 @@
 <div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># matching by multiple columns</span></span>
 <span><span class="co">## one to many</span></span>
-<span><span class="va">df6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tibble/man/tibble.html">tibble</a></span><span class="op">(</span>Species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,</span>
+<span><span class="va">df6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>Species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,</span>
 <span>              x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span>
 <span>              z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"cool"</span>, <span class="st">"cool"</span>, <span class="st">"awesome"</span>, <span class="st">"magical"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/mutate-joins.html">left_join</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df1</span>,</span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df1</span>,</span>
 <span>          y <span class="op">=</span> <span class="va">df6</span>,</span>
 <span>          by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Species"</span>, <span class="st">"x"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 4 × 3
@@ -751,11 +754,11 @@
 <div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># matching by multiple columns</span></span>
 <span><span class="co">## one to missing</span></span>
-<span><span class="va">df6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tibble/man/tibble.html">tibble</a></span><span class="op">(</span>Species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,</span>
+<span><span class="va">df6</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>Species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span>,</span>
 <span>              x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span>,</span>
 <span>              z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"cool"</span>, <span class="st">"awesome"</span>, <span class="st">"magical"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/dplyr/man/mutate-joins.html">left_join</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df1</span>,</span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df1</span>,</span>
 <span>          y <span class="op">=</span> <span class="va">df6</span>,</span>
 <span>          by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Species"</span>, <span class="st">"x"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 3 × 3
@@ -819,7 +822,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-11-18.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-12-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

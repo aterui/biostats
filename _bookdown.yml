@@ -17,7 +17,7 @@ rmd_files: ["index.Rmd",
             "chapters/basics-08-glm.Rmd",
             "chapters/basics-09-likelihood.Rmd",
             "chapters/basics-10-model-comparison.Rmd",
-            "chapters/advanced-01-glmm.Rmd",
+            "chapters/adv-01-glmm.Rmd",
             "chapters/zzz-appendix.Rmd"]
 output_dir: "docs"
             

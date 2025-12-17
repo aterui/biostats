@@ -187,3 +187,39 @@ messy <- data.frame(
 )
 
 write_csv(messy, "data_raw/data_messy.csv")
+
+
+# gam example -------------------------------------------------------------
+
+# URLs pointing to the raw CSV files hosted on GitHub.
+# These use the "raw.githubusercontent.com" domain so that R
+# downloads the actual CSV content rather than an HTML webpage.
+link_woody <- "https://raw.githubusercontent.com/aterui/public-proj_restore-aqua-complex/master/data_raw/data_src_w_temp/wetland_site1_woody_230321.csv"
+
+link_open <- "https://raw.githubusercontent.com/aterui/public-proj_restore-aqua-complex/master/data_raw/data_src_w_temp/wetland_site2_open_230321.csv"
+
+# Read the woody wetland dataset directly from GitHub.
+# A new column, `site`, is added to label observations
+# originating from the woody wetland.
+df_wt_woody_raw <- read_csv(link_woody, 
+                            guess_max = 1E+6) %>% 
+  select(1:3) %>% 
+  set_names(c("id", "date_time", "temp")) %>% 
+  mutate(site = "woody")
+
+# Read the open wetland dataset directly from GitHub.
+# Similarly, add a `site` column to indicate the open wetland.
+df_wt_open_raw <- read_csv(link_open, 
+                           guess_max = 1E+6) %>% 
+  select(1:3) %>% 
+  set_names(c("id", "date_time", "temp")) %>% 
+  mutate(site = "open")
+
+# Combine the two datasets into a single data frame by stacking rows.
+# This is possible because both datasets share the same column structure.
+# The `site` column preserves information about the original data source.
+df_wt_raw <- bind_rows(df_wt_woody_raw,
+                       df_wt_open_raw)
+
+write_csv(df_wt_raw,
+          "data_raw/data_water_temp.csv")

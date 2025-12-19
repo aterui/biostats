@@ -36,6 +36,10 @@ fig:ris-figure
 fig:gam-plot-water-temp
 fig:gam-plot-linear
 fig:gam-plot-smooth
+fig:iris-multiplot
+fig:eigenvector-plot
+fig:dune-plot
+fig:nmds-plot
 fig:gitcheck
 fig:gitdesktop1
 fig:gitdesktop2
@@ -221,3 +225,10 @@ estimating-smoothness
 choice-of-smooth-function
 penalty-strength
 laboratory-11
+unconstrained-ordination
+methods-for-unconstrained-ordination
+pca
+nmds
+other-options
+axis-interpretability
+laboratory-12

@@ -235,7 +235,7 @@ This GAM framework lets you move from linear approximations to flexible, realist
 By default, `mgcv::s()` employs **thin plate regression splines** as a smoothing function. While this is one of the most broadly applicable approaches, other options may be more appropriate depending on the structure of your data. The following table summarizes the possible alternatives offered in the `mgcv` package, along with their typical applications.
 
 | Smoother / Option | How to Specify | Description | Typical Use Case / Notes |
-|-----------------|----------------|----------------|-----------------------|
+|-----------------|-----------------|-----------------|----------------------|
 | **Thin plate regression spline (default)** | `s(x)` | Flexible, general-purpose spline that does not require knot placement. | Default in `mgcv::s()`; works well in most situations. |
 | **Cubic regression spline** | `s(x, bs = "cr")` | Standard cubic spline with specified knots. | Good when you want explicit control over knots or smoothness. |
 | **Cyclic spline** | `s(x, bs = "cc")` | Ensures smooth connection at boundaries for circular predictors. | Ideal for seasonal or periodic variables (e.g., day-of-year). |
@@ -252,7 +252,7 @@ By default, mgcv uses generalized cross-validation (GCV) to determine this smoot
 However, there are other options for the penalty selection method, which can be specified via the `method` argument in `mgcv::gam()`:
 
 | Penalty Selection Method | How to Specify | Notes / Typical Use |
-|------------------|------------------|------------------------------------|
+|------------------|------------------|-----------------------------------|
 | **GCV / GACV** | `method = "GCV.Cp"` (or default) | Balances fit vs. wiggliness; default in many examples. |
 | **REML** | `method = "REML"` | Preferred for stable inference; treats smoothness as a variance component. |
 | **ML** | `method = "ML"` | Useful for comparing nested models using likelihood-based criteria. |

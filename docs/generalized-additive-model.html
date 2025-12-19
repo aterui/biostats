@@ -68,9 +68,10 @@
 <li><a class="" href="generalized-linear-model.html"><span class="header-section-number">14</span> Generalized Linear Model</a></li>
 <li><a class="" href="likelihood.html"><span class="header-section-number">15</span> Likelihood</a></li>
 <li><a class="" href="model-comparison.html"><span class="header-section-number">16</span> Model Comparison</a></li>
-<li class="book-part">(somewhat) Advanced Statistics</li>
+<li class="book-part">Applied Statistics</li>
 <li><a class="" href="generalized-linear-mixed-effect-model.html"><span class="header-section-number">17</span> Generalized Linear Mixed Effect Model</a></li>
 <li><a class="active" href="generalized-additive-model.html"><span class="header-section-number">18</span> Generalized Additive Model</a></li>
+<li><a class="" href="unconstrained-ordination.html"><span class="header-section-number">19</span> Unconstrained Ordination</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="git-github.html">Git &amp; GitHub</a></li>
 <li><a class="" href="base-plot.html">Base Plot</a></li>
@@ -328,7 +329,10 @@ y_i = \alpha + f(x) + \varepsilon_i
 <p>The <code>ggpredict()</code> function allows us to generate and visualize predicted values from a GAM.</p>
 <div class="sourceCode" id="cb515"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_pred_gam</span> <span class="op">&lt;-</span> <span class="fu">ggpredict</span><span class="op">(</span><span class="va">m_gam</span>,</span>
-<span>                         terms <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"j_date [all]"</span>, <span class="st">"site [all]"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>                         terms <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>                           <span class="st">"j_date [all]"</span>, </span>
+<span>                           <span class="st">"site [all]"</span><span class="op">)</span></span>
+<span>                         <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>site <span class="op">=</span> <span class="va">group</span>,</span>
 <span>         j_date <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
 <span></span>
@@ -357,7 +361,7 @@ Figure 18.3: Daily water temperature in two types of artificial wetlands (“woo
 <ul>
 <li>Smooth terms (<code>s(x)</code>) allow flexible, data-driven curves.</li>
 <li>The model automatically balances fit vs. smoothness to avoid overfitting.</li>
-<li>Categoricalor other continuous predictors can be included alongside smooth terms, similar to linear models.</li>
+<li>Categorical or other continuous predictors can be included as linear predictors alongside smooth terms.</li>
 </ul>
 <p>This GAM framework lets you move from linear approximations to flexible, realistic modeling of seasonal patterns, which can then be illustrated with a simple water temperature example before diving into mathematical details.</p>
 </div>
@@ -371,12 +375,12 @@ Figure 18.3: Daily water temperature in two types of artificial wetlands (“woo
 <span class="header-section-number">18.2.1</span> Choice of smooth function<a class="anchor" aria-label="anchor" href="#choice-of-smooth-function"><i class="fas fa-link"></i></a>
 </h3>
 <p>By default, <code><a href="https://rdrr.io/pkg/mgcv/man/s.html">mgcv::s()</a></code> employs <strong>thin plate regression splines</strong> as a smoothing function. While this is one of the most broadly applicable approaches, other options may be more appropriate depending on the structure of your data. The following table summarizes the possible alternatives offered in the <code>mgcv</code> package, along with their typical applications.</p>
-<div class="inline-table"><table class="table table-sm">
+<div class="inline-table"><table style="width:100%;" class="table table-sm">
 <colgroup>
 <col width="23%">
-<col width="22%">
-<col width="22%">
-<col width="31%">
+<col width="23%">
+<col width="23%">
+<col width="30%">
 </colgroup>
 <thead><tr class="header">
 <th>Smoother / Option</th>
@@ -435,7 +439,7 @@ Figure 18.3: Daily water temperature in two types of artificial wetlands (“woo
 <colgroup>
 <col width="25%">
 <col width="25%">
-<col width="50%">
+<col width="49%">
 </colgroup>
 <thead><tr class="header">
 <th>Penalty Selection Method</th>
@@ -475,12 +479,9 @@ Figure 18.3: Daily water temperature in two types of artificial wetlands (“woo
 
 </div>
 </div>
-
-
-
   <div class="chapter-nav">
 <div class="prev"><a href="generalized-linear-mixed-effect-model.html"><span class="header-section-number">17</span> Generalized Linear Mixed Effect Model</a></div>
-<div class="next"><a href="git-github.html">Git &amp; GitHub</a></div>
+<div class="next"><a href="unconstrained-ordination.html"><span class="header-section-number">19</span> Unconstrained Ordination</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -515,7 +516,7 @@ Figure 18.3: Daily water temperature in two types of artificial wetlands (“woo
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-12-17.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-12-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

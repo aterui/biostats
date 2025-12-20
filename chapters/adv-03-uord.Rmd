@@ -226,7 +226,7 @@ The `metaMDS()` function positions sites in a user-specified k-dimensional space
 The resulting NMDS object contains several important pieces of information. It includes the coordinates of sites in NMDS space, which can be used for visualization or further analysis. It also reports a stress value, which quantifies how well the low-dimensional configuration represents the original distance relationships, with lower stress indicating a better fit. The above analysis resulted in the stress value of `r round(obj_nmds$stress, 2)`.
 
 | Stress Value | Interpretation |
-|---:|----|
+|-----------------------------------:|------------------------------------|
 | 0.00 - 0.05 | Excellent representation; distances in NMDS closely match original dissimilarities |
 | 0.05 - 0.10 | Good representation; minor distortions in distances |
 | 0.10 - 0.20 | Fair representation; some distortions present but overall structure interpretable |
@@ -314,7 +314,7 @@ There are many options for unconstrained ordination, and we have explored two ex
 Other ordination methods fall somewhere between these two approaches. For example, Principal Coordinates Analysis (PCoA) can accommodate a variety of distance metrics; Correspondence Analysis (CA) is designed for categorical or count data, rather than continuous variables. Selecting the appropriate method depends on the type and distribution of the data as well as the specific ecological questions being addressed.
 
 | Method | Advantage | Limitation | Example Applications |
-|----|----|----|----|
+|------------------|------------------|------------------|------------------|
 | **PCA (Principal Component Analysis)** | Preserves maximum quantitative variation; easy to interpret; widely used | Assumes linear relationships and roughly normal distribution; sensitive to outliers | Continuous trait data, environmental gradients, physiological measurements |
 | **PCoA (Principal Coordinates Analysis)** | Can use any distance or dissimilarity metric; preserves distances as well as possible | May produce negative eigenvalues if data not Euclidean; interpretation depends on metric chosen | Community ecology, phylogenetic distances, functional trait distances |
 | **CA (Correspondence Analysis)** | Works directly on count data; simultaneously ordinates sites and species; produces interpretable eigenvalues | Designed for count/abundance data rather than continuous variables; can produce "arch effect" with long gradients | Species-by-site abundance matrices, ecological community composition |

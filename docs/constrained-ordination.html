@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 20 Constrained Ordination | BIOSTATS</title>
+<meta name="author" content="Akira Terui">
+<meta name="description" content="In unconstrained ordination, the axes are derived solely from the multivariate response data, without reference to external predictors. These methods are useful for exploring dominant patterns,...">
+<meta name="generator" content="bookdown 0.43 with bs4_book()">
+<meta property="og:title" content="Chapter 20 Constrained Ordination | BIOSTATS">
+<meta property="og:type" content="book">
+<meta property="og:description" content="In unconstrained ordination, the axes are derived solely from the multivariate response data, without reference to external predictors. These methods are useful for exploring dominant patterns,...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 20 Constrained Ordination | BIOSTATS">
+<meta name="twitter:description" content="In unconstrained ordination, the axes are derived solely from the multivariate response data, without reference to external predictors. These methods are useful for exploring dominant patterns,...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QZSNHVQQNV"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-QZSNHVQQNV');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">BIOSTATS</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Introduction</a></li>
+<li class="book-part">Getting Started</li>
+<li><a class="" href="what-is-r-and-r-studio.html"><span class="header-section-number">1</span> What is R and R studio?</a></li>
+<li><a class="" href="installing-r-and-rstudio.html"><span class="header-section-number">2</span> Installing R and RStudio</a></li>
+<li><a class="" href="r-project.html"><span class="header-section-number">3</span> R Project</a></li>
+<li class="book-part">R Basics</li>
+<li><a class="" href="data-structure.html"><span class="header-section-number">4</span> Data Structure</a></li>
+<li><a class="" href="data-manipulation.html"><span class="header-section-number">5</span> Data Manipulation</a></li>
+<li><a class="" href="visualization.html"><span class="header-section-number">6</span> Visualization</a></li>
+<li class="book-part">Basic Statistics</li>
+<li><a class="" href="descriptive-statistics.html"><span class="header-section-number">7</span> Descriptive Statistics</a></li>
+<li><a class="" href="sampling.html"><span class="header-section-number">8</span> Sampling</a></li>
+<li><a class="" href="probabilistic-view.html"><span class="header-section-number">9</span> Probabilistic View</a></li>
+<li><a class="" href="two-group-comparison.html"><span class="header-section-number">10</span> Two-Group Comparison</a></li>
+<li><a class="" href="multiple-group-comparison.html"><span class="header-section-number">11</span> Multiple-Group Comparison</a></li>
+<li><a class="" href="regression.html"><span class="header-section-number">12</span> Regression</a></li>
+<li><a class="" href="linear-model.html"><span class="header-section-number">13</span> Linear Model</a></li>
+<li><a class="" href="generalized-linear-model.html"><span class="header-section-number">14</span> Generalized Linear Model</a></li>
+<li><a class="" href="likelihood.html"><span class="header-section-number">15</span> Likelihood</a></li>
+<li><a class="" href="model-comparison.html"><span class="header-section-number">16</span> Model Comparison</a></li>
+<li class="book-part">Applied Statistics</li>
+<li><a class="" href="generalized-linear-mixed-effect-model.html"><span class="header-section-number">17</span> Generalized Linear Mixed Effect Model</a></li>
+<li><a class="" href="generalized-additive-model.html"><span class="header-section-number">18</span> Generalized Additive Model</a></li>
+<li><a class="" href="unconstrained-ordination.html"><span class="header-section-number">19</span> Unconstrained Ordination</a></li>
+<li><a class="active" href="constrained-ordination.html"><span class="header-section-number">20</span> Constrained Ordination</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="git-github.html">Git &amp; GitHub</a></li>
+<li><a class="" href="base-plot.html">Base Plot</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/aterui/biostats">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="constrained-ordination" class="section level1" number="20">
+<h1>
+<span class="header-section-number">20</span> Constrained Ordination<a class="anchor" aria-label="anchor" href="#constrained-ordination"><i class="fas fa-link"></i></a>
+</h1>
+<p>In unconstrained ordination, the axes are derived solely from the multivariate response data, without reference to external predictors. These methods are useful for exploring dominant patterns, visualizing similarity among samples, and generating hypotheses.</p>
+<p>In many biological studies, however, we are explicitly interested in how external variables structure multivariate responses—for example, how species composition changes along gradients of moisture, land use, or management. <strong><em>Constrained</em></strong> ordination methods address this question by restricting the ordination axes to be linear (or unimodal) combinations of measured explanatory variables. In this sense, constrained ordination can be viewed as a multivariate extension of regression.</p>
+<p>Learning Objectives:</p>
+<ul>
+<li><p>Understand the conceptual difference between unconstrained and constrained ordination.</p></li>
+<li><p>Apply constrained ordination methods (RDA, CCA, dbRDA) to relate multivariate responses to environmental predictors.</p></li>
+<li><p>Interpret constrained ordination diagrams, including site scores, species scores, and environmental vectors.</p></li>
+<li><p>Quantify and test the proportion of multivariate variation explained by predictors using permutation tests.</p></li>
+</ul>
+<div class="sourceCode" id="cb536"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="va">tidyverse</span>,</span>
+<span>               <span class="va">GGally</span>,</span>
+<span>               <span class="va">vegan</span><span class="op">)</span></span></code></pre></div>
+<div id="methods-for-constrained-ordination" class="section level2" number="20.1">
+<h2>
+<span class="header-section-number">20.1</span> Methods for Constrained Ordination<a class="anchor" aria-label="anchor" href="#methods-for-constrained-ordination"><i class="fas fa-link"></i></a>
+</h2>
+<p>In constrained ordination, the term “constrained” refers to the fact that the ordination axes are determined by the explanatory variables, rather than emerging solely from the multivariate response data.</p>
+<ul>
+<li><p>The axes represent linear (or unimodal) combinations of measured predictors.</p></li>
+<li><p>Point coordinates in the ordination are interpretable in terms of these predictors.</p></li>
+</ul>
+<p>These points contrast with unconstrained ordination, where axes summarize the total variation in the response data without reference to external variables.</p>
+<p>The effects of predictors are estimated by identifying axes that maximize the variation in the multivariate response explained by the predictors. Mathematically, constrained ordination decomposes the total variation in the response matrix into the portion explained by the predictors and residual variation, with successive axes capturing the maximum remaining explained variation.</p>
+<div id="rda" class="section level3" number="20.1.1">
+<h3>
+<span class="header-section-number">20.1.1</span> RDA<a class="anchor" aria-label="anchor" href="#rda"><i class="fas fa-link"></i></a>
+</h3>
+<div id="lichen-pasture" class="section level4 unnumbered">
+<h4>Lichen pasture<a class="anchor" aria-label="anchor" href="#lichen-pasture"><i class="fas fa-link"></i></a>
+</h4>
+<p>We will begin by the Redundancy Analysis (RDA), which is a constrained version of Principal Component Analysis (PCA). To illustrate a use case of RDA, we will use the <code>varespec</code> dataset. This dataset contains observations from 24 sampling sites (rows), with each column representing the estimated cover of one of 44 plant species (lichen, bryophytes, and vascular plants) at those sites. It comes with <code>varechme</code> data, which include 14 variables that summarize soil properties, such as nutrient concentrations and physical characteristics.</p>
+<p>Before proceeding with the analysis, we will perform some basic data cleaning to ensure the datasets are easy to work with and consistently formatted.</p>
+<div class="sourceCode" id="cb537"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Load example datasets from the vegan package</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"varespec"</span><span class="op">)</span>  <span class="co"># Species abundance matrix: plant species measured at 44 sites</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"varechem"</span><span class="op">)</span>  <span class="co"># Environmental variables (soil chemistry) for the same sites</span></span>
+<span></span>
+<span><span class="co"># Response matrix: species abundances</span></span>
+<span><span class="va">m_y</span> <span class="op">&lt;-</span> <span class="va">varespec</span></span>
+<span></span>
+<span><span class="co"># Convert column names to lowercase for consistency</span></span>
+<span><span class="co"># This avoids issues with formulas or later data manipulation</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">m_y</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/case.html">str_to_lower</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">varespec</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Clean and prepare environmental data</span></span>
+<span><span class="co"># - Convert to tibble for easier use with dplyr</span></span>
+<span><span class="co"># - Use janitor::clean_names() to make column names lowercase, consistent, and safe for programming</span></span>
+<span><span class="va">df_env</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">varechem</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>Visualization highlights the non-normal distributional patterns that are common in biological datasets.</p>
+<div class="sourceCode" id="cb538"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Pairwise scatterplot matrix of the first 3 species columns in m_y</span></span>
+<span><span class="va">m_y</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">ggpairs</span><span class="op">(</span></span>
+<span>    progress <span class="op">=</span> <span class="cn">FALSE</span>,      <span class="co"># Disable the progress bar during plotting</span></span>
+<span>    columns <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,         <span class="co"># Only use the first 3 species for the plot</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
+<span>      alpha <span class="op">=</span> <span class="fl">0.5</span>           <span class="co"># Make points semi-transparent to reduce overplotting</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span>               <span class="co"># Use a clean theme with white background</span></span></code></pre></div>
+<div class="inline-figure"><img src="biostats_files/figure-html/varespec-pair-plot-1.png" width="672" style="display: block; margin: auto;"></div>
+<p>Performing RDA is straightforward, as the <code>vegan</code> package provides the <code>rda()</code> function for implementing this analysis. In the example below, we set <code>scale = FALSE</code> (default in <code>rda()</code>) because the response variables are already standardized as percent cover. If the variables were measured in different units (e.g., grams vs. meters) or differ grearly in their variations, <code>scale = TRUE</code> would be necessary to ensure that all variables contribute equally to the analysis.</p>
+<div class="sourceCode" id="cb539"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Run Redundancy Analysis (RDA)</span></span>
+<span><span class="co"># - Response: m_y (species abundance matrix, varespec)</span></span>
+<span><span class="co">#   Note: Hellinger transformation is recommended for raw species counts.</span></span>
+<span><span class="co"># - Predictors: n, p, k, ca (numeric soil chemistry variables from df_env)</span></span>
+<span><span class="co">#   These represent Nitrogen (n), Phosphorus (p), Potassium (k), and Calcium (ca) levels.</span></span>
+<span><span class="co"># - Data: df_env (cleaned environmental variables)</span></span>
+<span><span class="co"># The parentheses around obj_rda print the RDA summary immediately</span></span>
+<span><span class="op">(</span><span class="va">obj_rda</span> <span class="op">&lt;-</span> <span class="fu">rda</span><span class="op">(</span><span class="va">m_y</span> <span class="op">~</span> <span class="va">n</span> <span class="op">+</span> <span class="va">p</span> <span class="op">+</span> <span class="va">k</span> <span class="op">+</span> <span class="va">ca</span>,</span>
+<span>                data <span class="op">=</span> <span class="va">df_env</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Call: rda(formula = m_y ~ n + p + k + ca, data = df_env)
+## 
+##                 Inertia Proportion Rank
+## Total         1825.6594     1.0000     
+## Constrained    516.1041     0.2827    4
+## Unconstrained 1309.5553     0.7173   19
+## Inertia is variance 
+## 
+## Eigenvalues for constrained axes:
+##   RDA1   RDA2   RDA3   RDA4 
+## 244.71 216.40  30.61  24.37 
+## 
+## Eigenvalues for unconstrained axes:
+##   PC1   PC2   PC3   PC4   PC5   PC6   PC7   PC8 
+## 752.9 266.1 109.3  65.4  33.2  27.1  19.4  12.4 
+## (Showing 8 of 19 unconstrained eigenvalues)</code></pre>
+<p>The RDA results show that the total variance (inertia) in the species abundance data is 1825.66, of which 28.3% (516.10) is explained by the four soil chemistry predictors (<code>n</code>, <code>p</code>, <code>k</code>, <code>ca</code>) and 71.7% (1309.56) remains unexplained (residual variation).</p>
+<p>The first two axes of RDA axes (constrained) captured most of the explained variation, with eigenvalues of 244.71 (RDA1), 216.40 (RDA2), 30.61 (RDA3), and 24.37 (RDA4). The unconstrained axes, representing residual variation, have larger eigenvalues (e.g., PC1 = 752.9, PC2 = 266.1), showing that most variation in species composition is not accounted for by the measured soil variables.</p>
+<p>Overall, this indicates that while soil chemistry influences species distributions, a substantial proportion of multivariate variation is structured by other unmeasured factors or stochastic processes.</p>
+<p>However, we may be interested in the individual contribution of each predictor, particularly whether those contributions are statistically significant. To assess this, we can use the <code>anova.cca()</code> function from the <code>vegan</code> package, which performs permutation-based significance tests for constrained ordination models.</p>
+<div class="sourceCode" id="cb541"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Perform permutation test on the RDA object</span></span>
+<span><span class="co"># - obj_rda: RDA object containing species (response) and soil chemistry (predictors)</span></span>
+<span><span class="co"># - by = "margin": test the marginal effect of each predictor</span></span>
+<span><span class="co">#   This evaluates how much variation each predictor explains **after accounting for all other predictors**</span></span>
+<span><span class="co"># - permutations = 999: number of random permutations used to generate the null distribution for the F-statistic</span></span>
+<span><span class="fu">anova.cca</span><span class="op">(</span><span class="va">obj_rda</span>, </span>
+<span>          by <span class="op">=</span> <span class="st">"margin"</span>, </span>
+<span>          permutations <span class="op">=</span> <span class="fl">999</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Permutation test for rda under reduced model
+## Marginal effects of terms
+## Permutation: free
+## Number of permutations: 999
+## 
+## Model: rda(formula = m_y ~ n + p + k + ca, data = df_env)
+##          Df Variance      F Pr(&gt;F)  
+## n         1   189.63 2.7512  0.048 *
+## p         1    70.69 1.0256  0.370  
+## k         1    40.41 0.5863  0.649  
+## ca        1    80.83 1.1728  0.286  
+## Residual 19  1309.56                
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+<p>It is important to set <code>by = "margin"</code> when your goal is to assess the <em>individual</em> contribution of each predictor. An alternative option is <code>by = "terms"</code>, but this corresponds to a method analogous to <strong>Type I ANOVA</strong>, where predictors are tested sequentially in the order they appear in the model formula. As a result, the order of predictors matters: for example, specifying <code>m_y ~ n + p + k + ca</code> versus <code>m_y ~ p + n + k + ca</code> can lead to different test results, because each predictor is evaluated after accounting only for those entered before it.</p>
+<p>In contrast, setting <code>by = "margin"</code> invokes a procedure analogous to <strong>Type II ANOVA</strong>. Here, the effect of each predictor is tested <em>after accounting for all other predictors in the model</em>, regardless of their order in the formula. This approach is generally preferred when predictors are not strictly hierarchical and when the goal is to evaluate the unique contribution of each environmental variable to the multivariate response.</p>
+</div>
+<div id="horseshoe-effect" class="section level4 unnumbered">
+<h4>Horseshoe effect<a class="anchor" aria-label="anchor" href="#horseshoe-effect"><i class="fas fa-link"></i></a>
+</h4>
+<p>Since RDA is based on PCA, it implicitly assumes linear relationships among the response variables. This assumption is often violated in typical biological datasets, as we see here. This example illustrates how RDA can be inappropriate for many biological response data, which are frequently non-normal and non-linearly related. RDA tends to perform better with variables that are approximately normally distributed and linearly related, such as physical measurements (e.g., temperature, water depth) or certain biological traits (e.g., body size).</p>
+<p>When applied to non-linear data, visualization of the RDA axes can reveal artifacts such as the <strong>horseshoe effect</strong>, a mathematical distortion that arises when non-linear relationships are inappropriately treated as linear.</p>
+<div class="sourceCode" id="cb543"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Extract site (sample) scores from the RDA object</span></span>
+<span><span class="co"># - display = "sites": returns the coordinates of sampling sites in RDA space</span></span>
+<span><span class="co"># - scaling = 2: correlation scaling, which emphasizes relationships between sites</span></span>
+<span><span class="co">#   and explanatory variables (i.e., how site positions correlate with predictors)</span></span>
+<span><span class="co"># The site scores are then combined with the environmental data for visualization</span></span>
+<span><span class="va">df_rda</span> <span class="op">&lt;-</span> <span class="fu">scores</span><span class="op">(</span><span class="va">obj_rda</span>, </span>
+<span>                 display <span class="op">=</span> <span class="st">"sites"</span>,</span>
+<span>                 scaling <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html">bind_cols</a></span><span class="op">(</span><span class="va">df_env</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>           <span class="co"># append environmental variables (e.g., soil chemistry)</span></span>
+<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span>          <span class="co"># standardize column names for tidy workflows</span></span>
+<span></span>
+<span><span class="co"># Create a ggplot2 ordination plot</span></span>
+<span><span class="co"># - Points represent sites positioned by their constrained community composition</span></span>
+<span><span class="co"># - Color gradient reflects the nitrogen (n) concentration at each site</span></span>
+<span><span class="va">df_rda</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">rda1</span>,</span>
+<span>             y <span class="op">=</span> <span class="va">rda2</span>,</span>
+<span>             color <span class="op">=</span> <span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>        <span class="co"># color sites by nitrogen level</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"RDA1"</span>,</span>
+<span>       y <span class="op">=</span> <span class="st">"RDA2"</span>,</span>
+<span>       color <span class="op">=</span> <span class="st">"Nitrogen"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_color_viridis_c</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:rda-plot"></span>
+<img src="biostats_files/figure-html/rda-plot-1.png" alt="RDA ordination plot of sites based on species composition. Each point represents a site, positioned by its RDA scores (RDA1 and RDA2), with the color gradient indicating soil nitrogen (n) concentration, illustrating how environmental variation is associated with multivariate community patterns." width="672"><p class="caption">
+Figure 20.1: RDA ordination plot of sites based on species composition. Each point represents a site, positioned by its RDA scores (RDA1 and RDA2), with the color gradient indicating soil nitrogen (n) concentration, illustrating how environmental variation is associated with multivariate community patterns.
+</p>
+</div>
+<p>The plot clearly shows a unimodal pattern (“horseshoe”) along the RDA1 axis, which does not reflect a true biological pattern in the data. When such a pattern appears, it indicates that RDA—or any ordination method that assumes linear relationships—may be inappropriate; any statistical inference drawn from the results could be strongly biased.</p>
+</div>
+</div>
+<div id="dbrda" class="section level3" number="20.1.2">
+<h3>
+<span class="header-section-number">20.1.2</span> dbRDA<a class="anchor" aria-label="anchor" href="#dbrda"><i class="fas fa-link"></i></a>
+</h3>
+<p>While RDA provides an important extension of PCA to include environmental predictors, it also has limitations, particularly when species responses are non-linear or data are non-normal. To address this, we will explore distance-based RDA (dbRDA) as a more flexible alternative for constrained ordination.</p>
+<p>Although dbRDA is not as flexible as NMDS, it allows the use of a distance or dissimilarity matrix as the response input instead of the raw data, greatly expanding its applicability to biological datasets with non-linear relationships.</p>
+<p>The implementation requires only minimal changes. We can still use <code>m_y</code> from the previous example, but instead of <code>rda()</code>, we apply the <code>capscale()</code> function with <code>distance = "bray"</code>. This internally converts the raw community matrix into a Bray-Curtis dissimilarity matrix, allowing distance-based constrained ordination.</p>
+<div class="sourceCode" id="cb544"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Perform distance-based Redundancy Analysis (dbRDA)</span></span>
+<span><span class="co"># - Response: m_y (species abundance matrix)</span></span>
+<span><span class="co"># - Predictors: n, p, k, ca (environmental variables: nitrogen, phosphorus, potassium, calcium)</span></span>
+<span><span class="co"># - data = df_env: provides the environmental variables used as predictors</span></span>
+<span><span class="co"># - distance = "bray": computes a Bray-Curtis dissimilarity matrix from the raw species abundances</span></span>
+<span><span class="co">#   internally, before performing the constrained ordination</span></span>
+<span><span class="co"># The result is a capscale object representing the constrained ordination in distance space</span></span>
+<span><span class="op">(</span><span class="va">obj_db</span> <span class="op">&lt;-</span> <span class="fu">dbrda</span><span class="op">(</span><span class="va">m_y</span> <span class="op">~</span> <span class="va">n</span> <span class="op">+</span> <span class="va">p</span> <span class="op">+</span> <span class="va">k</span> <span class="op">+</span> <span class="va">ca</span>,</span>
+<span>                 data <span class="op">=</span> <span class="va">df_env</span>,</span>
+<span>                 distance <span class="op">=</span> <span class="st">"bray"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Call: dbrda(formula = m_y ~ n + p + k + ca, data = df_env, distance =
+## "bray")
+## 
+##               Inertia Proportion Rank RealDims
+## Total           4.544      1.000              
+## Constrained     1.164      0.256    4        4
+## Unconstrained   3.381      0.744   19       14
+## Inertia is squared Bray distance 
+## 
+## Eigenvalues for constrained axes:
+## dbRDA1 dbRDA2 dbRDA3 dbRDA4 
+## 0.5896 0.3408 0.1298 0.1034 
+## 
+## Eigenvalues for unconstrained axes:
+##   MDS1   MDS2   MDS3   MDS4   MDS5   MDS6   MDS7   MDS8 
+## 1.3418 0.7788 0.3983 0.2858 0.1825 0.1617 0.1186 0.0931 
+## (Showing 8 of 19 unconstrained eigenvalues)</code></pre>
+<p>The interpretation is analogous to RDA. The total inertia represents the overall variation in Bray-Curtis dissimilarity among sites. The constrained inertia (1.197) indicates that about 26% of the total variation in species composition is explained by the environmental predictors (<code>n</code>, <code>p</code>, <code>k</code>, <code>ca</code>), with the remaining variation (3.606) unconstrained or residual.</p>
+<p>The eigenvalues for the constrained axes (dbRDA1 – dbRDA4) indicate how much of the explained variation each axis captures, while the unconstrained axes (MDS1–MDS15) summarize the residual variation in distance space.</p>
+<p>Although the output resembles RDA, an important distinction is that <strong>dbRDA operates on a distance matrix</strong>, rather than raw biological data (in this case, percent cover), allowing it to accommodate non-linear and non-Euclidean relationships. In this way, dbRDA extends RDA to more complex biological datasets, providing a flexible framework for constrained ordination when linear assumptions are not met.</p>
+<p>Re-running the permutation test produces a contrasting result for soil nitrogen, which is now neither statistically significant nor marginally significant. This highlights the importance of carefully assessing the properties of your data before applying linear ordination methods, as assumptions violations can strongly affect statistical inference.</p>
+<div class="sourceCode" id="cb546"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Perform a permutation test on the dbRDA object</span></span>
+<span><span class="co"># - obj_db: the dbRDA (dbrda) object containing species distances and predictors</span></span>
+<span><span class="co"># - by = "margin": tests the **marginal effect** of each predictor, i.e., the unique contribution</span></span>
+<span><span class="co">#   of a variable after accounting for all other predictors in the model</span></span>
+<span><span class="co"># - permutations = 999: randomly permutes the data 999 times to generate a null distribution</span></span>
+<span><span class="co">#   for the F-statistic, allowing assessment of statistical significance</span></span>
+<span><span class="fu">anova.cca</span><span class="op">(</span><span class="va">obj_db</span>,</span>
+<span>          by <span class="op">=</span> <span class="st">"margin"</span>,</span>
+<span>          permutations <span class="op">=</span> <span class="fl">999</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Permutation test for dbrda under reduced model
+## Marginal effects of terms
+## Permutation: free
+## Number of permutations: 999
+## 
+## Model: dbrda(formula = m_y ~ n + p + k + ca, data = df_env, distance = "bray")
+##          Df SumOfSqs      F Pr(&gt;F)
+## n         1   0.2879 1.6177  0.136
+## p         1   0.1529 0.8593  0.507
+## k         1   0.1450 0.8150  0.581
+## ca        1   0.2733 1.5357  0.162
+## Residual 19   3.3809</code></pre>
+<p>We can now examine whether dbRDA has mitigated the horseshoe effect, reducing the distortions seen in linear RDA when species responses are non-linear.</p>
+<div class="sourceCode" id="cb548"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Extract site scores from the dbRDA object</span></span>
+<span><span class="co"># - display = "sites": retrieves the coordinates of each site in the constrained ordination space</span></span>
+<span><span class="co"># - scaling = 2: correlation (or "standardized") scaling, which emphasizes relationships between sites</span></span>
+<span><span class="co">#   and environmental predictors rather than absolute distances</span></span>
+<span><span class="co"># - as_tibble(): converts the site scores to a tibble for easier manipulation with dplyr</span></span>
+<span><span class="co"># - bind_cols(df_env): adds the original environmental variables for plotting, coloring, or annotation</span></span>
+<span><span class="co"># - janitor::clean_names(): ensures consistent, safe column names for programming</span></span>
+<span></span>
+<span><span class="va">df_db</span> <span class="op">&lt;-</span> <span class="fu">scores</span><span class="op">(</span><span class="va">obj_db</span>, </span>
+<span>                display <span class="op">=</span> <span class="st">"sites"</span>,</span>
+<span>                scaling <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>              </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html">bind_cols</a></span><span class="op">(</span><span class="va">df_env</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>        </span>
+<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span>       </span>
+<span></span>
+<span><span class="co"># Create a basic ggplot ordination plot</span></span>
+<span><span class="co"># - Each point represents a site in the dbRDA ordination space</span></span>
+<span><span class="co"># - Points can later be colored, shaped, or labeled by environmental variables for interpretation</span></span>
+<span><span class="va">df_db</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">db_rda1</span>,</span>
+<span>             y <span class="op">=</span> <span class="va">db_rda2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>               <span class="co"># plot sites as points</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"dbRDA1"</span>,</span>
+<span>       y <span class="op">=</span> <span class="st">"dbRDA2"</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:dbrda-plot"></span>
+<img src="biostats_files/figure-html/dbrda-plot-1.png" alt="Scatterplot of sites in dbRDA space. Each point represents a site positioned according to its constrained ordination scores, summarizing variation in species composition explained by the environmental predictors." width="672"><p class="caption">
+Figure 20.2: Scatterplot of sites in dbRDA space. Each point represents a site positioned according to its constrained ordination scores, summarizing variation in species composition explained by the environmental predictors.
+</p>
+</div>
+</div>
+<div id="other-options-1" class="section level3" number="20.1.3">
+<h3>
+<span class="header-section-number">20.1.3</span> Other Options<a class="anchor" aria-label="anchor" href="#other-options-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>Like unconstrained ordination, there are various constrained ordination methods, each with different assumptions and levels of flexibility. Common approaches include RDA and dbRDA, which can be seen as two extremes: RDA assumes linear relationships and normally distributed response variables, while dbRDA allows non-Euclidean distances and non-linear relationships.</p>
+<p>The most appropriate method depends on your data characteristics and analytical goals. Methods with stricter assumptions, like RDA, have limited applicability, but can provide more quantitative precision if the assumptions are met. More flexible methods, such as dbRDA or distance-based approaches, are widely applicable, but may sacrifice some quantitative detail in exchange for robustness to non-linear or non-normal data.</p>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="21%">
+<col width="21%">
+<col width="21%">
+<col width="34%">
+</colgroup>
+<thead><tr class="header">
+<th>Method</th>
+<th>Advantage</th>
+<th>Limitation</th>
+<th>Example Applications</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><strong>RDA (Redundancy Analysis)</strong></td>
+<td>Extends PCA to include environmental predictors; quantitative axes</td>
+<td>Assumes linear relationships; sensitive to non-normal or zero-inflated data; may produce artifacts (e.g., horseshoe effect) with long gradients</td>
+<td>Continuous trait data, species abundance matrices with linear responses, environmental gradients</td>
+</tr>
+<tr class="even">
+<td><strong>CCA (Canonical Correspondence Analysis)</strong></td>
+<td>Extends CA to include environmental predictors; models unimodal species responses; interpretable species–environment relationships</td>
+<td>Assumes unimodal responses; sensitive to rare species; may still produce arch effects if gradient is extreme</td>
+<td>Community ecology with count/abundance data, species–environment relationships along long ecological gradients</td>
+</tr>
+<tr class="odd">
+<td><strong>dbRDA / CAP (Distance-based RDA / Constrained Analysis of Principal Coordinates)</strong></td>
+<td>Uses distance or dissimilarity matrix; flexible with non-Euclidean distances; can handle non-linear relationships</td>
+<td>Less quantitative than RDA in raw units; may produce small imaginary components; interpretation depends on distance metric</td>
+<td>Ecological community data with many zeros or non-normal distributions, Bray-Curtis or Jaccard distances, functional or phylogenetic distance matrices</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div id="laboratory-13" class="section level2" number="20.2">
+<h2>
+<span class="header-section-number">20.2</span> Laboratory<a class="anchor" aria-label="anchor" href="#laboratory-13"><i class="fas fa-link"></i></a>
+</h2>
+
+</div>
+</div>
+
+
+
+  <div class="chapter-nav">
+<div class="prev"><a href="unconstrained-ordination.html"><span class="header-section-number">19</span> Unconstrained Ordination</a></div>
+<div class="next"><a href="git-github.html">Git &amp; GitHub</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#constrained-ordination"><span class="header-section-number">20</span> Constrained Ordination</a></li>
+<li>
+<a class="nav-link" href="#methods-for-constrained-ordination"><span class="header-section-number">20.1</span> Methods for Constrained Ordination</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#rda"><span class="header-section-number">20.1.1</span> RDA</a></li>
+<li><a class="nav-link" href="#dbrda"><span class="header-section-number">20.1.2</span> dbRDA</a></li>
+<li><a class="nav-link" href="#other-options-1"><span class="header-section-number">20.1.3</span> Other Options</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#laboratory-13"><span class="header-section-number">20.2</span> Laboratory</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/aterui/biostats/blob/master/chapters/adv-04-cord.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/aterui/biostats/edit/master/chapters/adv-04-cord.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-12-19.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

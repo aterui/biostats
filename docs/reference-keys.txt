@@ -40,6 +40,8 @@ fig:iris-multiplot
 fig:eigenvector-plot
 fig:dune-plot
 fig:nmds-plot
+fig:rda-plot
+fig:dbrda-plot
 fig:gitcheck
 fig:gitdesktop1
 fig:gitdesktop2
@@ -232,3 +234,9 @@ nmds
 other-options
 axis-interpretability
 laboratory-12
+constrained-ordination
+methods-for-constrained-ordination
+rda
+dbrda
+other-options-1
+laboratory-13

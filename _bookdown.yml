@@ -20,6 +20,7 @@ rmd_files: ["index.Rmd",
             "chapters/adv-01-glmm.Rmd",
             "chapters/adv-02-gam.Rmd",
             "chapters/adv-03-uord.Rmd",
+            "chapters/adv-04-cord.Rmd",
             "chapters/zzz-appendix.Rmd"]
 output_dir: "docs"
             

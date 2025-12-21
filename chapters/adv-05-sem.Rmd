@@ -30,7 +30,7 @@ Let's use the following data set, which involves plant, herbivore, and predator 
 url <- "https://raw.githubusercontent.com/aterui/biostats/master/data_raw/data_foodweb.csv"
 
 # Read the CSV file into a tibble
-df_fw <- read_csv(url)
+(df_fw <- read_csv(url))
 ```
 
 This dataset contains measurements for each plot, including plant biomass (`mass_plant`), variation in plant height expressed as the coefficient of variation (`cv_h_plant`), herbivore biomass (`mass_herbiv`), and predator biomass (`mass_pred`), along with a plot identifier (`plot_id`).
@@ -247,6 +247,19 @@ The associated p-value (0.3014) is not significant, indicating that the more com
 
 ## Structural Equation Modeling
 
-To be added
+In this section, we will extend a path analysis to structural equation modeling (SEM). What distinguishes a SEM from a simple path model is the ability to incorporate latent variables in the DAG. 
+
+Latent variables are “unobserved” variables that exist only within the statistical model. They are typically composites of multiple observed variables, often those that are strongly correlated with each other, and represent underlying constructs that cannot be measured directly.
+
+To explore this, we will use the following dataset.
+
+```{r}
+url <- "https://raw.githubusercontent.com/aterui/biostats/master/data_raw/data_herbivory.csv"
+
+(df_herbv <- read_csv(url))
+```
+
+This dataset contains measurements for each plot, including soil nitrogen (`soil_n`), herbivory rate (`herbivory`), specific leaf area (`sla`), carbon-to-nitrogen ratio (`cn_ratio`), and percent lignin (`per_lignin`).
+
 
 ## Laboratory

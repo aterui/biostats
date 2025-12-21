@@ -297,6 +297,7 @@ m_y_obs <- m_y_obs <- sweep(matrix(f1, ncol = 1) %*% m_lambda + eps,
 
 # Convert to data frame and name variables
 df_herbv <- cbind(m_y[, -2], m_y_obs) %>% 
+  round(1) %>% 
   as_tibble() %>% 
   set_names(nm = c("soil_n",
                    "herbivory",

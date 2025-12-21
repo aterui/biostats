@@ -230,14 +230,14 @@ write_csv(df_wt_raw,
 set.seed(123)  # ensure reproducibility
 
 # Define means and SDs
-v_mu <- c(1000, 5, 100, 10)
+v_mu <- c(100, 5, 50, 25)
 v_s0 <- v_mu * 0.01
 
 # Build covariance matrix
-m_vcov <- outer(v_s0, v_s0) * 0.3       # base correlations
+m_vcov <- outer(v_s0, v_s0) * 0.4       # base correlations
 diag(m_vcov) <- v_s0^2                  # variances on diagonal
-m_vcov[2, 4] <- m_vcov[4, 2] <- (v_s0[2] * v_s0[4]) * 0.001  # small covariances
-m_vcov[1, 4] <- m_vcov[4, 1] <- (v_s0[1] * v_s0[4]) * 0.001
+m_vcov[2, 4] <- m_vcov[4, 2] <- (v_s0[2] * v_s0[4]) * -0.1  # small covariances
+m_vcov[1, 4] <- m_vcov[4, 1] <- (v_s0[1] * v_s0[4]) * 0
 
 # Simulate multivariate normal data
 df_fw <- MASS::mvrnorm(n = 100, mu = v_mu, Sigma = m_vcov) %>% 
@@ -251,7 +251,7 @@ df_fw <- MASS::mvrnorm(n = 100, mu = v_mu, Sigma = m_vcov) %>%
 # Specify SEM model
 m <- '
   mass_herbiv ~ mass_plant + cv_h_plant
-  mass_pred ~ mass_herbiv
+  mass_pred ~ mass_herbiv + cv_h_plant
 '
 
 # Fit SEM

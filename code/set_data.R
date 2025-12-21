@@ -203,7 +203,7 @@ link_open <- "https://raw.githubusercontent.com/aterui/public-proj_restore-aqua-
 # originating from the woody wetland.
 df_wt_woody_raw <- read_csv(link_woody, 
                             guess_max = 1E+6) %>% 
-  select(1:3) %>% 
+  dplyr::select(1:3) %>% 
   set_names(c("id", "date_time", "temp")) %>% 
   mutate(site = "woody")
 
@@ -211,7 +211,7 @@ df_wt_woody_raw <- read_csv(link_woody,
 # Similarly, add a `site` column to indicate the open wetland.
 df_wt_open_raw <- read_csv(link_open, 
                            guess_max = 1E+6) %>% 
-  select(1:3) %>% 
+  dplyr::select(1:3) %>% 
   set_names(c("id", "date_time", "temp")) %>% 
   mutate(site = "open")
 

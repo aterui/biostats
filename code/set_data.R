@@ -227,23 +227,37 @@ write_csv(df_wt_raw,
 
 # path analysis example ---------------------------------------------------
 
-set.seed(123)
+set.seed(123)  # ensure reproducibility
+
+# Define means and SDs
 v_mu <- c(1000, 5, 100, 10)
 v_s0 <- v_mu * 0.01
-m_vcov <- outer(v_s0, v_s0) * 0.5
-diag(m_vcov) <- v_s0^2
-m_vcov[2, 4] <- m_vcov[4, 2] <- 0.005 * 0.001
 
-df_mass <- MASS::mvrnorm(n = 100, mu = v_mu, Sigma = m_vcov) %>% 
+# Build covariance matrix
+m_vcov <- outer(v_s0, v_s0) * 0.3       # base correlations
+diag(m_vcov) <- v_s0^2                  # variances on diagonal
+m_vcov[2, 4] <- m_vcov[4, 2] <- (v_s0[2] * v_s0[4]) * 0.001  # small covariances
+m_vcov[1, 4] <- m_vcov[4, 1] <- (v_s0[1] * v_s0[4]) * 0.001
+
+# Simulate multivariate normal data
+df_fw <- MASS::mvrnorm(n = 100, mu = v_mu, Sigma = m_vcov) %>% 
   as_tibble() %>% 
   set_names(nm = c("mass_plant",
                    "cv_h_plant",
                    "mass_herbiv",
                    "mass_pred")) %>% 
-  mutate(plot_id = row_number(),
-         .before = mass_plant)
+  mutate(plot_id = row_number(), .before = mass_plant)
 
-write_csv(df_mass,
+# Specify SEM model
+m <- '
+  mass_herbiv ~ mass_plant + cv_h_plant
+  mass_pred ~ mass_herbiv
+'
+
+# Fit SEM
+(fit <- sem(model = m, data = df_fw))
+
+write_csv(df_fw,
           file = "data_raw/data_foodweb.csv")
 
 

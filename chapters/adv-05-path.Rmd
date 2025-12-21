@@ -35,19 +35,15 @@ df_fw %>%
 ```
 
 ```{r}
-df_mite <- df_mite %>% 
-  mutate(
-    across(.cols = where(is.numeric),
-           .fns = function(x) c(scale(x)))
-  )
-
 m <- '
-  watr_cont ~ shrub
-  log_rich ~ watr_cont + shrub
+  mass_herbiv ~ mass_plant + cv_h_plant
+  mass_pred ~ mass_herbiv
+  mass_plant ~~ cv_h_plant
+  mass_plant ~~ cv_h_plant
 '
 
 (fit <- sem(model = m,
-           data = df_mite))
+           data = df_fw))
 ```
 
 ## Structural Equation Modeling

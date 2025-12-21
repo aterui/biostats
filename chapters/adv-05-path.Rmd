@@ -1,0 +1,75 @@
+# Structural Equation Modeling
+
+In path analysis and structural equation modeling (SEM), we are interested in understanding the relationships among multiple variables simultaneously. Unlike simple regression, which models a single response as a function of one or more predictors, SEM allows researchers to specify networks of mediating pathways, providing a framework to quantify both direct and indirect contributions.
+
+Learning Objectives:
+
+-   Understand the conceptual difference between univariate regression, path analysis, and SEM.
+
+-   Specify and fit path models using ecological data, identifying direct and indirect effects.
+
+-   Interpret model outputs, including path coefficients, residual variances, and fit statistics.
+
+-   Quantify and test the significance of hypothesized causal relationships in multivariate ecological systems.
+
+```{r}
+pacman::p_load(tidyverse,
+               GGally,
+               vegan,
+               lavaan)
+```
+
+## Path analysis
+
+```{r}
+data("mite")
+data("mite.env")
+```
+
+```{r}
+v_r <- apply(mite,
+              MARGIN = 1,
+              FUN = function(x) sum(x > 0))
+
+df_mite <- mite.env %>% 
+  as_tibble() %>% 
+  janitor::clean_names() %>% 
+  mutate(across(.cols = where(is.factor),
+                .fns = str_to_lower),
+         shrub = case_when(shrub == "none" ~ 0,
+                           shrub == "few" ~ 1,
+                           shrub == "many" ~ 2),
+         richness = v_r,
+         log_rich = log(richness))
+```
+
+```{r}
+df_mite %>% 
+  ggpairs(
+    progress = FALSE,
+    columns = c("shrub",
+                "subs_dens",
+                "watr_cont",
+                "richness")
+  )
+```
+
+```{r}
+df_mite <- df_mite %>% 
+  mutate(
+    across(.cols = where(is.numeric),
+           .fns = function(x) c(scale(x)))
+  )
+
+m <- '
+  watr_cont ~ shrub
+  log_rich ~ watr_cont + shrub
+'
+
+(fit <- sem(model = m,
+           data = df_mite))
+```
+
+## Structural Equation Modeling
+
+### Latent variable

@@ -68,11 +68,6 @@
 <li><a class="" href="generalized-linear-model.html"><span class="header-section-number">14</span> Generalized Linear Model</a></li>
 <li><a class="" href="likelihood.html"><span class="header-section-number">15</span> Likelihood</a></li>
 <li><a class="" href="model-comparison.html"><span class="header-section-number">16</span> Model Comparison</a></li>
-<li class="book-part">Applied Statistics</li>
-<li><a class="" href="generalized-linear-mixed-effect-model.html"><span class="header-section-number">17</span> Generalized Linear Mixed Effect Model</a></li>
-<li><a class="" href="generalized-additive-model.html"><span class="header-section-number">18</span> Generalized Additive Model</a></li>
-<li><a class="" href="unconstrained-ordination.html"><span class="header-section-number">19</span> Unconstrained Ordination</a></li>
-<li><a class="" href="constrained-ordination.html"><span class="header-section-number">20</span> Constrained Ordination</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="active" href="git-github.html">Git &amp; GitHub</a></li>
 <li><a class="" href="base-plot.html">Base Plot</a></li>
@@ -92,11 +87,11 @@
 <li><p>For <strong>Windows</strong>: Install Git from <a href="https://gitforwindows.org/">here</a>. During the installation process, you’ll be prompted about “Adjusting your PATH environment.” Choose “Git from the command line and also from 3rd-party software” if it’s not already selected.</p></li>
 <li><p>For <strong>Mac</strong>: Follow the instructions provided <a href="https://happygitwithr.com/install-git.html">here</a>.</p></li>
 </ul>
-<p>Once Git is installed, open R Studio and navigate to <code>Create Project</code> &gt; <code>New Directory</code> &gt; <code>New Project</code>. If you see the checkbox labeled “Create a git repository,” make sure to select it before creating your new project (refer to Figure <a href="git-github.html#fig:gitcheck">20.3</a>). This action will display the Git pane on the upper right panel of R Studio, indicating that Git integration is enabled.</p>
+<p>Once Git is installed, open R Studio and navigate to <code>Create Project</code> &gt; <code>New Directory</code> &gt; <code>New Project</code>. If you see the checkbox labeled “Create a git repository,” make sure to select it before creating your new project (refer to Figure <a href="git-github.html#fig:gitcheck">16.2</a>). This action will display the Git pane on the upper right panel of R Studio, indicating that Git integration is enabled.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:gitcheck"></span>
 <img src="image/git_image01.png" alt="After installing Git, you should see `Create a git repository`." width="296"><p class="caption">
-Figure 20.3: After installing Git, you should see <code>Create a git repository</code>.
+Figure 16.2: After installing Git, you should see <code>Create a git repository</code>.
 </p>
 </div>
 <p>If you are unable to find the options mentioned above, follow these steps:</p>
@@ -133,7 +128,7 @@ Figure 20.3: After installing Git, you should see <code>Create a git repository<
 <li>Write your code in the editor and save it as <code>sample.R</code> by clicking on <code>File</code> and selecting <code>Save</code> or using the shortcut <code>Ctrl + S</code>.</li>
 </ol>
 <p>Remember to save the file after writing your code.</p>
-<div class="sourceCode" id="cb549"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb483"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## produce 100 random numbers that follows a normal distribution</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, mean <span class="op">=</span> <span class="fl">0</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span></span>
@@ -142,25 +137,25 @@ Figure 20.3: After installing Git, you should see <code>Create a git repository<
 <span></span>
 <span><span class="co">## estimate SD</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
-<p>To open the GitHub Desktop app, locate the application on your computer and launch it. Once opened, you will see a GUI similar to the one depicted in Figure <a href="git-github.html#fig:gitdesktop1">20.4</a>.</p>
+<p>To open the GitHub Desktop app, locate the application on your computer and launch it. Once opened, you will see a GUI similar to the one depicted in Figure <a href="git-github.html#fig:gitdesktop1">16.3</a>.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:gitdesktop1"></span>
 <img src="image/git_image02.png" alt="GUI for GitHub Desktop" width="550"><p class="caption">
-Figure 20.4: GUI for GitHub Desktop
+Figure 16.3: GUI for GitHub Desktop
 </p>
 </div>
-<p>Click on the “Current Repository” button located at the top left corner of the GitHub Desktop app interface. Then, select “Add” followed by “Add existing repository” from the drop down menu, as shown in Figure <a href="git-github.html#fig:gitdesktop2">20.5</a>.</p>
+<p>Click on the “Current Repository” button located at the top left corner of the GitHub Desktop app interface. Then, select “Add” followed by “Add existing repository” from the drop down menu, as shown in Figure <a href="git-github.html#fig:gitdesktop2">16.4</a>.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:gitdesktop2"></span>
 <img src="image/git_image03.png" alt="Add dropdown on the top left" width="550"><p class="caption">
-Figure 20.5: Add dropdown on the top left
+Figure 16.4: Add dropdown on the top left
 </p>
 </div>
 </div>
 <div id="commit" class="section level3 unnumbered">
 <h3>Commit<a class="anchor" aria-label="anchor" href="#commit"><i class="fas fa-link"></i></a>
 </h3>
-<p>GitHub Desktop will prompt you to enter a local path to your Git repository. Browse and select the directory where your <code>R Project</code> is located. Once you have selected the directory, the local Git repository will appear in the list of repositories on the left side bar of GitHub Desktop, as shown in Figure <a href="git-github.html#fig:gitdesktop2">20.5</a>.</p>
+<p>GitHub Desktop will prompt you to enter a local path to your Git repository. Browse and select the directory where your <code>R Project</code> is located. Once you have selected the directory, the local Git repository will appear in the list of repositories on the left side bar of GitHub Desktop, as shown in Figure <a href="git-github.html#fig:gitdesktop2">16.4</a>.</p>
 <p>Now that your repository is added to GitHub Desktop, you are ready to start committing your files to Git. Committing is the process of recording the changes made to your files in Git. To proceed with committing, click on your Git repository in GitHub Desktop. You will see the following options and information displayed:</p>
 <ul>
 <li>The list of changed files: This section shows the files that have been modified since the last commit.</li>
@@ -171,7 +166,7 @@ Figure 20.5: Add dropdown on the top left
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:gitdesktop3"></span>
 <img src="image/git_image04.png" alt="You will see `Create sample.R` or `summary (required)` on the bottom left" width="550"><p class="caption">
-Figure 20.6: You will see <code>Create sample.R</code> or <code>summary (required)</code> on the bottom left
+Figure 16.5: You will see <code>Create sample.R</code> or <code>summary (required)</code> on the bottom left
 </p>
 </div>
 <p>At this stage, your file (<code>.R</code> or any other file) is saved in your local directory but has not been recorded in Git as a change history. To commit the changes, follow these steps:</p>
@@ -187,12 +182,12 @@ Figure 20.6: You will see <code>Create sample.R</code> or <code>summary (require
 <h3>Push<a class="anchor" aria-label="anchor" href="#push"><i class="fas fa-link"></i></a>
 </h3>
 <p>It’s important to note that your changes are currently recorded in your local computer’s Git repository but have not been published to your online GitHub repository. To send the local changes to the online GitHub repository, you need to use the “Push” operation through GitHub Desktop.</p>
-<p>After you make a commit in GitHub Desktop, you will be prompted with a dialog box asking if you want to push the commit to an online repository, as shown in Figure <a href="git-github.html#fig:gitdesktop4">20.7</a>. If this is your first push, there won’t be a corresponding repository on GitHub linked to your local repository. In this case, GitHub Desktop will ask if you want to publish it on GitHub. Please note that “publishing” here means making the repository available on GitHub, but it will remain private unless you explicitly choose to make it public.</p>
+<p>After you make a commit in GitHub Desktop, you will be prompted with a dialog box asking if you want to push the commit to an online repository, as shown in Figure <a href="git-github.html#fig:gitdesktop4">16.6</a>. If this is your first push, there won’t be a corresponding repository on GitHub linked to your local repository. In this case, GitHub Desktop will ask if you want to publish it on GitHub. Please note that “publishing” here means making the repository available on GitHub, but it will remain private unless you explicitly choose to make it public.</p>
 <p>If you are comfortable with the changes you made and want to send them to the online repository, click the “Push” button in GitHub Desktop. This action will push your commits to the remote repository on GitHub, effectively synchronizing your local repository with the online repository.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:gitdesktop4"></span>
 <img src="image/git_image05.png" alt="To Push your code, hit the highlighted menu button" width="550"><p class="caption">
-Figure 20.7: To Push your code, hit the highlighted menu button
+Figure 16.6: To Push your code, hit the highlighted menu button
 </p>
 </div>
 </div>
@@ -200,7 +195,7 @@ Figure 20.7: To Push your code, hit the highlighted menu button
 <h3>Edit<a class="anchor" aria-label="anchor" href="#edit"><i class="fas fa-link"></i></a>
 </h3>
 <p>We have created a file named <code>sample.R</code> as per the previous instructions. Now, let’s make a minor change to the content of the <code>sample.R</code> file. Open the <code>sample.R</code> file in your preferred text editor or in R Studio, and make a modification to the code. For example, you can update the code from:</p>
-<div class="sourceCode" id="cb550"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb484"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## produce 100 random numbers that follows a normal distribution</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, mean <span class="op">=</span> <span class="fl">0</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span></span>
@@ -210,7 +205,7 @@ Figure 20.7: To Push your code, hit the highlighted menu button
 <span><span class="co">## estimate SD</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
 <p>to:</p>
-<div class="sourceCode" id="cb551"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb485"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## produce 100 random numbers that follows a normal distribution</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, mean <span class="op">=</span> <span class="fl">0</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span></span>
@@ -225,7 +220,7 @@ Figure 20.7: To Push your code, hit the highlighted menu button
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:gitdesktop5"></span>
 <img src="image/git_image06.png" alt="Git detects edits to your codes" width="550"><p class="caption">
-Figure 20.8: Git detects edits to your codes
+Figure 16.7: Git detects edits to your codes
 </p>
 </div>
 <p>A sample repository can be found <a href="https://github.com/aterui/public-proj_projstr">here</a>.</p>
@@ -233,7 +228,7 @@ Figure 20.8: Git detects edits to your codes
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="constrained-ordination.html"><span class="header-section-number">20</span> Constrained Ordination</a></div>
+<div class="prev"><a href="model-comparison.html"><span class="header-section-number">16</span> Model Comparison</a></div>
 <div class="next"><a href="base-plot.html">Base Plot</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
@@ -264,7 +259,7 @@ Figure 20.8: Git detects edits to your codes
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-12-19.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-12-21.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

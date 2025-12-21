@@ -1,4 +1,5 @@
 pacman::p_load(tidyverse,
                foreach,
                igraph,
-               ggraph)
+               ggraph,
+               patchwork)

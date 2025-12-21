@@ -105,16 +105,16 @@ Figure 14.1: Garden view with sampling plots. White squares represent plots. Red
 <pre><code>## # A tibble: 30 × 3
 ##     plot count nitrate
 ##    &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
-##  1     1     1    14.6
-##  2     2     4    32.6
-##  3     3     6    29.3
-##  4     4     4    30.4
-##  5     5     7    34.1
-##  6     6     2    26.6
-##  7     7     2    30.2
-##  8     8     2    28.7
-##  9     9     3    32.5
-## 10    10     2    26  
+##  1     1     3    31.3
+##  2     2     1    27.4
+##  3     3     4    31.9
+##  4     4     1    30.1
+##  5     5     4    29.8
+##  6     6     1    30.4
+##  7     7     2    32  
+##  8     8     0    18.3
+##  9     9     2    31.7
+## 10    10     2    34  
 ## # ℹ 20 more rows</code></pre>
 <p>The variable of plant count had the following characteristics:</p>
 <ol style="list-style-type: decimal">
@@ -140,18 +140,18 @@ y_i &amp;\sim \text{Normal}(\mu_i, \sigma^2)\\
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -1.9084 -0.9000 -0.2572  0.6134  3.0316 
+## -1.2782 -0.6020 -0.1625  0.5094  3.1272 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) -5.90545    1.42516  -4.144 0.000285 ***
-## nitrate      0.30286    0.05105   5.933 2.19e-06 ***
+## (Intercept) -4.17690    1.20371  -3.470   0.0017 ** 
+## nitrate      0.21234    0.04068   5.219 1.52e-05 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 1.291 on 28 degrees of freedom
-## Multiple R-squared:  0.557,  Adjusted R-squared:  0.5411 
-## F-statistic:  35.2 on 1 and 28 DF,  p-value: 2.193e-06</code></pre>
+## Residual standard error: 0.9975 on 28 degrees of freedom
+## Multiple R-squared:  0.4931, Adjusted R-squared:  0.475 
+## F-statistic: 27.24 on 1 and 28 DF,  p-value: 1.523e-05</code></pre>
 <p>This seems satisfactory, but an anomalous behavior occurs during the plotting process on the figure. Plot the data and the predicted values together.</p>
 <div class="sourceCode" id="cb418"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># extract estimates</span></span>
@@ -202,16 +202,16 @@ y_i &amp;\sim \text{Poisson}(\lambda_i)\\
 ## 
 ## Coefficients:
 ##             Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept) -4.04899    1.05326  -3.844 0.000121 ***
-## nitrate      0.17028    0.03467   4.911 9.06e-07 ***
+## (Intercept) -4.70258    1.58317  -2.970 0.002974 ** 
+## nitrate      0.17751    0.05035   3.525 0.000423 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## (Dispersion parameter for poisson family taken to be 1)
 ## 
-##     Null deviance: 48.598  on 29  degrees of freedom
-## Residual deviance: 19.073  on 28  degrees of freedom
-## AIC: 93.858
+##     Null deviance: 32.015  on 29  degrees of freedom
+## Residual deviance: 13.628  on 28  degrees of freedom
+## AIC: 86.661
 ## 
 ## Number of Fisher Scoring iterations: 5</code></pre>
 <p>The estimated intercept is still negative…what’s wrong? No sweat, we estimated these parameters in a log scale; this result translates into:</p>
@@ -228,14 +228,14 @@ y_i &amp;\sim \text{Poisson}(\lambda_i)\\
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">z_value</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## (Intercept)     nitrate 
-##   -3.844229    4.910935</code></pre>
+##   -2.970364    3.525377</code></pre>
 <p>We call this statistic “z-statistic” as it is known to follow the z-distribution (also known as the standardized Normal distribution <span class="math inline">\(\text{Normal}(0, 1)\)</span>), as opposed to the Student’s t-distribution. The reported p-value (<code>Pr(&gt;|z|)</code>) is estimated under this assumption, which can be seen as follows.</p>
 <div class="sourceCode" id="cb424"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># estimate Pr(&gt;|z|) using a standardized normal distribution</span></span>
 <span><span class="va">p_value</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">pnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">z_value</span><span class="op">)</span>, mean <span class="op">=</span> <span class="fl">0</span>, sd <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">*</span> <span class="fl">2</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">p_value</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##  (Intercept)      nitrate 
-## 1.209323e-04 9.064303e-07</code></pre>
+## 0.0029744722 0.0004228806</code></pre>
 <p><strong>Notice that these p-values are not identical to the output from the Normal model</strong> – therefore, the choice of the probability distribution critically affects the results of statistical analysis, and often times, qualitatively (not in this particular example though).</p>
 <p>Visualization provides the convincing difference between the Normal and Poisson models (Figure <a href="generalized-linear-model.html#fig:normal-pois">14.2</a>).</p>
 <div class="sourceCode" id="cb426"><pre class="downlit sourceCode r">
@@ -289,15 +289,15 @@ Figure 14.2: Comparison of the predicted values between Normal (broken, black) a
 <pre><code>## # A tibble: 100 × 4
 ##    ind_id n_fertilized n_examined density
 ##     &lt;dbl&gt;        &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
-##  1      1            0         30       3
-##  2      2            1         30      14
-##  3      3            2         30      14
-##  4      4            6         30      19
-##  5      5            2         30      17
-##  6      6            0         30       8
-##  7      7            4         30      19
-##  8      8            0         30      11
-##  9      9            0         30       7
+##  1      1            0         30       6
+##  2      2           17         30      15
+##  3      3           21         30      15
+##  4      4            3         30       9
+##  5      5            1         30       9
+##  6      6            7         30      11
+##  7      7            2         30       9
+##  8      8            0         30       2
+##  9      9            1         30       9
 ## 10     10            0         30       7
 ## # ℹ 90 more rows</code></pre>
 <p>This data frame contains variables such as <code>ind_id</code> (mussel individual ID), <code>n_fertilized</code> (number of fertilized eggs), <code>n_examined</code> (number of eggs examined), and <code>density</code> (number of mussels in a 1 m<span class="math inline">\(^2\)</span> quadrat). To visualize the relationship between the proportion of eggs fertilized and the density gradient, plot the proportion of fertilized eggs against the density gradient (Figure <a href="generalized-linear-model.html#fig:mussel-egg">14.3</a>).</p>
@@ -377,11 +377,11 @@ Figure 14.4: Logit-transformation ensures that the transformed variable to fall 
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##      [,1] [,2]
 ## [1,]    0   30
-## [2,]    1   29
-## [3,]    2   28
-## [4,]    6   24
-## [5,]    2   28
-## [6,]    0   30</code></pre>
+## [2,]   17   13
+## [3,]   21    9
+## [4,]    3   27
+## [5,]    1   29
+## [6,]    7   23</code></pre>
 <p>Similar to the previous examples, the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function provides estimates of the model parameters. By applying the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function to the fitted model, you can obtain information such as coefficient estimates, standard errors, p-values, and other relevant statistics.</p>
 <div class="sourceCode" id="cb434"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">m_binom</span><span class="op">)</span></span></code></pre></div>
@@ -392,18 +392,18 @@ Figure 14.4: Logit-transformation ensures that the transformed variable to fall 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept) -8.06411    0.49944  -16.15   &lt;2e-16 ***
-## density      0.34209    0.03077   11.12   &lt;2e-16 ***
+## (Intercept) -7.85097    0.27150  -28.92   &lt;2e-16 ***
+## density      0.58219    0.02142   27.18   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
-##     Null deviance: 233.752  on 99  degrees of freedom
-## Residual deviance:  70.744  on 98  degrees of freedom
-## AIC: 158.3
+##     Null deviance: 1676.42  on 99  degrees of freedom
+## Residual deviance:  104.66  on 98  degrees of freedom
+## AIC: 317.64
 ## 
-## Number of Fisher Scoring iterations: 6</code></pre>
+## Number of Fisher Scoring iterations: 5</code></pre>
 <p>This result translates into:</p>
 <p><span class="math display">\[
 \begin{aligned}

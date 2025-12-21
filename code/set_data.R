@@ -261,3 +261,63 @@ write_csv(df_fw,
           file = "data_raw/data_foodweb.csv")
 
 
+
+# sem example -------------------------------------------------------------
+
+set.seed(123)  # ensure reproducibility
+n <- 100
+
+# Define means and SDs
+v_mu <- c(10, 0, 100)
+v_s0 <- c(2.5, 1, 10)
+
+# Create covariance matrix
+m_v <- outer(v_s0, v_s0) * 0.4
+diag(m_v) <- v_s0^2
+m_v[1,3] <- m_v[3,1] <- 0  # keep correlation between 1 and 3 zero
+
+# Simulate multivariate normal
+m_y <- MASS::mvrnorm(n = n,
+                     mu = v_mu,
+                     Sigma = m_v)
+
+# Define one latent factor
+f1 <- m_y[,2]  # using second variable as latent factor
+
+# Factor loadings
+m_lambda <- matrix(c(0.7, -0.5, -0.75), nrow = 1)
+v_alpha <- c(100, 10, 8)
+
+# Simulate observed variables: X = F %*% L + error
+eps <- matrix(rnorm(n * 3, mean = 0, sd = 0.3), nrow = n, ncol = 3)
+m_y_obs <- m_y_obs <- sweep(matrix(f1, ncol = 1) %*% m_lambda + eps,
+                            MARGIN = 2, 
+                            v_alpha, 
+                            FUN = "+")
+
+# Convert to data frame and name variables
+df_herbv <- cbind(m_y[, -2], m_y_obs) %>% 
+  as_tibble() %>% 
+  set_names(nm = c("soil_n",
+                   "herbivory",
+                   "sla",
+                   "cn_ratio",
+                   "per_lignin"))
+
+m <- '
+  # latent variable
+  palatability =~ sla + cn_ratio + per_lignin
+  
+  # regression
+  palatability ~ soil_n
+  herbivory ~ palatability
+'
+
+fit <- sem(m,
+           data = df_herbv)
+
+summary(fit, standardize = TRUE)
+
+write_csv(df_herbv,
+          file = "data_raw/data_herbivory.csv")
+

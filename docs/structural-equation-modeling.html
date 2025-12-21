@@ -105,34 +105,157 @@
 <h2>
 <span class="header-section-number">21.1</span> Path analysis<a class="anchor" aria-label="anchor" href="#path-analysis"><i class="fas fa-link"></i></a>
 </h2>
-<p>Path analysis is a special case of structural equation modeling.
-It is designed for cases where all variables of interest are directly measured, and you are interested in direct and indirect effects between those observed variables.</p>
+<p><strong>Path analysis is a special case of SEM.</strong> It is designed for cases where all variables of interest are directly measured, and you are interested in direct and indirect effects between those observed variables.</p>
 <p>Let’s use the following data set, which involves plant, herbivore, and predator variables measured in 100 plots.</p>
 <div class="sourceCode" id="cb550"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/aterui/biostats/master/data_raw/data_foodweb.csv"</span></span>
+<code class="sourceCode R"><span><span class="co"># Specify the URL of the raw CSV file on GitHub</span></span>
+<span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/aterui/biostats/master/data_raw/data_foodweb.csv"</span></span>
+<span></span>
+<span><span class="co"># Read the CSV file into a tibble</span></span>
 <span><span class="va">df_fw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span></code></pre></div>
 <p>This dataset contains measurements for each plot, including plant biomass (<code>mass_plant</code>), variation in plant height expressed as the coefficient of variation (<code>cv_h_plant</code>), herbivore biomass (<code>mass_herbiv</code>), and predator biomass (<code>mass_pred</code>), along with a plot identifier (<code>plot_id</code>).</p>
+<div id="directed-acyclic-graph" class="section level3" number="21.1.1">
+<h3>
+<span class="header-section-number">21.1.1</span> Directed Acyclic Graph<a class="anchor" aria-label="anchor" href="#directed-acyclic-graph"><i class="fas fa-link"></i></a>
+</h3>
 <p>Given the bottom-up influences in this system, these variables may be sequentially connected, with plant biomass affecting herbivore biomass, which in turn affects predator biomass. At the same time, variation in plant height (<code>cv_h_plant</code>) may reflect shelter availability for herbivores, suggesting that this variable could also influence higher trophic levels.</p>
 <p>In such a system, we can start with a full network represented as a directed acyclic graph (DAG), which encodes the hypothesized causal relationships among variables.</p>
-<div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-180-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:dag-full"></span>
+<img src="biostats_files/figure-html/dag-full-1.png" alt="Directed acyclic graph (DAG) representing the hypothesized causal structure among plant, herbivore, and predator variables. Nodes denote measured variables (plant mass, plant height, herbivore mass, and predator mass), and directed edges indicate assumed directional effects. Plant mass and plant height are modeled as exogenous variables influencing herbivore mass, which in turn influences predator mass; plant variables may also have direct effects on higher trophic levels." width="672"><p class="caption">
+Figure 21.1: Directed acyclic graph (DAG) representing the hypothesized causal structure among plant, herbivore, and predator variables. Nodes denote measured variables (plant mass, plant height, herbivore mass, and predator mass), and directed edges indicate assumed directional effects. Plant mass and plant height are modeled as exogenous variables influencing herbivore mass, which in turn influences predator mass; plant variables may also have direct effects on higher trophic levels.
+</p>
+</div>
 <p>In these networks, discerning two types of variables is particularly important: endogenous and exogenous variables.</p>
 <p><strong>Endogenous variables</strong> are those whose values are influenced by other variables in the system; they have one or more incoming arrows in the DAG. In our example, herbivore and predator biomass are endogenous because they depend on plant biomass and other factors.</p>
 <p><strong>Exogenous variables</strong> are determined outside the system and are not influenced by other variables in the network; they only have outgoing arrows. For instance, plant biomass and variation in plant height can be treated as exogenous, as they drive changes in higher trophic levels without being influenced by them.</p>
+<p>What makes this network a DAG is <strong>the absence of loops</strong>: all arrows flow from lower to higher trophic levels, with no feedback to lower levels. This excludes potential influences of higher trophic levels on lower ones (i.e., feedback loops). However, such cyclic relationships cannot be incorporated within the standard SEM framework, which is one of its major limitations.</p>
+</div>
+<div id="develop-a-hypothesis" class="section level3" number="21.1.2">
+<h3>
+<span class="header-section-number">21.1.2</span> Develop a hypothesis<a class="anchor" aria-label="anchor" href="#develop-a-hypothesis"><i class="fas fa-link"></i></a>
+</h3>
+<p>The example above represents a full DAG, which serves as a reasonable starting point.</p>
+<p>However, some links may not be biologically meaningful—for instance, while it is reasonable to assume that herbivore biomass is influenced by plant attributes, these variables are likely less important for predators.</p>
+<p>Visualizing the network helps identify which links are potentially relevant among these variables.</p>
 <div class="sourceCode" id="cb551"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_fw</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">plot_id</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu">ggpairs</span><span class="op">(</span></span>
-<span>    progress <span class="op">=</span> <span class="cn">FALSE</span></span>
-<span>  <span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-181-1.png" width="672" style="display: block; margin: auto;"></div>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">plot_id</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>        <span class="co"># remove plot_id column for plotting</span></span>
+<span>  <span class="fu">ggpairs</span><span class="op">(</span>                    <span class="co"># create pairwise scatterplots and correlations</span></span>
+<span>    progress <span class="op">=</span> <span class="cn">FALSE</span>          <span class="co"># suppress progress messages</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="biostats_files/figure-html/sem-pair-plot-1.png" width="672" style="display: block; margin: auto;"></div>
+<p>Plant variables are moderately correlated with herbivore biomass, not with predator biomass. These raw observations can guide hypothesis development and provide a rationale for omitting direct plant-to-predator paths from the DAG.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:dag-2"></span>
+<img src="biostats_files/figure-html/dag-2-1.png" alt="Simplified directed acyclic graph (DAG) representing the hypothesized causal relationships among plant, herbivore, and predator traits used in the focal analysis. Compared to the full DAG, this hypothesis-driven DAG retains only the direct pathways of primary interest, omitting direct links from plant variables to predator mass." width="672"><p class="caption">
+Figure 21.2: Simplified directed acyclic graph (DAG) representing the hypothesized causal relationships among plant, herbivore, and predator traits used in the focal analysis. Compared to the full DAG, this hypothesis-driven DAG retains only the direct pathways of primary interest, omitting direct links from plant variables to predator mass.
+</p>
+</div>
+</div>
+<div id="implementation" class="section level3" number="21.1.3">
+<h3>
+<span class="header-section-number">21.1.3</span> Implementation<a class="anchor" aria-label="anchor" href="#implementation"><i class="fas fa-link"></i></a>
+</h3>
+<p>A variety of R packages can be used to implement SEM, but here we will focus on lavaan, one of the most widely used packages for this purpose. A full description of its functionality is available on the lavaan website, but we will cover the basics here.</p>
+<p>The key syntax elements are <code>~</code> and <code>~~</code>:</p>
+<ul>
+<li><p>Single tilde <code>~</code> is used to specify a regression-like relationship between variables.</p></li>
+<li><p>Double tilde <code>~~</code> represents the covariance between variables’ residuals.</p></li>
+</ul>
+<p>Let’s start with a simple example, omitting the use of ~~ for now. We first define a model that corresponds to our hypothetical DAG.</p>
 <div class="sourceCode" id="cb552"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
+<code class="sourceCode R"><span><span class="co"># Specify the SEM model using lavaan syntax</span></span>
+<span><span class="co"># Note: the variable names must exactly match the column names in the dataframe (df_fw)</span></span>
+<span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
+<span><span class="st">  # regression of herbivore biomass on plant variables</span></span>
+<span><span class="st">  mass_herbiv ~ mass_plant + cv_h_plant</span></span>
+<span><span class="st">  # regression of predator biomass on herbivore biomass</span></span>
+<span><span class="st">  mass_pred ~ mass_herbiv</span></span>
+<span><span class="st">'</span></span></code></pre></div>
+<p>The model description <code>m1</code> should be passed to the <code>sem()</code> function from the <code>lavaan</code> package, which performs the analysis using the data you provide.</p>
+<div class="sourceCode" id="cb553"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">fit1</span> <span class="op">&lt;-</span> <span class="fu">sem</span><span class="op">(</span>model <span class="op">=</span> <span class="va">m1</span>,</span>
+<span>             data <span class="op">=</span> <span class="va">df_fw</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## lavaan 0.6-12 ended normally after 1 iterations
+## 
+##   Estimator                                         ML
+##   Optimization method                           NLMINB
+##   Number of model parameters                         5
+## 
+##   Number of observations                           100
+## 
+## Model Test User Model:
+##                                                       
+##   Test statistic                                 1.466
+##   Degrees of freedom                                 2
+##   P-value (Chi-square)                           0.480</code></pre>
+<p>The most important output from the <code>sem()</code> function is the <code>Model Test User Model</code> section, which reports the chi-square test statistic, degrees of freedom, and p-value.</p>
+<p>The test statistic (1.466) measures the discrepancy between the SEM model-implied covariance matrix and the observed covariance matrix, while the degrees of freedom provide a sense of how simple the model is relative to the full DAG—that is, how many potential links from the full DAG are omitted. In other words, the test essentially asks: <strong>“Does the model adequately reproduce the observed relationships in the data?”</strong></p>
+<p>Unlike ordinary hypothesis tests, the p-value here tests the null hypothesis that the model fits the data perfectly. A high p-value (typically &gt; 0.05) indicates no evidence of misfit. In this case, the p-value of 0.480 suggests that the model provides a good fit to the data.</p>
+<p>We can obtain estimates for each path in the model, which quantify the strength of the relationships among variables:</p>
+<div class="sourceCode" id="cb555"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">fit1</span>, standardize <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## lavaan 0.6-12 ended normally after 1 iterations
+## 
+##   Estimator                                         ML
+##   Optimization method                           NLMINB
+##   Number of model parameters                         5
+## 
+##   Number of observations                           100
+## 
+## Model Test User Model:
+##                                                       
+##   Test statistic                                 1.466
+##   Degrees of freedom                                 2
+##   P-value (Chi-square)                           0.480
+## 
+## Parameter Estimates:
+## 
+##   Standard errors                             Standard
+##   Information                                 Expected
+##   Information saturated (h1) model          Structured
+## 
+## Regressions:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+##   mass_herbiv ~                                                         
+##     mass_plant        0.173    0.050    3.449    0.001    0.173    0.327
+##     cv_h_plant        2.052    0.935    2.195    0.028    2.052    0.208
+##   mass_pred ~                                                           
+##     mass_herbiv       0.244    0.044    5.497    0.000    0.244    0.482
+## 
+## Variances:
+##                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all
+##    .mass_herbiv       0.185    0.026    7.071    0.000    0.185    0.805
+##    .mass_pred         0.045    0.006    7.071    0.000    0.045    0.768</code></pre>
+<p>The <code>Regressions:</code> section is the most informative. The Estimate column reports the raw effect sizes, but these values depend on the units and variability of the predictor variables and therefore are not directly comparable across predictors.</p>
+<p>By setting <code>standardize = TRUE</code>, however, <code>lavaan</code> also reports <code>Std.all</code>, which gives standardized coefficients (i.e., effects on a common scale). These standardized values allow direct comparison of the relative strength of different paths.</p>
+<p>In this example, the strongest path is from <code>mass_herbiv</code> to <code>mass_pred</code> (0.482), followed by <code>mass_plant</code> to <code>mass_herbiv</code> (0.327), and <code>cv_h_plant</code> to <code>mass_herbiv</code> (0.208).</p>
+</div>
+<div id="model-comparison-1" class="section level3" number="21.1.4">
+<h3>
+<span class="header-section-number">21.1.4</span> Model comparison<a class="anchor" aria-label="anchor" href="#model-comparison-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>Our model omits all direct plant-to-predator pathways. However, variation in plant height may still influence predators indirectly by altering physical habitat structure. This possibility is represented in the following DAGs.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:dag-3"></span>
+<img src="biostats_files/figure-html/dag-3-1.png" alt="Comparison of two alternative directed acyclic graphs (DAGs) representing competing causal hypotheses among plant, herbivore, and predator variables. Panel A shows the hypothesized DAG, in which predator mass is influenced only indirectly through herbivore mass. Panel B shows an alternative DAG that includes an additional direct pathway from plant height to predator mass, representing a plausible but untested mechanism (e.g., habitat structure or plant-mediated effects)." width="672"><p class="caption">
+Figure 21.3: Comparison of two alternative directed acyclic graphs (DAGs) representing competing causal hypotheses among plant, herbivore, and predator variables. Panel A shows the hypothesized DAG, in which predator mass is influenced only indirectly through herbivore mass. Panel B shows an alternative DAG that includes an additional direct pathway from plant height to predator mass, representing a plausible but untested mechanism (e.g., habitat structure or plant-mediated effects).
+</p>
+</div>
+<p>How do we test this alternative hypothesis, and determine whether this new path is worth including?</p>
+<p>We can address this by comparing model performance using a likelihood ratio test (LRT), which uses the difference in chi-square values between two models as the test statistic. The rationale is that the simpler model is a special case of the more complex model (i.e., the models are nested), so any improvement in fit can be attributed to the additional path.</p>
+<p>If adding the new path substantially reduces the chi-square value relative to the increase in model complexity (degrees of freedom), this suggests that the path explains meaningful structure in the data and is worth including.</p>
+<p>To perform this test, we first need to specify an alternative model that represents the updated DAG with the additional pathway:</p>
+<div class="sourceCode" id="cb557"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">m2</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
 <span><span class="st">  mass_herbiv ~ mass_plant + cv_h_plant</span></span>
 <span><span class="st">  mass_pred ~ mass_herbiv + cv_h_plant</span></span>
 <span><span class="st">'</span></span>
 <span></span>
-<span><span class="op">(</span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu">sem</span><span class="op">(</span>model <span class="op">=</span> <span class="va">m</span>,</span>
-<span>           data <span class="op">=</span> <span class="va">df_fw</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">(</span><span class="va">fit2</span> <span class="op">&lt;-</span> <span class="fu">sem</span><span class="op">(</span><span class="va">m2</span>,</span>
+<span>             data <span class="op">=</span> <span class="va">df_fw</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## lavaan 0.6-12 ended normally after 1 iterations
 ## 
 ##   Estimator                                         ML
@@ -143,20 +266,32 @@ It is designed for cases where all variables of interest are directly measured, 
 ## 
 ## Model Test User Model:
 ##                                                       
-##   Test statistic                                 0.147
+##   Test statistic                                 0.398
 ##   Degrees of freedom                                 1
-##   P-value (Chi-square)                           0.701</code></pre>
+##   P-value (Chi-square)                           0.528</code></pre>
+<p>We can use anova() function for the comparison.</p>
+<div class="sourceCode" id="cb559"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">fit1</span>, <span class="va">fit2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Chi-Squared Difference Test
+## 
+##      Df    AIC    BIC  Chisq Chisq diff Df diff Pr(&gt;Chisq)
+## fit2  1 99.826 115.46 0.3983                              
+## fit1  2 98.894 111.92 1.4662     1.0678       1     0.3014</code></pre>
+<p>This output shows a chi-square difference test comparing two nested SEMs. Here, <code>fit2</code> is the more complex model with one fewer degree of freedom (<code>Df = 1</code>), and <code>fit1</code> is the simpler model (<code>Df = 2</code>). Adding the extra path reduces the chi-square value from 1.4662 to 0.3983, giving a chi-square difference of 1.0678 with 1 degree of freedom.</p>
+<p>The associated p-value (0.3014) is not significant, indicating that the more complex model does not provide a meaningful improvement in fit. Consistent with this result, information criteria (AIC and BIC) are slightly lower for <code>fit1</code>, supporting the conclusion that the simpler, more parsimonious model is preferred.</p>
+</div>
 </div>
 <div id="structural-equation-modeling-1" class="section level2" number="21.2">
 <h2>
 <span class="header-section-number">21.2</span> Structural Equation Modeling<a class="anchor" aria-label="anchor" href="#structural-equation-modeling-1"><i class="fas fa-link"></i></a>
 </h2>
-<div id="latent-variable" class="section level3" number="21.2.1">
-<h3>
-<span class="header-section-number">21.2.1</span> Latent variable<a class="anchor" aria-label="anchor" href="#latent-variable"><i class="fas fa-link"></i></a>
-</h3>
-
+<p>To be added</p>
 </div>
+<div id="laboratory-14" class="section level2" number="21.3">
+<h2>
+<span class="header-section-number">21.3</span> Laboratory<a class="anchor" aria-label="anchor" href="#laboratory-14"><i class="fas fa-link"></i></a>
+</h2>
+
 </div>
 </div>
 
@@ -169,10 +304,16 @@ It is designed for cases where all variables of interest are directly measured, 
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#structural-equation-modeling"><span class="header-section-number">21</span> Structural Equation Modeling</a></li>
-<li><a class="nav-link" href="#path-analysis"><span class="header-section-number">21.1</span> Path analysis</a></li>
 <li>
-<a class="nav-link" href="#structural-equation-modeling-1"><span class="header-section-number">21.2</span> Structural Equation Modeling</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#latent-variable"><span class="header-section-number">21.2.1</span> Latent variable</a></li></ul>
+<a class="nav-link" href="#path-analysis"><span class="header-section-number">21.1</span> Path analysis</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#directed-acyclic-graph"><span class="header-section-number">21.1.1</span> Directed Acyclic Graph</a></li>
+<li><a class="nav-link" href="#develop-a-hypothesis"><span class="header-section-number">21.1.2</span> Develop a hypothesis</a></li>
+<li><a class="nav-link" href="#implementation"><span class="header-section-number">21.1.3</span> Implementation</a></li>
+<li><a class="nav-link" href="#model-comparison-1"><span class="header-section-number">21.1.4</span> Model comparison</a></li>
+</ul>
 </li>
+<li><a class="nav-link" href="#structural-equation-modeling-1"><span class="header-section-number">21.2</span> Structural Equation Modeling</a></li>
+<li><a class="nav-link" href="#laboratory-14"><span class="header-section-number">21.3</span> Laboratory</a></li>
 </ul>
 
       <div class="book-extra">

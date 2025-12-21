@@ -21,25 +21,29 @@ pacman::p_load(tidyverse,
 
 ## Path analysis
 
-Path analysis is a special case of structural equation modeling.
-It is designed for cases where all variables of interest are directly measured, and you are interested in direct and indirect effects between those observed variables.
+**Path analysis is a special case of SEM.** It is designed for cases where all variables of interest are directly measured, and you are interested in direct and indirect effects between those observed variables.
 
 Let's use the following data set, which involves plant, herbivore, and predator variables measured in 100 plots.
 
 ```{r}
+# Specify the URL of the raw CSV file on GitHub
 url <- "https://raw.githubusercontent.com/aterui/biostats/master/data_raw/data_foodweb.csv"
+
+# Read the CSV file into a tibble
 df_fw <- read_csv(url)
 ```
 
 This dataset contains measurements for each plot, including plant biomass (`mass_plant`), variation in plant height expressed as the coefficient of variation (`cv_h_plant`), herbivore biomass (`mass_herbiv`), and predator biomass (`mass_pred`), along with a plot identifier (`plot_id`).
 
+### Directed Acyclic Graph
+
 Given the bottom-up influences in this system, these variables may be sequentially connected, with plant biomass affecting herbivore biomass, which in turn affects predator biomass. At the same time, variation in plant height (`cv_h_plant`) may reflect shelter availability for herbivores, suggesting that this variable could also influence higher trophic levels.
 
 In such a system, we can start with a full network represented as a directed acyclic graph (DAG), which encodes the hypothesized causal relationships among variables. 
 
-```{r, echo=FALSE}
+```{r dag-full, echo=FALSE, fig.cap="Directed acyclic graph (DAG) representing the hypothesized causal structure among plant, herbivore, and predator variables. Nodes denote measured variables (plant mass, plant height, herbivore mass, and predator mass), and directed edges indicate assumed directional effects. Plant mass and plant height are modeled as exogenous variables influencing herbivore mass, which in turn influences predator mass; plant variables may also have direct effects on higher trophic levels."}
+source("code/library.R")
 
-library(igraph)
 # Define adjacency matrix
 m_net <- rbind(
   c(0, 0, 1, 1),
@@ -47,8 +51,7 @@ m_net <- rbind(
   c(0, 0, 0, 1),
   c(0, 0, 0, 0)
 )
-
-colnames(m_net) <- rownames(m_net) <- c("Plant mass", "CV Plant", "Hervb mass", "Predator mass")
+colnames(m_net) <- rownames(m_net) <- c("Plant mass", "Plant height", "Herbivore mass", "Predator mass")
 
 # Create igraph object
 g <- graph_from_adjacency_matrix(m_net, mode = "directed")
@@ -61,17 +64,22 @@ layout_mat <- matrix(c(0, 0,
                      ncol = 2, 
                      byrow = TRUE)
 
-# Plot - the arrow automatically stops before the target node
-plot(g, 
-     layout = layout_mat,
-     vertex.size = 40,  # Adjust this to control gap size
-     vertex.color = "lightblue",
-     vertex.label = V(g)$name,
-     vertex.label.color = "black",
-     vertex.label.cex = 0.8,
-     edge.arrow.size = 1.0,
-     edge.width = 2,
-     edge.color = "gray")
+# Plot with ggraph
+(dag_full <- 
+    ggraph(g, layout = layout_mat) +
+    geom_edge_link(arrow = arrow(length = unit(4, 'mm'), type = "closed"),
+                   end_cap = circle(10, 'mm'),
+                   edge_width = 1,
+                   edge_colour = "gray") +
+    geom_node_point(size = 20, 
+                    fill = "lightblue", 
+                    shape = 21, 
+                    stroke = NA) +
+    geom_node_text(aes(label = name), 
+                   size = 3.5) +
+    theme_void() +
+    xlim(-0.3, 1.3) +
+    ylim(-0.3, 2.3))
 ```
 
 In these networks, discerning two types of variables is particularly important: endogenous and exogenous variables.
@@ -80,27 +88,165 @@ In these networks, discerning two types of variables is particularly important: 
 
 **Exogenous variables** are determined outside the system and are not influenced by other variables in the network; they only have outgoing arrows. For instance, plant biomass and variation in plant height can be treated as exogenous, as they drive changes in higher trophic levels without being influenced by them.
 
+What makes this network a DAG is **the absence of loops**: all arrows flow from lower to higher trophic levels, with no feedback to lower levels. This excludes potential influences of higher trophic levels on lower ones (i.e., feedback loops). However, such cyclic relationships cannot be incorporated within the standard SEM framework, which is one of its major limitations.
 
-```{r}
+### Develop a hypothesis
+
+The example above represents a full DAG, which serves as a reasonable starting point. 
+
+However, some links may not be biologically meaningful—for instance, while it is reasonable to assume that herbivore biomass is influenced by plant attributes, these variables are likely less important for predators.
+
+Visualizing the network helps identify which links are potentially relevant among these variables.
+
+```{r sem-pair-plot}
 df_fw %>% 
-  select(-plot_id) %>% 
-  ggpairs(
-    progress = FALSE
-  )
+  select(-plot_id) %>%        # remove plot_id column for plotting
+  ggpairs(                    # create pairwise scatterplots and correlations
+    progress = FALSE          # suppress progress messages
+  ) +
+  theme_bw()
 ```
 
+Plant variables are moderately correlated with herbivore biomass, not with predator biomass. These raw observations can guide hypothesis development and provide a rationale for omitting direct plant-to-predator paths from the DAG.
 
+```{r dag-2, echo=FALSE, fig.cap="Simplified directed acyclic graph (DAG) representing the hypothesized causal relationships among plant, herbivore, and predator traits used in the focal analysis. Compared to the full DAG, this hypothesis-driven DAG retains only the direct pathways of primary interest, omitting direct links from plant variables to predator mass."}
+source("code/library.R")
 
-```{r}
-m <- '
+# Define adjacency matrix
+m_net[1, 4] <- m_net[2, 4] <- 0
+
+# Create igraph object
+g <- graph_from_adjacency_matrix(m_net, mode = "directed")
+
+# Plot with ggraph
+(dag_hypo <- 
+    ggraph(g, layout = layout_mat) +
+    geom_edge_link(arrow = arrow(length = unit(4, 'mm'), type = "closed"),
+                   end_cap = circle(10, 'mm'),
+                   edge_width = 1,
+                   edge_colour = "gray") +
+    geom_node_point(size = 20, 
+                    fill = "lightblue", 
+                    shape = 21, 
+                    stroke = NA) +
+    geom_node_text(aes(label = name), 
+                   size = 3.5) +
+    theme_void() +
+    xlim(-0.3, 1.3) +
+    ylim(-0.3, 2.3))
+```
+
+### Implementation
+
+A variety of R packages can be used to implement SEM, but here we will focus on lavaan, one of the most widely used packages for this purpose. A full description of its functionality is available on the lavaan website, but we will cover the basics here.
+
+The key syntax elements are `~` and `~~`:
+
+- Single tilde `~` is used to specify a regression-like relationship between variables.
+
+- Double tilde `~~` represents the covariance between variables’ residuals.
+
+Let’s start with a simple example, omitting the use of ~~ for now. We first define a model that corresponds to our hypothetical DAG.
+
+```{r sem-model1}
+# Specify the SEM model using lavaan syntax
+# Note: the variable names must exactly match the column names in the dataframe (df_fw)
+m1 <- '
+  # regression of herbivore biomass on plant variables
+  mass_herbiv ~ mass_plant + cv_h_plant
+  # regression of predator biomass on herbivore biomass
+  mass_pred ~ mass_herbiv
+'
+```
+
+The model description `m1` should be passed to the `sem()` function from the `lavaan` package, which performs the analysis using the data you provide.
+
+```{r sem-fit1}
+(fit1 <- sem(model = m1,
+             data = df_fw))
+```
+
+The most important output from the `sem()` function is the `Model Test User Model` section, which reports the chi-square test statistic, degrees of freedom, and p-value.
+
+The test statistic (1.466) measures the discrepancy between the SEM model-implied covariance matrix and the observed covariance matrix, while the degrees of freedom provide a sense of how simple the model is relative to the full DAG—that is, how many potential links from the full DAG are omitted. In other words, the test essentially asks: **"Does the model adequately reproduce the observed relationships in the data?"**
+
+Unlike ordinary hypothesis tests, the p-value here tests the null hypothesis that the model fits the data perfectly. A high p-value (typically > 0.05) indicates no evidence of misfit. In this case, the p-value of 0.480 suggests that the model provides a good fit to the data.
+
+We can obtain estimates for each path in the model, which quantify the strength of the relationships among variables:
+
+```{r sem-summary1}
+summary(fit1, standardize = TRUE)
+```
+
+The `Regressions:` section is the most informative. The Estimate column reports the raw effect sizes, but these values depend on the units and variability of the predictor variables and therefore are not directly comparable across predictors. 
+
+By setting `standardize = TRUE`, however, `lavaan` also reports `Std.all`, which gives standardized coefficients (i.e., effects on a common scale). These standardized values allow direct comparison of the relative strength of different paths. 
+
+In this example, the strongest path is from `mass_herbiv` to `mass_pred` (0.482), followed by `mass_plant` to `mass_herbiv` (0.327), and `cv_h_plant` to `mass_herbiv` (0.208).
+
+### Model comparison
+
+Our model omits all direct plant-to-predator pathways. However, variation in plant height may still influence predators indirectly by altering physical habitat structure. This possibility is represented in the following DAGs.
+
+```{r dag-3, echo=FALSE, fig.cap="Comparison of two alternative directed acyclic graphs (DAGs) representing competing causal hypotheses among plant, herbivore, and predator variables. Panel A shows the hypothesized DAG, in which predator mass is influenced only indirectly through herbivore mass. Panel B shows an alternative DAG that includes an additional direct pathway from plant height to predator mass, representing a plausible but untested mechanism (e.g., habitat structure or plant-mediated effects)."}
+source("code/library.R")
+
+# Define adjacency matrix
+m_net[2, 4] <- 1
+
+# Create igraph object
+g <- graph_from_adjacency_matrix(m_net, mode = "directed")
+
+# Plot with ggraph
+dag_alt <- 
+    ggraph(g, layout = layout_mat) +
+    geom_edge_link(arrow = arrow(length = unit(4, 'mm'), type = "closed"),
+                   end_cap = circle(10, 'mm'),
+                   edge_width = 1,
+                   edge_colour = "gray") +
+    geom_node_point(size = 20, 
+                    fill = "lightblue", 
+                    shape = 21, 
+                    stroke = NA) +
+    geom_node_text(aes(label = name), 
+                   size = 3.5) +
+    theme_void() +
+    xlim(-0.3, 1.3) +
+    ylim(-0.3, 2.3)
+
+dag_hypo + dag_alt + plot_annotation(tag_levels = "A")
+```
+
+How do we test this alternative hypothesis, and determine whether this new path is worth including? 
+
+We can address this by comparing model performance using a likelihood ratio test (LRT), which uses the difference in chi-square values between two models as the test statistic. The rationale is that the simpler model is a special case of the more complex model (i.e., the models are nested), so any improvement in fit can be attributed to the additional path.
+
+If adding the new path substantially reduces the chi-square value relative to the increase in model complexity (degrees of freedom), this suggests that the path explains meaningful structure in the data and is worth including.
+
+To perform this test, we first need to specify an alternative model that represents the updated DAG with the additional pathway:
+
+```{r sem-model2}
+m2 <- '
   mass_herbiv ~ mass_plant + cv_h_plant
   mass_pred ~ mass_herbiv + cv_h_plant
 '
 
-(fit <- sem(model = m,
-           data = df_fw))
+(fit2 <- sem(m2,
+             data = df_fw))
 ```
+
+We can use anova() function for the comparison.
+
+```{r sem-comp}
+anova(fit1, fit2)
+```
+
+This output shows a chi-square difference test comparing two nested SEMs. Here, `fit2` is the more complex model with one fewer degree of freedom (`Df = 1`), and `fit1` is the simpler model (`Df = 2`). Adding the extra path reduces the chi-square value from 1.4662 to 0.3983, giving a chi-square difference of 1.0678 with 1 degree of freedom. 
+
+The associated p-value (0.3014) is not significant, indicating that the more complex model does not provide a meaningful improvement in fit. Consistent with this result, information criteria (AIC and BIC) are slightly lower for `fit1`, supporting the conclusion that the simpler, more parsimonious model is preferred.
 
 ## Structural Equation Modeling
 
-### Latent variable
+To be added
+
+## Laboratory

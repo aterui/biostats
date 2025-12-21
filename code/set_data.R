@@ -227,11 +227,12 @@ write_csv(df_wt_raw,
 
 # path analysis example ---------------------------------------------------
 
+set.seed(123)
 v_mu <- c(1000, 5, 100, 10)
 v_s0 <- v_mu * 0.01
 m_vcov <- outer(v_s0, v_s0) * 0.5
 diag(m_vcov) <- v_s0^2
-m_vcov[2, 4] <- m_vcov[4, 2] <- 0.005 * (-1/3)
+m_vcov[2, 4] <- m_vcov[4, 2] <- 0.005 * 0.001
 
 df_mass <- MASS::mvrnorm(n = 100, mu = v_mu, Sigma = m_vcov) %>% 
   as_tibble() %>% 

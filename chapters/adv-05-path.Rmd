@@ -22,35 +22,15 @@ pacman::p_load(tidyverse,
 ## Path analysis
 
 ```{r}
-data("mite")
-data("mite.env")
+url <- "https://raw.githubusercontent.com/aterui/biostats/master/data_raw/data_foodweb.csv"
+df_fw <- read_csv(url)
 ```
 
 ```{r}
-v_r <- apply(mite,
-              MARGIN = 1,
-              FUN = function(x) sum(x > 0))
-
-df_mite <- mite.env %>% 
-  as_tibble() %>% 
-  janitor::clean_names() %>% 
-  mutate(across(.cols = where(is.factor),
-                .fns = str_to_lower),
-         shrub = case_when(shrub == "none" ~ 0,
-                           shrub == "few" ~ 1,
-                           shrub == "many" ~ 2),
-         richness = v_r,
-         log_rich = log(richness))
-```
-
-```{r}
-df_mite %>% 
+df_fw %>% 
+  select(-plot_id) %>% 
   ggpairs(
     progress = FALSE,
-    columns = c("shrub",
-                "subs_dens",
-                "watr_cont",
-                "richness")
   )
 ```
 

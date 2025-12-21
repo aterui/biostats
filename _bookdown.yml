@@ -21,6 +21,7 @@ rmd_files: ["index.Rmd",
             # "chapters/adv-02-gam.Rmd",
             # "chapters/adv-03-uord.Rmd",
             # "chapters/adv-04-cord.Rmd",
+            # "chapters/adv-05-sem.Rmd",
             "chapters/zzz-appendix.Rmd"]
 output_dir: "docs"
             

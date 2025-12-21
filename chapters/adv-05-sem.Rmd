@@ -1,0 +1,106 @@
+# Structural Equation Modeling
+
+In path analysis and structural equation modeling (SEM), we are interested in understanding the relationships among multiple variables simultaneously. Unlike simple regression, which models a single response as a function of one or more predictors, SEM allows researchers to specify networks of mediating pathways, providing a framework to quantify both direct and indirect contributions.
+
+Learning Objectives:
+
+-   Understand the conceptual difference between univariate regression, path analysis, and SEM.
+
+-   Specify and fit path models using ecological data, identifying direct and indirect effects.
+
+-   Interpret model outputs, including path coefficients, residual variances, and fit statistics.
+
+-   Quantify and test the significance of hypothesized causal relationships in multivariate ecological systems.
+
+```{r}
+pacman::p_load(tidyverse,
+               GGally,
+               vegan,
+               lavaan)
+```
+
+## Path analysis
+
+Path analysis is a special case of structural equation modeling.
+It is designed for cases where all variables of interest are directly measured, and you are interested in direct and indirect effects between those observed variables.
+
+Let's use the following data set, which involves plant, herbivore, and predator variables measured in 100 plots.
+
+```{r}
+url <- "https://raw.githubusercontent.com/aterui/biostats/master/data_raw/data_foodweb.csv"
+df_fw <- read_csv(url)
+```
+
+This dataset contains measurements for each plot, including plant biomass (`mass_plant`), variation in plant height expressed as the coefficient of variation (`cv_h_plant`), herbivore biomass (`mass_herbiv`), and predator biomass (`mass_pred`), along with a plot identifier (`plot_id`).
+
+Given the bottom-up influences in this system, these variables may be sequentially connected, with plant biomass affecting herbivore biomass, which in turn affects predator biomass. At the same time, variation in plant height (`cv_h_plant`) may reflect shelter availability for herbivores, suggesting that this variable could also influence higher trophic levels.
+
+In such a system, we can start with a full network represented as a directed acyclic graph (DAG), which encodes the hypothesized causal relationships among variables. 
+
+```{r, echo=FALSE}
+
+library(igraph)
+# Define adjacency matrix
+m_net <- rbind(
+  c(0, 0, 1, 1),
+  c(0, 0, 1, 1),
+  c(0, 0, 0, 1),
+  c(0, 0, 0, 0)
+)
+
+colnames(m_net) <- rownames(m_net) <- c("Plant mass", "CV Plant", "Hervb mass", "Predator mass")
+
+# Create igraph object
+g <- graph_from_adjacency_matrix(m_net, mode = "directed")
+
+# Coordinates
+layout_mat <- matrix(c(0, 0, 
+                       1, 0, 
+                       0.5, 1, 
+                       0.5, 2), 
+                     ncol = 2, 
+                     byrow = TRUE)
+
+# Plot - the arrow automatically stops before the target node
+plot(g, 
+     layout = layout_mat,
+     vertex.size = 40,  # Adjust this to control gap size
+     vertex.color = "lightblue",
+     vertex.label = V(g)$name,
+     vertex.label.color = "black",
+     vertex.label.cex = 0.8,
+     edge.arrow.size = 1.0,
+     edge.width = 2,
+     edge.color = "gray")
+```
+
+In these networks, discerning two types of variables is particularly important: endogenous and exogenous variables.
+
+**Endogenous variables** are those whose values are influenced by other variables in the system; they have one or more incoming arrows in the DAG. In our example, herbivore and predator biomass are endogenous because they depend on plant biomass and other factors.
+
+**Exogenous variables** are determined outside the system and are not influenced by other variables in the network; they only have outgoing arrows. For instance, plant biomass and variation in plant height can be treated as exogenous, as they drive changes in higher trophic levels without being influenced by them.
+
+
+```{r}
+df_fw %>% 
+  select(-plot_id) %>% 
+  ggpairs(
+    progress = FALSE
+  )
+```
+
+
+
+```{r}
+m <- '
+  mass_herbiv ~ mass_plant + cv_h_plant
+  mass_pred ~ mass_herbiv + cv_h_plant
+'
+
+(fit <- sem(model = m,
+           data = df_fw))
+```
+
+## Structural Equation Modeling
+
+### Latent variable

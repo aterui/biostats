@@ -51,8 +51,7 @@ write_csv(df_algae, "data_raw/data_algae.csv")
 
 # garden plant density ----------------------------------------------------
 
-set.seed(1)
-
+set.seed(123)
 garden_size <- 15
 n_plot <- 225
 
@@ -104,9 +103,10 @@ write_csv(df_garden_count, "data_raw/data_garden_count.csv")
 
 # fertilization rate ------------------------------------------------------
 
+set.seed(123)
 n_sample <- 100
 b0 <- -8
-b1 <- 0.35
+b1 <- 0.6
 x <- rpois(n = n_sample, lambda = 10 + rnorm(n_sample, 0, 3))
 p <- boot::inv.logit(model.matrix(~x) %*% c(b0, b1))
 y <- rbinom(n = n_sample, size = 30, prob = p)

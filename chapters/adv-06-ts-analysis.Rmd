@@ -5,21 +5,207 @@ pacman::p_load(tidyverse,
                glmmTMB)
 ```
 
-## Demon of Time-Series
+## Pitfall of Time-Series
+
+### Time-series anormalies
+
+Let’s explore a simple time series dataset, showing air-quality anomalies measured over 100 years.
 
 ```{r}
+url <- "https://raw.githubusercontent.com/aterui/biostats/master/data_raw/data_ts_anormaly.csv"
+(df_ts <- read_csv(url))
 ```
 
+The plot of this dataset shows that air-quality anomalies tend to increase over time.
 
+```{r, fig.cap="Time-series of annual anomalies. Points represent observed values for each year, and lines connect consecutive observations to highlight temporal trends."}
+# Plot time-series anomalies
+df_ts %>% 
+  ggplot(aes(x = year,          # Map 'year' to the x-axis
+             y = anormaly)) +  # Map 'anormaly' to the y-axis
+  geom_line() +                  # Add a line connecting the points
+  geom_point() +                 # Add points at each observation
+  theme_bw() +                   # Use a clean black-and-white theme
+  labs(
+    x = "Year",                     # Label x-axis
+    y = "Anomaly"                   # Label y-axis
+  )
+```
+
+Providing statistical evidence appears straightforward — we can simply regress anomalies on time.
+
+```{r}
+# Fit a simple linear model: anomaly as a function of year
+m_lm <- lm(anormaly ~ year, data = df_ts)
+
+# Show the model summary
+summary(m_lm)
+```
+
+There is a strong, positive effect of observation year, with a slope estimate of 0.04, indicating that anomalies increase by 0.04 per year on average.
+
+```{r, fig.cap="Time-series of anomalies over years. Dotted lines connect consecutive observations, semi-transparent points show individual measurements, and the solid line represents the fitted linear trend from a linear regression model."}
+
+df_ts %>% 
+  ggplot(aes(x = year, 
+             y = anormaly)) +  # Set up the plot: x = year, y = anomaly
+  geom_line(linetype = "dotted") +     # Draw a dotted line connecting the points
+  geom_point(alpha = 0.25) +           # Add points with transparency (alpha = 0.25)
+  geom_abline(intercept = coef(m_lm)[1],  # Add regression line from linear model
+              slope = coef(m_lm)[2]) +
+  theme_bw()                             # Use a clean black-and-white theme
+```
+
+The regression line may appear to fit the data well, with no obvious issues. However, if you think that, **you have already fallen into a common pitfall of time-series analysis** — this type of analysis has many potential problems.
+
+### Temporal autocorrelation
+
+While the data appear to show an increasing trend, this dataset was generated from a simulation that assumes **NO** true temporal increase — it was produced through a process known as a **random walk**.
+
+$$
+y_t = y_{t-1} + \varepsilon_{t}\\
+\varepsilon_t \sim \text{Normal}(0, \sigma^2)
+$$
+
+This system is unique because each observation depends on its immediate past: the previous value ($y_{t-1}$) plus noise ($\varepsilon_t$) produces the current value ($y_t$).
+
+The behavior of a random walk is highly stochastic, producing very different patterns in each simulation run. You can observe this by running the following code, which generated the dataset shown above.
+
+```{r, eval=FALSE}
+# Initialize a vector to store the time series (100 time steps)
+y <- rep(NA, 100)
+
+# Generate random noise for each time step
+eps <- rnorm(n = length(y))
+
+# Set the initial condition of the time series
+y[1] <- 0
+
+# Generate a random walk:
+# each value equals the previous value plus random noise
+for (t in 1:(length(y) - 1)) {
+  y[t + 1] <- y[t] + eps[t]
+}
+
+# Combine the time series with a corresponding year variable
+df_y <- tibble(
+  anormaly = y,
+  year = 1925 + seq_len(length(y))
+)
+
+# Plot time-series anomalies (not shown)
+df_y %>% 
+  ggplot(aes(x = year,
+             y = anormaly)) +
+  geom_line() +              
+  geom_point() +             
+  theme_bw() +               
+  labs(
+    x = "Year",              
+    y = "Anomaly"            
+  )
+```
+
+This is expected because we are measuring the same object over time, so the observations are not independent. This leads to **temporal autocorrelation**, a feature that violates a fundamental assumption of many statistical methods — the independence of data points. Temporal autocorrelation can be assessed using the `acf()` function in R: 
+
+```{r, fig.cap="Autocorrelation function plot. The x-axis represents the lag, or the time difference between observations (e.g., lag 1 is the correlation between consecutive observations, lag 2 is two steps apart, etc.), while the y-axis shows the autocorrelation coefficient, ranging from -1 to 1, indicating how strongly observations at that lag are correlated."}
+
+## Data must be ordered from the oldest observation to the most recent
+df_ts <- arrange(df_ts, year)
+acf(df_ts$anormaly)
+```
+
+In an ACF (autocorrelation function) plot, the x-axis represents the lag, or the time difference between observations (e.g., lag 1 is the correlation between consecutive observations, lag 2 is two steps apart, etc.), while the y-axis shows the autocorrelation coefficient, ranging from -1 to 1, indicating how strongly observations at that lag are correlated. 
+
+Positive values mean observations tend to move in the same direction as previous ones, negative values indicate opposite movement, and values near zero suggest little or no correlation. The dashed lines represent approximate confidence bounds, so spikes outside these lines indicate statistically significant correlations at that lag.
+
+Treating temporally correlated measurements as independent can seriously compromise statistical inference and lead to unsupported conclusions.
+
+Below, we explore how to accommodate the challenging nature of time-series data using basic models, and how these models can be extended to assess the influence of external factors that also change over time in biological data analysis.
 
 ## Basic Models
 
+As a starting point, we will focus on AR, MA, and ARMA models, all of which assume a stationary process.
+
+Stationarity is a fundamental concept in time-series analysis: a stationary process has a constant mean, variance, and autocorrelation structure over time. 
+
+We will use Nile built-in data,
+
+```{r}
+df_huron <- tibble(
+  year = time(LakeHuron),                # Extracts the time component (years) from the LakeHuron time series object
+  water_level = as.numeric(LakeHuron)    # Converts the LakeHuron water levels to numeric values (if they were stored as a ts object)
+) %>% 
+  arrange(year)
+
+acf(df_huron$water_level)
+```
+
+
 ### AR Model
+
+An autoregressive (AR) model describes a time series in which the current value depends on one or more of its past values plus random noise. In an AR(p) model, the present observation is a linear combination of the previous p observations. 
+
+```{r}
+
+arima(
+  df_huron$water_level,       # The time series data we want to model
+  order = c(1, 0, 0)          # ARIMA model orders: c(p, d, q)
+)
+
+```
+
+The notation `c(1, 0, 0)` represents three numbers that define a time series model. The first number 1 indicates that the current value of the series depends on one previous observation, so it “remembers” the last point. The second number 0 means that no differencing is applied, so the series is used in its original form without removing trends. The third number 0 shows that no past errors are included in the model. Together, this describes a simple model where each value is predicted mainly from the immediately preceding value.
+
+AR models capture temporal persistence and are stationary when the autoregressive parameters are less than one in magnitude.
+
+$$
+y_t = \mu + \sum_{i=1}^p \phi_i y_{t - i} + \varepsilon_t
+$$
+where $\mu$ is the constant term, $\phi_i$ is the autoregressive parameter, and $\varepsilon_t$ is the (white) noise.
 
 ### MA Model
 
+A moving average (MA) model represents a time series as a function of past random shocks rather than past observations. In an MA(q) model, the current value depends on the current and previous q error terms. 
+
+```{r}
+
+arima(
+  df_huron$water_level,       # The time series data we want to model
+  order = c(0, 0, 1)          # ARIMA model orders: c(p, d, q)
+)
+
+```
+
+MA models are useful for capturing short-term dependencies and sudden shocks in the data and are always stationary.
+
+$$
+y_t = \mu + \sum_{i=1}^q \theta_i \varepsilon_{t-i} + \varepsilon_t
+$$
+
+where $\mu$ is the constant term, $\theta_i$ is the moving-average parameter, and $\varepsilon_t$ is the (white) noise.
+
 ### ARMA Model
+
+An ARMA model combines both autoregressive and moving-average components, allowing the current value to depend on both past observations and past random shocks.
+
+ARMA(p,q) models are flexible and efficient for modeling stationary time series with complex autocorrelation structures. They form the foundation for more advanced models such as ARIMA.
+
+$$
+y_t = \mu + \sum_{i=1}^p\phi_i y_{t-i} + \sum_{i=1}^q \theta_i\varepsilon_{t-i} + \varepsilon_t
+$$
+
+```{r}
+
+arima(
+  df_huron$water_level,       # The time series data we want to model
+  order = c(1, 0, 1)          # ARIMA model orders: c(p, d, q)
+)
+
+```
 
 
 ## Applied Models
 
+### GALMA framework
+### GALMA framework

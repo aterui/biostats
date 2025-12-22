@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 22 Time-series Analaysis | BIOSTATS</title>
+<meta name="author" content="Akira Terui">
+<meta name="description" content="pacman::p_load(tidyverse,        glmmTMB)  22.1 Demon of Time-Series  22.1.1 Time-series anormalies Let’s explore a simple time series dataset, showing air-quality anomalies measured over 100...">
+<meta name="generator" content="bookdown 0.43 with bs4_book()">
+<meta property="og:title" content="Chapter 22 Time-series Analaysis | BIOSTATS">
+<meta property="og:type" content="book">
+<meta property="og:description" content="pacman::p_load(tidyverse,        glmmTMB)  22.1 Demon of Time-Series  22.1.1 Time-series anormalies Let’s explore a simple time series dataset, showing air-quality anomalies measured over 100...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 22 Time-series Analaysis | BIOSTATS">
+<meta name="twitter:description" content="pacman::p_load(tidyverse,        glmmTMB)  22.1 Demon of Time-Series  22.1.1 Time-series anormalies Let’s explore a simple time series dataset, showing air-quality anomalies measured over 100...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QZSNHVQQNV"></script><script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-QZSNHVQQNV');
+    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">BIOSTATS</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Introduction</a></li>
+<li class="book-part">Getting Started</li>
+<li><a class="" href="what-is-r-and-r-studio.html"><span class="header-section-number">1</span> What is R and R studio?</a></li>
+<li><a class="" href="installing-r-and-rstudio.html"><span class="header-section-number">2</span> Installing R and RStudio</a></li>
+<li><a class="" href="r-project.html"><span class="header-section-number">3</span> R Project</a></li>
+<li class="book-part">R Basics</li>
+<li><a class="" href="data-structure.html"><span class="header-section-number">4</span> Data Structure</a></li>
+<li><a class="" href="data-manipulation.html"><span class="header-section-number">5</span> Data Manipulation</a></li>
+<li><a class="" href="visualization.html"><span class="header-section-number">6</span> Visualization</a></li>
+<li class="book-part">Basic Statistics</li>
+<li><a class="" href="descriptive-statistics.html"><span class="header-section-number">7</span> Descriptive Statistics</a></li>
+<li><a class="" href="sampling.html"><span class="header-section-number">8</span> Sampling</a></li>
+<li><a class="" href="probabilistic-view.html"><span class="header-section-number">9</span> Probabilistic View</a></li>
+<li><a class="" href="two-group-comparison.html"><span class="header-section-number">10</span> Two-Group Comparison</a></li>
+<li><a class="" href="multiple-group-comparison.html"><span class="header-section-number">11</span> Multiple-Group Comparison</a></li>
+<li><a class="" href="regression.html"><span class="header-section-number">12</span> Regression</a></li>
+<li><a class="" href="linear-model.html"><span class="header-section-number">13</span> Linear Model</a></li>
+<li><a class="" href="generalized-linear-model.html"><span class="header-section-number">14</span> Generalized Linear Model</a></li>
+<li><a class="" href="likelihood.html"><span class="header-section-number">15</span> Likelihood</a></li>
+<li><a class="" href="model-comparison.html"><span class="header-section-number">16</span> Model Comparison</a></li>
+<li class="book-part">Applied Statistics</li>
+<li><a class="" href="generalized-linear-mixed-effect-model.html"><span class="header-section-number">17</span> Generalized Linear Mixed Effect Model</a></li>
+<li><a class="" href="generalized-additive-model.html"><span class="header-section-number">18</span> Generalized Additive Model</a></li>
+<li><a class="" href="unconstrained-ordination.html"><span class="header-section-number">19</span> Unconstrained Ordination</a></li>
+<li><a class="" href="constrained-ordination.html"><span class="header-section-number">20</span> Constrained Ordination</a></li>
+<li><a class="" href="structural-equation-modeling.html"><span class="header-section-number">21</span> Structural Equation Modeling</a></li>
+<li><a class="active" href="time-series-analaysis.html"><span class="header-section-number">22</span> Time-series Analaysis</a></li>
+<li class="book-part">Appendix</li>
+<li><a class="" href="basic-terminology.html"><span class="header-section-number">23</span> Basic Terminology</a></li>
+<li><a class="" href="git-github.html">Git &amp; GitHub</a></li>
+<li><a class="" href="base-plot.html">Base Plot</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/aterui/biostats">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="time-series-analaysis" class="section level1" number="22">
+<h1>
+<span class="header-section-number">22</span> Time-series Analaysis<a class="anchor" aria-label="anchor" href="#time-series-analaysis"><i class="fas fa-link"></i></a>
+</h1>
+<div class="sourceCode" id="cb569"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="va">tidyverse</span>,</span>
+<span>               <span class="va">glmmTMB</span><span class="op">)</span></span></code></pre></div>
+<div id="demon-of-time-series" class="section level2" number="22.1">
+<h2>
+<span class="header-section-number">22.1</span> Demon of Time-Series<a class="anchor" aria-label="anchor" href="#demon-of-time-series"><i class="fas fa-link"></i></a>
+</h2>
+<div id="time-series-anormalies" class="section level3" number="22.1.1">
+<h3>
+<span class="header-section-number">22.1.1</span> Time-series anormalies<a class="anchor" aria-label="anchor" href="#time-series-anormalies"><i class="fas fa-link"></i></a>
+</h3>
+<p>Let’s explore a simple time series dataset, showing air-quality anomalies measured over 100 years.</p>
+<div class="sourceCode" id="cb570"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/aterui/biostats/master/data_raw/data_ts_anormaly.csv"</span></span>
+<span><span class="op">(</span><span class="va">df_ts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 100 × 2
+##    anormaly  year
+##       &lt;dbl&gt; &lt;dbl&gt;
+##  1    0      1926
+##  2   -0.560  1927
+##  3   -0.791  1928
+##  4    0.768  1929
+##  5    0.839  1930
+##  6    0.968  1931
+##  7    2.68   1932
+##  8    3.14   1933
+##  9    1.88   1934
+## 10    1.19   1935
+## # ℹ 90 more rows</code></pre>
+<p>The plot of this dataset shows that air-quality anomalies tend to increase over time.</p>
+<div class="sourceCode" id="cb572"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Plot time-series anomalies</span></span>
+<span><span class="va">df_ts</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>,          <span class="co"># Map 'year' to the x-axis</span></span>
+<span>             y <span class="op">=</span> <span class="va">anormaly</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>  <span class="co"># Map 'anormaly' to the y-axis</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>                  <span class="co"># Add a line connecting the points</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>                 <span class="co"># Add points at each observation</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>                   <span class="co"># Use a clean black-and-white theme</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="st">"Year"</span>,                     <span class="co"># Label x-axis</span></span>
+<span>    y <span class="op">=</span> <span class="st">"Anomaly"</span>                   <span class="co"># Label y-axis</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-185"></span>
+<img src="biostats_files/figure-html/unnamed-chunk-185-1.png" alt="Time-series of annual anomalies. Points represent observed values for each year, and lines connect consecutive observations to highlight temporal trends." width="672"><p class="caption">
+Figure 22.1: Time-series of annual anomalies. Points represent observed values for each year, and lines connect consecutive observations to highlight temporal trends.
+</p>
+</div>
+<p>Providing statistical evidence appears straightforward — we can simply regress anomalies on time.</p>
+<div class="sourceCode" id="cb573"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Fit a simple linear model: anomaly as a function of year</span></span>
+<span><span class="va">m_lm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">anormaly</span> <span class="op">~</span> <span class="va">year</span>, data <span class="op">=</span> <span class="va">df_ts</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Show the model summary</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">m_lm</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = anormaly ~ year, data = df_ts)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.0830 -1.1333 -0.1559  1.2911  5.6330 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -90.770684  12.715802  -7.138 1.66e-10 ***
+## year          0.047154   0.006436   7.327 6.73e-11 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1.858 on 98 degrees of freedom
+## Multiple R-squared:  0.3539, Adjusted R-squared:  0.3473 
+## F-statistic: 53.68 on 1 and 98 DF,  p-value: 6.729e-11</code></pre>
+<p>There is a strong, positive effect of observation year, with a slope estimate of 0.04, indicating that anomalies increase by 0.04 per year on average.</p>
+<div class="sourceCode" id="cb575"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df_ts</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, </span>
+<span>             y <span class="op">=</span> <span class="va">anormaly</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>  <span class="co"># Set up the plot: x = year, y = anomaly</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>linetype <span class="op">=</span> <span class="st">"dotted"</span><span class="op">)</span> <span class="op">+</span>     <span class="co"># Draw a dotted line connecting the points</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span> <span class="op">+</span>           <span class="co"># Add points with transparency (alpha = 0.25)</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span><span class="op">(</span>intercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">m_lm</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,  <span class="co"># Add regression line from linear model</span></span>
+<span>              slope <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">m_lm</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span>                             <span class="co"># Use a clean black-and-white theme</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-187"></span>
+<img src="biostats_files/figure-html/unnamed-chunk-187-1.png" alt="Time-series of anomalies over years. Dotted lines connect consecutive observations, semi-transparent points show individual measurements, and the solid line represents the fitted linear trend from a linear regression model." width="672"><p class="caption">
+Figure 22.2: Time-series of anomalies over years. Dotted lines connect consecutive observations, semi-transparent points show individual measurements, and the solid line represents the fitted linear trend from a linear regression model.
+</p>
+</div>
+<p>The regression line may appear to fit the data well, with no obvious issues. However, if you think that, <strong>you have already fallen into a common pitfall of time-series analysis</strong> — this type of analysis has many potential problems.</p>
+</div>
+<div id="temporal-autocorrelation" class="section level3" number="22.1.2">
+<h3>
+<span class="header-section-number">22.1.2</span> Temporal autocorrelation<a class="anchor" aria-label="anchor" href="#temporal-autocorrelation"><i class="fas fa-link"></i></a>
+</h3>
+<p>While the data appear to show an increasing trend, this dataset was generated from a simulation that assumes <strong>NO</strong> true temporal increase — it was produced through a process known as a <strong>random walk</strong>.</p>
+<p><span class="math display">\[
+y_t = y_{t-1} + \varepsilon_{t}\\
+\varepsilon_t \sim \text{Normal}(0, \sigma^2)
+\]</span></p>
+<p>This system is unique because each observation depends on its immediate past: the previous value (<span class="math inline">\(y_{t-1}\)</span>) plus noise (<span class="math inline">\(\varepsilon_t\)</span>) produces the current value (<span class="math inline">\(y_t\)</span>).</p>
+<p>The behavior of a random walk is highly stochastic, producing very different patterns in each simulation run. You can observe this by running the following code, which generated the dataset shown above.</p>
+<div class="sourceCode" id="cb576"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Initialize a vector to store the time series (100 time steps)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">100</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Generate random noise for each time step</span></span>
+<span><span class="va">eps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set the initial condition of the time series</span></span>
+<span><span class="va">y</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span></span>
+<span><span class="co"># Generate a random walk:</span></span>
+<span><span class="co"># each value equals the previous value plus random noise</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">t</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">y</span><span class="op">[</span><span class="va">t</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">y</span><span class="op">[</span><span class="va">t</span><span class="op">]</span> <span class="op">+</span> <span class="va">eps</span><span class="op">[</span><span class="va">t</span><span class="op">]</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Combine the time series with a corresponding year variable</span></span>
+<span><span class="va">df_y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  anormaly <span class="op">=</span> <span class="va">y</span>,</span>
+<span>  year <span class="op">=</span> <span class="fl">1925</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plot time-series anomalies (not shown)</span></span>
+<span><span class="va">df_y</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>,</span>
+<span>             y <span class="op">=</span> <span class="va">anormaly</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>              </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>             </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>               </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="st">"Year"</span>,              </span>
+<span>    y <span class="op">=</span> <span class="st">"Anomaly"</span>            </span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<p>This is expected because we are measuring the same object over time, so the observations are not independent. This leads to <strong>temporal autocorrelation</strong>, a feature that violates a fundamental assumption of many statistical methods — the independence of data points. Temporal autocorrelation can be assessed using the <code><a href="https://rdrr.io/r/stats/acf.html">acf()</a></code> function in R:</p>
+<div class="sourceCode" id="cb577"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/acf.html">acf</a></span><span class="op">(</span><span class="va">df_ts</span><span class="op">$</span><span class="va">anormaly</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:unnamed-chunk-189"></span>
+<img src="biostats_files/figure-html/unnamed-chunk-189-1.png" alt="Autocorrelation function plot. The x-axis represents the lag, or the time difference between observations (e.g., lag 1 is the correlation between consecutive observations, lag 2 is two steps apart, etc.), while the y-axis shows the autocorrelation coefficient, ranging from -1 to 1, indicating how strongly observations at that lag are correlated." width="672"><p class="caption">
+Figure 22.3: Autocorrelation function plot. The x-axis represents the lag, or the time difference between observations (e.g., lag 1 is the correlation between consecutive observations, lag 2 is two steps apart, etc.), while the y-axis shows the autocorrelation coefficient, ranging from -1 to 1, indicating how strongly observations at that lag are correlated.
+</p>
+</div>
+<p>In an ACF (autocorrelation function) plot, the x-axis represents the lag, or the time difference between observations (e.g., lag 1 is the correlation between consecutive observations, lag 2 is two steps apart, etc.), while the y-axis shows the autocorrelation coefficient, ranging from -1 to 1, indicating how strongly observations at that lag are correlated.</p>
+<p>Positive values mean observations tend to move in the same direction as previous ones, negative values indicate opposite movement, and values near zero suggest little or no correlation. The dashed lines represent approximate confidence bounds, so spikes outside these lines indicate statistically significant correlations at that lag.</p>
+<p>Treating temporally correlated measurements as independent can seriously compromise statistical inference and lead to unsupported conclusions.</p>
+<p>Below, we explore how to accommodate the challenging nature of time-series data using basic models, and how these models can be extended to assess the influence of external factors that also change over time in biological data analysis.</p>
+</div>
+</div>
+<div id="basic-models" class="section level2" number="22.2">
+<h2>
+<span class="header-section-number">22.2</span> Basic Models<a class="anchor" aria-label="anchor" href="#basic-models"><i class="fas fa-link"></i></a>
+</h2>
+<div id="ar-model" class="section level3" number="22.2.1">
+<h3>
+<span class="header-section-number">22.2.1</span> AR Model<a class="anchor" aria-label="anchor" href="#ar-model"><i class="fas fa-link"></i></a>
+</h3>
+<p>An autoregressive (AR) model describes a time series in which the current value depends on one or more of its past values plus random noise. In an AR(p) model, the present observation is a linear combination of the previous p observations. AR models capture temporal persistence and are stationary when the autoregressive parameters are less than one in magnitude.</p>
+</div>
+<div id="ma-model" class="section level3" number="22.2.2">
+<h3>
+<span class="header-section-number">22.2.2</span> MA Model<a class="anchor" aria-label="anchor" href="#ma-model"><i class="fas fa-link"></i></a>
+</h3>
+<p>A moving average (MA) model represents a time series as a function of past random shocks rather than past observations. In an MA(q) model, the current value depends on the current and previous q error terms. MA models are useful for capturing short-term dependencies and sudden shocks in the data and are always stationary.</p>
+</div>
+<div id="arma-model" class="section level3" number="22.2.3">
+<h3>
+<span class="header-section-number">22.2.3</span> ARMA Model<a class="anchor" aria-label="anchor" href="#arma-model"><i class="fas fa-link"></i></a>
+</h3>
+<p>An ARMA model combines both autoregressive and moving-average components, allowing the current value to depend on both past observations and past random shocks. ARMA(p,q) models are flexible and efficient for modeling stationary time series with complex autocorrelation structures. They form the foundation for more advanced models such as ARIMA.</p>
+</div>
+</div>
+<div id="applied-models" class="section level2" number="22.3">
+<h2>
+<span class="header-section-number">22.3</span> Applied Models<a class="anchor" aria-label="anchor" href="#applied-models"><i class="fas fa-link"></i></a>
+</h2>
+
+</div>
+</div>
+
+
+
+  <div class="chapter-nav">
+<div class="prev"><a href="structural-equation-modeling.html"><span class="header-section-number">21</span> Structural Equation Modeling</a></div>
+<div class="next"><a href="basic-terminology.html"><span class="header-section-number">23</span> Basic Terminology</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#time-series-analaysis"><span class="header-section-number">22</span> Time-series Analaysis</a></li>
+<li>
+<a class="nav-link" href="#demon-of-time-series"><span class="header-section-number">22.1</span> Demon of Time-Series</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#time-series-anormalies"><span class="header-section-number">22.1.1</span> Time-series anormalies</a></li>
+<li><a class="nav-link" href="#temporal-autocorrelation"><span class="header-section-number">22.1.2</span> Temporal autocorrelation</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#basic-models"><span class="header-section-number">22.2</span> Basic Models</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#ar-model"><span class="header-section-number">22.2.1</span> AR Model</a></li>
+<li><a class="nav-link" href="#ma-model"><span class="header-section-number">22.2.2</span> MA Model</a></li>
+<li><a class="nav-link" href="#arma-model"><span class="header-section-number">22.2.3</span> ARMA Model</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#applied-models"><span class="header-section-number">22.3</span> Applied Models</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/aterui/biostats/blob/master/chapters/adv-06-ts-analysis.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/aterui/biostats/edit/master/chapters/adv-06-ts-analysis.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-12-22.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

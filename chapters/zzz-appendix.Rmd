@@ -1,5 +1,16 @@
 # (PART) Appendix {.unnumbered}
 
+# Basic Terminology
+
+Statistics uses specialized terminology, and its interpretation is often not intuitive. Below, I list key terms that may require clarification, along with helpful links for further explanation.
+
+- [Parametric vs. Non-parametric](https://statisticsbyjim.com/hypothesis-testing/nonparametric-parametric-tests/)
+- [Confidence interval](https://statisticsbyjim.com/hypothesis-testing/confidence-interval/)
+- [Correlation](https://statisticsbyjim.com/glossary/correlation-coefficient/)
+- [Covariance](https://statisticsbyjim.com/basics/covariance/)
+- [Covariance vs. Correlation](https://statisticsbyjim.com/basics/covariance-vs-correlation/)
+- [Covariance Matrix](https://statisticsbyjim.com/glossary/covariance-matrix/)
+
 # Git & GitHub {.unnumbered}
 
 In this section, I will explain how to integrate Git and GitHub into R Studio. While R Studio is already an excellent tool, it becomes even more powerful when combined with Git and GitHub. Git is a free and open-source distributed version control system that tracks changes in your code as you work on your project, ensuring you are aware of any modifications made to your script (and other) files. Tracking changes is crucial to avoid unintended errors in your code and helps prevent the creation of redundant files. Although Git is primarily a local system, it has an online counterpart called GitHub.

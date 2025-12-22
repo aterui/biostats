@@ -6,11 +6,9 @@ Learning Objectives:
 
 -   Understand the conceptual difference between univariate regression, path analysis, and SEM.
 
--   Specify and fit path models using ecological data, identifying direct and indirect effects.
+-   Specify and fit path/SEM models using biological data, identifying direct and indirect effects.
 
 -   Interpret model outputs, including path coefficients, residual variances, and fit statistics.
-
--   Quantify and test the significance of hypothesized causal relationships in multivariate ecological systems.
 
 ```{r}
 pacman::p_load(tidyverse,
@@ -39,9 +37,9 @@ This dataset contains measurements for each plot, including plant biomass (`mass
 
 Given the bottom-up influences in this system, these variables may be sequentially connected, with plant biomass affecting herbivore biomass, which in turn affects predator biomass. At the same time, variation in plant height (`cv_h_plant`) may reflect shelter availability for herbivores, suggesting that this variable could also influence higher trophic levels.
 
-In such a system, we can start with a full network represented as a directed acyclic graph (DAG), which encodes the hypothesized causal relationships among variables. 
+In such a system, we can start with a full network represented as a directed acyclic graph (DAG), which encodes the hypothesized causal relationships among variables.
 
-```{r dag-full, echo=FALSE, fig.cap="Directed acyclic graph (DAG) representing the hypothesized causal structure among plant, herbivore, and predator variables. Nodes denote measured variables (plant mass, plant height, herbivore mass, and predator mass), and directed edges indicate assumed directional effects. Plant mass and plant height are modeled as exogenous variables influencing herbivore mass, which in turn influences predator mass; plant variables may also have direct effects on higher trophic levels."}
+```{r dag-path-full-plot, echo=FALSE, fig.cap="Directed acyclic graph (DAG) representing the hypothesized causal structure among plant, herbivore, and predator variables. Nodes denote measured variables (plant mass, plant height, herbivore mass, and predator mass), and directed edges indicate assumed directional effects. Plant mass and plant height are modeled as exogenous variables influencing herbivore mass, which in turn influences predator mass; plant variables may also have direct effects on higher trophic levels."}
 source("code/library.R")
 
 # Define adjacency matrix
@@ -92,13 +90,13 @@ What makes this network a DAG is **the absence of loops**: all arrows flow from 
 
 ### Develop a hypothesis
 
-The example above represents a full DAG, which serves as a reasonable starting point. 
+The example above represents a full DAG, which serves as a reasonable starting point.
 
 However, some links may not be biologically meaningful—for instance, while it is reasonable to assume that herbivore biomass is influenced by plant attributes, these variables are likely less important for predators.
 
 Visualizing the network helps identify which links are potentially relevant among these variables.
 
-```{r sem-pair-plot}
+```{r path-pair-plot}
 df_fw %>% 
   select(-plot_id) %>%        # remove plot_id column for plotting
   ggpairs(                    # create pairwise scatterplots and correlations
@@ -109,7 +107,7 @@ df_fw %>%
 
 Plant variables are moderately correlated with herbivore biomass, not with predator biomass. These raw observations can guide hypothesis development and provide a rationale for omitting direct plant-to-predator paths from the DAG.
 
-```{r dag-2, echo=FALSE, fig.cap="Simplified directed acyclic graph (DAG) representing the hypothesized causal relationships among plant, herbivore, and predator traits used in the focal analysis. Compared to the full DAG, this hypothesis-driven DAG retains only the direct pathways of primary interest, omitting direct links from plant variables to predator mass."}
+```{r dag-path-sub1-plot, echo=FALSE, fig.cap="Simplified directed acyclic graph (DAG) representing the hypothesized causal relationships among plant, herbivore, and predator traits used in the focal analysis. Compared to the full DAG, this hypothesis-driven DAG retains only the direct pathways of primary interest, omitting direct links from plant variables to predator mass."}
 source("code/library.R")
 
 # Define adjacency matrix
@@ -138,17 +136,11 @@ g <- graph_from_adjacency_matrix(m_net, mode = "directed")
 
 ### Implementation
 
-A variety of R packages can be used to implement SEM, but here we will focus on lavaan, one of the most widely used packages for this purpose. A full description of its functionality is available on the lavaan website, but we will cover the basics here.
+A variety of R packages can be used to implement SEM, but here we will focus on `lavaan`, one of the most widely used packages for this purpose. A full description of its functionality is available on the [lavaan website](https://lavaan.ugent.be/), but we will cover the basics here.
 
-The key syntax elements are `~` and `~~`:
+The key syntax is `~`, which is used to specify a regression-like relationship between variables. Let’s start with a simple example. We first define a model that corresponds to our hypothetical DAG.
 
-- Single tilde `~` is used to specify a regression-like relationship between variables.
-
-- Double tilde `~~` represents the covariance between variables’ residuals.
-
-Let’s start with a simple example, omitting the use of ~~ for now. We first define a model that corresponds to our hypothetical DAG.
-
-```{r sem-model1}
+```{r path-model1}
 # Specify the SEM model using lavaan syntax
 # Note: the variable names must exactly match the column names in the dataframe (df_fw)
 m1 <- '
@@ -161,7 +153,7 @@ m1 <- '
 
 The model description `m1` should be passed to the `sem()` function from the `lavaan` package, which performs the analysis using the data you provide.
 
-```{r sem-fit1}
+```{r path-fit1}
 (fit1 <- sem(model = m1,
              data = df_fw))
 ```
@@ -170,17 +162,17 @@ The most important output from the `sem()` function is the `Model Test User Mode
 
 The test statistic (1.466) measures the discrepancy between the SEM model-implied covariance matrix and the observed covariance matrix, while the degrees of freedom provide a sense of how simple the model is relative to the full DAG—that is, how many potential links from the full DAG are omitted. In other words, the test essentially asks: **"Does the model adequately reproduce the observed relationships in the data?"**
 
-Unlike ordinary hypothesis tests, the p-value here tests the null hypothesis that the model fits the data perfectly. A high p-value (typically > 0.05) indicates no evidence of misfit. In this case, the p-value of 0.480 suggests that the model provides a good fit to the data.
+Unlike ordinary hypothesis tests, the p-value here tests the null hypothesis that the model fits the data perfectly. A high p-value (typically \> 0.05) indicates no evidence of misfit. In this case, the p-value of 0.480 suggests that the model provides a good fit to the data.
 
 We can obtain estimates for each path in the model, which quantify the strength of the relationships among variables:
 
-```{r sem-summary1}
+```{r path-summary1}
 summary(fit1, standardize = TRUE)
 ```
 
-The `Regressions:` section is the most informative. The Estimate column reports the raw effect sizes, but these values depend on the units and variability of the predictor variables and therefore are not directly comparable across predictors. 
+The `Regressions:` section is the most informative. The Estimate column reports the raw effect sizes, but these values depend on the units and variability of the predictor variables and therefore are not directly comparable across predictors.
 
-By setting `standardize = TRUE`, however, `lavaan` also reports `Std.all`, which gives standardized coefficients (i.e., effects on a common scale). These standardized values allow direct comparison of the relative strength of different paths. 
+By setting `standardize = TRUE`, however, `lavaan` also reports `Std.all`, which gives standardized coefficients (i.e., effects on a common scale). These standardized values allow direct comparison of the relative strength of different paths.
 
 In this example, the strongest path is from `mass_herbiv` to `mass_pred` (0.482), followed by `mass_plant` to `mass_herbiv` (0.327), and `cv_h_plant` to `mass_herbiv` (0.208).
 
@@ -188,7 +180,7 @@ In this example, the strongest path is from `mass_herbiv` to `mass_pred` (0.482)
 
 Our model omits all direct plant-to-predator pathways. However, variation in plant height may still influence predators indirectly by altering physical habitat structure. This possibility is represented in the following DAGs.
 
-```{r dag-3, echo=FALSE, fig.cap="Comparison of two alternative directed acyclic graphs (DAGs) representing competing causal hypotheses among plant, herbivore, and predator variables. Panel A shows the hypothesized DAG, in which predator mass is influenced only indirectly through herbivore mass. Panel B shows an alternative DAG that includes an additional direct pathway from plant height to predator mass, representing a plausible but untested mechanism (e.g., habitat structure or plant-mediated effects)."}
+```{r dag-path-sub2-plot, echo=FALSE, fig.cap="Comparison of two alternative directed acyclic graphs (DAGs) representing competing causal hypotheses among plant, herbivore, and predator variables. Panel A shows the hypothesized DAG, in which predator mass is influenced only indirectly through herbivore mass. Panel B shows an alternative DAG that includes an additional direct pathway from plant height to predator mass, representing a plausible but untested mechanism (e.g., habitat structure or plant-mediated effects)."}
 source("code/library.R")
 
 # Define adjacency matrix
@@ -217,7 +209,7 @@ dag_alt <-
 dag_hypo + dag_alt + plot_annotation(tag_levels = "A")
 ```
 
-How do we test this alternative hypothesis, and determine whether this new path is worth including? 
+How do we test this alternative hypothesis, and determine whether this new path is worth including?
 
 We can address this by comparing model performance using a likelihood ratio test (LRT), which uses the difference in chi-square values between two models as the test statistic. The rationale is that the simpler model is a special case of the more complex model (i.e., the models are nested), so any improvement in fit can be attributed to the additional path.
 
@@ -225,7 +217,7 @@ If adding the new path substantially reduces the chi-square value relative to th
 
 To perform this test, we first need to specify an alternative model that represents the updated DAG with the additional pathway:
 
-```{r sem-model2}
+```{r path-model2}
 m2 <- '
   mass_herbiv ~ mass_plant + cv_h_plant
   mass_pred ~ mass_herbiv + cv_h_plant
@@ -237,19 +229,21 @@ m2 <- '
 
 We can use anova() function for the comparison.
 
-```{r sem-comp}
+```{r path-comp}
 anova(fit1, fit2)
 ```
 
-This output shows a chi-square difference test comparing two nested SEMs. Here, `fit2` is the more complex model with one fewer degree of freedom (`Df = 1`), and `fit1` is the simpler model (`Df = 2`). Adding the extra path reduces the chi-square value from 1.4662 to 0.3983, giving a chi-square difference of 1.0678 with 1 degree of freedom. 
+This output shows a chi-square difference test comparing two nested SEMs. Here, `fit2` is the more complex model with one fewer degree of freedom (`Df = 1`), and `fit1` is the simpler model (`Df = 2`). Adding the extra path reduces the chi-square value from 1.4662 to 0.3983, giving a chi-square difference of 1.0678 with 1 degree of freedom.
 
 The associated p-value (0.3014) is not significant, indicating that the more complex model does not provide a meaningful improvement in fit. Consistent with this result, information criteria (AIC and BIC) are slightly lower for `fit1`, supporting the conclusion that the simpler, more parsimonious model is preferred.
 
 ## Structural Equation Modeling
 
-In this section, we will extend a path analysis to structural equation modeling (SEM). What distinguishes a SEM from a simple path model is the ability to incorporate latent variables in the DAG. 
+In this section, we will extend a path analysis to structural equation modeling (SEM). What distinguishes a SEM from a simple path model is the ability to incorporate latent variables in the DAG.
 
 Latent variables are “unobserved” variables that exist only within the statistical model. They are typically composites of multiple observed variables, often those that are strongly correlated with each other, and represent underlying constructs that cannot be measured directly.
+
+### SEM vs. Path analysis
 
 To explore this, we will use the following dataset.
 
@@ -259,7 +253,158 @@ url <- "https://raw.githubusercontent.com/aterui/biostats/master/data_raw/data_h
 (df_herbv <- read_csv(url))
 ```
 
-This dataset contains measurements for each plot, including soil nitrogen (`soil_n`), herbivory rate (`herbivory`), specific leaf area (`sla`), carbon-to-nitrogen ratio (`cn_ratio`), and percent lignin (`per_lignin`).
+Measurements were taken for individual plants grown under different levels of soil fertility, recorded in the column `soil_n` (inorganic nitrogen). These measurements are associated with each plant’s herbivory rate (`herbivory`), specific leaf area (`sla`), carbon-to-nitrogen ratio (`cn_ratio`), and percent lignin (`per_lignin`). The last three measurements – specific leaf area (`sla`), carbon-to-nitrogen ratio (`cn_ratio`), and percent lignin (`per_lignin`) – are plant traits that may affect herbivory rate.
 
+At first glance, we might propose the following DAG, which models each plant trait and herbivory rate as separate, individual elements.
+
+```{r dag-sem-nolatent-plot, echo=FALSE}
+source("code/library.R")
+
+# Define adjacency matrix
+m_net <- rbind(
+  c(0, 1, 1, 1, 0),
+  c(0, 0, 0, 0, 1),
+  c(0, 0, 0, 0, 1),
+  c(0, 0, 0, 0, 1),
+  c(0, 0, 0, 0, 0)
+)
+
+colnames(m_net) <- rownames(m_net) <- c("Soil N", "SLA", "CN Ratio", "% Lignin", "Herbivory")
+
+# Create igraph object
+g <- graph_from_adjacency_matrix(m_net, mode = "directed")
+
+# Coordinates
+layout_mat <- matrix(c(0.5, 0, 
+                       0, 1, 
+                       0.5, 1, 
+                       1, 1, 
+                       0.5, 2), 
+                     ncol = 2, 
+                     byrow = TRUE)
+
+# Plot with ggraph
+(dag_herb_full <- 
+    ggraph(g, layout = layout_mat) +
+    geom_edge_link(arrow = arrow(length = unit(4, 'mm'), type = "closed"),
+                   end_cap = circle(10, 'mm'),
+                   edge_width = 1,
+                   edge_colour = "gray") +
+    geom_node_point(size = 20, 
+                    fill = "lightblue", 
+                    shape = 21, 
+                    stroke = NA) +
+    geom_node_text(aes(label = name), 
+                   size = 3.5) +
+    theme_void() +
+    xlim(-0.3, 1.3) +
+    ylim(-0.3, 2.3))
+```
+
+However, examining the three traits, we see that they are highly correlated and appear to be strongly influenced by soil inorganic nitrogen:
+
+```{r}
+df_herbv %>% 
+  ggpairs(
+    progress = FALSE,
+    columns = c("soil_n",
+                "sla",
+                "cn_ratio",
+                "per_lignin")
+  ) +
+  theme_bw()
+```
+
+These plant traits may collectively represent plant tissue **“palatability,”** which is influenced by soil fertility and, in turn, affects herbivory rate.
+
+In this context, we can define a latent variable, **palatability**, as a function of the three plant traits. This latent variable then serves as a mediator linking soil fertility to herbivory rate. With this addition, the corresponding path diagram is modified to reflect the inclusion of the latent construct.
+
+```{r dag-sem-latent-plot, echo=FALSE, fig.cap="DAG of the structural equation model (SEM) linking soil fertility, palatability, and herbivory. Observed variables (SLA, CN Ratio, % Lignin, Soil N, Herbivory) are shown as circles, while the latent variable Palatability is shown as a square. Unlike a simple path analysis, SEM allows the inclusion of latent constructs that are inferred from multiple observed indicators, enabling the decomposition of complex traits like palatability into their underlying components."}
+
+source("code/library.R")
+
+# Define adjacency matrix
+m_net <- rbind(
+  c(0, 0, 0, 0, 0, 1),
+  c(0, 0, 0, 0, 0, 0),
+  c(0, 0, 0, 0, 0, 0),
+  c(0, 0, 0, 0, 0, 0),
+  c(0, 0, 0, 0, 0, 0),
+  c(0, 1, 1, 1, 1, 0)
+)
+
+colnames(m_net) <- rownames(m_net) <- c("Soil N", "SLA", "CN Ratio", "% Lignin", "Herbivory", "Palatability")
+
+# Create igraph object
+g <- graph_from_adjacency_matrix(m_net, mode = "directed")
+
+# Coordinates
+layout_mat <- matrix(c(0.5, 0, 
+                       0, 0.5, 
+                       0, 1, 
+                       0, 1.5, 
+                       0.5, 2,
+                       0.5, 1), 
+                     ncol = 2, 
+                     byrow = TRUE)
+V(g)$shape <- c(rep("Observed", 5), "Latent")
+
+# Plot with ggraph
+(dag_herb_latent <- 
+    ggraph(g, layout = layout_mat) +
+    geom_edge_link(arrow = arrow(length = unit(4, 'mm'), type = "closed"),
+                   end_cap = circle(10, 'mm'),
+                   width = 1,
+                   colour = "gray") +
+    geom_node_point(aes(shape = shape),
+                    fill = "lightblue",
+                    size = 20, 
+                    stroke = NA) +
+    geom_node_text(aes(label = name), 
+                   size = 3.5) +
+    scale_shape_manual(values = c("Observed" = 21, "Latent" = 22)) +
+    labs(shape = "Variable type") +
+    theme_void() +
+    xlim(-0.3, 1.3) +
+    ylim(-0.3, 2.3))
+```
+
+### Implementation
+
+When implementing SEM, we use the special syntax `=~` to specify **latent variables** in the model. In our example, we may use the following syntax: `palatability =~ sla + cn_ratio + perlignin` to construct a latent variable composed of three plant traits. By including latent constructs, SEM extends traditional path analysis, offering a more flexible framework to model complex relationships.
+
+```{r sem-fit}
+m_sem <- '
+# latent variable
+  palatability =~ sla + cn_ratio + per_lignin
+  
+# regression
+  palatability ~ soil_n
+  herbivory ~ palatability
+'
+
+(fit_sem <- sem(m_sem,
+                data = df_herbv))
+```
+
+The primary output and its interpretation is similar - in this case, the p-value is \> 0.05, suggesting that our model specification is reasonably good. We can exploit more information by calling summary():
+
+```{r}
+summary(fit_sem, standardize = TRUE)
+```
+
+The major difference from a simple path analysis is the inclusion of `Latent Variables:`, which decomposes the construct of *palatability*—a variable that exists only in the statistical model, not directly observed. The `Estimate` column shows the factor loadings, which indicate how strongly each observed variable contributes to the latent variable *palatability*.
+
+In this example, *palatability* is positively associated with `sla` but negatively associated with `cn_ratio` and `per_lignin`. This means that higher palatability corresponds to leaves with higher specific leaf area (SLA), lower carbon-to-nitrogen ratio (C:N), and lower lignin content (% lignin).
+
+The `Regressions:` section shows that the pathways from soil fertility to palatability and from palatability to herbivory rate are all significant, with the strongest effect observed between soil fertility and palatability.
+
+## Limitation
+
+The examples above rely on one major assumption: in the `lavaan` package, **all variables in the model are assumed to follow a normal distribution.** This can be a restrictive assumption, especially given the variety of data types often encountered in biological research.
+
+Importantly, this limitation comes from the package, not from the underlying statistics. Mathematically, it is possible to construct path analysis or SEM with non-normal variables or even include random effects.
+
+However, such models are challenging to estimate using standard methods because the likelihood function becomes highly complex. In these cases, Bayesian methods would provide a more flexible framework (examples: [Takagi et al. 2014](onlinelibrary.wiley.com/doi/abs/10.1111/1365-2656.12415); [Terui et al 2018](doi.org/10.1007%2Fs10021-017-0183-3)). While there are currently few packages that allow fully automated implementation, coding models directly in **BUGS** or **Stan** makes it possible to fit these more complex SEMs (with a steep learning curve).
 
 ## Laboratory

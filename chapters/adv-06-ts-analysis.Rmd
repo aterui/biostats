@@ -1,0 +1,25 @@
+# Time-series Analaysis
+
+```{r}
+pacman::p_load(tidyverse,
+               glmmTMB)
+```
+
+## Demon of Time-Series
+
+```{r}
+```
+
+
+
+## Basic Models
+
+### AR Model
+
+### MA Model
+
+### ARMA Model
+
+
+## Applied Models
+

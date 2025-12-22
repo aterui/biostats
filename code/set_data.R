@@ -322,3 +322,21 @@ summary(fit, standardize = TRUE)
 write_csv(df_herbv,
           file = "data_raw/data_herbivory.csv")
 
+
+
+# time-series -------------------------------------------------------------
+
+## random-walk
+set.seed(123)
+y <- rep(NA, 100)
+eps <- rnorm(n = length(x))
+y[1] <- 0
+
+for (t in 1:(length(y) - 1)) {
+  y[t + 1] <- y[t] + eps[t]
+}
+
+df_y <- tibble(anormaly = y,
+               year = 1925 + seq_len(length(y)))
+
+write_csv(df_y, file = "data_raw/data_ts_anomaly.csv")

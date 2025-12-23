@@ -1,6 +1,6 @@
 # (PART) Appendix {.unnumbered}
 
-# Basic Terminology
+# Basic Terminology {.unnumbered}
 
 Statistics uses specialized terminology, and its interpretation is often not intuitive. Below, I list key terms that may require clarification, along with helpful links for further explanation.
 

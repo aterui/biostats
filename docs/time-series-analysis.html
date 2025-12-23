@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 22 Time-Series Analaysis | BIOSTATS</title>
+<title>Chapter 22 Time-Series Analysis | BIOSTATS</title>
 <meta name="author" content="Akira Terui">
-<meta name="description" content="pacman::p_load(tidyverse,        forecast,        lterdatasampler,        daymetr)  22.1 Pitfall of Time-Series  22.1.1 Time-series anormalies Let’s explore a simple time series dataset, showing...">
+<meta name="description" content="Time-Series Analysis is one of the most challenging topics in statistics because it violates a fundamental assumption: the independence of data points. Nevertheless, this type of data is common in...">
 <meta name="generator" content="bookdown 0.43 with bs4_book()">
-<meta property="og:title" content="Chapter 22 Time-Series Analaysis | BIOSTATS">
+<meta property="og:title" content="Chapter 22 Time-Series Analysis | BIOSTATS">
 <meta property="og:type" content="book">
-<meta property="og:description" content="pacman::p_load(tidyverse,        forecast,        lterdatasampler,        daymetr)  22.1 Pitfall of Time-Series  22.1.1 Time-series anormalies Let’s explore a simple time series dataset, showing...">
+<meta property="og:description" content="Time-Series Analysis is one of the most challenging topics in statistics because it violates a fundamental assumption: the independence of data points. Nevertheless, this type of data is common in...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 22 Time-Series Analaysis | BIOSTATS">
-<meta name="twitter:description" content="pacman::p_load(tidyverse,        forecast,        lterdatasampler,        daymetr)  22.1 Pitfall of Time-Series  22.1.1 Time-series anormalies Let’s explore a simple time series dataset, showing...">
+<meta name="twitter:title" content="Chapter 22 Time-Series Analysis | BIOSTATS">
+<meta name="twitter:description" content="Time-Series Analysis is one of the most challenging topics in statistics because it violates a fundamental assumption: the independence of data points. Nevertheless, this type of data is common in...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -74,9 +74,9 @@
 <li><a class="" href="unconstrained-ordination.html"><span class="header-section-number">19</span> Unconstrained Ordination</a></li>
 <li><a class="" href="constrained-ordination.html"><span class="header-section-number">20</span> Constrained Ordination</a></li>
 <li><a class="" href="structural-equation-modeling.html"><span class="header-section-number">21</span> Structural Equation Modeling</a></li>
-<li><a class="active" href="time-series-analaysis.html"><span class="header-section-number">22</span> Time-Series Analaysis</a></li>
+<li><a class="active" href="time-series-analysis.html"><span class="header-section-number">22</span> Time-Series Analysis</a></li>
 <li class="book-part">Appendix</li>
-<li><a class="" href="basic-terminology.html"><span class="header-section-number">23</span> Basic Terminology</a></li>
+<li><a class="" href="basic-terminology.html">Basic Terminology</a></li>
 <li><a class="" href="git-github.html">Git &amp; GitHub</a></li>
 <li><a class="" href="base-plot.html">Base Plot</a></li>
 </ul>
@@ -86,15 +86,23 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="time-series-analaysis" class="section level1" number="22">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="time-series-analysis" class="section level1" number="22">
 <h1>
-<span class="header-section-number">22</span> Time-Series Analaysis<a class="anchor" aria-label="anchor" href="#time-series-analaysis"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22</span> Time-Series Analysis<a class="anchor" aria-label="anchor" href="#time-series-analysis"><i class="fas fa-link"></i></a>
 </h1>
+<p>Time-Series Analysis is one of the most challenging topics in statistics because it violates a fundamental assumption: the independence of data points. Nevertheless, this type of data is common in biology and is often analyzed incorrectly. In this section, we will explore common pitfalls in time-series analysis and review statistical models that can account for temporal dependence.</p>
+<p>Learning Objectives:</p>
+<ul>
+<li><p>Understand the challenges inherent in time-series analysis.</p></li>
+<li><p>Learn basic modeling approaches for time-series data.</p></li>
+<li><p>Learn how to incorporate external predictors into time-series models.</p></li>
+</ul>
 <div class="sourceCode" id="cb569"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="va">tidyverse</span>,</span>
 <span>               <span class="va">forecast</span>,</span>
 <span>               <span class="va">lterdatasampler</span>,</span>
-<span>               <span class="va">daymetr</span><span class="op">)</span></span></code></pre></div>
+<span>               <span class="va">daymetr</span>,</span>
+<span>               <span class="va">glarma</span><span class="op">)</span></span></code></pre></div>
 <div id="pitfall-of-time-series" class="section level2" number="22.1">
 <h2>
 <span class="header-section-number">22.1</span> Pitfall of Time-Series<a class="anchor" aria-label="anchor" href="#pitfall-of-time-series"><i class="fas fa-link"></i></a>
@@ -181,13 +189,13 @@ Figure 22.1: Time-series of annual anomalies. Points represent observed values f
 Figure 22.2: Time-series of anomalies over years. Dotted lines connect consecutive observations, semi-transparent points show individual measurements, and the solid line represents the fitted linear trend from a linear regression model.
 </p>
 </div>
-<p>The regression line may appear to fit the data well, with no obvious issues. However, if you think that, <strong>you have already fallen into a common pitfall of time-series analysis</strong> — this type of analysis has many potential problems.</p>
+<p>The regression line may appear to fit the data well, with no obvious issues. However, if you think that, you have already fallen into a common pitfall of time-series analysis — this type of analysis has many potential problems.</p>
 </div>
 <div id="temporal-autocorrelation" class="section level3" number="22.1.2">
 <h3>
 <span class="header-section-number">22.1.2</span> Temporal autocorrelation<a class="anchor" aria-label="anchor" href="#temporal-autocorrelation"><i class="fas fa-link"></i></a>
 </h3>
-<p>While the data appear to show an increasing trend, this dataset was generated from a simulation that assumes <strong>NO</strong> true temporal increase — it was produced through a process known as a <strong>random walk</strong>.</p>
+<p>While the data appear to show an increasing trend, this dataset was generated from a simulation that assumes NO true temporal increase — it was produced through a process known as a random walk.</p>
 <p><span class="math display">\[
 y_t = y_{t-1} + \varepsilon_{t}\\
 \varepsilon_t \sim \text{Normal}(0, \sigma^2)
@@ -227,7 +235,7 @@ y_t = y_{t-1} + \varepsilon_{t}\\
 <span>    x <span class="op">=</span> <span class="st">"Year"</span>,              </span>
 <span>    y <span class="op">=</span> <span class="st">"Anomaly"</span>            </span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p>This is expected because we are measuring the same object over time, so the observations are not independent. This leads to <strong>temporal autocorrelation</strong>, a feature that violates a fundamental assumption of many statistical methods — the independence of data points. Temporal autocorrelation can be assessed using the <code><a href="https://rdrr.io/r/stats/acf.html">acf()</a></code> function in R:</p>
+<p>This is expected because we are measuring the same object over time, so the observations are not independent. This leads to temporal autocorrelation, a feature that violates a fundamental assumption of many statistical methods — the independence of data points. Temporal autocorrelation can be assessed using the <code><a href="https://rdrr.io/r/stats/acf.html">acf()</a></code> function in R:</p>
 <div class="sourceCode" id="cb577"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Data must be ordered from the oldest observation to the most recent</span></span>
 <span><span class="va">df_ts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">df_ts</span>, <span class="va">year</span><span class="op">)</span></span>
@@ -284,7 +292,7 @@ Figure 22.4: Time series of Lake Huron water levels from 1875 to 1972. Points re
 y_t = \mu + \sum_{i=1}^p \phi_i y_{t - i} + \varepsilon_t
 \]</span></p>
 <p>where <span class="math inline">\(\mu\)</span> is the constant term (intercept), <span class="math inline">\(\phi_i\)</span> is the autoregressive parameter, and <span class="math inline">\(\varepsilon_t\)</span> is the (white) noise.</p>
-<p>In an AR(<span class="math inline">\(p\)</span>) model, the present observation is a linear combination of the previous <span class="math inline">\(p\)</span> observations. The <span class="math inline">\(p\)</span> is referred to as the <strong>order</strong> of the model. AR models are stationary when the sum of autoregressive parameters <span class="math inline">\(\sum_i \phi_i\)</span> are less than one – this is analogous to population models with a carrying capacity in ecology.</p>
+<p>In an AR(<span class="math inline">\(p\)</span>) model, the present observation is a linear combination of the previous <span class="math inline">\(p\)</span> observations. The <span class="math inline">\(p\)</span> is referred to as the order of the model. AR models are stationary when the sum of autoregressive parameters <span class="math inline">\(\sum_i \phi_i\)</span> are less than one – this is analogous to population models with a carrying capacity in ecology.</p>
 <p>In practice, we supply a vector of time-series data to the <code><a href="https://rdrr.io/r/stats/arima.html">arima()</a></code> function. We will begin with the simplest autoregressive model of order one, which is specified by setting the first element of the <code>order</code> argument to 1 (i.e., <code>order = c(1, 0, 0)</code>).</p>
 <div class="sourceCode" id="cb579"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">m_ar1</span> <span class="op">&lt;-</span> <span class="fu">Arima</span><span class="op">(</span></span>
@@ -333,7 +341,7 @@ Figure 22.5: Observed Lake Huron water levels (points) with in-sample fitted val
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>fit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html">fitted</a></span><span class="op">(</span><span class="va">m_ar1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Forecast the next 50 time points using the AR(1) model</span></span>
-<span><span class="va">df_pred_ar1</span> <span class="op">&lt;-</span> <span class="fu">forecast</span><span class="op">(</span><span class="va">m_ar1</span>, h <span class="op">=</span> <span class="fl">50</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span><span class="va">df_pred_ar1</span> <span class="op">&lt;-</span> <span class="fu">forecast</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/forecast.html">forecast</a></span><span class="op">(</span><span class="va">m_ar1</span>, h <span class="op">=</span> <span class="fl">50</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span>rownames <span class="op">=</span> <span class="st">"year"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">df_huron</span><span class="op">$</span><span class="va">year</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -498,17 +506,17 @@ Figure 22.9: Observed Lake Huron water levels (points) with ARIMA(1,1,0) model f
 <span class="header-section-number">22.3</span> Applied Models<a class="anchor" aria-label="anchor" href="#applied-models"><i class="fas fa-link"></i></a>
 </h2>
 <p>While the time-series models introduced above allow us to account for temporal autocorrelation, our primary interest is often in how external variables influence the response. How, then, can we incorporate predictors into a time-series model?</p>
-<p>Recall that a (generalized) linear model has the following structure when predictors are included:</p>
+<p>Recall that a linear model has the following structure when predictors <span class="math inline">\(x\)</span> are included:</p>
 <p><span class="math display">\[
-g(\hat{y}_i) = \alpha + \sum_k \beta_k x_{i}^{(k)} + \varepsilon_i
-\]</span> where <span class="math inline">\(g(\cdot)\)</span> is a link function, and we assume that the error term <span class="math inline">\(\varepsilon_i\)</span> is independent across observations. If the errors are normally distributed, we assume <span class="math inline">\(\varepsilon_i \sim \text{Normal}(0, \sigma^2)\)</span>.</p>
+y_i = \alpha + \sum_k \beta_k x_{i}^{(k)} + \varepsilon_i
+\]</span></p>
+<p>where <span class="math inline">\(\alpha\)</span> is the intercept, and <span class="math inline">\(\beta\)</span> is the slope. In this framework, we assume that the error term <span class="math inline">\(\varepsilon_i\)</span> is independent across observations with <span class="math inline">\(\varepsilon_i \sim \text{Normal}(0, \sigma^2)\)</span>.</p>
 <p>However, because we assume independence in the error term, problems arise when the data exhibit temporal autocorrelation. If we model the relationship between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> as if the observations are independent, the effect of <span class="math inline">\(x\)</span> can be estimated as artificially significant, increasing the risk of a Type I error; that is, we may conclude that <span class="math inline">\(x\)</span> has a significant effect even when it does not.</p>
 <p>We can include ARIMA components in the error term to account for temporal autocorrelation before evaluating the effects of external predictors. For example, if the error term follows an ARMA process, the model can be written as:</p>
 <p><span class="math display">\[
-g(\hat{y}_t) = \alpha + \sum_k \beta_k x_{t}^{(k)} + u_t\\
+y_t = \alpha + \sum_k \beta_k x_{t}^{(k)} + u_t\\
 u_t = \underbrace{\sum_{i=1}^p \phi_i y_{t - i}}_{\text{AR}} + \underbrace{\sum_{i = 1}^q \theta_i \varepsilon_{t - i}}_{\text{MA}} + \underbrace{\varepsilon_t}_{\text{Noise}}
-\]</span></p>
-<p>R offers a variety of functions for performing this type of modeling. Let’s explore how it works in practice.</p>
+\]</span>R offers a variety of functions for performing this type of modeling. Let’s explore how it works in practice.</p>
 <div id="arimax" class="section level3" number="22.3.1">
 <h3>
 <span class="header-section-number">22.3.1</span> ARIMAX<a class="anchor" aria-label="anchor" href="#arimax"><i class="fas fa-link"></i></a>
@@ -534,15 +542,15 @@ u_t = \underbrace{\sum_{i=1}^p \phi_i y_{t - i}}_{\text{AR}} + \underbrace{\sum_
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Ice duration"</span>,</span>
 <span>       x <span class="op">=</span> <span class="st">"Year"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-185"></span>
-<img src="biostats_files/figure-html/unnamed-chunk-185-1.png" alt="Ice-cover data for Lake Mendota (1980–2014) visualized as a dotted line with semi-transparent points. This plot shows the temporal trajectory of ice duration over 35 years, highlighting interannual variability." width="672"><p class="caption">
+<span style="display:block;" id="fig:adv-06-mendota-plot"></span>
+<img src="biostats_files/figure-html/adv-06-mendota-plot-1.png" alt="Ice-cover data for Lake Mendota (1980–2014) visualized as a dotted line with semi-transparent points. This plot shows the temporal trajectory of ice duration over 35 years, highlighting interannual variability." width="672"><p class="caption">
 Figure 22.10: Ice-cover data for Lake Mendota (1980–2014) visualized as a dotted line with semi-transparent points. This plot shows the temporal trajectory of ice duration over 35 years, highlighting interannual variability.
 </p>
 </div>
-<p>We will explore how ice-cover duration varies with winter air temperature. Daily temperature data can be obtained from <a href="https://daymet.ornl.gov/">DAYMET</a>, and the <code>daymetr</code> R package allows you to download these data directly into R.</p>
+<p>We will explore how ice-cover duration varies with air temperature. Daily temperature data can be obtained from <a href="https://daymet.ornl.gov/">DAYMET</a>, and the <code>daymetr</code> R package allows you to download these data directly into R.</p>
 <div class="sourceCode" id="cb592"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Download daily climate data from Daymet for Lake Mendota</span></span>
-<span><span class="va">list_temp</span> <span class="op">&lt;-</span> <span class="fu">download_daymet</span><span class="op">(</span></span>
+<span><span class="va">list_mendota</span> <span class="op">&lt;-</span> <span class="fu">download_daymet</span><span class="op">(</span></span>
 <span>  site <span class="op">=</span> <span class="st">"Lake_Mendota"</span>,   <span class="co"># Arbitrary name you assign to this site</span></span>
 <span>  lat <span class="op">=</span> <span class="fl">43.1</span>,              <span class="co"># Latitude of the lake</span></span>
 <span>  lon <span class="op">=</span> <span class="op">-</span><span class="fl">89.4</span>,             <span class="co"># Longitude of the lake</span></span>
@@ -550,9 +558,9 @@ Figure 22.10: Ice-cover data for Lake Mendota (1980–2014) visualized as a dott
 <span>  end <span class="op">=</span> <span class="fl">2024</span>,              <span class="co"># End year</span></span>
 <span>  internal <span class="op">=</span> <span class="cn">TRUE</span>          <span class="co"># Return the data as an R object rather than saving to disk</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>Because the original data format is difficult to work with, we will transform it into a structure compatible with the tidyverse framework. The following code calculates the winter minimum temperature.</p>
+<p>Because the original data format is difficult to work with, we will transform it into a structure compatible with the tidyverse framework. The following code calculates the average daily-minimum temperature.</p>
 <div class="sourceCode" id="cb593"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df_temp</span> <span class="op">&lt;-</span> <span class="va">list_temp</span><span class="op">$</span><span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<code class="sourceCode R"><span><span class="va">df_temp</span> <span class="op">&lt;-</span> <span class="va">list_mendota</span><span class="op">$</span><span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>                  <span class="co"># Convert the data to a tibble for tidyverse-friendly operations</span></span>
 <span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>       <span class="co"># Clean column names (lowercase, underscores)</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
@@ -561,19 +569,19 @@ Figure 22.10: Ice-cover data for Lake Mendota (1980–2014) visualized as a dott
 <span>    <span class="co"># Extract the month from the date</span></span>
 <span>    month <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/month.html">month</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">month</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">11</span>, <span class="fl">12</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># Keep only winter months (Oct–Mar)</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">yday</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># Group by year</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>temp_min <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">tmin_deg_c</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="co"># Compute average daily minimum temperature</span></span></code></pre></div>
-<p>We can now join the temperature data with the ice-duration data, enabling analysis of how winter temperature influences ice-cover duration.</p>
+<p>We can now join the temperature data with the ice-duration data, enabling analysis of how air temperature influences ice-cover duration.</p>
 <div class="sourceCode" id="cb594"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Join the winter temperature data to the ice cover data by year</span></span>
+<code class="sourceCode R"><span><span class="co"># Join the temperature data to the ice cover data by year</span></span>
 <span><span class="va">df_ice</span> <span class="op">&lt;-</span> <span class="va">df_ice</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">df_temp</span>, by <span class="op">=</span> <span class="st">"year"</span><span class="op">)</span></span></code></pre></div>
 <p>The <code>Arima()</code> and <code>auto.arima()</code> functions include an <code>xreg</code> argument, which allows us to supply potential predictor variables. <code>xreg</code> can be a vector or a matrix, but it must have the same number of rows as the response time series (ice duration in our case).</p>
 <div class="sourceCode" id="cb595"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">obj_arima</span> <span class="op">&lt;-</span> <span class="fu">auto.arima</span><span class="op">(</span></span>
 <span>  <span class="va">df_ice</span><span class="op">$</span><span class="va">ice_duration</span>, <span class="co"># Response variable: ice duration time series</span></span>
-<span>  xreg <span class="op">=</span> <span class="va">df_ice</span><span class="op">$</span><span class="va">temp_min</span>, <span class="co"># External predictor: average winter minimum temperature</span></span>
+<span>  xreg <span class="op">=</span> <span class="va">df_ice</span><span class="op">$</span><span class="va">temp_min</span>, <span class="co"># External predictor: average minimum temperature</span></span>
 <span>  stepwise <span class="op">=</span> <span class="cn">FALSE</span> <span class="co"># Use exhaustive search instead of stepwise approximation for model selection</span></span>
 <span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Series: df_ice$ice_duration 
@@ -581,21 +589,21 @@ Figure 22.10: Ice-cover data for Lake Mendota (1980–2014) visualized as a dott
 ## 
 ## Coefficients:
 ##           ar1  intercept     xreg
-##       -0.4921    51.5305  -6.1721
-## s.e.   0.1469    10.7291   1.7655
+##       -0.4650   107.3676  -8.0622
+## s.e.   0.1484     6.6398   2.6708
 ## 
-## sigma^2 = 342.9:  log likelihood = -150.39
-## AIC=308.78   AICc=310.11   BIC=315</code></pre>
-<p>The ARIMAX output now includes the estimated coefficient for the external predictor (<code>xreg</code>) along with the selected model structure (AR(1)). This coefficient represents the impact of winter temperature on ice-cover duration and appears to be highly significant, with an estimate of -6.172 and a standard error of 1.765.<br></p>
+## sigma^2 = 364.5:  log likelihood = -151.44
+## AIC=310.89   AICc=312.22   BIC=317.11</code></pre>
+<p>The ARIMAX output now includes the estimated coefficient for the external predictor (<code>xreg</code>) along with the selected model structure (AR(1)). This coefficient represents the impact of temperature on ice-cover duration and appears to be highly significant, with an estimate of -8.06 and a standard error of 2.67.<br></p>
 <p>We can also compute confidence intervals to obtain more detailed information about the uncertainty around this estimate. If the 95% confidence interval (CI) for a coefficient does not include zero, the estimate is considered statistically significant and highly reliable.</p>
 <div class="sourceCode" id="cb597"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/confint.html">confint</a></span><span class="op">(</span><span class="va">obj_arima</span>, level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span></code></pre></div>
-<pre><code>##                2.5 %     97.5 %
-## ar1       -0.7801308 -0.2041164
-## intercept 30.5017276 72.5592145
-## xreg      -9.6324728 -2.7117775</code></pre>
+<pre><code>##                 2.5 %      97.5 %
+## ar1        -0.7559461  -0.1741116
+## intercept  94.3538337 120.3814411
+## xreg      -13.2967927  -2.8276105</code></pre>
 <p>In our case, the 95% confidence interval for the <code>xreg</code> coefficient (temperature effect) is entirely negative and does not overlap zero, indicating that ice duration decreases significantly as winter temperature increases.</p>
-<p>Including predictor variables makes the forecast more meaningful. Although our model was fit using data from 1980–2014, we have temperature observations for 2015–2024. While we use these observed temperatures in this exercise, the predictor values could also come from model outputs, such as climate model projections, allowing us to explore potential impacts of climate change.</p>
+<p>Including predictor variables makes the forecast more meaningful. Although our model was fitted to data from 1980–2014, we have temperature observations for 2015–2024. While we use these observed temperatures in this exercise, the predictor values could also come from model outputs, such as climate model projections, allowing us to explore potential impacts of climate change.</p>
 <div class="sourceCode" id="cb599"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># 1. Add fitted values from the ARIMAX model to the original ice-cover dataset</span></span>
 <span><span class="va">df_ice</span> <span class="op">&lt;-</span> <span class="va">df_ice</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -607,7 +615,7 @@ Figure 22.10: Ice-cover data for Lake Mendota (1980–2014) visualized as a dott
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">temp_min</span><span class="op">)</span> <span class="co"># Extract the temperature values as a numeric vector</span></span>
 <span></span>
 <span><span class="co"># 3. Forecast ice duration for 2015–2024 using ARIMAX model with new temperature values</span></span>
-<span><span class="va">df_fore</span> <span class="op">&lt;-</span> <span class="fu">forecast</span><span class="op">(</span><span class="va">obj_arima</span>, xreg <span class="op">=</span> <span class="va">v_temp</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># Forecast with external predictor</span></span>
+<span><span class="va">df_fore</span> <span class="op">&lt;-</span> <span class="fu">forecast</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/forecast.html">forecast</a></span><span class="op">(</span><span class="va">obj_arima</span>, xreg <span class="op">=</span> <span class="va">v_temp</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># Forecast with external predictor</span></span>
 <span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># Convert forecast object to tibble</span></span>
 <span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># Clean column names</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>fit <span class="op">=</span> <span class="va">point_forecast</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># Rename point forecast column to 'fit'</span></span>
@@ -636,9 +644,160 @@ Figure 22.10: Ice-cover data for Lake Mendota (1980–2014) visualized as a dott
 <span>  <span class="co"># 6. Axis labels</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Year"</span>, y <span class="op">=</span> <span class="st">"Ice duration"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-193"></span>
-<img src="biostats_files/figure-html/unnamed-chunk-193-1.png" alt="Historical ice-cover duration (points) and ARIMAX model predictions (blue line) for Lake Mendota, including forecasts for 2015–2024. Shaded ribbons show the 80% and 95% confidence intervals for the forecasts. Because winter temperature is included as a predictor, the forecast varies with future temperature values rather than remaining constant." width="672"><p class="caption">
-Figure 22.11: Historical ice-cover duration (points) and ARIMAX model predictions (blue line) for Lake Mendota, including forecasts for 2015–2024. Shaded ribbons show the 80% and 95% confidence intervals for the forecasts. Because winter temperature is included as a predictor, the forecast varies with future temperature values rather than remaining constant.
+<span style="display:block;" id="fig:adv-06-arimax-plot"></span>
+<img src="biostats_files/figure-html/adv-06-arimax-plot-1.png" alt="Historical ice-cover duration (points) and ARIMAX model predictions (blue line) for Lake Mendota, including forecasts for 2015–2024. Shaded ribbons show the 80% and 95% confidence intervals for the forecasts. Because temperature is included as a predictor, the forecast varies with future temperature values rather than remaining constant." width="672"><p class="caption">
+Figure 22.11: Historical ice-cover duration (points) and ARIMAX model predictions (blue line) for Lake Mendota, including forecasts for 2015–2024. Shaded ribbons show the 80% and 95% confidence intervals for the forecasts. Because temperature is included as a predictor, the forecast varies with future temperature values rather than remaining constant.
+</p>
+</div>
+</div>
+<div id="glarma" class="section level3" number="22.3.2">
+<h3>
+<span class="header-section-number">22.3.2</span> GLARMA<a class="anchor" aria-label="anchor" href="#glarma"><i class="fas fa-link"></i></a>
+</h3>
+<p>One major limitation of ARIMAX models is their assumption of normally distributed errors, which makes them unsuitable for non-normal data. To overcome this, the Generalized Linear ARMA (GLARMA) model was developed, analogous to the extension from linear models to generalized linear models.</p>
+<p>In our next example, we analyze fish count data for Cutthroat Trout from Mack Creek, Oregon. Because these are count data, modeling the temporal process using a normal distribution would be inappropriate, making GLARMA a more suitable choice.</p>
+<div class="sourceCode" id="cb601"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Load HJ Andrews LTER vertebrate survey data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"and_vertebrates"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">df_ct</span> <span class="op">&lt;-</span> <span class="va">and_vertebrates</span>  <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">==</span> <span class="st">"Cutthroat trout"</span>,</span>
+<span>         <span class="va">length_1_mm</span> <span class="op">&gt;</span> <span class="fl">160</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>  <span class="co"># Keep only large cutthroat trout (hypothetical matured adults)</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># Group records by year</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>, <span class="co"># Count number of captures per year</span></span>
+<span>            .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">df_ct</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>,</span>
+<span>             y <span class="op">=</span> <span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>linetype <span class="op">=</span> <span class="st">"dotted"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Year"</span>,</span>
+<span>       y <span class="op">=</span> <span class="st">"Count"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="biostats_files/figure-html/adv-06-mack-data-1.png" width="672" style="display: block; margin: auto;"></div>
+<p>Cutthroat Trout is a cold-water species, so summer maximum temperature may be an important predictor of its abundance. To investigate this, we obtained climate data for Mack Creek from DAYMET.</p>
+<div class="sourceCode" id="cb602"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Download daily climate data from Daymet for Lake Mendota</span></span>
+<span><span class="va">list_mack</span> <span class="op">&lt;-</span> <span class="fu">download_daymet</span><span class="op">(</span></span>
+<span>  site <span class="op">=</span> <span class="st">"Mack_Creek"</span>,   <span class="co"># Arbitrary name you assign to this site</span></span>
+<span>  lat <span class="op">=</span> <span class="fl">44.2276</span>,         <span class="co"># Latitude of the lake</span></span>
+<span>  lon <span class="op">=</span> <span class="op">-</span><span class="fl">122.1673</span>,       <span class="co"># Longitude of the lake</span></span>
+<span>  start <span class="op">=</span> <span class="fl">1987</span>,          <span class="co"># Start year</span></span>
+<span>  end <span class="op">=</span> <span class="fl">2019</span>,            <span class="co"># End year</span></span>
+<span>  internal <span class="op">=</span> <span class="cn">TRUE</span>        <span class="co"># Return the data as an R object rather than saving to disk</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>As in the ARIMAX example, we can summarize summer temperature data using date as the reference.</p>
+<div class="sourceCode" id="cb603"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df_stemp</span> <span class="op">&lt;-</span> <span class="va">list_mack</span><span class="op">$</span><span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">yday</span>, sep <span class="op">=</span> <span class="st">"-"</span><span class="op">)</span>, format <span class="op">=</span> <span class="st">"%Y-%j"</span><span class="op">)</span>,</span>
+<span>    month <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/month.html">month</a></span><span class="op">(</span><span class="va">date</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">month</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># Select only summer months</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>temp_max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">tmax_deg_c</span><span class="op">)</span><span class="op">)</span> <span class="co"># Averaging daily max temperature</span></span>
+<span></span>
+<span><span class="co"># Add annual precipitation data by matching on year</span></span>
+<span><span class="va">df_ct</span> <span class="op">&lt;-</span> <span class="va">df_ct</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">df_stemp</span>,</span>
+<span>            by <span class="op">=</span> <span class="st">"year"</span><span class="op">)</span></span></code></pre></div>
+<p>The data format for <code>glarma()</code> is somewhat unique. The response variable must be provided as a vector, while the predictors (summer temperature in this case) must be supplied as a matrix. It is also essential to include a column for the intercept (a column of ones); without it, interpretation of model coefficients can be difficult.</p>
+<p>The <code>type</code> argument specifies the error distribution for the response variable. Since we are modeling count data, our first choice is the Poisson distribution. (<code>type = "Poi"</code>).</p>
+<p>The <code>phiLags</code> argument defines the order(s) of the AR process. Unlike the <code>Arima()</code> function, you can specify multiple AR orders separately—for example, 1 and 3, or 1 and 5. In this example, we will start with a first-order AR term as a baseline.</p>
+<div class="sourceCode" id="cb604"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Response variable: annual cutthroat trout counts</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">df_ct</span><span class="op">$</span><span class="va">n</span> </span>
+<span></span>
+<span><span class="co"># Design matrix for mean structure</span></span>
+<span><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/model.matrix.html">model.matrix</a></span><span class="op">(</span><span class="op">~</span> <span class="va">temp_max</span>, <span class="co"># Intercept + summer temperature predictor</span></span>
+<span>                  data <span class="op">=</span> <span class="va">df_ct</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">obj_glarma</span> <span class="op">&lt;-</span> <span class="fu">glarma</span><span class="op">(</span></span>
+<span>  y <span class="op">=</span> <span class="va">y</span>,                               <span class="co"># Count time series</span></span>
+<span>  X <span class="op">=</span> <span class="va">X</span>,                               <span class="co"># GLM design matrix</span></span>
+<span>  phiLags <span class="op">=</span> <span class="fl">1</span>,                         <span class="co"># AR structure in residuals (lag 1)</span></span>
+<span>  type <span class="op">=</span> <span class="st">"Poi"</span>                         <span class="co"># Poisson to allow count data</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">obj_glarma</span><span class="op">)</span>                    <span class="co"># Model coefficients and diagnostics</span></span></code></pre></div>
+<pre><code>## 
+## Call: glarma(y = y, X = X, type = "Poi", phiLags = 1)
+## 
+## Pearson Residuals:
+##     Min       1Q   Median       3Q      Max  
+## -2.0852  -0.8918  -0.0879   1.0448   3.2881  
+## 
+## GLARMA Coefficients:
+##       Estimate Std.Error z-ratio Pr(&gt;|z|)    
+## phi_1   0.1644    0.0415   3.962 7.42e-05 ***
+## 
+## Linear Model Coefficients:
+##             Estimate Std.Error z-ratio Pr(&gt;|z|)    
+## (Intercept)  3.50886   0.91518   3.834 0.000126 ***
+## temp_max    -0.05208   0.03614  -1.441 0.149537    
+## 
+##     Null deviance: 76.138  on 32  degrees of freedom
+## Residual deviance: 53.679  on 30  degrees of freedom
+## AIC: 191.0176 
+## 
+## Number of Fisher Scoring iterations: 30
+## 
+## LRT and Wald Test:
+## Alternative hypothesis: model is a GLARMA process
+## Null hypothesis: model is a GLM with the same regression structure
+##           Statistic  p-value    
+## LR Test       10.45  0.00123 ** 
+## Wald Test     15.70 7.42e-05 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+<p>The <code>Linear Model Coefficients</code> section can be interpreted much like the output of a standard GLM. The temperature effect is estimated to be insignificant - compare this result with the <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> function with Poisson errors, which would produce a significant effect of summer temperature (i.e., likely Type I error due to temporal autocorrelation)!</p>
+<p>In addition, GLARMA provides extra sections – most notably, <code>GLARMA Coefficients</code> – which summarize the estimated autoregressive (AR) parameters. In our example, the first-order AR parameter, <code>phi_1</code>, is estimated at approximately 0.16. This parameter is estimated on the link scale; for a Poisson distribution, that corresponds to the log scale.</p>
+<p>Unfortunately, the <code>glarma()</code> function does not include automated model selection. Therefore, we must choose and compare model orders manually. Here, we will explore different AR orders, from 1 to 3. The following code fits these three models and reports their AIC values for comparison.</p>
+<div class="sourceCode" id="cb606"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">list_glarma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>,</span>
+<span>                      <span class="kw">function</span><span class="op">(</span><span class="va">o</span><span class="op">)</span> <span class="op">{</span></span>
+<span>                        <span class="va">obj_glarma</span> <span class="op">&lt;-</span> <span class="fu">glarma</span><span class="op">(</span>y <span class="op">=</span> <span class="va">y</span>, </span>
+<span>                                             X <span class="op">=</span> <span class="va">X</span>, </span>
+<span>                                             phiLags <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">o</span><span class="op">)</span>,</span>
+<span>                                             type <span class="op">=</span> <span class="st">"Poi"</span><span class="op">)</span></span>
+<span>                      <span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">list_glarma</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">$</span><span class="va">aic</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [[1]]
+## [1] 191.0176
+## 
+## [[2]]
+## [1] 192.2589
+## 
+## [[3]]
+## [1] 192.8682</code></pre>
+<p>The AR(1) model has the lowest AIC, suggesting that our initial choice of a first-order autoregressive term was reasonable. As with the <code>Arima()</code> function, the GLARMA model allows us to obtain fitted values using the <code><a href="https://rdrr.io/r/stats/fitted.values.html">fitted()</a></code> function.</p>
+<div class="sourceCode" id="cb608"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df_ct</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>fit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html">fitted</a></span><span class="op">(</span><span class="va">obj_glarma</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>  <span class="co"># Add GLARMA fitted values as a new column</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="va">year</span>,</span>
+<span>    y <span class="op">=</span> <span class="va">n</span>,</span>
+<span>    color <span class="op">=</span> <span class="va">temp_max</span></span>
+<span>  <span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="va">year</span>, <span class="co"># X-axis: year</span></span>
+<span>    y <span class="op">=</span> <span class="va">fit</span>   <span class="co"># Y-axis: GLARMA fitted values</span></span>
+<span>  <span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_color_viridis_c</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="co"># Continuous color scale for temperature</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    y <span class="op">=</span> <span class="st">"Population Count"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Year"</span>,            </span>
+<span>    color <span class="op">=</span> <span class="st">"Temperature"</span> <span class="co"># Legend title</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:adv-06-glarma-plot"></span>
+<img src="biostats_files/figure-html/adv-06-glarma-plot-1.png" alt="Observed annual cutthroat trout counts at Mack Creek, Oregon, colored by maximum summer temperature, with fitted values from the first-order GLARMA model overlaid as a line." width="672"><p class="caption">
+Figure 22.12: Observed annual cutthroat trout counts at Mack Creek, Oregon, colored by maximum summer temperature, with fitted values from the first-order GLARMA model overlaid as a line.
 </p>
 </div>
 
@@ -650,11 +809,11 @@ Figure 22.11: Historical ice-cover duration (points) and ARIMAX model prediction
 
   <div class="chapter-nav">
 <div class="prev"><a href="structural-equation-modeling.html"><span class="header-section-number">21</span> Structural Equation Modeling</a></div>
-<div class="next"><a href="basic-terminology.html"><span class="header-section-number">23</span> Basic Terminology</a></div>
+<div class="next"><a href="basic-terminology.html">Basic Terminology</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#time-series-analaysis"><span class="header-section-number">22</span> Time-Series Analaysis</a></li>
+<li><a class="nav-link" href="#time-series-analysis"><span class="header-section-number">22</span> Time-Series Analysis</a></li>
 <li>
 <a class="nav-link" href="#pitfall-of-time-series"><span class="header-section-number">22.1</span> Pitfall of Time-Series</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#time-series-anormalies"><span class="header-section-number">22.1.1</span> Time-series anormalies</a></li>
@@ -671,7 +830,10 @@ Figure 22.11: Historical ice-cover duration (points) and ARIMAX model prediction
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#applied-models"><span class="header-section-number">22.3</span> Applied Models</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#arimax"><span class="header-section-number">22.3.1</span> ARIMAX</a></li></ul>
+<a class="nav-link" href="#applied-models"><span class="header-section-number">22.3</span> Applied Models</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#arimax"><span class="header-section-number">22.3.1</span> ARIMAX</a></li>
+<li><a class="nav-link" href="#glarma"><span class="header-section-number">22.3.2</span> GLARMA</a></li>
+</ul>
 </li>
 </ul>
 

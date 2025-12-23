@@ -74,9 +74,9 @@
 <li><a class="" href="unconstrained-ordination.html"><span class="header-section-number">19</span> Unconstrained Ordination</a></li>
 <li><a class="" href="constrained-ordination.html"><span class="header-section-number">20</span> Constrained Ordination</a></li>
 <li><a class="active" href="structural-equation-modeling.html"><span class="header-section-number">21</span> Structural Equation Modeling</a></li>
-<li><a class="" href="time-series-analaysis.html"><span class="header-section-number">22</span> Time-Series Analaysis</a></li>
+<li><a class="" href="time-series-analysis.html"><span class="header-section-number">22</span> Time-Series Analysis</a></li>
 <li class="book-part">Appendix</li>
-<li><a class="" href="basic-terminology.html"><span class="header-section-number">23</span> Basic Terminology</a></li>
+<li><a class="" href="basic-terminology.html">Basic Terminology</a></li>
 <li><a class="" href="git-github.html">Git &amp; GitHub</a></li>
 <li><a class="" href="base-plot.html">Base Plot</a></li>
 </ul>
@@ -106,7 +106,7 @@
 <h2>
 <span class="header-section-number">21.1</span> Path analysis<a class="anchor" aria-label="anchor" href="#path-analysis"><i class="fas fa-link"></i></a>
 </h2>
-<p><strong>Path analysis is a special case of SEM.</strong> It is designed for cases where all variables of interest are directly measured, and you are interested in direct and indirect effects between those observed variables.</p>
+<p>Path analysis is a special case of SEM. It is designed for cases where all variables of interest are directly measured, and you are interested in direct and indirect effects between those observed variables.</p>
 <p>Let’s use the following data set, which involves plant, herbivore, and predator variables measured in 100 plots.</p>
 <div class="sourceCode" id="cb550"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Specify the URL of the raw CSV file on GitHub</span></span>
@@ -131,7 +131,7 @@
 <p>This dataset contains measurements for each plot, including plant biomass (<code>mass_plant</code>), variation in plant height expressed as the coefficient of variation (<code>cv_h_plant</code>), herbivore biomass (<code>mass_herbiv</code>), and predator biomass (<code>mass_pred</code>), along with a plot identifier (<code>plot_id</code>).</p>
 <div id="directed-acyclic-graph" class="section level3" number="21.1.1">
 <h3>
-<span class="header-section-number">21.1.1</span> Directed Acyclic Graph<a class="anchor" aria-label="anchor" href="#directed-acyclic-graph"><i class="fas fa-link"></i></a>
+<span class="header-section-number">21.1.1</span> Directed acyclic graph<a class="anchor" aria-label="anchor" href="#directed-acyclic-graph"><i class="fas fa-link"></i></a>
 </h3>
 <p>Given the bottom-up influences in this system, these variables may be sequentially connected, with plant biomass affecting herbivore biomass, which in turn affects predator biomass. At the same time, variation in plant height (<code>cv_h_plant</code>) may reflect shelter availability for herbivores, suggesting that this variable could also influence higher trophic levels.</p>
 <p>In such a system, we can start with a full network represented as a directed acyclic graph (DAG), which encodes the hypothesized causal relationships among variables.</p>
@@ -142,9 +142,9 @@ Figure 21.1: Directed acyclic graph (DAG) representing the hypothesized causal s
 </p>
 </div>
 <p>In these networks, discerning two types of variables is particularly important: endogenous and exogenous variables.</p>
-<p><strong>Endogenous variables</strong> are those whose values are influenced by other variables in the system; they have one or more incoming arrows in the DAG. In our example, herbivore and predator biomass are endogenous because they depend on plant biomass and other factors.</p>
-<p><strong>Exogenous variables</strong> are determined outside the system and are not influenced by other variables in the network; they only have outgoing arrows. For instance, plant biomass and variation in plant height can be treated as exogenous, as they drive changes in higher trophic levels without being influenced by them.</p>
-<p>What makes this network a DAG is <strong>the absence of loops</strong>: all arrows flow from lower to higher trophic levels, with no feedback to lower levels. This excludes potential influences of higher trophic levels on lower ones (i.e., feedback loops). However, such cyclic relationships cannot be incorporated within the standard SEM framework, which is one of its major limitations.</p>
+<p>Endogenous variables are those whose values are influenced by other variables in the system; they have one or more incoming arrows in the DAG. In our example, herbivore and predator biomass are endogenous because they depend on plant biomass and other factors.</p>
+<p>Exogenous variables are determined outside the system and are not influenced by other variables in the network; they only have outgoing arrows. For instance, plant biomass and variation in plant height can be treated as exogenous, as they drive changes in higher trophic levels without being influenced by them.</p>
+<p>What makes this network a DAG is the absence of loops: all arrows flow from lower to higher trophic levels, with no feedback to lower levels. This excludes potential influences of higher trophic levels on lower ones (i.e., feedback loops). However, such cyclic relationships cannot be incorporated within the standard SEM framework, which is one of its major limitations.</p>
 </div>
 <div id="develop-a-hypothesis" class="section level3" number="21.1.2">
 <h3>
@@ -202,7 +202,7 @@ Figure 21.2: Simplified directed acyclic graph (DAG) representing the hypothesiz
 ##   Degrees of freedom                                 2
 ##   P-value (Chi-square)                           0.480</code></pre>
 <p>The most important output from the <code>sem()</code> function is the <code>Model Test User Model</code> section, which reports the chi-square test statistic, degrees of freedom, and p-value.</p>
-<p>The test statistic (1.466) measures the discrepancy between the SEM model-implied covariance matrix and the observed covariance matrix, while the degrees of freedom provide a sense of how simple the model is relative to the full DAG—that is, how many potential links from the full DAG are omitted. In other words, the test essentially asks: <strong>“Does the model adequately reproduce the observed relationships in the data?”</strong></p>
+<p>The test statistic (1.466) measures the discrepancy between the SEM model-implied covariance matrix and the observed covariance matrix, while the degrees of freedom provide a sense of how simple the model is relative to the full DAG—that is, how many potential links from the full DAG are omitted. In other words, the test essentially asks: “Does the model adequately reproduce the observed relationships in the data?”</p>
 <p>Unlike ordinary hypothesis tests, the p-value here tests the null hypothesis that the model fits the data perfectly. A high p-value (typically &gt; 0.05) indicates no evidence of misfit. In this case, the p-value of 0.480 suggests that the model provides a good fit to the data.</p>
 <p>We can obtain estimates for each path in the model, which quantify the strength of the relationships among variables:</p>
 <div class="sourceCode" id="cb556"><pre class="downlit sourceCode r">
@@ -335,8 +335,8 @@ Figure 21.3: Comparison of two alternative directed acyclic graphs (DAGs) repres
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-181-1.png" width="672" style="display: block; margin: auto;"></div>
-<p>These plant traits may collectively represent plant tissue <strong>“palatability,”</strong> which is influenced by soil fertility and, in turn, affects herbivory rate.</p>
-<p>In this context, we can define a latent variable, <strong>palatability</strong>, as a function of the three plant traits. This latent variable then serves as a mediator linking soil fertility to herbivory rate. With this addition, the corresponding path diagram is modified to reflect the inclusion of the latent construct.</p>
+<p>These plant traits may collectively represent plant tissue “palatability,” which is influenced by soil fertility and, in turn, affects herbivory rate.</p>
+<p>In this context, we can define a latent variable, palatability, as a function of the three plant traits. This latent variable then serves as a mediator linking soil fertility to herbivory rate. With this addition, the corresponding path diagram is modified to reflect the inclusion of the latent construct.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:dag-sem-latent-plot"></span>
 <img src="biostats_files/figure-html/dag-sem-latent-plot-1.png" alt="DAG of the structural equation model (SEM) linking soil fertility, palatability, and herbivory. Observed variables (SLA, CN Ratio, % Lignin, Soil N, Herbivory) are shown as circles, while the latent variable Palatability is shown as a square. Unlike a simple path analysis, SEM allows the inclusion of latent constructs that are inferred from multiple observed indicators, enabling the decomposition of complex traits like palatability into their underlying components." width="672"><p class="caption">
@@ -348,7 +348,7 @@ Figure 21.4: DAG of the structural equation model (SEM) linking soil fertility, 
 <h3>
 <span class="header-section-number">21.2.2</span> Implementation<a class="anchor" aria-label="anchor" href="#implementation-1"><i class="fas fa-link"></i></a>
 </h3>
-<p>When implementing SEM, we use the special syntax <code>=~</code> to specify <strong>latent variables</strong> in the model. In our example, we may use the following syntax: <code>palatability =~ sla + cn_ratio + perlignin</code> to construct a latent variable composed of three plant traits. By including latent constructs, SEM extends traditional path analysis, offering a more flexible framework to model complex relationships.</p>
+<p>When implementing SEM, we use the special syntax <code>=~</code> to specify latent variables in the model. In our example, we may use the following syntax: <code>palatability =~ sla + cn_ratio + perlignin</code> to construct a latent variable composed of three plant traits. By including latent constructs, SEM extends traditional path analysis, offering a more flexible framework to model complex relationships.</p>
 <div class="sourceCode" id="cb565"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_sem</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
 <span><span class="st"># latent variable</span></span>
@@ -427,27 +427,22 @@ Figure 21.4: DAG of the structural equation model (SEM) linking soil fertility, 
 <h2>
 <span class="header-section-number">21.3</span> Limitation<a class="anchor" aria-label="anchor" href="#limitation"><i class="fas fa-link"></i></a>
 </h2>
-<p>The examples above rely on one major assumption: in the <code>lavaan</code> package, <strong>all variables in the model are assumed to follow a normal distribution.</strong> This can be a restrictive assumption, especially given the variety of data types often encountered in biological research.</p>
+<p>The examples above rely on one major assumption: in the <code>lavaan</code> package, all variables in the model are assumed to follow a normal distribution. This can be a restrictive assumption, especially given the variety of data types often encountered in biological research.</p>
 <p>Importantly, this limitation comes from the package, not from the underlying statistics. Mathematically, it is possible to construct path analysis or SEM with non-normal variables or even include random effects.</p>
-<p>However, such models are challenging to estimate using standard methods because the likelihood function becomes highly complex. In these cases, Bayesian methods would provide a more flexible framework (examples: <a href="onlinelibrary.wiley.com/doi/abs/10.1111/1365-2656.12415">Takagi et al. 2014</a>; <a href="doi.org/10.1007%2Fs10021-017-0183-3">Terui et al 2018</a>). While there are currently few packages that allow fully automated implementation, coding models directly in <strong>BUGS</strong> or <strong>Stan</strong> makes it possible to fit these more complex SEMs (with a steep learning curve).</p>
-</div>
-<div id="laboratory-14" class="section level2" number="21.4">
-<h2>
-<span class="header-section-number">21.4</span> Laboratory<a class="anchor" aria-label="anchor" href="#laboratory-14"><i class="fas fa-link"></i></a>
-</h2>
+<p>However, such models are challenging to estimate using standard methods because the likelihood function becomes highly complex. In these cases, Bayesian methods would provide a more flexible framework (examples: <a href="onlinelibrary.wiley.com/doi/abs/10.1111/1365-2656.12415">Takagi et al. 2014</a>; <a href="doi.org/10.1007%2Fs10021-017-0183-3">Terui et al 2018</a>). While there are currently few packages that allow fully automated implementation, coding models directly in BUGS or Stan makes it possible to fit these more complex SEMs (with a steep learning curve).</p>
 
 </div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="constrained-ordination.html"><span class="header-section-number">20</span> Constrained Ordination</a></div>
-<div class="next"><a href="time-series-analaysis.html"><span class="header-section-number">22</span> Time-Series Analaysis</a></div>
+<div class="next"><a href="time-series-analysis.html"><span class="header-section-number">22</span> Time-Series Analysis</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#structural-equation-modeling"><span class="header-section-number">21</span> Structural Equation Modeling</a></li>
 <li>
 <a class="nav-link" href="#path-analysis"><span class="header-section-number">21.1</span> Path analysis</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#directed-acyclic-graph"><span class="header-section-number">21.1.1</span> Directed Acyclic Graph</a></li>
+<li><a class="nav-link" href="#directed-acyclic-graph"><span class="header-section-number">21.1.1</span> Directed acyclic graph</a></li>
 <li><a class="nav-link" href="#develop-a-hypothesis"><span class="header-section-number">21.1.2</span> Develop a hypothesis</a></li>
 <li><a class="nav-link" href="#implementation"><span class="header-section-number">21.1.3</span> Implementation</a></li>
 <li><a class="nav-link" href="#model-comparison-1"><span class="header-section-number">21.1.4</span> Model comparison</a></li>
@@ -460,7 +455,6 @@ Figure 21.4: DAG of the structural equation model (SEM) linking soil fertility, 
 </ul>
 </li>
 <li><a class="nav-link" href="#limitation"><span class="header-section-number">21.3</span> Limitation</a></li>
-<li><a class="nav-link" href="#laboratory-14"><span class="header-section-number">21.4</span> Laboratory</a></li>
 </ul>
 
       <div class="book-extra">
@@ -478,7 +472,7 @@ Figure 21.4: DAG of the structural equation model (SEM) linking soil fertility, 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-12-22.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-12-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

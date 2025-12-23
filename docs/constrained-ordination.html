@@ -74,9 +74,9 @@
 <li><a class="" href="unconstrained-ordination.html"><span class="header-section-number">19</span> Unconstrained Ordination</a></li>
 <li><a class="active" href="constrained-ordination.html"><span class="header-section-number">20</span> Constrained Ordination</a></li>
 <li><a class="" href="structural-equation-modeling.html"><span class="header-section-number">21</span> Structural Equation Modeling</a></li>
-<li><a class="" href="time-series-analaysis.html"><span class="header-section-number">22</span> Time-Series Analaysis</a></li>
+<li><a class="" href="time-series-analysis.html"><span class="header-section-number">22</span> Time-Series Analysis</a></li>
 <li class="book-part">Appendix</li>
-<li><a class="" href="basic-terminology.html"><span class="header-section-number">23</span> Basic Terminology</a></li>
+<li><a class="" href="basic-terminology.html">Basic Terminology</a></li>
 <li><a class="" href="git-github.html">Git &amp; GitHub</a></li>
 <li><a class="" href="base-plot.html">Base Plot</a></li>
 </ul>
@@ -91,7 +91,7 @@
 <span class="header-section-number">20</span> Constrained Ordination<a class="anchor" aria-label="anchor" href="#constrained-ordination"><i class="fas fa-link"></i></a>
 </h1>
 <p>In unconstrained ordination, the axes are derived solely from the multivariate response data, without reference to external predictors. These methods are useful for exploring dominant patterns, visualizing similarity among samples, and generating hypotheses.</p>
-<p>In many biological studies, however, we are explicitly interested in how external variables structure multivariate responses—for example, how species composition changes along gradients of moisture, land use, or management. <strong><em>Constrained</em></strong> ordination methods address this question by restricting the ordination axes to be linear (or unimodal) combinations of measured explanatory variables. In this sense, constrained ordination can be viewed as a multivariate extension of regression.</p>
+<p>In many biological studies, however, we are explicitly interested in how external variables structure multivariate responses—for example, how species composition changes along gradients of moisture, land use, or management. <em>Constrained</em> ordination methods address this question by restricting the ordination axes to be linear (or unimodal) combinations of measured explanatory variables. In this sense, constrained ordination can be viewed as a multivariate extension of regression.</p>
 <p>Learning Objectives:</p>
 <ul>
 <li><p>Understand the conceptual difference between unconstrained and constrained ordination.</p></li>
@@ -207,14 +207,14 @@
 ## Residual 19  1309.56                
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-<p>It is important to set <code>by = "margin"</code> when your goal is to assess the <em>individual</em> contribution of each predictor. An alternative option is <code>by = "terms"</code>, but this corresponds to a method analogous to <strong>Type I ANOVA</strong>, where predictors are tested sequentially in the order they appear in the model formula. As a result, the order of predictors matters: for example, specifying <code>m_y ~ n + p + k + ca</code> versus <code>m_y ~ p + n + k + ca</code> can lead to different test results, because each predictor is evaluated after accounting only for those entered before it.</p>
-<p>In contrast, setting <code>by = "margin"</code> invokes a procedure analogous to <strong>Type II ANOVA</strong>. Here, the effect of each predictor is tested <em>after accounting for all other predictors in the model</em>, regardless of their order in the formula. This approach is generally preferred when predictors are not strictly hierarchical and when the goal is to evaluate the unique contribution of each environmental variable to the multivariate response.</p>
+<p>It is important to set <code>by = "margin"</code> when your goal is to assess the <em>individual</em> contribution of each predictor. An alternative option is <code>by = "terms"</code>, but this corresponds to a method analogous to Type I ANOVA, where predictors are tested sequentially in the order they appear in the model formula. As a result, the order of predictors matters: for example, specifying <code>m_y ~ n + p + k + ca</code> versus <code>m_y ~ p + n + k + ca</code> can lead to different test results, because each predictor is evaluated after accounting only for those entered before it.</p>
+<p>In contrast, setting <code>by = "margin"</code> invokes a procedure analogous to Type II ANOVA. Here, the effect of each predictor is tested <em>after accounting for all other predictors in the model</em>, regardless of their order in the formula. This approach is generally preferred when predictors are not strictly hierarchical and when the goal is to evaluate the unique contribution of each environmental variable to the multivariate response.</p>
 </div>
 <div id="horseshoe-effect" class="section level4 unnumbered">
 <h4>Horseshoe effect<a class="anchor" aria-label="anchor" href="#horseshoe-effect"><i class="fas fa-link"></i></a>
 </h4>
 <p>Since RDA is based on PCA, it implicitly assumes linear relationships among the response variables. This assumption is often violated in typical biological datasets, as we see here. This example illustrates how RDA can be inappropriate for many biological response data, which are frequently non-normal and non-linearly related. RDA tends to perform better with variables that are approximately normally distributed and linearly related, such as physical measurements (e.g., temperature, water depth) or certain biological traits (e.g., body size).</p>
-<p>When applied to non-linear data, visualization of the RDA axes can reveal artifacts such as the <strong>horseshoe effect</strong>, a mathematical distortion that arises when non-linear relationships are inappropriately treated as linear.</p>
+<p>When applied to non-linear data, visualization of the RDA axes can reveal artifacts such as the horseshoe effect, a mathematical distortion that arises when non-linear relationships are inappropriately treated as linear.</p>
 <div class="sourceCode" id="cb543"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Extract site (sample) scores from the RDA object</span></span>
 <span><span class="co"># - display = "sites": returns the coordinates of sampling sites in RDA space</span></span>
@@ -286,7 +286,7 @@ Figure 20.1: RDA ordination plot of sites based on species composition. Each poi
 ## (Showing 8 of 19 unconstrained eigenvalues)</code></pre>
 <p>The interpretation is analogous to RDA. The total inertia represents the overall variation in Bray-Curtis dissimilarity among sites. The constrained inertia (1.197) indicates that about 26% of the total variation in species composition is explained by the environmental predictors (<code>n</code>, <code>p</code>, <code>k</code>, <code>ca</code>), with the remaining variation (3.606) unconstrained or residual.</p>
 <p>The eigenvalues for the constrained axes (dbRDA1 – dbRDA4) indicate how much of the explained variation each axis captures, while the unconstrained axes (MDS1–MDS15) summarize the residual variation in distance space.</p>
-<p>Although the output resembles RDA, an important distinction is that <strong>dbRDA operates on a distance matrix</strong>, rather than raw biological data (in this case, percent cover), allowing it to accommodate non-linear and non-Euclidean relationships. In this way, dbRDA extends RDA to more complex biological datasets, providing a flexible framework for constrained ordination when linear assumptions are not met.</p>
+<p>Although the output resembles RDA, an important distinction is that dbRDA operates on a distance matrix, rather than raw biological data (in this case, percent cover), allowing it to accommodate non-linear and non-Euclidean relationships. In this way, dbRDA extends RDA to more complex biological datasets, providing a flexible framework for constrained ordination when linear assumptions are not met.</p>
 <p>Re-running the permutation test produces a contrasting result for soil nitrogen, which is now neither statistically significant nor marginally significant. This highlights the importance of carefully assessing the properties of your data before applying linear ordination methods, as assumptions violations can strongly affect statistical inference.</p>
 <div class="sourceCode" id="cb546"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Perform a permutation test on the dbRDA object</span></span>
@@ -364,19 +364,19 @@ Figure 20.2: Scatterplot of sites in dbRDA space. Each point represents a site p
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td><strong>RDA (Redundancy Analysis)</strong></td>
+<td>RDA (Redundancy Analysis)</td>
 <td>Extends PCA to include environmental predictors; quantitative axes</td>
 <td>Assumes linear relationships; sensitive to non-normal or zero-inflated data; may produce artifacts (e.g., horseshoe effect) with long gradients</td>
 <td>Continuous trait data, species abundance matrices with linear responses, environmental gradients</td>
 </tr>
 <tr class="even">
-<td><strong>CCA (Canonical Correspondence Analysis)</strong></td>
+<td>CCA (Canonical Correspondence Analysis)</td>
 <td>Extends CA to include environmental predictors; models unimodal species responses; interpretable species–environment relationships</td>
 <td>Assumes unimodal responses; sensitive to rare species; may still produce arch effects if gradient is extreme</td>
 <td>Community ecology with count/abundance data, species–environment relationships along long ecological gradients</td>
 </tr>
 <tr class="odd">
-<td><strong>dbRDA / CAP (Distance-based RDA / Constrained Analysis of Principal Coordinates)</strong></td>
+<td>dbRDA / CAP (Distance-based RDA / Constrained Analysis of Principal Coordinates)</td>
 <td>Uses distance or dissimilarity matrix; flexible with non-Euclidean distances; can handle non-linear relationships</td>
 <td>Less quantitative than RDA in raw units; may produce small imaginary components; interpretation depends on distance metric</td>
 <td>Ecological community data with many zeros or non-normal distributions, Bray-Curtis or Jaccard distances, functional or phylogenetic distance matrices</td>
@@ -384,12 +384,6 @@ Figure 20.2: Scatterplot of sites in dbRDA space. Each point represents a site p
 </tbody>
 </table></div>
 </div>
-</div>
-<div id="laboratory-13" class="section level2" number="20.2">
-<h2>
-<span class="header-section-number">20.2</span> Laboratory<a class="anchor" aria-label="anchor" href="#laboratory-13"><i class="fas fa-link"></i></a>
-</h2>
-
 </div>
 </div>
   <div class="chapter-nav">
@@ -406,7 +400,6 @@ Figure 20.2: Scatterplot of sites in dbRDA space. Each point represents a site p
 <li><a class="nav-link" href="#other-options-1"><span class="header-section-number">20.1.3</span> Other Options</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#laboratory-13"><span class="header-section-number">20.2</span> Laboratory</a></li>
 </ul>
 
       <div class="book-extra">
@@ -424,7 +417,7 @@ Figure 20.2: Scatterplot of sites in dbRDA space. Each point represents a site p
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-12-22.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-12-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

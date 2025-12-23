@@ -18,7 +18,7 @@ pacman::p_load(tidyverse,
 
 ## Methods for Unconstrained Ordination
 
-We will explore **unconstrained ordination methods** for summarizing multivariate data. These methods differ in their assumptions, flexibility, and how interpretable the axes are, and the choice of method depends on the goals of your analysis. Here, we will focus on two extreme cases—**PCA** and **NMDS**—and demonstrate their application with examples. We will conclude by briefly introducing other ordination options, highlighting their potential uses for future analyses.
+We will explore unconstrained ordination methods for summarizing multivariate data. These methods differ in their assumptions, flexibility, and how interpretable the axes are, and the choice of method depends on the goals of your analysis. Here, we will focus on two extreme cases—PCA and NMDS—and demonstrate their application with examples. We will conclude by briefly introducing other ordination options, highlighting their potential uses for future analyses.
 
 ### PCA
 
@@ -221,12 +221,12 @@ obj_nmds <- metaMDS(
 )
 ```
 
-The `metaMDS()` function positions sites in a user-specified k-dimensional space (`k = 2`) so that the **ranked distances** (not observed distances!) in this reduced space closely match the original dissimilarities. It achieves this through an iterative optimization algorithm.
+The `metaMDS()` function positions sites in a user-specified k-dimensional space (`k = 2`) so that the ranked distances (not observed distances!) in this reduced space closely match the original dissimilarities. It achieves this through an iterative optimization algorithm.
 
 The resulting NMDS object contains several important pieces of information. It includes the coordinates of sites in NMDS space, which can be used for visualization or further analysis. It also reports a stress value, which quantifies how well the low-dimensional configuration represents the original distance relationships, with lower stress indicating a better fit. The above analysis resulted in the stress value of `r round(obj_nmds$stress, 2)`.
 
 | Stress Value | Interpretation |
-|-----------------------------------:|------------------------------------|
+|:-----------|------------------------------------|
 | 0.00 - 0.05 | Excellent representation; distances in NMDS closely match original dissimilarities |
 | 0.05 - 0.10 | Good representation; minor distortions in distances |
 | 0.10 - 0.20 | Fair representation; some distortions present but overall structure interpretable |
@@ -248,17 +248,17 @@ head(dune.env)
 
 The `dune.env` dataset contains 5 environmental variables for the 20 dune meadow sites.
 
--   **A1** measures the thickness of the topsoil horizon (top mineral layer).
+-   A1 measures the thickness of the topsoil horizon (top mineral layer).
 
--   **Moisture** is an ordered factor indicating soil moisture levels from dry to wet (levels 1, 2, 4, 5).
+-   Moisture is an ordered factor indicating soil moisture levels from dry to wet (levels 1, 2, 4, 5).
 
--   **Management** is a categorical variable describing the management type: Biological farming (`BF`), Hobby farming (`HF`), Nature Conservation Management (`NCM`), or Standard Farming (`SF`).
+-   Management is a categorical variable describing the management type: Biological farming (`BF`), Hobby farming (`HF`), Nature Conservation Management (`NCM`), or Standard Farming (`SF`).
 
--   **Use** indicates land-use intensity as an ordered factor from Hayfield to Haypastu to Pasture.
+-   Use indicates land-use intensity as an ordered factor from Hayfield to Haypastu to Pasture.
 
--   **Manure** is an ordered factor showing manure application levels from 0 to 4.
+-   Manure is an ordered factor showing manure application levels from 0 to 4.
 
-In this exercise, we will use the **“Use”** column to investigate whether variations in land-use intensity correspond to differences in plant community composition. The NMDS output stores the coordinates of each site in NMDS space in the `$points` element, with rows ordered according to the original distance matrix. While you can directly associate site attributes with these coordinates, it is important to ensure that the row order remains consistent to avoid mismatches.
+In this exercise, we will use the “Use” column to investigate whether variations in land-use intensity correspond to differences in plant community composition. The NMDS output stores the coordinates of each site in NMDS space in the `$points` element, with rows ordered according to the original distance matrix. While you can directly associate site attributes with these coordinates, it is important to ensure that the row order remains consistent to avoid mismatches.
 
 ```{r nmds-plot, fig.cap="NMDS ordination of plant communities in the Dutch dune meadows dataset (`dune`), with sites colored by land-use intensity (`Use`). The plot visualizes differences in community composition among sites along the first two NMDS axes."}
 # Combine environmental data with NMDS coordinates
@@ -292,7 +292,7 @@ To formally test whether plant community composition differs among levels of lan
 
 Unlike traditional MANOVA, PERMANOVA does not assume multivariate normality and can be applied directly to a distance or dissimilarity matrix, such as the Bray-Curtis distances used in the NMDS analysis.
 
-This approach assesses whether the centroids of groups—here, the categories of the “**Use**” variable—differ significantly in multivariate space. The `adonis2()` function from the `vegan` package can be used to perform this analysis, testing whether plant community composition differs among groups based on a chosen environmental factor.
+This approach assesses whether the centroids of groups—here, the categories of the “Use” variable—differ significantly in multivariate space. The `adonis2()` function from the `vegan` package can be used to perform this analysis, testing whether plant community composition differs among groups based on a chosen environmental factor.
 
 ```{r do-adonis}
 # Perform PERMANOVA to test whether plant community composition differs by land-use intensity
@@ -305,7 +305,7 @@ adonis2(
 
 We used PERMANOVA to test whether plant communities differ among the three land-use intensity categories (`use`). This method looks at the overall differences in species composition between groups and compares them to differences within groups. In our analysis, land-use intensity explains about 13% of the variation in plant communities, while the remaining 87% comes from other factors or natural variation (column `R2`).
 
-The test gave a p-value of 0.258, which means the differences we see are **not statistically significant**. In simple terms, even though the NMDS plot shows some separation between sites with different land-use intensity, the test suggests that these differences could easily have happened by chance. So, we do not have strong evidence that land-use intensity alone drives changes in plant community composition in this dataset.
+The test gave a p-value of 0.258, which means the differences we see are not statistically significant. In simple terms, even though the NMDS plot shows some separation between sites with different land-use intensity, the test suggests that these differences could easily have happened by chance. So, we do not have strong evidence that land-use intensity alone drives changes in plant community composition in this dataset.
 
 ### Other Options
 
@@ -315,30 +315,28 @@ Other ordination methods fall somewhere between these two approaches. For exampl
 
 | Method | Advantage | Limitation | Example Applications |
 |------------------|------------------|------------------|------------------|
-| **PCA (Principal Component Analysis)** | Preserves maximum quantitative variation; easy to interpret; widely used | Assumes linear relationships and roughly normal distribution; sensitive to outliers | Continuous trait data, environmental gradients, physiological measurements |
-| **PCoA (Principal Coordinates Analysis)** | Can use any distance or dissimilarity metric; preserves distances as well as possible | May produce negative eigenvalues if data not Euclidean; interpretation depends on metric chosen | Community ecology, phylogenetic distances, functional trait distances |
-| **CA (Correspondence Analysis)** | Works directly on count data; simultaneously ordinates sites and species; produces interpretable eigenvalues | Designed for count/abundance data rather than continuous variables; can produce "arch effect" with long gradients | Species-by-site abundance matrices, ecological community composition |
-| **MCA (Multiple Correspondence Analysis)** | Reduces dimensionality of multiple categorical variables; reveals patterns and associations among categories | Requires categorical variables; can be computationally intensive with many categories; interpretation requires understanding of dummy coding | Survey data with multiple choice questions, demographic patterns, clinical categorical variables, questionnaire analysis |
-| **NMDS (Non-metric Multidimensional Scaling)** | Very flexible; works with many data types and dissimilarity metrics; handles non-linear patterns and long gradients well | Only preserves rank-order information; axes not directly interpretable in units of original variables; requires multiple runs | Ecological community data with skewed or zero-inflated abundances; species composition comparisons |
+| PCA (Principal Component Analysis) | Preserves maximum quantitative variation; easy to interpret; widely used | Assumes linear relationships and roughly normal distribution; sensitive to outliers | Continuous trait data, environmental gradients, physiological measurements |
+| PCoA (Principal Coordinates Analysis) | Can use any distance or dissimilarity metric; preserves distances as well as possible | May produce negative eigenvalues if data not Euclidean; interpretation depends on metric chosen | Community ecology, phylogenetic distances, functional trait distances |
+| CA (Correspondence Analysis) | Works directly on count data; simultaneously ordinates sites and species; produces interpretable eigenvalues | Designed for count/abundance data rather than continuous variables; can produce "arch effect" with long gradients | Species-by-site abundance matrices, ecological community composition |
+| MCA (Multiple Correspondence Analysis) | Reduces dimensionality of multiple categorical variables; reveals patterns and associations among categories | Requires categorical variables; can be computationally intensive with many categories; interpretation requires understanding of dummy coding | Survey data with multiple choice questions, demographic patterns, clinical categorical variables, questionnaire analysis |
+| NMDS (Non-metric Multidimensional Scaling) | Very flexible; works with many data types and dissimilarity metrics; handles non-linear patterns and long gradients well | Only preserves rank-order information; axes not directly interpretable in units of original variables; requires multiple runs | Ecological community data with skewed or zero-inflated abundances; species composition comparisons |
 
 ### Axis Interpretability
 
-One key difference among ordination methods lies in the interpretability of the axes themselves. Methods can be broadly categorized into those with **directly interpretable axes** and those with **abstract distance-based axes**.
+One key difference among ordination methods lies in the interpretability of the axes themselves. Methods can be broadly categorized into those with directly interpretable axes and those with abstract distance-based axes.
 
-**PCA, CA, and MCA** produce axes that are meaningful transformations of the original data:
+PCA, CA, and MCA produce axes that are meaningful transformations of the original data:
 
--   **PCA**: The axes (principal components) are linear combinations of the original variables, so the coordinates along each axis are meaningful and can be interpreted in terms of the original measurements. For example, higher values on PC1 may reflect larger trait values or abundances across species. Each axis explains a specific percentage of the total variance, and loadings show how original variables contribute to each component.
+-   PCA: The axes (principal components) are linear combinations of the original variables, so the coordinates along each axis are meaningful and can be interpreted in terms of the original measurements. For example, higher values on PC1 may reflect larger trait values or abundances across species. Each axis explains a specific percentage of the total variance, and loadings show how original variables contribute to each component.
 
--   **CA**: The axes are weighted averages of species scores (for sites) and site scores (for species), with units in standard deviations of species turnover. Sites with similar species composition cluster together, and the position along each axis reflects species compositional change. Eigenvalues indicate the strength of each axis in capturing species turnover.
+-   CA: The axes are weighted averages of species scores (for sites) and site scores (for species), with units in standard deviations of species turnover. Sites with similar species composition cluster together, and the position along each axis reflects species compositional change. Eigenvalues indicate the strength of each axis in capturing species turnover.
 
--   **MCA**: Similar to PCA but for categorical data, the axes represent dimensions of variation among categorical variables. Coordinates reflect the association strength with particular categories, and contributions of each category to each dimension can be quantified.
+-   MCA: Similar to PCA but for categorical data, the axes represent dimensions of variation among categorical variables. Coordinates reflect the association strength with particular categories, and contributions of each category to each dimension can be quantified.
 
-**PCoA and NMDS** create axes in arbitrary units where only relative positions matter:
+PCoA and NMDS create axes in arbitrary units where only relative positions matter:
 
--   **PCoA**: Axes preserve the distances between samples as faithfully as possible based on the chosen distance metric. The axes themselves are in arbitrary units, but eigenvalues show how much of the total distance variation each axis captures. The interpretation depends entirely on which distance metric was used (e.g., Bray-Curtis, UniFrac).
+-   PCoA: Axes preserve the distances between samples as faithfully as possible based on the chosen distance metric. The axes themselves are in arbitrary units, but eigenvalues show how much of the total distance variation each axis captures. The interpretation depends entirely on which distance metric was used (e.g., Bray-Curtis, UniFrac).
 
--   **NMDS**: Axes are purely abstract dimensions constructed to best preserve the rank order of dissimilarities between sites. The numeric values along NMDS axes do not have inherent meaning; only the relative distances between points matter. Unlike PCoA, NMDS doesn't even preserve exact distances—only their rank order. As a result, NMDS plots are interpreted in terms of patterns of similarity or separation among sites, not in terms of the absolute values on each axis. The quality of fit is measured by stress values rather than variance explained.
+-   NMDS: Axes are purely abstract dimensions constructed to best preserve the rank order of dissimilarities between sites. The numeric values along NMDS axes do not have inherent meaning; only the relative distances between points matter. Unlike PCoA, NMDS doesn't even preserve exact distances—only their rank order. As a result, NMDS plots are interpreted in terms of patterns of similarity or separation among sites, not in terms of the absolute values on each axis. The quality of fit is measured by stress values rather than variance explained.
 
-**Practical implication**: For methods with interpretable axes (PCA, CA, MCA), you can meaningfully describe what high or low values on an axis represent. For distance-based methods (PCoA, NMDS), you can only describe which samples are similar or dissimilar to each other.
-
-## Laboratory
+Practical implication: For methods with interpretable axes (PCA, CA, MCA), you can meaningfully describe what high or low values on an axis represent. For distance-based methods (PCoA, NMDS), you can only describe which samples are similar or dissimilar to each other.

@@ -74,7 +74,9 @@
 <li><a class="active" href="unconstrained-ordination.html"><span class="header-section-number">19</span> Unconstrained Ordination</a></li>
 <li><a class="" href="constrained-ordination.html"><span class="header-section-number">20</span> Constrained Ordination</a></li>
 <li><a class="" href="structural-equation-modeling.html"><span class="header-section-number">21</span> Structural Equation Modeling</a></li>
+<li><a class="" href="time-series-analysis.html"><span class="header-section-number">22</span> Time-Series Analysis</a></li>
 <li class="book-part">Appendix</li>
+<li><a class="" href="basic-terminology.html">Basic Terminology</a></li>
 <li><a class="" href="git-github.html">Git &amp; GitHub</a></li>
 <li><a class="" href="base-plot.html">Base Plot</a></li>
 </ul>
@@ -103,7 +105,7 @@
 <h2>
 <span class="header-section-number">19.1</span> Methods for Unconstrained Ordination<a class="anchor" aria-label="anchor" href="#methods-for-unconstrained-ordination"><i class="fas fa-link"></i></a>
 </h2>
-<p>We will explore <strong>unconstrained ordination methods</strong> for summarizing multivariate data. These methods differ in their assumptions, flexibility, and how interpretable the axes are, and the choice of method depends on the goals of your analysis. Here, we will focus on two extreme cases—<strong>PCA</strong> and <strong>NMDS</strong>—and demonstrate their application with examples. We will conclude by briefly introducing other ordination options, highlighting their potential uses for future analyses.</p>
+<p>We will explore unconstrained ordination methods for summarizing multivariate data. These methods differ in their assumptions, flexibility, and how interpretable the axes are, and the choice of method depends on the goals of your analysis. Here, we will focus on two extreme cases—PCA and NMDS—and demonstrate their application with examples. We will conclude by briefly introducing other ordination options, highlighting their potential uses for future analyses.</p>
 <div id="pca" class="section level3" number="19.1.1">
 <h3>
 <span class="header-section-number">19.1.1</span> PCA<a class="anchor" aria-label="anchor" href="#pca"><i class="fas fa-link"></i></a>
@@ -295,36 +297,36 @@ Figure 19.3: Pairwise scatterplots of the first three plant species in the Dutch
 ## ... Procrustes: rmse 1.983547e-05  max resid 6.214347e-05 
 ## ... Similar to previous best
 ## *** Best solution repeated 4 times</code></pre>
-<p>The <code>metaMDS()</code> function positions sites in a user-specified k-dimensional space (<code>k = 2</code>) so that the <strong>ranked distances</strong> (not observed distances!) in this reduced space closely match the original dissimilarities. It achieves this through an iterative optimization algorithm.</p>
+<p>The <code>metaMDS()</code> function positions sites in a user-specified k-dimensional space (<code>k = 2</code>) so that the ranked distances (not observed distances!) in this reduced space closely match the original dissimilarities. It achieves this through an iterative optimization algorithm.</p>
 <p>The resulting NMDS object contains several important pieces of information. It includes the coordinates of sites in NMDS space, which can be used for visualization or further analysis. It also reports a stress value, which quantifies how well the low-dimensional configuration represents the original distance relationships, with lower stress indicating a better fit. The above analysis resulted in the stress value of 0.12.</p>
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
-<col width="50%">
-<col width="50%">
+<col width="25%">
+<col width="75%">
 </colgroup>
 <thead><tr class="header">
-<th align="right">Stress Value</th>
+<th align="left">Stress Value</th>
 <th>Interpretation</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="right">0.00 - 0.05</td>
+<td align="left">0.00 - 0.05</td>
 <td>Excellent representation; distances in NMDS closely match original dissimilarities</td>
 </tr>
 <tr class="even">
-<td align="right">0.05 - 0.10</td>
+<td align="left">0.05 - 0.10</td>
 <td>Good representation; minor distortions in distances</td>
 </tr>
 <tr class="odd">
-<td align="right">0.10 - 0.20</td>
+<td align="left">0.10 - 0.20</td>
 <td>Fair representation; some distortions present but overall structure interpretable</td>
 </tr>
 <tr class="even">
-<td align="right">0.20 - 0.30</td>
+<td align="left">0.20 - 0.30</td>
 <td>Poor representation; results should be interpreted with caution</td>
 </tr>
 <tr class="odd">
-<td align="right">&gt; 0.30</td>
+<td align="left">&gt; 0.30</td>
 <td>Very poor representation; ordination is likely unreliable</td>
 </tr>
 </tbody>
@@ -348,13 +350,13 @@ Figure 19.3: Pairwise scatterplots of the first three plant species in the Dutch
 ## 6 4.3        1         HF Haypastu      2</code></pre>
 <p>The <code>dune.env</code> dataset contains 5 environmental variables for the 20 dune meadow sites.</p>
 <ul>
-<li><p><strong>A1</strong> measures the thickness of the topsoil horizon (top mineral layer).</p></li>
-<li><p><strong>Moisture</strong> is an ordered factor indicating soil moisture levels from dry to wet (levels 1, 2, 4, 5).</p></li>
-<li><p><strong>Management</strong> is a categorical variable describing the management type: Biological farming (<code>BF</code>), Hobby farming (<code>HF</code>), Nature Conservation Management (<code>NCM</code>), or Standard Farming (<code>SF</code>).</p></li>
-<li><p><strong>Use</strong> indicates land-use intensity as an ordered factor from Hayfield to Haypastu to Pasture.</p></li>
-<li><p><strong>Manure</strong> is an ordered factor showing manure application levels from 0 to 4.</p></li>
+<li><p>A1 measures the thickness of the topsoil horizon (top mineral layer).</p></li>
+<li><p>Moisture is an ordered factor indicating soil moisture levels from dry to wet (levels 1, 2, 4, 5).</p></li>
+<li><p>Management is a categorical variable describing the management type: Biological farming (<code>BF</code>), Hobby farming (<code>HF</code>), Nature Conservation Management (<code>NCM</code>), or Standard Farming (<code>SF</code>).</p></li>
+<li><p>Use indicates land-use intensity as an ordered factor from Hayfield to Haypastu to Pasture.</p></li>
+<li><p>Manure is an ordered factor showing manure application levels from 0 to 4.</p></li>
 </ul>
-<p>In this exercise, we will use the <strong>“Use”</strong> column to investigate whether variations in land-use intensity correspond to differences in plant community composition. The NMDS output stores the coordinates of each site in NMDS space in the <code>$points</code> element, with rows ordered according to the original distance matrix. While you can directly associate site attributes with these coordinates, it is important to ensure that the row order remains consistent to avoid mismatches.</p>
+<p>In this exercise, we will use the “Use” column to investigate whether variations in land-use intensity correspond to differences in plant community composition. The NMDS output stores the coordinates of each site in NMDS space in the <code>$points</code> element, with rows ordered according to the original distance matrix. While you can directly associate site attributes with these coordinates, it is important to ensure that the row order remains consistent to avoid mismatches.</p>
 <div class="sourceCode" id="cb533"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Combine environmental data with NMDS coordinates</span></span>
 <span><span class="va">df_nmds</span> <span class="op">&lt;-</span> <span class="va">dune.env</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>           <span class="co"># Start with the environmental data for each site</span></span>
@@ -389,7 +391,7 @@ Figure 19.4: NMDS ordination of plant communities in the Dutch dune meadows data
 </h4>
 <p>To formally test whether plant community composition differs among levels of land-use intensity, we can use PERMANOVA (Permutational Multivariate Analysis of Variance).</p>
 <p>Unlike traditional MANOVA, PERMANOVA does not assume multivariate normality and can be applied directly to a distance or dissimilarity matrix, such as the Bray-Curtis distances used in the NMDS analysis.</p>
-<p>This approach assesses whether the centroids of groups—here, the categories of the “<strong>Use</strong>” variable—differ significantly in multivariate space. The <code>adonis2()</code> function from the <code>vegan</code> package can be used to perform this analysis, testing whether plant community composition differs among groups based on a chosen environmental factor.</p>
+<p>This approach assesses whether the centroids of groups—here, the categories of the “Use” variable—differ significantly in multivariate space. The <code>adonis2()</code> function from the <code>vegan</code> package can be used to perform this analysis, testing whether plant community composition differs among groups based on a chosen environmental factor.</p>
 <div class="sourceCode" id="cb534"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Perform PERMANOVA to test whether plant community composition differs by land-use intensity</span></span>
 <span><span class="fu">adonis2</span><span class="op">(</span></span>
@@ -407,7 +409,7 @@ Figure 19.4: NMDS ordination of plant communities in the Dutch dune meadows data
 ## Residual 17   3.7459 0.87133              
 ## Total    19   4.2990 1.00000</code></pre>
 <p>We used PERMANOVA to test whether plant communities differ among the three land-use intensity categories (<code>use</code>). This method looks at the overall differences in species composition between groups and compares them to differences within groups. In our analysis, land-use intensity explains about 13% of the variation in plant communities, while the remaining 87% comes from other factors or natural variation (column <code>R2</code>).</p>
-<p>The test gave a p-value of 0.258, which means the differences we see are <strong>not statistically significant</strong>. In simple terms, even though the NMDS plot shows some separation between sites with different land-use intensity, the test suggests that these differences could easily have happened by chance. So, we do not have strong evidence that land-use intensity alone drives changes in plant community composition in this dataset.</p>
+<p>The test gave a p-value of 0.258, which means the differences we see are not statistically significant. In simple terms, even though the NMDS plot shows some separation between sites with different land-use intensity, the test suggests that these differences could easily have happened by chance. So, we do not have strong evidence that land-use intensity alone drives changes in plant community composition in this dataset.</p>
 </div>
 </div>
 <div id="other-options" class="section level3" number="19.1.3">
@@ -431,31 +433,31 @@ Figure 19.4: NMDS ordination of plant communities in the Dutch dune meadows data
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td><strong>PCA (Principal Component Analysis)</strong></td>
+<td>PCA (Principal Component Analysis)</td>
 <td>Preserves maximum quantitative variation; easy to interpret; widely used</td>
 <td>Assumes linear relationships and roughly normal distribution; sensitive to outliers</td>
 <td>Continuous trait data, environmental gradients, physiological measurements</td>
 </tr>
 <tr class="even">
-<td><strong>PCoA (Principal Coordinates Analysis)</strong></td>
+<td>PCoA (Principal Coordinates Analysis)</td>
 <td>Can use any distance or dissimilarity metric; preserves distances as well as possible</td>
 <td>May produce negative eigenvalues if data not Euclidean; interpretation depends on metric chosen</td>
 <td>Community ecology, phylogenetic distances, functional trait distances</td>
 </tr>
 <tr class="odd">
-<td><strong>CA (Correspondence Analysis)</strong></td>
+<td>CA (Correspondence Analysis)</td>
 <td>Works directly on count data; simultaneously ordinates sites and species; produces interpretable eigenvalues</td>
 <td>Designed for count/abundance data rather than continuous variables; can produce “arch effect” with long gradients</td>
 <td>Species-by-site abundance matrices, ecological community composition</td>
 </tr>
 <tr class="even">
-<td><strong>MCA (Multiple Correspondence Analysis)</strong></td>
+<td>MCA (Multiple Correspondence Analysis)</td>
 <td>Reduces dimensionality of multiple categorical variables; reveals patterns and associations among categories</td>
 <td>Requires categorical variables; can be computationally intensive with many categories; interpretation requires understanding of dummy coding</td>
 <td>Survey data with multiple choice questions, demographic patterns, clinical categorical variables, questionnaire analysis</td>
 </tr>
 <tr class="odd">
-<td><strong>NMDS (Non-metric Multidimensional Scaling)</strong></td>
+<td>NMDS (Non-metric Multidimensional Scaling)</td>
 <td>Very flexible; works with many data types and dissimilarity metrics; handles non-linear patterns and long gradients well</td>
 <td>Only preserves rank-order information; axes not directly interpretable in units of original variables; requires multiple runs</td>
 <td>Ecological community data with skewed or zero-inflated abundances; species composition comparisons</td>
@@ -467,26 +469,21 @@ Figure 19.4: NMDS ordination of plant communities in the Dutch dune meadows data
 <h3>
 <span class="header-section-number">19.1.4</span> Axis Interpretability<a class="anchor" aria-label="anchor" href="#axis-interpretability"><i class="fas fa-link"></i></a>
 </h3>
-<p>One key difference among ordination methods lies in the interpretability of the axes themselves. Methods can be broadly categorized into those with <strong>directly interpretable axes</strong> and those with <strong>abstract distance-based axes</strong>.</p>
-<p><strong>PCA, CA, and MCA</strong> produce axes that are meaningful transformations of the original data:</p>
+<p>One key difference among ordination methods lies in the interpretability of the axes themselves. Methods can be broadly categorized into those with directly interpretable axes and those with abstract distance-based axes.</p>
+<p>PCA, CA, and MCA produce axes that are meaningful transformations of the original data:</p>
 <ul>
-<li><p><strong>PCA</strong>: The axes (principal components) are linear combinations of the original variables, so the coordinates along each axis are meaningful and can be interpreted in terms of the original measurements. For example, higher values on PC1 may reflect larger trait values or abundances across species. Each axis explains a specific percentage of the total variance, and loadings show how original variables contribute to each component.</p></li>
-<li><p><strong>CA</strong>: The axes are weighted averages of species scores (for sites) and site scores (for species), with units in standard deviations of species turnover. Sites with similar species composition cluster together, and the position along each axis reflects species compositional change. Eigenvalues indicate the strength of each axis in capturing species turnover.</p></li>
-<li><p><strong>MCA</strong>: Similar to PCA but for categorical data, the axes represent dimensions of variation among categorical variables. Coordinates reflect the association strength with particular categories, and contributions of each category to each dimension can be quantified.</p></li>
+<li><p>PCA: The axes (principal components) are linear combinations of the original variables, so the coordinates along each axis are meaningful and can be interpreted in terms of the original measurements. For example, higher values on PC1 may reflect larger trait values or abundances across species. Each axis explains a specific percentage of the total variance, and loadings show how original variables contribute to each component.</p></li>
+<li><p>CA: The axes are weighted averages of species scores (for sites) and site scores (for species), with units in standard deviations of species turnover. Sites with similar species composition cluster together, and the position along each axis reflects species compositional change. Eigenvalues indicate the strength of each axis in capturing species turnover.</p></li>
+<li><p>MCA: Similar to PCA but for categorical data, the axes represent dimensions of variation among categorical variables. Coordinates reflect the association strength with particular categories, and contributions of each category to each dimension can be quantified.</p></li>
 </ul>
-<p><strong>PCoA and NMDS</strong> create axes in arbitrary units where only relative positions matter:</p>
+<p>PCoA and NMDS create axes in arbitrary units where only relative positions matter:</p>
 <ul>
-<li><p><strong>PCoA</strong>: Axes preserve the distances between samples as faithfully as possible based on the chosen distance metric. The axes themselves are in arbitrary units, but eigenvalues show how much of the total distance variation each axis captures. The interpretation depends entirely on which distance metric was used (e.g., Bray-Curtis, UniFrac).</p></li>
-<li><p><strong>NMDS</strong>: Axes are purely abstract dimensions constructed to best preserve the rank order of dissimilarities between sites. The numeric values along NMDS axes do not have inherent meaning; only the relative distances between points matter. Unlike PCoA, NMDS doesn’t even preserve exact distances—only their rank order. As a result, NMDS plots are interpreted in terms of patterns of similarity or separation among sites, not in terms of the absolute values on each axis. The quality of fit is measured by stress values rather than variance explained.</p></li>
+<li><p>PCoA: Axes preserve the distances between samples as faithfully as possible based on the chosen distance metric. The axes themselves are in arbitrary units, but eigenvalues show how much of the total distance variation each axis captures. The interpretation depends entirely on which distance metric was used (e.g., Bray-Curtis, UniFrac).</p></li>
+<li><p>NMDS: Axes are purely abstract dimensions constructed to best preserve the rank order of dissimilarities between sites. The numeric values along NMDS axes do not have inherent meaning; only the relative distances between points matter. Unlike PCoA, NMDS doesn’t even preserve exact distances—only their rank order. As a result, NMDS plots are interpreted in terms of patterns of similarity or separation among sites, not in terms of the absolute values on each axis. The quality of fit is measured by stress values rather than variance explained.</p></li>
 </ul>
-<p><strong>Practical implication</strong>: For methods with interpretable axes (PCA, CA, MCA), you can meaningfully describe what high or low values on an axis represent. For distance-based methods (PCoA, NMDS), you can only describe which samples are similar or dissimilar to each other.</p>
-</div>
-</div>
-<div id="laboratory-12" class="section level2" number="19.2">
-<h2>
-<span class="header-section-number">19.2</span> Laboratory<a class="anchor" aria-label="anchor" href="#laboratory-12"><i class="fas fa-link"></i></a>
-</h2>
+<p>Practical implication: For methods with interpretable axes (PCA, CA, MCA), you can meaningfully describe what high or low values on an axis represent. For distance-based methods (PCoA, NMDS), you can only describe which samples are similar or dissimilar to each other.</p>
 
+</div>
 </div>
 </div>
   <div class="chapter-nav">
@@ -504,7 +501,6 @@ Figure 19.4: NMDS ordination of plant communities in the Dutch dune meadows data
 <li><a class="nav-link" href="#axis-interpretability"><span class="header-section-number">19.1.4</span> Axis Interpretability</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#laboratory-12"><span class="header-section-number">19.2</span> Laboratory</a></li>
 </ul>
 
       <div class="book-extra">
@@ -522,7 +518,7 @@ Figure 19.4: NMDS ordination of plant communities in the Dutch dune meadows data
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-12-21.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-12-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

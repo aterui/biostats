@@ -19,7 +19,7 @@ pacman::p_load(tidyverse,
 
 ## Path analysis
 
-**Path analysis is a special case of SEM.** It is designed for cases where all variables of interest are directly measured, and you are interested in direct and indirect effects between those observed variables.
+Path analysis is a special case of SEM. It is designed for cases where all variables of interest are directly measured, and you are interested in direct and indirect effects between those observed variables.
 
 Let's use the following data set, which involves plant, herbivore, and predator variables measured in 100 plots.
 
@@ -33,7 +33,7 @@ url <- "https://raw.githubusercontent.com/aterui/biostats/master/data_raw/data_f
 
 This dataset contains measurements for each plot, including plant biomass (`mass_plant`), variation in plant height expressed as the coefficient of variation (`cv_h_plant`), herbivore biomass (`mass_herbiv`), and predator biomass (`mass_pred`), along with a plot identifier (`plot_id`).
 
-### Directed Acyclic Graph
+### Directed acyclic graph
 
 Given the bottom-up influences in this system, these variables may be sequentially connected, with plant biomass affecting herbivore biomass, which in turn affects predator biomass. At the same time, variation in plant height (`cv_h_plant`) may reflect shelter availability for herbivores, suggesting that this variable could also influence higher trophic levels.
 
@@ -82,11 +82,11 @@ layout_mat <- matrix(c(0, 0,
 
 In these networks, discerning two types of variables is particularly important: endogenous and exogenous variables.
 
-**Endogenous variables** are those whose values are influenced by other variables in the system; they have one or more incoming arrows in the DAG. In our example, herbivore and predator biomass are endogenous because they depend on plant biomass and other factors.
+Endogenous variables are those whose values are influenced by other variables in the system; they have one or more incoming arrows in the DAG. In our example, herbivore and predator biomass are endogenous because they depend on plant biomass and other factors.
 
-**Exogenous variables** are determined outside the system and are not influenced by other variables in the network; they only have outgoing arrows. For instance, plant biomass and variation in plant height can be treated as exogenous, as they drive changes in higher trophic levels without being influenced by them.
+Exogenous variables are determined outside the system and are not influenced by other variables in the network; they only have outgoing arrows. For instance, plant biomass and variation in plant height can be treated as exogenous, as they drive changes in higher trophic levels without being influenced by them.
 
-What makes this network a DAG is **the absence of loops**: all arrows flow from lower to higher trophic levels, with no feedback to lower levels. This excludes potential influences of higher trophic levels on lower ones (i.e., feedback loops). However, such cyclic relationships cannot be incorporated within the standard SEM framework, which is one of its major limitations.
+What makes this network a DAG is the absence of loops: all arrows flow from lower to higher trophic levels, with no feedback to lower levels. This excludes potential influences of higher trophic levels on lower ones (i.e., feedback loops). However, such cyclic relationships cannot be incorporated within the standard SEM framework, which is one of its major limitations.
 
 ### Develop a hypothesis
 
@@ -160,7 +160,7 @@ The model description `m1` should be passed to the `sem()` function from the `la
 
 The most important output from the `sem()` function is the `Model Test User Model` section, which reports the chi-square test statistic, degrees of freedom, and p-value.
 
-The test statistic (1.466) measures the discrepancy between the SEM model-implied covariance matrix and the observed covariance matrix, while the degrees of freedom provide a sense of how simple the model is relative to the full DAG—that is, how many potential links from the full DAG are omitted. In other words, the test essentially asks: **"Does the model adequately reproduce the observed relationships in the data?"**
+The test statistic (1.466) measures the discrepancy between the SEM model-implied covariance matrix and the observed covariance matrix, while the degrees of freedom provide a sense of how simple the model is relative to the full DAG—that is, how many potential links from the full DAG are omitted. In other words, the test essentially asks: "Does the model adequately reproduce the observed relationships in the data?"
 
 Unlike ordinary hypothesis tests, the p-value here tests the null hypothesis that the model fits the data perfectly. A high p-value (typically \> 0.05) indicates no evidence of misfit. In this case, the p-value of 0.480 suggests that the model provides a good fit to the data.
 
@@ -315,9 +315,9 @@ df_herbv %>%
   theme_bw()
 ```
 
-These plant traits may collectively represent plant tissue **“palatability,”** which is influenced by soil fertility and, in turn, affects herbivory rate.
+These plant traits may collectively represent plant tissue “palatability,” which is influenced by soil fertility and, in turn, affects herbivory rate.
 
-In this context, we can define a latent variable, **palatability**, as a function of the three plant traits. This latent variable then serves as a mediator linking soil fertility to herbivory rate. With this addition, the corresponding path diagram is modified to reflect the inclusion of the latent construct.
+In this context, we can define a latent variable, palatability, as a function of the three plant traits. This latent variable then serves as a mediator linking soil fertility to herbivory rate. With this addition, the corresponding path diagram is modified to reflect the inclusion of the latent construct.
 
 ```{r dag-sem-latent-plot, echo=FALSE, fig.cap="DAG of the structural equation model (SEM) linking soil fertility, palatability, and herbivory. Observed variables (SLA, CN Ratio, % Lignin, Soil N, Herbivory) are shown as circles, while the latent variable Palatability is shown as a square. Unlike a simple path analysis, SEM allows the inclusion of latent constructs that are inferred from multiple observed indicators, enabling the decomposition of complex traits like palatability into their underlying components."}
 
@@ -371,7 +371,7 @@ V(g)$shape <- c(rep("Observed", 5), "Latent")
 
 ### Implementation
 
-When implementing SEM, we use the special syntax `=~` to specify **latent variables** in the model. In our example, we may use the following syntax: `palatability =~ sla + cn_ratio + perlignin` to construct a latent variable composed of three plant traits. By including latent constructs, SEM extends traditional path analysis, offering a more flexible framework to model complex relationships.
+When implementing SEM, we use the special syntax `=~` to specify latent variables in the model. In our example, we may use the following syntax: `palatability =~ sla + cn_ratio + perlignin` to construct a latent variable composed of three plant traits. By including latent constructs, SEM extends traditional path analysis, offering a more flexible framework to model complex relationships.
 
 ```{r sem-fit}
 m_sem <- '
@@ -401,10 +401,8 @@ The `Regressions:` section shows that the pathways from soil fertility to palata
 
 ## Limitation
 
-The examples above rely on one major assumption: in the `lavaan` package, **all variables in the model are assumed to follow a normal distribution.** This can be a restrictive assumption, especially given the variety of data types often encountered in biological research.
+The examples above rely on one major assumption: in the `lavaan` package, all variables in the model are assumed to follow a normal distribution. This can be a restrictive assumption, especially given the variety of data types often encountered in biological research.
 
 Importantly, this limitation comes from the package, not from the underlying statistics. Mathematically, it is possible to construct path analysis or SEM with non-normal variables or even include random effects.
 
-However, such models are challenging to estimate using standard methods because the likelihood function becomes highly complex. In these cases, Bayesian methods would provide a more flexible framework (examples: [Takagi et al. 2014](onlinelibrary.wiley.com/doi/abs/10.1111/1365-2656.12415); [Terui et al 2018](doi.org/10.1007%2Fs10021-017-0183-3)). While there are currently few packages that allow fully automated implementation, coding models directly in **BUGS** or **Stan** makes it possible to fit these more complex SEMs (with a steep learning curve).
-
-## Laboratory
+However, such models are challenging to estimate using standard methods because the likelihood function becomes highly complex. In these cases, Bayesian methods would provide a more flexible framework (examples: [Takagi et al. 2014](onlinelibrary.wiley.com/doi/abs/10.1111/1365-2656.12415); [Terui et al 2018](doi.org/10.1007%2Fs10021-017-0183-3)). While there are currently few packages that allow fully automated implementation, coding models directly in BUGS or Stan makes it possible to fit these more complex SEMs (with a steep learning curve).

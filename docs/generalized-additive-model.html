@@ -74,7 +74,9 @@
 <li><a class="" href="unconstrained-ordination.html"><span class="header-section-number">19</span> Unconstrained Ordination</a></li>
 <li><a class="" href="constrained-ordination.html"><span class="header-section-number">20</span> Constrained Ordination</a></li>
 <li><a class="" href="structural-equation-modeling.html"><span class="header-section-number">21</span> Structural Equation Modeling</a></li>
+<li><a class="" href="time-series-analysis.html"><span class="header-section-number">22</span> Time-Series Analysis</a></li>
 <li class="book-part">Appendix</li>
+<li><a class="" href="basic-terminology.html">Basic Terminology</a></li>
 <li><a class="" href="git-github.html">Git &amp; GitHub</a></li>
 <li><a class="" href="base-plot.html">Base Plot</a></li>
 </ul>
@@ -88,9 +90,9 @@
 <h1>
 <span class="header-section-number">18</span> Generalized Additive Model<a class="anchor" aria-label="anchor" href="#generalized-additive-model"><i class="fas fa-link"></i></a>
 </h1>
-<p>In generalized linear models (GLMs) and generalized linear mixed models (GLMMs), a key structural assumption is <strong>linearity on the scale of the linear predictor</strong>. That is, after applying the link function, the expected value of the response is assumed to be a linear combination of predictors and their associated parameters.</p>
-<p>In biological and ecological data, however, relationships are often <strong>nonlinear but smooth</strong>, reflecting processes such as seasonality, thresholds, saturation, or diminishing returns. When these patterns are forced into a strictly linear framework, GLMs and GLMMs may yield biased parameter estimates, poor predictive performance, or misleading inference.</p>
-<p>To address these limitations, this chapter introduces <strong>generalized additive models (GAMs)</strong>, which extend GLMs by allowing predictors to enter the model as smooth functions rather than assuming linear effects.</p>
+<p>In generalized linear models (GLMs) and generalized linear mixed models (GLMMs), a key structural assumption is linearity on the scale of the linear predictor. That is, after applying the link function, the expected value of the response is assumed to be a linear combination of predictors and their associated parameters.</p>
+<p>In biological and ecological data, however, relationships are often nonlinear but smooth, reflecting processes such as seasonality, thresholds, saturation, or diminishing returns. When these patterns are forced into a strictly linear framework, GLMs and GLMMs may yield biased parameter estimates, poor predictive performance, or misleading inference.</p>
+<p>To address these limitations, this chapter introduces generalized additive models (GAMs), which extend GLMs by allowing predictors to enter the model as smooth functions rather than assuming linear effects.</p>
 <p>Learning Objectives:</p>
 <ul>
 <li><p>Understand the linearity assumptions underlying GLMs and GLMMs</p></li>
@@ -134,7 +136,7 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">df_wt_raw</span>, <span class="va">class</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##          id   date_time        temp        site 
 ##   "numeric" "character"   "numeric" "character"</code></pre>
-<p>A potential issue in this dataset is that the <code>date_time</code> column is stored as a “<strong>character</strong>.” Although <code>data_time</code> contains temporal information, the character data type does not allow R to interpret it as a date. In the following code, we will convert this column to a <code>Date</code> object, which explicitly encodes temporal information and enables time-based operations.</p>
+<p>A potential issue in this dataset is that the <code>date_time</code> column is stored as a “character.” Although <code>data_time</code> contains temporal information, the character data type does not allow R to interpret it as a date. In the following code, we will convert this column to a <code>Date</code> object, which explicitly encodes temporal information and enables time-based operations.</p>
 <div class="sourceCode" id="cb506"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Start from the raw water-temperature dataset</span></span>
 <span><span class="op">(</span><span class="va">df_wt</span> <span class="op">&lt;-</span> <span class="va">df_wt_raw</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -290,11 +292,11 @@ Figure 18.2: Daily water temperature in two types of artificial wetlands (“woo
 <span class="header-section-number">18.1.2</span> Smooth function<a class="anchor" aria-label="anchor" href="#smooth-function"><i class="fas fa-link"></i></a>
 </h3>
 <p>Linear models assume a straight-line relationship between predictors and the response. For seasonal data, like water temperature over a year, this assumption is often violated: temperatures rise in spring, peak in summer, and fall in autumn—a nonlinear pattern that a simple linear term cannot capture.</p>
-<p>A Generalized Additive Model (GAM) extends linear models by replacing (one or more of) linear terms with <strong>smooth functions</strong>, allowing the relationship to bend and flex according to the data:</p>
+<p>A Generalized Additive Model (GAM) extends linear models by replacing (one or more of) linear terms with smooth functions, allowing the relationship to bend and flex according to the data:</p>
 <p><span class="math display">\[
 y_i = \alpha + f(x) + \varepsilon_i
 \]</span></p>
-<p>Here, <span class="math inline">\(f(\cdot)\)</span> is a <strong>smooth function</strong> estimated from the data, often using <strong>splines</strong>. In practice, this means GAMs can model seasonal or other nonlinear trends without needing to specify the exact form of the curve in advance.</p>
+<p>Here, <span class="math inline">\(f(\cdot)\)</span> is a smooth function estimated from the data, often using splines. In practice, this means GAMs can model seasonal or other nonlinear trends without needing to specify the exact form of the curve in advance.</p>
 <p>In R, we can use the <code>mgcv</code> package to implement this approach. We apply a smooth function <code>s()</code> to <code>j_date</code> to capture the clear seasonal pattern, while keeping <code>site</code> (wetland type) as a linear term, since we do not expect the effect of wetland type to vary nonlinearly.</p>
 <div class="sourceCode" id="cb513"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_gam</span> <span class="op">&lt;-</span> <span class="fu">gam</span><span class="op">(</span><span class="va">temp</span> <span class="op">~</span> <span class="va">site</span> <span class="op">+</span> <span class="fu">s</span><span class="op">(</span><span class="va">j_date</span><span class="op">)</span>,</span>
@@ -325,7 +327,7 @@ y_i = \alpha + f(x) + \varepsilon_i
 ## R-sq.(adj) =  0.888   Deviance explained =   89%
 ## GCV = 3.3527  Scale est. = 3.28      n = 490</code></pre>
 <p>The interpretation of the parametric coefficients is largely the same as in GLMs or GLMMs. In this case, the effect of site (wetland type) becomes statistically significant. This occurs because the nonlinear seasonal pattern is modeled first through the smooth term, allowing the <code>site</code> effect to be assessed without being confounded by seasonal structure in the data.</p>
-<p>The smooth term <code>s(j_date)</code> in the GAM captures the nonlinear seasonal variation in water temperature across the year. Its <strong>effective degrees of freedom</strong> (edf =8.62) indicate that the relationship is flexible rather than a straight line, allowing the model to follow the rise of temperature in spring, the peak in summer, and the decline in fall. The <code>edf</code> becomes approximately 1 when the smooth term represents an essentially linear effect - if this occurs, adding a predictor as a smooth term is not meaningful.</p>
+<p>The smooth term <code>s(j_date)</code> in the GAM captures the nonlinear seasonal variation in water temperature across the year. Its effective degrees of freedom (edf =8.62) indicate that the relationship is flexible rather than a straight line, allowing the model to follow the rise of temperature in spring, the peak in summer, and the decline in fall. The <code>edf</code> becomes approximately 1 when the smooth term represents an essentially linear effect - if this occurs, adding a predictor as a smooth term is not meaningful.</p>
 <p>The extremely low p-value (&lt;2e-16) shows that this seasonal pattern is highly significant, meaning that the smooth term explains a large portion of the variation in temperature that a linear term alone could not capture.</p>
 <p>The GCV (generalized cross-validation) score (3.35) is worth mentioning because it is used to determine how wiggly the curve should be. A lower GCV indicates a better balance between model fit and smoothness, penalizing excessive curvature to avoid overfitting.</p>
 <p>The <code>ggpredict()</code> function allows us to generate and visualize predicted values from a GAM.</p>
@@ -376,13 +378,13 @@ Figure 18.3: Daily water temperature in two types of artificial wetlands (“woo
 <h3>
 <span class="header-section-number">18.2.1</span> Choice of smooth function<a class="anchor" aria-label="anchor" href="#choice-of-smooth-function"><i class="fas fa-link"></i></a>
 </h3>
-<p>By default, <code><a href="https://rdrr.io/pkg/mgcv/man/s.html">mgcv::s()</a></code> employs <strong>thin plate regression splines</strong> as a smoothing function. While this is one of the most broadly applicable approaches, other options may be more appropriate depending on the structure of your data. The following table summarizes the possible alternatives offered in the <code>mgcv</code> package, along with their typical applications.</p>
-<div class="inline-table"><table style="width:100%;" class="table table-sm">
+<p>By default, <code><a href="https://rdrr.io/pkg/mgcv/man/s.html">mgcv::s()</a></code> employs thin plate regression splines as a smoothing function. While this is one of the most broadly applicable approaches, other options may be more appropriate depending on the structure of your data. The following table summarizes the possible alternatives offered in the <code>mgcv</code> package, along with their typical applications.</p>
+<div class="inline-table"><table class="table table-sm">
 <colgroup>
 <col width="23%">
 <col width="23%">
 <col width="23%">
-<col width="30%">
+<col width="29%">
 </colgroup>
 <thead><tr class="header">
 <th>Smoother / Option</th>
@@ -392,37 +394,37 @@ Figure 18.3: Daily water temperature in two types of artificial wetlands (“woo
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td><strong>Thin plate regression spline (default)</strong></td>
+<td>Thin plate regression spline (default)</td>
 <td><code>s(x)</code></td>
 <td>Flexible, general-purpose spline that does not require knot placement.</td>
 <td>Default in <code><a href="https://rdrr.io/pkg/mgcv/man/s.html">mgcv::s()</a></code>; works well in most situations.</td>
 </tr>
 <tr class="even">
-<td><strong>Cubic regression spline</strong></td>
+<td>Cubic regression spline</td>
 <td><code>s(x, bs = "cr")</code></td>
 <td>Standard cubic spline with specified knots.</td>
 <td>Good when you want explicit control over knots or smoothness.</td>
 </tr>
 <tr class="odd">
-<td><strong>Cyclic spline</strong></td>
+<td>Cyclic spline</td>
 <td><code>s(x, bs = "cc")</code></td>
 <td>Ensures smooth connection at boundaries for circular predictors.</td>
 <td>Ideal for seasonal or periodic variables (e.g., day-of-year).</td>
 </tr>
 <tr class="even">
-<td><strong>P-spline</strong></td>
+<td>P-spline</td>
 <td><code>s(x, bs = "ps")</code></td>
 <td>Penalized B-spline allowing control over wiggliness via penalties.</td>
 <td>Useful for evenly spaced predictors; can handle large datasets efficiently.</td>
 </tr>
 <tr class="odd">
-<td><strong>Thin plate regression spline with shrinkage</strong></td>
+<td>Thin plate regression spline with shrinkage</td>
 <td><code>s(x, bs = "ts")</code></td>
 <td>Adds extra penalization to allow smooth term to shrink to zero if not important.</td>
 <td>Useful for model selection or when some smooth terms may be irrelevant.</td>
 </tr>
 <tr class="even">
-<td><strong>Tensor product smooths</strong></td>
+<td>Tensor product smooths</td>
 <td><code>te(x1, x2)</code></td>
 <td>Combines multiple continuous predictors, allowing interactions on different scales.</td>
 <td>Use for multidimensional ecological responses (e.g., temperature × flow).</td>
@@ -435,13 +437,13 @@ Figure 18.3: Daily water temperature in two types of artificial wetlands (“woo
 <span class="header-section-number">18.2.2</span> Penalty strength<a class="anchor" aria-label="anchor" href="#penalty-strength"><i class="fas fa-link"></i></a>
 </h3>
 <p>In a GAM, smooth terms are flexible functions whose degree of curvature (wiggliness) must be estimated from the data. In the <code>mgcv</code> package, this is done automatically by selecting a smoothing parameter that balances goodness of fit against model complexity.</p>
-<p>By default, mgcv uses generalized cross-validation (GCV) to determine this smoothing parameter. <strong>In other words, GCV decides the strength of the penalty applied to the smooth term</strong>: a stronger penalty produces a smoother, less wiggly curve, while a weaker penalty allows more flexibility to follow data fluctuations. Conceptually, GCV asks: <em>How well would this model predict new data if we slightly penalize excessive curvature?</em> A smoother that fits the data too closely (overfitting) is penalized, while a smoother that is too rigid (underfitting) fails to capture important structure. The chosen smoothness minimizes the GCV score, yielding a curve that is flexible enough to capture real patterns but smooth enough to generalize beyond the observed data.</p>
+<p>By default, mgcv uses generalized cross-validation (GCV) to determine this smoothing parameter. In other words, GCV decides the strength of the penalty applied to the smooth term: a stronger penalty produces a smoother, less wiggly curve, while a weaker penalty allows more flexibility to follow data fluctuations. Conceptually, GCV asks: <em>How well would this model predict new data if we slightly penalize excessive curvature?</em> A smoother that fits the data too closely (overfitting) is penalized, while a smoother that is too rigid (underfitting) fails to capture important structure. The chosen smoothness minimizes the GCV score, yielding a curve that is flexible enough to capture real patterns but smooth enough to generalize beyond the observed data.</p>
 <p>However, there are other options for the penalty selection method, which can be specified via the <code>method</code> argument in <code><a href="https://rdrr.io/pkg/mgcv/man/gam.html">mgcv::gam()</a></code>:</p>
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
-<col width="25%">
-<col width="25%">
-<col width="49%">
+<col width="26%">
+<col width="26%">
+<col width="47%">
 </colgroup>
 <thead><tr class="header">
 <th>Penalty Selection Method</th>
@@ -450,35 +452,29 @@ Figure 18.3: Daily water temperature in two types of artificial wetlands (“woo
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td><strong>GCV / GACV</strong></td>
+<td>GCV / GACV</td>
 <td>
 <code>method = "GCV.Cp"</code> (or default)</td>
 <td>Balances fit vs. wiggliness; default in many examples.</td>
 </tr>
 <tr class="even">
-<td><strong>REML</strong></td>
+<td>REML</td>
 <td><code>method = "REML"</code></td>
 <td>Preferred for stable inference; treats smoothness as a variance component.</td>
 </tr>
 <tr class="odd">
-<td><strong>ML</strong></td>
+<td>ML</td>
 <td><code>method = "ML"</code></td>
 <td>Useful for comparing nested models using likelihood-based criteria.</td>
 </tr>
 <tr class="even">
-<td><strong>UBRE / P-UBRE</strong></td>
+<td>UBRE / P-UBRE</td>
 <td><code>method = "UBRE"</code></td>
 <td>Based on unbiased risk estimate; mainly for Gaussian models.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
-</div>
-<div id="laboratory-11" class="section level2" number="18.3">
-<h2>
-<span class="header-section-number">18.3</span> Laboratory<a class="anchor" aria-label="anchor" href="#laboratory-11"><i class="fas fa-link"></i></a>
-</h2>
-
 </div>
 </div>
   <div class="chapter-nav">
@@ -500,7 +496,6 @@ Figure 18.3: Daily water temperature in two types of artificial wetlands (“woo
 <li><a class="nav-link" href="#penalty-strength"><span class="header-section-number">18.2.2</span> Penalty strength</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#laboratory-11"><span class="header-section-number">18.3</span> Laboratory</a></li>
 </ul>
 
       <div class="book-extra">
@@ -518,7 +513,7 @@ Figure 18.3: Daily water temperature in two types of artificial wetlands (“woo
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-12-21.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-12-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

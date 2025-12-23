@@ -235,18 +235,6 @@ df_owl %>%
 
 ```
 
-### Model specification
-
-With $y_i$ denoting the number of negotiation calls (`sibling_negotiation`), the above example is formulated as follows:
-
-$$
-y_i \sim \mbox{NB}(\mu_i, \theta)\\
-\ln \mu_i = \underbrace{(\alpha + \gamma_{j(i)})}_{\text{intercept + random effect term}} + \underbrace{\beta}_{\text{slope}} x_i + \ln(\mbox{offset term})\\
-\gamma_j \sim \mbox{Normal}(0, \sigma_{\gamma}^2)
-$$
-
-Here, $i$ indexes individuals, and $j(i)$ denotes the nest to which individual $i$ belongs. In our model estimates, global intercept $\alpha$ = `r round(fixef(m_ri)$cond[1], 2)`, effect of food treatment $\beta$ = `r round(fixef(m_ri)$cond[2], 2)`, dispersion parameter $\theta$ = `r round(sigma(m_ri), 2)`, and SD of the random effect $\sigma_{\gamma}$ = `r round(c(VarCorr(m_ri)$cond$nest), 2)`. Although this example uses a negative binomial model, the overall structure is similar for other probability distributions, provided an appropriate link function is chosen.
-
 ## Random Intercept and Slope
 
 ### Adding a random slope term
@@ -345,7 +333,30 @@ df_owl %>%
 
 ```
 
-### Model specification
+## Fixed vs Random
+
+In statistical modeling, particularly in ecology, factors in a dataset can be treated as fixed effects or random effects. Choosing the appropriate type affects how we interpret model coefficients and account for variation in the data. Fixed effects are used when we are specifically interested in estimating and comparing the levels of a factor, while random effects are used when the levels represent a sample from a larger population and we are primarily interested in quantifying variability among them.
+
+| Type | Interpretation | Examples |
+|------------------------|------------------------|------------------------|
+| Fixed effect | You are explicitly interested in the slope of specific levels of the factor or of continuous variable. **Can be categorical or continuous.** | Nutrient treatment (ambient vs. added), Sex (male vs. female), Temperature (continuous) |
+| Random effect | The levels are a sample from a larger population. You are not interested in estimating each level, but rather in modeling variation among them. **Must be categorical.** | Nest ID, Site, Year, Block, Individual ID |
+
+## Model specification
+
+### Rnadom intercept
+
+With $y_i$ denoting the number of negotiation calls (`sibling_negotiation`), the above example is formulated as follows:
+
+$$
+y_i \sim \mbox{NB}(\mu_i, \theta)\\
+\ln \mu_i = \underbrace{(\alpha + \gamma_{j(i)})}_{\text{intercept + random effect term}} + \underbrace{\beta}_{\text{slope}} x_i + \ln(\mbox{offset term})\\
+\gamma_j \sim \mbox{Normal}(0, \sigma_{\gamma}^2)
+$$
+
+Here, $i$ indexes individuals, and $j(i)$ denotes the nest to which individual $i$ belongs. In our model estimates, global intercept $\alpha$ = `r round(fixef(m_ri)$cond[1], 2)`, effect of food treatment $\beta$ = `r round(fixef(m_ri)$cond[2], 2)`, dispersion parameter $\theta$ = `r round(sigma(m_ri), 2)`, and SD of the random effect $\sigma_{\gamma}$ = `r round(c(VarCorr(m_ri)$cond$nest), 2)`. Although this example uses a negative binomial model, the overall structure is similar for other probability distributions, provided an appropriate link function is chosen.
+
+### Random intercept and slope
 
 With the random slope term, the model specification becomes:
 
@@ -358,14 +369,3 @@ $$
 $$
 
 where $\Sigma$ denotes the variance-covariance matrix of random effect terms.
-
-## Fixed vs Random
-
-In statistical modeling, particularly in ecology, factors in a dataset can be treated as fixed effects or random effects. Choosing the appropriate type affects how we interpret model coefficients and account for variation in the data. Fixed effects are used when we are specifically interested in estimating and comparing the levels of a factor, while random effects are used when the levels represent a sample from a larger population and we are primarily interested in quantifying variability among them.
-
-| Type | Interpretation | Examples |
-|------------------------|------------------------|------------------------|
-| Fixed effect | You are explicitly interested in the slope of specific levels of the factor or of continuous variable. **Can be categorical or continuous.** | Nutrient treatment (ambient vs. added), Sex (male vs. female), Temperature (continuous) |
-| Random effect | The levels are a sample from a larger population. You are not interested in estimating each level, but rather in modeling variation among them. **Must be categorical.** | Nest ID, Site, Year, Block, Individual ID |
-
-## Laboratory

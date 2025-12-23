@@ -74,7 +74,9 @@
 <li><a class="" href="unconstrained-ordination.html"><span class="header-section-number">19</span> Unconstrained Ordination</a></li>
 <li><a class="" href="constrained-ordination.html"><span class="header-section-number">20</span> Constrained Ordination</a></li>
 <li><a class="" href="structural-equation-modeling.html"><span class="header-section-number">21</span> Structural Equation Modeling</a></li>
+<li><a class="" href="time-series-analysis.html"><span class="header-section-number">22</span> Time-Series Analysis</a></li>
 <li class="book-part">Appendix</li>
+<li><a class="" href="basic-terminology.html">Basic Terminology</a></li>
 <li><a class="" href="git-github.html">Git &amp; GitHub</a></li>
 <li><a class="" href="base-plot.html">Base Plot</a></li>
 </ul>
@@ -350,18 +352,6 @@ Figure 17.1: Visualization of a random‐intercept GLMM fitted to owl nesting da
 </p>
 </div>
 </div>
-<div id="model-specification" class="section level3" number="17.2.3">
-<h3>
-<span class="header-section-number">17.2.3</span> Model specification<a class="anchor" aria-label="anchor" href="#model-specification"><i class="fas fa-link"></i></a>
-</h3>
-<p>With <span class="math inline">\(y_i\)</span> denoting the number of negotiation calls (<code>sibling_negotiation</code>), the above example is formulated as follows:</p>
-<p><span class="math display">\[
-y_i \sim \mbox{NB}(\mu_i, \theta)\\
-\ln \mu_i = \underbrace{(\alpha + \gamma_{j(i)})}_{\text{intercept + random effect term}} + \underbrace{\beta}_{\text{slope}} x_i + \ln(\mbox{offset term})\\
-\gamma_j \sim \mbox{Normal}(0, \sigma_{\gamma}^2)
-\]</span></p>
-<p>Here, <span class="math inline">\(i\)</span> indexes individuals, and <span class="math inline">\(j(i)\)</span> denotes the nest to which individual <span class="math inline">\(i\)</span> belongs. In our model estimates, global intercept <span class="math inline">\(\alpha\)</span> = 0.71, effect of food treatment <span class="math inline">\(\beta\)</span> = -0.8, dispersion parameter <span class="math inline">\(\theta\)</span> = 7.05, and SD of the random effect <span class="math inline">\(\sigma_{\gamma}\)</span> = 0.13. Although this example uses a negative binomial model, the overall structure is similar for other probability distributions, provided an appropriate link function is chosen.</p>
-</div>
 </div>
 <div id="random-intercept-and-slope" class="section level2" number="17.3">
 <h2>
@@ -490,18 +480,6 @@ Figure 17.2: Visualization of a random‐intercept and random‐slope GLMM fitte
 </p>
 </div>
 </div>
-<div id="model-specification-1" class="section level3" number="17.3.2">
-<h3>
-<span class="header-section-number">17.3.2</span> Model specification<a class="anchor" aria-label="anchor" href="#model-specification-1"><i class="fas fa-link"></i></a>
-</h3>
-<p>With the random slope term, the model specification becomes:</p>
-<p><span class="math display">\[ y_i \sim \mbox{NB}(\mu_i, \theta)\\ \ln \mu_i = \underbrace{(\alpha + \gamma_{j(i)})}_{\text{intercept + random effect term}} + \underbrace{(\beta + \delta_{j(i)})}_{\text{slope + random effect term}} x_i + \ln(\mbox{offset term})\\\]</span></p>
-<p>When a random slope term is included, random intercept and slope terms are assumed to follow a multi-variate normal distribution, specified as:</p>
-<p><span class="math display">\[
-\{\gamma_{j}, \delta_j\} \sim \mbox{MVN}(0, \Sigma)
-\]</span></p>
-<p>where <span class="math inline">\(\Sigma\)</span> denotes the variance-covariance matrix of random effect terms.</p>
-</div>
 </div>
 <div id="fixed-vs-random" class="section level2" number="17.4">
 <h2>
@@ -535,11 +513,35 @@ Figure 17.2: Visualization of a random‐intercept and random‐slope GLMM fitte
 </tbody>
 </table></div>
 </div>
-<div id="laboratory-10" class="section level2" number="17.5">
+<div id="model-specification" class="section level2" number="17.5">
 <h2>
-<span class="header-section-number">17.5</span> Laboratory<a class="anchor" aria-label="anchor" href="#laboratory-10"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.5</span> Model specification<a class="anchor" aria-label="anchor" href="#model-specification"><i class="fas fa-link"></i></a>
 </h2>
+<div id="rnadom-intercept" class="section level3" number="17.5.1">
+<h3>
+<span class="header-section-number">17.5.1</span> Rnadom intercept<a class="anchor" aria-label="anchor" href="#rnadom-intercept"><i class="fas fa-link"></i></a>
+</h3>
+<p>With <span class="math inline">\(y_i\)</span> denoting the number of negotiation calls (<code>sibling_negotiation</code>), the above example is formulated as follows:</p>
+<p><span class="math display">\[
+y_i \sim \mbox{NB}(\mu_i, \theta)\\
+\ln \mu_i = \underbrace{(\alpha + \gamma_{j(i)})}_{\text{intercept + random effect term}} + \underbrace{\beta}_{\text{slope}} x_i + \ln(\mbox{offset term})\\
+\gamma_j \sim \mbox{Normal}(0, \sigma_{\gamma}^2)
+\]</span></p>
+<p>Here, <span class="math inline">\(i\)</span> indexes individuals, and <span class="math inline">\(j(i)\)</span> denotes the nest to which individual <span class="math inline">\(i\)</span> belongs. In our model estimates, global intercept <span class="math inline">\(\alpha\)</span> = 0.71, effect of food treatment <span class="math inline">\(\beta\)</span> = -0.8, dispersion parameter <span class="math inline">\(\theta\)</span> = 7.05, and SD of the random effect <span class="math inline">\(\sigma_{\gamma}\)</span> = 0.13. Although this example uses a negative binomial model, the overall structure is similar for other probability distributions, provided an appropriate link function is chosen.</p>
+</div>
+<div id="random-intercept-and-slope-1" class="section level3" number="17.5.2">
+<h3>
+<span class="header-section-number">17.5.2</span> Random intercept and slope<a class="anchor" aria-label="anchor" href="#random-intercept-and-slope-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>With the random slope term, the model specification becomes:</p>
+<p><span class="math display">\[ y_i \sim \mbox{NB}(\mu_i, \theta)\\ \ln \mu_i = \underbrace{(\alpha + \gamma_{j(i)})}_{\text{intercept + random effect term}} + \underbrace{(\beta + \delta_{j(i)})}_{\text{slope + random effect term}} x_i + \ln(\mbox{offset term})\\\]</span></p>
+<p>When a random slope term is included, random intercept and slope terms are assumed to follow a multi-variate normal distribution, specified as:</p>
+<p><span class="math display">\[
+\{\gamma_{j}, \delta_j\} \sim \mbox{MVN}(0, \Sigma)
+\]</span></p>
+<p>where <span class="math inline">\(\Sigma\)</span> denotes the variance-covariance matrix of random effect terms.</p>
 
+</div>
 </div>
 </div>
   <div class="chapter-nav">
@@ -554,17 +556,18 @@ Figure 17.2: Visualization of a random‐intercept and random‐slope GLMM fitte
 <a class="nav-link" href="#random-intercept"><span class="header-section-number">17.2</span> Random Intercept</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#developing-a-model"><span class="header-section-number">17.2.1</span> Developing a model</a></li>
 <li><a class="nav-link" href="#visualize-model-output"><span class="header-section-number">17.2.2</span> Visualize model output</a></li>
-<li><a class="nav-link" href="#model-specification"><span class="header-section-number">17.2.3</span> Model specification</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#random-intercept-and-slope"><span class="header-section-number">17.3</span> Random Intercept and Slope</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#adding-a-random-slope-term"><span class="header-section-number">17.3.1</span> Adding a random slope term</a></li>
-<li><a class="nav-link" href="#model-specification-1"><span class="header-section-number">17.3.2</span> Model specification</a></li>
-</ul>
+<a class="nav-link" href="#random-intercept-and-slope"><span class="header-section-number">17.3</span> Random Intercept and Slope</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#adding-a-random-slope-term"><span class="header-section-number">17.3.1</span> Adding a random slope term</a></li></ul>
 </li>
 <li><a class="nav-link" href="#fixed-vs-random"><span class="header-section-number">17.4</span> Fixed vs Random</a></li>
-<li><a class="nav-link" href="#laboratory-10"><span class="header-section-number">17.5</span> Laboratory</a></li>
+<li>
+<a class="nav-link" href="#model-specification"><span class="header-section-number">17.5</span> Model specification</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#rnadom-intercept"><span class="header-section-number">17.5.1</span> Rnadom intercept</a></li>
+<li><a class="nav-link" href="#random-intercept-and-slope-1"><span class="header-section-number">17.5.2</span> Random intercept and slope</a></li>
+</ul>
+</li>
 </ul>
 
       <div class="book-extra">
@@ -582,7 +585,7 @@ Figure 17.2: Visualization of a random‐intercept and random‐slope GLMM fitte
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-12-21.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-12-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

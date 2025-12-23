@@ -1,10 +1,10 @@
 # Generalized Additive Model
 
-In generalized linear models (GLMs) and generalized linear mixed models (GLMMs), a key structural assumption is **linearity on the scale of the linear predictor**. That is, after applying the link function, the expected value of the response is assumed to be a linear combination of predictors and their associated parameters.
+In generalized linear models (GLMs) and generalized linear mixed models (GLMMs), a key structural assumption is linearity on the scale of the linear predictor. That is, after applying the link function, the expected value of the response is assumed to be a linear combination of predictors and their associated parameters.
 
-In biological and ecological data, however, relationships are often **nonlinear but smooth**, reflecting processes such as seasonality, thresholds, saturation, or diminishing returns. When these patterns are forced into a strictly linear framework, GLMs and GLMMs may yield biased parameter estimates, poor predictive performance, or misleading inference.
+In biological and ecological data, however, relationships are often nonlinear but smooth, reflecting processes such as seasonality, thresholds, saturation, or diminishing returns. When these patterns are forced into a strictly linear framework, GLMs and GLMMs may yield biased parameter estimates, poor predictive performance, or misleading inference.
 
-To address these limitations, this chapter introduces **generalized additive models (GAMs)**, which extend GLMs by allowing predictors to enter the model as smooth functions rather than assuming linear effects.
+To address these limitations, this chapter introduces generalized additive models (GAMs), which extend GLMs by allowing predictors to enter the model as smooth functions rather than assuming linear effects.
 
 Learning Objectives:
 
@@ -40,7 +40,7 @@ It is always a good practice to begin by checking the class of each column, as m
 sapply(df_wt_raw, class)
 ```
 
-A potential issue in this dataset is that the `date_time` column is stored as a "**character**." Although `data_time` contains temporal information, the character data type does not allow R to interpret it as a date. In the following code, we will convert this column to a `Date` object, which explicitly encodes temporal information and enables time-based operations.
+A potential issue in this dataset is that the `date_time` column is stored as a "character." Although `data_time` contains temporal information, the character data type does not allow R to interpret it as a date. In the following code, we will convert this column to a `Date` object, which explicitly encodes temporal information and enables time-based operations.
 
 ```{r gam-covert-date}
 # Start from the raw water-temperature dataset
@@ -166,13 +166,13 @@ df_wt_daily %>%
 
 Linear models assume a straight-line relationship between predictors and the response. For seasonal data, like water temperature over a year, this assumption is often violated: temperatures rise in spring, peak in summer, and fall in autumn—a nonlinear pattern that a simple linear term cannot capture.
 
-A Generalized Additive Model (GAM) extends linear models by replacing (one or more of) linear terms with **smooth functions**, allowing the relationship to bend and flex according to the data:
+A Generalized Additive Model (GAM) extends linear models by replacing (one or more of) linear terms with smooth functions, allowing the relationship to bend and flex according to the data:
 
 $$
 y_i = \alpha + f(x) + \varepsilon_i
 $$
 
-Here, $f(\cdot)$ is a **smooth function** estimated from the data, often using **splines**. In practice, this means GAMs can model seasonal or other nonlinear trends without needing to specify the exact form of the curve in advance.
+Here, $f(\cdot)$ is a smooth function estimated from the data, often using splines. In practice, this means GAMs can model seasonal or other nonlinear trends without needing to specify the exact form of the curve in advance.
 
 In R, we can use the `mgcv` package to implement this approach. We apply a smooth function `s()` to `j_date` to capture the clear seasonal pattern, while keeping `site` (wetland type) as a linear term, since we do not expect the effect of wetland type to vary nonlinearly.
 
@@ -186,7 +186,7 @@ summary(m_gam)
 
 The interpretation of the parametric coefficients is largely the same as in GLMs or GLMMs. In this case, the effect of site (wetland type) becomes statistically significant. This occurs because the nonlinear seasonal pattern is modeled first through the smooth term, allowing the `site` effect to be assessed without being confounded by seasonal structure in the data.
 
-The smooth term `s(j_date)` in the GAM captures the nonlinear seasonal variation in water temperature across the year. Its **effective degrees of freedom** (edf =`r round(sum(m_gam$edf) - 2, 2)`) indicate that the relationship is flexible rather than a straight line, allowing the model to follow the rise of temperature in spring, the peak in summer, and the decline in fall. The `edf` becomes approximately 1 when the smooth term represents an essentially linear effect - if this occurs, adding a predictor as a smooth term is not meaningful.
+The smooth term `s(j_date)` in the GAM captures the nonlinear seasonal variation in water temperature across the year. Its effective degrees of freedom (edf =`r round(sum(m_gam$edf) - 2, 2)`) indicate that the relationship is flexible rather than a straight line, allowing the model to follow the rise of temperature in spring, the peak in summer, and the decline in fall. The `edf` becomes approximately 1 when the smooth term represents an essentially linear effect - if this occurs, adding a predictor as a smooth term is not meaningful.
 
 The extremely low p-value (\<2e-16) shows that this seasonal pattern is highly significant, meaning that the smooth term explains a large portion of the variation in temperature that a linear term alone could not capture.
 
@@ -232,30 +232,28 @@ This GAM framework lets you move from linear approximations to flexible, realist
 
 ### Choice of smooth function
 
-By default, `mgcv::s()` employs **thin plate regression splines** as a smoothing function. While this is one of the most broadly applicable approaches, other options may be more appropriate depending on the structure of your data. The following table summarizes the possible alternatives offered in the `mgcv` package, along with their typical applications.
+By default, `mgcv::s()` employs thin plate regression splines as a smoothing function. While this is one of the most broadly applicable approaches, other options may be more appropriate depending on the structure of your data. The following table summarizes the possible alternatives offered in the `mgcv` package, along with their typical applications.
 
 | Smoother / Option | How to Specify | Description | Typical Use Case / Notes |
-|-----------------|-----------------|-----------------|----------------------|
-| **Thin plate regression spline (default)** | `s(x)` | Flexible, general-purpose spline that does not require knot placement. | Default in `mgcv::s()`; works well in most situations. |
-| **Cubic regression spline** | `s(x, bs = "cr")` | Standard cubic spline with specified knots. | Good when you want explicit control over knots or smoothness. |
-| **Cyclic spline** | `s(x, bs = "cc")` | Ensures smooth connection at boundaries for circular predictors. | Ideal for seasonal or periodic variables (e.g., day-of-year). |
-| **P-spline** | `s(x, bs = "ps")` | Penalized B-spline allowing control over wiggliness via penalties. | Useful for evenly spaced predictors; can handle large datasets efficiently. |
-| **Thin plate regression spline with shrinkage** | `s(x, bs = "ts")` | Adds extra penalization to allow smooth term to shrink to zero if not important. | Useful for model selection or when some smooth terms may be irrelevant. |
-| **Tensor product smooths** | `te(x1, x2)` | Combines multiple continuous predictors, allowing interactions on different scales. | Use for multidimensional ecological responses (e.g., temperature × flow). |
+|-----------------|-----------------|-----------------|---------------------|
+| Thin plate regression spline (default) | `s(x)` | Flexible, general-purpose spline that does not require knot placement. | Default in `mgcv::s()`; works well in most situations. |
+| Cubic regression spline | `s(x, bs = "cr")` | Standard cubic spline with specified knots. | Good when you want explicit control over knots or smoothness. |
+| Cyclic spline | `s(x, bs = "cc")` | Ensures smooth connection at boundaries for circular predictors. | Ideal for seasonal or periodic variables (e.g., day-of-year). |
+| P-spline | `s(x, bs = "ps")` | Penalized B-spline allowing control over wiggliness via penalties. | Useful for evenly spaced predictors; can handle large datasets efficiently. |
+| Thin plate regression spline with shrinkage | `s(x, bs = "ts")` | Adds extra penalization to allow smooth term to shrink to zero if not important. | Useful for model selection or when some smooth terms may be irrelevant. |
+| Tensor product smooths | `te(x1, x2)` | Combines multiple continuous predictors, allowing interactions on different scales. | Use for multidimensional ecological responses (e.g., temperature × flow). |
 
 ### Penalty strength
 
 In a GAM, smooth terms are flexible functions whose degree of curvature (wiggliness) must be estimated from the data. In the `mgcv` package, this is done automatically by selecting a smoothing parameter that balances goodness of fit against model complexity.
 
-By default, mgcv uses generalized cross-validation (GCV) to determine this smoothing parameter. **In other words, GCV decides the strength of the penalty applied to the smooth term**: a stronger penalty produces a smoother, less wiggly curve, while a weaker penalty allows more flexibility to follow data fluctuations. Conceptually, GCV asks: *How well would this model predict new data if we slightly penalize excessive curvature?* A smoother that fits the data too closely (overfitting) is penalized, while a smoother that is too rigid (underfitting) fails to capture important structure. The chosen smoothness minimizes the GCV score, yielding a curve that is flexible enough to capture real patterns but smooth enough to generalize beyond the observed data.
+By default, mgcv uses generalized cross-validation (GCV) to determine this smoothing parameter. In other words, GCV decides the strength of the penalty applied to the smooth term: a stronger penalty produces a smoother, less wiggly curve, while a weaker penalty allows more flexibility to follow data fluctuations. Conceptually, GCV asks: *How well would this model predict new data if we slightly penalize excessive curvature?* A smoother that fits the data too closely (overfitting) is penalized, while a smoother that is too rigid (underfitting) fails to capture important structure. The chosen smoothness minimizes the GCV score, yielding a curve that is flexible enough to capture real patterns but smooth enough to generalize beyond the observed data.
 
 However, there are other options for the penalty selection method, which can be specified via the `method` argument in `mgcv::gam()`:
 
 | Penalty Selection Method | How to Specify | Notes / Typical Use |
-|------------------|------------------|-----------------------------------|
-| **GCV / GACV** | `method = "GCV.Cp"` (or default) | Balances fit vs. wiggliness; default in many examples. |
-| **REML** | `method = "REML"` | Preferred for stable inference; treats smoothness as a variance component. |
-| **ML** | `method = "ML"` | Useful for comparing nested models using likelihood-based criteria. |
-| **UBRE / P-UBRE** | `method = "UBRE"` | Based on unbiased risk estimate; mainly for Gaussian models. |
-
-## Laboratory
+|-------------------|-------------------|-----------------------------------|
+| GCV / GACV | `method = "GCV.Cp"` (or default) | Balances fit vs. wiggliness; default in many examples. |
+| REML | `method = "REML"` | Preferred for stable inference; treats smoothness as a variance component. |
+| ML | `method = "ML"` | Useful for comparing nested models using likelihood-based criteria. |
+| UBRE / P-UBRE | `method = "UBRE"` | Based on unbiased risk estimate; mainly for Gaussian models. |

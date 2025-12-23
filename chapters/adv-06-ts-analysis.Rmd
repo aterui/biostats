@@ -251,7 +251,7 @@ where $\mu$ is the constant term (intercept), $\theta_i$ is the moving-average p
 
 ```
 
-We can perform a similar fitting, forecasting, and visualization for MA models, which highlights how their behavior differs from AR models. In particular, the average of the projected values quickly converges to the most recent observation. This occurs because MA models capture autocorrelation in the error terms, but the current value does not directly depend on past observations, unlike AR models.
+We can perform a similar fitting, forecasting, and visualization for MA models, which highlights how their behavior differs from AR models. In particular, the average of the projected values quickly converges to the average of observed values.
 
 ```{r adv-06-ma1-plot, echo=FALSE, fig.cap="Observed Lake Huron water levels (points) with MA(1) model fitted values and 50-year forecasts (steelblue line). The shaded grey ribbon represents ±1 standard error around the predictions, illustrating the uncertainty of the forecast."}
 
@@ -281,6 +281,8 @@ df_huron_ma1 %>%
   labs(x = "Year", y = "Water Level")
 ```
 
+This convergence occurs because MA models capture autocorrelation in the error terms, but the current value does not directly depend on past observations, unlike AR models.
+ 
 ### ARMA Model
 
 An ARMA model combines both autoregressive and moving-average components, allowing the current value to depend on both past observations and past random noises.

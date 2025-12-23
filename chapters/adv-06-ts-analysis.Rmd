@@ -1,8 +1,8 @@
-# Time-series Analaysis
+# Time-Series Analaysis
 
 ```{r}
 pacman::p_load(tidyverse,
-               glmmTMB)
+               forecast)
 ```
 
 ## Pitfall of Time-Series
@@ -18,7 +18,7 @@ url <- "https://raw.githubusercontent.com/aterui/biostats/master/data_raw/data_t
 
 The plot of this dataset shows that air-quality anomalies tend to increase over time.
 
-```{r, fig.cap="Time-series of annual anomalies. Points represent observed values for each year, and lines connect consecutive observations to highlight temporal trends."}
+```{r adv-06-random-walk-plot, fig.cap="Time-series of annual anomalies. Points represent observed values for each year, and lines connect consecutive observations to highlight temporal trends."}
 # Plot time-series anomalies
 df_ts %>% 
   ggplot(aes(x = year,          # Map 'year' to the x-axis
@@ -34,7 +34,7 @@ df_ts %>%
 
 Providing statistical evidence appears straightforward — we can simply regress anomalies on time.
 
-```{r}
+```{r adv-06-lm-to-rw}
 # Fit a simple linear model: anomaly as a function of year
 m_lm <- lm(anormaly ~ year, data = df_ts)
 
@@ -44,7 +44,7 @@ summary(m_lm)
 
 There is a strong, positive effect of observation year, with a slope estimate of 0.04, indicating that anomalies increase by 0.04 per year on average.
 
-```{r, fig.cap="Time-series of anomalies over years. Dotted lines connect consecutive observations, semi-transparent points show individual measurements, and the solid line represents the fitted linear trend from a linear regression model."}
+```{r adv-06-lm-fit-plot, fig.cap="Time-series of anomalies over years. Dotted lines connect consecutive observations, semi-transparent points show individual measurements, and the solid line represents the fitted linear trend from a linear regression model."}
 
 df_ts %>% 
   ggplot(aes(x = year, 
@@ -71,7 +71,7 @@ This system is unique because each observation depends on its immediate past: th
 
 The behavior of a random walk is highly stochastic, producing very different patterns in each simulation run. You can observe this by running the following code, which generated the dataset shown above.
 
-```{r, eval=FALSE}
+```{r adv-06-sim-rw, eval=FALSE}
 # Initialize a vector to store the time series (100 time steps)
 y <- rep(NA, 100)
 
@@ -108,7 +108,7 @@ df_y %>%
 
 This is expected because we are measuring the same object over time, so the observations are not independent. This leads to **temporal autocorrelation**, a feature that violates a fundamental assumption of many statistical methods — the independence of data points. Temporal autocorrelation can be assessed using the `acf()` function in R: 
 
-```{r, fig.cap="Autocorrelation function plot. The x-axis represents the lag, or the time difference between observations (e.g., lag 1 is the correlation between consecutive observations, lag 2 is two steps apart, etc.), while the y-axis shows the autocorrelation coefficient, ranging from -1 to 1, indicating how strongly observations at that lag are correlated."}
+```{r adv-06-acf-plot, fig.cap="Autocorrelation function plot. The x-axis represents the lag, or the time difference between observations (e.g., lag 1 is the correlation between consecutive observations, lag 2 is two steps apart, etc.), while the y-axis shows the autocorrelation coefficient, ranging from -1 to 1, indicating how strongly observations at that lag are correlated."}
 
 ## Data must be ordered from the oldest observation to the most recent
 df_ts <- arrange(df_ts, year)
@@ -125,85 +125,280 @@ Below, we explore how to accommodate the challenging nature of time-series data 
 
 ## Basic Models
 
-As a starting point, we will focus on AR, MA, and ARMA models, all of which assume a stationary process.
+As a starting point, we will focus on AR, MA, and ARMA models, all of which assume a stationary process. We will then extend these frameworks to the ARIMA model, which incorporates an integration step to handle non-stationary time series.
 
-Stationarity is a fundamental concept in time-series analysis: a stationary process has a constant mean, variance, and autocorrelation structure over time. 
+Stationarity is a fundamental concept in time-series analysis: a stationary process has a constant mean, variance, and autocorrelation structure over time. Non-stationarity means that one or more of these properties change through time—for example, the series may exhibit trends, shifts in variability, or evolving temporal dependence—making direct modeling and inference more challenging without first transforming the data.
 
-We will use Nile built-in data,
+We will use the built-in `LakeHuron` dataset to learn the implementation of these modeling approaches. All of the models discussed above can be implemented using the `Arima()` function from the `forecast` package, since AR, MA, and ARMA models are all special cases of the more general ARIMA framework.
 
-```{r}
+```{r adv-06-huron-plot, fig.cap="Time series of Lake Huron water levels from 1875 to 1972. Points represent annual water levels, and the dotted line connects consecutive observations. The solid black line shows a linear trend for reference only, providing a visual guide to the overall direction of change and facilitating comparison with predictions from time-series models."}
+# Create a tibble (modern data frame) from the LakeHuron time series
 df_huron <- tibble(
-  year = time(LakeHuron),                # Extracts the time component (years) from the LakeHuron time series object
-  water_level = as.numeric(LakeHuron)    # Converts the LakeHuron water levels to numeric values (if they were stored as a ts object)
+  year = time(LakeHuron),                # Extracts the time component (years) from the LakeHuron ts object
+  water_level = as.numeric(LakeHuron)    # Converts LakeHuron values to numeric (from ts class)
 ) %>% 
-  arrange(year)
+  arrange(year)                           # Ensures the data is ordered by year
 
-acf(df_huron$water_level)
+# Plot Lake Huron time series with a linear trend
+df_huron %>% 
+  ggplot(aes(x = year, y = water_level)) +
+  geom_point(alpha = 0.25) +       # Semi-transparent points
+  geom_line(linetype = "dotted") + # Dotted line connecting points
+  geom_smooth(method = "lm",       # Linear trend line
+              color = "black",
+              linewidth = 0.5) +
+  theme_bw() +
+  labs(x = "Year", y = "Water Level")
+
 ```
-
 
 ### AR Model
 
-An autoregressive (AR) model describes a time series in which the current value depends on one or more of its past values plus random noise. In an AR(p) model, the present observation is a linear combination of the previous p observations. 
-
-```{r}
-
-arima(
-  df_huron$water_level,       # The time series data we want to model
-  order = c(1, 0, 0)          # ARIMA model orders: c(p, d, q)
-)
-
-```
-
-The notation `c(1, 0, 0)` represents three numbers that define a time series model. The first number 1 indicates that the current value of the series depends on one previous observation, so it “remembers” the last point. The second number 0 means that no differencing is applied, so the series is used in its original form without removing trends. The third number 0 shows that no past errors are included in the model. Together, this describes a simple model where each value is predicted mainly from the immediately preceding value.
-
-AR models capture temporal persistence and are stationary when the autoregressive parameters are less than one in magnitude.
+An autoregressive (AR) model describes a time series in which the current value depends on one or more of its past values plus random noise.
 
 $$
 y_t = \mu + \sum_{i=1}^p \phi_i y_{t - i} + \varepsilon_t
 $$
-where $\mu$ is the constant term, $\phi_i$ is the autoregressive parameter, and $\varepsilon_t$ is the (white) noise.
+
+where $\mu$ is the constant term (intercept), $\phi_i$ is the autoregressive parameter, and $\varepsilon_t$ is the (white) noise.
+
+In an AR($p$) model, the present observation is a linear combination of the previous $p$ observations. The $p$ is referred to as the **order** of the model. AR models are stationary when the sum of autoregressive parameters $\sum_i \phi_i$ are less than one -- this is analogous to population models with a carrying capacity in ecology.
+
+In practice, we supply a vector of time-series data to the `arima()` function. We will begin with the simplest autoregressive model of order one, which is specified by setting the first element of the `order` argument to 1 (i.e., `order = c(1, 0, 0)`).
+
+```{r adv-06-ar1}
+
+(m_ar1 <- Arima(
+  df_huron$water_level,       # The time series data we want to model
+  order = c(1, 0, 0)          # ARIMA model orders: c(p, d, q)
+))
+```
+
+This setup corresponds to setting the order ($p = 1$) in an AR model, meaning the process “remembers” the previous observation. The remaining elements of the `order` argument define the other components of the model, which are relevant for the additional models introduced below.
+
+We can extract the in-sample fitted values from the AR(1) model using the `fitted()` function. Below, we compare these model predictions with a simple linear trend to illustrate how the time-series model captures temporal dependence beyond what a linear model provides.
+
+```{r adv-06-ar1-plot, fig.cap="Observed Lake Huron water levels (points) with in-sample fitted values from an AR(1) model (steelblue line). The AR(1) model captures temporal dependence in the series, providing a better representation of year-to-year variation than a simple linear trend."}
+# Add fitted values from AR(1) model to the dataset
+df_huron_ar1 <- df_huron %>% 
+  mutate(fit = fitted(m_ar1) %>%   # Extract fitted (in-sample predicted) values from the AR(1) model
+           as.numeric())           # Convert to numeric if necessary
+
+# Plot observed and fitted values
+df_huron_ar1 %>% 
+  ggplot() +
+  geom_point(aes(x = year, 
+                 y = water_level),
+             alpha = 0.25) +        # Plot observed water levels
+  geom_line(aes(x = year, 
+                y = fit),           # Plot AR(1) fitted values
+            color = "steelblue") +
+  theme_bw()                        # Clean black-and-white theme
+```
+
+AR models assume stationarity, meaning their expected values and variance remain constant over time. When projecting time-series data into the future, AR models can produce forecasts that account for temporal dependence, often giving a very different and more realistic picture than a simple linear trend.
+
+The `predict()` function preforms the projection with the `n.ahead` argument.
+
+```{r adv-06-ar1-plot-pred, fig.cap="Observed Lake Huron water levels (points) with AR(1) model fitted values and 50-year forecasts (steelblue line). The shaded grey ribbon represents ±1 standard error around the predictions, illustrating the uncertainty of the forecast. This visualization highlights how the AR(1) model captures temporal dependence and projects future values differently from a simple linear trend."}
+# Forecast the next 50 time points using the AR(1) model
+p_ar1 <- predict(m_ar1, n.ahead = 50)  
+# Returns predicted values (p_ar1$pred) and their standard errors (p_ar1$se)
+
+# Create a tibble for the forecasted values
+df_pred_ar1 <- tibble(
+  year = min(df_huron$year) + time(p_ar1$pred), # Map forecast time steps to actual years
+  fit = as.numeric(p_ar1$pred),                 # Forecasted water levels
+  fit_se = as.numeric(p_ar1$se)                 # Associated standard errors
+)
+
+# Combine historical AR(1) fitted values and future forecasts, then plot
+df_huron_ar1 %>% 
+  bind_rows(df_pred_ar1) %>% 
+  ggplot() +
+  geom_point(aes(x = year, y = water_level),  # Observed water levels (semi-transparent)
+             alpha = 0.25) +
+  geom_ribbon(aes(x = year,                   # Visualize forecast uncertainty
+                  ymin = fit - fit_se,
+                  ymax = fit + fit_se),
+              fill = "grey",
+              color = NA,
+              alpha = 0.6) +
+  geom_line(aes(x = year, y = fit),           # Fitted values for historical data + forecasts
+            color = "steelblue") +
+  theme_bw() +
+  labs(x = "Year",
+       y = "Water Level")
+```
+
 
 ### MA Model
 
-A moving average (MA) model represents a time series as a function of past random shocks rather than past observations. In an MA(q) model, the current value depends on the current and previous q error terms. 
-
-```{r}
-
-arima(
-  df_huron$water_level,       # The time series data we want to model
-  order = c(0, 0, 1)          # ARIMA model orders: c(p, d, q)
-)
-
-```
-
-MA models are useful for capturing short-term dependencies and sudden shocks in the data and are always stationary.
+A moving average (MA) model represents a time series as a function of past random noises rather than past observations. In an MA(q) model, the current value depends on the current and previous q error terms. 
 
 $$
 y_t = \mu + \sum_{i=1}^q \theta_i \varepsilon_{t-i} + \varepsilon_t
 $$
 
-where $\mu$ is the constant term, $\theta_i$ is the moving-average parameter, and $\varepsilon_t$ is the (white) noise.
+where $\mu$ is the constant term (intercept), $\theta_i$ is the moving-average parameter, and $\varepsilon_t$ is the (white) noise. In the `Arima()` function, specifying `order = c(0, 0, 1)` corresponds to a moving-average model of order 1 (MA(1)), where the current value depends on the most recent random noise.
+
+```{r adv-06-ma1}
+
+(m_ma1 <- Arima(
+  df_huron$water_level,       # The time series data we want to model
+  order = c(0, 0, 1)          # ARIMA model orders: c(p, d, q)
+))
+
+```
+
+We can perform a similar fitting, forecasting, and visualization for MA models, which highlights how their behavior differs from AR models. In particular, the average of the projected values quickly converges to the most recent observation. This occurs because MA models capture autocorrelation in the error terms, but the current value does not directly depend on past observations, unlike AR models.
+
+```{r adv-06-ma1-plot, echo=FALSE, fig.cap="Observed Lake Huron water levels (points) with MA(1) model fitted values and 50-year forecasts (steelblue line). The shaded grey ribbon represents ±1 standard error around the predictions, illustrating the uncertainty of the forecast."}
+
+# Add in-sample fitted values from MA(1) model
+df_huron_ma1 <- df_huron %>% 
+  mutate(fit = fitted(m_ma1) %>% as.numeric())
+
+# Forecast next 50 years using MA(1) model
+p_ma1 <- predict(m_ma1, n.ahead = 50)  
+
+# Create tibble of forecasted values
+df_pred_ma1 <- tibble(
+  year = min(df_huron$year) + time(p_ma1$pred),
+  fit = as.numeric(p_ma1$pred),
+  fit_se = as.numeric(p_ma1$se)
+)
+
+# Combine historical fitted values and forecasts, then plot
+df_huron_ma1 %>% 
+  bind_rows(df_pred_ma1) %>% 
+  ggplot() +
+  geom_point(aes(x = year, y = water_level), alpha = 0.25) +   # Observed values
+  geom_ribbon(aes(x = year, ymin = fit - fit_se, ymax = fit + fit_se), 
+              fill = "grey", alpha = 0.6) +                     # Forecast uncertainty
+  geom_line(aes(x = year, y = fit), color = "steelblue") +      # Fitted + forecasted line
+  theme_bw() +
+  labs(x = "Year", y = "Water Level")
+```
 
 ### ARMA Model
 
-An ARMA model combines both autoregressive and moving-average components, allowing the current value to depend on both past observations and past random shocks.
-
-ARMA(p,q) models are flexible and efficient for modeling stationary time series with complex autocorrelation structures. They form the foundation for more advanced models such as ARIMA.
+An ARMA model combines both autoregressive and moving-average components, allowing the current value to depend on both past observations and past random noises.
 
 $$
 y_t = \mu + \sum_{i=1}^p\phi_i y_{t-i} + \sum_{i=1}^q \theta_i\varepsilon_{t-i} + \varepsilon_t
 $$
 
-```{r}
+The parameters are defined as above. Since an ARMA model combines both AR and MA components, we specify `order = c(1, 0, 1)` to include first-order AR and MA terms, allowing the current value to depend on both the previous observation and the most recent random noise.
 
-arima(
+```{r adv-06-arma}
+(m_arma <- Arima(
   df_huron$water_level,       # The time series data we want to model
   order = c(1, 0, 1)          # ARIMA model orders: c(p, d, q)
+))
+```
+We can visualize the ARMA(1,1) model in the same way as we did for the AR(1) and MA(1) models by combining historical fitted values with out-of-sample forecasts and displaying the uncertainty:
+
+```{r adv-06-arma-plot, echo=FALSE, fig.cap="Observed Lake Huron water levels (points) with ARMA(1,1) model fitted values and 50-year forecasts (steelblue line). The shaded grey ribbon represents ±1 standard error around the predictions, illustrating the uncertainty of the forecast."}
+# Add in-sample fitted values
+df_huron_arma <- df_huron %>% 
+  mutate(fit = fitted(m_arma) %>% as.numeric())
+
+# Forecast next 50 years
+p_arma <- predict(m_arma, n.ahead = 50)
+
+# Create tibble for forecasted values
+df_pred_arma <- tibble(
+  year = min(df_huron$year) + time(p_arma$pred),
+  fit = as.numeric(p_arma$pred),
+  fit_se = as.numeric(p_arma$se)
 )
+
+# Combine historical fitted values and forecasts, then plot
+df_huron_arma %>% 
+  bind_rows(df_pred_arma) %>% 
+  ggplot() +
+  geom_point(aes(x = year, y = water_level), alpha = 0.25) +  # Observed points
+  geom_ribbon(aes(x = year, ymin = fit - fit_se, ymax = fit + fit_se), 
+              fill = "grey", alpha = 0.6) +                     # Forecast uncertainty
+  geom_line(aes(x = year, y = fit), color = "steelblue") +      # Fitted + forecast line
+  theme_bw() +
+  labs(x = "Year", y = "Water Level")
 
 ```
 
+### ARIMA model
+
+An ARIMA model can be thought of as an ARMA model applied to the differenced series. To illustrate, consider an ARIMA model with first-order differencing. We define a new variable: $\delta_t = y_t - y_{t-1}$. 
+
+The ARIMA then fits an ARMA(p, q) model to $\delta_t$, capturing the autoregressive and moving-average structure in the differenced (stationary) series:
+
+$$
+\delta_t = \sum_{i=1}^p \phi_i \delta_{t-i} + \sum_{i=1}^q \theta_i \varepsilon_{t-i} +\varepsilon_t
+$$
+
+This is a special case of the more general d-order ARIMA(p,d,q) model, specifically ARIMA(p,1,q) where $d=1$. For more detailed explanations and examples, you can refer to well-developed documentation, such as [Wikipedia](https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average)
+
+This extension allows ARIMA models to handle non-stationary time series, where the mean or trend changes over time.
+
+Here, we assume $p=1$ and $d=1$ to illustrate and gain insights into how the ARIMA model operates.
+
+```{r adv-06-arima}
+(m_arima <- Arima(df_huron$water_level,
+                  order = c(1, 1, 0)))
+```
+
+No constant term is estimated because the series is first-order differenced. The visualization highlights how the shifting mean influences the model’s projections over time -- the uncertainty is greater than stationary models.
+
+```{r adv-06-arima-plot, echo=FALSE, fig.cap="Observed Lake Huron water levels (points) with ARIMA(1,1,0) model fitted values and 50-year forecasts (steelblue line). The shaded grey ribbon represents ±1 standard error around the predictions, illustrating forecast uncertainty."}
+# Add in-sample fitted values (for differenced series, integrated back)
+df_huron_arima <- df_huron %>% 
+  mutate(fit = fitted(m_arima) %>% as.numeric())
+
+# Forecast next 50 years
+p_arima <- predict(m_arima, n.ahead = 50)
+
+# Create tibble for forecasted values
+df_pred_arima <- tibble(
+  year = min(df_huron$year) + time(p_arima$pred),
+  fit = as.numeric(p_arima$pred),
+  fit_se = as.numeric(p_arima$se)
+)
+
+# Combine historical fitted values and forecasts, then plot
+df_huron_arima %>% 
+  bind_rows(df_pred_arima) %>% 
+  ggplot() +
+  geom_point(aes(x = year, y = water_level), alpha = 0.25) +  # Observed points
+  geom_line(aes(x = year, y = fit), color = "steelblue") +      # Fitted + forecast line
+  geom_ribbon(aes(x = year, ymin = fit - fit_se, ymax = fit + fit_se),
+              fill = "grey", alpha = 0.6) +                     # Forecast uncertainty
+  theme_bw() +
+  labs(x = "Year", y = "Water Level")
+```
+
+### Model selection
+
+Selecting the appropriate model and its orders can be challenging, because there are multiple model types (AR, MA, ARMA, ARIMA) and many possible combinations of parameters (p, d, q). One common approach to guide model selection is the use of information criteria, such as the Akaike Information Criterion (AIC), which balance model fit and complexity.
+
+This approach is conveniently implemented in the `forecast` package. In particular, the function `auto.arima()` automatically searches over a range of ARIMA models and selects the combination of parameters that yields the most parsimonious model for your data, simplifying the model selection process.
+
+```{r adv-06-ms}
+# Possible extensions / additional arguments:
+# max.p, max.q       : maximum AR and MA orders to consider
+# d, D               : specify non-seasonal or seasonal differencing (or let auto.arima decide)
+# seasonal           : include seasonal ARIMA components (TRUE/FALSE)
+# max.P, max.Q       : maximum seasonal AR and MA orders
+# approximation      : use approximation for faster computation on long series
+# lambda             : Box-Cox transformation for stabilizing variance
+
+auto.arima(
+  df_huron$water_level, # data
+  stepwise = FALSE,  # stepwise = FALSE: search all possible models rather than using stepwise approximation
+  ic = "aic" # model selection based on AIC
+)
+```
+In this case, ARIMA(2,1,1) was selected, which suggests a non-stationary series with a shifting mean (due to differencing) and autocorrelations in the changes captured by the AR and MA terms.
 
 ## Applied Models
 

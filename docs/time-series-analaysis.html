@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 22 Time-series Analaysis | BIOSTATS</title>
+<title>Chapter 22 Time-Series Analaysis | BIOSTATS</title>
 <meta name="author" content="Akira Terui">
-<meta name="description" content="pacman::p_load(tidyverse,        glmmTMB)  22.1 Demon of Time-Series  22.1.1 Time-series anormalies Let’s explore a simple time series dataset, showing air-quality anomalies measured over 100...">
+<meta name="description" content="pacman::p_load(tidyverse,        forecast)  22.1 Pitfall of Time-Series  22.1.1 Time-series anormalies Let’s explore a simple time series dataset, showing air-quality anomalies measured over 100...">
 <meta name="generator" content="bookdown 0.43 with bs4_book()">
-<meta property="og:title" content="Chapter 22 Time-series Analaysis | BIOSTATS">
+<meta property="og:title" content="Chapter 22 Time-Series Analaysis | BIOSTATS">
 <meta property="og:type" content="book">
-<meta property="og:description" content="pacman::p_load(tidyverse,        glmmTMB)  22.1 Demon of Time-Series  22.1.1 Time-series anormalies Let’s explore a simple time series dataset, showing air-quality anomalies measured over 100...">
+<meta property="og:description" content="pacman::p_load(tidyverse,        forecast)  22.1 Pitfall of Time-Series  22.1.1 Time-series anormalies Let’s explore a simple time series dataset, showing air-quality anomalies measured over 100...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 22 Time-series Analaysis | BIOSTATS">
-<meta name="twitter:description" content="pacman::p_load(tidyverse,        glmmTMB)  22.1 Demon of Time-Series  22.1.1 Time-series anormalies Let’s explore a simple time series dataset, showing air-quality anomalies measured over 100...">
+<meta name="twitter:title" content="Chapter 22 Time-Series Analaysis | BIOSTATS">
+<meta name="twitter:description" content="pacman::p_load(tidyverse,        forecast)  22.1 Pitfall of Time-Series  22.1.1 Time-series anormalies Let’s explore a simple time series dataset, showing air-quality anomalies measured over 100...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -74,7 +74,7 @@
 <li><a class="" href="unconstrained-ordination.html"><span class="header-section-number">19</span> Unconstrained Ordination</a></li>
 <li><a class="" href="constrained-ordination.html"><span class="header-section-number">20</span> Constrained Ordination</a></li>
 <li><a class="" href="structural-equation-modeling.html"><span class="header-section-number">21</span> Structural Equation Modeling</a></li>
-<li><a class="active" href="time-series-analaysis.html"><span class="header-section-number">22</span> Time-series Analaysis</a></li>
+<li><a class="active" href="time-series-analaysis.html"><span class="header-section-number">22</span> Time-Series Analaysis</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="basic-terminology.html"><span class="header-section-number">23</span> Basic Terminology</a></li>
 <li><a class="" href="git-github.html">Git &amp; GitHub</a></li>
@@ -88,14 +88,14 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="time-series-analaysis" class="section level1" number="22">
 <h1>
-<span class="header-section-number">22</span> Time-series Analaysis<a class="anchor" aria-label="anchor" href="#time-series-analaysis"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22</span> Time-Series Analaysis<a class="anchor" aria-label="anchor" href="#time-series-analaysis"><i class="fas fa-link"></i></a>
 </h1>
 <div class="sourceCode" id="cb569"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="va">tidyverse</span>,</span>
-<span>               <span class="va">glmmTMB</span><span class="op">)</span></span></code></pre></div>
-<div id="demon-of-time-series" class="section level2" number="22.1">
+<span>               <span class="va">forecast</span><span class="op">)</span></span></code></pre></div>
+<div id="pitfall-of-time-series" class="section level2" number="22.1">
 <h2>
-<span class="header-section-number">22.1</span> Demon of Time-Series<a class="anchor" aria-label="anchor" href="#demon-of-time-series"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22.1</span> Pitfall of Time-Series<a class="anchor" aria-label="anchor" href="#pitfall-of-time-series"><i class="fas fa-link"></i></a>
 </h2>
 <div id="time-series-anormalies" class="section level3" number="22.1.1">
 <h3>
@@ -133,8 +133,8 @@
 <span>    y <span class="op">=</span> <span class="st">"Anomaly"</span>                   <span class="co"># Label y-axis</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-185"></span>
-<img src="biostats_files/figure-html/unnamed-chunk-185-1.png" alt="Time-series of annual anomalies. Points represent observed values for each year, and lines connect consecutive observations to highlight temporal trends." width="672"><p class="caption">
+<span style="display:block;" id="fig:adv-06-random-walk-plot"></span>
+<img src="biostats_files/figure-html/adv-06-random-walk-plot-1.png" alt="Time-series of annual anomalies. Points represent observed values for each year, and lines connect consecutive observations to highlight temporal trends." width="672"><p class="caption">
 Figure 22.1: Time-series of annual anomalies. Points represent observed values for each year, and lines connect consecutive observations to highlight temporal trends.
 </p>
 </div>
@@ -174,8 +174,8 @@ Figure 22.1: Time-series of annual anomalies. Points represent observed values f
 <span>              slope <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">m_lm</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span>                             <span class="co"># Use a clean black-and-white theme</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-187"></span>
-<img src="biostats_files/figure-html/unnamed-chunk-187-1.png" alt="Time-series of anomalies over years. Dotted lines connect consecutive observations, semi-transparent points show individual measurements, and the solid line represents the fitted linear trend from a linear regression model." width="672"><p class="caption">
+<span style="display:block;" id="fig:adv-06-lm-fit-plot"></span>
+<img src="biostats_files/figure-html/adv-06-lm-fit-plot-1.png" alt="Time-series of anomalies over years. Dotted lines connect consecutive observations, semi-transparent points show individual measurements, and the solid line represents the fitted linear trend from a linear regression model." width="672"><p class="caption">
 Figure 22.2: Time-series of anomalies over years. Dotted lines connect consecutive observations, semi-transparent points show individual measurements, and the solid line represents the fitted linear trend from a linear regression model.
 </p>
 </div>
@@ -227,10 +227,12 @@ y_t = y_{t-1} + \varepsilon_{t}\\
 <span>  <span class="op">)</span></span></code></pre></div>
 <p>This is expected because we are measuring the same object over time, so the observations are not independent. This leads to <strong>temporal autocorrelation</strong>, a feature that violates a fundamental assumption of many statistical methods — the independence of data points. Temporal autocorrelation can be assessed using the <code><a href="https://rdrr.io/r/stats/acf.html">acf()</a></code> function in R:</p>
 <div class="sourceCode" id="cb577"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/acf.html">acf</a></span><span class="op">(</span><span class="va">df_ts</span><span class="op">$</span><span class="va">anormaly</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">## Data must be ordered from the oldest observation to the most recent</span></span>
+<span><span class="va">df_ts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">df_ts</span>, <span class="va">year</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/acf.html">acf</a></span><span class="op">(</span><span class="va">df_ts</span><span class="op">$</span><span class="va">anormaly</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-189"></span>
-<img src="biostats_files/figure-html/unnamed-chunk-189-1.png" alt="Autocorrelation function plot. The x-axis represents the lag, or the time difference between observations (e.g., lag 1 is the correlation between consecutive observations, lag 2 is two steps apart, etc.), while the y-axis shows the autocorrelation coefficient, ranging from -1 to 1, indicating how strongly observations at that lag are correlated." width="672"><p class="caption">
+<span style="display:block;" id="fig:adv-06-acf-plot"></span>
+<img src="biostats_files/figure-html/adv-06-acf-plot-1.png" alt="Autocorrelation function plot. The x-axis represents the lag, or the time difference between observations (e.g., lag 1 is the correlation between consecutive observations, lag 2 is two steps apart, etc.), while the y-axis shows the autocorrelation coefficient, ranging from -1 to 1, indicating how strongly observations at that lag are correlated." width="672"><p class="caption">
 Figure 22.3: Autocorrelation function plot. The x-axis represents the lag, or the time difference between observations (e.g., lag 1 is the correlation between consecutive observations, lag 2 is two steps apart, etc.), while the y-axis shows the autocorrelation coefficient, ranging from -1 to 1, indicating how strongly observations at that lag are correlated.
 </p>
 </div>
@@ -244,30 +246,266 @@ Figure 22.3: Autocorrelation function plot. The x-axis represents the lag, or th
 <h2>
 <span class="header-section-number">22.2</span> Basic Models<a class="anchor" aria-label="anchor" href="#basic-models"><i class="fas fa-link"></i></a>
 </h2>
+<p>As a starting point, we will focus on AR, MA, and ARMA models, all of which assume a stationary process. We will then extend these frameworks to the ARIMA model, which incorporates an integration step to handle non-stationary time series.</p>
+<p>Stationarity is a fundamental concept in time-series analysis: a stationary process has a constant mean, variance, and autocorrelation structure over time. Non-stationarity means that one or more of these properties change through time—for example, the series may exhibit trends, shifts in variability, or evolving temporal dependence—making direct modeling and inference more challenging without first transforming the data.</p>
+<p>We will use the built-in <code>LakeHuron</code> dataset to learn the implementation of these modeling approaches. All of the models discussed above can be implemented using the <code>Arima()</code> function from the <code>forecast</code> package, since AR, MA, and ARMA models are all special cases of the more general ARIMA framework.</p>
+<div class="sourceCode" id="cb578"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Create a tibble (modern data frame) from the LakeHuron time series</span></span>
+<span><span class="va">df_huron</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/time.html">time</a></span><span class="op">(</span><span class="va">LakeHuron</span><span class="op">)</span>,                <span class="co"># Extracts the time component (years) from the LakeHuron ts object</span></span>
+<span>  water_level <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">LakeHuron</span><span class="op">)</span>    <span class="co"># Converts LakeHuron values to numeric (from ts class)</span></span>
+<span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span>                           <span class="co"># Ensures the data is ordered by year</span></span>
+<span></span>
+<span><span class="co"># Plot Lake Huron time series with a linear trend</span></span>
+<span><span class="va">df_huron</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">water_level</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span> <span class="op">+</span>       <span class="co"># Semi-transparent points</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>linetype <span class="op">=</span> <span class="st">"dotted"</span><span class="op">)</span> <span class="op">+</span> <span class="co"># Dotted line connecting points</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>,       <span class="co"># Linear trend line</span></span>
+<span>              color <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>              linewidth <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Year"</span>, y <span class="op">=</span> <span class="st">"Water Level"</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:adv-06-huron-plot"></span>
+<img src="biostats_files/figure-html/adv-06-huron-plot-1.png" alt="Time series of Lake Huron water levels from 1875 to 1972. Points represent annual water levels, and the dotted line connects consecutive observations. The solid black line shows a linear trend for reference only, providing a visual guide to the overall direction of change and facilitating comparison with predictions from time-series models." width="672"><p class="caption">
+Figure 22.4: Time series of Lake Huron water levels from 1875 to 1972. Points represent annual water levels, and the dotted line connects consecutive observations. The solid black line shows a linear trend for reference only, providing a visual guide to the overall direction of change and facilitating comparison with predictions from time-series models.
+</p>
+</div>
 <div id="ar-model" class="section level3" number="22.2.1">
 <h3>
 <span class="header-section-number">22.2.1</span> AR Model<a class="anchor" aria-label="anchor" href="#ar-model"><i class="fas fa-link"></i></a>
 </h3>
-<p>An autoregressive (AR) model describes a time series in which the current value depends on one or more of its past values plus random noise. In an AR(p) model, the present observation is a linear combination of the previous p observations. AR models capture temporal persistence and are stationary when the autoregressive parameters are less than one in magnitude.</p>
+<p>An autoregressive (AR) model describes a time series in which the current value depends on one or more of its past values plus random noise.</p>
+<p><span class="math display">\[
+y_t = \mu + \sum_{i=1}^p \phi_i y_{t - i} + \varepsilon_t
+\]</span></p>
+<p>where <span class="math inline">\(\mu\)</span> is the constant term (intercept), <span class="math inline">\(\phi_i\)</span> is the autoregressive parameter, and <span class="math inline">\(\varepsilon_t\)</span> is the (white) noise.</p>
+<p>In an AR(<span class="math inline">\(p\)</span>) model, the present observation is a linear combination of the previous <span class="math inline">\(p\)</span> observations. The <span class="math inline">\(p\)</span> is referred to as the <strong>order</strong> of the model. AR models are stationary when the sum of autoregressive parameters <span class="math inline">\(\sum_i \phi_i\)</span> are less than one – this is analogous to population models with a carrying capacity in ecology.</p>
+<p>In practice, we supply a vector of time-series data to the <code><a href="https://rdrr.io/r/stats/arima.html">arima()</a></code> function. We will begin with the simplest autoregressive model of order one, which is specified by setting the first element of the <code>order</code> argument to 1 (i.e., <code>order = c(1, 0, 0)</code>).</p>
+<div class="sourceCode" id="cb579"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">m_ar1</span> <span class="op">&lt;-</span> <span class="fu">Arima</span><span class="op">(</span></span>
+<span>  <span class="va">df_huron</span><span class="op">$</span><span class="va">water_level</span>,       <span class="co"># The time series data we want to model</span></span>
+<span>  order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>          <span class="co"># ARIMA model orders: c(p, d, q)</span></span>
+<span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Series: df_huron$water_level 
+## ARIMA(1,0,0) with non-zero mean 
+## 
+## Coefficients:
+##          ar1      mean
+##       0.8375  579.1153
+## s.e.  0.0538    0.4240
+## 
+## sigma^2 = 0.5199:  log likelihood = -106.6
+## AIC=219.2   AICc=219.45   BIC=226.95</code></pre>
+<p>This setup corresponds to setting the order (<span class="math inline">\(p = 1\)</span>) in an AR model, meaning the process “remembers” the previous observation. The remaining elements of the <code>order</code> argument define the other components of the model, which are relevant for the additional models introduced below.</p>
+<p>We can extract the in-sample fitted values from the AR(1) model using the <code><a href="https://rdrr.io/r/stats/fitted.values.html">fitted()</a></code> function. Below, we compare these model predictions with a simple linear trend to illustrate how the time-series model captures temporal dependence beyond what a linear model provides.</p>
+<div class="sourceCode" id="cb581"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Add fitted values from AR(1) model to the dataset</span></span>
+<span><span class="va">df_huron_ar1</span> <span class="op">&lt;-</span> <span class="va">df_huron</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>fit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/fitted.values.html">fitted</a></span><span class="op">(</span><span class="va">m_ar1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>   <span class="co"># Extract fitted (in-sample predicted) values from the AR(1) model</span></span>
+<span>           <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>           <span class="co"># Convert to numeric if necessary</span></span>
+<span></span>
+<span><span class="co"># Plot observed and fitted values</span></span>
+<span><span class="va">df_huron_ar1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, </span>
+<span>                 y <span class="op">=</span> <span class="va">water_level</span><span class="op">)</span>,</span>
+<span>             alpha <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span> <span class="op">+</span>        <span class="co"># Plot observed water levels</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, </span>
+<span>                y <span class="op">=</span> <span class="va">fit</span><span class="op">)</span>,           <span class="co"># Plot AR(1) fitted values</span></span>
+<span>            color <span class="op">=</span> <span class="st">"steelblue"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span>                        <span class="co"># Clean black-and-white theme</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:adv-06-ar1-plot"></span>
+<img src="biostats_files/figure-html/adv-06-ar1-plot-1.png" alt="Observed Lake Huron water levels (points) with in-sample fitted values from an AR(1) model (steelblue line). The AR(1) model captures temporal dependence in the series, providing a better representation of year-to-year variation than a simple linear trend." width="672"><p class="caption">
+Figure 22.5: Observed Lake Huron water levels (points) with in-sample fitted values from an AR(1) model (steelblue line). The AR(1) model captures temporal dependence in the series, providing a better representation of year-to-year variation than a simple linear trend.
+</p>
+</div>
+<p>AR models assume stationarity, meaning their expected values and variance remain constant over time. When projecting time-series data into the future, AR models can produce forecasts that account for temporal dependence, often giving a very different and more realistic picture than a simple linear trend.</p>
+<p>The <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> function preforms the projection with the <code>n.ahead</code> argument.</p>
+<div class="sourceCode" id="cb582"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Forecast the next 50 time points using the AR(1) model</span></span>
+<span><span class="va">p_ar1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">m_ar1</span>, n.ahead <span class="op">=</span> <span class="fl">50</span><span class="op">)</span>  </span>
+<span><span class="co"># Returns predicted values (p_ar1$pred) and their standard errors (p_ar1$se)</span></span>
+<span></span>
+<span><span class="co"># Create a tibble for the forecasted values</span></span>
+<span><span class="va">df_pred_ar1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">df_huron</span><span class="op">$</span><span class="va">year</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/time.html">time</a></span><span class="op">(</span><span class="va">p_ar1</span><span class="op">$</span><span class="va">pred</span><span class="op">)</span>, <span class="co"># Map forecast time steps to actual years</span></span>
+<span>  fit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">p_ar1</span><span class="op">$</span><span class="va">pred</span><span class="op">)</span>,                 <span class="co"># Forecasted water levels</span></span>
+<span>  fit_se <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">p_ar1</span><span class="op">$</span><span class="va">se</span><span class="op">)</span>                 <span class="co"># Associated standard errors</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Combine historical AR(1) fitted values and future forecasts, then plot</span></span>
+<span><span class="va">df_huron_ar1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows</a></span><span class="op">(</span><span class="va">df_pred_ar1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">water_level</span><span class="op">)</span>,  <span class="co"># Observed water levels (semi-transparent)</span></span>
+<span>             alpha <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html">geom_ribbon</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>,                   <span class="co"># Visualize forecast uncertainty</span></span>
+<span>                  ymin <span class="op">=</span> <span class="va">fit</span> <span class="op">-</span> <span class="va">fit_se</span>,</span>
+<span>                  ymax <span class="op">=</span> <span class="va">fit</span> <span class="op">+</span> <span class="va">fit_se</span><span class="op">)</span>,</span>
+<span>              fill <span class="op">=</span> <span class="st">"grey"</span>,</span>
+<span>              color <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>              alpha <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">fit</span><span class="op">)</span>,           <span class="co"># Fitted values for historical data + forecasts</span></span>
+<span>            color <span class="op">=</span> <span class="st">"steelblue"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Year"</span>,</span>
+<span>       y <span class="op">=</span> <span class="st">"Water Level"</span><span class="op">)</span></span></code></pre></div>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:adv-06-ar1-plot-pred"></span>
+<img src="biostats_files/figure-html/adv-06-ar1-plot-pred-1.png" alt="Observed Lake Huron water levels (points) with AR(1) model fitted values and 50-year forecasts (steelblue line). The shaded grey ribbon represents ±1 standard error around the predictions, illustrating the uncertainty of the forecast. This visualization highlights how the AR(1) model captures temporal dependence and projects future values differently from a simple linear trend." width="672"><p class="caption">
+Figure 22.6: Observed Lake Huron water levels (points) with AR(1) model fitted values and 50-year forecasts (steelblue line). The shaded grey ribbon represents ±1 standard error around the predictions, illustrating the uncertainty of the forecast. This visualization highlights how the AR(1) model captures temporal dependence and projects future values differently from a simple linear trend.
+</p>
+</div>
 </div>
 <div id="ma-model" class="section level3" number="22.2.2">
 <h3>
 <span class="header-section-number">22.2.2</span> MA Model<a class="anchor" aria-label="anchor" href="#ma-model"><i class="fas fa-link"></i></a>
 </h3>
-<p>A moving average (MA) model represents a time series as a function of past random shocks rather than past observations. In an MA(q) model, the current value depends on the current and previous q error terms. MA models are useful for capturing short-term dependencies and sudden shocks in the data and are always stationary.</p>
+<p>A moving average (MA) model represents a time series as a function of past random noises rather than past observations. In an MA(q) model, the current value depends on the current and previous q error terms.</p>
+<p><span class="math display">\[
+y_t = \mu + \sum_{i=1}^q \theta_i \varepsilon_{t-i} + \varepsilon_t
+\]</span></p>
+<p>where <span class="math inline">\(\mu\)</span> is the constant term (intercept), <span class="math inline">\(\theta_i\)</span> is the moving-average parameter, and <span class="math inline">\(\varepsilon_t\)</span> is the (white) noise. In the <code>Arima()</code> function, specifying <code>order = c(0, 0, 1)</code> corresponds to a moving-average model of order 1 (MA(1)), where the current value depends on the most recent random noise.</p>
+<div class="sourceCode" id="cb583"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">m_ma1</span> <span class="op">&lt;-</span> <span class="fu">Arima</span><span class="op">(</span></span>
+<span>  <span class="va">df_huron</span><span class="op">$</span><span class="va">water_level</span>,       <span class="co"># The time series data we want to model</span></span>
+<span>  order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>          <span class="co"># ARIMA model orders: c(p, d, q)</span></span>
+<span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Series: df_huron$water_level 
+## ARIMA(0,0,1) with non-zero mean 
+## 
+## Coefficients:
+##          ma1      mean
+##       0.8302  578.9982
+## s.e.  0.0633    0.1580
+## 
+## sigma^2 = 0.7517:  log likelihood = -124.65
+## AIC=255.3   AICc=255.55   BIC=263.05</code></pre>
+<p>We can perform a similar fitting, forecasting, and visualization for MA models, which highlights how their behavior differs from AR models. In particular, the average of the projected values quickly converges to the most recent observation. This occurs because MA models capture autocorrelation in the error terms, but the current value does not directly depend on past observations, unlike AR models.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:adv-06-ma1-plot"></span>
+<img src="biostats_files/figure-html/adv-06-ma1-plot-1.png" alt="Observed Lake Huron water levels (points) with MA(1) model fitted values and 50-year forecasts (steelblue line). The shaded grey ribbon represents ±1 standard error around the predictions, illustrating the uncertainty of the forecast." width="672"><p class="caption">
+Figure 22.7: Observed Lake Huron water levels (points) with MA(1) model fitted values and 50-year forecasts (steelblue line). The shaded grey ribbon represents ±1 standard error around the predictions, illustrating the uncertainty of the forecast.
+</p>
+</div>
 </div>
 <div id="arma-model" class="section level3" number="22.2.3">
 <h3>
 <span class="header-section-number">22.2.3</span> ARMA Model<a class="anchor" aria-label="anchor" href="#arma-model"><i class="fas fa-link"></i></a>
 </h3>
-<p>An ARMA model combines both autoregressive and moving-average components, allowing the current value to depend on both past observations and past random shocks. ARMA(p,q) models are flexible and efficient for modeling stationary time series with complex autocorrelation structures. They form the foundation for more advanced models such as ARIMA.</p>
+<p>An ARMA model combines both autoregressive and moving-average components, allowing the current value to depend on both past observations and past random noises.</p>
+<p><span class="math display">\[
+y_t = \mu + \sum_{i=1}^p\phi_i y_{t-i} + \sum_{i=1}^q \theta_i\varepsilon_{t-i} + \varepsilon_t
+\]</span></p>
+<p>The parameters are defined as above. Since an ARMA model combines both AR and MA components, we specify <code>order = c(1, 0, 1)</code> to include first-order AR and MA terms, allowing the current value to depend on both the previous observation and the most recent random noise.</p>
+<div class="sourceCode" id="cb585"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">m_arma</span> <span class="op">&lt;-</span> <span class="fu">Arima</span><span class="op">(</span></span>
+<span>  <span class="va">df_huron</span><span class="op">$</span><span class="va">water_level</span>,       <span class="co"># The time series data we want to model</span></span>
+<span>  order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>          <span class="co"># ARIMA model orders: c(p, d, q)</span></span>
+<span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Series: df_huron$water_level 
+## ARIMA(1,0,1) with non-zero mean 
+## 
+## Coefficients:
+##          ar1     ma1      mean
+##       0.7449  0.3206  579.0555
+## s.e.  0.0777  0.1135    0.3501
+## 
+## sigma^2 = 0.4899:  log likelihood = -103.25
+## AIC=214.49   AICc=214.92   BIC=224.83</code></pre>
+<p>We can visualize the ARMA(1,1) model in the same way as we did for the AR(1) and MA(1) models by combining historical fitted values with out-of-sample forecasts and displaying the uncertainty:</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:adv-06-arma-plot"></span>
+<img src="biostats_files/figure-html/adv-06-arma-plot-1.png" alt="Observed Lake Huron water levels (points) with ARMA(1,1) model fitted values and 50-year forecasts (steelblue line). The shaded grey ribbon represents ±1 standard error around the predictions, illustrating the uncertainty of the forecast." width="672"><p class="caption">
+Figure 22.8: Observed Lake Huron water levels (points) with ARMA(1,1) model fitted values and 50-year forecasts (steelblue line). The shaded grey ribbon represents ±1 standard error around the predictions, illustrating the uncertainty of the forecast.
+</p>
+</div>
+</div>
+<div id="arima-model" class="section level3" number="22.2.4">
+<h3>
+<span class="header-section-number">22.2.4</span> ARIMA model<a class="anchor" aria-label="anchor" href="#arima-model"><i class="fas fa-link"></i></a>
+</h3>
+<p>An ARIMA model can be thought of as an ARMA model applied to the differenced series. To illustrate, consider an ARIMA model with first-order differencing. We define a new variable: <span class="math inline">\(\delta_t = y_t - y_{t-1}\)</span>.</p>
+<p>The ARIMA then fits an ARMA(p, q) model to <span class="math inline">\(\delta_t\)</span>, capturing the autoregressive and moving-average structure in the differenced (stationary) series:</p>
+<p><span class="math display">\[
+\delta_t = \sum_{i=1}^p \phi_i \delta_{t-i} + \sum_{i=1}^q \theta_i \varepsilon_{t-i} +\varepsilon_t
+\]</span></p>
+<p>This is a special case of the more general d-order ARIMA(p,d,q) model, specifically ARIMA(p,1,q) where <span class="math inline">\(d=1\)</span>. For more detailed explanations and examples, you can refer to well-developed documentation, such as <a href="https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average">Wikipedia</a></p>
+<p>This extension allows ARIMA models to handle non-stationary time series, where the mean or trend changes over time.</p>
+<p>Here, we assume <span class="math inline">\(p=1\)</span> and <span class="math inline">\(d=1\)</span> to illustrate and gain insights into how the ARIMA model operates.</p>
+<div class="sourceCode" id="cb587"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">m_arima</span> <span class="op">&lt;-</span> <span class="fu">Arima</span><span class="op">(</span><span class="va">df_huron</span><span class="op">$</span><span class="va">water_level</span>,</span>
+<span>                  order <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Series: df_huron$water_level 
+## ARIMA(1,1,0) 
+## 
+## Coefficients:
+##          ar1
+##       0.1362
+## s.e.  0.1021
+## 
+## sigma^2 = 0.5544:  log likelihood = -108.23
+## AIC=220.45   AICc=220.58   BIC=225.6</code></pre>
+<p>No constant term is estimated because the series is first-order differenced. The visualization highlights how the shifting mean influences the model’s projections over time – the uncertainty is greater than stationary models.</p>
+<div class="figure" style="text-align: center">
+<span style="display:block;" id="fig:adv-06-arima-plot"></span>
+<img src="biostats_files/figure-html/adv-06-arima-plot-1.png" alt="Observed Lake Huron water levels (points) with ARIMA(1,1,0) model fitted values and 50-year forecasts (steelblue line). The shaded grey ribbon represents ±1 standard error around the predictions, illustrating forecast uncertainty." width="672"><p class="caption">
+Figure 22.9: Observed Lake Huron water levels (points) with ARIMA(1,1,0) model fitted values and 50-year forecasts (steelblue line). The shaded grey ribbon represents ±1 standard error around the predictions, illustrating forecast uncertainty.
+</p>
+</div>
+</div>
+<div id="model-selection" class="section level3" number="22.2.5">
+<h3>
+<span class="header-section-number">22.2.5</span> Model selection<a class="anchor" aria-label="anchor" href="#model-selection"><i class="fas fa-link"></i></a>
+</h3>
+<p>Selecting the appropriate model and its orders can be challenging, because there are multiple model types (AR, MA, ARMA, ARIMA) and many possible combinations of parameters (p, d, q). One common approach to guide model selection is the use of information criteria, such as the Akaike Information Criterion (AIC), which balance model fit and complexity.</p>
+<p>This approach is conveniently implemented in the <code>forecast</code> package. In particular, the function <code>auto.arima()</code> automatically searches over a range of ARIMA models and selects the combination of parameters that yields the most parsimonious model for your data, simplifying the model selection process.</p>
+<div class="sourceCode" id="cb589"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">auto.arima</span><span class="op">(</span></span>
+<span>  <span class="va">df_huron</span><span class="op">$</span><span class="va">water_level</span>, <span class="co"># data</span></span>
+<span>  stepwise <span class="op">=</span> <span class="cn">FALSE</span>,  <span class="co"># stepwise = FALSE: search all possible models rather than using stepwise approximation</span></span>
+<span>  ic <span class="op">=</span> <span class="st">"aic"</span> <span class="co"># model selection based on AIC</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Series: df_huron$water_level 
+## ARIMA(2,1,1) 
+## 
+## Coefficients:
+##          ar1      ar2      ma1
+##       0.9712  -0.2924  -0.9108
+## s.e.  0.1137   0.1030   0.0712
+## 
+## sigma^2 = 0.5003:  log likelihood = -102.54
+## AIC=213.07   AICc=213.51   BIC=223.37</code></pre>
+<div class="sourceCode" id="cb591"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Possible extensions / additional arguments:</span></span>
+<span><span class="co"># max.p, max.q       : maximum AR and MA orders to consider</span></span>
+<span><span class="co"># d, D               : specify non-seasonal or seasonal differencing (or let auto.arima decide)</span></span>
+<span><span class="co"># seasonal           : include seasonal ARIMA components (TRUE/FALSE)</span></span>
+<span><span class="co"># max.P, max.Q       : maximum seasonal AR and MA orders</span></span>
+<span><span class="co"># approximation      : use approximation for faster computation on long series</span></span>
+<span><span class="co"># lambda             : Box-Cox transformation for stabilizing variance</span></span></code></pre></div>
+<p>In this case, ARIMA(2,1,1) was selected, which suggests a non-stationary series with a shifting mean (due to differencing) and autocorrelations in the changes captured by the AR and MA terms.</p>
 </div>
 </div>
 <div id="applied-models" class="section level2" number="22.3">
 <h2>
 <span class="header-section-number">22.3</span> Applied Models<a class="anchor" aria-label="anchor" href="#applied-models"><i class="fas fa-link"></i></a>
 </h2>
+<div id="galma-framework" class="section level3" number="22.3.1">
+<h3>
+<span class="header-section-number">22.3.1</span> GALMA framework<a class="anchor" aria-label="anchor" href="#galma-framework"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="galma-framework-1" class="section level3" number="22.3.2">
+<h3>
+<span class="header-section-number">22.3.2</span> GALMA framework<a class="anchor" aria-label="anchor" href="#galma-framework-1"><i class="fas fa-link"></i></a>
+</h3>
 
+</div>
 </div>
 </div>
 
@@ -279,9 +517,9 @@ Figure 22.3: Autocorrelation function plot. The x-axis represents the lag, or th
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#time-series-analaysis"><span class="header-section-number">22</span> Time-series Analaysis</a></li>
+<li><a class="nav-link" href="#time-series-analaysis"><span class="header-section-number">22</span> Time-Series Analaysis</a></li>
 <li>
-<a class="nav-link" href="#demon-of-time-series"><span class="header-section-number">22.1</span> Demon of Time-Series</a><ul class="nav navbar-nav">
+<a class="nav-link" href="#pitfall-of-time-series"><span class="header-section-number">22.1</span> Pitfall of Time-Series</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#time-series-anormalies"><span class="header-section-number">22.1.1</span> Time-series anormalies</a></li>
 <li><a class="nav-link" href="#temporal-autocorrelation"><span class="header-section-number">22.1.2</span> Temporal autocorrelation</a></li>
 </ul>
@@ -291,9 +529,16 @@ Figure 22.3: Autocorrelation function plot. The x-axis represents the lag, or th
 <li><a class="nav-link" href="#ar-model"><span class="header-section-number">22.2.1</span> AR Model</a></li>
 <li><a class="nav-link" href="#ma-model"><span class="header-section-number">22.2.2</span> MA Model</a></li>
 <li><a class="nav-link" href="#arma-model"><span class="header-section-number">22.2.3</span> ARMA Model</a></li>
+<li><a class="nav-link" href="#arima-model"><span class="header-section-number">22.2.4</span> ARIMA model</a></li>
+<li><a class="nav-link" href="#model-selection"><span class="header-section-number">22.2.5</span> Model selection</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#applied-models"><span class="header-section-number">22.3</span> Applied Models</a></li>
+<li>
+<a class="nav-link" href="#applied-models"><span class="header-section-number">22.3</span> Applied Models</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#galma-framework"><span class="header-section-number">22.3.1</span> GALMA framework</a></li>
+<li><a class="nav-link" href="#galma-framework-1"><span class="header-section-number">22.3.2</span> GALMA framework</a></li>
+</ul>
+</li>
 </ul>
 
       <div class="book-extra">

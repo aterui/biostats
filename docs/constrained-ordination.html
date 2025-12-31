@@ -258,7 +258,7 @@ Figure 20.1: RDA ordination plot of sites based on species composition. Each poi
 </h3>
 <p>While RDA provides an important extension of PCA to include environmental predictors, it also has limitations, particularly when species responses are non-linear or data are non-normal. To address this, we will explore distance-based RDA (dbRDA) as a more flexible alternative for constrained ordination.</p>
 <p>Although dbRDA is not as flexible as NMDS, it allows the use of a distance or dissimilarity matrix as the response input instead of the raw data, greatly expanding its applicability to biological datasets with non-linear relationships.</p>
-<p>The implementation requires only minimal changes. We can still use <code>m_y</code> from the previous example, but instead of <code>rda()</code>, we apply the <code>capscale()</code> function with <code>distance = "bray"</code>. This internally converts the raw community matrix into a Bray-Curtis dissimilarity matrix, allowing distance-based constrained ordination.</p>
+<p>The implementation requires only minimal changes. We can still use <code>m_y</code> from the previous example, but instead of <code>rda()</code>, we apply the <code>dbrda()</code> function with <code>distance = "bray"</code>. This internally converts the raw community matrix into a Bray-Curtis dissimilarity matrix, allowing distance-based constrained ordination.</p>
 <div class="sourceCode" id="cb544"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Perform distance-based Redundancy Analysis (dbRDA)</span></span>
 <span><span class="co"># - Response: m_y (species abundance matrix)</span></span>
@@ -266,7 +266,7 @@ Figure 20.1: RDA ordination plot of sites based on species composition. Each poi
 <span><span class="co"># - data = df_env: provides the environmental variables used as predictors</span></span>
 <span><span class="co"># - distance = "bray": computes a Bray-Curtis dissimilarity matrix from the raw species abundances</span></span>
 <span><span class="co">#   internally, before performing the constrained ordination</span></span>
-<span><span class="co"># The result is a capscale object representing the constrained ordination in distance space</span></span>
+<span><span class="co"># The result is a dbrda object representing the constrained ordination in distance space</span></span>
 <span><span class="op">(</span><span class="va">obj_db</span> <span class="op">&lt;-</span> <span class="fu">dbrda</span><span class="op">(</span><span class="va">m_y</span> <span class="op">~</span> <span class="va">n</span> <span class="op">+</span> <span class="va">p</span> <span class="op">+</span> <span class="va">k</span> <span class="op">+</span> <span class="va">ca</span>,</span>
 <span>                 data <span class="op">=</span> <span class="va">df_env</span>,</span>
 <span>                 distance <span class="op">=</span> <span class="st">"bray"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>

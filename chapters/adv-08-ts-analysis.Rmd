@@ -31,7 +31,7 @@ url <- "https://raw.githubusercontent.com/aterui/biostats/master/data_raw/data_t
 
 The plot of this dataset shows that air-quality anomalies tend to increase over time.
 
-```{r adv-06-random-walk-plot, fig.cap="Time-series of annual anomalies. Points represent observed values for each year, and lines connect consecutive observations to highlight temporal trends."}
+```{r adv-08-random-walk-plot, fig.cap="Time-series of annual anomalies. Points represent observed values for each year, and lines connect consecutive observations to highlight temporal trends."}
 # Plot time-series anomalies
 df_ts %>% 
   ggplot(aes(x = year,          # Map 'year' to the x-axis
@@ -47,7 +47,7 @@ df_ts %>%
 
 Providing statistical evidence appears straightforward — we can simply regress anomalies on time.
 
-```{r adv-06-lm-to-rw}
+```{r adv-08-lm-to-rw}
 # Fit a simple linear model: anomaly as a function of year
 m_lm <- lm(anormaly ~ year, data = df_ts)
 
@@ -57,7 +57,7 @@ summary(m_lm)
 
 There is a strong, positive effect of observation year, with a slope estimate of 0.04, indicating that anomalies increase by 0.04 per year on average.
 
-```{r adv-06-lm-fit-plot, fig.cap="Time-series of anomalies over years. Dotted lines connect consecutive observations, semi-transparent points show individual measurements, and the solid line represents the fitted linear trend from a linear regression model."}
+```{r adv-08-lm-fit-plot, fig.cap="Time-series of anomalies over years. Dotted lines connect consecutive observations, semi-transparent points show individual measurements, and the solid line represents the fitted linear trend from a linear regression model."}
 
 df_ts %>% 
   ggplot(aes(x = year, 
@@ -84,7 +84,7 @@ This system is unique because each observation depends on its immediate past: th
 
 The behavior of a random walk is highly stochastic, producing very different patterns in each simulation run. You can observe this by running the following code, which generated the dataset shown above.
 
-```{r adv-06-sim-rw, eval=FALSE}
+```{r adv-08-sim-rw, eval=FALSE}
 # Initialize a vector to store the time series (100 time steps)
 y <- rep(NA, 100)
 
@@ -121,7 +121,7 @@ df_y %>%
 
 This is expected because we are measuring the same object over time, so the observations are not independent. This leads to temporal autocorrelation, a feature that violates a fundamental assumption of many statistical methods — the independence of data points. Temporal autocorrelation can be assessed using the `acf()` function in R:
 
-```{r adv-06-acf-plot, fig.cap="Autocorrelation function plot. The x-axis represents the lag, or the time difference between observations (e.g., lag 1 is the correlation between consecutive observations, lag 2 is two steps apart, etc.), while the y-axis shows the autocorrelation coefficient, ranging from -1 to 1, indicating how strongly observations at that lag are correlated."}
+```{r adv-08-acf-plot, fig.cap="Autocorrelation function plot. The x-axis represents the lag, or the time difference between observations (e.g., lag 1 is the correlation between consecutive observations, lag 2 is two steps apart, etc.), while the y-axis shows the autocorrelation coefficient, ranging from -1 to 1, indicating how strongly observations at that lag are correlated."}
 
 ## Data must be ordered from the oldest observation to the most recent
 df_ts <- arrange(df_ts, year)
@@ -144,7 +144,7 @@ Stationarity is a fundamental concept in time-series analysis: a stationary proc
 
 We will use the built-in `LakeHuron` dataset to learn the implementation of these modeling approaches. All of the models discussed above can be implemented using the `Arima()` function from the `forecast` package, since AR, MA, and ARMA models are all special cases of the more general ARIMA framework.
 
-```{r adv-06-huron-plot, fig.cap="Time series of Lake Huron water levels from 1875 to 1972. Points represent annual water levels, and the dotted line connects consecutive observations. The solid black line shows a linear trend for reference only, providing a visual guide to the overall direction of change and facilitating comparison with predictions from time-series models."}
+```{r adv-08-huron-plot, fig.cap="Time series of Lake Huron water levels from 1875 to 1972. Points represent annual water levels, and the dotted line connects consecutive observations. The solid black line shows a linear trend for reference only, providing a visual guide to the overall direction of change and facilitating comparison with predictions from time-series models."}
 # Create a tibble (modern data frame) from the LakeHuron time series
 df_huron <- tibble(
   year = time(LakeHuron),                # Extracts the time component (years) from the LakeHuron ts object
@@ -179,7 +179,7 @@ In an AR($p$) model, the present observation is a linear combination of the prev
 
 In practice, we supply a vector of time-series data to the `arima()` function. We will begin with the simplest autoregressive model of order one, which is specified by setting the first element of the `order` argument to 1 (i.e., `order = c(1, 0, 0)`).
 
-```{r adv-06-ar1}
+```{r adv-08-ar1}
 
 (m_ar1 <- Arima(
   df_huron$water_level,       # The time series data we want to model
@@ -191,7 +191,7 @@ This setup corresponds to setting the order ($p = 1$) in an AR model, meaning th
 
 We can extract the in-sample fitted values from the AR(1) model using the `fitted()` function. Below, we compare these model predictions with a simple linear trend to illustrate how the time-series model captures temporal dependence beyond what a linear model provides.
 
-```{r adv-06-ar1-plot, fig.cap="Observed Lake Huron water levels (points) with in-sample fitted values from an AR(1) model (steelblue line). The AR(1) model captures temporal dependence in the series, providing a better representation of year-to-year variation than a simple linear trend."}
+```{r adv-08-ar1-plot, fig.cap="Observed Lake Huron water levels (points) with in-sample fitted values from an AR(1) model (steelblue line). The AR(1) model captures temporal dependence in the series, providing a better representation of year-to-year variation than a simple linear trend."}
 # Add fitted values from AR(1) model to the dataset
 df_huron_ar1 <- df_huron %>% 
   mutate(fit = fitted(m_ar1) %>%   # Extract fitted (in-sample predicted) values from the AR(1) model
@@ -213,7 +213,7 @@ AR models assume stationarity, meaning their expected values and variance remain
 
 The `predict()` function preforms the projection with the `n.ahead` argument.
 
-```{r adv-06-ar1-plot-pred, fig.cap="Observed Lake Huron water levels (points) with AR(1) model fitted values and 50-year forecasts (steelblue line). The shaded grey ribbon represents 95% confidence intervals around the predictions, illustrating the uncertainty of the forecast. This visualization highlights how the AR(1) model captures temporal dependence and projects future values differently from a simple linear trend."}
+```{r adv-08-ar1-plot-pred, fig.cap="Observed Lake Huron water levels (points) with AR(1) model fitted values and 50-year forecasts (steelblue line). The shaded grey ribbon represents 95% confidence intervals around the predictions, illustrating the uncertainty of the forecast. This visualization highlights how the AR(1) model captures temporal dependence and projects future values differently from a simple linear trend."}
 
 # Add in-sample fitted values
 df_huron_ar1 <- df_huron %>% 
@@ -255,7 +255,7 @@ $$
 
 where $\mu$ is the constant term (intercept), $\theta_i$ is the moving-average parameter, and $\varepsilon_t$ is the (white) noise. In the `Arima()` function, specifying `order = c(0, 0, 1)` corresponds to a moving-average model of order 1 (MA(1)), where the current value depends on the most recent random noise.
 
-```{r adv-06-ma1}
+```{r adv-08-ma1}
 
 (m_ma1 <- Arima(
   df_huron$water_level,       # The time series data we want to model
@@ -266,7 +266,7 @@ where $\mu$ is the constant term (intercept), $\theta_i$ is the moving-average p
 
 We can perform a similar fitting, forecasting, and visualization for MA models, which highlights how their behavior differs from AR models. In particular, the average of the projected values quickly converges to the average of observed values.
 
-```{r adv-06-ma1-plot, echo=FALSE, fig.cap="Observed Lake Huron water levels (points) with MA(1) model fitted values and 50-year forecasts (steelblue line). The shaded grey ribbon represents 95% confidence intervals around the predictions, illustrating the uncertainty of the forecast."}
+```{r adv-08-ma1-plot, echo=FALSE, fig.cap="Observed Lake Huron water levels (points) with MA(1) model fitted values and 50-year forecasts (steelblue line). The shaded grey ribbon represents 95% confidence intervals around the predictions, illustrating the uncertainty of the forecast."}
 
 # Add in-sample fitted values
 df_huron_ma1 <- df_huron %>% 
@@ -307,7 +307,7 @@ $$
 
 The parameters are defined as above. Since an ARMA model combines both AR and MA components, we specify `order = c(1, 0, 1)` to include first-order AR and MA terms, allowing the current value to depend on both the previous observation and the most recent random noise.
 
-```{r adv-06-arma}
+```{r adv-08-arma}
 (m_arma <- Arima(
   df_huron$water_level,       # The time series data we want to model
   order = c(1, 0, 1)          # ARIMA model orders: c(p, d, q)
@@ -316,7 +316,7 @@ The parameters are defined as above. Since an ARMA model combines both AR and MA
 
 We can visualize the ARMA(1,1) model in the same way as we did for the AR(1) and MA(1) models by combining historical fitted values with out-of-sample forecasts and displaying the uncertainty:
 
-```{r adv-06-arma-plot, echo=FALSE, fig.cap="Observed Lake Huron water levels (points) with ARMA(1,1) model fitted values and 50-year forecasts (steelblue line). The shaded grey ribbon represents 95% confindence intervals around the predictions, illustrating the uncertainty of the forecast."}
+```{r adv-08-arma-plot, echo=FALSE, fig.cap="Observed Lake Huron water levels (points) with ARMA(1,1) model fitted values and 50-year forecasts (steelblue line). The shaded grey ribbon represents 95% confindence intervals around the predictions, illustrating the uncertainty of the forecast."}
 # Add in-sample fitted values
 df_huron_arma <- df_huron %>% 
   mutate(fit = fitted(m_arma) %>% as.numeric())
@@ -359,14 +359,14 @@ This is a special case of the more general d-order ARIMA(p,d,q) model, specifica
 
 This extension allows ARIMA models to handle non-stationary time series, where the mean or trend changes over time. Here, we assume $p=1$ and $d=1$ to illustrate and gain insights into how the ARIMA model operates.
 
-```{r adv-06-arima}
+```{r adv-08-arima}
 (m_arima <- Arima(df_huron$water_level,
                   order = c(1, 1, 0)))
 ```
 
 No constant term is estimated because the series is first-order differenced. The visualization highlights how the shifting mean influences the model’s projections over time -- the uncertainty is greater than stationary models.
 
-```{r adv-06-arima-plot, echo=FALSE, fig.cap="Observed Lake Huron water levels (points) with ARIMA(1,1,0) model fitted values and 50-year forecasts (steelblue line). The shaded grey ribbon represents 95% confindence intervals around the predictions, illustrating forecast uncertainty."}
+```{r adv-08-arima-plot, echo=FALSE, fig.cap="Observed Lake Huron water levels (points) with ARIMA(1,1,0) model fitted values and 50-year forecasts (steelblue line). The shaded grey ribbon represents 95% confindence intervals around the predictions, illustrating forecast uncertainty."}
 # Add in-sample fitted values (for differenced series, integrated back)
 df_huron_arima <- df_huron %>% 
   mutate(fit = fitted(m_arima) %>% as.numeric())
@@ -403,7 +403,7 @@ Selecting the appropriate model and its orders can be challenging, because there
 
 This approach is conveniently implemented in the `forecast` package. In particular, the function `auto.arima()` automatically searches over a range of ARIMA models and selects the combination of parameters that yields the most parsimonious model for your data, simplifying the model selection process.
 
-```{r adv-06-ms}
+```{r adv-08-ms}
 # Possible extensions / additional arguments:
 # max.p, max.q       : maximum AR and MA orders to consider
 # d, D               : specify non-seasonal or seasonal differencing (or let auto.arima decide)
@@ -446,7 +446,7 @@ $$R offers a variety of functions for performing this type of modeling. Let’s 
 
 ARIMAX is an ARIMA model that includes external predictors. To illustrate its use, we use ice-cover data from Lake Mendota, Wisconsin, available in the `lmerdatasampler` R package. We focus on the period from 1980 to 2014 (35 years).
 
-```{r adv-06-mendota-plot, fig.cap="Ice-cover data for Lake Mendota (1980–2014) visualized as a dotted line with semi-transparent points. This plot shows the temporal trajectory of ice duration over 35 years, highlighting interannual variability."}
+```{r adv-08-mendota-plot, fig.cap="Ice-cover data for Lake Mendota (1980–2014) visualized as a dotted line with semi-transparent points. This plot shows the temporal trajectory of ice duration over 35 years, highlighting interannual variability."}
 # Load and inspect the dataset
 data("ntl_icecover")  # Built-in dataset with ice cover information for multiple lakes
 
@@ -469,7 +469,7 @@ df_ice %>%
 
 We will explore how ice-cover duration varies with air temperature. Daily temperature data can be obtained from [DAYMET](https://daymet.ornl.gov/), and the `daymetr` R package allows you to download these data directly into R.
 
-```{r adv-06-mendota-clim-data, eval=FALSE}
+```{r adv-08-mendota-clim-data, eval=FALSE}
 # Download daily climate data from Daymet for Lake Mendota
 list_mendota <- download_daymet(
   site = "Lake_Mendota",   # Arbitrary name you assign to this site
@@ -487,7 +487,7 @@ list_mendota <- readRDS("data_raw/data_mendota_temp.rds")
 
 Because the original data format is difficult to work with, we will transform it into a structure compatible with the tidyverse framework. The following code calculates the average daily-minimum temperature.
 
-```{r adv-06-mendota-clean-clim}
+```{r adv-08-mendota-clean-clim}
 df_temp <- list_mendota$data %>% 
   as_tibble() %>%                  # Convert the data to a tibble for tidyverse-friendly operations
   janitor::clean_names() %>%       # Clean column names (lowercase, underscores)
@@ -512,7 +512,7 @@ df_ice <- df_ice %>%
 
 The `Arima()` and `auto.arima()` functions include an `xreg` argument, which allows us to supply potential predictor variables. `xreg` can be a vector or a matrix, but it must have the same number of rows as the response time series (ice duration in our case).
 
-```{r adv-06-mendota-arimax}
+```{r adv-08-mendota-arimax}
 (obj_arima <- auto.arima(
   df_ice$ice_duration, # Response variable: ice duration time series
   xreg = df_ice$temp_min, # External predictor: average minimum temperature
@@ -532,7 +532,7 @@ In our case, the 95% confidence interval for the `xreg` coefficient (temperature
 
 Including predictor variables makes the forecast more meaningful. Although our model was fitted to data from 1980–2014, we have temperature observations for 2015–2024. While we use these observed temperatures in this exercise, the predictor values could also come from model outputs, such as climate model projections, allowing us to explore potential impacts of climate change.
 
-```{r adv-06-arimax-forecast}
+```{r adv-08-arimax-forecast}
 # 1. Add fitted values from the ARIMAX model to the original ice-cover dataset
 df_ice <- df_ice %>% 
   mutate(fit = fitted(obj_arima)) # 'fitted()' gives the model's in-sample predicted values
@@ -556,7 +556,7 @@ df_ice <- df_ice %>%
 
 Because we include temperature as a predictor, the forecast is no longer constant but varies according to future temperature values.
 
-```{r adv-06-arimax-plot, fig.cap="Historical ice-cover duration (points) and ARIMAX model predictions (blue line) for Lake Mendota, including forecasts for 2015–2024. Shaded ribbons show the 80% and 95% confidence intervals for the forecasts. Because temperature is included as a predictor, the forecast varies with future temperature values rather than remaining constant."}
+```{r adv-08-arimax-plot, fig.cap="Historical ice-cover duration (points) and ARIMAX model predictions (blue line) for Lake Mendota, including forecasts for 2015–2024. Shaded ribbons show the 80% and 95% confidence intervals for the forecasts. Because temperature is included as a predictor, the forecast varies with future temperature values rather than remaining constant."}
 # Combine historical fitted values and forecasts, then plot
 df_ice %>% 
   ggplot() +
@@ -582,7 +582,7 @@ One major limitation of ARIMAX models is their assumption of normally distribute
 
 In our next example, we analyze fish count data for Cutthroat Trout from Mack Creek, Oregon. Because these are count data, modeling the temporal process using a normal distribution would be inappropriate, making GLARMA a more suitable choice.
 
-```{r adv-06-mack-data}
+```{r adv-08-mack-data}
 # Load HJ Andrews LTER vertebrate survey data
 data("and_vertebrates")
 
@@ -623,7 +623,7 @@ list_mack <- readRDS("data_raw/data_prec_mack.rds")
 
 As in the ARIMAX example, we can summarize summer temperature data using date as the reference.
 
-```{r adv-06-mack-clim-data}
+```{r adv-08-mack-clim-data}
 df_stemp <- list_mack$data %>% 
   janitor::clean_names() %>% 
     mutate(
@@ -646,7 +646,7 @@ The `type` argument specifies the error distribution for the response variable. 
 
 The `phiLags` argument defines the order(s) of the AR process. Unlike the `Arima()` function, you can specify multiple AR orders separately—for example, 1 and 3, or 1 and 5. In this example, we will start with a first-order AR term as a baseline.
 
-```{r adv-06-glarma-fit}
+```{r adv-08-glarma-fit}
 # Response variable: annual cutthroat trout counts
 y <- df_ct$n 
 
@@ -670,7 +670,7 @@ In addition, GLARMA provides extra sections -- most notably, `GLARMA Coefficient
 
 Unfortunately, the `glarma()` function does not include automated model selection. Therefore, we must choose and compare model orders manually. Here, we will explore different AR orders, from 1 to 3. The following code fits these three models and reports their AIC values for comparison.
 
-```{r adv-06-glarma-ms}
+```{r adv-08-glarma-ms}
 list_glarma <- lapply(1:3,
                       function(o) {
                         obj_glarma <- glarma(y = y, 
@@ -684,7 +684,7 @@ lapply(list_glarma, function(x) x$aic)
 
 The AR(1) model has the lowest AIC, suggesting that our initial choice of a first-order autoregressive term was reasonable. As with the `Arima()` function, the GLARMA model allows us to obtain fitted values using the `fitted()` function.
 
-```{r adv-06-glarma-plot, fig.cap="Observed annual cutthroat trout counts at Mack Creek, Oregon, colored by maximum summer temperature, with fitted values from the first-order GLARMA model overlaid as a line."}
+```{r adv-08-glarma-plot, fig.cap="Observed annual cutthroat trout counts at Mack Creek, Oregon, colored by maximum summer temperature, with fitted values from the first-order GLARMA model overlaid as a line."}
 df_ct %>% 
   mutate(fit = as.numeric(fitted(obj_glarma))) %>%  # Add GLARMA fitted values as a new column
   ggplot() +

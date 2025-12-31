@@ -93,7 +93,7 @@
 <h1>
 <span class="header-section-number">22</span> Piecewise SEM<a class="anchor" aria-label="anchor" href="#piecewise-sem"><i class="fas fa-link"></i></a>
 </h1>
-<p>Path analysis and Structural Equation Modeling (SEM) provide a powerful framework for addressing mediating interactions among more than two variables. Traditional SEM is implemented using covariance-based approaches and assumes multivariate normality and large sample sizes. In contrast, <strong>piecewise SEM</strong> extends this framework by fitting individual component models (e.g., linear models, generalized linear models, mixed-effects models) and evaluating the overall network structure using tests of conditional independence. This makes piecewise SEM especially well suited for biological data, which often violate assumptions of normality, independence, or simple experimental design.</p>
+<p>Path analysis and Structural Equation Modeling (SEM) provide a powerful framework for addressing mediating interactions among more than two variables. Traditional SEM is implemented using covariance-based approaches and assumes multivariate normality and large sample sizes. In contrast, piecewise SEM extends this framework by fitting individual component models (e.g., linear models, generalized linear models, mixed-effects models) and evaluating the overall network structure using tests of conditional independence. This makes piecewise SEM especially well suited for biological data, which often violate assumptions of normality, independence, or simple experimental design.</p>
 <p>In this chapter, we will focus on how piecewise SEM can be used to link biological processes, quantify direct and indirect effects, and evaluate competing hypotheses using real biological data.</p>
 <p>Learning Objectives:</p>
 <ul>
@@ -104,7 +104,6 @@
 <div class="sourceCode" id="cb570"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="va">tidyverse</span>,</span>
 <span>               <span class="va">GGally</span>,</span>
-<span>               <span class="va">mgcv</span>,</span>
 <span>               <span class="va">piecewiseSEM</span><span class="op">)</span></span></code></pre></div>
 <div id="non-normal-distributions" class="section level2" number="22.1">
 <h2>
@@ -115,7 +114,7 @@
 <span class="header-section-number">22.1.1</span> Post-fire plant diversity: the original model<a class="anchor" aria-label="anchor" href="#post-fire-plant-diversity-the-original-model"><i class="fas fa-link"></i></a>
 </h3>
 <p>One of the major limitations of the <code>lavaan</code> package is its reliance on multivariate normality; it cannot easily accommodate non-normal distributions in response (endogeneous) variables. In biological datasets, variables often deviate from normality, and treating them as normally distributed can increase the risk of inappropriate statistical inference.</p>
-<p><strong>Piecewise SEM</strong> addresses this limitation by allowing component models to follow a variety of distributions, such as Poisson, binomial, or negative binomial, making it much more flexible for real-world biological data. It is important to note, however, that piecewise SEM is not a full SEM in the traditional sense; it does not support latent variables within the directed acyclic graph (DAG). In practice, piecewise SEM should be understood as an extension of <strong>path analysis</strong> that combines generalized and/or mixed-effect models while retaining the network structure of relationships among variables.</p>
+<p>Piecewise SEM addresses this limitation by allowing component models to follow a variety of distributions, such as Poisson, binomial, or negative binomial, making it much more flexible for real-world biological data. It is important to note, however, that piecewise SEM is not a full SEM in the traditional sense; it does not support latent variables within the directed acyclic graph (DAG). In practice, piecewise SEM should be understood as an extension of path analysis that combines generalized and/or mixed-effect models while retaining the network structure of relationships among variables.</p>
 <p>To illustrate the utility of piecewise SEM, we will use the dataset from <a href="https://esajournals.onlinelibrary.wiley.com/doi/full/10.1890/1051-0761%282006%29016%5B0503%3AASEMAO%5D2.0.CO%3B2">Grace and Keeley (2006)</a>. In their study, the authors examined the relationships among landscape position, abiotic conditions, fire severity, and plant diversity. This dataset is conveniently included in the <code>piecewiseSEM</code> package, allowing us to replicate and explore these ecological relationships using modern piecewise SEM methods.</p>
 <div class="sourceCode" id="cb571"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"keeley"</span><span class="op">)</span></span>
@@ -231,21 +230,6 @@ Figure 22.1: Conceptual path diagram illustrating the hypothesized relationships
 </h3>
 <p>Because some of the response variables may be better described by non-normal distributions, we can extend the piecewise SEM framework by fitting generalized linear models. In particular, species richness is a count variable and is more appropriately modeled using a negative binomial distribution.</p>
 <p>In addition, the analysis above highlighted potentially important pathways that were not included in the original DAG – specifically, the direct effects of landscape position (<code>distance</code>) on richness (<code>rich</code>) and heterogeneity (<code>hetero</code>) on vegetation cover (<code>cover</code>). These paths represent direct influences of each factor that may not be fully captured by the mediating variables in the original model.</p>
-<!-- ```{r} -->
-<!-- # Pairwise plots of key variables in the Keeley dataset -->
-<!-- df_keeley %>%  -->
-<!--   ggpairs( -->
-<!--     progress = FALSE, -->
-<!--     columns = c("distance", -->
-<!--                 "abiotic",  -->
-<!--                 "hetero",  -->
-<!--                 "age",  -->
-<!--                 "firesev",  -->
-<!--                 "cover",  -->
-<!--                 "rich") -->
-<!--   ) + -->
-<!--   theme_bw()  # Clean, white background theme -->
-<!-- ``` -->
 <p>Below, we revise the previous model by fitting species richness with a negative binomial GLM and adding missing paths.</p>
 <div class="sourceCode" id="cb575"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define individual models</span></span>
@@ -393,11 +377,11 @@ Figure 22.2: Visualization of the piecewise structural equation model for the Ke
 <span>                <span class="st">"date"</span>,</span>
 <span>                <span class="st">"growth"</span>,</span>
 <span>                <span class="st">"live"</span><span class="op">)</span>,  <span class="co"># select variables to plot</span></span>
-<span>    progress <span class="op">=</span> <span class="cn">FALSE</span>                               <span class="co"># disable progress bar</span></span>
+<span>    progress <span class="op">=</span> <span class="cn">FALSE</span>      <span class="co"># disable progress bar</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span>                                      <span class="co"># clean theme for the plot</span></span></code></pre></div>
-<p><img src="biostats_files/figure-html/unnamed-chunk-189-1.png" width="672" style="display: block; margin: auto;">
-The relationships appear clear. Increasing cumulative degree days (<code>dd</code>) promotes earlier bud burst in trees (<code>date</code>; julian date of the year), which in turn may enhance both growth (<code>growth</code>) and survival (<code>live</code>).</p>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span>              <span class="co"># clean theme for the plot</span></span></code></pre></div>
+<div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-189-1.png" width="672" style="display: block; margin: auto;"></div>
+<p>The relationships appear clear. Increasing cumulative degree days (<code>dd</code>) promotes earlier bud burst in trees (<code>date</code>; julian date of the year), which in turn may enhance both growth (<code>growth</code>) and survival (<code>live</code>).</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:adv-06-shipley-dag"></span>
 <img src="biostats_files/figure-html/adv-06-shipley-dag-1.png" alt="Directed acyclic graph (DAG) illustrating hypothesized  relationships among the key variables in the shipley dataset. Arrows indicate the direction of hypothesized influence: cumulative degree days (`DD`) affects the date of first bud burst (`Date of first bud`), which influences `Growth`, and in turn affects `Survival`." width="672"><p class="caption">

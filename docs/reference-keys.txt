@@ -236,7 +236,7 @@ random-intercept-and-slope
 adding-a-random-slope-term
 fixed-vs-random
 model-specification
-rnadom-intercept
+random-intercept-1
 random-intercept-and-slope-1
 generalized-additive-model
 seasonal-data

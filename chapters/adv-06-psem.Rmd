@@ -1,0 +1,291 @@
+# Piecewise SEM
+
+Path analysis and Structural Equation Modeling (SEM) provide a powerful framework for addressing mediating interactions among more than two variables. Traditional SEM is implemented using covariance-based approaches and assumes multivariate normality and large sample sizes. In contrast, **piecewise SEM** extends this framework by fitting individual component models (e.g., linear models, generalized linear models, mixed-effects models) and evaluating the overall network structure using tests of conditional independence. This makes piecewise SEM especially well suited for biological data, which often violate assumptions of normality, independence, or simple experimental design.
+
+In this chapter, we will focus on how piecewise SEM can be used to link biological processes, quantify direct and indirect effects, and evaluate competing hypotheses using real biological data.
+
+Learning Objectives:
+
+-   Understand the conceptual differences between traditional and piecewise SEM.
+
+-   Specify and fit piecewise SEM models using biological data.
+
+-   Interpret model outputs, including path coefficients, residual variances, and overall model fit statistics.
+
+```{r}
+pacman::p_load(tidyverse,
+               GGally,
+               mgcv,
+               piecewiseSEM)
+```
+
+## Non-normal Distributions
+
+### Post-fire plant diversity: the original model
+
+One of the major limitations of the `lavaan` package is its reliance on multivariate normality; it cannot easily accommodate non-normal distributions in response (endogeneous) variables. In biological datasets, variables often deviate from normality, and treating them as normally distributed can increase the risk of inappropriate statistical inference.
+
+**Piecewise SEM** addresses this limitation by allowing component models to follow a variety of distributions, such as Poisson, binomial, or negative binomial, making it much more flexible for real-world biological data. It is important to note, however, that piecewise SEM is not a full SEM in the traditional sense; it does not support latent variables within the directed acyclic graph (DAG). In practice, piecewise SEM should be understood as an extension of **path analysis** that combines generalized and/or mixed-effect models while retaining the network structure of relationships among variables.
+
+To illustrate the utility of piecewise SEM, we will use the dataset from [Grace and Keeley (2006)](https://esajournals.onlinelibrary.wiley.com/doi/full/10.1890/1051-0761%282006%29016%5B0503%3AASEMAO%5D2.0.CO%3B2). In their study, the authors examined the relationships among landscape position, abiotic conditions, fire severity, and plant diversity. This dataset is conveniently included in the `piecewiseSEM` package, allowing us to replicate and explore these ecological relationships using modern piecewise SEM methods.
+
+```{r}
+data("keeley")
+
+(df_keeley <- keeley %>% 
+  as_tibble())
+```
+
+The Keeley dataset contains nine ecological variables measured across 90 post-fire shrubland sites in California: distance from the fire source in meters (`distance`), elevation above sea level in meters (`elev`), an abiotic conditions index that represents a composite score of multiple non-biological environmental factors such as soil properties (`abiotic`), within-plot heterogeneity measuring spatial variability in species composition (`hetero`), stand age in years since the previous fire event (`age`), fire severity (`firesev`), fractional vegetation cover (`cover`), and species richness of plants (`rich`).
+
+The proposed DAG in Grace and Keeley (2006) is as follows -- landscape position (represented by distance to the coast) affects both abiotic conditions and habitat heterogeneity, as topography, soil, and microclimate vary across the landscape. Stand age influences fire severity, since older vegetation tends to accumulate more fuel and burn differently. Fire severity, in turn, affects vegetation cover, altering plant species richness via both the direct effects of cover, abiotic conditions, and habitat heterogeneity, integrating the cumulative influence of these upstream environmental and disturbance factors.
+
+```{r adv-06-keeley-dag, echo=FALSE, fig.cap="Conceptual path diagram illustrating the hypothesized relationships among landscape position, environmental conditions, disturbance, and plant diversity based on Grace and Keeley (2006). Arrows indicate directional (causal) paths specified in the piecewise structural equation model. Distance represents landscape position, which influences abiotic conditions, heterogeneity, and stand age. Fire severity and vegetation cover act as intermediate variables affecting plant species richness. The diagram represents the directed acyclic graph (DAG) used to define the component models in the piecewise SEM analysis."}
+
+source("code/library.R")
+
+m_net <- rbind(c(0, 1, 1, 1, 0, 0, 0),
+               c(0, 0, 0, 0, 0, 0, 1),
+               c(0, 0, 0, 0, 0, 0, 1),
+               c(0, 0, 0, 0, 1, 0, 0),
+               c(0, 0, 0, 0, 0, 1, 0),
+               c(0, 0, 0, 0, 0, 0, 1),
+               c(0, 0, 0, 0, 0, 0, 0))
+
+colnames(m_net) <- rownames(m_net) <- c("Distance", 
+                                        "Abiotic", 
+                                        "Hetero",
+                                        "Age",
+                                        "Fire",
+                                        "Cover",
+                                        "Richness")
+
+g <- graph_from_adjacency_matrix(m_net, mode = "directed")
+
+# Coordinates
+layout_mat <- matrix(c(0.5, 0, 
+                       0, 0.75, 
+                       0.5, 0.75, 
+                       1, 0.25,
+                       1, 0.75,
+                       1, 1.25,
+                       0.5, 1.75), 
+                     ncol = 2, 
+                     byrow = TRUE)
+
+# Plot with ggraph
+(dag_full <- 
+    ggraph(g, layout = layout_mat) +
+    geom_edge_link(arrow = arrow(length = unit(2, 'mm'), type = "closed"),
+                   end_cap = circle(10, 'mm'),
+                   edge_width = 1,
+                   edge_colour = "gray") +
+    geom_node_point(size = 20, 
+                    fill = "lightblue", 
+                    shape = 21, 
+                    stroke = NA) +
+    geom_node_text(aes(label = name), 
+                   size = 3.5) +
+    theme_void() +
+    xlim(-0.3, 1.3) +
+    ylim(-0.3, 2))
+```
+
+The `psem()` function takes multiple "piecewise" model objects as input and combines them into a single causal network. From these component models, it constructs a path diagram and evaluates the implied conditional independence claims that define the structural equation model.
+
+The conditional independence claims correspond to the missing paths in the proposed DAG. If any of these implied independence relationships are statistically violated —- meaning a missing path is in fact significant -- this suggests that the proposed model structure is incomplete and may be omitting important biological relationships.
+
+For this example, we begin by fitting a piecewise SEM in which all response variables are assumed to follow normal distributions. This reflects the original approach used by Grace and Keeley (2006) and provides a useful baseline for understanding how the method operates before extending it to more complex, non-normal models.
+
+```{r adv-06-keeley-psem0}
+# Define individual models
+m1 <- lm(abiotic ~ distance, data = df_keeley)
+m2 <- lm(hetero ~ distance, data = df_keeley)
+m3 <- lm(firesev ~ age, data = df_keeley)
+m4 <- lm(cover ~ firesev, data = df_keeley)
+m5 <- lm(rich ~ cover + abiotic + hetero, data = df_keeley)
+
+# Combine into piecewise SEM
+sem_model <- psem(m1, m2, m3, m4, m5)
+
+# Evaluate
+summary(sem_model, .progressBar = FALSE)
+```
+
+`Tests of directed separation:` report which missing paths in the DAG are statistically significant. If any of these independence claims are rejected, it suggests that the proposed model structure may be incomplete. In this example, the relationships `rich ~ distance + ...` and `cover ~ hetero + ...` are identified as significant, indicating that these pathways may need to be explicitly included in the final model.
+
+`Global goodness-of-fit:` reports both the chi-squared statistic and Fisher’s C. Unlike covariance-based SEM (e.g., `lavaan`), the chi-squared statistic in piecewise SEM is not derived from a variance–covariance matrix. Instead, it is computed by comparing the summed log-likelihoods of the component models under the saturated and unsaturated model structures, allowing the framework to accommodate non-normal response distributions.
+
+Fisher’s C provides an alternative measure of overall model fit and is calculated as $C = -2 \sum_i \ln(p_i)$, where $i$ indexes each conditional independence claim and $p_i$ is the corresponding p-value. Large values of Fisher’s C (i.e., small p-values) indicate that one or more independence assumptions are violated, suggesting that the proposed model may be missing important pathways.
+
+`Coefficients:` summarizes the estimated effects for each component model. As in the `lavaan` framework, both raw parameter estimates (`Estimate`) and standardized coefficients (`Std.Estimate`) are reported. The raw estimates depend on the scale of the predictors and are therefore not directly comparable, whereas standardized estimates allow comparison of effect sizes across variables. Because this table clearly identifies the response and predictor variables for each path, it provides a concise and interpretable summary of the overall model output.
+
+### Post-fire plant diversity: the revised model
+
+Because some of the response variables may be better described by non-normal distributions, we can extend the piecewise SEM framework by fitting generalized linear models. In particular, species richness is a count variable and is more appropriately modeled using a negative binomial distribution.
+
+In addition, the analysis above highlighted potentially important pathways that were not included in the original DAG -- specifically, the direct effects of landscape position (`distance`) on richness (`rich`) and heterogeneity (`hetero`) on vegetation cover (`cover`). These paths represent direct influences of each factor that may not be fully captured by the mediating variables in the original model.
+
+<!-- ```{r} -->
+<!-- # Pairwise plots of key variables in the Keeley dataset -->
+<!-- df_keeley %>%  -->
+<!--   ggpairs( -->
+<!--     progress = FALSE, -->
+<!--     columns = c("distance", -->
+<!--                 "abiotic",  -->
+<!--                 "hetero",  -->
+<!--                 "age",  -->
+<!--                 "firesev",  -->
+<!--                 "cover",  -->
+<!--                 "rich") -->
+<!--   ) + -->
+<!--   theme_bw()  # Clean, white background theme -->
+<!-- ``` -->
+
+Below, we revise the previous model by fitting species richness with a negative binomial GLM and adding missing paths.
+
+```{r adv-06-keeley-psem1}
+# Define individual models
+m1 <- lm(abiotic ~ distance, data = df_keeley)      # unchanged
+m2 <- lm(hetero ~ distance, data = df_keeley)       # unchanged
+m3 <- lm(firesev ~ age, data = df_keeley)           # unchanged
+
+# m4 now includes a direct effect of hetero on cover (added path)
+m4 <- lm(cover ~ firesev + hetero, data = df_keeley)  
+
+# m5 now models richness as negative binomial (MASS::glm.nb) 
+# and includes direct effect of distance on richness (added path)
+m5 <- MASS::glm.nb(rich ~ cover + abiotic + hetero + distance, 
+                   data = df_keeley)  
+
+# Combine into piecewise SEM
+sem_model <- psem(m1, m2, m3, m4, m5)
+
+# Evaluate model
+summary(sem_model, .progressBar = FALSE)
+```
+
+After including the previously missing paths, the Fisher’s C statistic became non-significant, indicating that the revised model fits the data reasonably well. The results can be visualized using the `plot()` function, where solid arrows indicate statistically significant pathways and dashed arrows indicate non-significant pathways.
+
+```{r, fig.cap="Visualization of the piecewise structural equation model for the Keeley dataset. Solid arrows indicate statistically significant pathways, while dashed arrows represent non-significant pathways. Node labels correspond to variables in the DAG: `distance` (distance to the coast), `abiotic` (abiotic conditions), `hetero` (habitat heterogeneity), `age` (stand age), `firesev` (fire severity), `cover` (vegetation cover), and `rich` (plant species richness)."}
+plot(sem_model)
+```
+
+## Random Effects
+
+### Tree growth: data structure
+
+Another simplifying assumption in traditional SEMs is that all data points are independent. This assumption is often violated, particularly when there are repeated measurements of the same individuals over time or when sampling is spatially clustered within a confined locality. Such hierarchical structures in the data-generating process should be properly accounted for. Piecewise SEM can accommodate this by incorporating random effects, allowing the model to account for non-independence among observations. We will use `shipley` data from [Shipley 2009](https://esajournals.onlinelibrary.wiley.com/doi/10.1890/08-1034.1) to illustrate this case.
+
+This dataset contains information on tree growth (`Growth`) and survival (`Live`) for a given observation year, along with environmental variables that may influence these demographic responses. These include cumulative degree days until first bud burst (`DD`) and the date of the first bud burst (`Date`).
+
+Before proceeding with the analysis, we first perform data cleaning to ensure accuracy and consistency.
+
+```{r}
+data("shipley")
+
+df_shipley <- shipley %>% 
+  as_tibble() %>% 
+  janitor::clean_names() %>% 
+  drop_na(growth)
+```
+
+Importantly, this dataset contains temporally and spatially repeated measurements -- the same individuals are tracked for growth over time until they die (`tree` indexes individuals), and five individuals are sampled at each site (`site` indexes locations). Clearly, these observations are not independent, and this hierarchical structure must be accounted for in the analysis.
+
+```{r}
+df_shipley %>% 
+  group_by(site) %>% 
+  summarize(n_tree = n_distinct(tree))
+```
+
+To begin developing hypotheses, we first explore pairwise relationships among the variables.
+
+```{r}
+# Pairwise plots of key variables
+df_shipley %>% 
+  ggpairs(
+    columns = c("dd", 
+                "date",
+                "growth",
+                "live"),  # select variables to plot
+    progress = FALSE                               # disable progress bar
+  ) +
+  theme_bw()                                      # clean theme for the plot
+```
+The relationships appear clear. Increasing cumulative degree days (`dd`) promotes earlier bud burst in trees (`date`; julian date of the year), which in turn may enhance both growth (`growth`) and survival (`live`).
+
+```{r adv-06-shipley-dag, echo=FALSE, fig.cap="Directed acyclic graph (DAG) illustrating hypothesized  relationships among the key variables in the shipley dataset. Arrows indicate the direction of hypothesized influence: cumulative degree days (`DD`) affects the date of first bud burst (`Date of first bud`), which influences `Growth`, and in turn affects `Survival`."}
+source("code/library.R")
+
+m_net <- rbind(c(0, 1, 0, 0),
+               c(0, 0, 1, 0),
+               c(0, 0, 0, 1),
+               c(0, 0, 0, 0))
+
+colnames(m_net) <- rownames(m_net) <- c("DD", 
+                                        "Date of first bud", 
+                                        "Growth",
+                                        "Survival")
+
+g <- graph_from_adjacency_matrix(m_net, mode = "directed")
+
+# Coordinates
+layout_mat <- matrix(c(0, 0, 
+                       0, 0.6, 
+                       0, 1.2, 
+                       0, 1.8), 
+                     ncol = 2, 
+                     byrow = TRUE)
+
+# Plot with ggraph
+(dag_full <- 
+    ggraph(g, layout = layout_mat) +
+    geom_edge_link(arrow = arrow(length = unit(2, 'mm'), type = "closed"),
+                   end_cap = circle(10, 'mm'),
+                   edge_width = 1,
+                   edge_colour = "gray") +
+    geom_node_point(size = 20, 
+                    fill = "lightblue", 
+                    shape = 21, 
+                    stroke = NA) +
+    geom_node_text(aes(label = name), 
+                   size = 3.5) +
+    theme_void() +
+    xlim(-0.3, 0.3) +
+    ylim(-0.3, 2))
+```
+
+### Tree growth: implementation
+
+The `psem()` function accepts GLMMs of class `glmmTMB` or `lmerMod` (from the `lme4` package), making it straightforward to include random effects in a piecewise SEM. In this example, we include site and tree as random effects. Since these are independent, unnested random effects, specifying them as separate terms in the model formula is appropriate.
+
+```{r adv-06-shipley-psem}
+# Model 1: date depends on dd, with random intercepts for site and tree
+m1 <- glmmTMB(date ~ dd + (1 | site) + (1 | tree), 
+              data = df_shipley,
+              family = "gaussian")
+
+# Model 2: growth depends on date, same random effects
+m2 <- glmmTMB(growth ~ date + (1 | site) + (1 | tree), 
+              data = df_shipley,
+              family = "gaussian")
+
+# Model 3: live (binary) depends on growth, logistic mixed model
+m3 <- glmmTMB(live ~ growth + (1 | site) + (1 | tree), 
+              data = df_shipley, 
+              family = "binomial")
+
+# Combine models into a piecewise SEM
+sem_glmm <- psem(m1, m2, m3)
+
+# Summarize SEM (paths, significance, and Shipley's test)
+summary(sem_glmm, .progressBar = FALSE)
+```
+
+The model specification and interpretation are largely the same as before. In this case, both the chi-squared test and Fisher’s C were non-significant, indicating that the model fits the data well.
+
+One key difference is the `Individual R-squared:` section, which now reports `Marginal` and `Conditional` values. These represent the model’s ability to explain variation using fixed effects only (marginal) or using both fixed and random effects (conditional). Because random effects often explain a substantial portion of the variation—particularly in the growth model—the conditional R-squared values are typically much higher. Note that these R-squared values are defined following [Nakagawa and Schielzeth (2012)](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/j.2041-210x.2012.00261.x) and differ from traditional R-squared.
+
+## Limitations
+
+While piecewise SEM greatly expands the scope of data analysis, a notable limitation is the inability to incorporate latent variables—this feature is not implemented in the current package. However, the inclusion of latent variables is not a mathematical limitation, only a limitation of the implementation. Incorporating latent variables is possible within more generalized SEM frameworks, although the fitting process becomes more challenging. For those interested in this approach, Bayesian modeling offers a flexible alternative, and emerging packages (e.g., the `brms` package) increasingly allow such analyses without directly writing Stan or BUGS code. Nevertheless, these extensions require a solid understanding of the underlying statistical principles.

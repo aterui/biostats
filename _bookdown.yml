@@ -22,7 +22,8 @@ rmd_files: ["index.Rmd",
             "chapters/adv-03-uord.Rmd",
             "chapters/adv-04-cord.Rmd",
             "chapters/adv-05-sem.Rmd",
-            "chapters/adv-06-ts-analysis.Rmd",
+            "chapters/adv-06-psem.Rmd",
+            "chapters/adv-08-ts-analysis.Rmd",
             "chapters/zzz-appendix.Rmd"]
 output_dir: "docs"
             

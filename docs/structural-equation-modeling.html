@@ -17,7 +17,9 @@
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QZSNHVQQNV"></script><script>
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/viz-1.8.2/viz.js"></script><link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet">
+<script src="libs/grViz-binding-1.0.11/grViz.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QZSNHVQQNV"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
@@ -74,7 +76,8 @@
 <li><a class="" href="unconstrained-ordination.html"><span class="header-section-number">19</span> Unconstrained Ordination</a></li>
 <li><a class="" href="constrained-ordination.html"><span class="header-section-number">20</span> Constrained Ordination</a></li>
 <li><a class="active" href="structural-equation-modeling.html"><span class="header-section-number">21</span> Structural Equation Modeling</a></li>
-<li><a class="" href="time-series-analysis.html"><span class="header-section-number">22</span> Time-Series Analysis</a></li>
+<li><a class="" href="piecewise-sem.html"><span class="header-section-number">22</span> Piecewise SEM</a></li>
+<li><a class="" href="time-series-analysis.html"><span class="header-section-number">23</span> Time-Series Analysis</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="basic-terminology.html">Basic Terminology</a></li>
 <li><a class="" href="git-github.html">Git &amp; GitHub</a></li>
@@ -101,7 +104,8 @@
 <code class="sourceCode R"><span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="va">tidyverse</span>,</span>
 <span>               <span class="va">GGally</span>,</span>
 <span>               <span class="va">vegan</span>,</span>
-<span>               <span class="va">lavaan</span><span class="op">)</span></span></code></pre></div>
+<span>               <span class="va">lavaan</span>,</span>
+<span>               <span class="va">lavaanPlot</span><span class="op">)</span></span></code></pre></div>
 <div id="path-analysis" class="section level2" number="21.1">
 <h2>
 <span class="header-section-number">21.1</span> Path analysis<a class="anchor" aria-label="anchor" href="#path-analysis"><i class="fas fa-link"></i></a>
@@ -242,6 +246,11 @@ Figure 21.2: Simplified directed acyclic graph (DAG) representing the hypothesiz
 <p>The <code>Regressions:</code> section is the most informative. The Estimate column reports the raw effect sizes, but these values depend on the units and variability of the predictor variables and therefore are not directly comparable across predictors.</p>
 <p>By setting <code>standardize = TRUE</code>, however, <code>lavaan</code> also reports <code>Std.all</code>, which gives standardized coefficients (i.e., effects on a common scale). These standardized values allow direct comparison of the relative strength of different paths.</p>
 <p>In this example, the strongest path is from <code>mass_herbiv</code> to <code>mass_pred</code> (0.482), followed by <code>mass_plant</code> to <code>mass_herbiv</code> (0.327), and <code>cv_h_plant</code> to <code>mass_herbiv</code> (0.208).</p>
+<p>The results can be visualized with the <code>lavaanPlot()</code> function from <code>lavaanPlot</code> package.</p>
+<div class="sourceCode" id="cb558"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">lavaanPlot</span><span class="op">(</span>model <span class="op">=</span> <span class="va">fit1</span>, coefs <span class="op">=</span> <span class="cn">TRUE</span>, stand <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-def37207ed098f172db1" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-def37207ed098f172db1">{"x":{"diagram":" digraph plot { \n graph [ overlap = true, fontsize = 10 ] \n node [ shape = box ] \n node [shape = box] \n mass_plant; cv_h_plant; mass_herbiv; mass_pred \n node [shape = oval] \n  \n \n edge [ color = black ] \n mass_plant->mass_herbiv [label = \"0.33\"] cv_h_plant->mass_herbiv [label = \"0.21\"] mass_herbiv->mass_pred [label = \"0.48\"]  \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="model-comparison-1" class="section level3" number="21.1.4">
 <h3>
@@ -258,7 +267,7 @@ Figure 21.3: Comparison of two alternative directed acyclic graphs (DAGs) repres
 <p>We can address this by comparing model performance using a likelihood ratio test (LRT), which uses the difference in chi-square values between two models as the test statistic. The rationale is that the simpler model is a special case of the more complex model (i.e., the models are nested), so any improvement in fit can be attributed to the additional path.</p>
 <p>If adding the new path substantially reduces the chi-square value relative to the increase in model complexity (degrees of freedom), this suggests that the path explains meaningful structure in the data and is worth including.</p>
 <p>To perform this test, we first need to specify an alternative model that represents the updated DAG with the additional pathway:</p>
-<div class="sourceCode" id="cb558"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb559"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m2</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
 <span><span class="st">  mass_herbiv ~ mass_plant + cv_h_plant</span></span>
 <span><span class="st">  mass_pred ~ mass_herbiv + cv_h_plant</span></span>
@@ -280,7 +289,7 @@ Figure 21.3: Comparison of two alternative directed acyclic graphs (DAGs) repres
 ##   Degrees of freedom                                 1
 ##   P-value (Chi-square)                           0.528</code></pre>
 <p>We can use anova() function for the comparison.</p>
-<div class="sourceCode" id="cb560"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb561"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">fit1</span>, <span class="va">fit2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Chi-Squared Difference Test
 ## 
@@ -302,7 +311,7 @@ Figure 21.3: Comparison of two alternative directed acyclic graphs (DAGs) repres
 <span class="header-section-number">21.2.1</span> SEM vs. Path analysis<a class="anchor" aria-label="anchor" href="#sem-vs.-path-analysis"><i class="fas fa-link"></i></a>
 </h3>
 <p>To explore this, we will use the following dataset.</p>
-<div class="sourceCode" id="cb562"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb563"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/aterui/biostats/master/data_raw/data_herbivory.csv"</span></span>
 <span></span>
 <span><span class="op">(</span><span class="va">df_herbv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -324,7 +333,7 @@ Figure 21.3: Comparison of two alternative directed acyclic graphs (DAGs) repres
 <p>At first glance, we might propose the following DAG, which models each plant trait and herbivory rate as separate, individual elements.</p>
 <div class="inline-figure"><img src="biostats_files/figure-html/dag-sem-nolatent-plot-1.png" width="672" style="display: block; margin: auto;"></div>
 <p>However, examining the three traits, we see that they are highly correlated and appear to be strongly influenced by soil inorganic nitrogen:</p>
-<div class="sourceCode" id="cb564"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb565"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_herbv</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">ggpairs</span><span class="op">(</span></span>
 <span>    progress <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -334,7 +343,7 @@ Figure 21.3: Comparison of two alternative directed acyclic graphs (DAGs) repres
 <span>                <span class="st">"per_lignin"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-181-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-182-1.png" width="672" style="display: block; margin: auto;"></div>
 <p>These plant traits may collectively represent plant tissue “palatability,” which is influenced by soil fertility and, in turn, affects herbivory rate.</p>
 <p>In this context, we can define a latent variable, palatability, as a function of the three plant traits. This latent variable then serves as a mediator linking soil fertility to herbivory rate. With this addition, the corresponding path diagram is modified to reflect the inclusion of the latent construct.</p>
 <div class="figure" style="text-align: center">
@@ -349,7 +358,7 @@ Figure 21.4: DAG of the structural equation model (SEM) linking soil fertility, 
 <span class="header-section-number">21.2.2</span> Implementation<a class="anchor" aria-label="anchor" href="#implementation-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>When implementing SEM, we use the special syntax <code>=~</code> to specify latent variables in the model. In our example, we may use the following syntax: <code>palatability =~ sla + cn_ratio + perlignin</code> to construct a latent variable composed of three plant traits. By including latent constructs, SEM extends traditional path analysis, offering a more flexible framework to model complex relationships.</p>
-<div class="sourceCode" id="cb565"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb566"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_sem</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
 <span><span class="st"># latent variable</span></span>
 <span><span class="st">  palatability =~ sla + cn_ratio + per_lignin</span></span>
@@ -375,7 +384,7 @@ Figure 21.4: DAG of the structural equation model (SEM) linking soil fertility, 
 ##   Degrees of freedom                                 5
 ##   P-value (Chi-square)                           0.110</code></pre>
 <p>The primary output and its interpretation is similar - in this case, the p-value is &gt; 0.05, suggesting that our model specification is reasonably good. We can exploit more information by calling summary():</p>
-<div class="sourceCode" id="cb567"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb568"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">fit_sem</span>, standardize <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## lavaan 0.6-12 ended normally after 29 iterations
 ## 
@@ -429,13 +438,13 @@ Figure 21.4: DAG of the structural equation model (SEM) linking soil fertility, 
 </h2>
 <p>The examples above rely on one major assumption: in the <code>lavaan</code> package, all variables in the model are assumed to follow a normal distribution. This can be a restrictive assumption, especially given the variety of data types often encountered in biological research.</p>
 <p>Importantly, this limitation comes from the package, not from the underlying statistics. Mathematically, it is possible to construct path analysis or SEM with non-normal variables or even include random effects.</p>
-<p>However, such models are challenging to estimate using standard methods because the likelihood function becomes highly complex. In these cases, Bayesian methods would provide a more flexible framework (examples: <a href="onlinelibrary.wiley.com/doi/abs/10.1111/1365-2656.12415">Takagi et al. 2014</a>; <a href="doi.org/10.1007%2Fs10021-017-0183-3">Terui et al 2018</a>). While there are currently few packages that allow fully automated implementation, coding models directly in BUGS or Stan makes it possible to fit these more complex SEMs (with a steep learning curve).</p>
+<p>However, such models are challenging to estimate using standard methods because the likelihood function becomes highly complex. In these cases, piecewise SEM (<a href="https://besjournals.onlinelibrary.wiley.com/doi/10.1111/2041-210X.12512">Lefcheck 2015</a>) or Bayesian methods would provide a more flexible framework (examples: <a href="onlinelibrary.wiley.com/doi/abs/10.1111/1365-2656.12415">Takagi et al. 2014</a>; <a href="doi.org/10.1007%2Fs10021-017-0183-3">Terui et al 2018</a>). While there are currently few packages that allow fully automated implementation, coding models directly in BUGS or Stan makes it possible to fit these more complex SEMs (with a steep learning curve).</p>
 
 </div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="constrained-ordination.html"><span class="header-section-number">20</span> Constrained Ordination</a></div>
-<div class="next"><a href="time-series-analysis.html"><span class="header-section-number">22</span> Time-Series Analysis</a></div>
+<div class="next"><a href="piecewise-sem.html"><span class="header-section-number">22</span> Piecewise SEM</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -472,7 +481,7 @@ Figure 21.4: DAG of the structural equation model (SEM) linking soil fertility, 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-12-23.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2025-12-31.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

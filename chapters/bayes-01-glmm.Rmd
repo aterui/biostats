@@ -1,0 +1,46 @@
+# (PART) Bayesian Statistics {.unnumbered}
+
+# Bayesian GLMM
+
+Generalized Linear Mixed-Effects Models (GLMMs) are powerful tools for analyzing biological data that exhibit non-normal error structures and hierarchical dependencies, with their widespread adoption and the availability of user-friendly R packages. However, GLMMs remain conceptually and computationally challenging, and the increasing accessibility of these tools has also introduced a risk of misuse -- particularly when model assumptions, convergence issues, or hierarchical structure are not carefully considered.
+
+In this chapter, we focus on strategies for fitting and interpreting complex GLMMs, with an emphasis on models that include multiple random effects. We will also explore how Bayesian approaches can help address some of the limitations commonly encountered in frequentist implementations.
+
+Learning Objectives:
+
+-   Understand the key challenges associated with fitting and interpreting GLMMs, including convergence, identifiability, and model complexity.
+
+-   Distinguish between frequentist and Bayesian approaches to mixed-effects modeling and understand when each framework is most appropriate.
+
+-   Apply Bayesian methods to complex GLMMs, using them as a practical solution for models with multiple random effects or limited data support.
+
+```{r}
+pacman::p_load(tidyverse,
+               glmmTMB,
+               rstanarm)
+```
+
+## Convergence Issue
+
+```{r}
+data("grouseticks")
+
+df_tick <- grouseticks %>% 
+  as_tibble() %>% 
+  janitor::clean_names() %>% 
+  mutate(std_height = (height - mean(height)) / sd(height))
+
+m <- glmmTMB(ticks ~ std_height + (1 + std_height | year), 
+             data = df_tick, 
+             family = nbinom2())
+```
+
+```{r}
+df_tick %>% 
+  ggplot(aes(x = c_height,
+             y = ticks,
+             color = location)) +
+  geom_point()
+```
+
+

@@ -14,7 +14,8 @@ Learning Objectives:
 pacman::p_load(tidyverse,
                GGally,
                vegan,
-               lavaan)
+               lavaan,
+               lavaanPlot)
 ```
 
 ## Path analysis
@@ -175,6 +176,12 @@ The `Regressions:` section is the most informative. The Estimate column reports 
 By setting `standardize = TRUE`, however, `lavaan` also reports `Std.all`, which gives standardized coefficients (i.e., effects on a common scale). These standardized values allow direct comparison of the relative strength of different paths.
 
 In this example, the strongest path is from `mass_herbiv` to `mass_pred` (0.482), followed by `mass_plant` to `mass_herbiv` (0.327), and `cv_h_plant` to `mass_herbiv` (0.208).
+
+The results can be visualized with the `lavaanPlot()` function from `lavaanPlot` package.
+
+```{r}
+lavaanPlot(model = fit1, coefs = TRUE, stand = TRUE)
+```
 
 ### Model comparison
 

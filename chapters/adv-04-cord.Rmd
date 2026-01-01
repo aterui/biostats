@@ -152,7 +152,7 @@ While RDA provides an important extension of PCA to include environmental predic
 
 Although dbRDA is not as flexible as NMDS, it allows the use of a distance or dissimilarity matrix as the response input instead of the raw data, greatly expanding its applicability to biological datasets with non-linear relationships.
 
-The implementation requires only minimal changes. We can still use `m_y` from the previous example, but instead of `rda()`, we apply the `capscale()` function with `distance = "bray"`. This internally converts the raw community matrix into a Bray-Curtis dissimilarity matrix, allowing distance-based constrained ordination.
+The implementation requires only minimal changes. We can still use `m_y` from the previous example, but instead of `rda()`, we apply the `dbrda()` function with `distance = "bray"`. This internally converts the raw community matrix into a Bray-Curtis dissimilarity matrix, allowing distance-based constrained ordination.
 
 ```{r dbrda}
 # Perform distance-based Redundancy Analysis (dbRDA)
@@ -161,7 +161,7 @@ The implementation requires only minimal changes. We can still use `m_y` from th
 # - data = df_env: provides the environmental variables used as predictors
 # - distance = "bray": computes a Bray-Curtis dissimilarity matrix from the raw species abundances
 #   internally, before performing the constrained ordination
-# The result is a capscale object representing the constrained ordination in distance space
+# The result is a dbrda object representing the constrained ordination in distance space
 (obj_db <- dbrda(m_y ~ n + p + k + ca,
                  data = df_env,
                  distance = "bray"))

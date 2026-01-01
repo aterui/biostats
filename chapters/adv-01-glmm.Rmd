@@ -53,45 +53,39 @@ It has seven main columns:
 
 Since this original data contains a mix of upper- and lower-case letters, we will first clean the format:
 
-```{r owls-clean}
-df_owl <- df_owl_raw %>% 
-  janitor::clean_names() %>% 
-  mutate(across(.cols = where(is.factor), 
-                .fns = str_to_lower)) # apply str_to_lower() if column data type is factor
-
-print(colnames(df_owl))
+```{r adv-01-owls-clean}
+(df_owl <- df_owl_raw %>%                 # Start with raw owl dataset and assign cleaned version
+  janitor::clean_names() %>%              # Standardize column names (lowercase, underscores, etc.)
+  mutate(across(.cols = where(is.factor), # Select all factor-type columns
+                .fns = str_to_lower))     # Convert factor levels to lowercase
+ )                     
 ```
 
 Then, visualize the data. Our primary interest here is whether `food_treatment` changed the number of negotiations per chick (`neg_per_chick` = `sibling_negotiation` / `brood_size`):
 
-```{r owl-food-treatment}
-
-df_owl %>% 
-  ggplot(aes(x = food_treatment,
-             y = neg_per_chick)) +
-  geom_boxplot(outliers = FALSE) +
-  geom_jitter(alpha = 0.25) +
-  theme_bw()
-
+```{r adv-01-owl-food-treatment}
+df_owl %>%                          # Use cleaned owl dataset
+  ggplot(aes(x = food_treatment,    # Map food treatment to x-axis
+             y = neg_per_chick)) +  # Map number of negatives per chick to y-axis
+  geom_boxplot(outliers = FALSE) +  # Draw boxplots without plotting outliers
+  geom_jitter(alpha = 0.25) +       # Add jittered raw data points with transparency
+  theme_bw()                        # Apply a clean black-and-white theme
 ```
 
 At first glance, the figure appears straightforward: the number of negotiations per chick decreases when nestlings are satiated. However, a closer examination reveals an important additional complexity in the data—its grouped structure. The example below highlights the first nine nests, illustrating substantial variation in `neg_per_chick` among nests.
 
 ```{r group-structure-fig}
+v_g9 <- unique(df_owl$nest)[1:9]    # Extract first 9 nest IDs
 
-# select the first nine groups
-v_g9 <- unique(df_owl$nest)[1:9]
-
-df_owl %>% 
-  filter(nest %in% v_g9) %>% 
-  ggplot(aes(x = food_treatment,
-             y = neg_per_chick)) +
-  geom_boxplot() +
-  facet_wrap(facets =~ nest,
-             ncol = 3,
-             nrow = 3) +
-  theme_bw()
-
+df_owl %>%                          # Start with owl dataset
+  filter(nest %in% v_g9) %>%        # Keep only observations from selected nests
+  ggplot(aes(x = food_treatment,    
+             y = neg_per_chick)) +  
+  geom_jitter(alpha = 0.25) +       # Draw jitter plots for each treatment
+  facet_wrap(facets =~ nest,        # Create separate panels for each nest
+             ncol = 3,              # Arrange panels into 3 columns
+             nrow = 3) +            # Arrange panels into 3 rows
+  theme_bw()                        # Apply clean black-and-white theme
 ```
 
 To examine the effect of food treatment while accounting for differences among nests, the GLM can be specified as follows:
@@ -123,19 +117,24 @@ Although this model works, it is not advisable. Because there are 27 nests, the 
 
 Variables included as explicit predictors or explanatory variables are typically referred to as fixed effects. In the previous example, both `food_treatment` and `nest` were treated as fixed effects. Fixed effects are usually the primary focus of an analysis, as they represent factors whose effects we wish to estimate directly and interpret in a biological context.
 
-However, as noted above, differences among nests are not biologically interpretable, making them inappropriate to include as fixed effects. At the same time, ignoring variation among nests altogether by excluding them from the model would bias the estimated effect of `food_treatment`.
+However, as noted above, differences among nests are not biologically interpretable, making them uninformative to include as fixed effects. At the same time, ignoring variation among nests altogether by excluding them from the model would bias the estimated effect of `food_treatment`.
 
 Random effects are well suited to this situation. They represent categorical grouping variables that assign individual observations to a smaller number of groups. In the example above, `nest` is an ideal random effect because it groups individual chicks within nests, capturing among-nest variation without requiring explicit estimation of nest-specific effects.
 
 Let’s develop a model that includes `nest` as a random effect. We will use the `glmmTMB()` function from the `glmmTMB` package, specifying the random effect with the syntax `(1 | nest)`.
 
 ```{r ri-model}
+m_ri <- glmmTMB(
+  sibling_negotiation ~       # Response variable
+    food_treatment +          # Fixed effect of food treatment
+    (1 | nest) +              # Random intercept for each nest
+    offset(log(brood_size)),  # Offset to model rate per chick
+  data = df_owl,              
+  family = nbinom2()          # Negative binomial distribution
+)
 
-m_ri <- glmmTMB(sibling_negotiation ~ food_treatment + (1 | nest) + offset(log(brood_size)),
-                 data = df_owl,
-                 family = nbinom1()) # nbinom1() is from glmmTMB package
+summary(m_ri)                 # Display model results and parameter estimates
 
-summary(m_ri)
 ```
 
 Fixed effects still estimate `(Intercept)` and the effect of `food_treatment`. The key distinction from a standard GLM is that there are no nest-specific coefficients in the GLMM; instead, the model estimates the standard deviation of the nest effect (estimated as `Std.Dev. 0.361`), capturing among-nest variation.
@@ -146,7 +145,9 @@ The “trick” of GLMMs is to model only the variation between groups as a sing
 
 In a GLMM, random effects (e.g., nests, plots, or subjects) are modeled as variation among groups, summarized as a standard deviation in intercept rather than as separate fixed-effect parameters for each group. This means the model estimates how much groups vary around the overall mean, not individual group intercepts directly. We call this specification a random-intercept model because it allows group-specific intercepts.
 
-You can obtain group-specific intercepts using `coef()` function:
+You can obtain group-specific intercepts using `coef()` function[^adv-01-glmm-1] – note that these estimates are show in a log-scale because the negative-binomial distribution uses a log link function:
+
+[^adv-01-glmm-1]: Specific codes to extract group-specific values vary by R package - for example, we will need to use different codes to extract group-specific values from `lmerMod` objects (class of the `lme4` package)
 
 ```{r ri-coef}
 head(coef(m_ri)$cond$nest)
@@ -183,14 +184,14 @@ v_g9_ran <- sample(unique(df_owl$nest),
 # These values are still on the log scale.
 df_g9 <- coef(m_ri)$cond$nest %>% 
   as_tibble(rownames = "nest") %>%      # convert to tibble and keep nest ID
-  filter(nest %in% v_g9_ran) %>%         # keep only the selected nests
+  filter(nest %in% v_g9_ran) %>%        # keep only the selected nests
   rename(
-    log_g = `(Intercept)`,               # nest-specific intercept (log scale)
-    b = food_treatmentsatiated            # fixed slope for food treatment
+    log_g = `(Intercept)`,              # nest-specific intercept (log scale)
+    b = food_treatmentsatiated          # fixed slope for food treatment
   ) %>% 
   mutate(
-    g = exp(log_g),                      # intercept on response scale
-    s = exp(log_g + b)                   # predicted value under satiated treatment
+    g = exp(log_g),                     # intercept on response scale
+    s = exp(log_g + b)                  # predicted value under satiated treatment
   )
 
 
@@ -198,7 +199,7 @@ df_g9 <- coef(m_ri)$cond$nest %>%
 # 4. Create the figure
 # ------------------------------------------------------------
 df_owl %>% 
-  filter(nest %in% v_g9_ran) %>%         # plot only the selected nests
+  filter(nest %in% v_g9_ran) %>%        # plot only the selected nests
   ggplot(aes(x = food_treatment,
              y = neg_per_chick)) +
   # Raw data points (jittered to reduce overlap)
@@ -246,11 +247,17 @@ This reflects an assumption of the model: while nests may differ in their overal
 We can relax this assumption by allowing the effect of food treatment to vary among nests. This is done by specifying the random effect as `(1 + food_treatment | nest)`. In this random-intercept and random-slope model, the model still estimates an average effect of food treatment, but it also allows each nest to have its own slope, capturing differences in how strongly nests respond to the treatment:
 
 ```{r ris-model}
-m_ris <- glmmTMB(sibling_negotiation ~ food_treatment + (1 + food_treatment | nest) + offset(log(brood_size)),
-                 data = df_owl,
-                 family = nbinom1())
+m_ris <- glmmTMB(
+  sibling_negotiation ~             # Response variable
+    food_treatment +                # Fixed effect of food treatment
+    (1 + food_treatment | nest) +   # Random intercepts and slopes for each nest
+    offset(log(brood_size)),        # Offset to model rate per chick
+  data = df_owl,                    
+  family = nbinom2()                # Negative binomial distribution
+)
 
-summary(m_ris)
+summary(m_ris)                      # Display model estimates and diagnostics
+
 ```
 
 Now, `coef(m_ris)$cond$nest` returns variable slopes among nests, reflecting the assumption of the random slope:
@@ -344,7 +351,7 @@ In statistical modeling, particularly in ecology, factors in a dataset can be tr
 
 ## Model specification
 
-### Rnadom intercept
+### Random intercept
 
 With $y_i$ denoting the number of negotiation calls (`sibling_negotiation`), the above example is formulated as follows:
 

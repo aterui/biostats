@@ -81,7 +81,8 @@ df_owl %>%                          # Start with owl dataset
   filter(nest %in% v_g9) %>%        # Keep only observations from selected nests
   ggplot(aes(x = food_treatment,    
              y = neg_per_chick)) +  
-  geom_jitter(alpha = 0.25) +       # Draw jitter plots for each treatment
+  geom_jitter(alpha = 0.25,         # Draw jitter plots for each treatment
+              width = 0.1) +       
   facet_wrap(facets =~ nest,        # Create separate panels for each nest
              ncol = 3,              # Arrange panels into 3 columns
              nrow = 3) +            # Arrange panels into 3 rows

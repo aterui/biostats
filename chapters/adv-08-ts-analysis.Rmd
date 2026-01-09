@@ -444,7 +444,7 @@ $$R offers a variety of functions for performing this type of modeling. Let’s 
 
 ### ARIMAX
 
-ARIMAX is an ARIMA model that includes external predictors. To illustrate its use, we use ice-cover data from Lake Mendota, Wisconsin, available in the `lmerdatasampler` R package. We focus on the period from 1980 to 2014 (35 years).
+ARIMAX is an ARIMA model that includes external predictors. To illustrate its use, we use ice-cover data from Lake Mendota, Wisconsin, available in the `lterdatasampler` R package. We focus on the period from 1980 to 2014 (35 years).
 
 ```{r adv-08-mendota-plot, fig.cap="Ice-cover data for Lake Mendota (1980–2014) visualized as a dotted line with semi-transparent points. This plot shows the temporal trajectory of ice duration over 35 years, highlighting interannual variability."}
 # Load and inspect the dataset

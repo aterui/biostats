@@ -454,7 +454,8 @@ data("ntl_icecover")  # Built-in dataset with ice cover information for multiple
 df_ice <- ntl_icecover %>% 
   as_tibble() %>% # Convert to tibble for tidyverse-friendly operations
   filter(between(year, 1980, 2014), # Keep only years from 1980 onward
-         lakeid == "Lake Mendota") # Keep only data for Lake Mendota
+         lakeid == "Lake Mendota") %>% # Keep only data for Lake Mendota
+  arrange(year) # Arrange by year
 
 # Create a line + point plot of ice duration over time
 df_ice %>% 
@@ -591,7 +592,8 @@ df_ct <- and_vertebrates  %>%
          length_1_mm > 160) %>%  # Keep only large cutthroat trout (hypothetical matured adults)
   group_by(year) %>% # Group records by year
   summarize(n = n(), # Count number of captures per year
-            .groups = "drop")
+            .groups = "drop") %>% 
+  arrange(year) # Arrange by year
 
 df_ct %>% 
   ggplot(aes(x = year,

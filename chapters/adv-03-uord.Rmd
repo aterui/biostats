@@ -82,6 +82,12 @@ print(obj_pca)
 
 The standard deviations of the principal components (PCs) indicate how much the data varies along each axis. In this case, PC1 has a standard deviation of 1.401, much higher than PC2’s 0.193, meaning that most of the variation in petal length and width occurs along PC1. Squaring these values gives the eigenvalues, which quantify the variance captured by each component.
 
+Proportional contributions of PC axes can be displayed with `summary()` function:
+
+```{r prcomp-summary}
+summary(obj_pca)
+```
+
 The proportion of variance shows that PC1 explains approximately 98% of the total variance, while PC2 accounts for only about 2%. The cumulative proportion confirms that together they capture 100% of the variation. This means PC1 effectively summarizes almost all the information in the dataset, and PC2 adds very little new insight.
 
 Visualization helps illustrate how PCA summarizes the variables. As shown in this figure, the principal component axes identified by `prcomp()` represent orthogonal dimensions of the relationships, with the first axis capturing the largest variance (eigenvalue) and therefore most of the information from the original variables.

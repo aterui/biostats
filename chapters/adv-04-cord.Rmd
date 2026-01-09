@@ -80,17 +80,17 @@ Performing RDA is straightforward, as the `vegan` package provides the `rda()` f
 # Run Redundancy Analysis (RDA)
 # - Response: m_y (species abundance matrix, varespec)
 #   Note: Hellinger transformation is recommended for raw species counts.
-# - Predictors: n, p, k, ca (numeric soil chemistry variables from df_env)
-#   These represent Nitrogen (n), Phosphorus (p), Potassium (k), and Calcium (ca) levels.
+# - Predictors: n, p, ca (numeric soil chemistry variables from df_env)
+#   These represent Nitrogen (n), Phosphorus (p), and Calcium (ca) levels.
 # - Data: df_env (cleaned environmental variables)
 # The parentheses around obj_rda print the RDA summary immediately
-(obj_rda <- rda(m_y ~ n + p + k + ca,
+(obj_rda <- rda(m_y ~ n + p + ca,
                 data = df_env))
 ```
 
-The RDA results show that the total variance (inertia) in the species abundance data is 1825.66, of which 28.3% (516.10) is explained by the four soil chemistry predictors (`n`, `p`, `k`, `ca`) and 71.7% (1309.56) remains unexplained (residual variation).
+The RDA results show that the total variance (inertia) in the species abundance data is 1825.66, of which 28.3% (475.70) is explained by the four soil chemistry predictors (`n`, `p`, `ca`) and 73.9% (1349.97) remains unexplained (residual variation).
 
-The first two axes of RDA axes (constrained) captured most of the explained variation, with eigenvalues of 244.71 (RDA1), 216.40 (RDA2), 30.61 (RDA3), and 24.37 (RDA4). The unconstrained axes, representing residual variation, have larger eigenvalues (e.g., PC1 = 752.9, PC2 = 266.1), showing that most variation in species composition is not accounted for by the measured soil variables.
+The first two axes of RDA axes (constrained) captured most of the explained variation, with eigenvalues of 234.85 (RDA1), 215.02 (RDA2), and 25.83 (RDA3). The unconstrained axes, representing residual variation, have larger eigenvalues (e.g., PC1 = 763.0, PC2 = 267.5), showing that most variation in species composition is not accounted for by the measured soil variables.
 
 Overall, this indicates that while soil chemistry influences species distributions, a substantial proportion of multivariate variation is structured by other unmeasured factors or stochastic processes.
 
@@ -107,7 +107,7 @@ anova.cca(obj_rda,
           permutations = 999)
 ```
 
-It is important to set `by = "margin"` when your goal is to assess the *individual* contribution of each predictor. An alternative option is `by = "terms"`, but this corresponds to a method analogous to Type I ANOVA, where predictors are tested sequentially in the order they appear in the model formula. As a result, the order of predictors matters: for example, specifying `m_y ~ n + p + k + ca` versus `m_y ~ p + n + k + ca` can lead to different test results, because each predictor is evaluated after accounting only for those entered before it.
+It is important to set `by = "margin"` when your goal is to assess the *individual* contribution of each predictor. An alternative option is `by = "terms"`, but this corresponds to a method analogous to Type I ANOVA, where predictors are tested sequentially in the order they appear in the model formula. As a result, the order of predictors matters: for example, specifying `m_y ~ n + p + ca` versus `m_y ~ p + n + ca` can lead to different test results, because each predictor is evaluated after accounting only for those entered before it.
 
 In contrast, setting `by = "margin"` invokes a procedure analogous to Type II ANOVA. Here, the effect of each predictor is tested *after accounting for all other predictors in the model*, regardless of their order in the formula. This approach is generally preferred when predictors are not strictly hierarchical and when the goal is to evaluate the unique contribution of each environmental variable to the multivariate response.
 
@@ -129,19 +129,38 @@ df_rda <- scores(obj_rda,
   bind_cols(df_env) %>%           # append environmental variables (e.g., soil chemistry)
   janitor::clean_names()          # standardize column names for tidy workflows
 
+# RDA vectors for environmental predictors
+df_bp <- scores(obj_rda, 
+                display = "bp", 
+                scaling = 2) %>% 
+    as_tibble(rownames = "variable") %>% 
+  janitor::clean_names()
+
 # Create a ggplot2 ordination plot
 # - Points represent sites positioned by their constrained community composition
 # - Color gradient reflects the nitrogen (n) concentration at each site
 df_rda %>% 
   ggplot(aes(x = rda1,
-             y = rda2,
-             color = n)) +        # color sites by nitrogen level
-  geom_point() +
+             y = rda2)) +        # color sites by nitrogen level
+  geom_point(aes(color = n)) +
+  geom_segment(data = df_bp,
+               aes(x = 0, xend = rda1 * 10, # 10 is arbitrary scaling for visualization
+                   y = 0, yend = rda2 * 10),
+               arrow = arrow(length = unit(0.2, "cm"))
+               ) +
+  geom_text(data = df_bp,
+            aes(x = rda1 * 10.5,    # slightly beyond arrow tip
+                y = rda2 * 10.5,
+                label = variable),  # or use a variable column
+            size = 4) +
   theme_bw() +
   labs(x = "RDA1",
        y = "RDA2",
        color = "Nitrogen") +
   scale_color_viridis_c()
+
+# for non-ggplot, you can use
+# plot(obj_rda)
 ```
 
 The plot clearly shows a unimodal pattern (“horseshoe”) along the RDA1 axis, which does not reflect a true biological pattern in the data. When such a pattern appears, it indicates that RDA—or any ordination method that assumes linear relationships—may be inappropriate; any statistical inference drawn from the results could be strongly biased.
@@ -157,17 +176,17 @@ The implementation requires only minimal changes. We can still use `m_y` from th
 ```{r dbrda}
 # Perform distance-based Redundancy Analysis (dbRDA)
 # - Response: m_y (species abundance matrix)
-# - Predictors: n, p, k, ca (environmental variables: nitrogen, phosphorus, potassium, calcium)
+# - Predictors: n, p, ca (environmental variables: nitrogen, phosphorus, potassium, calcium)
 # - data = df_env: provides the environmental variables used as predictors
 # - distance = "bray": computes a Bray-Curtis dissimilarity matrix from the raw species abundances
 #   internally, before performing the constrained ordination
 # The result is a dbrda object representing the constrained ordination in distance space
-(obj_db <- dbrda(m_y ~ n + p + k + ca,
+(obj_db <- dbrda(m_y ~ n + p + ca,
                  data = df_env,
                  distance = "bray"))
 ```
 
-The interpretation is analogous to RDA. The total inertia represents the overall variation in Bray-Curtis dissimilarity among sites. The constrained inertia (1.197) indicates that about 26% of the total variation in species composition is explained by the environmental predictors (`n`, `p`, `k`, `ca`), with the remaining variation (3.606) unconstrained or residual.
+The interpretation is analogous to RDA. The total inertia represents the overall variation in Bray-Curtis dissimilarity among sites. The constrained inertia (1.0186) indicates that about 22% of the total variation in species composition is explained by the environmental predictors (`n`, `p`, `ca`), with the remaining variation (3.5259) unconstrained or residual.
 
 The eigenvalues for the constrained axes (dbRDA1 – dbRDA4) indicate how much of the explained variation each axis captures, while the unconstrained axes (MDS1–MDS15) summarize the residual variation in distance space.
 
@@ -191,13 +210,6 @@ We can now examine whether dbRDA has mitigated the horseshoe effect, reducing th
 
 ```{r dbrda-plot, fig.cap="Scatterplot of sites in dbRDA space. Each point represents a site positioned according to its constrained ordination scores, summarizing variation in species composition explained by the environmental predictors."}
 # Extract site scores from the dbRDA object
-# - display = "sites": retrieves the coordinates of each site in the constrained ordination space
-# - scaling = 2: correlation (or "standardized") scaling, which emphasizes relationships between sites
-#   and environmental predictors rather than absolute distances
-# - as_tibble(): converts the site scores to a tibble for easier manipulation with dplyr
-# - bind_cols(df_env): adds the original environmental variables for plotting, coloring, or annotation
-# - janitor::clean_names(): ensures consistent, safe column names for programming
-
 df_db <- scores(obj_db, 
                 display = "sites",
                 scaling = 2) %>% 
@@ -205,15 +217,34 @@ df_db <- scores(obj_db,
   bind_cols(df_env) %>%        
   janitor::clean_names()       
 
-# Create a basic ggplot ordination plot
-# - Each point represents a site in the dbRDA ordination space
-# - Points can later be colored, shaped, or labeled by environmental variables for interpretation
+# dbRDA vectors for environmental predictors
+df_bp <- scores(obj_db, 
+                display = "bp", 
+                scaling = 2) %>% 
+    as_tibble(rownames = "variable") %>% 
+  janitor::clean_names()
+
+# Create a ggplot2 ordination plot
 df_db %>% 
   ggplot(aes(x = db_rda1,
-             y = db_rda2)) +
-  geom_point() +               # plot sites as points
+             y = db_rda2)) +        # color sites by nitrogen level
+  geom_point(aes(color = n)) +
+  geom_segment(data = df_bp,
+               aes(x = 0, xend = db_rda1,
+                   y = 0, yend = db_rda2),
+               arrow = arrow(length = unit(0.2, "cm"))
+               ) +
+  geom_text(data = df_bp,
+            aes(x = db_rda1 * 1.1,    # slightly beyond arrow tip
+                y = db_rda2 * 1.1,
+                label = variable),  # or use a variable column
+            size = 4) +
+  theme_bw() +
   labs(x = "dbRDA1",
-       y = "dbRDA2")
+       y = "dbRDA2",
+       color = "Nitrogen") +
+  scale_color_viridis_c()
+
 ```
 
 ### Other Options

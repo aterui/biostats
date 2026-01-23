@@ -7,7 +7,7 @@
 <title>Chapter 22 Piecewise SEM | BIOSTATS</title>
 <meta name="author" content="Akira Terui">
 <meta name="description" content="Path analysis and Structural Equation Modeling (SEM) provide a powerful framework for addressing mediating interactions among more than two variables. Traditional SEM is implemented using...">
-<meta name="generator" content="bookdown 0.43 with bs4_book()">
+<meta name="generator" content="bookdown 0.46 with bs4_book()">
 <meta property="og:title" content="Chapter 22 Piecewise SEM | BIOSTATS">
 <meta property="og:type" content="book">
 <meta property="og:description" content="Path analysis and Structural Equation Modeling (SEM) provide a powerful framework for addressing mediating interactions among more than two variables. Traditional SEM is implemented using...">
@@ -101,7 +101,7 @@
 <li><p>Specify and fit piecewise SEM models using biological data.</p></li>
 <li><p>Interpret model outputs, including path coefficients, residual variances, and overall model fit statistics.</p></li>
 </ul>
-<div class="sourceCode" id="cb573"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb571"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="va">tidyverse</span>,</span>
 <span>               <span class="va">GGally</span>,</span>
 <span>               <span class="va">piecewiseSEM</span><span class="op">)</span></span></code></pre></div>
@@ -116,7 +116,7 @@
 <p>One of the major limitations of the <code>lavaan</code> package is its reliance on multivariate normality; it cannot easily accommodate non-normal distributions in response (endogeneous) variables. In biological datasets, variables often deviate from normality, and treating them as normally distributed can increase the risk of inappropriate statistical inference.</p>
 <p>Piecewise SEM addresses this limitation by allowing component models to follow a variety of distributions, such as Poisson, binomial, or negative binomial, making it much more flexible for real-world biological data. It is important to note, however, that piecewise SEM is not a full SEM in the traditional sense; it does not support latent variables within the directed acyclic graph (DAG). In practice, piecewise SEM should be understood as an extension of path analysis that combines generalized and/or mixed-effect models while retaining the network structure of relationships among variables.</p>
 <p>To illustrate the utility of piecewise SEM, we will use the dataset from <a href="https://esajournals.onlinelibrary.wiley.com/doi/full/10.1890/1051-0761%282006%29016%5B0503%3AASEMAO%5D2.0.CO%3B2">Grace and Keeley (2006)</a>. In their study, the authors examined the relationships among landscape position, abiotic conditions, fire severity, and plant diversity. This dataset is conveniently included in the <code>piecewiseSEM</code> package, allowing us to replicate and explore these ecological relationships using modern piecewise SEM methods.</p>
-<div class="sourceCode" id="cb574"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb572"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"keeley"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="op">(</span><span class="va">df_keeley</span> <span class="op">&lt;-</span> <span class="va">keeley</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -146,7 +146,7 @@ Figure 22.1: Conceptual path diagram illustrating the hypothesized relationships
 <p>The <code>psem()</code> function takes multiple “piecewise” model objects as input and combines them into a single causal network. From these component models, it constructs a path diagram and evaluates the implied conditional independence claims that define the structural equation model.</p>
 <p>The conditional independence claims correspond to the missing paths in the proposed DAG. If any of these implied independence relationships are statistically violated —- meaning a missing path is in fact significant – this suggests that the proposed model structure is incomplete and may be omitting important biological relationships.</p>
 <p>For this example, we begin by fitting a piecewise SEM in which all response variables are assumed to follow normal distributions. This reflects the original approach used by Grace and Keeley (2006) and provides a useful baseline for understanding how the method operates before extending it to more complex, non-normal models.</p>
-<div class="sourceCode" id="cb576"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb574"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define individual models</span></span>
 <span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">abiotic</span> <span class="op">~</span> <span class="va">distance</span>, data <span class="op">=</span> <span class="va">df_keeley</span><span class="op">)</span></span>
 <span><span class="va">m2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">hetero</span> <span class="op">~</span> <span class="va">distance</span>, data <span class="op">=</span> <span class="va">df_keeley</span><span class="op">)</span></span>
@@ -231,7 +231,7 @@ Figure 22.1: Conceptual path diagram illustrating the hypothesized relationships
 <p>Because some of the response variables may be better described by non-normal distributions, we can extend the piecewise SEM framework by fitting generalized linear models. In particular, species richness is a count variable and is more appropriately modeled using a negative binomial distribution.</p>
 <p>In addition, the analysis above highlighted potentially important pathways that were not included in the original DAG – specifically, the direct effects of landscape position (<code>distance</code>) on richness (<code>rich</code>) and heterogeneity (<code>hetero</code>) on vegetation cover (<code>cover</code>). These paths represent direct influences of each factor that may not be fully captured by the mediating variables in the original model.</p>
 <p>Below, we revise the previous model by fitting species richness with a negative binomial GLM and adding missing paths.</p>
-<div class="sourceCode" id="cb578"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb576"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define individual models</span></span>
 <span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">abiotic</span> <span class="op">~</span> <span class="va">distance</span>, data <span class="op">=</span> <span class="va">df_keeley</span><span class="op">)</span>      <span class="co"># unchanged</span></span>
 <span><span class="va">m2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">hetero</span> <span class="op">~</span> <span class="va">distance</span>, data <span class="op">=</span> <span class="va">df_keeley</span><span class="op">)</span>       <span class="co"># unchanged</span></span>
@@ -311,7 +311,7 @@ Figure 22.1: Conceptual path diagram illustrating the hypothesized relationships
 ##      cover       none      0.23
 ##       rich nagelkerke      0.78</code></pre>
 <p>After including the previously missing paths, the Fisher’s C statistic became non-significant, indicating that the revised model fits the data reasonably well. The results can be visualized using the <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> function, where solid arrows indicate statistically significant pathways and dashed arrows indicate non-significant pathways.</p>
-<div class="sourceCode" id="cb580"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb578"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">sem_model</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:unnamed-chunk-186"></span>
@@ -333,7 +333,7 @@ Figure 22.2: Visualization of the piecewise structural equation model for the Ke
 <p>Another simplifying assumption in traditional SEMs is that all data points are independent. This assumption is often violated, particularly when there are repeated measurements of the same individuals over time or when sampling is spatially clustered within a confined locality. Such hierarchical structures in the data-generating process should be properly accounted for. Piecewise SEM can accommodate this by incorporating random effects, allowing the model to account for non-independence among observations. We will use <code>shipley</code> data from <a href="https://esajournals.onlinelibrary.wiley.com/doi/10.1890/08-1034.1">Shipley 2009</a> to illustrate this case.</p>
 <p>This dataset contains information on tree growth (<code>Growth</code>) and survival (<code>Live</code>) for a given observation year, along with environmental variables that may influence these demographic responses. These include cumulative degree days until first bud burst (<code>DD</code>) and the date of the first bud burst (<code>Date</code>).</p>
 <p>Before proceeding with the analysis, we first perform data cleaning to ensure accuracy and consistency.</p>
-<div class="sourceCode" id="cb581"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb579"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"shipley"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">df_shipley</span> <span class="op">&lt;-</span> <span class="va">shipley</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -341,7 +341,7 @@ Figure 22.2: Visualization of the piecewise structural equation model for the Ke
 <span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">growth</span><span class="op">)</span></span></code></pre></div>
 <p>Importantly, this dataset contains temporally and spatially repeated measurements – the same individuals are tracked for growth over time until they die (<code>tree</code> indexes individuals), and five individuals are sampled at each site (<code>site</code> indexes locations). Clearly, these observations are not independent, and this hierarchical structure must be accounted for in the analysis.</p>
-<div class="sourceCode" id="cb582"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb580"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_shipley</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">site</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>n_tree <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/n_distinct.html">n_distinct</a></span><span class="op">(</span><span class="va">tree</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -369,7 +369,7 @@ Figure 22.2: Visualization of the piecewise structural equation model for the Ke
 ## 19    19      5
 ## 20    20      5</code></pre>
 <p>To begin developing hypotheses, we first explore pairwise relationships among the variables.</p>
-<div class="sourceCode" id="cb584"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb582"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Pairwise plots of key variables</span></span>
 <span><span class="va">df_shipley</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">ggpairs</span><span class="op">(</span></span>
@@ -394,7 +394,7 @@ Figure 22.3: Directed acyclic graph (DAG) illustrating hypothesized relationship
 <span class="header-section-number">22.2.2</span> Tree growth: implementation<a class="anchor" aria-label="anchor" href="#tree-growth-implementation"><i class="fas fa-link"></i></a>
 </h3>
 <p>The <code>psem()</code> function accepts GLMMs of class <code>glmmTMB</code> or <code>lmerMod</code> (from the <code>lme4</code> package), making it straightforward to include random effects in a piecewise SEM. In this example, we include site and tree as random effects. Since these are independent, unnested random effects, specifying them as separate terms in the model formula is appropriate.</p>
-<div class="sourceCode" id="cb585"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb583"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Model 1: date depends on dd, with random intercepts for site and tree</span></span>
 <span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu">glmmTMB</span><span class="op">(</span><span class="va">date</span> <span class="op">~</span> <span class="va">dd</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">site</span><span class="op">)</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">tree</span><span class="op">)</span>, </span>
 <span>              data <span class="op">=</span> <span class="va">df_shipley</span>,</span>
@@ -506,7 +506,7 @@ Figure 22.3: Directed acyclic graph (DAG) illustrating hypothesized relationship
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2026-01-09.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2026-01-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

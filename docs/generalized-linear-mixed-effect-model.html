@@ -7,7 +7,7 @@
 <title>Chapter 17 Generalized Linear Mixed Effect Model | BIOSTATS</title>
 <meta name="author" content="Akira Terui">
 <meta name="description" content="In the previous chapters, we developed foundational skills in linear modeling, including generalized linear models (GLMs). GLMs are a powerful and flexible framework when data arise from a single,...">
-<meta name="generator" content="bookdown 0.43 with bs4_book()">
+<meta name="generator" content="bookdown 0.46 with bs4_book()">
 <meta property="og:title" content="Chapter 17 Generalized Linear Mixed Effect Model | BIOSTATS">
 <meta property="og:type" content="book">
 <meta property="og:description" content="In the previous chapters, we developed foundational skills in linear modeling, including generalized linear models (GLMs). GLMs are a powerful and flexible framework when data arise from a single,...">
@@ -287,83 +287,7 @@
 ## chevroux          0.6627038             -0.6776889
 ## corcellesfavres   1.0781649             -0.6776889</code></pre>
 <p>The returned values in <code>(Intercept)</code> represent group-specific intercepts, showing that GLMMs account for group-level variation by allowing the intercept to vary across groups. The coefficient of <code>food_treatmentsatiated</code> is constant across nests because we did not allow variation in this parameter among groups.</p>
-<p>Since plotting all 27 nests would be tedious and hard to track visually, we will use only random nine nests for this exercise:</p>
-<div class="sourceCode" id="cb495"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># ------------------------------------------------------------</span></span>
-<span><span class="co"># 1. Global (population-level) intercept on the response scale</span></span>
-<span><span class="co"># ------------------------------------------------------------</span></span>
-<span><span class="co"># The model uses a log link (negative binomial),</span></span>
-<span><span class="co"># so the intercept is on the log scale.</span></span>
-<span><span class="co"># We exponentiate it to return to the original response scale.</span></span>
-<span><span class="va">g0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="fu">fixef</span><span class="op">(</span><span class="va">m_ri</span><span class="op">)</span><span class="op">$</span><span class="va">cond</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
-<span></span>
-<span></span>
-<span><span class="co"># ------------------------------------------------------------</span></span>
-<span><span class="co"># 2. Select a subset of nests to visualize</span></span>
-<span><span class="co"># ------------------------------------------------------------</span></span>
-<span><span class="co"># Plotting all 27 nests would be visually overwhelming,</span></span>
-<span><span class="co"># so we randomly select 9 nests for this example.</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span>  <span class="co"># ensures reproducibility</span></span>
-<span><span class="va">v_g9_ran</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">df_owl</span><span class="op">$</span><span class="va">nest</span><span class="op">)</span>,</span>
-<span>                   size <span class="op">=</span> <span class="fl">9</span><span class="op">)</span></span>
-<span></span>
-<span></span>
-<span><span class="co"># ------------------------------------------------------------</span></span>
-<span><span class="co"># 3. Extract nest-specific coefficients (random intercept model)</span></span>
-<span><span class="co"># ------------------------------------------------------------</span></span>
-<span><span class="co"># coef(m_ri) returns the sum of fixed + random effects for each nest.</span></span>
-<span><span class="co"># These values are still on the log scale.</span></span>
-<span><span class="va">df_g9</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">m_ri</span><span class="op">)</span><span class="op">$</span><span class="va">cond</span><span class="op">$</span><span class="va">nest</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span>rownames <span class="op">=</span> <span class="st">"nest"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>      <span class="co"># convert to tibble and keep nest ID</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">nest</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">v_g9_ran</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>        <span class="co"># keep only the selected nests</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span></span>
-<span>    log_g <span class="op">=</span> <span class="va">`(Intercept)`</span>,              <span class="co"># nest-specific intercept (log scale)</span></span>
-<span>    b <span class="op">=</span> <span class="va">food_treatmentsatiated</span>          <span class="co"># fixed slope for food treatment</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
-<span>    g <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">log_g</span><span class="op">)</span>,                     <span class="co"># intercept on response scale</span></span>
-<span>    s <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">log_g</span> <span class="op">+</span> <span class="va">b</span><span class="op">)</span>                  <span class="co"># predicted value under satiated treatment</span></span>
-<span>  <span class="op">)</span></span>
-<span></span>
-<span></span>
-<span><span class="co"># ------------------------------------------------------------</span></span>
-<span><span class="co"># 4. Create the figure</span></span>
-<span><span class="co"># ------------------------------------------------------------</span></span>
-<span><span class="va">df_owl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">nest</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">v_g9_ran</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>        <span class="co"># plot only the selected nests</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">food_treatment</span>,</span>
-<span>             y <span class="op">=</span> <span class="va">neg_per_chick</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="co"># Raw data points (jittered to reduce overlap)</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.1</span>,</span>
-<span>              alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="co"># Dashed horizontal lines:</span></span>
-<span>  <span class="co"># nest-specific intercepts (baseline differences among nests)</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_g9</span>,</span>
-<span>             <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="va">g</span><span class="op">)</span>,</span>
-<span>             alpha <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span>             linetype <span class="op">=</span> <span class="st">"dashed"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="co"># Solid line segments:</span></span>
-<span>  <span class="co"># predicted change from unfed to satiated treatment</span></span>
-<span>  <span class="co"># using a common (fixed) slope across nests</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html">geom_segment</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_g9</span>,</span>
-<span>               <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">g</span>,</span>
-<span>                   yend <span class="op">=</span> <span class="va">s</span>,</span>
-<span>                   x <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>                   xend <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
-<span>               linewidth <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span>               linetype <span class="op">=</span> <span class="st">"solid"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="co"># Solid blue horizontal line:</span></span>
-<span>  <span class="co"># global (population-level) intercept</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="va">g0</span>,</span>
-<span>             alpha <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span>             linewidth <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>             linetype <span class="op">=</span> <span class="st">"solid"</span>,</span>
-<span>             color <span class="op">=</span> <span class="st">"steelblue"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="co"># Facet by nest to emphasize group-level structure</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span>facets <span class="op">=</span><span class="op">~</span> <span class="va">nest</span>,</span>
-<span>             nrow <span class="op">=</span> <span class="fl">3</span>,</span>
-<span>             ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>Since plotting all 27 nests would be tedious and hard to track visually, we will use only random nine nests for this visualization.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:ri-figure"></span>
 <img src="biostats_files/figure-html/ri-figure-1.png" alt="Visualization of a random‐intercept GLMM fitted to owl nesting data for a subset of nine nests. Points show observed counts of negotiation calls per chick. Dashed horizontal lines indicate nest‐specific intercepts (back‐transformed to the response scale from the log link), reflecting baseline differences among nests. Solid line segments connect predicted values under unfed and satiated treatments, illustrating the common (fixed) effect of food treatment, which is assumed to be identical across nests in the random‐intercept model. The solid blue horizontal line represents the global intercept (population‐level mean). Panels are faceted by nest to emphasize between‐nest variation in baseline response." width="672"><p class="caption">
@@ -383,7 +307,7 @@ Figure 17.1: Visualization of a random‐intercept GLMM fitted to owl nesting da
 <p>In the random-intercept model, written as <code>(1 | nest)</code> in the above example, we allow each nest to have its own baseline level (its own intercept) in the number of negotiations per chick. In other words, nests can start at different average values. However, as we saw from <code>coef(m_ri)</code>, the effect of <code>food_treatment</code> is the same for all nests—the slope does not change across nests.</p>
 <p>This reflects an assumption of the model: while nests may differ in their overall level, the effect of food treatment is assumed to be similar across nests. Any nest-to-nest differences in how food treatment works are assumed to be small enough to ignore.</p>
 <p>We can relax this assumption by allowing the effect of food treatment to vary among nests. This is done by specifying the random effect as <code>(1 + food_treatment | nest)</code>. In this random-intercept and random-slope model, the model still estimates an average effect of food treatment, but it also allows each nest to have its own slope, capturing differences in how strongly nests respond to the treatment:</p>
-<div class="sourceCode" id="cb496"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb495"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_ris</span> <span class="op">&lt;-</span> <span class="fu">glmmTMB</span><span class="op">(</span></span>
 <span>  <span class="va">sibling_negotiation</span> <span class="op">~</span>             <span class="co"># Response variable</span></span>
 <span>    <span class="va">food_treatment</span> <span class="op">+</span>                <span class="co"># Fixed effect of food treatment</span></span>
@@ -419,7 +343,7 @@ Figure 17.1: Visualization of a random‐intercept GLMM fitted to owl nesting da
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>Now, <code>coef(m_ris)$cond$nest</code> returns variable slopes among nests, reflecting the assumption of the random slope:</p>
-<div class="sourceCode" id="cb498"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb497"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">m_ris</span><span class="op">)</span><span class="op">$</span><span class="va">cond</span><span class="op">$</span><span class="va">nest</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##                 (Intercept) food_treatmentsatiated
 ## autavauxtv        0.6458989           -1.076110554
@@ -429,74 +353,7 @@ Figure 17.1: Visualization of a random‐intercept GLMM fitted to owl nesting da
 ## chevroux          0.5486965           -2.417926598
 ## corcellesfavres   0.7235323           -0.004790489</code></pre>
 <p>Again, visualization helps clarify how this model differs from the random-intercept model. In the random-intercept case, lines for different nests are parallel, because the effect of food treatment is the same across nests.</p>
-<p>The following code highlights how the effect of food treatment differs among nests by allowing each nest to have its own slope. As a result, the lines are no longer parallel, making it easy to see nest-specific responses to the food treatment.</p>
-<div class="sourceCode" id="cb500"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># ------------------------------------------------------------</span></span>
-<span><span class="co"># 1. Extract nest-specific coefficients from the random-slope model</span></span>
-<span><span class="co"># ------------------------------------------------------------</span></span>
-<span><span class="co"># coef(m_ris) returns the sum of fixed + random effects for each nest.</span></span>
-<span><span class="co"># In this model, BOTH the intercept and the slope of food treatment</span></span>
-<span><span class="co"># are allowed to vary among nests.</span></span>
-<span><span class="co"># All coefficients are still on the log scale.</span></span>
-<span><span class="va">df_s9</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">m_ris</span><span class="op">)</span><span class="op">$</span><span class="va">cond</span><span class="op">$</span><span class="va">nest</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span>rownames <span class="op">=</span> <span class="st">"nest"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>       <span class="co"># convert to tibble and keep nest ID</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span></span>
-<span>    log_g <span class="op">=</span> <span class="va">`(Intercept)`</span>,               <span class="co"># nest-specific intercept (log scale)</span></span>
-<span>    b <span class="op">=</span> <span class="st">"food_treatmentsatiated"</span>          <span class="co"># nest-specific slope (log scale)</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
-<span>    g <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">log_g</span><span class="op">)</span>,                      <span class="co"># intercept on response scale</span></span>
-<span>    s <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">log_g</span> <span class="op">+</span> <span class="va">b</span><span class="op">)</span>                   <span class="co"># predicted value under satiated treatment</span></span>
-<span>  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">nest</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">v_g9_ran</span><span class="op">)</span>              <span class="co"># keep only the selected nine nests</span></span>
-<span></span>
-<span></span>
-<span><span class="co"># ------------------------------------------------------------</span></span>
-<span><span class="co"># 2. Create the figure</span></span>
-<span><span class="co"># ------------------------------------------------------------</span></span>
-<span><span class="va">df_owl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">nest</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">v_g9_ran</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>          <span class="co"># plot only the selected nests</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">food_treatment</span>,</span>
-<span>             y <span class="op">=</span> <span class="va">neg_per_chick</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="co"># Raw data points (jittered to reduce overlap)</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.1</span>,</span>
-<span>              alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="co"># DOTTED line segments:</span></span>
-<span>  <span class="co"># predictions from the random-intercept model</span></span>
-<span>  <span class="co"># (intercepts vary, but slopes are assumed identical across nests)</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html">geom_segment</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_g9</span>,</span>
-<span>               <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">g</span>,</span>
-<span>                   yend <span class="op">=</span> <span class="va">s</span>,</span>
-<span>                   x <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>                   xend <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
-<span>               linewidth <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span>               linetype <span class="op">=</span> <span class="st">"dotted"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="co"># SOLID line segments:</span></span>
-<span>  <span class="co"># predictions from the random-intercept + random-slope model</span></span>
-<span>  <span class="co"># both intercepts and slopes vary among nests</span></span>
-<span>  <span class="co"># color represents the nest-specific slope estimate</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html">geom_segment</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_s9</span>,</span>
-<span>               <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">g</span>,</span>
-<span>                   yend <span class="op">=</span> <span class="va">s</span>,</span>
-<span>                   x <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>                   xend <span class="op">=</span> <span class="fl">2</span>,</span>
-<span>                   color <span class="op">=</span> <span class="va">b</span><span class="op">)</span>,</span>
-<span>               linewidth <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>               linetype <span class="op">=</span> <span class="st">"solid"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="co"># Solid blue horizontal line:</span></span>
-<span>  <span class="co"># global (population-level) intercept</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="va">g0</span>,</span>
-<span>             alpha <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span>             linewidth <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>             linetype <span class="op">=</span> <span class="st">"solid"</span>,</span>
-<span>             color <span class="op">=</span> <span class="st">"steelblue"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="co"># Facet by nest to highlight group-level heterogeneity</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span>facets <span class="op">=</span><span class="op">~</span> <span class="va">nest</span>,</span>
-<span>             nrow <span class="op">=</span> <span class="fl">3</span>,</span>
-<span>             ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="co"># Color scale for nest-specific slopes</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_color_viridis_c</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>The following highlights how the effect of food treatment differs among nests by allowing each nest to have its own slope. As a result, the lines are no longer parallel, making it easy to see nest-specific responses to the food treatment.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:ris-figure"></span>
 <img src="biostats_files/figure-html/ris-figure-1.png" alt="Visualization of a random‐intercept and random‐slope GLMM fitted to owl nesting data for a subset of nine nests. Points show observed counts of negotiation calls per chick under each food treatment. Dotted line segments represent predictions from the random‐intercept model, where the effect of food treatment is assumed to be constant across nests. Solid line segments show predictions from the random‐slope model, allowing the effect of food treatment to vary among nests; color indicates the nest‐specific slope estimate. The solid blue horizontal line denotes the global (population‐level) intercept. Panels are faceted by nest to emphasize differences in both baseline response and treatment effects." width="672"><p class="caption">
@@ -610,7 +467,7 @@ y_i \sim \mbox{NB}(\mu_i, \theta)\\
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2026-01-09.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2026-01-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

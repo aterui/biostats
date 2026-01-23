@@ -156,9 +156,9 @@ head(coef(m_ri)$cond$nest)
 
 The returned values in `(Intercept)` represent group-specific intercepts, showing that GLMMs account for group-level variation by allowing the intercept to vary across groups. The coefficient of `food_treatmentsatiated` is constant across nests because we did not allow variation in this parameter among groups.
 
-Since plotting all 27 nests would be tedious and hard to track visually, we will use only random nine nests for this exercise:
+Since plotting all 27 nests would be tedious and hard to track visually, we will use only random nine nests for this visualization.
 
-```{r ri-figure, fig.cap="Visualization of a random‐intercept GLMM fitted to owl nesting data for a subset of nine nests. Points show observed counts of negotiation calls per chick. Dashed horizontal lines indicate nest‐specific intercepts (back‐transformed to the response scale from the log link), reflecting baseline differences among nests. Solid line segments connect predicted values under unfed and satiated treatments, illustrating the common (fixed) effect of food treatment, which is assumed to be identical across nests in the random‐intercept model. The solid blue horizontal line represents the global intercept (population‐level mean). Panels are faceted by nest to emphasize between‐nest variation in baseline response."}
+```{r ri-figure, echo=FALSE, fig.cap="Visualization of a random‐intercept GLMM fitted to owl nesting data for a subset of nine nests. Points show observed counts of negotiation calls per chick. Dashed horizontal lines indicate nest‐specific intercepts (back‐transformed to the response scale from the log link), reflecting baseline differences among nests. Solid line segments connect predicted values under unfed and satiated treatments, illustrating the common (fixed) effect of food treatment, which is assumed to be identical across nests in the random‐intercept model. The solid blue horizontal line represents the global intercept (population‐level mean). Panels are faceted by nest to emphasize between‐nest variation in baseline response."}
 # ------------------------------------------------------------
 # 1. Global (population-level) intercept on the response scale
 # ------------------------------------------------------------
@@ -269,9 +269,9 @@ head(coef(m_ris)$cond$nest)
 
 Again, visualization helps clarify how this model differs from the random-intercept model. In the random-intercept case, lines for different nests are parallel, because the effect of food treatment is the same across nests.
 
-The following code highlights how the effect of food treatment differs among nests by allowing each nest to have its own slope. As a result, the lines are no longer parallel, making it easy to see nest-specific responses to the food treatment.
+The following highlights how the effect of food treatment differs among nests by allowing each nest to have its own slope. As a result, the lines are no longer parallel, making it easy to see nest-specific responses to the food treatment.
 
-```{r ris-figure, collapse=TRUE, fig.cap="Visualization of a random‐intercept and random‐slope GLMM fitted to owl nesting data for a subset of nine nests. Points show observed counts of negotiation calls per chick under each food treatment. Dotted line segments represent predictions from the random‐intercept model, where the effect of food treatment is assumed to be constant across nests. Solid line segments show predictions from the random‐slope model, allowing the effect of food treatment to vary among nests; color indicates the nest‐specific slope estimate. The solid blue horizontal line denotes the global (population‐level) intercept. Panels are faceted by nest to emphasize differences in both baseline response and treatment effects."}
+```{r ris-figure, echo=FALSE, fig.cap="Visualization of a random‐intercept and random‐slope GLMM fitted to owl nesting data for a subset of nine nests. Points show observed counts of negotiation calls per chick under each food treatment. Dotted line segments represent predictions from the random‐intercept model, where the effect of food treatment is assumed to be constant across nests. Solid line segments show predictions from the random‐slope model, allowing the effect of food treatment to vary among nests; color indicates the nest‐specific slope estimate. The solid blue horizontal line denotes the global (population‐level) intercept. Panels are faceted by nest to emphasize differences in both baseline response and treatment effects."}
 # ------------------------------------------------------------
 # 1. Extract nest-specific coefficients from the random-slope model
 # ------------------------------------------------------------

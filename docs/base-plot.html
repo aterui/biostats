@@ -7,7 +7,7 @@
 <title>Base Plot | BIOSTATS</title>
 <meta name="author" content="Akira Terui">
 <meta name="description" content="Overview R offers a variety of functions that aid in visualizing data. The graphics package in R provides a set of functions for basic graphics (list of functions). To demonstrate the...">
-<meta name="generator" content="bookdown 0.43 with bs4_book()">
+<meta name="generator" content="bookdown 0.46 with bs4_book()">
 <meta property="og:title" content="Base Plot | BIOSTATS">
 <meta property="og:type" content="book">
 <meta property="og:description" content="Overview R offers a variety of functions that aid in visualizing data. The graphics package in R provides a set of functions for basic graphics (list of functions). To demonstrate the...">
@@ -96,7 +96,7 @@
 <h2>Overview<a class="anchor" aria-label="anchor" href="#overview-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>R offers a variety of functions that aid in visualizing data. The <code>graphics</code> package in R provides a set of functions for basic graphics (<a href="https://www.rdocumentation.org/packages/graphics/versions/3.6.2">list of functions</a>). To demonstrate the functionality of these <code>graphics</code> functions, I will utilize the built-in <code>iris</code> dataset in R.</p>
-<div class="sourceCode" id="cb630"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb628"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 6 × 5
 ##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
@@ -112,7 +112,7 @@
 <h2>Plot<a class="anchor" aria-label="anchor" href="#plot"><i class="fas fa-link"></i></a>
 </h2>
 <p>When creating a plot, you typically need to specify the <strong>formula</strong> to define the relationship between variables. For instance, if you wish to visualize the association between <code>x</code> and <code>y</code> (with <code>y</code> on the vertical axis and <code>x</code> on the horizontal axis), the formula would be <code>y ~ x</code> (where the left side of the formula represents the vertical axis). In the <code>iris</code> dataset, you have access to the following columns: <code>Sepal.Length</code>, <code>Sepal.Width</code>, <code>Petal.Length</code>, <code>Petal.Width</code>, and <code>Species</code>. In the subsequent example, we will plot the relationship between <code>Sepal.Length</code> and <code>Sepal.Width</code>:</p>
-<div class="sourceCode" id="cb632"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb630"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Sepal.Width</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-201-1.png" width="672" style="display: block; margin: auto;"></div>
 <p>The <code>data =</code> argument informs the function about the dataset from which the variables (<code>Sepal.Length</code> and <code>Sepal.Width</code>) should be extracted.</p>
@@ -120,7 +120,7 @@
 <h3>Symbol<a class="anchor" aria-label="anchor" href="#symbol"><i class="fas fa-link"></i></a>
 </h3>
 <p><code>pch</code> argument. Choose from <code>1</code> to <code>25</code> (google <strong>r plot pch</strong> for details)</p>
-<div class="sourceCode" id="cb633"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb631"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Sepal.Width</span>, data <span class="op">=</span> <span class="va">iris</span>,</span>
 <span>     pch <span class="op">=</span> <span class="fl">19</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-202-1.png" width="672" style="display: block; margin: auto;"></div>
@@ -129,7 +129,7 @@
 <h3>Symbol size<a class="anchor" aria-label="anchor" href="#symbol-size"><i class="fas fa-link"></i></a>
 </h3>
 <p><code>cex</code> argument. <code>cex = 1</code> is the default value. <code>cex = 2</code> is as twice large as default value.</p>
-<div class="sourceCode" id="cb634"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb632"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Sepal.Width</span>, data <span class="op">=</span> <span class="va">iris</span>,</span>
 <span>     pch <span class="op">=</span> <span class="fl">19</span>, cex <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-203-1.png" width="672" style="display: block; margin: auto;"></div>
@@ -138,7 +138,7 @@
 <h3>Symbol color (border)<a class="anchor" aria-label="anchor" href="#symbol-color-border"><i class="fas fa-link"></i></a>
 </h3>
 <p><code>col</code> argument (quote <code>"color name"</code> when specifying). Google <strong>r color name</strong> for color options.</p>
-<div class="sourceCode" id="cb635"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb633"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Sepal.Width</span>, data <span class="op">=</span> <span class="va">iris</span>,</span>
 <span>     pch <span class="op">=</span> <span class="fl">21</span>, cex <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span> <span class="st">"gray"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-204-1.png" width="672" style="display: block; margin: auto;"></div>
@@ -147,7 +147,7 @@
 <h3>Symbol color (fill)<a class="anchor" aria-label="anchor" href="#symbol-color-fill"><i class="fas fa-link"></i></a>
 </h3>
 <p><code>bg</code> argument (quote <code>"color name"</code> when specifying). Available for a subset of symbol options (some symbols have pre-defined filled color).</p>
-<div class="sourceCode" id="cb636"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb634"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Sepal.Width</span>, data <span class="op">=</span> <span class="va">iris</span>,</span>
 <span>     pch <span class="op">=</span> <span class="fl">21</span>, cex <span class="op">=</span> <span class="fl">2</span>, bg <span class="op">=</span> <span class="st">"lightgray"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-205-1.png" width="672" style="display: block; margin: auto;"></div>
@@ -156,7 +156,7 @@
 <h3>Label<a class="anchor" aria-label="anchor" href="#label"><i class="fas fa-link"></i></a>
 </h3>
 <p><code>ylab</code> or <code>xlab</code> arguments. Provide <code>"quoted text"</code>.</p>
-<div class="sourceCode" id="cb637"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb635"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Sepal.Width</span>, data <span class="op">=</span> <span class="va">iris</span>,</span>
 <span>     pch <span class="op">=</span> <span class="fl">21</span>, cex <span class="op">=</span> <span class="fl">2</span>, bg <span class="op">=</span> <span class="st">"lightgray"</span>,</span>
 <span>     xlab <span class="op">=</span> <span class="st">"Sepal width (cm)"</span>, ylab <span class="op">=</span> <span class="st">"Sepal length (cm)"</span><span class="op">)</span></span></code></pre></div>
@@ -166,7 +166,7 @@
 <h3>Axis<a class="anchor" aria-label="anchor" href="#axis"><i class="fas fa-link"></i></a>
 </h3>
 <p>Delete axes with <code>axes = F</code> and re-draw with <code><a href="https://rdrr.io/r/graphics/box.html">box()</a></code> and <code><a href="https://rdrr.io/r/graphics/axis.html">axis()</a></code> functions.</p>
-<div class="sourceCode" id="cb638"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb636"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Sepal.Width</span>, data <span class="op">=</span> <span class="va">iris</span>,</span>
 <span>     pch <span class="op">=</span> <span class="fl">21</span>, cex <span class="op">=</span> <span class="fl">2</span>, bg <span class="op">=</span> <span class="st">"lightgray"</span>,</span>
 <span>     xlab <span class="op">=</span> <span class="st">"Sepal width (cm)"</span>, ylab <span class="op">=</span> <span class="st">"Sepal length (cm)"</span>,</span>
@@ -181,7 +181,7 @@
 <h2>Boxplot<a class="anchor" aria-label="anchor" href="#boxplot-1"><i class="fas fa-link"></i></a>
 </h2>
 <p><code><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot()</a></code> is used when the x-axis is factor-type data (by default, <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> will produce a boxplot when x-axis is a factor variable). In the <code>iris</code> dataset, the column <code>Species</code> is a factor variable. Compare <code>Sepal.Length</code> among species using <code><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot()</a></code>.</p>
-<div class="sourceCode" id="cb639"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb637"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-208-1.png" width="672" style="display: block; margin: auto;"></div>
 <p>You can customize as in <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code>, but slighlty different.</p>
@@ -189,7 +189,7 @@
 <h3>Box color<a class="anchor" aria-label="anchor" href="#box-color"><i class="fas fa-link"></i></a>
 </h3>
 <p><code>col</code> argument.</p>
-<div class="sourceCode" id="cb640"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb638"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span>,</span>
 <span>        col <span class="op">=</span> <span class="st">"lightgray"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-209-1.png" width="672" style="display: block; margin: auto;"></div>
@@ -198,7 +198,7 @@
 <h3>Border color<a class="anchor" aria-label="anchor" href="#border-color"><i class="fas fa-link"></i></a>
 </h3>
 <p><code>border</code> argument.</p>
-<div class="sourceCode" id="cb641"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb639"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span>,</span>
 <span>        col <span class="op">=</span> <span class="st">"lightgray"</span>, border <span class="op">=</span> <span class="st">"grey48"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-210-1.png" width="672" style="display: block; margin: auto;"></div>
@@ -207,7 +207,7 @@
 <h3>Box width<a class="anchor" aria-label="anchor" href="#box-width"><i class="fas fa-link"></i></a>
 </h3>
 <p><code>boxwex</code> argument.</p>
-<div class="sourceCode" id="cb642"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb640"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span>,</span>
 <span>        col <span class="op">=</span> <span class="st">"lightgray"</span>, border <span class="op">=</span> <span class="st">"grey48"</span>,</span>
 <span>        boxwex <span class="op">=</span> <span class="fl">0.4</span> <span class="op">)</span></span></code></pre></div>
@@ -217,7 +217,7 @@
 <h3>Axis<a class="anchor" aria-label="anchor" href="#axis-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>Delete axes with <code>axes = F</code> and re-draw with <code><a href="https://rdrr.io/r/graphics/box.html">box()</a></code> and <code><a href="https://rdrr.io/r/graphics/axis.html">axis()</a></code> functions.</p>
-<div class="sourceCode" id="cb643"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb641"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">Sepal.Length</span> <span class="op">~</span> <span class="va">Species</span>, data <span class="op">=</span> <span class="va">iris</span>,</span>
 <span>        col <span class="op">=</span> <span class="st">"lightgray"</span>, border <span class="op">=</span> <span class="st">"grey48"</span>,</span>
 <span>        boxwex <span class="op">=</span> <span class="fl">0.4</span>, ylab <span class="op">=</span> <span class="st">"Sepal length (cm)"</span>,</span>
@@ -286,7 +286,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2026-01-09.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2026-01-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

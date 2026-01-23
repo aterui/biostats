@@ -7,7 +7,7 @@
 <title>Chapter 18 Generalized Additive Model | BIOSTATS</title>
 <meta name="author" content="Akira Terui">
 <meta name="description" content="In generalized linear models (GLMs) and generalized linear mixed models (GLMMs), a key structural assumption is linearity on the scale of the linear predictor. That is, after applying the link...">
-<meta name="generator" content="bookdown 0.43 with bs4_book()">
+<meta name="generator" content="bookdown 0.46 with bs4_book()">
 <meta property="og:title" content="Chapter 18 Generalized Additive Model | BIOSTATS">
 <meta property="og:type" content="book">
 <meta property="og:description" content="In generalized linear models (GLMs) and generalized linear mixed models (GLMMs), a key structural assumption is linearity on the scale of the linear predictor. That is, after applying the link...">
@@ -102,7 +102,7 @@
 <li><p>Understand how smoothing functions relax these assumptions</p></li>
 <li><p>Evaluate the advantages and limitations of additive models</p></li>
 </ul>
-<div class="sourceCode" id="cb501"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb499"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="va">tidyverse</span>,</span>
 <span>               <span class="va">ggeffects</span>,</span>
 <span>               <span class="va">mgcv</span><span class="op">)</span></span></code></pre></div>
@@ -115,7 +115,7 @@
 <span class="header-section-number">18.1.1</span> Water temperature example<a class="anchor" aria-label="anchor" href="#water-temperature-example"><i class="fas fa-link"></i></a>
 </h3>
 <p>To illustrate the application of nonlinear models, we use water temperature data collected from artificial wetlands on the campus of the University of North Carolina, Greensboro. These data are publicly available and form part of <a href="https://www.sciencedirect.com/science/article/pii/S2351989425002252">Ibrahim <em>et al.</em> 2025</a>.</p>
-<div class="sourceCode" id="cb502"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb500"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">link</span> <span class="op">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/aterui/biostats/master/data_raw/data_water_temp.csv"</span></span>
 <span></span>
 <span><span class="op">(</span><span class="va">df_wt_raw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="va">link</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -135,12 +135,12 @@
 ## # ℹ 77,586 more rows</code></pre>
 <p>The dataset loaded from the provided link contains water temperature observations from wetlands and includes three main columns. The <code>date_time</code> column records the timestamp of each measurement, typically in month/day/year format. The <code>site</code> column indicates the wetland type or location (e.g., “woody” vs. “open”), serving as a factor to distinguish between different wetland types. Finally, the <code>temp</code> column provides the numeric water temperature in degrees Celsius, which can be used as the response variable in statistical models.</p>
 <p>It is always a good practice to begin by checking the class of each column, as misunderstanding data types can lead to unnecessary confusion during data analysis.</p>
-<div class="sourceCode" id="cb504"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb502"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">df_wt_raw</span>, <span class="va">class</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##          id   date_time        temp        site 
 ##   "numeric" "character"   "numeric" "character"</code></pre>
 <p>A potential issue in this dataset is that the <code>date_time</code> column is stored as a “character.” Although <code>data_time</code> contains temporal information, the character data type does not allow R to interpret it as a date. In the following code, we will convert this column to a <code>Date</code> object, which explicitly encodes temporal information and enables time-based operations.</p>
-<div class="sourceCode" id="cb506"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb504"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Start from the raw water-temperature dataset</span></span>
 <span><span class="op">(</span><span class="va">df_wt</span> <span class="op">&lt;-</span> <span class="va">df_wt_raw</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
@@ -172,7 +172,7 @@
 ## 10 19810 3/1/2022 2:15  7.22 woody 2022-03-01  2022     3
 ## # ℹ 35,277 more rows</code></pre>
 <p>In the example above, we restricted the dataset to the period from 2022-03-01 to 2022-10-31 because the woody site contains missing data outside this range. Next, we aggregate the data to daily means because the original measurements were recorded at 15-minute intervals, which is too fine-grained for our analysis.</p>
-<div class="sourceCode" id="cb508"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb506"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Aggregate raw water temperature data to daily averages</span></span>
 <span><span class="va">df_wt_daily</span> <span class="op">&lt;-</span> <span class="va">df_wt</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="co"># Group the data by date and site</span></span>
@@ -186,7 +186,7 @@
 <span>    temp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">temp</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <p>Since water temperature is seasonal, it rises from spring to summer and falls from summer to fall. These data are collected from two wetlands, and colors distinguish different types of wetlands.</p>
-<div class="sourceCode" id="cb509"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb507"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Visualize daily water temperature for each wetland site</span></span>
 <span><span class="va">df_wt_daily</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
@@ -212,7 +212,7 @@ Figure 18.1: Daily water temperature measured in two types of artificial wetland
 </p>
 </div>
 <p>What happens if we model this seasonal dataset using a linear model? We can explore this using the <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code> (or <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code>) function, and visualizing the predicted values will highlight the limitations of treating inherently seasonal data as linear.</p>
-<div class="sourceCode" id="cb510"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb508"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Add new variables and ensure proper data types</span></span>
 <span><span class="va">df_wt_daily</span> <span class="op">&lt;-</span> <span class="va">df_wt_daily</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
@@ -252,7 +252,7 @@ Figure 18.1: Daily water temperature measured in two types of artificial wetland
 ## Number of Fisher Scoring iterations: 2</code></pre>
 <p>The model suggests that water temperature increases with Julian date and that there is no significant difference between wetland types. However, this conclusion may be misleading because of the strong seasonal (nonlinear) pattern in the data. Visualizing the model-predicted values can help assess this result.</p>
 <p>The <code>ggpredict()</code> function from the <code>ggeffects</code> package provides a convenient way to generate predicted values from a model, internally using the base <code><a href="https://rdrr.io/r/stats/predict.html">predict()</a></code> function. Factor variables (e.g., <code>site</code>) are returned as <code>group</code>, while continuous variables are returned as <code>x</code>; these can then be renamed to match the original column names for clarity.</p>
-<div class="sourceCode" id="cb512"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb510"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Generate model predictions across all Julian days and wetland sites</span></span>
 <span><span class="va">df_pred</span> <span class="op">&lt;-</span> <span class="fu">ggpredict</span><span class="op">(</span><span class="va">m_glm</span>,</span>
 <span>                     terms <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
@@ -301,7 +301,7 @@ y_i = \alpha + f(x) + \varepsilon_i
 \]</span></p>
 <p>Here, <span class="math inline">\(f(\cdot)\)</span> is a smooth function estimated from the data, often using splines. In practice, this means GAMs can model seasonal or other nonlinear trends without needing to specify the exact form of the curve in advance.</p>
 <p>In R, we can use the <code>mgcv</code> package to implement this approach. We apply a smooth function <code>s()</code> to <code>j_date</code> to capture the clear seasonal pattern, while keeping <code>site</code> (wetland type) as a linear term, since we do not expect the effect of wetland type to vary nonlinearly.</p>
-<div class="sourceCode" id="cb513"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb511"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">m_gam</span> <span class="op">&lt;-</span> <span class="fu">gam</span><span class="op">(</span><span class="va">temp</span> <span class="op">~</span> <span class="va">site</span> <span class="op">+</span> <span class="fu">s</span><span class="op">(</span><span class="va">j_date</span><span class="op">)</span>,</span>
 <span>             data <span class="op">=</span> <span class="va">df_wt_daily</span>,</span>
 <span>             family <span class="op">=</span> <span class="st">"gaussian"</span><span class="op">)</span></span>
@@ -334,7 +334,7 @@ y_i = \alpha + f(x) + \varepsilon_i
 <p>The extremely low p-value (&lt;2e-16) shows that this seasonal pattern is highly significant, meaning that the smooth term explains a large portion of the variation in temperature that a linear term alone could not capture.</p>
 <p>The GCV (generalized cross-validation) score (3.35) is worth mentioning because it is used to determine how wiggly the curve should be. A lower GCV indicates a better balance between model fit and smoothness, penalizing excessive curvature to avoid overfitting.</p>
 <p>The <code>ggpredict()</code> function allows us to generate and visualize predicted values from a GAM.</p>
-<div class="sourceCode" id="cb515"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb513"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_pred_gam</span> <span class="op">&lt;-</span> <span class="fu">ggpredict</span><span class="op">(</span><span class="va">m_gam</span>,</span>
 <span>                         terms <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
 <span>                           <span class="st">"j_date [all]"</span>, </span>
@@ -516,7 +516,7 @@ Figure 18.3: Daily water temperature in two types of artificial wetlands (“woo
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2026-01-09.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2026-01-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

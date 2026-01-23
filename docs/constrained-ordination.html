@@ -7,7 +7,7 @@
 <title>Chapter 20 Constrained Ordination | BIOSTATS</title>
 <meta name="author" content="Akira Terui">
 <meta name="description" content="In unconstrained ordination, the axes are derived solely from the multivariate response data, without reference to external predictors. These methods are useful for exploring dominant patterns,...">
-<meta name="generator" content="bookdown 0.43 with bs4_book()">
+<meta name="generator" content="bookdown 0.46 with bs4_book()">
 <meta property="og:title" content="Chapter 20 Constrained Ordination | BIOSTATS">
 <meta property="og:type" content="book">
 <meta property="og:description" content="In unconstrained ordination, the axes are derived solely from the multivariate response data, without reference to external predictors. These methods are useful for exploring dominant patterns,...">
@@ -102,7 +102,7 @@
 <li><p>Interpret constrained ordination diagrams, including site scores, species scores, and environmental vectors.</p></li>
 <li><p>Quantify and test the proportion of multivariate variation explained by predictors using permutation tests.</p></li>
 </ul>
-<div class="sourceCode" id="cb538"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb536"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="va">tidyverse</span>,</span>
 <span>               <span class="va">GGally</span>,</span>
 <span>               <span class="va">vegan</span><span class="op">)</span></span></code></pre></div>
@@ -126,7 +126,7 @@
 </h4>
 <p>We will begin by the Redundancy Analysis (RDA), which is a constrained version of Principal Component Analysis (PCA). To illustrate a use case of RDA, we will use the <code>varespec</code> dataset. This dataset contains observations from 24 sampling sites (rows), with each column representing the estimated cover of one of 44 plant species (lichen, bryophytes, and vascular plants) at those sites. It comes with <code>varechme</code> data, which include 14 variables that summarize soil properties, such as nutrient concentrations and physical characteristics.</p>
 <p>Before proceeding with the analysis, we will perform some basic data cleaning to ensure the datasets are easy to work with and consistently formatted.</p>
-<div class="sourceCode" id="cb539"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb537"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load example datasets from the vegan package</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"varespec"</span><span class="op">)</span>  <span class="co"># Species abundance matrix: plant species measured at 44 sites</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"varechem"</span><span class="op">)</span>  <span class="co"># Environmental variables (soil chemistry) for the same sites</span></span>
@@ -144,7 +144,7 @@
 <span><span class="va">df_env</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">varechem</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Visualization highlights the non-normal distributional patterns that are common in biological datasets.</p>
-<div class="sourceCode" id="cb540"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb538"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Pairwise scatterplot matrix of the first 3 species columns in m_y</span></span>
 <span><span class="va">m_y</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">ggpairs</span><span class="op">(</span></span>
@@ -157,7 +157,7 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span>               <span class="co"># Use a clean theme with white background</span></span></code></pre></div>
 <div class="inline-figure"><img src="biostats_files/figure-html/varespec-pair-plot-1.png" width="672" style="display: block; margin: auto;"></div>
 <p>Performing RDA is straightforward, as the <code>vegan</code> package provides the <code>rda()</code> function for implementing this analysis. In the example below, we set <code>scale = FALSE</code> (default in <code>rda()</code>) because the response variables are already standardized as percent cover. If the variables were measured in different units (e.g., grams vs. meters) or differ grearly in their variations, <code>scale = TRUE</code> would be necessary to ensure that all variables contribute equally to the analysis.</p>
-<div class="sourceCode" id="cb541"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb539"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Run Redundancy Analysis (RDA)</span></span>
 <span><span class="co"># - Response: m_y (species abundance matrix, varespec)</span></span>
 <span><span class="co">#   Note: Hellinger transformation is recommended for raw species counts.</span></span>
@@ -187,7 +187,7 @@
 <p>The first two axes of RDA axes (constrained) captured most of the explained variation, with eigenvalues of 234.85 (RDA1), 215.02 (RDA2), and 25.83 (RDA3). The unconstrained axes, representing residual variation, have larger eigenvalues (e.g., PC1 = 763.0, PC2 = 267.5), showing that most variation in species composition is not accounted for by the measured soil variables.</p>
 <p>Overall, this indicates that while soil chemistry influences species distributions, a substantial proportion of multivariate variation is structured by other unmeasured factors or stochastic processes.</p>
 <p>However, we may be interested in the individual contribution of each predictor, particularly whether those contributions are statistically significant. To assess this, we can use the <code>anova.cca()</code> function from the <code>vegan</code> package, which performs permutation-based significance tests for constrained ordination models.</p>
-<div class="sourceCode" id="cb543"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb541"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Perform permutation test on the RDA object</span></span>
 <span><span class="co"># - obj_rda: RDA object containing species (response) and soil chemistry (predictors)</span></span>
 <span><span class="co"># - by = "margin": test the marginal effect of each predictor</span></span>
@@ -209,7 +209,7 @@
 ## Residual 20  1349.97                
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-<p>It is important to set <code>by = "margin"</code> when your goal is to assess the <em>individual</em> contribution of each predictor. An alternative option is <code>by = "terms"</code>, but this corresponds to a method analogous to Type I ANOVA, where predictors are tested sequentially in the order they appear in the model formula. As a result, the order of predictors matters: for example, specifying <code>m_y ~ n + p + k + ca</code> versus <code>m_y ~ p + n + k + ca</code> can lead to different test results, because each predictor is evaluated after accounting only for those entered before it.</p>
+<p>It is important to set <code>by = "margin"</code> when your goal is to assess the <em>individual</em> contribution of each predictor. An alternative option is <code>by = "terms"</code>, but this corresponds to a method analogous to Type I ANOVA, where predictors are tested sequentially in the order they appear in the model formula. As a result, the order of predictors matters: for example, specifying <code>m_y ~ n + p + ca</code> versus <code>m_y ~ p + n + ca</code> can lead to different test results, because each predictor is evaluated after accounting only for those entered before it.</p>
 <p>In contrast, setting <code>by = "margin"</code> invokes a procedure analogous to Type II ANOVA. Here, the effect of each predictor is tested <em>after accounting for all other predictors in the model</em>, regardless of their order in the formula. This approach is generally preferred when predictors are not strictly hierarchical and when the goal is to evaluate the unique contribution of each environmental variable to the multivariate response.</p>
 </div>
 <div id="horseshoe-effect" class="section level4 unnumbered">
@@ -217,7 +217,7 @@
 </h4>
 <p>Since RDA is based on PCA, it implicitly assumes linear relationships among the response variables. This assumption is often violated in typical biological datasets, as we see here. This example illustrates how RDA can be inappropriate for many biological response data, which are frequently non-normal and non-linearly related. RDA tends to perform better with variables that are approximately normally distributed and linearly related, such as physical measurements (e.g., temperature, water depth) or certain biological traits (e.g., body size).</p>
 <p>When applied to non-linear data, visualization of the RDA axes can reveal artifacts such as the horseshoe effect, a mathematical distortion that arises when non-linear relationships are inappropriately treated as linear.</p>
-<div class="sourceCode" id="cb545"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb543"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Extract site (sample) scores from the RDA object</span></span>
 <span><span class="co"># - display = "sites": returns the coordinates of sampling sites in RDA space</span></span>
 <span><span class="co"># - scaling = 2: correlation scaling, which emphasizes relationships between sites</span></span>
@@ -264,7 +264,7 @@
 Figure 20.1: RDA ordination plot of sites based on species composition. Each point represents a site, positioned by its RDA scores (RDA1 and RDA2), with the color gradient indicating soil nitrogen (n) concentration, illustrating how environmental variation is associated with multivariate community patterns.
 </p>
 </div>
-<div class="sourceCode" id="cb546"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb544"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># for non-ggplot, you can use</span></span>
 <span><span class="co"># plot(obj_rda)</span></span></code></pre></div>
 <p>The plot clearly shows a unimodal pattern (“horseshoe”) along the RDA1 axis, which does not reflect a true biological pattern in the data. When such a pattern appears, it indicates that RDA—or any ordination method that assumes linear relationships—may be inappropriate; any statistical inference drawn from the results could be strongly biased.</p>
@@ -277,7 +277,7 @@ Figure 20.1: RDA ordination plot of sites based on species composition. Each poi
 <p>While RDA provides an important extension of PCA to include environmental predictors, it also has limitations, particularly when species responses are non-linear or data are non-normal. To address this, we will explore distance-based RDA (dbRDA) as a more flexible alternative for constrained ordination.</p>
 <p>Although dbRDA is not as flexible as NMDS, it allows the use of a distance or dissimilarity matrix as the response input instead of the raw data, greatly expanding its applicability to biological datasets with non-linear relationships.</p>
 <p>The implementation requires only minimal changes. We can still use <code>m_y</code> from the previous example, but instead of <code>rda()</code>, we apply the <code>dbrda()</code> function with <code>distance = "bray"</code>. This internally converts the raw community matrix into a Bray-Curtis dissimilarity matrix, allowing distance-based constrained ordination.</p>
-<div class="sourceCode" id="cb547"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb545"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Perform distance-based Redundancy Analysis (dbRDA)</span></span>
 <span><span class="co"># - Response: m_y (species abundance matrix)</span></span>
 <span><span class="co"># - Predictors: n, p, ca (environmental variables: nitrogen, phosphorus, potassium, calcium)</span></span>
@@ -309,7 +309,7 @@ Figure 20.1: RDA ordination plot of sites based on species composition. Each poi
 <p>The eigenvalues for the constrained axes (dbRDA1 – dbRDA4) indicate how much of the explained variation each axis captures, while the unconstrained axes (MDS1–MDS15) summarize the residual variation in distance space.</p>
 <p>Although the output resembles RDA, an important distinction is that dbRDA operates on a distance matrix, rather than raw biological data (in this case, percent cover), allowing it to accommodate non-linear and non-Euclidean relationships. In this way, dbRDA extends RDA to more complex biological datasets, providing a flexible framework for constrained ordination when linear assumptions are not met.</p>
 <p>Re-running the permutation test produces a contrasting result for soil nitrogen, which is now neither statistically significant nor marginally significant. This highlights the importance of carefully assessing the properties of your data before applying linear ordination methods, as assumptions violations can strongly affect statistical inference.</p>
-<div class="sourceCode" id="cb549"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb547"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Perform a permutation test on the dbRDA object</span></span>
 <span><span class="co"># - obj_db: the dbRDA (dbrda) object containing species distances and predictors</span></span>
 <span><span class="co"># - by = "margin": tests the **marginal effect** of each predictor, i.e., the unique contribution</span></span>
@@ -331,7 +331,7 @@ Figure 20.1: RDA ordination plot of sites based on species composition. Each poi
 ## ca        1   0.2909 1.6501  0.130
 ## Residual 20   3.5259</code></pre>
 <p>We can now examine whether dbRDA has mitigated the horseshoe effect, reducing the distortions seen in linear RDA when species responses are non-linear.</p>
-<div class="sourceCode" id="cb551"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb549"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Extract site scores from the dbRDA object</span></span>
 <span><span class="va">df_db</span> <span class="op">&lt;-</span> <span class="fu">scores</span><span class="op">(</span><span class="va">obj_db</span>, </span>
 <span>                display <span class="op">=</span> <span class="st">"sites"</span>,</span>
@@ -448,7 +448,7 @@ Figure 20.2: Scatterplot of sites in dbRDA space. Each point represents a site p
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2026-01-09.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2026-01-23.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

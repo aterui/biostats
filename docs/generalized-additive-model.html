@@ -258,8 +258,8 @@ Figure 18.1: Daily water temperature measured in two types of artificial wetland
 <span>                     terms <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
 <span>                       <span class="st">"j_date [all]"</span>,  <span class="co"># Use all observed values of Julian day</span></span>
 <span>                       <span class="st">"site [all]"</span>     <span class="co"># Generate predictions for all levels of the factor 'site'</span></span>
-<span>                     <span class="op">)</span></span>
-<span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>                     <span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="co"># Rename the default columns to match the original dataset</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>site <span class="op">=</span> <span class="va">group</span>,  <span class="co"># 'group' from ggpredict() corresponds to the factor variable 'site'</span></span>
 <span>         j_date <span class="op">=</span> <span class="va">x</span>     <span class="co"># 'x' from ggpredict() corresponds to the predictor 'j_date'</span></span>
@@ -340,6 +340,7 @@ y_i = \alpha + f(x) + \varepsilon_i
 <span>                           <span class="st">"j_date [all]"</span>, </span>
 <span>                           <span class="st">"site [all]"</span><span class="op">)</span></span>
 <span>                         <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>site <span class="op">=</span> <span class="va">group</span>,</span>
 <span>         j_date <span class="op">=</span> <span class="va">x</span><span class="op">)</span></span>
 <span></span>
@@ -516,7 +517,7 @@ Figure 18.3: Daily water temperature in two types of artificial wetlands (“woo
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2026-01-23.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2026-01-29.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

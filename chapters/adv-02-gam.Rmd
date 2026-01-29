@@ -135,8 +135,8 @@ df_pred <- ggpredict(m_glm,
                      terms = c(
                        "j_date [all]",  # Use all observed values of Julian day
                        "site [all]"     # Generate predictions for all levels of the factor 'site'
-                     )
-) %>% 
+                     )) %>% 
+  as_tibble() %>% 
   # Rename the default columns to match the original dataset
   rename(site = group,  # 'group' from ggpredict() corresponds to the factor variable 'site'
          j_date = x     # 'x' from ggpredict() corresponds to the predictor 'j_date'
@@ -200,6 +200,7 @@ df_pred_gam <- ggpredict(m_gam,
                            "j_date [all]", 
                            "site [all]")
                          ) %>% 
+  as_tibble() %>% 
   rename(site = group,
          j_date = x)
 

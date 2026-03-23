@@ -1,8 +1,5 @@
 
-# setup -------------------------------------------------------------------
-
 source(here::here("code/library.R"))
-
 
 # lake body size data -----------------------------------------------------
 
@@ -340,3 +337,87 @@ df_y <- tibble(anormaly = y,
                year = 1925 + seq_len(length(y)))
 
 write_csv(df_y, file = "data_raw/data_ts_anomaly.csv")
+
+# exam for biostats II BIO 709 --------------------------------------------
+
+## GLMM 1
+set.seed(123)
+
+lake <- rep(letters[1:10], each = 10)
+n <- length(lake)
+
+g1 <- rnorm(length(unique(lake)), 10, 2.5)
+g2 <- runif(length(unique(lake)), 1, 10)
+
+cond <- runif(n, min = 1, max = 20)
+substrate <- runif(n, 0, 7)
+
+prod <- rnorm(n, 
+              mean = g2[as.numeric(factor(lake))] + 0.5 * cond, 
+              sd = 1)
+
+mu <- g1[as.numeric(factor(lake))] + 0.2 * prod
+hb <- rnorm(n, mean = mu)
+
+lambda <- exp(g1[as.numeric(factor(lake))] * 0.05 + 0.1 * prod)
+s <- rpois(n, lambda = lambda)
+
+df_s <- tibble(s = s,
+               hb = hb,
+               prod = prod,
+               substrate = substrate,
+               cond = cond,
+               lake = lake)
+
+ggplot(df_s) +
+  geom_point(aes(y = s,
+                 x = prod,
+                 color = lake)) +
+  facet_wrap(facets = ~lake)
+
+library(glmmTMB)
+m <- glmmTMB(log(hb) ~ prod + substrate + (1 | lake),
+             data = df_s,
+             family = gaussian)
+
+summary(m)
+saveRDS(df_s, "data_raw/data_lake_invert.rds")
+
+## psem
+library(piecewiseSEM)
+m1 <- glmmTMB(hb ~ prod + substrate + (1 | lake),
+              data = df_s)
+
+m2 <- glmmTMB(prod ~ cond + (1 | lake),
+              data = df_s)
+
+m3 <- glmmTMB(s ~ prod + (1 | lake),
+              data = df_s,
+              family = poisson)
+
+fit <- psem(m1, m2, m3)
+
+## GAM
+set.seed(123)
+library(mgcv)
+
+p <- 0.995^(0:364)
+y1 <- (2 + sin(seq(-0.5*pi, 7/2*pi, length = 365)) + rnorm(365, sd = 0.3)) * p
+y2 <- (2.2 + sin(seq(-0.5*pi, 6/2*pi, length = 365)) + rnorm(365, sd = 0.4)) * p
+
+df_emg <- tibble(t = 1:365, s1 = y1, s2 = y2) %>% 
+  pivot_longer(cols = c(s1, s2),
+               names_to = "site",
+               values_to = "emergence") %>% 
+  mutate(site = factor(site))
+
+df_emg %>% 
+  ggplot(aes(x = t,
+             y = emergence,
+             color = site)) +
+  geom_point()
+
+m <- gam(emergence ~ s(t, by = site) + site, 
+         data = df_emg)
+
+saveRDS(df_s, "data_raw/data_insect_emergence.rds")

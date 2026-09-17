@@ -25,7 +25,7 @@ pacman::p_load(tidyverse,
 Let’s explore a simple time series dataset, showing air-quality anomalies measured over 100 years.
 
 ```{r}
-url <- "https://raw.githubusercontent.com/aterui/biostats/master/data_raw/data_ts_anormaly.csv"
+url <- "https://raw.githubusercontent.com/aterui/biostats/master/data_src/data_ts_anormaly.csv"
 (df_ts <- read_csv(url))
 ```
 
@@ -483,7 +483,7 @@ list_mendota <- download_daymet(
 ```
 
 ```{r, include=FALSE}
-list_mendota <- readRDS("data_raw/data_mendota_temp.rds")
+list_mendota <- readRDS("data_src/data_mendota_temp.rds")
 ```
 
 Because the original data format is difficult to work with, we will transform it into a structure compatible with the tidyverse framework. The following code calculates the average daily-minimum temperature.
@@ -620,7 +620,7 @@ list_mack <- download_daymet(
 ```
 
 ```{r, include=FALSE}
-list_mack <- readRDS("data_raw/data_prec_mack.rds")
+list_mack <- readRDS("data_src/data_prec_mack.rds")
 ```
 
 As in the ARIMAX example, we can summarize summer temperature data using date as the reference.

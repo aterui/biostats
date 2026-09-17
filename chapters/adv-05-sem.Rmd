@@ -26,7 +26,7 @@ Let's use the following data set, which involves plant, herbivore, and predator 
 
 ```{r}
 # Specify the URL of the raw CSV file on GitHub
-url <- "https://raw.githubusercontent.com/aterui/biostats/master/data_raw/data_foodweb.csv"
+url <- "https://raw.githubusercontent.com/aterui/biostats/master/data_src/data_foodweb.csv"
 
 # Read the CSV file into a tibble
 (df_fw <- read_csv(url))
@@ -255,7 +255,7 @@ Latent variables are “unobserved” variables that exist only within the stati
 To explore this, we will use the following dataset.
 
 ```{r}
-url <- "https://raw.githubusercontent.com/aterui/biostats/master/data_raw/data_herbivory.csv"
+url <- "https://raw.githubusercontent.com/aterui/biostats/master/data_src/data_herbivory.csv"
 
 (df_herbv <- read_csv(url))
 ```

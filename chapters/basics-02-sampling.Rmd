@@ -1,6 +1,6 @@
 ```{r, include=FALSE}
 source(here::here("code/library.R"))
-df_h0 <- read_csv(here::here("data_raw/data_plant_height.csv"))
+df_h0 <- read_csv(here::here("data_src/data_plant_height.csv"))
 ```
 
 # Sampling
@@ -77,18 +77,18 @@ Provided that certain assumptions are met, the *sample mean* is the unbiased poi
 
 Let's explore this concept further through simple simulations. Suppose we have data on a thousand plant individuals, although this scenario may be unrealistic in practice. However, by conducting these simulations, we can examine how different sample means and variances can deviate from the true values.
 
-Download the data [here](https://github.com/aterui/biostats/blob/master/data_raw/data_plant_height.csv) containing height measurements of thousand individuals, and place this file under `data_raw/` in your project directory. You can load this `csv` file in R as follows:
+Download the data [here](https://github.com/aterui/biostats/blob/master/data_src/data_plant_height.csv) containing height measurements of thousand individuals, and place this file under `data_src/` in your project directory. You can load this `csv` file in R as follows:
 
 ```{r, eval=F}
 # load csv data on R
-df_h0 <- read_csv("data_raw/data_plant_height.csv")
+df_h0 <- read_csv("data_src/data_plant_height.csv")
 
 # show the first 10 rows
 print(df_h0)
 ```
 
 ```{r load-csv, echo=F}
-df_h0 <- read_csv(here::here("data_raw/data_plant_height.csv"))
+df_h0 <- read_csv(here::here("data_src/data_plant_height.csv"))
 
 # show the first 10 rows
 print(df_h0)

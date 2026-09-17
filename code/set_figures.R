@@ -27,7 +27,7 @@ df_plot <- expand.grid(x0 = seq(0, 14, length = 15),
          y1 = y0 + 1)
 
 ## plot
-df_garden_sub <- readRDS(here::here("data_raw/data_garden_sub.rds"))
+df_garden_sub <- readRDS(here::here("data_src/data_garden_sub.rds"))
 
 g_garden <- df_garden_sub %>% 
   filter(plot %in% plot30) %>% 

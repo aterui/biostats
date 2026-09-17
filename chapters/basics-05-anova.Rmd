@@ -1,6 +1,6 @@
 ```{r, include=FALSE}
 source(here::here("code/library.R"))
-df_anova <- read_csv(here::here("data_raw/data_fish_length_anova.csv"))
+df_anova <- read_csv(here::here("data_src/data_fish_length_anova.csv"))
 ```
 
 # Multiple-Group Comparison
@@ -20,10 +20,10 @@ If appropriate, post-hoc tests can be conducted to identify specific differing g
 
 The first step is to determine what aspect to examine. In the case of a t-test, we focus on the difference in sample means between groups. One might initially consider conducting t-tests for all possible combinations. However, this approach leads to a problem known as the [multiple comparisons problem](https://en.wikipedia.org/wiki/Multiple_comparisons_problem#:~:text=In%20statistics%2C%20the%20multiple%20comparisons,based%20on%20the%20observed%20values.). Hence, this is not a viable option. Therefore, we need to explore the data from a different perspective.
 
-To facilitate learning, let's once again utilize the lake fish data (download [here](https://github.com/aterui/biostats/blob/master/data_raw/data_fish_length_anova.csv)), but this time we have three lakes in our analysis:
+To facilitate learning, let's once again utilize the lake fish data (download [here](https://github.com/aterui/biostats/blob/master/data_src/data_fish_length_anova.csv)), but this time we have three lakes in our analysis:
 
 ```{r, eval = F}
-df_anova <- read_csv("data_raw/data_fish_length_anova.csv")
+df_anova <- read_csv("data_src/data_fish_length_anova.csv")
 distinct(df_anova, lake)
 ```
 

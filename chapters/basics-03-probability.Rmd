@@ -1,7 +1,7 @@
 ```{r, include=FALSE}
 source(here::here("code/library.R"))
-df_h0 <- read_csv(here::here("data_raw/data_plant_height.csv"))
-df_count <- read_csv(here::here("data_raw/data_garden_count.csv"))
+df_h0 <- read_csv(here::here("data_src/data_plant_height.csv"))
+df_count <- read_csv(here::here("data_src/data_garden_count.csv"))
 ```
 
 # Probabilistic View
@@ -18,7 +18,7 @@ Let me use the plant height example in Chapter \@ref(sampling):
 
 ```{r, eval=F}
 # load csv data on R
-df_h0 <- read_csv("data_raw/data_plant_height.csv")
+df_h0 <- read_csv("data_src/data_plant_height.csv")
 ```
 
 While Chapter \@ref(sampling) primarily focused on exploring mean and variance, let's broaden our perspective to gain a comprehensive understanding of the entire distribution of height.
@@ -143,10 +143,10 @@ Let's shift our perspective and examine the density of plants in the garden. For
 knitr::include_graphics(here::here("image/figure_garden.jpg"))
 ```
 
-Download the data [here](https://github.com/aterui/biostats/blob/master/data_raw/data_garden_count.csv) and load it onto R:
+Download the data [here](https://github.com/aterui/biostats/blob/master/data_src/data_garden_count.csv) and load it onto R:
 
 ```{r, eval=F}
-df_count <- read_csv("data_raw/data_garden_count.csv")
+df_count <- read_csv("data_src/data_garden_count.csv")
 print(df_count)
 ```
 

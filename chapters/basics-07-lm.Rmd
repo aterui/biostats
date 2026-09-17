@@ -1,7 +1,7 @@
 ```{r, include=FALSE}
 source(here::here("code/library.R"))
-df_fl <- readr::read_csv(here::here("data_raw/data_fish_length.csv"))
-df_anova <- read_csv(here::here("data_raw/data_fish_length_anova.csv"))
+df_fl <- readr::read_csv(here::here("data_src/data_fish_length.csv"))
+df_anova <- read_csv(here::here("data_src/data_fish_length_anova.csv"))
 ```
 
 # Linear Model
@@ -80,7 +80,7 @@ Let me confirm this using the dataset in Chapter \@ref(two-group-comparison) (fi
 
 ```{r, eval=F}
 library(tidyverse)
-df_fl <- read_csv("data_raw/data_fish_length.csv")
+df_fl <- read_csv("data_src/data_fish_length.csv")
 print(df_fl)
 ```
 
@@ -151,7 +151,7 @@ $$
 Therefore, the group `a` serves as the reference, and the $\beta$s represent the deviations from the reference group. Now, let me attempt the ANOVA dataset provided in Chapter \@ref(multiple-group-comparison):
 
 ```{r, eval=F}
-df_anova <- read_csv("data_raw/data_fish_length_anova.csv")
+df_anova <- read_csv("data_src/data_fish_length_anova.csv")
 print(df_anova)
 ```
 

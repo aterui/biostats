@@ -12,7 +12,7 @@ df_fish_length <- tibble(lake = rep(c("a", "b"), each = 50),
                          unit = "cm")
 
 write_csv(df_fish_length,
-          "data_raw/data_fish_length.csv")
+          "data_src/data_fish_length.csv")
 
 
 # lake body size data II --------------------------------------------------
@@ -27,7 +27,7 @@ df_fish_anova <- tibble(lake = rep(c("a", "b", "c"), each = 50),
                         unit = "cm")
 
 write_csv(df_fish_anova,
-          "data_raw/data_fish_length_anova.csv")
+          "data_src/data_fish_length_anova.csv")
 
 
 # lm example --------------------------------------------------------------
@@ -44,7 +44,7 @@ df_algae <- tibble(biomass = round(b, 2),
                    conductivity = round(cond, 2),
                    unit_cond = "ms")
 
-write_csv(df_algae, "data_raw/data_algae.csv")
+write_csv(df_algae, "data_src/data_algae.csv")
 
 # garden plant density ----------------------------------------------------
 
@@ -93,9 +93,9 @@ df_garden_count <- df_garden_sub %>%
          nitrate = (log(count + 1) - mean(count + 1)) / rnorm(nrow(.), 0.2, 0.05) + 40,
          nitrate = round(nitrate, 1))
 
-saveRDS(df_garden, "data_raw/data_garden.rds")
-saveRDS(df_garden_sub, "data_raw/data_garden_sub.rds")
-write_csv(df_garden_count, "data_raw/data_garden_count.csv")
+saveRDS(df_garden, "data_src/data_garden.rds")
+saveRDS(df_garden_sub, "data_src/data_garden_sub.rds")
+write_csv(df_garden_count, "data_src/data_garden_count.csv")
 
 
 # fertilization rate ------------------------------------------------------
@@ -119,7 +119,7 @@ df_fert %>%
              y = n_fertilized)) +
   geom_point()
 
-write_csv(df_fert, "data_raw/data_mussel.csv")
+write_csv(df_fert, "data_src/data_mussel.csv")
 
 
 # offset ------------------------------------------------------------------
@@ -129,7 +129,7 @@ df_n <- tibble(area = runif(100, 5, 100),
                nitrate = runif(100, 0, 1) + 3/area) %>% 
   mutate(count = rpois(nrow(.), lambda = exp(-0.1 + 0.5 * nitrate) * area))
 
-write_csv(df_n, "data_raw/data_offset.csv")
+write_csv(df_n, "data_src/data_offset.csv")
 
 # negative binomial -------------------------------------------------------
 
@@ -138,7 +138,7 @@ df_tadpole <- tibble(aqveg = runif(100, 0, 1),
                      permanence = round(runif(100, 10, 50)),
                      tadpole = rnbinom(100, mu = exp(-0.5 + 0.05 * permanence), size = 0.5))
 
-write_csv(df_tadpole, "data_raw/data_tadpole.csv")
+write_csv(df_tadpole, "data_src/data_tadpole.csv")
 
 
 # messy data --------------------------------------------------------------
@@ -183,7 +183,7 @@ messy <- data.frame(
   stringsAsFactors = FALSE
 )
 
-write_csv(messy, "data_raw/data_messy.csv")
+write_csv(messy, "data_src/data_messy.csv")
 
 
 # gam example -------------------------------------------------------------
@@ -191,9 +191,9 @@ write_csv(messy, "data_raw/data_messy.csv")
 # URLs pointing to the raw CSV files hosted on GitHub.
 # These use the "raw.githubusercontent.com" domain so that R
 # downloads the actual CSV content rather than an HTML webpage.
-link_woody <- "https://raw.githubusercontent.com/aterui/public-proj_restore-aqua-complex/master/data_raw/data_src_w_temp/wetland_site1_woody_230321.csv"
+link_woody <- "https://raw.githubusercontent.com/aterui/public-proj_restore-aqua-complex/master/data_src/data_src_w_temp/wetland_site1_woody_230321.csv"
 
-link_open <- "https://raw.githubusercontent.com/aterui/public-proj_restore-aqua-complex/master/data_raw/data_src_w_temp/wetland_site2_open_230321.csv"
+link_open <- "https://raw.githubusercontent.com/aterui/public-proj_restore-aqua-complex/master/data_src/data_src_w_temp/wetland_site2_open_230321.csv"
 
 # Read the woody wetland dataset directly from GitHub.
 # A new column, `site`, is added to label observations
@@ -219,7 +219,7 @@ df_wt_raw <- bind_rows(df_wt_woody_raw,
                        df_wt_open_raw)
 
 write_csv(df_wt_raw,
-          "data_raw/data_water_temp.csv")
+          "data_src/data_water_temp.csv")
 
 
 # path analysis example ---------------------------------------------------
@@ -255,7 +255,7 @@ m <- '
 (fit <- sem(model = m, data = df_fw))
 
 write_csv(df_fw,
-          file = "data_raw/data_foodweb.csv")
+          file = "data_src/data_foodweb.csv")
 
 
 
@@ -317,7 +317,7 @@ fit <- sem(m,
 summary(fit, standardize = TRUE)
 
 write_csv(df_herbv,
-          file = "data_raw/data_herbivory.csv")
+          file = "data_src/data_herbivory.csv")
 
 
 
@@ -336,7 +336,7 @@ for (t in 1:(length(y) - 1)) {
 df_y <- tibble(anormaly = y,
                year = 1925 + seq_len(length(y)))
 
-write_csv(df_y, file = "data_raw/data_ts_anomaly.csv")
+write_csv(df_y, file = "data_src/data_ts_anomaly.csv")
 
 # exam for biostats II BIO 709 --------------------------------------------
 
@@ -408,7 +408,7 @@ m_glmm <- glmmTMB(
 summary(m_glmm)
 
 ### Save simulated dataset
-saveRDS(df_s, "data_raw/data_lake_invert.rds")
+saveRDS(df_s, "data_src/data_lake_invert.rds")
 
 
 ## psem
@@ -487,4 +487,4 @@ m_gam <- gam(
 summary(m_gam)
 
 ### Save dataset
-saveRDS(df_emg, "data_raw/data_insect_emergence.rds")
+saveRDS(df_emg, "data_src/data_insect_emergence.rds")

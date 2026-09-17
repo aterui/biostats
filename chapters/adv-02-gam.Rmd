@@ -27,7 +27,7 @@ pacman::p_load(tidyverse,
 To illustrate the application of nonlinear models, we use water temperature data collected from artificial wetlands on the campus of the University of North Carolina, Greensboro. These data are publicly available and form part of [Ibrahim *et al.* 2025](https://www.sciencedirect.com/science/article/pii/S2351989425002252).
 
 ```{r gam-water-temp-data}
-link <- "https://raw.githubusercontent.com/aterui/biostats/master/data_raw/data_water_temp.csv"
+link <- "https://raw.githubusercontent.com/aterui/biostats/master/data_src/data_water_temp.csv"
 
 (df_wt_raw <- read_csv(link))
 ```

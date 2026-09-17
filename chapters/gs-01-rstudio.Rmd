@@ -153,7 +153,7 @@ The internal structure of an R Project is crucial for effective navigation and e
 |----------------------|--------------------------------------------------|
 | `README.md` | Markdown file explaining contents in the `R Project`. Can be derived from `README.Rmd`.                                                                                       |
 | `code/`     | Sub-directory for R scripts (`.R`).                                                                                                                                           |
-| `data_raw/` | Sub-directory for raw data before data manipulation (`.csv` or other formats). Files in this sub-directory MUST NOT be modified unless there are changes to raw data entries. |
+| `data_src/` | Sub-directory for raw data before data manipulation (`.csv` or other formats). Files in this sub-directory MUST NOT be modified unless there are changes to raw data entries. |
 | `data_fmt/` | Sub-directory for formatted data (`.csv`, `.rds`, or other formats).                                                                                                          |
 | `output/`   | Sub-directory for result outputs (`.csv`, `.rds`, or other formats). This may include statistical estimates from linear regression models etc.                                |
 | `rmd/`      | (Optional) Sub-directory for Rmarkdown files (`.Rmd`). Rmarkdown allows seamless integration of R scripts and text.                                                           |

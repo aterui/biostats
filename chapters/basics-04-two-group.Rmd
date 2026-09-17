@@ -1,6 +1,6 @@
 ```{r, include=FALSE}
 source(here::here("code/library.R"))
-df_fl <- readr::read_csv(here::here("data_raw/data_fish_length.csv"))
+df_fl <- readr::read_csv(here::here("data_src/data_fish_length.csv"))
 ```
 
 # Two-Group Comparison
@@ -15,11 +15,11 @@ Data consists of "samples" extracted from the population of interest, but it's i
 
 ## Explore Data Structure
 
-Suppose that we study fish populations of the same species in two lakes (Lake `a` and `b`). These lakes are in stark contrast of productivity (Lake `b` looks more productive), and our interest is the difference in *mean* body size between the two lakes. We obtained $50$ data points of fish length from each lake (download [here](https://github.com/aterui/biostats/blob/master/data_raw/data_fish_length.csv)). Save under `data_raw/` and use `read_csv()` to read data:
+Suppose that we study fish populations of the same species in two lakes (Lake `a` and `b`). These lakes are in stark contrast of productivity (Lake `b` looks more productive), and our interest is the difference in *mean* body size between the two lakes. We obtained $50$ data points of fish length from each lake (download [here](https://github.com/aterui/biostats/blob/master/data_src/data_fish_length.csv)). Save under `data_src/` and use `read_csv()` to read data:
 
 ```{r read-fish-length, eval = F}
 library(tidyverse) # call add-in packages everytime you open new R session
-df_fl <- read_csv("data_raw/data_fish_length.csv")
+df_fl <- read_csv("data_src/data_fish_length.csv")
 print(df_fl)
 ```
 

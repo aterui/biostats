@@ -1,7 +1,7 @@
 ```{r, include=FALSE}
 source(here::here("code/library.R"))
-df_count <- read_csv(here::here("data_raw/data_garden_count.csv"))
-df_mussel <- read_csv(here::here("data_raw/data_mussel.csv"))
+df_count <- read_csv(here::here("data_src/data_garden_count.csv"))
+df_mussel <- read_csv(here::here("data_src/data_mussel.csv"))
 ```
 
 # Generalized Linear Model
@@ -22,7 +22,7 @@ knitr::include_graphics(here::here("image/figure_garden.jpg"))
 ```
 
 ```{r, eval=F}
-df_count <- read_csv("data_raw/data_garden_count.csv")
+df_count <- read_csv("data_src/data_garden_count.csv")
 print(df_count)
 ```
 
@@ -170,7 +170,7 @@ Clearly, the Poisson model does a better job.
 
 ### Mussel Egg Fertilization
 
-There is another type of data for which a Normal distribution is not suitable - proportional data. Let's consider an example dataset where an investigation was conducted on the number of fertilized eggs out of 30 eggs examined for 100 female freshwater mussels. You can download the dataset [here](https://github.com/aterui/biostats/blob/master/data_raw/data_mussel.csv).
+There is another type of data for which a Normal distribution is not suitable - proportional data. Let's consider an example dataset where an investigation was conducted on the number of fertilized eggs out of 30 eggs examined for 100 female freshwater mussels. You can download the dataset [here](https://github.com/aterui/biostats/blob/master/data_src/data_mussel.csv).
 
 ```{r, echo=F}
 knitr::include_graphics(here::here("image/image_mussel.jpg"))
@@ -179,7 +179,7 @@ knitr::include_graphics(here::here("image/image_mussel.jpg"))
 Male freshwater mussels release sperm into the water, which is then drawn into female mussels downstream. Considering the nature of the fertilization process, female mussels are expected to have a higher probability of fertilization when they are surrounded by a greater number of males. To explore this relationship, let's load the data into R and visualize it.
 
 ```{r, eval=FALSE}
-df_mussel <- read_csv("data_raw/data_mussel.csv")
+df_mussel <- read_csv("data_src/data_mussel.csv")
 print(df_mussel)
 ```
 
@@ -428,7 +428,7 @@ Here, $\alpha'$ and $\beta'$ represent the intercept and slope after standardizi
 1.  The Poisson distribution (and other distributions used for modeling count data) assumes that all observations are collected under comparable sampling efforts. In practice, however, survey data often differ in effort — for example, some counts may come from surveys conducted over longer search times or larger areas. To see this issue, copy and paste the following code:
 
     ```{r}
-    url <- "https://raw.githubusercontent.com/aterui/biostats/master/data_raw/data_offset.csv"
+    url <- "https://raw.githubusercontent.com/aterui/biostats/master/data_src/data_offset.csv"
     df_offset <- read_csv(url)
     ```
 
@@ -460,7 +460,7 @@ Here, $\alpha'$ and $\beta'$ represent the intercept and slope after standardizi
 Copy and paste the following code:
 
 ```{r}
-url <- "https://raw.githubusercontent.com/aterui/biostats/master/data_raw/data_tadpole.csv"
+url <- "https://raw.githubusercontent.com/aterui/biostats/master/data_src/data_tadpole.csv"
 df_tadpole <- read_csv(url)
 ```
 

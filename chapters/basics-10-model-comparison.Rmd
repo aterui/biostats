@@ -1,6 +1,6 @@
 ```{r, include=FALSE}
 source(here::here("code/library.R"))
-df_anova <- read_csv(here::here("data_raw/data_fish_length_anova.csv"))
+df_anova <- read_csv(here::here("data_src/data_fish_length_anova.csv"))
 ```
 
 # Model Comparison

@@ -1,6 +1,6 @@
 ```{r, include=FALSE}
 source(here::here("code/library.R"))
-df_algae <- read_csv(here::here("data_raw/data_algae.csv"))
+df_algae <- read_csv(here::here("data_src/data_algae.csv"))
 ```
 
 # Regression
@@ -11,11 +11,11 @@ Our previous examples focused on cases that involved a distinct group structure.
 
 ## Explore Data Structure
 
-For this exercise, we will use algae biomass data from streams. Download the data [here](https://github.com/aterui/biostats/blob/master/data_raw/data_algae.csv) and locate it in `data_raw/`.
+For this exercise, we will use algae biomass data from streams. Download the data [here](https://github.com/aterui/biostats/blob/master/data_src/data_algae.csv) and locate it in `data_src/`.
 
 ```{r, eval=F}
 library(tidyverse)
-df_algae <- read_csv("data_raw/data_algae.csv")
+df_algae <- read_csv("data_src/data_algae.csv")
 print(df_algae)
 ```
 

@@ -7,7 +7,7 @@
 <title>Chapter 19 Unconstrained Ordination | BIOSTATS</title>
 <meta name="author" content="Akira Terui">
 <meta name="description" content="So far, our modeling exercises have focused on univariate analyses, where we model a single response variable using one or more predictors. In practice, biological data are often multivariate,...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
+<meta name="generator" content="bookdown 0.48 with bs4_book()">
 <meta property="og:title" content="Chapter 19 Unconstrained Ordination | BIOSTATS">
 <meta property="og:type" content="book">
 <meta property="og:description" content="So far, our modeling exercises have focused on univariate analyses, where we model a single response variable using one or more predictors. In practice, biological data are often multivariate,...">
@@ -16,10 +16,10 @@
 <meta name="twitter:description" content="So far, our modeling exercises have focused on univariate analyses, where we model a single response variable using one or more predictors. In practice, biological data are often multivariate,...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/viz-1.8.2/viz.js"></script><link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet">
-<script src="libs/grViz-binding-1.0.11/grViz.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QZSNHVQQNV"></script><script>
+<script src="libs/grViz-binding-1.0.12/grViz.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QZSNHVQQNV"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
@@ -213,7 +213,7 @@ Figure 19.2: Scatter plot of scaled petal length and width for three Iris specie
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Species"</span>,</span>
 <span>       y <span class="op">=</span> <span class="st">"Petal shape (PC1)"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="biostats_files/figure-html/pc-plot-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="biostats_files/figure-html/pc-plot-1.png" alt="" width="672" style="display: block; margin: auto;"></div>
 </div>
 </div>
 <div id="nmds" class="section level3" number="19.1.2">
@@ -410,13 +410,12 @@ Figure 19.4: NMDS ordination of plant communities in the Dutch dune meadows data
 <span>  data <span class="op">=</span> <span class="va">df_nmds</span>  <span class="co"># Data frame containing the grouping variable 'use' aligned with the distance matrix</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Permutation test for adonis under reduced model
-## Terms added sequentially (first to last)
 ## Permutation: free
 ## Number of permutations: 999
 ## 
 ## adonis2(formula = m_bray ~ use, data = df_nmds)
 ##          Df SumOfSqs      R2      F Pr(&gt;F)
-## use       2   0.5532 0.12867 1.2552  0.252
+## Model     2   0.5532 0.12867 1.2552  0.252
 ## Residual 17   3.7459 0.87133              
 ## Total    19   4.2990 1.00000</code></pre>
 <p>We used PERMANOVA to test whether plant communities differ among the three land-use intensity categories (<code>use</code>). This method looks at the overall differences in species composition between groups and compares them to differences within groups. In our analysis, land-use intensity explains about 13% of the variation in plant communities, while the remaining 87% comes from other factors or natural variation (column <code>R2</code>).</p>
@@ -529,7 +528,7 @@ Figure 19.4: NMDS ordination of plant communities in the Dutch dune meadows data
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2026-01-29.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2026-09-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

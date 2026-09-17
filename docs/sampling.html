@@ -7,7 +7,7 @@
 <title>Chapter 8 Sampling | BIOSTATS</title>
 <meta name="author" content="Akira Terui">
 <meta name="description" content="“Why do I need statistics in the first place?” This was the initial question that arose when I entered the field of ecology. Initially, I assumed it would be a straightforward query with an...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
+<meta name="generator" content="bookdown 0.48 with bs4_book()">
 <meta property="og:title" content="Chapter 8 Sampling | BIOSTATS">
 <meta property="og:type" content="book">
 <meta property="og:description" content="“Why do I need statistics in the first place?” This was the initial question that arose when I entered the field of ecology. Initially, I assumed it would be a straightforward query with an...">
@@ -16,10 +16,10 @@
 <meta name="twitter:description" content="“Why do I need statistics in the first place?” This was the initial question that arose when I entered the field of ecology. Initially, I assumed it would be a straightforward query with an...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/viz-1.8.2/viz.js"></script><link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet">
-<script src="libs/grViz-binding-1.0.11/grViz.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QZSNHVQQNV"></script><script>
+<script src="libs/grViz-binding-1.0.12/grViz.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QZSNHVQQNV"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
@@ -192,10 +192,10 @@
 <p>The unknowns we are interested in, which the population mean and variance in this example, are referred to as “<strong>parameters.</strong>” These parameters <u><em>cannot be directly measured</em></u> but can be <u><em>estimated</em></u> from samples through statistical inference.</p>
 <p>Provided that certain assumptions are met, the <em>sample mean</em> is the unbiased point estimate of the <em>population</em> <em>mean</em>. The <strong>“<em>unbiased</em>”</strong> means that the sample means – if we repeat the sampling process – are centered around the population mean. In the meantime, the sample variance – if we use the formula in Chapter <a href="descriptive-statistics.html#descriptive-statistics">7</a> – is “<strong><em>biased</em></strong>.” It tends to be smaller than the population variance.</p>
 <p>Let’s explore this concept further through simple simulations. Suppose we have data on a thousand plant individuals, although this scenario may be unrealistic in practice. However, by conducting these simulations, we can examine how different sample means and variances can deviate from the true values.</p>
-<p>Download the data <a href="https://github.com/aterui/biostats/blob/master/data_raw/data_plant_height.csv">here</a> containing height measurements of thousand individuals, and place this file under <code>data_raw/</code> in your project directory. You can load this <code>csv</code> file in R as follows:</p>
+<p>Download the data <a href="https://github.com/aterui/biostats/blob/master/data_src/data_plant_height.csv">here</a> containing height measurements of thousand individuals, and place this file under <code>data_src/</code> in your project directory. You can load this <code>csv</code> file in R as follows:</p>
 <div class="sourceCode" id="cb261"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load csv data on R</span></span>
-<span><span class="va">df_h0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data_raw/data_plant_height.csv"</span><span class="op">)</span></span>
+<span><span class="va">df_h0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data_src/data_plant_height.csv"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># show the first 10 rows</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_h0</span><span class="op">)</span></span></code></pre></div>
@@ -407,7 +407,7 @@ Figure 8.2: Comparison of biased and unbiased variances.
 <span class="header-section-number">8.3</span> Laboratory<a class="anchor" aria-label="anchor" href="#laboratory-1"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
-<li><p>We used 10 plants to estimate sample means and variances. Obtain 100 sub-datasets with 50 and 100 measures each, and draw histograms of sample means and unbiased variances (use <code><a href="https://rdrr.io/r/stats/cor.html">var()</a></code>).</p></li>
+<li><p>We used 10 plants to estimate sample means and variances. Obtain 100 sub-datasets with (a) 50 individuals/measures each, and (b) 100 individual/measures each. Draw histograms of sample means and unbiased variances (use <code><a href="https://rdrr.io/r/stats/cor.html">var()</a></code>) for each data set.</p></li>
 <li>
 <p>Sample means and unbiased variances are unbiased if samples are randomly selected. What happens if samples are non-random? Suppose the investigator was unable to find plants less than 10 cm in height – the following code excludes those less than 10 cm in height:</p>
 <div class="sourceCode" id="cb279"><pre class="downlit sourceCode r">
@@ -445,7 +445,7 @@ Figure 8.2: Comparison of biased and unbiased variances.
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2026-01-29.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2026-09-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

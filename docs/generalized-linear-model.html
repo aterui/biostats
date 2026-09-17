@@ -7,7 +7,7 @@
 <title>Chapter 14 Generalized Linear Model | BIOSTATS</title>
 <meta name="author" content="Akira Terui">
 <meta name="description" content="One of the key assumptions in the Linear Model framework is Normality – that the error term follows a normal distribution (Chapter 13). However, this assumption frequently leads to situations...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
+<meta name="generator" content="bookdown 0.48 with bs4_book()">
 <meta property="og:title" content="Chapter 14 Generalized Linear Model | BIOSTATS">
 <meta property="og:type" content="book">
 <meta property="og:description" content="One of the key assumptions in the Linear Model framework is Normality – that the error term follows a normal distribution (Chapter 13). However, this assumption frequently leads to situations...">
@@ -16,10 +16,10 @@
 <meta name="twitter:description" content="One of the key assumptions in the Linear Model framework is Normality – that the error term follows a normal distribution (Chapter 13). However, this assumption frequently leads to situations...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/viz-1.8.2/viz.js"></script><link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet">
-<script src="libs/grViz-binding-1.0.11/grViz.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QZSNHVQQNV"></script><script>
+<script src="libs/grViz-binding-1.0.12/grViz.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QZSNHVQQNV"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
@@ -111,7 +111,7 @@ Figure 14.1: Garden view with sampling plots. White squares represent plots. Red
 </p>
 </div>
 <div class="sourceCode" id="cb414"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df_count</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data_raw/data_garden_count.csv"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">df_count</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data_src/data_garden_count.csv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_count</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 30 × 3
 ##     plot count nitrate
@@ -175,7 +175,7 @@ y_i &amp;\sim \text{Normal}(\mu_i, \sigma^2)\\
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_abline</a></span><span class="op">(</span>intercept <span class="op">=</span> <span class="va">alpha</span>,</span>
 <span>              slope <span class="op">=</span> <span class="va">beta</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-138-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-138-1.png" alt="" width="672" style="display: block; margin: auto;"></div>
 <p>The intersection of the predicted line with the x-axis suggests the presence of negative predicted values for plant counts. However, it is logically implausible for plant counts to be negative.</p>
 <p>This occurrence stems from the nature of the model employed.</p>
 <ol style="list-style-type: decimal">
@@ -291,11 +291,11 @@ Figure 14.2: Comparison of the predicted values between Normal (broken, black) a
 <h3>
 <span class="header-section-number">14.2.1</span> Mussel Egg Fertilization<a class="anchor" aria-label="anchor" href="#mussel-egg-fertilization"><i class="fas fa-link"></i></a>
 </h3>
-<p>There is another type of data for which a Normal distribution is not suitable - proportional data. Let’s consider an example dataset where an investigation was conducted on the number of fertilized eggs out of 30 eggs examined for 100 female freshwater mussels. You can download the dataset <a href="https://github.com/aterui/biostats/blob/master/data_raw/data_mussel.csv">here</a>.</p>
-<div class="inline-figure"><img src="image/image_mussel.JPG" width="300" style="display: block; margin: auto;"></div>
+<p>There is another type of data for which a Normal distribution is not suitable - proportional data. Let’s consider an example dataset where an investigation was conducted on the number of fertilized eggs out of 30 eggs examined for 100 female freshwater mussels. You can download the dataset <a href="https://github.com/aterui/biostats/blob/master/data_src/data_mussel.csv">here</a>.</p>
+<div class="inline-figure"><img src="image/image_mussel.JPG" alt="" width="300" style="display: block; margin: auto;"></div>
 <p>Male freshwater mussels release sperm into the water, which is then drawn into female mussels downstream. Considering the nature of the fertilization process, female mussels are expected to have a higher probability of fertilization when they are surrounded by a greater number of males. To explore this relationship, let’s load the data into R and visualize it.</p>
 <div class="sourceCode" id="cb427"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df_mussel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data_raw/data_mussel.csv"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">df_mussel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data_src/data_mussel.csv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_mussel</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 100 × 4
 ##    ind_id n_fertilized n_examined density
@@ -593,7 +593,7 @@ Figure 14.6: Tree chart on how to choose a probability distribution in GLM analy
 <li>
 <p>The Poisson distribution (and other distributions used for modeling count data) assumes that all observations are collected under comparable sampling efforts. In practice, however, survey data often differ in effort — for example, some counts may come from surveys conducted over longer search times or larger areas. To see this issue, copy and paste the following code:</p>
 <div class="sourceCode" id="cb439"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/aterui/biostats/master/data_raw/data_offset.csv"</span></span>
+<code class="sourceCode R"><span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/aterui/biostats/master/data_src/data_offset.csv"</span></span>
 <span><span class="va">df_offset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span></code></pre></div>
 <p>Using <code>df_offset</code>, perform the following:</p>
 <ul>
@@ -626,7 +626,7 @@ Figure 14.6: Tree chart on how to choose a probability distribution in GLM analy
 </h3>
 <p>Copy and paste the following code:</p>
 <div class="sourceCode" id="cb441"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/aterui/biostats/master/data_raw/data_tadpole.csv"</span></span>
+<code class="sourceCode R"><span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/aterui/biostats/master/data_src/data_tadpole.csv"</span></span>
 <span><span class="va">df_tadpole</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span></code></pre></div>
 <p>This dataset contains the data of tadpole counts (<code>tadpole</code>), aquatic vegetation cover (<code>aqveg</code>), and pond permanence (the number of days persist; <code>permanence</code>).</p>
 <ol style="list-style-type: decimal">
@@ -682,7 +682,7 @@ Figure 14.6: Tree chart on how to choose a probability distribution in GLM analy
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2026-01-29.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2026-09-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

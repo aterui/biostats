@@ -7,7 +7,7 @@
 <title>Chapter 10 Two-Group Comparison | BIOSTATS</title>
 <meta name="author" content="Akira Terui">
 <meta name="description" content="Data consists of “samples” extracted from the population of interest, but it’s important to acknowledge that these samples are not flawless replicas of the entire population. Given this imperfect...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
+<meta name="generator" content="bookdown 0.48 with bs4_book()">
 <meta property="og:title" content="Chapter 10 Two-Group Comparison | BIOSTATS">
 <meta property="og:type" content="book">
 <meta property="og:description" content="Data consists of “samples” extracted from the population of interest, but it’s important to acknowledge that these samples are not flawless replicas of the entire population. Given this imperfect...">
@@ -16,10 +16,10 @@
 <meta name="twitter:description" content="Data consists of “samples” extracted from the population of interest, but it’s important to acknowledge that these samples are not flawless replicas of the entire population. Given this imperfect...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/viz-1.8.2/viz.js"></script><link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet">
-<script src="libs/grViz-binding-1.0.11/grViz.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QZSNHVQQNV"></script><script>
+<script src="libs/grViz-binding-1.0.12/grViz.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QZSNHVQQNV"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
@@ -104,10 +104,10 @@
 <h2>
 <span class="header-section-number">10.1</span> Explore Data Structure<a class="anchor" aria-label="anchor" href="#explore-data-structure"><i class="fas fa-link"></i></a>
 </h2>
-<p>Suppose that we study fish populations of the same species in two lakes (Lake <code>a</code> and <code>b</code>). These lakes are in stark contrast of productivity (Lake <code>b</code> looks more productive), and our interest is the difference in <em>mean</em> body size between the two lakes. We obtained <span class="math inline">\(50\)</span> data points of fish length from each lake (download <a href="https://github.com/aterui/biostats/blob/master/data_raw/data_fish_length.csv">here</a>). Save under <code>data_raw/</code> and use <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> to read data:</p>
+<p>Suppose that we study fish populations of the same species in two lakes (Lake <code>a</code> and <code>b</code>). These lakes are in stark contrast of productivity (Lake <code>b</code> looks more productive), and our interest is the difference in <em>mean</em> body size between the two lakes. We obtained <span class="math inline">\(50\)</span> data points of fish length from each lake (download <a href="https://github.com/aterui/biostats/blob/master/data_src/data_fish_length.csv">here</a>). Save under <code>data_src/</code> and use <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> to read data:</p>
 <div class="sourceCode" id="cb296"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span> <span class="co"># call add-in packages everytime you open new R session</span></span>
-<span><span class="va">df_fl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data_raw/data_fish_length.csv"</span><span class="op">)</span></span>
+<span><span class="va">df_fl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data_src/data_fish_length.csv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_fl</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 100 × 3
 ##    lake  length unit 
@@ -469,7 +469,7 @@ d.f. = \frac{(\frac{\hat{\sigma}^2_a}{N_a} + \frac{\hat{\sigma}^2_b}{N_b})^2}{\f
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2026-01-29.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2026-09-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -7,7 +7,7 @@
 <title>Chapter 13 Linear Model | BIOSTATS</title>
 <meta name="author" content="Akira Terui">
 <meta name="description" content="We have extensively covered three important statistical analyses: the t-test, ANOVA, and regression analysis. While these methods may seem distinct, they all fall under the umbrella of the Linear...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
+<meta name="generator" content="bookdown 0.48 with bs4_book()">
 <meta property="og:title" content="Chapter 13 Linear Model | BIOSTATS">
 <meta property="og:type" content="book">
 <meta property="og:description" content="We have extensively covered three important statistical analyses: the t-test, ANOVA, and regression analysis. While these methods may seem distinct, they all fall under the umbrella of the Linear...">
@@ -16,10 +16,10 @@
 <meta name="twitter:description" content="We have extensively covered three important statistical analyses: the t-test, ANOVA, and regression analysis. While these methods may seem distinct, they all fall under the umbrella of the Linear...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/viz-1.8.2/viz.js"></script><link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet">
-<script src="libs/grViz-binding-1.0.11/grViz.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QZSNHVQQNV"></script><script>
+<script src="libs/grViz-binding-1.0.12/grViz.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QZSNHVQQNV"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
@@ -155,7 +155,7 @@ y_i &amp;\sim \text{Normal}(\mu_i, \sigma^2)\\
 <p>Let me confirm this using the dataset in Chapter <a href="two-group-comparison.html#two-group-comparison">10</a> (fish body length in two lakes):</p>
 <div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
-<span><span class="va">df_fl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data_raw/data_fish_length.csv"</span><span class="op">)</span></span>
+<span><span class="va">df_fl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data_src/data_fish_length.csv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_fl</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 100 × 3
 ##    lake  length unit 
@@ -256,7 +256,7 @@ y_i &amp;\sim \text{Normal}(\mu_i, \sigma^2)\\
 \]</span></p>
 <p>Therefore, the group <code>a</code> serves as the reference, and the <span class="math inline">\(\beta\)</span>s represent the deviations from the reference group. Now, let me attempt the ANOVA dataset provided in Chapter <a href="multiple-group-comparison.html#multiple-group-comparison">11</a>:</p>
 <div class="sourceCode" id="cb392"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df_anova</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data_raw/data_fish_length_anova.csv"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">df_anova</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data_src/data_fish_length_anova.csv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_anova</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 150 × 3
 ##    lake  length unit 
@@ -516,7 +516,7 @@ Figure 13.1: Example of model fitting to iris data. Points are observations, and
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">df_pred</span>,</span>
 <span>            <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">y_pred_int</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-131-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="biostats_files/figure-html/unnamed-chunk-131-1.png" alt="" width="672" style="display: block; margin: auto;"></div>
 <p>In this case, the interaction was significant for <code>versicolor</code>, and the slope is estimated to be clearly different from the other two.</p>
 </div>
 <div id="level-of-measurament" class="section level3" number="13.2.3">
@@ -720,7 +720,7 @@ Suppose that <code>x1</code> and <code>x2</code> are factors that vary across sa
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2026-01-29.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2026-09-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -7,7 +7,7 @@
 <title>Chapter 20 Constrained Ordination | BIOSTATS</title>
 <meta name="author" content="Akira Terui">
 <meta name="description" content="In unconstrained ordination, the axes are derived solely from the multivariate response data, without reference to external predictors. These methods are useful for exploring dominant patterns,...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
+<meta name="generator" content="bookdown 0.48 with bs4_book()">
 <meta property="og:title" content="Chapter 20 Constrained Ordination | BIOSTATS">
 <meta property="og:type" content="book">
 <meta property="og:description" content="In unconstrained ordination, the axes are derived solely from the multivariate response data, without reference to external predictors. These methods are useful for exploring dominant patterns,...">
@@ -16,10 +16,10 @@
 <meta name="twitter:description" content="In unconstrained ordination, the axes are derived solely from the multivariate response data, without reference to external predictors. These methods are useful for exploring dominant patterns,...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/viz-1.8.2/viz.js"></script><link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet">
-<script src="libs/grViz-binding-1.0.11/grViz.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QZSNHVQQNV"></script><script>
+<script src="libs/grViz-binding-1.0.12/grViz.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QZSNHVQQNV"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
@@ -155,7 +155,7 @@
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span>               <span class="co"># Use a clean theme with white background</span></span></code></pre></div>
-<div class="inline-figure"><img src="biostats_files/figure-html/varespec-pair-plot-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="biostats_files/figure-html/varespec-pair-plot-1.png" alt="" width="672" style="display: block; margin: auto;"></div>
 <p>Performing RDA is straightforward, as the <code>vegan</code> package provides the <code>rda()</code> function for implementing this analysis. In the example below, we set <code>scale = FALSE</code> (default in <code>rda()</code>) because the response variables are already standardized as percent cover. If the variables were measured in different units (e.g., grams vs. meters) or differ grearly in their variations, <code>scale = TRUE</code> would be necessary to ensure that all variables contribute equally to the analysis.</p>
 <div class="sourceCode" id="cb539"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Run Redundancy Analysis (RDA)</span></span>
@@ -167,13 +167,15 @@
 <span><span class="co"># The parentheses around obj_rda print the RDA summary immediately</span></span>
 <span><span class="op">(</span><span class="va">obj_rda</span> <span class="op">&lt;-</span> <span class="fu">rda</span><span class="op">(</span><span class="va">m_y</span> <span class="op">~</span> <span class="va">n</span> <span class="op">+</span> <span class="va">p</span> <span class="op">+</span> <span class="va">ca</span>,</span>
 <span>                data <span class="op">=</span> <span class="va">df_env</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## Call: rda(formula = m_y ~ n + p + ca, data = df_env)
+<pre><code>## 
+## Call: rda(formula = m_y ~ n + p + ca, data = df_env)
 ## 
 ##                 Inertia Proportion Rank
 ## Total         1825.6594     1.0000     
 ## Constrained    475.6938     0.2606    3
 ## Unconstrained 1349.9656     0.7394   20
-## Inertia is variance 
+## 
+## Inertia is variance
 ## 
 ## Eigenvalues for constrained axes:
 ##   RDA1   RDA2   RDA3 
@@ -288,14 +290,15 @@ Figure 20.1: RDA ordination plot of sites based on species composition. Each poi
 <span><span class="op">(</span><span class="va">obj_db</span> <span class="op">&lt;-</span> <span class="fu">dbrda</span><span class="op">(</span><span class="va">m_y</span> <span class="op">~</span> <span class="va">n</span> <span class="op">+</span> <span class="va">p</span> <span class="op">+</span> <span class="va">ca</span>,</span>
 <span>                 data <span class="op">=</span> <span class="va">df_env</span>,</span>
 <span>                 distance <span class="op">=</span> <span class="st">"bray"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## Call: dbrda(formula = m_y ~ n + p + ca, data = df_env, distance =
-## "bray")
+<pre><code>## 
+## Call: dbrda(formula = m_y ~ n + p + ca, data = df_env, distance = "bray")
 ## 
 ##               Inertia Proportion Rank RealDims
 ## Total          4.5444     1.0000              
 ## Constrained    1.0186     0.2241    3        3
 ## Unconstrained  3.5259     0.7759   20       14
-## Inertia is squared Bray distance 
+## 
+## Inertia is squared Bray distance
 ## 
 ## Eigenvalues for constrained axes:
 ## dbRDA1 dbRDA2 dbRDA3 
@@ -448,7 +451,7 @@ Figure 20.2: Scatterplot of sites in dbRDA space. Each point represents a site p
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2026-01-29.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2026-09-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

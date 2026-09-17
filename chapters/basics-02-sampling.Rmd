@@ -256,7 +256,7 @@ Recognizing the limitations and uncertainties associated with working with sampl
 
 ## Laboratory
 
-1.  We used 10 plants to estimate sample means and variances. Obtain 100 sub-datasets with 50 and 100 measures each, and draw histograms of sample means and unbiased variances (use `var()`).
+1.  We used 10 plants to estimate sample means and variances. Obtain 100 sub-datasets with (a) 50 individuals/measures each, and (b) 100 individual/measures each. Draw histograms of sample means and unbiased variances (use `var()`) for each data set.
 
 2.  Sample means and unbiased variances are unbiased if samples are randomly selected. What happens if samples are non-random? Suppose the investigator was unable to find plants less than 10 cm in height -- the following code excludes those less than 10 cm in height:
 

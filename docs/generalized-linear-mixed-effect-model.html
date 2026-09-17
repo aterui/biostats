@@ -7,7 +7,7 @@
 <title>Chapter 17 Generalized Linear Mixed Effect Model | BIOSTATS</title>
 <meta name="author" content="Akira Terui">
 <meta name="description" content="In the previous chapters, we developed foundational skills in linear modeling, including generalized linear models (GLMs). GLMs are a powerful and flexible framework when data arise from a single,...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
+<meta name="generator" content="bookdown 0.48 with bs4_book()">
 <meta property="og:title" content="Chapter 17 Generalized Linear Mixed Effect Model | BIOSTATS">
 <meta property="og:type" content="book">
 <meta property="og:description" content="In the previous chapters, we developed foundational skills in linear modeling, including generalized linear models (GLMs). GLMs are a powerful and flexible framework when data arise from a single,...">
@@ -16,10 +16,10 @@
 <meta name="twitter:description" content="In the previous chapters, we developed foundational skills in linear modeling, including generalized linear models (GLMs). GLMs are a powerful and flexible framework when data arise from a single,...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/viz-1.8.2/viz.js"></script><link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet">
-<script src="libs/grViz-binding-1.0.11/grViz.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QZSNHVQQNV"></script><script>
+<script src="libs/grViz-binding-1.0.12/grViz.js"></script><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-QZSNHVQQNV"></script><script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
@@ -157,7 +157,7 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>outliers <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span>  <span class="co"># Draw boxplots without plotting outliers</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span> <span class="op">+</span>       <span class="co"># Add jittered raw data points with transparency</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span>                        <span class="co"># Apply a clean black-and-white theme</span></span></code></pre></div>
-<div class="inline-figure"><img src="biostats_files/figure-html/adv-01-owl-food-treatment-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="biostats_files/figure-html/adv-01-owl-food-treatment-1.png" alt="" width="672" style="display: block; margin: auto;"></div>
 <p>At first glance, the figure appears straightforward: the number of negotiations per chick decreases when nestlings are satiated. However, a closer examination reveals an important additional complexity in the data—its grouped structure. The example below highlights the first nine nests, illustrating substantial variation in <code>neg_per_chick</code> among nests.</p>
 <div class="sourceCode" id="cb488"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">v_g9</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">df_owl</span><span class="op">$</span><span class="va">nest</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">9</span><span class="op">]</span>    <span class="co"># Extract first 9 nest IDs</span></span>
@@ -172,7 +172,7 @@
 <span>             ncol <span class="op">=</span> <span class="fl">3</span>,              <span class="co"># Arrange panels into 3 columns</span></span>
 <span>             nrow <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span>            <span class="co"># Arrange panels into 3 rows</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span>                        <span class="co"># Apply clean black-and-white theme</span></span></code></pre></div>
-<div class="inline-figure"><img src="biostats_files/figure-html/group-structure-fig-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="biostats_files/figure-html/group-structure-fig-1.png" alt="" width="672" style="display: block; margin: auto;"></div>
 <p>To examine the effect of food treatment while accounting for differences among nests, the GLM can be specified as follows:</p>
 <div class="sourceCode" id="cb489"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Response: sibling_negotiation — raw count of negotiation calls</span></span>
@@ -347,8 +347,8 @@ Figure 17.1: Visualization of a random‐intercept GLMM fitted to owl nesting da
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">m_ris</span><span class="op">)</span><span class="op">$</span><span class="va">cond</span><span class="op">$</span><span class="va">nest</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##                 (Intercept) food_treatmentsatiated
 ## autavauxtv        0.6458989           -1.076110554
-## bochet            0.5818570           -1.960248712
-## champmartin       0.5051865           -3.018403203
+## bochet            0.5818570           -1.960248711
+## champmartin       0.5051865           -3.018403202
 ## chesard           0.7381005            0.196113330
 ## chevroux          0.5486965           -2.417926598
 ## corcellesfavres   0.7235323           -0.004790489</code></pre>
@@ -467,7 +467,7 @@ y_i \sim \mbox{NB}(\mu_i, \theta)\\
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2026-01-29.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2026-09-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

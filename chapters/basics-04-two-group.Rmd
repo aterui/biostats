@@ -168,9 +168,9 @@ To address this, the concept of the **Null Hypothesis** is utilized to substanti
 
 Let's begin by assuming that there is no difference in the mean body size of fish populations between the lakes, meaning the true difference in means is zero ($\mu_a - \mu_b = 0$; without hats in this formula!). Under this assumption, we can define the probability distribution of t-statistics, which represents how t-statistics are distributed across a range of possible values.
 
-This probability distribution is known as the Student's t-distribution and is characterized by three parameters: the mean, the variance, and the degrees of freedom (d.f.). Considering that we are evaluating the difference in body size as the test statistic, the mean (of the difference) is assumed to be zero. The variance is estimated using $\hat{\sigma}^2_p$, and the degrees of freedom are determined by $N_a + N_b - 2$ (where d.f. can be considered as a measure related to the sample size[^04-two-group-1]).
+This probability distribution is known as the Student's t-distribution and is characterized by three parameters: the mean, the variance, and the degrees of freedom (d.f.). Considering that we are evaluating the difference in body size as the test statistic, the mean (of the difference) is assumed to be zero. The variance is estimated using $\hat{\sigma}^2_p$, and the degrees of freedom are determined by $N_a + N_b - 2$ (where d.f. can be considered as a measure related to the sample size[^basics-04-two-group-1]).
 
-[^04-two-group-1]: Discussing the concept of degrees of freedom in depth would require a more comprehensive explanation, so I will refer to it here as a quantity relevant to the sample size.
+[^basics-04-two-group-1]: Discussing the concept of degrees of freedom in depth would require a more comprehensive explanation, so I will refer to it here as a quantity relevant to the sample size.
 
 R has a function to draw the Student's t-distribution; let's try that out:
 
@@ -247,9 +247,9 @@ The above example assumes the relative similarity of variance between groups, wh
 t.test(x, y, var.equal = FALSE)
 ```
 
-In Welch's t-test, t-statistics are defined differently to account for unequal variance between groups[^04-two-group-2]:
+In Welch's t-test, t-statistics are defined differently to account for unequal variance between groups[^basics-04-two-group-2]:
 
-[^04-two-group-2]: When $\hat{\sigma}^2_a \approx \hat{\sigma}_b^2$, the t-statistic for Welch's t-test is reduced to the original t-statistic.
+[^basics-04-two-group-2]: When $\hat{\sigma}^2_a \approx \hat{\sigma}_b^2$, the t-statistic for Welch's t-test is reduced to the original t-statistic.
 
 $$
 t = \frac{\hat{\mu_a} - \hat{\mu_b}}{\sqrt{\left(\frac{\hat{\sigma}^2_a}{N_a} + \frac{\hat{\sigma}^2_b}{N_b}\right)}}
@@ -263,21 +263,26 @@ $$
 
 Therefore, the reported values of t-statistic and d.f. are different from what we estimated. The Welch's t-test covers the cases for equal variances; therefore, by default, we use the Welch's test.
 
-
 ## Laboratory
 
 ### Influence of Sample Size
 
 Create the following vectors with `rnorm()`:
 
-- `xs` with mean $10$, SD $5$, and sample size $10$ 
-- `ys` with mean $12$, SD $5$, and sample size $10$ 
-- `xl` with mean $10$, SD $5$, and sample size $100$ 
-- `yl` with mean $12$, SD $5$, and sample size $100$ 
+-   `xs` with mean $10$, SD $5$, and sample size $10$
+-   `ys` with mean $12$, SD $5$, and sample size $10$
+-   `xl` with mean $10$, SD $5$, and sample size $100$
+-   `yl` with mean $12$, SD $5$, and sample size $100$
 
-Perform Welch's t-test for `xs` vs. `ys`, and `xl` vs. `yl` and compare p-values. Set `var.equal = TRUE` in `t.test()`.
+Using these vectors,
 
-### Difference and Uncertainty
+1.  Perform t-test for `xs` vs. `ys`, and `xl` vs. `yl`.
+
+2.  Compare (a) the degree of freedom, and (b) p-values.
+
+Set `var.equal = TRUE` in `t.test()`.
+
+### Effects of Uncertainty
 
 We have four vectors - `a1` and `a2` & `b1` and `b2`.
 
@@ -292,11 +297,25 @@ b2 <- c(26.9, 12.9, 11.1, 16.7, 20.0, 20.9, 16.6, 15.4, 16.2, 16.2)
 Perform the following analysis:
 
 1.  Estimate sample means and SDs for each vector. To do so, create a `tibble()` object with `group` (consist of characters `a1`, `a2`, `b1`, `b2`) and `value` columns (consist of values above). Then use `group_by()` and `summarize()` functions to estimate means and SDs for each `group`.
+
 2.  Create a figure similar to Figure \@ref(fig:mean-plot) using data from `a1` and `a2`.
 
-3.  Perform Welch's t-test for each pair and compare results.
+3.  Perform Welch's t-test for each pair (`a1` vs. `a2` AND `b1` vs. `b2`) and compare results.
+
+### Simulate null hypothesis
+
+The t-values under the equal-variance assumption can be calculated using `t.test(x, y, var.equal = TRUE)$statistic`, where `x` and `y` are the two vectors being compared. To simulate the distribution of t-values:
+
+1. Assign `mean(df_fl$length)` to `mu` and `sd(df_fl$length)` to `sig`.
+
+2. Use `rnorm()` to generate 50 random observations for each of two groups (`x` and `y`) from the same normal distribution, using `mean = mu` and `sd = sig` for both groups. This simulates a situation in which you collect 50 observations from each group but with identical means and SDs. Calculate the t-value for this simulated dataset using `t.test(x, y, var.equal = TRUE)`.
+
+3. Use a `for` loop (`for (...) { ... }`) to repeat this process 100 times, generating a distribution of 100 simulated t-values.
+
+4. Draw a histogram of the simulated t-values and add vertical lines indicating the observed t-value for the comparison of `length` between lakes `a` and `b` in the `df_fl` dataset. Include vertical lines for both the positive and negative values of the observed t-value to show the two-tailed comparison.
+
+5. Calculate the proportion of simulated t-values whose absolute values are greater than the absolute value of the observed t-value for the difference in `length` between lakes `a` and `b` in the `df_fl` dataset. Compare this proportion with the `p.value` obtained from `t.test()` function.
 
 ### Bonus Exercise: Welch's t-test
 
 Reproduce the results of `t.test(x, y, var.equal = FALSE)` without using this function (report t-statistic, degrees of freedom, and p-value).
-

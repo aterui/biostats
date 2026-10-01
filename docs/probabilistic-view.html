@@ -126,7 +126,7 @@ Figure 9.1: Distribution of plant height
 x \sim \mbox{Normal}(\mu, \sigma^2)
 \]</span></p>
 <p>Unlike an “equation,” we do not use the “<span class="math inline">\(=\)</span>” sign because variable <span class="math inline">\(x\)</span> is not equivalent to the Normal distribution. Rather, it represents a “stochastic” relationship that signifies the probability of <span class="math inline">\(x\)</span> taking on a specific range of values.</p>
-<p>A Normal distribution is characterized by two parameters: the mean and the variance. Strictly speaking, the terms “mean” and “variance” in a probability distribution differ from “sample mean” and “sample variance,” although they converge when the variable <span class="math inline">\(x\)</span> is assumed to follow a Normal distribution (refer to Chapter <a href="likelihood.html#likelihood">15</a> for more details). More precisely, the mean is referred to as the “expected value” and is denoted as <span class="math inline">\(\mbox{E}(x)\)</span>. The variance represents the expected value of <span class="math inline">\(x^2\)</span> and is denoted as <span class="math inline">\(\mbox{E}(x^2)\)</span>. <strong>The expected value serves as the central tendency of a random variable, indicating where values are most likely to occur.</strong> On the other hand, <strong>the variance quantifies the extent to which individual data points deviate from this expected value</strong>. Although I use the terms mean and variance for simplicity, it is important to recognize the distinction.</p>
+<p>A Normal distribution is characterized by two parameters: the mean and the variance. Strictly speaking, the terms “mean” and “variance” in a probability distribution differ from “sample mean” and “sample variance,” although they converge when the variable <span class="math inline">\(x\)</span> is assumed to follow a Normal distribution (refer to Chapter <a href="likelihood.html#likelihood">15</a> for more details). More precisely, the mean is referred to as the “expected value” and is denoted as <span class="math inline">\(\mbox{E}(x)\)</span>. The variance can be expressed in a form of expected value too, denoted as <span class="math inline">\(\mbox{E}(x^2) - (\mbox{E}(x))^2\)</span>. <strong>The expected value serves as the central tendency of a random variable, indicating where values are most likely to occur.</strong> On the other hand, <strong>the variance quantifies the extent to which individual data points deviate from this expected value</strong>. Although I use the terms mean and variance for simplicity, it is important to recognize the distinction.</p>
 <p>Once these parameters are determined, the formula that defines the Normal distribution will yield the probability density for a given range of values. This formula <span class="math inline">\(f(x)\)</span> is known as the <strong>probability density function (PDF)</strong> and is displayed below:</p>
 <p><span class="math display">\[
 f(x) = \frac{1}{\sqrt{2 \pi} \sigma} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
@@ -422,7 +422,7 @@ Figure 9.7: Observed histogram of the discrete variable overlaid with the Poisso
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2026-09-17.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2026-09-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

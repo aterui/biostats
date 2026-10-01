@@ -153,7 +153,8 @@ interpretation
 t-test-with-unequal-variance
 laboratory-3
 influence-of-sample-size
-difference-and-uncertainty
+effects-of-uncertainty
+simulate-null-hypothesis
 bonus-exercise-welchs-t-test
 multiple-group-comparison
 partition-the-variability

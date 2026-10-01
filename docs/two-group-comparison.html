@@ -398,11 +398,16 @@ d.f. = \frac{(\frac{\hat{\sigma}^2_a}{N_a} + \frac{\hat{\sigma}^2_b}{N_b})^2}{\f
 <code>yl</code> with mean <span class="math inline">\(12\)</span>, SD <span class="math inline">\(5\)</span>, and sample size <span class="math inline">\(100\)</span>
 </li>
 </ul>
-<p>Perform Welch’s t-test for <code>xs</code> vs. <code>ys</code>, and <code>xl</code> vs. <code>yl</code> and compare p-values. Set <code>var.equal = TRUE</code> in <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code>.</p>
+<p>Using these vectors,</p>
+<ol style="list-style-type: decimal">
+<li><p>Perform t-test for <code>xs</code> vs. <code>ys</code>, and <code>xl</code> vs. <code>yl</code>.</p></li>
+<li><p>Compare (a) the degree of freedom, and (b) p-values.</p></li>
+</ol>
+<p>Set <code>var.equal = TRUE</code> in <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code>.</p>
 </div>
-<div id="difference-and-uncertainty" class="section level3" number="10.5.2">
+<div id="effects-of-uncertainty" class="section level3" number="10.5.2">
 <h3>
-<span class="header-section-number">10.5.2</span> Difference and Uncertainty<a class="anchor" aria-label="anchor" href="#difference-and-uncertainty"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.5.2</span> Effects of Uncertainty<a class="anchor" aria-label="anchor" href="#effects-of-uncertainty"><i class="fas fa-link"></i></a>
 </h3>
 <p>We have four vectors - <code>a1</code> and <code>a2</code> &amp; <code>b1</code> and <code>b2</code>.</p>
 <div class="sourceCode" id="cb324"><pre class="downlit sourceCode r">
@@ -415,12 +420,25 @@ d.f. = \frac{(\frac{\hat{\sigma}^2_a}{N_a} + \frac{\hat{\sigma}^2_b}{N_b})^2}{\f
 <ol style="list-style-type: decimal">
 <li><p>Estimate sample means and SDs for each vector. To do so, create a <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code> object with <code>group</code> (consist of characters <code>a1</code>, <code>a2</code>, <code>b1</code>, <code>b2</code>) and <code>value</code> columns (consist of values above). Then use <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> functions to estimate means and SDs for each <code>group</code>.</p></li>
 <li><p>Create a figure similar to Figure <a href="two-group-comparison.html#fig:mean-plot">10.1</a> using data from <code>a1</code> and <code>a2</code>.</p></li>
-<li><p>Perform Welch’s t-test for each pair and compare results.</p></li>
+<li><p>Perform Welch’s t-test for each pair (<code>a1</code> vs. <code>a2</code> AND <code>b1</code> vs. <code>b2</code>) and compare results.</p></li>
 </ol>
 </div>
-<div id="bonus-exercise-welchs-t-test" class="section level3" number="10.5.3">
+<div id="simulate-null-hypothesis" class="section level3" number="10.5.3">
 <h3>
-<span class="header-section-number">10.5.3</span> Bonus Exercise: Welch’s t-test<a class="anchor" aria-label="anchor" href="#bonus-exercise-welchs-t-test"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.5.3</span> Simulate null hypothesis<a class="anchor" aria-label="anchor" href="#simulate-null-hypothesis"><i class="fas fa-link"></i></a>
+</h3>
+<p>The t-values under the equal-variance assumption can be calculated using <code>t.test(x, y, var.equal = TRUE)$statistic</code>, where <code>x</code> and <code>y</code> are the two vectors being compared. To simulate the distribution of t-values:</p>
+<ol style="list-style-type: decimal">
+<li><p>Assign <code>mean(df_fl$length)</code> to <code>mu</code> and <code>sd(df_fl$length)</code> to <code>sig</code>.</p></li>
+<li><p>Use <code><a href="https://rdrr.io/r/stats/Normal.html">rnorm()</a></code> to generate 50 random observations for each of two groups (<code>x</code> and <code>y</code>) from the same normal distribution, using <code>mean = mu</code> and <code>sd = sig</code> for both groups. This simulates a situation in which you collect 50 observations from each group but with identical means and SDs. Calculate the t-value for this simulated dataset using <code>t.test(x, y, var.equal = TRUE)</code>.</p></li>
+<li><p>Use a <code>for</code> loop (<code>for (...) { ... }</code>) to repeat this process 100 times, generating a distribution of 100 simulated t-values.</p></li>
+<li><p>Draw a histogram of the simulated t-values and add vertical lines indicating the observed t-value for the comparison of <code>length</code> between lakes <code>a</code> and <code>b</code> in the <code>df_fl</code> dataset. Include vertical lines for both the positive and negative values of the observed t-value to show the two-tailed comparison.</p></li>
+<li><p>Calculate the proportion of simulated t-values whose absolute values are greater than the absolute value of the observed t-value for the difference in <code>length</code> between lakes <code>a</code> and <code>b</code> in the <code>df_fl</code> dataset. Compare this proportion with the <code>p.value</code> obtained from <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code> function.</p></li>
+</ol>
+</div>
+<div id="bonus-exercise-welchs-t-test" class="section level3" number="10.5.4">
+<h3>
+<span class="header-section-number">10.5.4</span> Bonus Exercise: Welch’s t-test<a class="anchor" aria-label="anchor" href="#bonus-exercise-welchs-t-test"><i class="fas fa-link"></i></a>
 </h3>
 <p>Reproduce the results of <code>t.test(x, y, var.equal = FALSE)</code> without using this function (report t-statistic, degrees of freedom, and p-value).</p>
 
@@ -448,8 +466,9 @@ d.f. = \frac{(\frac{\hat{\sigma}^2_a}{N_a} + \frac{\hat{\sigma}^2_b}{N_b})^2}{\f
 <li>
 <a class="nav-link" href="#laboratory-3"><span class="header-section-number">10.5</span> Laboratory</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#influence-of-sample-size"><span class="header-section-number">10.5.1</span> Influence of Sample Size</a></li>
-<li><a class="nav-link" href="#difference-and-uncertainty"><span class="header-section-number">10.5.2</span> Difference and Uncertainty</a></li>
-<li><a class="nav-link" href="#bonus-exercise-welchs-t-test"><span class="header-section-number">10.5.3</span> Bonus Exercise: Welch’s t-test</a></li>
+<li><a class="nav-link" href="#effects-of-uncertainty"><span class="header-section-number">10.5.2</span> Effects of Uncertainty</a></li>
+<li><a class="nav-link" href="#simulate-null-hypothesis"><span class="header-section-number">10.5.3</span> Simulate null hypothesis</a></li>
+<li><a class="nav-link" href="#bonus-exercise-welchs-t-test"><span class="header-section-number">10.5.4</span> Bonus Exercise: Welch’s t-test</a></li>
 </ul>
 </li>
 </ul>
@@ -469,7 +488,7 @@ d.f. = \frac{(\frac{\hat{\sigma}^2_a}{N_a} + \frac{\hat{\sigma}^2_b}{N_b})^2}{\f
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2026-09-17.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2026-09-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

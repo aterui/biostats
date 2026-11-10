@@ -35,11 +35,11 @@ dpois(3, lambda = 3.5)
 (p <- (3.5^3 * exp(-3.5)) / factorial(3))
 ```
 
-If we assume a mean of $3.5$ in the Poisson distribution, the probability of observing a value of $3$ is approximately $0.216$. We can experiment with different values of $\lambda$ to see if there is a potentially "better" value. By exploring different values of $\lambda$, we can observe how the probability of observing a specific value changes. This allows us to assess which value of $\lambda$ provides a better fit or captures the data more accurately. The following example explores $\lambda = 0 - 10$ with a $0.1$ interval.
+If we assume a mean of $3.5$ in the Poisson distribution, the probability of observing a value of $3$ is approximately $0.216$. We can experiment with different values of $\lambda$ to see if there is a potentially "better" value. By exploring different values of $\lambda$, we can observe how the probability of observing a specific value changes. This allows us to assess which value of $\lambda$ provides a better fit or captures the data more accurately. The following example explores $\lambda = 0.1 - 10$ with a $0.1$ interval.
 
 ```{r}
 # change lambda from 0 to 10 by 0.1
-lambda <- seq(0, 10, by = 0.1)
+lambda <- seq(0.1, 10, by = 0.1)
 
 # probability
 pr <- dpois(3, lambda = lambda)
@@ -60,6 +60,7 @@ df_pois %>%
              y = pr)) +
   geom_point() +
   geom_line() +
+  scale_y_continuous(trans = "log") +
   labs(x = "lambda",
        y = "Pr(k = 3)")
 ```
@@ -104,7 +105,7 @@ Similar to the previous example, let's search for a more suitable value of $\lam
 ```{r dpois-likelihood, fig.cap="Likelihood of observing three count data points $\\pmb{y}$ simultaneously."}
 # lambda = 0 - 10 by 0.01
 y <- c(3, 2, 5)
-lambda <- seq(0, 10, by = 0.01)
+lambda <- seq(0.1, 10, by = 0.01)
 
 # sapply repeats the task in FUN
 # each element in "X" will be sequencially substituted in "z"
@@ -124,6 +125,7 @@ df_pois %>%
   ggplot(aes(x = lambda,
              y = pr)) +
   geom_line() +
+  scale_y_continuous(trans = "log") +
   labs(y = "Likelihood")
 ```
 

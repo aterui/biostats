@@ -118,10 +118,10 @@
 <code class="sourceCode R"><span><span class="co"># write the formula to confirm</span></span>
 <span><span class="op">(</span><span class="va">p</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">3.5</span><span class="op">^</span><span class="fl">3</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3.5</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/Special.html">factorial</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.2157855</code></pre>
-<p>If we assume a mean of <span class="math inline">\(3.5\)</span> in the Poisson distribution, the probability of observing a value of <span class="math inline">\(3\)</span> is approximately <span class="math inline">\(0.216\)</span>. We can experiment with different values of <span class="math inline">\(\lambda\)</span> to see if there is a potentially “better” value. By exploring different values of <span class="math inline">\(\lambda\)</span>, we can observe how the probability of observing a specific value changes. This allows us to assess which value of <span class="math inline">\(\lambda\)</span> provides a better fit or captures the data more accurately. The following example explores <span class="math inline">\(\lambda = 0 - 10\)</span> with a <span class="math inline">\(0.1\)</span> interval.</p>
+<p>If we assume a mean of <span class="math inline">\(3.5\)</span> in the Poisson distribution, the probability of observing a value of <span class="math inline">\(3\)</span> is approximately <span class="math inline">\(0.216\)</span>. We can experiment with different values of <span class="math inline">\(\lambda\)</span> to see if there is a potentially “better” value. By exploring different values of <span class="math inline">\(\lambda\)</span>, we can observe how the probability of observing a specific value changes. This allows us to assess which value of <span class="math inline">\(\lambda\)</span> provides a better fit or captures the data more accurately. The following example explores <span class="math inline">\(\lambda = 0.1 - 10\)</span> with a <span class="math inline">\(0.1\)</span> interval.</p>
 <div class="sourceCode" id="cb446"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># change lambda from 0 to 10 by 0.1</span></span>
-<span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span>, by <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span>
+<span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">10</span>, by <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># probability</span></span>
 <span><span class="va">pr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Poisson.html">dpois</a></span><span class="op">(</span><span class="fl">3</span>, lambda <span class="op">=</span> <span class="va">lambda</span><span class="op">)</span></span>
@@ -132,20 +132,20 @@
 <span>                  pr <span class="op">=</span> <span class="va">pr</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df_pois</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## # A tibble: 101 × 3
+<pre><code>## # A tibble: 100 × 3
 ##        y lambda       pr
 ##    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;
-##  1     3    0   0       
-##  2     3    0.1 0.000151
-##  3     3    0.2 0.00109 
-##  4     3    0.3 0.00333 
-##  5     3    0.4 0.00715 
-##  6     3    0.5 0.0126  
-##  7     3    0.6 0.0198  
-##  8     3    0.7 0.0284  
-##  9     3    0.8 0.0383  
-## 10     3    0.9 0.0494  
-## # ℹ 91 more rows</code></pre>
+##  1     3    0.1 0.000151
+##  2     3    0.2 0.00109 
+##  3     3    0.3 0.00333 
+##  4     3    0.4 0.00715 
+##  5     3    0.5 0.0126  
+##  6     3    0.6 0.0198  
+##  7     3    0.7 0.0284  
+##  8     3    0.8 0.0383  
+##  9     3    0.9 0.0494  
+## 10     3    1   0.0613  
+## # ℹ 90 more rows</code></pre>
 <p>Make a plot:</p>
 <div class="sourceCode" id="cb448"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_pois</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -153,6 +153,7 @@
 <span>             y <span class="op">=</span> <span class="va">pr</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>trans <span class="op">=</span> <span class="st">"log"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"lambda"</span>,</span>
 <span>       y <span class="op">=</span> <span class="st">"Pr(k = 3)"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
@@ -169,7 +170,7 @@ Figure 15.1: Relationship between the parameter <span class="math inline">\(\lam
 <span><span class="va">df_pois</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">pr</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## # A tibble: 101 × 3
+<pre><code>## # A tibble: 100 × 3
 ##        y lambda    pr
 ##    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
 ##  1     3    3   0.224
@@ -182,7 +183,7 @@ Figure 15.1: Relationship between the parameter <span class="math inline">\(\lam
 ##  8     3    3.4 0.219
 ##  9     3    2.6 0.218
 ## 10     3    3.5 0.216
-## # ℹ 91 more rows</code></pre>
+## # ℹ 90 more rows</code></pre>
 <p>That reasoning is sound because the probability of <span class="math inline">\(y_1\)</span> being equal to <span class="math inline">\(3\)</span> is maximized when <span class="math inline">\(\lambda = 3\)</span>. This represents the simplest form of a <strong>likelihood function</strong> denoted as <span class="math inline">\(L(\lambda~|~y_1)\)</span>, where <span class="math inline">\((\cdot~|~y_1)\)</span> indicates that <span class="math inline">\(y_1\)</span> is fixed or given. We evaluated the likelihood of various <span class="math inline">\(\lambda\)</span> considering the given value of <span class="math inline">\(y_1\)</span>.</p>
 <p>However, what if we have multiple values of <span class="math inline">\(y_i\)</span>? Let’s consider the scenario where <span class="math inline">\(\pmb{y} = \{3, 2, 5\}\)</span>. In such cases, we must account for the probability of simultaneously observing these values. When the events are independent, the probability of observing multiple events can be expressed as the product of their individual probabilities. Consequently, the likelihood function takes the following form:</p>
 <p><span class="math display">\[
@@ -207,7 +208,7 @@ L(\lambda~|~\pmb{y}) &amp;= \Pr(y_1 = 3) \times \Pr(y_2 = 2) \times \Pr(y_3 = 5)
 <div class="sourceCode" id="cb455"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># lambda = 0 - 10 by 0.01</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">5</span><span class="op">)</span></span>
-<span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span>, by <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span>
+<span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">10</span>, by <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># sapply repeats the task in FUN</span></span>
 <span><span class="co"># each element in "X" will be sequencially substituted in "z"</span></span>
@@ -221,7 +222,7 @@ L(\lambda~|~\pmb{y}) &amp;= \Pr(y_1 = 3) \times \Pr(y_2 = 2) \times \Pr(y_3 = 5)
 <span><span class="va">df_pois</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">pr</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## # A tibble: 1,001 × 2
+<pre><code>## # A tibble: 991 × 2
 ##    lambda      pr
 ##     &lt;dbl&gt;   &lt;dbl&gt;
 ##  1   3.33 0.00534
@@ -234,13 +235,14 @@ L(\lambda~|~\pmb{y}) &amp;= \Pr(y_1 = 3) \times \Pr(y_2 = 2) \times \Pr(y_3 = 5)
 ##  8   3.37 0.00534
 ##  9   3.29 0.00533
 ## 10   3.38 0.00533
-## # ℹ 991 more rows</code></pre>
+## # ℹ 981 more rows</code></pre>
 <div class="sourceCode" id="cb457"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># visualize</span></span>
 <span><span class="va">df_pois</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">lambda</span>,</span>
 <span>             y <span class="op">=</span> <span class="va">pr</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>trans <span class="op">=</span> <span class="st">"log"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>y <span class="op">=</span> <span class="st">"Likelihood"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:dpois-likelihood"></span>
@@ -400,7 +402,7 @@ L(\mu, \sigma | \pmb{y}) = \prod_{i}^N f(y_i)
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2026-09-30.</p>
+    <p>"<strong>BIOSTATS</strong>" was written by Akira Terui. It was last built on 2026-11-10.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
